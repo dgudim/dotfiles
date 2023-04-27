@@ -1,0 +1,145 @@
+
+# Replace ls with exa
+alias ls='exa --all --icons --color=always --group-directories-first --long --git --color-scale --extended --header'
+alias la='exa --all --icons --color=always --group-directories-first'
+alias l='exa --classify --icons --color=always --group-directories-first'
+
+# Replace cat with bat
+alias cat='bat --paging=never --theme=gruvbox-dark'
+
+# Nice cd aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Neofetch logo
+alias neofetch='neofetch --sixel /home/kloud/Documents/shared/_Personal/usefull_files/.neofetch --image_size 455'
+
+# Pacman aliases
+alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | less'
+alias orphans='pacman -Qtdq'
+
+# Rank mirrors
+alias mirrors='sudo reflector --verbose -c BY -c DE -c LT -c RU -c UA --protocol https --protocol http --sort rate --latest 50 --download-timeout 5 --save /etc/pacman.d/mirrorlist && eos-rankmirrors'
+
+# Colorize grep and ip
+alias grep='grep --color=auto'
+alias ip='ip --color=auto'
+
+# Interactive aliases
+alias mv='mv -i'
+alias rm='rm -i'
+alias cp='cp -i'
+alias ln='ln -i'
+
+# Non-interactive aliases
+alias mvn='/bin/mv'
+alias rmn='/bin/rm'
+alias cpn='/bin/cp'
+alias lnn='/bin/ln'
+
+# Auto subdir creation
+alias mkdir='mkdir -pv'
+
+alias op='xdg-open'
+alias fop='op "$(fzf)"'
+complete -f op
+
+# Random stuff
+alias git_vis='gource --colour-images -a 3 -s 1 -c 3'
+alias labi_cpp='cd /home/kloud/Documents/shared/_projects/Cpp_stuff/cpp-labs/compiled_binaries_linux/ && ./menu.sh'
+
+alias weather='curl wttr.in'
+
+alias hs='hoard sync get && hoard sync save'
+
+alias filestat='duf && dust'
+
+alias pls='sudo "$BASH" -c "$(history -p !!)"'
+
+alias reboot='sudo reboot now'
+alias shut='sudo shutdown now'
+
+alias reload='source ~/.bashrc'
+alias grub-reload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+
+# Laptop aliases
+alias butter_debutter='duperemove -r -d -h -v --dedupe-options=partial,same,fiemap --hashfile=/home/kloud/Documents/butter_hashfile /mnt/storage_butter/'
+alias xps_aggressive_fancurve="sudo dellfan 0 1 && sudo systemctl start fancontrol && systemctl status fancontrol"
+alias xps_bios_fancurve="sudo dellfan 0 0 && sudo systemctl stop fancontrol && systemctl status fancontrol"
+
+
+mount_shares(){
+	echo -n "password for kloud: "
+	read -s password
+	echo
+	
+	FOLDERS=$(smbclient -L $1 -U=kloud%$password | grep Disk | grep -v [$] | cut -d" " -f1)
+	
+	for folder in $FOLDERS
+	do
+		mkdir /home/kloud/Documents/MOUNT_$1/$folder
+		echo $password | sudo -S mount -t cifs -o uid=kloud,username=kloud,password=$password //$1/$folder /home/kloud/Documents/MOUNT_$1/$folder
+		printf "mounted $folder\n"
+	done
+}
+
+unmount_shares(){
+	sudo umount ~/Documents/MOUNT_$1/*
+	printf "unmounted all shares\n"
+}
+
+b_kill(){
+	echo -n "password for kloud: "
+	read -s password
+	echo
+	
+	for run in {1..30}; do
+		echo $password | sudo -S l2ping -i hci1 -s 668 -f $1 &
+	done
+}
+
+batch(){
+	for elem in $(/usr/bin/ls)
+	do
+	    printf "processing $elem \n"
+		"$@" "$elem" &
+		sleep 0.15
+	done
+}
+
+batch_dir(){
+	for elem in $(/usr/bin/ls */ -d)
+	do
+	    printf "processing $elem \n"
+		cd "$elem"
+		"$@" &
+		cd ..
+		sleep 0.15
+	done
+}
+
+get_power(){
+	echo - | awk "{printf \"%.1f\", \
+$(( \
+  $(cat /sys/class/power_supply/BAT*/current_now) * \
+  $(cat /sys/class/power_supply/BAT*/voltage_now) \
+)) / 1000000000000 }" ; echo " W "
+}
+
+download_yt_playlist(){
+	yt-dlp -x -f ba --embed-thumbnail --add-metadata --output '%(uploader)s - %(title)s.%(ext)s' $1
+}
+
+start_vpn_client(){
+    echo -n "password for kloud: "
+    read -s password
+    echo
+
+    echo $password | sudo -S vpnclient start
+    sleep 5
+    echo $password | sudo -S dhclient vpn_vpn
+    echo $password | sudo -S ip route del default via 172.16.22.1
+    route -n | grep vpn_vpn
+    ip address show vpn_vpn | grep inet
+}

@@ -1,0 +1,38 @@
+#
+# ~/.bashrc
+#
+
+HISTCONTROL=ignoreboth
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+[[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+bind '"\e[1;5A": history-search-backward'
+bind '"\e[1;5B": history-search-forward'
+
+eval "$(oh-my-posh init bash --config ~/shell_theme.json)"
+
+[[ "$(whoami)" = "root" ]] && return
+
+# Python stuff is in there
+export PATH=~/.local/bin:$PATH
+
+# Brrrr, file explorer
+source /home/kloud/.config/broot/launcher/bash/br
+
+# Command hoarder
+source /usr/share/doc/hoard/hoard.bash
+
+# Enhanced history
+[[ -f /usr/share/bash-preexec/bash-preexec.sh ]] && source /usr/share/bash-preexec/bash-preexec.sh
+eval "$(atuin init bash --disable-up-arrow)"
+
+# Bruh
+export QSYS_ROOTDIR="/home/kloud/QUARTUS/18.1/quartus/sopc_builder/bin"
+
