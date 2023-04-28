@@ -13,7 +13,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # Neofetch logo
-alias neofetch='neofetch --sixel /home/kloud/Documents/shared/_Personal/usefull_files/.neofetch --image_size 455'
+alias neofetch='neofetch --sixel /home/kloud/.config/neofetch/logo --image_size 455'
 
 # Pacman aliases
 alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | less'
