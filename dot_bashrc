@@ -16,7 +16,7 @@ fi
 bind '"\e[1;5A": history-search-backward'
 bind '"\e[1;5B": history-search-forward'
 
-eval "$(oh-my-posh init bash --config ~/shell_theme.json)"
+eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/shell_theme.json)"
 
 [[ "$(whoami)" = "root" ]] && return
 
