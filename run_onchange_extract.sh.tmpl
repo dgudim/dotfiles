@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# theme hash: {{ include "dot_local/share/icons/icons.tar.gz" | sha256sum }}
+# theme hash: {{ include "dot_local/share/yakuake/skins/gruvbox-dark.tar.gz" | sha256sum }}
+echo "Extracting icons"
+cd "{{.chezmoi.homeDir}}/.local/share/icons/"
+tar -xzf icons.tar.gz
+echo "Extracting yakuake theme"
+cd "{{.chezmoi.homeDir}}/.local/share/yakuake/skins/"
+tar -xzf gruvbox-dark.tar.gz

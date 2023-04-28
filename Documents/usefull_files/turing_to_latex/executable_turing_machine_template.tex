@@ -1,0 +1,480 @@
+\documentclass[12pt, a4paper]{report}
+\usepackage{amsmath,amscd,amsfonts,amssymb}
+\usepackage{multicol}
+\usepackage{datetime}
+\usepackage[normalem]{ulem}
+\usepackage{xcolor}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{amsthm}
+\usepackage{fancyvrb}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{placeins}
+\usepackage{fancybox,framed}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{oz}
+
+\usepackage{graphicx}
+\graphicspath{ {./} }
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={180mm,257mm},
+	left=10mm,
+	top=20mm,
+}
+
+
+\topmargin -1.5 cm
+%\leftmargin 2.0 cm
+%\rightmargin 0.0 cm
+\oddsidemargin -0.5 cm
+\textheight 25cm
+\textwidth 17cm
+
+\everydisplay{\color{blue}}
+\everymath{\color{blue}}
+
+\newcommand{\VS}{\vskip 2in}
+\newcommand{\vs}{\vskip .1in}
+\newcommand{\hs}{\hskip .1in}
+\newcommand{\nin}{\noindent}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Pw}{\mathcal{P}}
+
+
+\newcommand{\leqv}{\leftrightarrow}
+
+\newcommand{\link}[2]{\hyperlink{#1}{\underline{\textcolor{Cerulean}{#2}}}}
+
+\newcommand{\hsp}[1]{\hspace{0.5cm}{(#1)}}
+
+\newcommand{\vsp}{\vspace{-0.25cm}}
+
+\newcommand{\Vs}{\vspace{-0.5cm}}
+
+\newcommand{\Hs}{\hspace{0.75cm}}
+\newcommand{\HS}{\hspace{1.0cm}}
+\newcommand{\HSS}{\hspace{1.5cm}}
+\newcommand{\bc}[1]{\textbf{\uppercase{#1}}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    %basicstyle=\ttfamily\footnotesize,
+	basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\begin{document}
+\pagestyle{headings}
+
+\begin{titlepage}
+	\begin{center}
+		Vilnius Gediminas Technical University\\
+		\vs
+	Department Department of Informational Technologies \\
+		\vspace*{5cm}
+ 
+		\textbf{\Large Informational Technologies Homework 2}
+		\vs
+		\textbf{\Large  Turing Machine}
+\end{center}
+		\vspace{0.5cm}
+		
+		\flushright{\textbf{Student}: %%STUDENT%%
+		}
+		\flushright{\textbf{Lecturer}: Darius Zabulionis}
+			 
+
+
+ 
+		\vfill
+			 
+					
+		\center{Vilnius 2022}
+
+			 
+ \end{titlepage}
+
+
+
+
+\markboth{}{{\bf Homework 2. Student:} \uline{\hfill %%STUDENT%%
+\hfill} {\bf group:} \uline{\hfill ITfuc-22 \hfill}}
+
+%\markboth{}{{\bf Homework 2., Name:} \underline{Jonas Jonaitis {\bf group:} ITfuc-19 }}
+
+%\vspace{-.5cm}
+Module: Informational technologies FMISB18100; Date: \today{}
+\vspace{-.10cm}
+\begin{center}{\bf Vilnius Gediminas Technical University}\\
+	%\THEMONTH~\THEYEAR
+	%\monthname[\THEMONTH]~\THEDAY, \THEYEAR
+	Department of Information Systems\\
+	
+	\large{\bf Assignment of homework 2: Turing machine} 
+	
+\end{center}
+\vsp
+
+%\uline{ \hfill gggg \hfill}
+
+{\bf The main problem}
+\vsp
+\begin{framed}
+	Write the Turing machine that groups the symbols of the input string by four symbols
+by inserting the blank symbol between the groups. If string contains less symbols than 4
+no actions must be performed on the input string. The empty string must be accepted.\\
+	Examples:
+	\begin{enumerate}
+		\item The input string is "$ aabbacc $"; the output string is "$ aab \; bacc $".
+		\item The input string is "$ aaaaaaaaaa $"; the output string is "$ aa \; aaaa \; aaaa $".
+	\end{enumerate}
+	The alphabet of the input string $\Sigma = \{a, b, c\}$, the alphabet of the Turing machine tape $ \Sigma \cup \{\texttt{\char32}\} \subset \Gamma $.
+\end{framed}
+
+{\bf For the main problem formulate and report the following items}
+
+\begin{multicols}{2}
+	\begin{enumerate}[label=(\Roman*)]
+		\item Make the program for the online version of the Turing machine simulator
+		\item Find all terms that comprise the Turing machine theoretical model
+		\begin{enumerate}[label=(\arabic*)]
+			\item The set of the states $ Q $
+			\item The alphabet $\Sigma $ of the input string
+			\item The alphabet $\Gamma$ of the symbols of the Turing machine type
+			\item The initial state $q_0$
+			\item The accept state $q_{acc}$
+			\item The reject state $q_{rej}$
+			\item The Cartesian products: $Q \times \Gamma$ and $ Q \times \Gamma \times \{L, R\} $
+			\item Calculate the cardinality of the sets $ Q \times \Gamma$ and $ Q \times \Gamma \times \{L, R\}$
+			\item make the transition table of the Turing machine
+			\item Find the domain of definition $ D $ of the transition function $ \delta $ of the Turing machine
+			\item Define and represent the transition function $ \delta $ as a set of all ordered pairs from the domain of the definition $Q \times \Gamma$ and the codomain $ Q \times \Gamma \times \{L, R\} $
+		\end{enumerate}
+		\item Draw the transition diagram or the graph of the Turing machine
+	\end{enumerate}
+\end{multicols}
+
+Remarks.
+\par
+The report of the homework must contain: the title page, assignment, abstract page, table of contents, the main text of the homework whose chapters and numbering of the chapters correspond to the above listed items, the list of the references (if literature were used)
+\par
+All calculations, derivations of formulas assumptions etc. must be commented in the text of the report; variables of the formulas must be explained when they are used for the first time in the text; figures and tables must be labelled and numbered in the text of the report.
+
+\newpage
+\markboth{}{}
+\vspace{-15cm}
+\begin{abstract}
+	This homework report covers:
+	\begin{enumerate}
+		\item Program for the Turing machine computer simulator: \url{http://morphett.info/turing/turing.html}
+		\item Theoretical model of the Turing Machine: $ TM = (Q, \Sigma, \Gamma, \delta, q_{0}, q_{accp}, q_{rej}) $, 
+		where: 
+			\begin{itemize}
+				\item $Q$  is the set of TM states
+				\item $\Sigma$  is the alphabet of the input string of TM
+				\item $\gamma$  is the type symbol set of TM
+				\item $\delta$  is the transition function of TM
+				\item $q_{0}$ is the initial state of TM
+				\item $q_{accp}$ is the accept state of TM
+				\item $q_{rej}$  is the reject state of TM
+				\end{itemize}
+		\item All other items of the assignment.
+		\end{enumerate}
+
+	\end{abstract}
+%=====================================================================================
+\newpage
+
+\tableofcontents
+\addcontentsline{toc}{chapter}{Bibliography}
+
+%=====================================================================================
+
+\newpage
+\chapter{Program for the computer simulator of the Turing machine}
+\section[]{Programming realization of the Turing Machine}
+
+The program for the Turing machine simulator \cite{TuringSite} \vspace{-0.25cm}
+{\center \url{http://morphett.info/turing/turing.html} \par}
+\noindent
+is listed below in program Listing~\ref{programListing}.
+The program is also explained in Listing~\ref{programListing}. The explaining comments start with semicolons ";".
+The default initial state in the online simulator of the Turing machine \cite{TuringSite} is $ 0 $,
+%%STARTING_STATE_DESCRIPTION%%
+
+\lstset{style=mystyle}
+
+%\begin{verbatim}
+\begin{lstlisting}[language = , caption= Turing machine program]
+	
+	%%CODE_LISTING%%
+
+\end{lstlisting} \label{programListing}
+
+% \end{verbatim}
+
+\chapter{Theoretical modelling of the Turing machine}
+
+
+\section[]{Turing machine theoretical model as an ordered set}
+
+Turing Machine can be represented as an ordered set: $ TM = (Q, \Sigma, \Gamma, \delta, q_{0}, q_{accp}, q_{rej}) $, consisting of: 
+			\begin{itemize}
+				\item $Q$  is the set of TM states
+				\item $\Sigma$  is the alphabet of the input string of TM
+				\item $\gamma$  is the type symbol set of TM
+				\item $\delta$  is the transition function of TM
+				\item $q_{0}$ is the initial state of TM
+				\item $q_{accp}$ is accept state of TM
+				\item $q_{rej}$  is reject state of TM
+				\end{itemize}
+
+
+	\subsection{The set of the states $Q$ of TM}
+	This set contains all states of the TM program listed in Listing \ref{programListing}.
+		\begin{equation}
+		\begin{aligned}
+		\label{eq:Q}
+			Q = \{ %%STATES%%
+			\}
+		\end{aligned}
+		\end{equation}
+	% 
+	\subsection{The alphabet $ \Sigma $ of the input string of TM}
+		The alphabet $ \Sigma $ is a set containing all symbols that can be used to make the input strings of the given TM program, see Listing \ref{programListing}. These permitted symbols are pointed out in the assignment. The alphabet is as follows:
+		\begin{equation}
+			\Sigma = \{ %%SOURCE_LETTERS%%
+			\}
+		\end{equation}
+% 
+	\subsection{The set of the tape symbols $ \Gamma $ of TM}
+	The set of the TM tape symbols contains all symbols that can be used on the TM tape. At least, the TM tape can contain $ \Sigma $ and blank space $ \_ $. Therefore, at least $ \Gamma $ is superset of $ \Sigma \cup \{\_\} $, i.e. $ \Gamma \supset (\Sigma \cup \{\_\}) $.
+		\begin{equation} \label{eq:Gamma}
+			\Gamma = \{
+			%%SOURCE_LETTERS%%
+			\} \cup \{
+			%%EXTRA_LETTERS%%
+			\} = \{
+			%%SOURCE_LETTERS%%
+			,
+			%%EXTRA_LETTERS%%
+			\}
+		\end{equation}
+	
+	\subsection{Domain of definition $ D_{\delta} $ of the transition function $ \delta $ of TM}
+	The domain of definition is a set denoted by $ D_{\delta} $. This set contains ordered pairs $ (s, r) $ where  their components $ s $ and $ r $ are state and read symbol (by TM head) respectively. This set $ D_{\delta} $ is composed from the terms of the first two columns of the TM program listed in Listing \ref{programListing}.
+	\begin{equation}
+	\begin{aligned}
+	\label{eq:domain}
+		D_{\delta} = \{
+		%%DOMAIN_OF_DEFINITION%%
+		\}
+	\end{aligned}
+	\end{equation}
+
+	\subsection{Range $ R_{\delta} $ of the transition function $ \delta $ of TM}
+	The range of the transition function $ \delta $, see Eq. \ref{eq:delta}, is a set denoted by $ R_{\delta} $. This set contains ordered triples $ (w, d, z) \in R_{\delta} $ attained by the Transition function $ \delta $. The components of $ (w, d, z) $ are following: $ w \in \Gamma $ is symbol that can be written on TM tape; $ d \in \{L, R\} $ is direction; and $ z \in Q $ is a state.
+	This set $ R_{\delta} $ is composed from the terms of the last three columns of the TM program listed in Listing \ref{programListing}.
+	\begin{equation}
+	\label{eq:range}
+	\begin{aligned}
+	R_{\delta} = \{
+		%%TRANSITION_RANGE%%
+		\}
+	\end{aligned}
+	\end{equation}
+	
+	
+	\subsection{Transition function $ \delta $ of TM}
+	\paragraph{Some explanations.} The transition function $ \delta $ maps the set $ D_{\delta} $, i.e. the domain of the definition, to set $ R_{\delta} $, i.e. the range. Usually it is written as $ \delta: D_{\delta} \to R_{\delta} $.  It should be noticed that according to the definition of the function in mathematics the function $ \delta $ must be defined over the entire set $ D_{\delta} $, i.e. the domain of the definition, also the transition function $ \delta $ must attain every element from the range $ R_{\delta} $. In mathematics a function also can be denoted as a map from the domain of definition $ D_{\delta} $ to so called codomain, denoted hereafter by $ C_{\delta} $, as follows: $ f: D_{\delta} \to C_{\delta} $, where codomain $ C_{\delta} $ is superset of the domain of definition $ D_{\delta}: $ $ D_{\delta} \subseteqq C_{\delta} $.
+	
+	The transition function $ \delta $ defined here as a set, see Eq. \ref{eq:delta}, consists of ordered pairs $ (a , b) $, where $ a \in D_{\delta} $ and $ b \in R_{\delta}  $ is also made on the basis of the TM program listed in Listing \ref{programListing}.
+	
+	\begin{equation} \label{eq:delta}
+	\begin{aligned}
+	\delta = \{
+		%%TRANSITION_FUNCTION%%
+		\}
+	\end{aligned}
+	\end{equation}
+	\paragraph{Remark.} As we can see from Eq. \eqref{eq:delta}, Turing machine, or one tape non-deterministic Turing machine, can be treated as \emph{a vector variable vector valued function} $ \delta $
+	\begin{equation}\label{key}
+		\delta = \{((s, r), \delta(s, r)) : (s, r) \in D_{\delta} \} 
+	\end{equation}
+	where $ (s, r) $ is vector variable, and their components $ s $ and $ r $ are state and read symbol respectively. Thus, we can write that $ (w, d, z) = \delta(s, r) $ where $ (w, d, z) \in R_{\delta} $ is vector value attained by $ \delta $, whose components   $ w $, $ d \in \{L, R\} $, $ z $ are as follows:
+	\begin{itemize}
+		\item $ w $ is  written symbol on TM tape
+		\item $ d $ is direction
+		\item $ z $ new state
+	\end{itemize}
+	Thus the first term of Eq. \eqref{eq:delta}, is $ (
+	%%FIRST_KEY%%
+	,
+	%%FIRST_VALUE%%
+	) $ therefore, $
+	%%FIRST_VALUE%%
+	=\delta%%FIRST_KEY%%
+	$.
+	
+	\subsection{The initial, accept and reject states of TM}
+	{The initial state, denoted by $ q_0 $, see Eq. \eqref{eq:q0}, is the state with which the TM starts to execute the program listed in Listing \ref{programListing}. In general, $ q_0 $ is not necessarily located at the beginning of the program text as it is shown in line $ 8 $ of Listing \ref{programListing}. That is, actually, the lines containing the initial state $ q_0 $ can be placed in any position of the TM program.
+	\begin{equation} \label{eq:q0}
+		q0 = %%STARTING_STATE%%
+	\end{equation}
+	
+	The accept state $ q_{accp} $ and reject state $ q_{rej} $ are states used to show if the input string is accepted, i.e. an input string meets the requirements, or the input string is rejected, i.e. an input string does not meet the requirements. That is, $ q_{accp} $ and $ q_{rej} $ are used to make the decision. %%REJECT_STATE_NULL_MESSAGE%% However, if the TM program makes no decision but modifies the input string or does another functions, e.g. counts symbols, then usually, the accept state $ q_{accp} $ is always present  while the reject state $ q_{rej} $ can be omitted, see Listing \ref{programListing}. The absent state can be specified by using so called null or empty string $ \lambda $.
+	
+	\noindent {The accept state:}
+	\begin{equation}
+		q_{accp} = %%ACCEPT_STATE%%
+	\end{equation}
+	%
+	{The reject state:}
+	\begin{equation}\label{eq:q_rej}
+		q_{rej} = %%REJECT_STATE%%
+	\end{equation}
+	%%REJECT_STATE_NULL_MESSAGE%% where $\lambda$ is null string.
+	
+
+	\section{The Cartesian products: $Q \times \Gamma$ and $ Q \times \Gamma \times \{L, R\} $}
+	
+	The Cartesian product of $Q \times \Gamma = \{(a,b) : a \in Q \text{~and~} b \in \Gamma \}$ is as follows:
+		\begin{equation}\label{eq:Q_times_Gamma}
+		\begin{aligned}
+		Q \times \Gamma = \{
+		   %%CARTESIAN_QG%%
+		   \}
+		\end{aligned}
+		\end{equation}
+		
+	The Cartesian product of $ Q \times \Gamma \times \{L,R\} = \{(a, b, c) : a \in Q \text{~and~} b \in \Gamma \text{~and~} c \in \{L,R\} \}$ is as follows:
+		%
+		\begin{equation}\label{eq:Q_times_Gamma_times_LR}
+		\begin{aligned}
+		& Q \times \Gamma \times \{L,R\} = \\
+		= \{
+			%%CARTESIAN_QGLR%%
+			\}      \\
+		\end{aligned}
+		\end{equation}
+
+	\section{Cardinality of the sets $ Q \times \Gamma$ and $ Q \times \Gamma \times \{L, R\} $}
+	Cardinality of set $ Q \times \Gamma $, is denoted as $ |Q \times \Gamma| $. The cardinality of the set $ Q \times \Gamma $ is number of elements of $ Q \times \Gamma $ that can be calculated as $ |Q \times \Gamma| = |Q| \cdot |\Gamma| $. Therefore for the TM program listed in Listing \ref{programListing}
+	%
+	\begin{equation}\label{eq:cardinality2}
+		|Q \times \Gamma| = |Q| \cdot |\Gamma| = %%NUM_STATES%%
+		\cdot
+		%%NUM_TAPE_LETTERS%%
+		=
+		%%QG_CARDINALITY%%
+	\end{equation}
+	%
+	where $ |Q| = %%NUM_STATES%%
+	$ and $ |\Gamma| = %%NUM_TAPE_LETTERS%%
+	$, can be easily counted from Eqs. \eqref{eq:Q} and \eqref{eq:Gamma}.
+	
+	Also, the cardinality $ |Q \times \Gamma| $ can be counted directly by using Eq. \eqref{eq:Q_times_Gamma}. However, it is easier to evaluate $ {|Q \times \Gamma| = {|Q|}\cdot|\Gamma|}$ than count directly $ |Q \times \Gamma| $ from Eq. \eqref{eq:Q_times_Gamma}. And this  advantage is even more evident for the cardinality of $ |Q \times \Gamma \times \{L, R\}| $, see Eq. \eqref{eq:cardinality2}
+	%
+	\begin{equation}\label{eq:cardinality2}
+		|Q \times \Gamma \times \{L, R\}| = |Q| \cdot |\Gamma| \cdot |\{L, R\}| = %%NUM_STATES%%
+		\cdot 2 \cdot %%NUM_TAPE_LETTERS%%
+		= %%QGLR_CARDINALITY%%
+	\end{equation}
+	%
+	Also, the cardinality $ |Q \times \Gamma \times \{L, R\}| $ can be counted directly by using Eq. \eqref{eq:Q_times_Gamma_times_LR}.
+	
+	\newpage
+	\section{The transition table of the Turing machine}
+	The transition table of the TM program is given in Table \ref{table:transitionTable}. In first column of Table \ref{table:transitionTable} contains states from set $ Q $, the second row contains TM tape symbols from set $ \Gamma $.
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{graphicx}
+\begin{table}[h]
+	\caption{Transition table of the Turing machine program given in Listing \ref{programListing}} \label{table:transitionTable}
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{@{~}l@{~~~}llllllll@{}}
+			\toprule
+			 & \multicolumn{%%NUM_TAPE_LETTERS%%
+			 }{c}{Tape symbols (elements of set $ \Gamma $)}                                                                          \\ \midrule
+			%%TRANSITION_TABLE%%
+			\bottomrule
+		\end{tabular}%
+	}
+\end{table}
+
+\section{Transition diagram of the TM program}
+	The transition diagram of the TM program is given in Fig. \ref{transitionDiagram}. The diagram is made by using the TM program code given in Listing \ref{programListing} and by using the transition table given in Table \ref{table:transitionTable}. From the diagram, we can see the connections of the states, also what operations are done by transiting from one state to another.
+	
+	It should be noted, that al three approaches: the transition function $ \delta $, Eq. \eqref{eq:delta}, the transition table, Table \ref{table:transitionTable}, and the transition diagram, Fig. \ref{transitionDiagram}, define the same TM program given in Listing \ref{programListing}. However, there are more approaches how to describe or define TM. Transition function may be thought of as the simplest and clearest approach to define TM. However, the transition function is not suitable when the non-deterministic TM is designed. Transition table is not a strict approach to define TM since different Transition tables can be made for the same TM. The most general approach is the transition diagram that is suitable for very sophisticated TM's: multi tape nondeterministic TM.
+
+
+\enlargethispage{100cm}
+\begin{figure}
+	\centering
+
+	\includegraphics[
+	width=\textwidth,height=\textheight,keepaspectratio
+	]{
+	%%TRANSITION_DIAGRAM%%
+	}
+
+	\caption{Transition diagram of the TM program given in Listing \ref{programListing}} \label{transitionDiagram}
+\end{figure}
+
+
+
+\newpage
+
+	\cleardoublepage
+	\addcontentsline{toc}{chapter}{Bibliography}
+	\begin{thebibliography}{1}
+
+		
+		\bibitem{TuringSite} Turing machine simulator: \url{http://morphett.info/turing/turing.html}.\
+		%\bibitem{}Sharma H., Dominic P., and Christine H. L., Stabilization of Methanol-Bases Suspensions, \emph{J. K. Ceram. Soc.}, 89, (2005) 450-485.
+		
+		\bibitem{Kile} Kile LaTeX editor: \url{https://docs.kde.org/trunk5/en/kile/kile/kile.pdf};\
+		\bibitem{Tikz} Tikz package: \url{https://www3.nd.edu/~kogge/courses/cse30151-fa17/Public/other/tikz_tutorial.pdf};\
+		
+		
+		
+	\end{thebibliography}
+\end{document}
+	

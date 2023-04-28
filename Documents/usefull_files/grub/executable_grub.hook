@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Upgrade
+
+Type = Package
+Target = grub
+
+[Action]
+Description = Re-generate Grub if Updated
+When = PostTransaction
+Depends = grub
+Exec = /bin/sh -c "/usr/bin/grub-install --no-nvram && /usr/bin/grub-mkconfig -o /boot/grub/grub.cfg"

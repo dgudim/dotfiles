@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# theme hash: {{ include "dot_local/share/icons/icons.tar.gz" | sha256sum }}
-echo "Extracting icons"
-cd "{{.chezmoi.homeDir}}/.local/share/icons/"
-tar -xzf icons.tar.gz
