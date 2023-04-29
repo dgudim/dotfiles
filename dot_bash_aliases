@@ -4,8 +4,9 @@ alias ls='exa --all --icons --color=always --group-directories-first --long --gi
 alias la='exa --all --icons --color=always --group-directories-first'
 alias l='exa --classify --icons --color=always --group-directories-first'
 
-# Replace cat with bat
+# Replace cat with bat and man with batman
 alias cat='bat --paging=never --theme=gruvbox-dark'
+alias man='batman'
 
 # Nice cd aliases
 alias ..='cd ..'
