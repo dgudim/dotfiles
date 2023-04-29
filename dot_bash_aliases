@@ -5,7 +5,9 @@ alias la='exa --all --icons --color=always --group-directories-first'
 alias l='exa --classify --icons --color=always --group-directories-first'
 
 # Replace cat with bat and man with batman
-alias cat='bat --paging=never --theme=gruvbox-dark'
+export BAT_THEME=gruvbox-dark
+export BAT_STYLE=numbers,changes
+alias cat='bat --paging=never'
 alias man='batman'
 
 # Nice cd aliases
