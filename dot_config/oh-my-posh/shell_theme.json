@@ -81,7 +81,7 @@
             "always_enabled": true
           },
           "style": "diamond",
-          "template": " {{ if gt .Code 0 }}󰀦{{ else }}{{ end }}",
+          "template": " {{ if gt .Code 0 }}󰀦{{ else }}{{ end }} ",
           "trailing_diamond": "",
           "type": "exit"
         }
