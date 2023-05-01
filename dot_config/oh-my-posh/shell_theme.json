@@ -223,13 +223,13 @@
         {
           "foreground": "#fb4934",
           "style": "plain",
-          "template": " ",
+          "template": "󰈸",
           "type": "root"
         },
         {
           "foreground": "#b16286",
           "style": "plain",
-          "template": " <#458588><b>⚡</b></><b>{{ .UserName }}</b> <#26C6DA>❯</><#458588>❯</>",
+          "template": " <#458588><b>󱐋</b></><b>{{ .UserName }}</b> <#26C6DA>❯</><#458588>❯</>",
           "type": "text"
         }
       ],
