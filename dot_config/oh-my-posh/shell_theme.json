@@ -56,7 +56,7 @@
             "always_enabled": true
           },
           "style": "powerline",
-          "template": " 󰔟{{ .FormattedMs }}⠀",
+          "template": " 󰔟 {{ .FormattedMs }}⠀",
           "type": "executiontime"
         },
         {
@@ -229,7 +229,7 @@
         {
           "foreground": "#b16286",
           "style": "plain",
-          "template": " <#458588><b>󱐋</b></><b>{{ .UserName }}</b> <#26C6DA>❯</><#458588>❯</>",
+          "template": " <#458588><b>󱐋</b></><b> {{ .UserName }}</b> <#26C6DA>❯</><#458588>❯</>",
           "type": "text"
         }
       ],
