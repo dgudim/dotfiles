@@ -15,12 +15,15 @@
 * {
   --interactive-normal: #ebdbb2 !important;
   --interactive-active: #ffedc1 !important;
-  --header-primary: var(--interactive-active) !important;
+  --header-primary: #cfc19d;
   --text-normal: #ebdbb2 !important;
   --background-primary: #282828;
   --background-secondary: #313131;
   --background-tertiary: #242424;
   --channels-default: #92b8a9;
+  --brand-experiment-560: #79998c;
+  --button-danger-background: #fb4934;
+  --status-danger: #fb4934;
   --deprecated-panel-background: #161818;
   --channeltextarea-background: #32302f;
 
@@ -79,7 +82,8 @@ div[class^="userPanelOuter"] {
 svg[class^="bannerSVGWrapper"] mask,
 img[class^="avatarDecoration"],
 div foreignObject[mask^="url(#svg-mask-avatar-decoration-status"],
-svg[class^="bannerSVGWrapper"] * {
+svg[class^="bannerSVGWrapper"] * ,
+div[id^="message-add-reaction-1"] {
   display: none !important;
 }
 
