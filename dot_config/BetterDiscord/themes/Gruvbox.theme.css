@@ -1,0 +1,223 @@
+/**
+ * @name Duvbox
+ * @author CircuitRCAY
+ * @version 3.2.0
+ * @description Gruvbox Discord theme.
+*/
+
+/**
+    Duvbox - adapted for Discord
+
+    Made by CircuitRCAY (Circuit#2816)
+*/
+
+/* Iosevka, codeblock font */
+:root {
+  --interactive-normal: #ebdbb2;
+  --text-normal: #ebdbb2;
+  --background-primary: #282828;
+  --background-secondary: #313131;
+  --background-tertiary: #242424;
+  --channels-default: #92b8a9;
+  --deprecated-panel-background: #161818;
+  --channeltextarea-background: #32302f;
+
+  --scrollbar-thin-thumb: var(--background-tertiary);
+  --scrollbar-auto-thumb: var(--background-tertiary);
+  --scrollbar-auto-scrollbar-color-thumb: var(--background-tertiary);
+  --scrollbar-auto-scrollbar-color-track: var(--background-secondary);
+}
+
+/* Popout / menu colors. */
+.da-popouts .da-container,
+.da-friendsTableHeader,
+.da-friendsTable,
+.da-autocomplete,
+.da-themedPopout,
+.da-header,
+.da-footer,
+.da-userPopout > *,
+.da-systemPad,
+.da-autocompleteHeaderBackground {
+  background-color: var(--background-secondary) !important;
+  border-color: transparent !important;
+}
+
+div[role="dialog"] > div {
+  --profile-gradient-primary-color: var(--background-tertiary) !important;
+  --profile-gradient-secondary-color: var(--background-tertiary) !important;
+  --profile-gradient-button-color: var(--background-primary) !important;
+  --profile-gradient-overlay-color: unset !important;
+  --profile-body-background-color: var(--background-primary) !important;
+  --profile-body-background-hover: var(--background-secondary) !important;
+  --profile-body-divider-color: var(--background-secondary) !important;
+  --profile-avatar-border-color: unset !important;
+  --profile-message-input-border-color: var(--background-tertiary) !important;
+  --profile-note-background-color: unset !important;
+  --profile-role-pill-background-color: unset !important;
+  --profile-role-pill-border-color: var(--background-secondary) !important;
+}
+
+div[class^="userPanelOuter"] {
+  --profile-gradient-primary-color: unset !important;
+  --profile-gradient-secondary-color: unset !important;
+  --profile-gradient-button-color: unset !important;
+  --profile-gradient-overlay-color: unset !important;
+  --profile-body-background-color: unset !important;
+  --profile-body-background-hover: unset !important;
+  --profile-body-divider-color: unset !important;
+  --profile-avatar-border-color: unset !important;
+  --profile-message-input-border-color: unset !important;
+  --profile-note-background-color: unset !important;
+  --profile-role-pill-background-color: unset !important;
+  --profile-role-pill-border-color: unset !important;
+}
+
+svg[class^="bannerSVGWrapper"] mask, img[class^="avatarDecoration"], div foreignObject[mask^="url(#svg-mask-avatar-decoration-status"] {
+  display: none !important;
+}
+
+.theme-dark .da-messageGroupWrapper {
+  background-color: var(--background-tertiary) !important;
+  border-color: transparent;
+}
+
+/* Each individual item in popouts has a slight gradient - we clear it here. */
+.theme-dark .da-option:after {
+  background-image: none !important;
+}
+
+/* Force BetterDiscord settings items to match normal settings items. */
+.theme-dark #bd-settings-sidebar .ui-tab-bar-item {
+  color: var(--interactive-normal);
+}
+
+/* Recolor BD settings headers, Nitro settings item and Add Channel icon */
+.theme-dark #bd-settings-sidebar .ui-tab-bar-header,
+div[style*="color: rgb(114, 137, 218);"],
+.da-addButtonIcon {
+  color: var(--channels-default) !important;
+}
+
+/* Force BetterDiscord *active* settings items to match normal active settings items. */
+.theme-dark #bd-settings-sidebar .ui-tab-bar-item.selected,
+.theme-dark .da-autocompleteRow .da-selectorSelected {
+  background-color: var(--background-modifier-selected);
+  color: var(--interactive-active);
+}
+
+/* Recolor the emoji button in the chat bar to match the color scheme. */
+.da-emojiButtonNormal .da-contents .da-sprite {
+  filter: sepia(1) !important;
+}
+
+/* Recolor scrollbar track. */
+.da-messagesWrapper .da-scroller::-webkit-scrollbar,
+.da-messagesWrapper .da-scroller::-webkit-scrollbar-track-piece {
+  background-color: var(--background-tertiary) !important;
+  border-color: rgba(0, 0, 0, 0) !important;
+}
+
+/* Recolor scrollbar thumbs. */
+.da-scrollerThemed .da-scroller::-webkit-scrollbar-thumb,
+.da-scrollerWrap .da-scroller::-webkit-scrollbar-thumb {
+  background-color: var(--background-secondary) !important;
+  border-color: var(--background-tertiary) !important;
+}
+
+/* CSS below this comment is from highlight.js gruvbox-dark theme.
+   https://github.com/highlightjs/highlight.js/blob/master/src/styles/gruvbox-dark.css
+   This CSS makes code blocks within Discord match gruvbox.
+   hightlight.js is copyright 2006 Ivan Sagalaev and licensed under the BSD 3-clause license,
+   as specified here: https://github.com/highlightjs/highlight.js/blob/master/LICENSE            */
+
+/* Gruvbox Red */
+.hljs-deletion,
+.hljs-formula,
+.hljs-keyword,
+.hljs-link,
+.hljs-selector-tag {
+  color: #fb4934;
+}
+
+/* Gruvbox Blue */
+.hljs-built_in,
+.hljs-emphasis,
+.hljs-name,
+.hljs-quote,
+.hljs-strong,
+.hljs-title,
+.hljs-variable {
+  color: #83a598;
+}
+
+/* Gruvbox Yellow */
+.hljs-attr,
+.hljs-params,
+.hljs-template-tag,
+.hljs-type {
+  color: #fabd2f;
+}
+
+/* Gruvbox Purple */
+.hljs-builtin-name,
+.hljs-doctag,
+.hljs-literal,
+.hljs-number {
+  color: #d3869b;
+}
+
+/* Gruvbox Orange */
+.hljs-code,
+.hljs-meta,
+.hljs-regexp,
+.hljs-selector-id,
+.hljs-template-variable {
+  color: #d78220;
+}
+
+/* Gruvbox Green */
+.hljs-addition,
+.hljs-meta-string,
+.hljs-section,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-string,
+.hljs-symbol {
+  color: #b8bb26;
+}
+
+/* Gruvbox Aqua */
+.hljs-attribute,
+.hljs-bullet,
+.hljs-class,
+.hljs-function,
+.hljs-function .hljs-keyword,
+.hljs-meta-keyword,
+.hljs-selector-pseudo,
+.hljs-tag {
+  color: #8ec07c;
+}
+
+/* Gruvbox Gray */
+.hljs-comment {
+  color: #928374;
+}
+
+/* Gruvbox Purple */
+.hljs-link_label,
+.hljs-literal,
+.hljs-number {
+  color: #d3869b;
+}
+
+.hljs-comment,
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-section,
+.hljs-strong,
+.hljs-tag {
+  font-weight: bold;
+}
