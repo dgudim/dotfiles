@@ -12,9 +12,11 @@
 */
 
 /* Iosevka, codeblock font */
-:root {
-  --interactive-normal: #ebdbb2;
-  --text-normal: #ebdbb2;
+* {
+  --interactive-normal: #ebdbb2 !important;
+  --interactive-active: #ffedc1 !important;
+  --header-primary: var(--interactive-active) !important;
+  --text-normal: #ebdbb2 !important;
   --background-primary: #282828;
   --background-secondary: #313131;
   --background-tertiary: #242424;
@@ -56,6 +58,7 @@ div[role="dialog"] > div {
   --profile-note-background-color: unset !important;
   --profile-role-pill-background-color: unset !important;
   --profile-role-pill-border-color: var(--background-secondary) !important;
+  filter: sepia(0.2) !important;
 }
 
 div[class^="userPanelOuter"] {
@@ -73,7 +76,10 @@ div[class^="userPanelOuter"] {
   --profile-role-pill-border-color: unset !important;
 }
 
-svg[class^="bannerSVGWrapper"] mask, img[class^="avatarDecoration"], div foreignObject[mask^="url(#svg-mask-avatar-decoration-status"] {
+svg[class^="bannerSVGWrapper"] mask,
+img[class^="avatarDecoration"],
+div foreignObject[mask^="url(#svg-mask-avatar-decoration-status"],
+svg[class^="bannerSVGWrapper"] * {
   display: none !important;
 }
 
