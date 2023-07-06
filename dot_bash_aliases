@@ -21,6 +21,7 @@ alias neofetch='neofetch --sixel /home/kloud/.config/neofetch/logo --image_size 
 # Pacman aliases
 alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | less'
 alias orphans='pacman -Qtdq'
+alias broken='sudo pacman -Qkk | grep warning'
 
 # Rank mirrors
 alias mirrors='sudo reflector --verbose -c BY -c DE -c LT -c RU -c UA --protocol https --protocol http --sort rate --latest 50 --download-timeout 5 --save /etc/pacman.d/mirrorlist && eos-rankmirrors'
