@@ -148,3 +148,11 @@ start_vpn_client(){
     route -n | grep vpn_vpn
     ip address show vpn_vpn | grep inet
 }
+
+remove-lines() (
+  remove_lines="$1"
+  all_lines="$2"
+  tmp_file="$(mktemp)"
+  grep -Fvxf "$remove_lines" "$all_lines" > "$tmp_file"
+  mv "$tmp_file" "$all_lines"
+)
