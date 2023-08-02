@@ -32,13 +32,13 @@ INSTALL_LIST=./pkg_install.list
 # scripts must be executable and have non-zero exit status for pkgsync to continue
 
 # script that is ran before pkgsync calculations start, can be used to sync various lists
-#PRESTART_SCRIPT=/etc/pkgsync/pkg_prestart.sh
+PRESTART_SCRIPT=./pkg_prestart.sh
 
 # script that is ran when INSTALL_LIST is changed, can be used to sync it
-#FINISH_SCRIPT=/etc/pkgsync/pkg_finish.sh
+FINISH_SCRIPT=./pkg_finish.sh
 
 # directory to store temporary working files in
-#TMP_DIR=/tmp
+TMP_DIR=/tmp
 
 [ -x "$PRESTART_SCRIPT" ] && "$PRESTART_SCRIPT"
 

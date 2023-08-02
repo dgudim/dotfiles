@@ -834,3 +834,4 @@ lib32-vulkan-intel
 libva-intel-driver
 vulkan-intel
 xf86-video-intel
+texlive-pstricks
