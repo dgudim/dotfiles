@@ -1,4 +1,5 @@
 # CORE STUFF
+base
 linux
 linux-firmware
 linux-headers
@@ -24,6 +25,7 @@ sed
 less
 which
 whois
+expac
 pacman
 pacman-contrib
 yay
@@ -31,6 +33,26 @@ man-db
 man-pages
 unrar
 unzip
+ntfs-3g
+ntp
+rebuild-detector
+reflector
+unarchiver
+usb_modeswitch
+usbutils
+dkms
+dmidecode
+dmraid
+e2fsprogs
+exfatprogs
+dosfstools
+fakeroot
+grep
+smartmontools
+btrfs-progs
+efibootmgr
+efitools
+f2fs-tools
 
 
 
@@ -72,6 +94,25 @@ xdg-user-dirs
 xdg-utils
 wayland-protocols
 wl-clipboard
+egl-wayland
+trash-cli
+plasma-nm
+plasma-pa
+plasma-disks
+kfind
+kgpg
+khotkeys
+kinfocenter
+bluedevil
+bluez
+bluez-utils
+breeze-gtk
+kde-gtk-config
+gtk3-classic
+kdialog
+kinit
+kscreen
+ksshaskpass
 
 
 
@@ -81,6 +122,7 @@ legacylauncher
 konsole
 spectacle
 dolphin
+ark
 kate
 yakuake
 kcalc
@@ -127,6 +169,11 @@ kdeconnect
 calibre
 telegram-desktop
 anilibria-winmaclinux
+reflector-simple
+edex-ui-bin
+discord
+discord-screenaudio
+discover
 
 
 
@@ -151,6 +198,7 @@ yt-dlp
 wireplumber
 htop
 btop
+bottom
 xdotool
 bat
 mc
@@ -158,6 +206,7 @@ rsync
 xdg-ninja
 chezmoi
 cmatrix
+ddcutil
 exa
 
 
@@ -167,7 +216,6 @@ exa
 nano-syntax-highlighting-git
 steam-native-runtime
 linux-steam-integration
-nheko-krunner-git
 pip-autoremove
 plasma-browser-integration
 thunderbird-i18n-en-us
@@ -204,6 +252,9 @@ gvfs-google
 gvfs-mtp
 gvfs-nfs
 gvfs-smb
+kimageformats
+kdeplasma-addons
+nheko-krunner-git
 
 ## KATE
 markdownpart
@@ -238,6 +289,7 @@ alhp-mirrorlist
 endeavouros-keyring
 endeavouros-mirrorlist
 endeavouros-theming
+eos-rankmirrors
 
 
 
@@ -381,6 +433,13 @@ libwnck3
 
 
 # BUILD STUFF, DEVELOPMENT
+shellcheck
+autopep8
+twine
+bash-language-server
+prettier
+git
+git-delta
 
 ## ANDROID
 java-environment-common
@@ -406,6 +465,7 @@ qtcreator
 autoconf
 automake
 heaptrack
+extra-cmake-modules
 
 ## JS
 nodejs
@@ -414,6 +474,10 @@ npm-check-updates
 typescript
 typescript-language-server
 ts-node
+esbuild
+eslint
+eslint_d
+eslint-language-server
 
 ## WEB
 sassc
@@ -423,6 +487,9 @@ vscode-html-languageserver
 
 
 # NETWORKING
+dhclient
+dnsmasq
+ethtool
 netctl
 net-tools
 networkmanager
@@ -443,7 +510,6 @@ wireless_tools
 wget
 
 ## PENTEST
-
 reaver
 pixiewps
 wifite
@@ -463,7 +529,7 @@ amb-plugins
 soundfont-fluid
 calf
 ambix
-
+aeolus
 
 ## GUIS
 surge
@@ -486,6 +552,9 @@ gpick
 obs-studio
 blender
 krita
+gwenview
+dragon
+inkscape
 
 
 
@@ -496,6 +565,7 @@ papirus-icon-theme
 plymouth-git
 plymouth-theme-green-blocks-git
 klassy
+dracut-colors-git
 
 
 
@@ -516,6 +586,7 @@ ncurses5-compat-libs
 
 # PACMAN HOOKS
 pacman-systemd-inhibit
+kernel-modules-hook
 eos-hooks
 
 
@@ -530,6 +601,8 @@ upower
 
 
 # MISC UTILS, OPT DEPS
+realtime-privileges
+dbus-broker
 logrotate
 pigz
 
@@ -547,11 +620,15 @@ cups
 cups-filters
 cups-pdf
 hplip
+print-manager
+system-config-printer
 
 
 
 
 # DOCUMENT RENDERING
+poppler-data
+poppler-glib
 tex-gyre-fonts
 texinfo
 texlive-latexextra
@@ -559,9 +636,12 @@ texlive-mathscience
 texlive-pictures
 pandoc-cli
 pandoc-crossref
+plantuml-ascii-math
 asciidoctor
+blockdiag
 pdf2svg
 biber
+ditaa
 
 
 
@@ -582,8 +662,7 @@ nbd
 ndisc6
 nilfs-utils
 nss-mdns
-ntfs-3g
-ntp
+
 nwdiag
 openmp
 openmpi
@@ -594,14 +673,10 @@ perl-archive-zip
 phonon-qt5-vlc
 pkgconf
 pkgfile
-plantuml-ascii-math
-plasma-nm
-plasma-pa
-plasma-disks
-poppler-data
-poppler-glib
-prettier
-print-manager
+
+
+
+
 protobuf
 protobuf-c
 protonvpn
@@ -610,10 +685,6 @@ pv
 qgpgme-qt5
 qt-jdenticon
 quilt
-realtime-privileges
-rebuild-detector
-reflector
-reflector-simple
 reiserfsprogs
 rp-pppoe
 samba
@@ -624,9 +695,7 @@ seqdiag
 setbfree
 sg3_utils
 shaderc
-shellcheck
 shfmt
-smartmontools
 s-nail
 sof-firmware
 solid
@@ -637,13 +706,7 @@ svgpart
 sysbench
 sysfsutils
 systembus-notify
-system-config-printer
 systemd-sysvcompat
-trash-cli
-twine
-unarchiver
-usb_modeswitch
-usbutils
 vamp-plugin-sdk
 vdpauinfo
 vim
@@ -660,32 +723,19 @@ yad
 yapf
 zip
 accountsservice
-aeolus
 arj
-ark
 artyfx
 atomicparsley
-autopep8
 b43-fwcutter
 bandwhich
 barrier
-base
 bash-completion
-bash-language-server
 bash-preexec
 bind
 binutils
 bison
-blockdiag
-bluedevil
-bluez
-bluez-utils
 boost
-bottom
-breeze-gtk
-broadcom-wl-dkms
 broot
-btrfs-progs
 cdrtools
 clinfo
 cnijfilter2
@@ -701,50 +751,19 @@ cronie
 cryptsetup
 c++utilities
 cvs
-dbus-broker
-ddcutil
 debtap
-dellfan-git
 device-mapper
-dhclient
 dialog
 diffutils
-discord
-discord-screenaudio
-discover
 distcc
-ditaa
-dkms
-dmidecode
-dmraid
-dnsmasq
-dosfstools
 downgrade
-dracut-colors-git
-dragon
 duf
 duperemove
 dust
 dxvk-bin
-e2fsprogs
 earlyoom
 ed
-edex-ui-bin
-efibootmgr
-efitools
-egl-wayland
 entr
-eos-rankmirrors
-esbuild
-eslint
-eslint_d
-eslint-language-server
-ethtool
-exfatprogs
-expac
-extra-cmake-modules
-f2fs-tools
-fakeroot
 fig2dev
 file
 filelight
@@ -761,8 +780,7 @@ gettext
 ghc-libs
 ghostscript
 gimagereader-qt
-git
-git-delta
+
 gitui
 glava
 glfw-x11
@@ -774,7 +792,6 @@ gpufetch-git
 gpu-screen-recorder-gtk-git
 graphicsmagick
 graphviz
-grep
 groff
 gsfonts
 gst-libav
@@ -783,9 +800,7 @@ gst-plugin-qmlgl
 gst-plugins-bad
 gst-plugins-ugly
 gtest
-gtk3-classic
 gupnp
-gwenview
 gzip
 haveged
 hcxdumptool
@@ -796,31 +811,19 @@ hwinfo
 icoutils
 img2pdf
 inetutils
-inkscape
 innoextract
 inotify-tools
 inxi
 iwd
 jfsutils
 jq
-kde-gtk-config
-kdeplasma-addons
-kdialog
-kernel-modules-hook
-kfind
-kgpg
-khotkeys
-kimageformats
-kinfocenter
-kinit
-kscreen
-ksshaskpass
-
 
 
 
 
 # LAPTOP STUFF
+dellfan-git
+broadcom-wl-dkms
 bcm20702a1-firmware
 intel-gpu-tools
 intel-media-sdk
