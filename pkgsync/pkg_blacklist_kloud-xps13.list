@@ -1,0 +1,39 @@
+# Blacklist virtualization stuff
+qemu-desktop
+qemu-system-ppc
+qemu-system-ppc-firmware
+qemu-user-static
+qemu-user-static-binfmt
+guestfs-tools
+libvirt
+libguestfs
+virt-manager
+docker
+docker-buildx
+docker-compose
+
+# Blacklist nvidia stuff
+nvidia-dkms
+nvidia-inst
+nvidia-settings
+libva-nvidia-driver
+lib32-opencl-nvidia
+nvtop
+opencv-cuda
+cuda
+
+# Blacklist rgb stuff
+openrazer-driver-dkms
+openrgb
+
+# Blacklist other stuff from pc
+grub
+eos-dracut
+amd-ucode
+power-profiles-daemon
+plasma5-wallpapers-wallpaper-engine
+noisetorch
+upscayl-bin
+viber
+
+

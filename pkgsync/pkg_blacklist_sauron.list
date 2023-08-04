@@ -17,6 +17,8 @@ vulkan-intel
 xf86-video-intel
 libvdpau-va-gl-i965
 lib32-libvdpau-va-gl
+vulkan-mesa-layers
+lib32-vulkan-mesa-layers
 gestures
 libinput-gestures
 

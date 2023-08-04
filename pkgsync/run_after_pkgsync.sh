@@ -19,9 +19,11 @@ set -e
 
 # packages on this system to exclude from shared install list
 EXCLUSION_LIST=./pkg_exclude_$(hostname).list
+# echo $EXCLUSION_LIST
 
 # packages in shared install list to not install on this system
 BLACKLIST_LIST=./pkg_blacklist_$(hostname).list
+# echo $BLACKLIST_LIST
 
 # packages to remove from all systems, you must sync it between systems
 REMOVE_LIST=./pkg_remove.list
@@ -80,7 +82,7 @@ then
     then
         yay -S --needed --confirm $(cat $TMP_DIR/pkg_toinstall.list)
         # Mark as explicitly installed
-        # sudo pacman -D --asexplicit --confirm - < "$TMP_DIR/pkg_toinstall.list"
+        sudo pacman -D --asexplicit --confirm - < "$TMP_DIR/pkg_toinstall.list"
     fi
     [[ "$yn" =~ ^[Aa]$ ]] && exit 1
 fi
