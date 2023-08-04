@@ -1,3 +1,60 @@
+# LAPTOP STUFF
+dellfan-git
+b43-fwcutter
+broadcom-wl-dkms
+bcm20702a1-firmware
+intel-gpu-tools
+intel-media-sdk
+intel-ucode
+kernel-install-for-dracut
+lib32-libva-intel-driver
+lib32-vulkan-intel
+libva-intel-driver
+vulkan-intel
+xf86-video-intel
+libvdpau-va-gl-i965
+lib32-libvdpau-va-gl
+gestures
+libinput-gestures
+
+
+
+
+# PC STUFF
+grub
+eos-dracut
+power-profiles-daemon
+openrazer-driver-dkms
+amd-ucode
+openrgb
+
+## NVIDIA STUFF
+nvidia-dkms
+nvidia-inst
+nvidia-settings
+libva-nvidia-driver
+lib32-opencl-nvidia
+nvtop
+opencv-cuda
+cuda
+
+## VIRTUALIZATION AND CONTAINERS
+qemu-desktop
+qemu-system-ppc
+qemu-system-ppc-firmware
+qemu-user-static
+qemu-user-static-binfmt
+guestfs-tools
+libvirt
+libguestfs
+virt-manager
+docker
+docker-buildx
+docker-compose
+
+
+
+
 # CORE STUFF
 base
 linux
@@ -6,6 +63,7 @@ linux-headers
 alsa-firmware
 alsa-plugins
 alsa-utils
+sof-firmware
 archlinux-keyring
 xorg-server
 xorg-xdpyinfo
@@ -15,8 +73,10 @@ xorg-xinput
 xorg-xkill
 xorg-xrandr
 xorg-xwininfo
-util-linux
-util-linux-libs
+xorg-mkfontscale
+wmctrl
+xsettingsd
+xterm
 lsb-release
 os-prober
 xf86-input-libinput
@@ -40,24 +100,70 @@ reflector
 unarchiver
 usb_modeswitch
 usbutils
-dkms
 dmidecode
-dmraid
-e2fsprogs
-exfatprogs
-dosfstools
 fakeroot
 grep
 smartmontools
-btrfs-progs
 efibootmgr
 efitools
-f2fs-tools
+zip
+gzip
+hwdetect
+hwinfo
+inotify-tools
+m4
+mlocate
+mtools
+pkgconf
+pkgfile
+patch
+binutils
+findutils
+perf
+gawk
+pv
+cronie
+file
+systembus-notify
+systemd-sysvcompat
+cryptsetup
+sg3_utils
+gettext
+diffutils
+sysfsutils
+dialog
+findutils
+entr
+haveged
 
+## PACMAN HOOKS
+pacman-systemd-inhibit
+kernel-modules-hook
+eos-hooks
+
+## FS TOOLS
+dmraid
+xfsprogs
+jfsutils
+e2fsprogs
+exfatprogs
+dosfstools
+btrfs-progs
+f2fs-tools
+device-mapper
+reiserfsprogs
+nilfs-utils
+lsscsi
+mdadm
+mda.lv2
+hdparm
+lvm2
+nbd
 
 
 
 # FONTS
+fontforge
 fonts-meta-base
 adobe-source-han-sans-cn-fonts
 adobe-source-han-sans-jp-fonts
@@ -68,7 +174,6 @@ noto-fonts
 noto-fonts-emoji
 ttf-bitstream-vera
 ttf-caladea
-ttf-carlito
 ttf-dejavu
 ttf-firacode-nerd
 ttf-liberation
@@ -78,33 +183,42 @@ ttf-opensans
 ttf-oswald
 ttf-quintessential
 ttf-ubuntu-font-family
-xorg-fonts-alias-misc
 xorg-fonts-misc
+tex-gyre-fonts
+gsfonts
+ttf-courier-prime
+ttf-droid
+ttf-hack-nerd
+ttf-heuristica
+ttf-symbola
+opendesktop-fonts
 
 
 
 
-# DEKSTOP ENVIRONMENT
+# DESKTOP ENVIRONMENT
+libdecor
 plasma-desktop
-plasma-wayland-protocols
 plasma-wayland-session
+packagekit-qt5
 xdg-desktop-portal
 xdg-desktop-portal-kde
 xdg-user-dirs
 xdg-utils
-wayland-protocols
 wl-clipboard
-egl-wayland
 trash-cli
 plasma-nm
 plasma-pa
 plasma-disks
+powerdevil
+kwallet
+kwallet-pam
 kfind
 kgpg
+qgpgme-qt5
 khotkeys
 kinfocenter
 bluedevil
-bluez
 bluez-utils
 breeze-gtk
 kde-gtk-config
@@ -113,13 +227,14 @@ kdialog
 kinit
 kscreen
 ksshaskpass
+accountsservice
 
 
 
 
 # GUI APPS
-legacylauncher
 konsole
+filelight
 spectacle
 dolphin
 ark
@@ -135,10 +250,11 @@ ktorrent
 kwalletmanager
 ventoy-bin
 firefox
+gnome-disk-utility
+google-chrome
 kdiff3
 kompare
 keepassxc
-haruna
 gource
 gparted
 onlyoffice-bin
@@ -152,7 +268,7 @@ syncthingtray
 okteta
 okular
 nheko
-mpv
+cinny-desktop-bin
 schildichat-desktop-bin
 rclone-browser
 thunderbird
@@ -161,25 +277,33 @@ lutris-git
 pdfarranger
 tokodon
 tlpui
-visual-studio-code-bin
-vlc
-wireshark-qt
 zoom
-kdeconnect
 calibre
 telegram-desktop
 anilibria-winmaclinux
 reflector-simple
-edex-ui-bin
 discord
 discord-screenaudio
 discover
+barrier
+libreoffice-fresh
+smb4k
+sqlitebrowser
+textpieces
+qdirstat
+viber
+cpu-x
+anydesk-bin
+gsmartcontrol
+
 
 
 
 
 # CLI APPS
 neofetch
+cpufetch-git
+gpufetch-git
 nano
 syncthing
 onefetch
@@ -196,18 +320,41 @@ atuin
 hoard
 yt-dlp
 wireplumber
-htop
-btop
-bottom
-xdotool
 bat
 mc
 rsync
 xdg-ninja
 chezmoi
 cmatrix
-ddcutil
 exa
+downgrade
+inxi
+duf
+duperemove
+dust
+gitui
+lazygit
+compsize
+broot
+fsarchiver
+glow
+vim
+bfg
+chafa
+fd
+visidata
+symlinks
+tidy
+sherlock-git
+gpart
+cpupower
+
+## TOPS
+htop
+btop
+bottom
+iotop
+powertop
 
 
 
@@ -215,31 +362,21 @@ exa
 # COMPLEMENTARY PACKAGES
 nano-syntax-highlighting-git
 steam-native-runtime
-linux-steam-integration
-pip-autoremove
-plasma-browser-integration
-thunderbird-i18n-en-us
 vlc-plugin-fluidsynth-bin
 bat-extras
 aspell-en
 aspell-ru
-betterdiscord-installer
-kwallet
-kwallet-pam
-hunspell
+hyphen-en
+hyphen-ru
 hunspell-en_us
 hunspell-ru
+libreoffice-fresh-ru
+betterdiscord-installer-bin
 tesseract-data-rus
 chezmoi_modify_manager
-
-
-
-
-# WINE
-wine-gecko
-wine-mono
-wine-staging
-winetricks
+bash-completion
+bash-preexec
+mpv-mpris
 
 
 
@@ -247,7 +384,6 @@ winetricks
 # INTEGRATIONS
 gvfs
 gvfs-afc
-gvfs-goa
 gvfs-google
 gvfs-mtp
 gvfs-nfs
@@ -255,9 +391,14 @@ gvfs-smb
 kimageformats
 kdeplasma-addons
 nheko-krunner-git
+linux-steam-integration
+plasma-browser-integration
+discordrp-mpris-git
+kdeconnect
 
 ## KATE
 markdownpart
+svgpart
 
 ## DOLPHIN
 kio-admin
@@ -270,6 +411,7 @@ dolphin-plugins
 kdegraphics-thumbnailers
 tumbler
 tumbler-extra-thumbnailers
+kdenetwork-filesharing
 
 ## SETTINGS
 systemd-kcm
@@ -294,181 +436,151 @@ eos-rankmirrors
 
 
 
-# HASKELL STUFF, OPTIONAL DEPS
-haskell-citeproc
-haskell-commonmark
-haskell-commonmark-extensions
-haskell-commonmark-pandoc
-haskell-conduit
-haskell-conduit-extra
-haskell-libyaml
-haskell-pandoc
-haskell-pandoc-lua-engine
-haskell-pandoc-server
-haskell-safe-exceptions
-haskell-servant-server
-haskell-simple-sendfile
-haskell-skylighting
-haskell-skylighting-core
-haskell-skylighting-format-ansi
-haskell-skylighting-format-blaze-html
-haskell-skylighting-format-context
-haskell-skylighting-format-latex
-haskell-unliftio
-haskell-wai-app-static
-haskell-wai-extra
-haskell-wai-logger
-haskell-warp
-haskell-xml-conduit
-haskell-yaml
-
-
-
-
-# PYTHON STUFF
-pybind11
-python
-python-boto
-python-capng
-python-curio
-python-defusedxml
-python-dnspython
-python-fonttools
-python-graphviz
-python-lsp-black
-python-markupsafe
-python-mutagen
-python-packaging
-python-pandas
-python-pip
-python-pptx
-python-protobuf
-python-pyclip
-python-pydocstyle
-python-pylint
-python-pypubsub
-python-pyqt5
-python-pystemmer
-python-pytelegrambotapi
-python-pytz
-python-pyxdg
-python-rapidfuzz
-python-reportlab
-python-requests-toolbelt
-python-rope
-python-sniffio
-python-sphinx
-python-sympy
-python-trio
-python-whatthepatch
-
-
-
-
 # LIB32 STUFF, COMPATABILITY AND WINE
-lib32-colord
 lib32-gamemode
-lib32-giflib
-lib32-gnutls
-lib32-harfbuzz
-lib32-icu
 lib32-libappindicator-gtk3
 lib32-libavtp
-lib32-libdbusmenu-glib
-lib32-libdbusmenu-gtk3
-lib32-libpcap
-lib32-libpng
-lib32-libpulse
 lib32-libsamplerate
-lib32-libvdpau-va-gl
-lib32-libxml2
-lib32-libxslt
-lib32-mesa-utils
-lib32-mpg123
-lib32-ncurses5-compat-libs
-lib32-nss
-lib32-openal
-lib32-p11-kit
-lib32-pipewire
 lib32-pipewire-jack
 lib32-pipewire-v4l2
-lib32-sdl12-compat
-lib32-sdl2
 lib32-speexdsp
 lib32-v4l-utils
 lib32-vkd3d
-lib32-vulkan-mesa-layers
+lib32-fluidsynth
 
+## WINE
+wine-gecko
+wine-mono
+wine-staging
+winetricks-git
+vkd3d
+dxvk-bin
 
-
-
-# LIBS, MISC
-libappindicator-gtk3
-libdbusmenu-glib
-libdecor
-libdvdcss
-libebur128
-libgdiplus
-libgepub
-libgsf
-libid3tag
-libinput-gestures
-libjxl
-libnfs
-libopenraw
-libotr
-libpaper
-libpng12
-libqalculate
-libquotient
-libreoffice-fresh
-libsixel
-libtool
-libva-utils
-libvdpau-va-gl-i965
-libvncserver
-libwnck3
 
 
 
 
 # BUILD STUFF, DEVELOPMENT
-shellcheck
-autopep8
-twine
-bash-language-server
 prettier
 git
 git-delta
+github-cli
+rust
+perl
+perl-archive-zip
+visual-studio-code-bin
 
-## ANDROID
-java-environment-common
+## DBUS
+bustle
+dconf-editor
+d-feet
+
+## SHELL
+shellcheck
+bash-language-server
+shfmt
+
+## PYTHON
+python
+python-lsp-black
+pip-autoremove
+autopep8
+flake8
+twine
+yapf
+codon-bin
+
+### LIBS
+python-aiodns
+python-defusedxml
+python-dnslib
+python-dotenv
+python-ffmpeg-python
+python-graphviz
+python-h5py
+python-lockfile
+python-lxml
+python-mako
+python-openpyxl
+python-openrgb-git
+python-outcome
+python-packaging
+python-pandas
+python-pdfminer
+python-pip
+python-pipx
+python-pptx
+python-pycryptodomex
+python-pydocstyle
+python-pydot
+python-pyelftools
+python-pygame
+python-pygame-sdl2
+python-pygments
+python-pylast
+python-pylint
+python-pypng
+python-pypresence
+python-pyqt5
+python-pyqt6
+python-pyqt6-sip
+python-pystemmer
+python-pystray
+python-pytelegrambotapi
+python-rapidfuzz
+python-reportlab
+python-rope
+python-scrypt
+python-socksio
+python-sympy
+python-tabulate
+python-trio
+python-twisted
+python-vobject
+python-wcwidth
+python-websockets
+python-whatthepatch
+python-xlrd
+
+## ANDROID AND JAVA
 jdk11-openjdk
+jre11-openjdk
+java17-openjfx
+jdk17-openjdk
+jdk8-openjdk
+jre8-openjdk-headless
 android-sdk-platform-tools
 android-studio
 android-tools
-jre11-openjdk
-jre8-openjdk
+adbfs-rootless-git
+logcat-colorize
+android-apktool
+android-sdk-build-tools
+android-udev
+scrcpy
 
 ## C++
 make
 cmake
 gcc
-clang
 gdb
 valgrind
 ninja
 llvm
-nlohmann-json
 meson
 qtcreator
 autoconf
 automake
 heaptrack
 extra-cmake-modules
+sdl12-compat
+c++utilities
+boost
+glfw-x11
 
 ## JS
-nodejs
+nodejs-lts-hydrogen
+yarn
 npm
 npm-check-updates
 typescript
@@ -480,7 +592,7 @@ eslint_d
 eslint-language-server
 
 ## WEB
-sassc
+dart-sass
 vscode-html-languageserver
 
 
@@ -494,9 +606,12 @@ netctl
 net-tools
 networkmanager
 networkmanager-openvpn
-networkmanager-qt
+networkmanager-openconnect
+networkmanager-pptp
 wpa_supplicant
 microsocks
+torsocks
+mitmproxy
 vopono-bin
 openconnect
 nfs-utils
@@ -505,15 +620,37 @@ openvpn
 modemmanager
 ppp
 pptpclient
+rp-pppoe
 wireless-regdb
 wireless_tools
 wget
+vpnc
+iwd
+bind
+ndisc6
+gnu-netcat
+nss-mdns
+bandwhich
+inetutils
+xl2tpd
+tor
+miniserve
+tcpdump
+ssh-audit
+
+## GUIS
+protonvpn
+postman9-bin
+wireshark-qt
 
 ## PENTEST
 reaver
 pixiewps
 wifite
 bully
+cowpatty
+hcxdumptool
+hcxtools
 
 
 
@@ -528,33 +665,83 @@ zam-plugins
 amb-plugins
 soundfont-fluid
 calf
-ambix
-aeolus
+artyfx
+aubio
+x42-plugins
+zita-at1
+rubberband
+rtaudio
+reapack
+sws
+sox
+flite
 
 ## GUIS
+ambix
+aeolus
 surge
-strawberry
+strawberry-qt5
 qpwgraph
 audacity
 jamesdsp
+setbfree
+reaper
+ocenaudio-bin
+ardour
+noisetorch
 
 
 
 
 # GRAPHICS, VIDEO
-vulkan-mesa-layers
+libva-utils
+libpng12
+libjxl
+libsixel
 v4l2loopback-dkms
 v4l2loopback-utils
-mesa-utils
+vdpauinfo
+gst-plugin-pipewire
+gst-plugin-qmlgl
+gst-plugin-libcamera
+phonon-qt5-vlc
+qt6-multimedia
+colord
+gamemode
+atomicparsley
+
+## CLIS
+mplayer
 
 ## GUIS
+vlc
+mpv
+dragon
+haruna
 gpick
+hugin
 obs-studio
 blender
 krita
 gwenview
-dragon
 inkscape
+gpu-screen-recorder-gtk-git
+gimagereader-qt
+glava
+darktable
+digikam
+handbrake
+kdenlive
+gimp
+upscayl-bin
+xnviewmp-system-libs
+rawtherapee
+scale2x
+shutter-encoder
+qwinff
+droidcam
+czkawka-gui-bin
+kolourpaint
 
 
 
@@ -564,47 +751,75 @@ numix-icon-theme-git
 papirus-icon-theme
 plymouth-git
 plymouth-theme-green-blocks-git
+plasma5-wallpapers-wallpaper-engine
 klassy
 dracut-colors-git
+gradience
 
 
 
 
 # MISC LIBS
+libdvdcss
+libgdiplus
+libgsf
+libopenraw
+libotr
+libquotient
+libtool
+libvncserver
+libwnck3
 qt5-charts
 qt5-connectivity
 qt5-websockets
-qt5-xmlpatterns
-qt6-multimedia
-qt6-multimedia-ffmpeg
 qt6-sensors
 qt6-websockets
+qt5-3d
+qt5-gamepad
+qt5-imageformats
+qt5-quick3d
+qt6-charts
+qt6-connectivity
+qt6-doc
+qt6-examples
+qt6-networkauth
+qtforkawesome-qt6
 ncurses5-compat-libs
-
-
-
-
-# PACMAN HOOKS
-pacman-systemd-inhibit
-kernel-modules-hook
-eos-hooks
-
-
-
-
-# POWER
-powerdevil
-powertop
-upower
+qt-jdenticon
+freerdp
+cdrtools
+coin-or-mp
+shapelib
+libvoikko
+lib32-libid3tag
+libstrangle
+linux-atm
+openslide
 
 
 
 
 # MISC UTILS, OPT DEPS
+unixodbc
 realtime-privileges
+innoextract
 dbus-broker
-logrotate
 pigz
+yad
+icoutils
+xmlstarlet
+logrotate
+debtap
+s-nail
+arj
+sysbench
+earlyoom
+distcc
+sshfs
+xclip
+tk
+movit
+sysstat
 
 
 
@@ -619,21 +834,34 @@ foomatic-db-ppds
 cups
 cups-filters
 cups-pdf
+splix
 hplip
 print-manager
 system-config-printer
+xsane
+colord-sane
+scangearmp2-sane-git
+cnijfilter2
+gutenprint
 
 
 
 
 # DOCUMENT RENDERING
-poppler-data
+flex
+libgepub
 poppler-glib
-tex-gyre-fonts
+texlab
 texinfo
 texlive-latexextra
 texlive-mathscience
 texlive-pictures
+texlive-pstricks
+texlive-bibtexextra
+texlive-binextra
+texlive-formatsextra
+texlive-humanities
+texlive-publishers
 pandoc-cli
 pandoc-crossref
 plantuml-ascii-math
@@ -642,196 +870,17 @@ blockdiag
 pdf2svg
 biber
 ditaa
-
-
-
-
-# MISC
-
-lsscsi
-lua-alt-getopt
-lua-filesystem
-lua-lpeg
-lvm2
-m4
-mdadm
-mda.lv2
-mlocate
-mtools
-nbd
-ndisc6
-nilfs-utils
-nss-mdns
-
-nwdiag
-openmp
-openmpi
-patch
-perf
-perl
-perl-archive-zip
-phonon-qt5-vlc
-pkgconf
-pkgfile
-
-
-
-
-protobuf
-protobuf-c
-protonvpn
-pstoedit
-pv
-qgpgme-qt5
-qt-jdenticon
-quilt
-reiserfsprogs
-rp-pppoe
-samba
-scangearmp2-sane-git
-scour
-sdl12-compat
-seqdiag
-setbfree
-sg3_utils
-shaderc
-shfmt
-s-nail
-sof-firmware
-solid
-spice-gtk
-splix
-sshfs
-svgpart
-sysbench
-sysfsutils
-systembus-notify
-systemd-sysvcompat
-vamp-plugin-sdk
-vdpauinfo
-vim
-vkd3d
-vpnc
-wmctrl
-xfsprogs
-xl2tpd
-xmlstarlet
-xsane
-xsettingsd
-xterm
-yad
-yapf
-zip
-accountsservice
-arj
-artyfx
-atomicparsley
-b43-fwcutter
-bandwhich
-barrier
-bash-completion
-bash-preexec
-bind
-binutils
-bison
-boost
-broot
-cdrtools
-clinfo
-cnijfilter2
-coin-or-mp
-colord
-colord-gtk
-colord-sane
-compsize
-cowpatty
-cpanminus
-cppunit
-cronie
-cryptsetup
-c++utilities
-cvs
-debtap
-device-mapper
-dialog
-diffutils
-distcc
-downgrade
-duf
-duperemove
-dust
-dxvk-bin
-earlyoom
-ed
-entr
-fig2dev
-file
-filelight
-findutils
-flake8
-flex
-freerdp
-fsarchiver
-gamemode
-gawk
-gcab
-gestures
-gettext
-ghc-libs
-ghostscript
-gimagereader-qt
-
-gitui
-glava
-glfw-x11
-glow
-gnu-netcat
 gnuplot
-gobject-introspection
-gpufetch-git
-gpu-screen-recorder-gtk-git
-graphicsmagick
-graphviz
+nwdiag
+seqdiag
 groff
-gsfonts
-gst-libav
-gst-plugin-pipewire
-gst-plugin-qmlgl
-gst-plugins-bad
-gst-plugins-ugly
-gtest
-gupnp
-gzip
-haveged
-hcxdumptool
-hcxtools
-hdparm
-hwdetect
-hwinfo
-icoutils
+ghostscript
+bison
+pstoedit
 img2pdf
-inetutils
-innoextract
-inotify-tools
-inxi
-iwd
-jfsutils
-jq
+dot2tex
+scour
 
 
 
-
-# LAPTOP STUFF
-dellfan-git
-broadcom-wl-dkms
-bcm20702a1-firmware
-intel-gpu-tools
-intel-media-sdk
-intel-ucode
-kernel-install-for-dracut
-lib32-libva-intel-driver
-lib32-vulkan-intel
-libva-intel-driver
-vulkan-intel
-xf86-video-intel
-texlive-pstricks
+# ----------------------------------------- MISC ------------------------------------------------

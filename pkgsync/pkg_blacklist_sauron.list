@@ -1,0 +1,39 @@
+# these are packages in the installed list that
+# you explicitly do not want on this system
+
+# Exclude laptop intel drivers
+dellfan-git
+b43-fwcutter
+broadcom-wl-dkms
+bcm20702a1-firmware
+intel-gpu-tools
+intel-media-sdk
+intel-ucode
+kernel-install-for-dracut
+lib32-libva-intel-driver
+lib32-vulkan-intel
+libva-intel-driver
+vulkan-intel
+xf86-video-intel
+libvdpau-va-gl-i965
+lib32-libvdpau-va-gl
+gestures
+libinput-gestures
+
+# Exlude some more laptop stuff
+fancontrol-kcm
+tlpui
+plymouth-theme-green-blocks-git
+plymouth-git
+plymouth-kcm
+powertop
+nomachine
+
+# Exclude pentesting stuff
+wifite
+pixiewps
+bully
+hcxdumptool
+hcxtools
+cowpatty
+reaver

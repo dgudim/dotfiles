@@ -18,10 +18,10 @@ set -e
 # list files can have comments starting with #, and do not need to be sorted
 
 # packages on this system to exclude from shared install list
-EXCLUSION_LIST=./pkg_exclude.list
+EXCLUSION_LIST=./pkg_exclude_$(hostname).list
 
 # packages in shared install list to not install on this system
-BLACKLIST_LIST=./pkg_blacklist.list
+BLACKLIST_LIST=./pkg_blacklist_$(hostname).list
 
 # packages to remove from all systems, you must sync it between systems
 REMOVE_LIST=./pkg_remove.list
@@ -76,7 +76,12 @@ then
         echo
         [[ "$yn" =~ ^[Ll]$ ]] && cat "$TMP_DIR/pkg_toinstall.list"
     done
-    [[ "$yn" =~ ^[Yy]$ ]] && sudo pacman -S --needed --confirm - < "$TMP_DIR/pkg_toinstall.list"
+    if [[ "$yn" =~ ^[Yy]$ ]]
+    then
+        yay -S --needed --confirm $(cat $TMP_DIR/pkg_toinstall.list)
+        # Mark as explicitly installed
+        # sudo pacman -D --asexplicit --confirm - < "$TMP_DIR/pkg_toinstall.list"
+    fi
     [[ "$yn" =~ ^[Aa]$ ]] && exit 1
 fi
 
