@@ -778,11 +778,7 @@ qt5-3d
 qt5-gamepad
 qt5-imageformats
 qt5-quick3d
-qt6-charts
 qt6-connectivity
-qt6-doc
-qt6-examples
-qt6-networkauth
 qtforkawesome-qt6
 ncurses5-compat-libs
 qt-jdenticon
