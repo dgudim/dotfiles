@@ -468,6 +468,7 @@ git
 git-delta
 github-cli
 rust
+rust-src
 perl
 perl-archive-zip
 visual-studio-code-bin
