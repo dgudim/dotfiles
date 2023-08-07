@@ -1,0 +1,16 @@
+# Nvidia
+nvidia-dkms
+nvidia-inst
+nvidia-settings
+libva-nvidia-driver
+lib32-opencl-nvidia
+nvtop
+opencv-cuda
+cuda
+
+# Rgb stuff
+openrazer-driver-dkms
+openrgb
+
+# Hardware
+amd-ucode

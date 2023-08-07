@@ -18,7 +18,7 @@ set -e
 # list files can have comments starting with #, and do not need to be sorted
 
 # packages on this system to exclude from shared install list
-EXCLUSION_LIST=./pkg_exclude_$(hostname).list
+EXCLUSION_LIST=./pkg_hardware_$(hostname).list
 # echo $EXCLUSION_LIST
 
 # packages in shared install list to not install on this system
