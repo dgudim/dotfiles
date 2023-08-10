@@ -377,6 +377,7 @@ svgpart
 kio-admin
 kio-fuse
 kio-gdrive
+kio-s3
 kio-zeroconf
 ffmpegthumbnailer
 ffmpegthumbs
