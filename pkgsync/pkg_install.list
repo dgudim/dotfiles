@@ -470,6 +470,9 @@ codon-bin
 python-reportlab
 python-tinycss2
 python-pyaml
+python-bottle
+python-docker
+python-paramiko
 
 ## ANDROID AND JAVA
 jdk11-openjdk
@@ -733,6 +736,7 @@ distcc
 sshfs
 xclip
 tk
+hddtemp
 movit
 sysstat
 
