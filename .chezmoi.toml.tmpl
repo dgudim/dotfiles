@@ -1,7 +1,13 @@
 {{- $fontsize := promptIntOnce . "fontsize" "Konsole font size" -}}
+{{- $git_username := promptStringOnce . "git_username" "Git username" -}}
+{{- $git_email := promptStringOnce . "git_email" "Git email" -}}
 
 [data.konsole]
     fontsize = {{ $fontsize | quote }}
+
+[data.git]
+    git_username = {{ $git_username | quote }}
+    git_email = {{ $git_email | quote }}
 
 [git]
     autoCommit = false

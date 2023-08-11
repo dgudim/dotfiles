@@ -1,0 +1,13 @@
+[user]
+	name = {{ .git.git_username }}
+	email =  {{ .git.git_email }}
+[credential]
+	helper = store
+[pull]
+	rebase = false
+[init]
+	defaultBranch = master
+[protocol "file"]
+	allow = always
+[commit]
+	gpgsign = true
