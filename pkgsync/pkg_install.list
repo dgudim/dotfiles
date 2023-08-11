@@ -33,6 +33,7 @@ base
 linux
 linux-firmware
 linux-headers
+dracut
 alsa-firmware
 alsa-plugins
 alsa-utils
@@ -222,6 +223,7 @@ ventoy-bin
 firefox
 gnome-disk-utility
 google-chrome
+meld
 kdiff3
 kompare
 keepassxc
@@ -325,6 +327,7 @@ btop
 bottom
 iotop
 powertop
+glances
 
 
 
@@ -466,6 +469,7 @@ codon-bin
 ### LIBS
 python-reportlab
 python-tinycss2
+python-pyaml
 
 ## ANDROID AND JAVA
 jdk11-openjdk
@@ -553,6 +557,7 @@ iwd
 bind
 ndisc6
 gnu-netcat
+iptables-nft
 nss-mdns
 bandwhich
 inetutils
@@ -625,6 +630,9 @@ libjxl
 libsixel
 v4l2loopback-dkms
 v4l2loopback-utils
+gst-libav
+gst-plugins-bad
+gst-plugins-ugly
 vdpauinfo
 gst-plugin-pipewire
 gst-plugin-qmlgl
