@@ -435,7 +435,7 @@ dxvk-bin
 # BUILD STUFF, DEVELOPMENT
 prettier
 git
-svn
+subversion
 git-delta
 github-cli
 rust
