@@ -130,7 +130,6 @@ reiserfsprogs
 nilfs-utils
 lsscsi
 mdadm
-mda.lv2
 hdparm
 lvm2
 nbd
@@ -231,13 +230,13 @@ gource
 gparted
 onlyoffice-bin
 nomachine
-neochat
 obsidian
 pinta
 steam
 remmina
 syncthingtray
 okteta
+neochat
 okular
 nheko
 cinny-desktop-bin
@@ -275,7 +274,6 @@ gsmartcontrol
 # CLI APPS
 neofetch
 cpufetch-git
-gpufetch-git
 nano
 syncthing
 onefetch
@@ -437,6 +435,7 @@ dxvk-bin
 # BUILD STUFF, DEVELOPMENT
 prettier
 git
+svn
 git-delta
 github-cli
 rust
@@ -463,12 +462,8 @@ autopep8
 flake8
 twine
 yapf
+python-pipx
 codon-bin
-
-### LIBS
-python-graphviz
-python-aiohttp
-python-xlsxwriter
 
 ## ANDROID AND JAVA
 jdk11-openjdk
@@ -490,6 +485,7 @@ scrcpy
 make
 cmake
 gcc
+clang
 gdb
 valgrind
 ninja
@@ -501,7 +497,6 @@ automake
 heaptrack
 extra-cmake-modules
 sdl12-compat
-c++utilities
 boost
 glfw-x11
 
@@ -590,6 +585,7 @@ pipewire-v4l2
 lsp-plugins
 zam-plugins
 amb-plugins
+mda.lv2
 soundfont-fluid
 calf
 artyfx
@@ -632,7 +628,6 @@ gst-plugin-pipewire
 gst-plugin-qmlgl
 gst-plugin-libcamera
 phonon-qt5-vlc
-qt6-multimedia
 colord
 gamemode
 atomicparsley
@@ -692,19 +687,11 @@ libgdiplus
 libgsf
 libopenraw
 libotr
-libquotient
 libtool
 libvncserver
 libwnck3
 qt5-charts
-qt5-connectivity
-qt5-websockets
-qt6-sensors
-qt6-websockets
-qt5-3d
 qt5-imageformats
-qt5-quick3d
-qt6-connectivity
 ncurses5-compat-libs
 qt-jdenticon
 freerdp
@@ -803,4 +790,3 @@ scour
 
 
 # ----------------------------------------- MISC ------------------------------------------------
-python-pipx
