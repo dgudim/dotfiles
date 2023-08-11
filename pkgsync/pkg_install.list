@@ -151,7 +151,6 @@ ttf-caladea
 ttf-dejavu
 ttf-firacode-nerd
 ttf-liberation
-ttf-mac-fonts
 ttf-ms-win10-auto
 ttf-opensans
 ttf-oswald
@@ -260,7 +259,6 @@ barrier
 libreoffice-fresh
 smb4k
 sqlitebrowser
-textpieces
 qdirstat
 viber
 cpu-x
@@ -464,6 +462,10 @@ twine
 yapf
 python-pipx
 codon-bin
+
+### LIBS
+python-reportlab
+python-tinycss2
 
 ## ANDROID AND JAVA
 jdk11-openjdk
@@ -676,7 +678,6 @@ plymouth-theme-green-blocks-git
 plasma5-wallpapers-wallpaper-engine
 klassy
 dracut-colors-git
-gradience
 
 
 
@@ -790,3 +791,4 @@ scour
 
 
 # ----------------------------------------- MISC ------------------------------------------------
+
