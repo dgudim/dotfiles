@@ -4,7 +4,6 @@ nvidia-inst
 nvidia-settings
 libva-nvidia-driver
 lib32-opencl-nvidia
-nvtop
 opencv-cuda
 cuda
 

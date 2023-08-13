@@ -1,12 +1,11 @@
-# these are packages in the installed list that
-# you explicitly do not want on this system
+# power
+tlpui
 
 # Exlude some more laptop stuff
 kernel-install-for-dracut
 gestures
 libinput-gestures
 fancontrol-kcm
-tlpui
 plymouth-theme-green-blocks-git
 plymouth-git
 plymouth-kcm

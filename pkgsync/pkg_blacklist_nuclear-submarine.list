@@ -1,5 +1,5 @@
 # Power
-power-profiles-daemon
+tlpui
 
 # Ignore systemd-boot stuff
 kernel-install-for-dracut

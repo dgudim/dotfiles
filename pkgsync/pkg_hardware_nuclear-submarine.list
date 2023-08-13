@@ -2,4 +2,14 @@
 amd-ucode
 libfprint-2-tod1-goodix
 xf86-video-amdgpu
+btrfs-assistant
+btrfsmaintenance
+grub-btrfs
+libva-mesa-driver
+mesa-vdpau
+radeontop
+snap-pac
+snapper
+vulkan-mesa-layers
+vulkan-radeon
 fprintd

@@ -267,6 +267,7 @@ cpu-x
 anydesk-bin
 gsmartcontrol
 diskmonitor
+cpupower-gui
 
 
 
@@ -325,6 +326,7 @@ ytfzf
 ## TOPS
 htop
 btop
+nvtop
 bottom
 iotop
 powertop
@@ -714,6 +716,7 @@ shapelib
 libvoikko
 lib32-libid3tag
 openslide
+libappindicator-gtk3
 
 
 
