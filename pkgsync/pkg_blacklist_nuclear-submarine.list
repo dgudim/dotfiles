@@ -23,15 +23,8 @@ nomachine
 # Ignore dev stuff
 
 ## QEMU
-qemu-desktop
 qemu-system-ppc
 qemu-system-ppc-firmware
-qemu-user-static
-qemu-user-static-binfmt
-guestfs-tools
-libvirt
-libguestfs
-virt-manager
 
 ## Python
 codon-bin
@@ -69,7 +62,6 @@ discord
 discord-screenaudio
 viber
 thunderbird
-ktorrent
 kdeconnect
 
 ## Video and audio

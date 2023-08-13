@@ -348,6 +348,7 @@ hyphen-ru
 hunspell-en_us
 hunspell-ru
 betterdiscord-installer-bin
+geoip-database-extra
 tesseract-data-rus
 chezmoi_modify_manager
 bash-completion
@@ -718,6 +719,7 @@ libvoikko
 lib32-libid3tag
 openslide
 libappindicator-gtk3
+geoip
 
 
 
