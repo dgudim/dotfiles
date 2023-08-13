@@ -322,6 +322,7 @@ gpart
 cpupower
 tmux
 ytfzf
+xdotool
 
 ## TOPS
 htop
