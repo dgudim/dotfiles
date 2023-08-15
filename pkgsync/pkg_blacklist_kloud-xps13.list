@@ -11,6 +11,7 @@ virt-manager
 docker
 docker-buildx
 docker-compose
+docker-rootless-extras
 
 # Blacklist other stuff from pc
 grub

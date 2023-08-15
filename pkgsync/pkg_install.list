@@ -24,6 +24,7 @@ virt-manager
 docker
 docker-buildx
 docker-compose
+docker-rootless-extras
 
 
 
