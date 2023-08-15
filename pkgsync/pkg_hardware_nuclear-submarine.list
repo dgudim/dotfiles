@@ -14,3 +14,6 @@ snapper
 vulkan-mesa-layers
 vulkan-radeon
 fprintd
+
+# Not hardware, but work stuff instead
+slack-electron
