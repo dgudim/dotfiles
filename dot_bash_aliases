@@ -156,3 +156,8 @@ remove-lines() (
   grep -Fvxf "$remove_lines" "$all_lines" > "$tmp_file"
   mv "$tmp_file" "$all_lines"
 )
+
+rgd() {
+  rg --json -C 2 $1 | delta
+}
+
