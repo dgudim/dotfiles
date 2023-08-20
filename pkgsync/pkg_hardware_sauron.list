@@ -13,3 +13,6 @@ openrgb
 
 # Hardware
 amd-ucode
+
+# Misc
+python310
