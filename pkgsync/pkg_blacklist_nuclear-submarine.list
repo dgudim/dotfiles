@@ -34,7 +34,6 @@ jdk11-openjdk
 jre11-openjdk
 java17-openjfx
 jdk17-openjdk
-jdk8-openjdk
 jre8-openjdk-headless
 android-sdk-platform-tools
 android-studio
