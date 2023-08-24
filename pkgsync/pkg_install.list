@@ -479,6 +479,7 @@ python-pyaml
 python-bottle
 python-docker
 python-paramiko
+python-scipy
 
 ## ANDROID AND JAVA
 jdk11-openjdk
