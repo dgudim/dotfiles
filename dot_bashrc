@@ -2,6 +2,8 @@
 # ~/.bashrc
 #
 
+# Make sure the directory exists
+mkdir -p "${XDG_STATE_HOME}/bash"
 HISTCONTROL=ignoreboth
 
 # If not running interactively, don't do anything
