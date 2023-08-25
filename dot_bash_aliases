@@ -23,9 +23,6 @@ alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | c
 alias orphans='pacman -Qtdq'
 alias broken='sudo pacman -Qkk | grep warning'
 
-# Rank mirrors
-alias mirrors='sudo reflector --verbose -c BY -c DE -c LT -c RU -c UA --protocol https --protocol http --sort rate --latest 50 --download-timeout 5 --save /etc/pacman.d/mirrorlist && eos-rankmirrors'
-
 # Colorize grep and ip
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
@@ -73,6 +70,17 @@ alias butter_debutter='duperemove -r -d -h -v --dedupe-options=partial,same,fiem
 alias xps_aggressive_fancurve="sudo dellfan 0 1 && sudo systemctl start fancontrol && systemctl status fancontrol"
 alias xps_bios_fancurve="sudo dellfan 0 0 && sudo systemctl stop fancontrol && systemctl status fancontrol"
 
+__rank_mirrors(){
+	TMPFILE=$(mktemp)
+	sudo true
+	rate-mirrors --save=$TMPFILE $1
+	echo "Ranked $1 mirrors"
+	sudo mv /etc/pacman.d/$2 /etc/pacman.d/$2-backup
+	sudo mv $TMPFILE /etc/pacman.d/$2
+	echo "Moved to /etc/pacman.d/$2"
+}
+
+alias mirrors='__rank_mirrors arch mirrorlist && __rank_mirrors endeavouros endeavouros-mirrorlist'
 
 mount_shares(){
 	echo -n "password for kloud: "
