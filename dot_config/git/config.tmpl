@@ -60,7 +60,8 @@
 
 [user]
 	name = {{ .git.git_username }}
-	email =  {{ .git.git_email }}
+	email = {{ .git.git_email }}
+	signingkey = {{ .gpg.signingkey }}
 [credential]
 	helper = store
 [pull]

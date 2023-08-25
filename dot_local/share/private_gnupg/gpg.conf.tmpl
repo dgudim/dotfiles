@@ -1,0 +1,8 @@
+use-agent
+
+default-key {{ .gpg.signingkey }}
+encrypt-to {{ .gpg.signingkey }}
+
+keyserver hkps://keys.openpgp.org
+
+
