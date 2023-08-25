@@ -450,6 +450,8 @@ rust-src
 perl
 perl-archive-zip
 visual-studio-code-bin
+ccache
+sccache
 
 ## DBUS
 bustle
