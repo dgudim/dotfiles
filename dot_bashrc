@@ -22,6 +22,11 @@ bind '"\e[1;5B": history-search-forward'
 
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/shell_theme.json)"
 
+# Cache rust builds
+export RUSTC_WRAPPER=sccache
+export CARGO_INCREMENTAL=0
+export SCCACHE_CACHE_SIZE=5G
+
 [[ "$(whoami)" = "root" ]] && return
 
 # Python stuff is in there
