@@ -70,8 +70,6 @@ unrar
 unzip
 ntfs-3g
 ntp
-rebuild-detector
-reflector
 unarchiver
 usb_modeswitch
 usbutils
@@ -117,6 +115,9 @@ kernel-modules-hook
 eos-hooks
 informant
 pacman-pstatus
+check-broken-packages-pacman-hook-git
+pacdiff-pacman-hook-git
+rebuild-detector
 
 ## FS TOOLS
 dmraid
@@ -255,7 +256,6 @@ zoom
 calibre
 telegram-desktop
 anilibria-winmaclinux
-reflector-simple
 discord
 discord-screenaudio
 discover
@@ -324,6 +324,7 @@ tmux
 ytfzf
 xdotool
 lshw
+rate-mirrors
 
 ## TOPS
 htop
@@ -408,9 +409,6 @@ kcm-uefi
 alhp-keyring
 alhp-mirrorlist
 endeavouros-keyring
-endeavouros-mirrorlist
-endeavouros-theming
-eos-rankmirrors
 
 
 
@@ -517,6 +515,7 @@ extra-cmake-modules
 sdl12-compat
 boost
 glfw-x11
+mold
 
 ## JS
 nodejs-lts-hydrogen
@@ -734,6 +733,8 @@ realtime-privileges
 innoextract
 dbus-broker
 pigz
+lbzip2
+pbzip2
 yad
 icoutils
 xmlstarlet
@@ -813,3 +814,4 @@ scour
 
 
 # ----------------------------------------- MISC ------------------------------------------------
+

@@ -1,0 +1,9 @@
+# Remove unnecessary eos stuff
+
+eos-rankmirrors
+endeavouros-mirrorlist
+reflector
+reflector-simple
+eos-bash-shared
+endeavouros-theming
+
