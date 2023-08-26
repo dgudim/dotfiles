@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+sccache /usr/bin/gcc "$@"
+
