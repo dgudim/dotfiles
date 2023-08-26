@@ -8,6 +8,7 @@ grub-btrfs
 libva-mesa-driver
 mesa-vdpau
 radeontop
+amdgpu_top-bin
 snap-pac
 snapper
 snapper-gui-git
