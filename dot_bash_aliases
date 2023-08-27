@@ -97,6 +97,10 @@ mount_shares(){
 	done
 }
 
+disable_cache(){
+	export PATH=/usr/bin:$PATH
+}
+
 unmount_shares(){
 	sudo umount ~/Documents/MOUNT_$1/*
 	printf "unmounted all shares\n"
