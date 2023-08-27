@@ -3,6 +3,7 @@ tlpui
 
 # Ignore systemd-boot stuff
 kernel-install-for-dracut
+systemd-boot-pacman-hook
 
 # Exclude pentesting stuff
 wifite

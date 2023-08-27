@@ -18,6 +18,3 @@ fprintd
 
 # Not hardware, but work stuff instead
 slack-electron
-
-# Systemd-boot
-systemd-boot-pacman-hook
