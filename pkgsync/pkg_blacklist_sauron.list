@@ -20,3 +20,6 @@ hcxdumptool
 hcxtools
 cowpatty
 reaver
+
+# Systemd-boot
+systemd-boot-pacman-hook

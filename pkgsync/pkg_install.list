@@ -117,6 +117,7 @@ informant
 pacman-pstatus
 check-broken-packages-pacman-hook-git
 pacdiff-pacman-hook-git
+systemd-boot-pacman-hook
 rebuild-detector
 
 ## FS TOOLS
