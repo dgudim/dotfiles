@@ -23,7 +23,7 @@ encryption = "gpg"
 progress=true
 
 [gpg]
-    recipient = "Kloud"
+    recipient = {{ $git_email | quote }}
 
 {{ if eq $signingkey "" }}
 {{  writeToStdout "Warning, signing key for " }}

@@ -19,6 +19,11 @@ if [ -f ~/.bash_aliases_private ]; then
     . ~/.bash_aliases_private
 fi
 
+if [ -f ~/.bash_aliases_work ]; then
+    . ~/.bash_aliases_work
+fi
+
+
 bind '"\e[1;5A": history-search-backward'
 bind '"\e[1;5B": history-search-forward'
 
