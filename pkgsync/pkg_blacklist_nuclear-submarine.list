@@ -75,7 +75,6 @@ aubio
 x42-plugins
 zita-at1
 rubberband
-rtaudio
 reapack
 sws
 sox
@@ -91,7 +90,6 @@ reaper
 ocenaudio-bin
 ardour
 noisetorch
-kdenlive
 gimp
 shutter-encoder
 upscayl-bin

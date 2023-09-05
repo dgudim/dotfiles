@@ -23,3 +23,6 @@ reaver
 
 # Systemd-boot
 systemd-boot-pacman-hook
+
+# Replaced by opencv-cuda
+opencv

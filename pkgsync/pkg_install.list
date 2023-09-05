@@ -361,7 +361,6 @@ mpv-mpris
 
 
 
-
 # INTEGRATIONS
 gvfs
 gvfs-afc
@@ -618,6 +617,8 @@ reapack
 sws
 sox
 flite
+mediainfo
+noise-suppression-for-voice
 
 ## GUIS
 ambix
@@ -725,6 +726,7 @@ lib32-libid3tag
 openslide
 libappindicator-gtk3
 geoip
+opencv
 
 
 
