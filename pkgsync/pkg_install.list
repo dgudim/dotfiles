@@ -494,6 +494,7 @@ android-studio
 android-tools
 adbfs-rootless-git
 logcat-colorize
+logcat-color3
 android-apktool
 android-sdk-build-tools
 scrcpy
@@ -578,6 +579,7 @@ tor
 miniserve
 tcpdump
 ssh-audit
+ipcalc
 
 ## GUIS
 protonvpn
