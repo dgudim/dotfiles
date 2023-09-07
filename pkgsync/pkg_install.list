@@ -759,6 +759,7 @@ tk
 hddtemp
 movit
 sysstat
+blas-openblas
 
 
 
