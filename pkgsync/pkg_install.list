@@ -481,6 +481,8 @@ python-bottle
 python-docker
 python-paramiko
 python-scipy
+python-aiodns
+python-aiohttp
 
 ## ANDROID AND JAVA
 jdk11-openjdk

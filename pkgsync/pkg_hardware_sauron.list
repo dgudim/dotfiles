@@ -16,3 +16,6 @@ amd-ucode
 
 # Misc
 python310
+
+# UNI stuff
+gns3-server

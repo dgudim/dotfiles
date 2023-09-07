@@ -13,3 +13,6 @@ libvdpau-va-gl-i965
 lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
+
+# UNI stuff
+gns3-gui
