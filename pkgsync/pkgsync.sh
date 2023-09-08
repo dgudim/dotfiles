@@ -69,7 +69,7 @@ then
     done
     if [[ "$yn" =~ ^[Yy]$ ]]
     then
-        yay -S --needed --confirm $(cat $TMP_DIR/pkg_toinstall.list)
+        yay -S --needed --confirm $(cat $TMP_DIR/pkg_to_install.list)
         # Mark as explicitly installed
         sudo pacman -D --asexplicit --confirm - < "$TMP_DIR/pkg_to_install.list"
     fi
