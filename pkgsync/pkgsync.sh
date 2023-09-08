@@ -87,6 +87,7 @@ then
         [[ "$yn" =~ ^[Ll]$ ]] && cat "$TMP_DIR/pkg_to_remove.list"
     done
     [[ "$yn" =~ ^[Yy]$ ]] && sudo pacman -Runs --confirm - < "$TMP_DIR/pkg_to_remove.list"
+    [[ "$yn" =~ ^[Yy]$ ]] && sudo pacman -D --asdeps - < "$TMP_DIR/pkg_to_remove.list"
     [[ "$yn" =~ ^[Aa]$ ]] && exit 1
 fi
 
