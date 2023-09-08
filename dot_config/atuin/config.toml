@@ -38,6 +38,7 @@
 ## possible values: return-original, return-query
 # exit_mode = "return-original"
 
+workspaces = true
 inline_height=30
 
 ## prevent commands matching any of these regexes from being written to history.
