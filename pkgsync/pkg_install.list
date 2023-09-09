@@ -440,6 +440,7 @@ prettier
 git
 subversion
 git-delta
+git-filter-repo
 github-cli
 rust
 rust-src
@@ -825,3 +826,4 @@ scour
 
 
 # ----------------------------------------- MISC ------------------------------------------------
+
