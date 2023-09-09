@@ -237,7 +237,6 @@ onlyoffice-bin
 nomachine
 obsidian
 pinta
-steam
 remmina
 syncthingtray
 okteta
@@ -249,7 +248,6 @@ schildichat-desktop-bin
 rclone-browser
 thunderbird
 plasma-systemmonitor
-lutris-git
 pdfarranger
 tokodon
 tlpui
@@ -342,7 +340,6 @@ glances
 
 # COMPLEMENTARY PACKAGES
 nano-syntax-highlighting-git
-steam-native-runtime
 vlc-plugin-fluidsynth-bin
 bat-extras
 aspell-en
@@ -371,7 +368,6 @@ gvfs-smb
 kimageformats
 kdeplasma-addons
 nheko-krunner-git
-linux-steam-integration
 plasma-browser-integration
 discordrp-mpris-git
 kdeconnect
@@ -415,7 +411,6 @@ endeavouros-keyring
 
 
 # LIB32 STUFF, COMPATABILITY AND WINE
-lib32-gamemode
 lib32-libappindicator-gtk3
 lib32-libavtp
 lib32-libsamplerate
@@ -425,6 +420,8 @@ lib32-speexdsp
 lib32-v4l-utils
 lib32-vkd3d
 lib32-fluidsynth
+lib32-alsa-plugins
+lib32-giflib
 
 ## WINE
 wine-gecko
@@ -658,7 +655,6 @@ gst-plugin-qmlgl
 gst-plugin-libcamera
 phonon-qt5-vlc
 colord
-gamemode
 atomicparsley
 
 ## CLIS
@@ -733,6 +729,9 @@ libappindicator-gtk3
 geoip
 opencv
 ipp-usb
+sdl_image
+opusfile
+zenity
 
 
 
