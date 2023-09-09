@@ -533,6 +533,7 @@ esbuild
 eslint
 eslint_d
 eslint-language-server
+bunjs-bin
 
 ## WEB
 dart-sass
@@ -825,4 +826,3 @@ scour
 
 
 # ----------------------------------------- MISC ------------------------------------------------
-
