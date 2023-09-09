@@ -1,3 +1,0 @@
-#!/usr/bin/bash
-sccache /usr/bin/g++ "$@"
-

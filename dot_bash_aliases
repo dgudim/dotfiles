@@ -80,7 +80,7 @@ __rank_mirrors(){
 	echo "Moved to /etc/pacman.d/$2"
 }
 
-alias mirrors='__rank_mirrors arch mirrorlist && __rank_mirrors endeavouros endeavouros-mirrorlist'
+alias mirrors='__rank_mirrors arch mirrorlist && __rank_mirrors endeavouros endeavouros-mirrorlist && __rank_mirrors chaotic-aur chaotic-mirrorlist'
 
 mount_shares(){
 	echo -n "password for kloud: "

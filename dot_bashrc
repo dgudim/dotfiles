@@ -34,8 +34,8 @@ export RUSTC_WRAPPER=/usr/bin/sccache
 
 [[ "$(whoami)" = "root" ]] && return
 
-# Python stuff is in there and sccache for distributed compilation and cache
-export PATH=~/.config/sccache/:~/.local/bin:$PATH
+# Python stuff is in there
+export PATH=~/.local/bin:$PATH
 
 # Brrrr, file explorer
 source ~/.config/broot/launcher/bash/br
