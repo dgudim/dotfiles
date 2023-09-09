@@ -402,11 +402,11 @@ kcm-uefi
 
 
 
-# ALHP AND EOS
+# ALHP, EOS, CHAOTIC
 alhp-keyring
 alhp-mirrorlist
 endeavouros-keyring
-
+chaotic-keyring
 
 
 
