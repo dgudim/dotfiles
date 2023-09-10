@@ -321,6 +321,7 @@ sherlock-git
 gpart
 cpupower
 tmux
+zellij
 ytfzf
 xdotool
 lshw
@@ -824,4 +825,3 @@ scour
 
 
 # ----------------------------------------- MISC ------------------------------------------------
-
