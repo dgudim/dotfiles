@@ -16,6 +16,7 @@ lib32-vulkan-mesa-layers
 
 # UNI stuff
 gns3-gui
+powershell
 
 ## R
 gcc-fortran
