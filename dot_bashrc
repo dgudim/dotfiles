@@ -29,8 +29,7 @@ bind '"\e[1;5B": history-search-forward'
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/shell_theme.json)"
 
 # Cache rust builds
-export CARGO_INCREMENTAL=0
-export RUSTC_WRAPPER=/usr/bin/sccache
+export CARGO_INCREMENTAL=1
 
 [[ "$(whoami)" = "root" ]] && return
 
