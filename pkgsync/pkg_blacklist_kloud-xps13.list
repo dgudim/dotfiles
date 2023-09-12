@@ -21,4 +21,7 @@ plasma5-wallpapers-wallpaper-engine
 noisetorch
 upscayl-bin
 
-
+# Switch to iwd
+netctl
+networkmanager
+wpa_supplicant

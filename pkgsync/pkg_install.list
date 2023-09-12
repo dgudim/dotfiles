@@ -543,6 +543,7 @@ vscode-html-languageserver
 dhclient
 dnsmasq
 ethtool
+openresolv
 netctl
 net-tools
 networkmanager
