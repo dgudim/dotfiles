@@ -568,7 +568,6 @@ wireless-regdb
 wireless_tools
 wget
 vpnc
-iwd
 bind
 ndisc6
 gnu-netcat

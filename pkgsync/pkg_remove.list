@@ -7,4 +7,7 @@ reflector-simple
 eos-bash-shared
 endeavouros-theming
 
+# Go back to wpa_supplicant
+iwd
+
 
