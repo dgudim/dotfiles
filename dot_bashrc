@@ -46,11 +46,13 @@ source /usr/share/doc/hoard/hoard.bash
 [[ -f /usr/share/bash-preexec/bash-preexec.sh ]] && source /usr/share/bash-preexec/bash-preexec.sh
 eval "$(atuin init bash --disable-up-arrow)"
 
+source /usr/share/doc/find-the-command/ftc.bash askfirst
+
 # Bruh
 export QSYS_ROOTDIR="/home/kloud/QUARTUS/18.1/quartus/sopc_builder/bin"
 
 # Rootless docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
-HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth
 
