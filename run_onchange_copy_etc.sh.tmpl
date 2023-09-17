@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# pacman conf hash: {{ include "etc/pacman.conf" | sha256sum }}
+
+echo "Copying pacman.conf"
+sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "etc/pacman.conf" | quote }} /etc
+
