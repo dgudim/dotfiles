@@ -468,6 +468,7 @@ autopep8
 flake8
 twine
 yapf
+mypy
 python-pipx
 codon-bin
 
@@ -581,6 +582,7 @@ miniserve
 tcpdump
 ssh-audit
 ipcalc
+sipcalc
 
 ## GUIS
 protonvpn
