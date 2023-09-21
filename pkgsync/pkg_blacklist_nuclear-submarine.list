@@ -66,10 +66,8 @@ setbfree
 reaper
 ocenaudio-bin
 ardour
-noisetorch
 gimp
 shutter-encoder
-upscayl-bin
 kolourpaint
 xnviewmp-system-libs
 krita
@@ -83,8 +81,6 @@ rawtherapee
 darktable
 
 
-# Themes and stuff
-plasma5-wallpapers-wallpaper-engine
 
 # Misc
 protonvpn

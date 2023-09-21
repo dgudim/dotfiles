@@ -619,7 +619,6 @@ setbfree
 reaper
 ocenaudio-bin
 ardour
-noisetorch
 
 
 
@@ -665,7 +664,6 @@ digikam
 handbrake
 kdenlive
 gimp
-upscayl-bin
 xnviewmp-system-libs
 rawtherapee
 scale2x
