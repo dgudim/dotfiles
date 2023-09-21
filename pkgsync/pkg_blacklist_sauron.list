@@ -1,28 +1,7 @@
-# power
-tlpui
-
-# Exlude some more laptop stuff
-kernel-install-for-dracut
+# No touchpad and battery
 gestures
 libinput-gestures
-fancontrol-kcm
-plymouth-theme-green-blocks-git
-plymouth-git
-plymouth-kcm
 powertop
-nomachine
-
-# Exclude pentesting stuff
-wifite
-pixiewps
-bully
-hcxdumptool
-hcxtools
-cowpatty
-reaver
-
-# Systemd-boot
-systemd-boot-pacman-hook
 
 # Replaced by opencv-cuda
 opencv

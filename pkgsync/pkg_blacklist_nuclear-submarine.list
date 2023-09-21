@@ -1,26 +1,3 @@
-# Power
-tlpui
-
-# Ignore systemd-boot stuff
-kernel-install-for-dracut
-systemd-boot-pacman-hook
-
-# Exclude pentesting stuff
-wifite
-pixiewps
-bully
-hcxdumptool
-hcxtools
-cowpatty
-reaver
-
-# Ignore laptop stuff
-fancontrol-kcm
-plymouth-theme-green-blocks-git
-plymouth-git
-plymouth-kcm
-nomachine
-
 # Ignore dev stuff
 
 ## QEMU

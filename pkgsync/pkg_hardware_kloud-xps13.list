@@ -1,4 +1,3 @@
-dellfan-git
 broadcom-wl-dkms
 bcm20702a1-firmware
 intel-gpu-tools
@@ -14,9 +13,31 @@ lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
+# Battery stuff
+tlpui
+
+# Fan control stuff
+dellfan-git
+fancontrol-kcm
+
+# Boot stuff
+plymouth-theme-green-blocks-git
+plymouth-git
+plymouth-kcm
+systemd-boot-pacman-hook
+kernel-install-for-dracut
+
 # UNI stuff
 gns3-gui
-powershell
+
+## Pentesting stuff
+wifite
+pixiewps
+bully
+hcxdumptool
+hcxtools
+cowpatty
+reaver
 
 ## R
 gcc-fortran
@@ -29,3 +50,4 @@ r-languageserver
 r-markdown
 r-rmarkdown
 r-shiny
+

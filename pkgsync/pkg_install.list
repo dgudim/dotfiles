@@ -1,15 +1,9 @@
 # LAPTOP STUFF
-kernel-install-for-dracut
 gestures
 libinput-gestures
 
 
 
-
-# PC STUFF
-grub
-eos-dracut
-power-profiles-daemon
 
 ## VIRTUALIZATION AND CONTAINERS
 qemu-desktop
@@ -117,7 +111,6 @@ informant
 pacman-pstatus
 check-broken-packages-pacman-hook-git
 pacdiff-pacman-hook-git
-systemd-boot-pacman-hook
 rebuild-detector
 find-the-command
 
@@ -235,7 +228,6 @@ keepassxc
 gource
 gparted
 onlyoffice-bin
-nomachine
 obsidian
 pinta
 remmina
@@ -251,7 +243,6 @@ thunderbird
 plasma-systemmonitor
 pdfarranger
 tokodon
-tlpui
 zoom
 calibre
 telegram-desktop
@@ -326,6 +317,7 @@ zellij
 ytfzf
 xdotool
 lshw
+powershell
 rate-mirrors
 
 ## TOPS
@@ -395,9 +387,7 @@ kdenetwork-filesharing
 ## SETTINGS
 systemd-kcm
 sddm-kcm
-plymouth-kcm
 flatpak-kcm
-fancontrol-kcm
 kcm-polkit-kde-git
 kcm-uefi
 
@@ -589,15 +579,6 @@ protonvpn
 postman9-bin
 wireshark-qt
 
-## PENTEST
-reaver
-pixiewps
-wifite
-bully
-cowpatty
-hcxdumptool
-hcxtools
-
 
 
 
@@ -699,9 +680,6 @@ kolourpaint
 # THEMES AND STUFF
 numix-icon-theme-git
 papirus-icon-theme
-plymouth-git
-plymouth-theme-green-blocks-git
-plasma5-wallpapers-wallpaper-engine
 klassy
 dracut-colors-git
 

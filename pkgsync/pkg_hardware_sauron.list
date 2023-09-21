@@ -7,6 +7,13 @@ lib32-opencl-nvidia
 opencv-cuda
 cuda
 
+# Power
+power-profiles-daemon
+
+# Boot stuff
+grub
+eos-dracut
+
 # Rgb stuff
 openrazer-driver-dkms
 openrgb
@@ -30,3 +37,8 @@ steam-native-runtime
 lib32-gamemode
 gamemode
 lutris-git
+
+# Misc
+plasma5-wallpapers-wallpaper-engine
+noisetorch
+upscayl-bin

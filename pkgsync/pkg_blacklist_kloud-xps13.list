@@ -13,12 +13,3 @@ docker-buildx
 docker-compose
 docker-rootless-extras
 
-# Blacklist other stuff from pc
-grub
-eos-dracut
-power-profiles-daemon
-plasma5-wallpapers-wallpaper-engine
-noisetorch
-upscayl-bin
-
-
