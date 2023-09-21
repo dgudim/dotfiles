@@ -13,7 +13,7 @@ alias man='batman'
 # Git and chezmoi aliases
 alias gpul='git pull'
 alias gpus='git push'
-alias gfc='git fetch origin --prune && git maintenance run auto && git maintenance run --task=gc'
+alias gfc='git fetch origin --prune && git maintenance run --auto && git maintenance run --task=gc'
 alias chzu='chezmoi update'
 
 # Nice cd aliases
