@@ -76,8 +76,10 @@ LocalFileSigLevel = Optional
 SigLevel = PackageRequired
 Include = /etc/pacman.d/endeavouros-mirrorlist
 
+{{- if eq .x86_v3.enabled "true" }}
 [core-x86-64-v3]
 Include = /etc/pacman.d/alhp-mirrorlist
+{{- end }}
 
 #[testing]
 #Include = /etc/pacman.d/mirrorlist
@@ -85,8 +87,10 @@ Include = /etc/pacman.d/alhp-mirrorlist
 [core]
 Include = /etc/pacman.d/mirrorlist
 
+{{- if eq .x86_v3.enabled "true" }}
 [extra-x86-64-v3]
 Include = /etc/pacman.d/alhp-mirrorlist
+{{- end }}
 
 [extra]
 Include = /etc/pacman.d/mirrorlist
@@ -97,8 +101,10 @@ Include = /etc/pacman.d/mirrorlist
 #[multilib-testing]
 #Include = /etc/pacman.d/mirrorlist
 
+{{- if eq .x86_v3.enabled "true" }}
 [multilib-x86-64-v3]
 Include = /etc/pacman.d/alhp-mirrorlist
+{{- end }}
 
 [multilib]
 Include = /etc/pacman.d/mirrorlist

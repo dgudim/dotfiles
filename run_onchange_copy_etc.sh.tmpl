@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# pacman conf hash: {{ include "etc/pacman.conf" | sha256sum }}
+# pacman conf hash: {{ include "etc/pacman.conf.tmpl" | sha256sum }}
 
-echo "Copying pacman.conf"
-sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "etc/pacman.conf" | quote }} /etc
+echo "Copying pacman.conf.tmpl"
+cat {{ joinPath .chezmoi.sourceDir "etc/pacman.conf.tmpl" | quote }} | chezmoi execute-template > /tmp/pacman.conf
+sudo mv -vf /tmp/pacman.conf /etc
 

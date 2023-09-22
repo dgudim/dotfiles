@@ -27,9 +27,6 @@ plymouth-kcm
 systemd-boot-pacman-hook
 kernel-install-for-dracut
 
-# UNI stuff
-gns3-gui
-
 ## Pentesting stuff
 wifite
 pixiewps
