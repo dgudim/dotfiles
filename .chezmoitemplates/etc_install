@@ -1,0 +1,6 @@
+# pacman conf hash: {{ include .source_file | sha256sum }}
+
+echo "Installing {{ .file }}"
+cat {{ joinPath .chezmoi.sourceDir .source_file | quote }} | chezmoi execute-template > "/tmp/{{- .file -}}"
+sudo install -v --owner=root --group=root --mode=0644 "/tmp/{{- .file -}}" /etc
+sudo rm "/tmp/{{- .file -}}"

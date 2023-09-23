@@ -1,0 +1,7 @@
+#!/bin/bash
+
+{{ template "etc_install" dict "source_file" "etc/pacman.conf.tmpl" "file" "pacman.conf" "chezmoi" .chezmoi }}
+{{ template "etc_install" dict "source_file" "etc/environment.tmpl" "file" "environment" "chezmoi" .chezmoi }}
+{{ template "etc_install" dict "source_file" "etc/vconsole.conf" "file" "vconsole.conf" "chezmoi" .chezmoi }}
+
+

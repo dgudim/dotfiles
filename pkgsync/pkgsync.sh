@@ -18,11 +18,11 @@ set -e
 # list files can have comments starting with #, and do not need to be sorted
 
 # packages on this system to exclude from shared install list
-HARDWARE_LIST=./pkg_hardware_$(hostname).list
+HARDWARE_LIST=./$(hostname)/hardware.list
 # echo $HARDWARE_LIST
 
 # packages in shared install list to not install on this system
-BLACKLIST_LIST=./pkg_blacklist_$(hostname).list
+BLACKLIST_LIST=./$(hostname)/blacklist.list
 # echo $BLACKLIST_LIST
 
 # packages to remove from all systems, you must sync it between systems
