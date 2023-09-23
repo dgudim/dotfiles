@@ -25,6 +25,7 @@ docker-rootless-extras
 
 # CORE STUFF
 base
+base-devel
 linux
 linux-firmware
 linux-headers
@@ -102,6 +103,9 @@ dialog
 findutils
 entr
 haveged
+bluez
+pahis
+solid
 
 ## PACMAN HOOKS
 pacman-systemd-inhibit
@@ -288,7 +292,7 @@ wireplumber
 bat
 mc
 rsync
-xdg-ninja
+xdg-ninja-git
 chezmoi
 cmatrix
 eza
@@ -372,6 +376,7 @@ markdownpart
 svgpart
 
 ## DOLPHIN
+audiocd-kio
 kio-admin
 kio-fuse
 kio-gdrive
@@ -473,6 +478,9 @@ python-paramiko
 python-scipy
 python-aiodns
 python-aiohttp
+python-defusedxml
+python-packaging
+python-pyqt5
 
 ## ANDROID AND JAVA
 jdk11-openjdk
@@ -574,6 +582,7 @@ tcpdump
 ssh-audit
 ipcalc
 sipcalc
+openssh
 
 ## GUIS
 protonvpn
@@ -710,7 +719,7 @@ opencv
 ipp-usb
 sdl_image
 opusfile
-zenity
+upower
 
 
 
@@ -718,6 +727,7 @@ zenity
 # MISC UTILS, OPT DEPS
 unixodbc
 realtime-privileges
+rtkit
 innoextract
 dbus-broker
 pigz
@@ -739,6 +749,8 @@ hddtemp
 movit
 sysstat
 blas-openblas
+fuse-overlayfs
+zenity
 
 
 
@@ -804,4 +816,3 @@ scour
 
 
 # ----------------------------------------- MISC ------------------------------------------------
-

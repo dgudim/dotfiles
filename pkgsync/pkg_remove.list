@@ -5,7 +5,14 @@ reflector
 reflector-simple
 eos-bash-shared
 endeavouros-theming
-
+eos-apps-info
+eos-log-tool
+eos-packagelist
+eos-plasma-sddm-config
+eos-quickstart
+eos-settings-plasma
+eos-update-notifier
+welcome
 
 
 # Go back to wpa_supplicant
