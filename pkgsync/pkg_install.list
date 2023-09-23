@@ -610,7 +610,6 @@ noise-suppression-for-voice
 ## GUIS
 ambix
 aeolus
-surge
 strawberry-qt5
 qpwgraph
 audacity
@@ -667,7 +666,7 @@ gimp
 xnviewmp-system-libs
 rawtherapee
 scale2x
-shutter-encoder
+shutter-encoder-bin
 qwinff
 droidcam
 czkawka-gui-bin

@@ -58,7 +58,6 @@ sox
 flite
 ambix
 aeolus
-surge
 strawberry-qt5
 audacity
 jamesdsp
@@ -67,7 +66,7 @@ reaper
 ocenaudio-bin
 ardour
 gimp
-shutter-encoder
+shutter-encoder-bin
 kolourpaint
 xnviewmp-system-libs
 krita
