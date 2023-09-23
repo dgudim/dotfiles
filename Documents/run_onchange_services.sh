@@ -15,6 +15,6 @@ systemctl enable --user dbus-broker.service
 sudo systemctl enable dbus-broker.service
 
 # Enable docker socket
-systemctl enable --now --user docker.socket
+systemctl enable --user docker.socket
 
 echo "Service setup done!"
