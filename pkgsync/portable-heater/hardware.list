@@ -16,7 +16,14 @@ power-profiles-daemon
 amd-ucode
 intel-ucode
 
-
+## Intel
+intel-media-sdk
+intel-media-driver
+vulkan-intel
+lib32-vulkan-intel
+libva-intel-driver
+lib32-libva-intel-driver
+xf86-video-intel
 
 ## Amd
 xf86-video-amdgpu
@@ -26,9 +33,6 @@ vulkan-radeon
 nvidia-dkms
 nvidia-hook
 nvidia-inst
-
-## Intel
-intel-media-driver
 
 ## Wireless
 broadcom-wl-dkms
