@@ -1,18 +1,23 @@
+# Gpu
+xf86-video-amdgpu
+vulkan-mesa-layers
+lib32-vulkan-mesa-layers
+libva-mesa-driver
+lib32-libva-mesa-driver
+mesa-vdpau
+mesa-utils
+radeontop
+amdgpu_top-bin
+vulkan-radeon
+
 # Hardware
 amd-ucode
 libfprint-2-tod1-goodix
-xf86-video-amdgpu
 btrfs-assistant
 btrfsmaintenance
-libva-mesa-driver
-mesa-vdpau
-radeontop
-amdgpu_top-bin
 snap-pac
 snapper
 snapper-gui-git
-vulkan-mesa-layers
-vulkan-radeon
 fprintd
 
 # Not hardware, but work stuff instead

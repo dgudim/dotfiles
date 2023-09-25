@@ -16,6 +16,12 @@ power-profiles-daemon
 amd-ucode
 intel-ucode
 
+
+
+## Amd
+xf86-video-amdgpu
+vulkan-radeon
+
 ## Nvidia
 nvidia-dkms
 nvidia-hook
@@ -30,8 +36,10 @@ broadcom-wl-dkms
 ## Misc
 mesa-utils
 mesa-vdpau
-lib32-libva-mesa-driver
 libva-mesa-driver
+lib32-libva-mesa-driver
+vulkan-mesa-layers
+lib32-vulkan-mesa-layers
 
 
 
