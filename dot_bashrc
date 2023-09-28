@@ -56,3 +56,6 @@ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
 export HISTCONTROL=ignoreboth
 
+gpgconf --launch gpg-agent
+export GPG_TTY=$(tty)
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
