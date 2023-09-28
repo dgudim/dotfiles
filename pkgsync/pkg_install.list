@@ -114,9 +114,11 @@ eos-hooks
 informant
 pacman-pstatus
 check-broken-packages-pacman-hook-git
+pacman-log-orphans-hook
 pacdiff-pacman-hook-git
 rebuild-detector
 find-the-command
+paccache-hook
 
 ## FS TOOLS
 dmraid
