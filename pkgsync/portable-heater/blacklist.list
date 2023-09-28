@@ -1,1 +1,6 @@
- 
+# Blacklist droidcam and video loopback
+
+v4l2loopback-dc-dkms
+v4l2loopback-dkms
+droidcam
+v4l2loopback-utils
