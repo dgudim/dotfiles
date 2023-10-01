@@ -37,3 +37,7 @@ lutris-git
 plasma5-wallpapers-wallpaper-engine
 noisetorch
 upscayl-bin
+
+## Browser sync to RAM
+profile-sync-daemon
+profile-sync-daemon-thunderbird

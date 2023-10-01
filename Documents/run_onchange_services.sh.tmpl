@@ -16,7 +16,14 @@ sudo systemctl enable dbus-broker.service
 
 # Enable docker socket
 {{ if ne .chezmoi.hostname "kloud-xps13" }}
+echo "Enabling docker user socket"
 systemctl enable --user docker.socket
+{{ end }}
+
+# Enable firefox profile sync
+{{ if eq .chezmoi.hostname "sauron" }}
+echo "Enabling profile sync daemon"
+systemctl enable --user psd
 {{ end }}
 
 echo "Service setup done!"
