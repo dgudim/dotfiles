@@ -766,6 +766,7 @@ foomatic-db-nonfree-ppds
 foomatic-db-ppds
 cups
 cups-filters
+cups-browsed
 cups-pdf
 splix
 hplip
@@ -818,4 +819,3 @@ scour
 
 
 # ----------------------------------------- MISC ------------------------------------------------
-
