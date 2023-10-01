@@ -48,4 +48,6 @@ lib32-vulkan-mesa-layers
 # Gayming
 steam
 
-
+## Browser sync to RAM
+profile-sync-daemon
+profile-sync-daemon-thunderbird

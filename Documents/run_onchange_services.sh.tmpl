@@ -21,7 +21,7 @@ systemctl enable --user docker.socket
 {{ end }}
 
 # Enable firefox profile sync
-{{ if eq .chezmoi.hostname "sauron" }}
+{{ if (or (eq .chezmoi.hostname "sauron") (eq .chezmoi.hostname "portable-heater")) }}
 echo "Enabling profile sync daemon"
 systemctl enable --user psd
 {{ end }}
