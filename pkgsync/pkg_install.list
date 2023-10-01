@@ -105,7 +105,7 @@ entr
 haveged
 bluez
 pahis
-solid
+solid5
 
 ## PACMAN HOOKS
 pacman-systemd-inhibit
@@ -185,7 +185,7 @@ plasma-nm
 plasma-pa
 plasma-disks
 powerdevil
-kwallet
+kwallet5
 kwallet-pam
 kfind
 kgpg
@@ -217,7 +217,7 @@ kate
 yakuake
 kcalc
 kile
-kplotting
+kplotting5
 krename
 krop
 ksystemlog
@@ -366,7 +366,7 @@ gvfs-google
 gvfs-mtp
 gvfs-nfs
 gvfs-smb
-kimageformats
+kimageformats5
 kdeplasma-addons
 nheko-krunner-git
 plasma-browser-integration
