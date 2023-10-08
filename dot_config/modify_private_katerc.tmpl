@@ -6,8 +6,8 @@ source "{{ .chezmoi.sourceDir }}/{{ .chezmoi.sourceFile | trimSuffix ".tmpl" | r
 
 # Add your ignores and transforms here
 
-ignore "KFileDialog Settings" "Recent Files"
-ignore "KFileDialog Settings" "Recent URLs"
+ignore regex "KFileDialog Settings" "Recent Files.*"
+ignore regex "KFileDialog Settings" "Recent URLs.*"
 ignore section "KPropertiesDialog"
 ignore section "KTextEditor::Search"
 
