@@ -588,6 +588,7 @@ ssh-audit
 ipcalc
 sipcalc
 openssh
+traceroute
 
 ## GUIS
 protonvpn
