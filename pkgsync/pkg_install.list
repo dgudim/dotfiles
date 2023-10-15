@@ -536,7 +536,7 @@ esbuild
 eslint
 eslint_d
 eslint-language-server
-bunjs-bin
+bun-bin
 
 ## WEB
 dart-sass
