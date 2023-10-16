@@ -8,6 +8,9 @@ mkdir -p "${XDG_STATE_HOME}/bash"
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Blesh top init
+source /usr/share/blesh/ble.sh --noattach --rcfile $HOME/blerc
+
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 
 if [ -f ~/.bash_aliases ]; then
@@ -48,6 +51,9 @@ eval "$(atuin init bash --disable-up-arrow)"
 
 source /usr/share/doc/find-the-command/ftc.bash askfirst
 
+# Blesh bottom config
+[[ ${BLE_VERSION-} ]] && ble-attach
+
 # Bruh
 export QSYS_ROOTDIR="/home/kloud/QUARTUS/18.1/quartus/sopc_builder/bin"
 
@@ -59,3 +65,4 @@ export HISTCONTROL=ignoreboth
 gpgconf --launch gpg-agent
 export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
