@@ -9,7 +9,7 @@ mkdir -p "${XDG_STATE_HOME}/bash"
 [[ $- != *i* ]] && return
 
 # Blesh top init
-source /usr/share/blesh/ble.sh --noattach --rcfile $HOME/blerc
+source /usr/share/blesh/ble.sh --noattach --rcfile $HOME/.config/blerc
 
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 
