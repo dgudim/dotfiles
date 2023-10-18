@@ -94,7 +94,7 @@ ble-color-setface syntax_param_expansion    fg=purple
 ble-color-setface syntax_history_expansion  bg=94,fg=231
 ble-color-setface syntax_function_name      fg=92,bold
 ble-color-setface syntax_comment            fg=gray
-ble-color-setface syntax_glob               fg=198,bold
+ble-color-setface syntax_glob               fg=magenta,bold
 ble-color-setface syntax_brace              fg=37,bold
 ble-color-setface syntax_tilde              fg=navy,bold
 ble-color-setface syntax_document           fg=94
