@@ -71,7 +71,7 @@ bleopt highlight_variable=1
 
 ble-color-setface region                    fg=white,bg=60
 ble-color-setface region_insert             none
-ble-color-setface region_match              fg=white,bg=55,bold
+ble-color-setface region_match              fg=yellow,bold
 ble-color-setface region_target             fg=black,bg=153
 ble-color-setface disabled                  fg=242
 ble-color-setface overwrite_mode            fg=black,bg=51
