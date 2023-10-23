@@ -24,6 +24,8 @@ fprintd
 slack-electron
 realvnc-vnc-viewer
 dotnet-sdk
+aspnet-runtime
+aspnet-targeting-pack
 lens-bin
 
 # Boot stuff
