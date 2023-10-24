@@ -27,6 +27,7 @@ dotnet-sdk
 aspnet-runtime
 aspnet-targeting-pack
 lens-bin
+mssql-server
 
 # Boot stuff
 grub-btrfs
