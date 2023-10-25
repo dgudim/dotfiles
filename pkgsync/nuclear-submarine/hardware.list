@@ -28,6 +28,7 @@ aspnet-runtime
 aspnet-targeting-pack
 lens-bin
 mssql-server
+python39
 
 # Boot stuff
 grub-btrfs
