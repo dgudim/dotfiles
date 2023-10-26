@@ -22,7 +22,7 @@ bleopt exec_errexit_mark=''
 bleopt line_limit_length=10000
 bleopt history_limit_length=10000
 
-ble-bind -f TAB menu-complete
+ble-bind -f C-q menu-complete
 
 ##-----------------------------------------------------------------------------
 ## Rendering options
@@ -60,12 +60,20 @@ bleopt complete_auto_complete=1
 bleopt complete_auto_history=1
 bleopt complete_menu_complete=1
 bleopt complete_menu_filter=1
+
 bleopt complete_ambiguous=1
 
 # Options are "dense" "dense-nowrap" "linewise" "desc" "desc-raw" "align" and "align-nowrap"
 bleopt complete_menu_style=align
 bleopt menu_align_max=20
 bleopt complete_menu_maxlines=20
+
+## When there are user inputs while generating completion candidates, the
+## candidates generation will be canceled to process the user inputs. The
+## following setting controls the interval of checking user inputs while
+## generating completion candidates.
+
+bleopt complete_polling_cycle=75
 
 ##-----------------------------------------------------------------------------
 ## Color settings
