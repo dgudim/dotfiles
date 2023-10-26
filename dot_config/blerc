@@ -13,18 +13,26 @@ bleopt indent_tabs=1
 # position of the cursor on dirty section after undo (end or beg)
 bleopt undo_point=end
 
-bleopt prompt_eol_mark=$'\e[4;1;33m[EOF]\e[m'
-bleopt exec_errexit_mark=$'\e[1;31mexit %d\e[m' # $?
+# bleopt prompt_eol_mark=$'\e[4;1;33m[EOF]\e[m'
+# bleopt exec_errexit_mark=$'\e[1;31mexit %d\e[m' # $?
+
+bleopt prompt_eol_mark=''
+bleopt exec_errexit_mark=''
 
 bleopt line_limit_length=10000
 bleopt history_limit_length=10000
 
+ble-bind -f TAB menu-complete
 
 ##-----------------------------------------------------------------------------
 ## Rendering options
 
 bleopt tab_width=4
 bleopt char_width_mode=auto
+bleopt grapheme_cluster=extended
+
+# Add @, *, / to dir and file names depending on type
+bind 'set visible-stats on'
 
 ##-----------------------------------------------------------------------------
 ## User input settings
@@ -47,10 +55,11 @@ bleopt vbell_align=right
 ## non-empty strings are set, the functionality is enabled. Otherwise, the
 ## functionality is inactive.
 
-bleopt complete_auto_complete=
+bleopt complete_auto_delay=200
+bleopt complete_auto_complete=1
+bleopt complete_auto_history=1
 bleopt complete_menu_complete=1
 bleopt complete_menu_filter=1
-
 bleopt complete_ambiguous=1
 
 # Options are "dense" "dense-nowrap" "linewise" "desc" "desc-raw" "align" and "align-nowrap"
@@ -75,7 +84,7 @@ ble-color-setface region_match              fg=yellow,bold
 ble-color-setface region_target             fg=black,bg=153
 ble-color-setface disabled                  fg=242
 ble-color-setface overwrite_mode            fg=black,bg=51
-ble-color-setface auto_complete             fg=238,bg=254
+ble-color-setface auto_complete             fg=gray
 ble-color-setface vbell                     reverse
 ble-color-setface vbell_erase               none
 ble-color-setface vbell_flash               fg=green,reverse
