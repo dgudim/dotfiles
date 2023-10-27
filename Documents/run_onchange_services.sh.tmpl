@@ -72,7 +72,7 @@ add_group() {
             sudo usermod -aG $1 $USER
         fi
     else
-         echo -e "$CYAN$1$NC ${ORANGE}does not exist$NC on this machine, ${GRAY}skipping$NC"
+         echo -e "$CYAN$1$NC ${RED}does not exist$NC on this machine, ${GRAY}skipping$NC"
     fi
 }
 
