@@ -2,28 +2,87 @@
 
 set -e
 
-echo "Setting up services..."
+GREEN='\033[0;32m'
+L_GREEN='\033[1;32m'
+YELLOW='\033[0;33m'
+L_YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+L_BLUE='\033[1;34m'
+PURPLE='\033[0;35m'
+L_PURPLE='\033[1;35m'
+CYAN='\033[0;36m'
+L_CYAN='\033[1;36m'
+GRAY='\033[1;30m'
+NC='\033[0m'
 
-sudo systemctl enable drkonqi-coredump-processor@.service
-systemctl --user enable --now drkonqi-coredump-launcher.socket drkonqi-coredump-cleanup.timer
+enable_service() {
+    NAME=$1
+    IS_USER=$2
 
-# Enable kernel modules cleanup
-sudo systemctl enable linux-modules-cleanup.service
+    if [ -n "$IS_USER" ]; then
+        if [ "$(systemctl is-enabled --user $NAME)" == "disabled" ]; then
+            echo -e "${L_YELLOW}Enabling$NC $L_CYAN$NAME$NC (${YELLOW}user$NC)"
+            systemctl enable --user $NAME
+        else
+            echo -e "$CYAN$NAME$NC already ${L_GREEN}enabled$NC (${YELLOW}user$NC)"
+        fi
+    else
+        if [ "$(systemctl is-enabled $NAME)" == "disabled" ]; then
+            echo -e "${L_YELLOW}Enabling$NC $L_BLUE$NAME$NC (${PURPLE}system-wide$NC)"
+            sudo systemctl enable $NAME
+        else
+            echo -e "$BLUE$NAME$NC already ${L_GREEN}enabled$NC (${PURPLE}system-wide$NC)"
+        fi
+    fi
+}
 
-# Enable dbus-broker
-systemctl enable --user dbus-broker.service
-sudo systemctl enable dbus-broker.service
+
+echo -e "\n${L_PURPLE}Setting up services...$NC"
+
+enable_service drkonqi-coredump-processor@.service
+enable_service drkonqi-coredump-launcher.socket 1
+enable_service drkonqi-coredump-cleanup.timer 1
+
+enable_service linux-modules-cleanup.service
+
+enable_service dbus-broker.service 1
+enable_service dbus-broker.service
 
 # Enable docker socket
 {{ if ne .chezmoi.hostname "kloud-xps13" }}
-echo "Enabling docker user socket"
-systemctl enable --user docker.socket
+enable_service docker.socket 1
 {{ end }}
 
 # Enable firefox profile sync
 {{ if (or (eq .chezmoi.hostname "sauron") (eq .chezmoi.hostname "portable-heater")) }}
-echo "Enabling profile sync daemon"
-systemctl enable --user psd
+enable_service psd 1
 {{ end }}
 
-echo "Service setup done!"
+echo -e "${L_GREEN}Service setup done!$NC"
+
+echo -e "\n${L_PURPLE}Setting up groups...$NC"
+
+add_group() {
+    if id -nG "$USER" | grep -qw "$1"; then
+        echo -e "$GREEN$USER$NC belongs to $CYAN$1$NC, ${GRAY}skipping$NC"
+    else
+        echo -e "$GREEN$USER$NC does not belong to $CYAN$1$1, ${L_YELLOW}adding$NC"
+        sudo usermod -aG $1 $USER
+    fi
+}
+
+add_group sys
+add_group wireshark
+add_group realtime
+add_group docker
+add_group i2c
+add_group sambashare
+add_group plugdev
+add_group rfkill
+add_group video
+add_group input
+add_group informant
+add_group kvm
+add_group libvirt
+
+echo -e "${L_GREEN}Group setup done!$NC"
