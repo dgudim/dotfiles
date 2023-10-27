@@ -29,6 +29,7 @@ aspnet-targeting-pack
 lens-bin
 mssql-server
 python39
+cassowary
 
 # Boot stuff
 grub-btrfs
