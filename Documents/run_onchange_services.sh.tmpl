@@ -63,11 +63,16 @@ echo -e "${L_GREEN}Service setup done!$NC"
 echo -e "\n${L_PURPLE}Setting up groups...$NC"
 
 add_group() {
-    if id -nG "$USER" | grep -qw "$1"; then
-        echo -e "$GREEN$USER$NC belongs to $CYAN$1$NC, ${GRAY}skipping$NC"
+
+    if grep -q $group /etc/group; then
+        if id -nG "$USER" | grep -qw "$1"; then
+            echo -e "$GREEN$USER$NC belongs to $CYAN$1$NC, ${GRAY}skipping$NC"
+        else
+            echo -e "$GREEN$USER$NC does not belong to $CYAN$1$NC, ${L_YELLOW}adding$NC"
+            sudo usermod -aG $1 $USER
+        fi
     else
-        echo -e "$GREEN$USER$NC does not belong to $CYAN$1$1, ${L_YELLOW}adding$NC"
-        sudo usermod -aG $1 $USER
+         echo "$CYAN$1$NC does not exist on this machine, ${GRAY}skipping$NC"
     fi
 }
 
