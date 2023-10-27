@@ -2,6 +2,7 @@
 
 set -e
 
+ORANGE='\033[0;33m'
 GREEN='\033[0;32m'
 L_GREEN='\033[1;32m'
 YELLOW='\033[0;33m'
@@ -72,7 +73,7 @@ add_group() {
             sudo usermod -aG $1 $USER
         fi
     else
-         echo "$CYAN$1$NC does not exist on this machine, ${GRAY}skipping$NC"
+         echo -e "$CYAN$1$NC ${ORANGE}does not exist$NC on this machine, ${GRAY}skipping$NC"
     fi
 }
 
