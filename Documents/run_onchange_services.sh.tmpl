@@ -49,17 +49,16 @@ enable_service linux-modules-cleanup.service
 enable_service dbus-broker.service 1
 enable_service dbus-broker.service
 
-# Enable docker socket
 {{ if ne .chezmoi.hostname "kloud-xps13" }}
 enable_service docker.socket 1
 {{ end }}
 
-# Enable firefox profile sync
 {{ if (or (eq .chezmoi.hostname "sauron") (eq .chezmoi.hostname "portable-heater")) }}
 enable_service psd 1
 {{ end }}
 
 echo -e "${L_GREEN}Service setup done!$NC"
+
 
 echo -e "\n${L_PURPLE}Setting up groups...$NC"
 
