@@ -64,7 +64,7 @@ echo -e "\n${L_PURPLE}Setting up groups...$NC"
 
 add_group() {
 
-    if grep -q $group /etc/group; then
+    if grep -q $1 /etc/group; then
         if id -nG "$USER" | grep -qw "$1"; then
             echo -e "$GREEN$USER$NC belongs to $CYAN$1$NC, ${GRAY}skipping$NC"
         else
