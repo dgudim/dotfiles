@@ -29,7 +29,7 @@ bleopt prompt_eol_mark=''
 bleopt exec_errexit_mark=''
 
 bleopt line_limit_length=10000
-bleopt history_limit_length=10000
+bleopt history_limit_length=20000
 
 ble-bind -f C-q menu-complete
 

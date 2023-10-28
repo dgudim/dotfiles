@@ -328,6 +328,8 @@ xdotool
 lshw
 powershell
 rate-mirrors
+asciinema
+asciinema-agg
 
 ## TOPS
 htop
@@ -356,7 +358,6 @@ geoip-database-extra
 tesseract-data-rus
 chezmoi_modify_manager
 bash-completion
-bash-preexec
 mpv-mpris
 
 
@@ -827,5 +828,4 @@ typst
 
 
 # ----------------------------------------- MISC ------------------------------------------------
-
 
