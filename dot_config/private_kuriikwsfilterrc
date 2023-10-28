@@ -1,0 +1,6 @@
+[General]
+DefaultWebShortcut=
+EnableWebShortcuts=true
+KeywordDelimiter=:
+PreferredWebShortcuts=archwiki,youtube,protondb,wikipedia,google,wikit,aur
+UsePreferredWebShortcutsOnly=false

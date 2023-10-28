@@ -1,0 +1,30 @@
+#!/usr/bin/env chezmoi_modify_manager
+
+# This is needed to figure out where the source file is.
+# See https://github.com/twpayne/chezmoi/issues/2934
+source "{{ .chezmoi.sourceDir }}/{{ .chezmoi.sourceFile | trimSuffix ".tmpl" | replace "modify_" "" }}.src.ini"
+
+ignore section "ChunkDownloadView"
+ignore section "FileSelectDlg"
+ignore section "FileView"
+ignore section "GroupSwitcher"
+ignore section "GroupView"
+ignore section "KFileDialog Settings"
+ignore section "LogFlags"
+ignore section "MagnetView"
+ignore section "PeerView"
+ignore section "MainWindow"
+ignore section "PrefDialog"
+ignore section "Recent Dirs"
+ignore section "SpeedLimitsDlg"
+ignore section "UPnPDevicesList"
+ignore section "WebSeedsTab"
+ignore section "TorrentActivitySplitters"
+ignore "QueueManagerWidget" "view_state"
+ignore "TrackerView" "state"
+
+# Add your ignores and transforms here
+#ignore section "my-section"
+#ignore "exact section name without brackets" "exact key name"
+#ignore regex "section.*" "key_prefix_.*"
+#transform "section" "key" transform_name read="the docs" for="more detail on transforms"
