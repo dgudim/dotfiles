@@ -475,6 +475,8 @@ yapf
 mypy
 python-pipx
 codon-bin
+python-pylint
+python-pylint-venv
 
 ### LIBS
 python-reportlab
@@ -828,4 +830,5 @@ typst
 
 
 # ----------------------------------------- MISC ------------------------------------------------
+
 
