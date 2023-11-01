@@ -3,9 +3,17 @@
 # theme hash: {{ include "dot_config/oh-my-posh/shell_theme_root.json" | sha256sum }}
 # aliases hash: {{ include "dot_bash_aliases" | sha256sum }}
 # rc hash: {{ include "dot_bashrc" | sha256sum }}
-echo "Copying oh-my-posh theme for the root user"
+# blerc hash: {{ include "dot_config/blerc" | sha256sum }}
+
+PURPLE='\033[0;35m'
+NC='\033[0m'
+BLUE='\033[0;34m'
+
+echo -e "Copying ${BLUE}oh-my-posh$NC theme for the ${PURPLE}root user$NC"
 sudo mkdir -pv '/root/.config/oh-my-posh/'
 sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_config/oh-my-posh/shell_theme_root.json" | quote }} /root/.config/oh-my-posh/shell_theme.json
-echo "Copying bash configs for the root user"
+echo -e "Copying ${BLUE}bash configs$NC for the ${PURPLE}root user$NC"
 sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bashrc" | quote }} /root/.bashrc
 sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bash_aliases" | quote }} /root/.bash_aliases
+echo -e "Copying ${BLUE}blerc config$NC for the ${PURPLE}root user$NC"
+sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_config/blerc" | quote }} /root/.config/blerc

@@ -6,6 +6,9 @@
 #    SETTINGS
 # ===============
 
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
 set -o emacs # set edit mode
 set -o pipefail # fail if any command in pipe fails
 shopt -s checkwinsize # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
@@ -36,15 +39,12 @@ HISTFILESIZE=40000
 # don't save duplicates and commands starting with a space
 HISTCONTROL=ignorespace:ignoredupes
 
-####################################################
+[[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+####################################################
 
 # Blesh top init
 source /usr/share/blesh/ble.sh --noattach --rcfile $HOME/.config/blerc
-
-[[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -63,12 +63,20 @@ bind '"\e[1;5B": history-search-forward'
 
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/shell_theme.json)"
 
+source /usr/share/doc/find-the-command/ftc.bash askfirst
+
+gpgconf --launch gpg-agent
+export GPG_TTY=$(tty)
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
 # Cache rust builds
 export CARGO_INCREMENTAL=1
 
+# Early attach for the root user
+[[ "$(whoami)" = "root" && ${BLE_VERSION-} ]] && ble-attach
 [[ "$(whoami)" = "root" ]] && return
 
-# Make sure the directory exists
+# Make sure the directory for history exists
 mkdir -p "${XDG_STATE_HOME}/bash"
 
 # Python stuff is in there
@@ -83,18 +91,11 @@ source /usr/share/doc/hoard/hoard.bash
 # Enhanced history
 eval "$(atuin init bash --disable-up-arrow)"
 
-source /usr/share/doc/find-the-command/ftc.bash askfirst
-
-# Blesh bottom config
-[[ ${BLE_VERSION-} ]] && ble-attach
-
 # Bruh
 export QSYS_ROOTDIR="/home/kloud/QUARTUS/18.1/quartus/sopc_builder/bin"
 
 # Rootless docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
-gpgconf --launch gpg-agent
-export GPG_TTY=$(tty)
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-
+# Attach for the regular userZ
+[[ ${BLE_VERSION-} ]] && ble-attach
