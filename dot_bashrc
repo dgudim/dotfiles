@@ -43,8 +43,8 @@ HISTCONTROL=ignorespace:ignoredupes
 
 ####################################################
 
-# Blesh top init
-source /usr/share/blesh/ble.sh --noattach --rcfile $HOME/.config/blerc
+# Blesh top init (don't init for the root user)
+[[ "$(whoami)" != "root" ]] && source /usr/share/blesh/ble.sh --noattach --rcfile $HOME/.config/blerc
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -72,8 +72,6 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 # Cache rust builds
 export CARGO_INCREMENTAL=1
 
-# Early attach for the root user
-[[ "$(whoami)" = "root" && ${BLE_VERSION-} ]] && ble-attach
 [[ "$(whoami)" = "root" ]] && return
 
 # Make sure the directory for history exists
@@ -97,5 +95,5 @@ export QSYS_ROOTDIR="/home/kloud/QUARTUS/18.1/quartus/sopc_builder/bin"
 # Rootless docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
-# Attach for the regular userZ
+# Attach ble.sh
 [[ ${BLE_VERSION-} ]] && ble-attach

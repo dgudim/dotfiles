@@ -3,7 +3,6 @@
 # theme hash: {{ include "dot_config/oh-my-posh/shell_theme_root.json" | sha256sum }}
 # aliases hash: {{ include "dot_bash_aliases" | sha256sum }}
 # rc hash: {{ include "dot_bashrc" | sha256sum }}
-# blerc hash: {{ include "dot_config/blerc" | sha256sum }}
 
 PURPLE='\033[0;35m'
 NC='\033[0m'
@@ -15,5 +14,3 @@ sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_config/oh-my
 echo -e "Copying ${BLUE}bash configs$NC for the ${PURPLE}root user$NC"
 sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bashrc" | quote }} /root/.bashrc
 sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bash_aliases" | quote }} /root/.bash_aliases
-echo -e "Copying ${BLUE}blerc config$NC for the ${PURPLE}root user$NC"
-sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_config/blerc" | quote }} /root/.config/blerc
