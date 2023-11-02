@@ -270,6 +270,7 @@ skanpage
 freeplane
 crow-translate
 dbeaver
+dpscreenocr
 
 
 
@@ -330,6 +331,8 @@ powershell
 rate-mirrors
 asciinema
 asciinema-agg
+lazydocker
+oxker
 
 ## TOPS
 htop
