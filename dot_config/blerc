@@ -30,6 +30,11 @@ bleopt exec_errexit_mark=''
 
 bleopt line_limit_length=10000
 bleopt history_limit_length=20000
+bleopt history_erasedups_limit=-10 # new items and 10 prev-session items
+
+## The command history is shared with the other Bash ble.sh sessions with the history
+## sharing turned on (for suggestions)
+bleopt history_share=1
 
 ble-bind -f C-q menu-complete
 
