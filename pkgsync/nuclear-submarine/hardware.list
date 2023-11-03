@@ -31,6 +31,10 @@ mssql-server
 python39
 cassowary
 
+## Kubernetes
+minikube
+kubectl
+
 # Boot stuff
 grub-btrfs
 grub
