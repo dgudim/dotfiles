@@ -473,6 +473,7 @@ python-lsp-black
 pip-autoremove
 autopep8
 flake8
+ruff
 twine
 yapf
 mypy
