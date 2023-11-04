@@ -29,6 +29,8 @@ base-devel
 linux
 linux-firmware
 linux-headers
+linux-lts
+linux-lts-headers
 dracut
 alsa-firmware
 alsa-plugins
@@ -694,7 +696,6 @@ rawtherapee
 scale2x
 shutter-encoder-bin
 qwinff
-droidcam
 czkawka-gui-bin
 kolourpaint
 

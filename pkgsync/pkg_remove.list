@@ -18,4 +18,5 @@ welcome
 iwd # Go back to wpa_supplicant
 nomachine # Don't use it anymore
 bash-preexec # Replaced with ble.sh
+droidcam # Replaced with scrcpy
 
