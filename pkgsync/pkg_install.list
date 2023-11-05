@@ -111,7 +111,6 @@ solid5
 
 ## PACMAN HOOKS
 pacman-systemd-inhibit
-kernel-modules-hook
 eos-hooks
 informant
 pacman-pstatus
