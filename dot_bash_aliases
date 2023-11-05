@@ -137,6 +137,21 @@ batch_dir(){
 	done
 }
 
+batch_rec() {
+	files="$(find -L "$1" -type f)";
+	if [[ "$files" == "" ]]; then
+		echo "No files";
+		return 0;
+	fi
+	file_count=$(echo "$files" | wc -l)
+	echo "Count: $file_count"
+	echo "$files" | while read file; do
+		printf "processing $file \n"
+		"$@" "$file" &
+		sleep 0.3
+	done
+}
+
 get_power(){
 	echo - | awk "{printf \"%.1f\", \
 $(( \
