@@ -37,14 +37,14 @@ HISTSIZE=20000
 HISTFILESIZE=40000
 
 # don't save duplicates and commands starting with a space
-HISTCONTROL=ignorespace:erasedups
+HISTCONTROL=ignorespace:erasedupes
 
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 
 ####################################################
 
 # Blesh top init (don't init for the root user)
-[[ "$(whoami)" != "root" ]] && source /usr/share/blesh/ble.sh --noattach --rcfile $HOME/.config/blerc
+[[ "$(whoami)" != "root" ]] && source /usr/share/blesh/ble.sh --noattach --rcfile $HOME/.config/blesh/blerc
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -80,25 +80,11 @@ mkdir -p "${XDG_STATE_HOME}/bash"
 # Python stuff is in there
 export PATH=~/.local/bin:$PATH
 
-# Brrrr, file explorer
-source ~/.config/broot/launcher/bash/br
-
-# Command hoarder
-source /usr/share/doc/hoard/hoard.bash
-
-# Enhanced history
-eval "$(atuin init bash --disable-up-arrow --disable-ctrl-r)"
-
 # Bruh
 export QSYS_ROOTDIR="/home/kloud/QUARTUS/18.1/quartus/sopc_builder/bin"
 
 # Rootless docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
-
-# Bind atuin, overwrite fzf history widget in ble.sh
-# ble-bind -m emacs   -x C-r -
-# ble-bind -m vi_imap -x C-r -
-bind -x '"\C-r": __atuin_history'
 
 # Attach ble.sh
 [[ ${BLE_VERSION-} ]] && ble-attach
