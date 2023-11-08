@@ -47,6 +47,8 @@ enable_service drkonqi-coredump-cleanup.timer 1
 enable_service dbus-broker.service 1
 enable_service dbus-broker.service
 
+enable_service ananicy.service
+
 {{ if ne .chezmoi.hostname "kloud-xps13" }}
 enable_service docker.socket 1
 {{ end }}
