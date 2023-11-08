@@ -37,7 +37,7 @@ HISTSIZE=20000
 HISTFILESIZE=40000
 
 # don't save duplicates and commands starting with a space
-HISTCONTROL=ignorespace:erasedupes
+HISTCONTROL=ignorespace:erasedups
 
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 

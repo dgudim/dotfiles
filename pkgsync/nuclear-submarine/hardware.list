@@ -34,6 +34,7 @@ cassowary
 ## Kubernetes
 minikube
 kubectl
+helm
 
 # Boot stuff
 grub-btrfs
