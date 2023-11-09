@@ -6,6 +6,31 @@
 #    SETTINGS
 # ===============
 
+# Export XDG vars
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+
+export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
+export ANDROID_HOME="$ANDROID_USER_HOME"/Sdk
+
+export HISTFILE="${XDG_STATE_HOME}"/bash/history
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/cuda_cache
+
+export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+
+export PLATFORMIO_CORE_DIR="$XDG_DATA_HOME"/platformio
+export SONARLINT_USER_HOME="$XDG_DATA_HOME"/sonarlint
+
+# Make sure the directory for history exists
+mkdir -p "${XDG_STATE_HOME}/bash"
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -74,14 +99,8 @@ export CARGO_INCREMENTAL=1
 
 [[ "$(whoami)" = "root" ]] && return
 
-# Make sure the directory for history exists
-mkdir -p "${XDG_STATE_HOME}/bash"
-
 # Python stuff is in there
 export PATH=~/.local/bin:$PATH
-
-# Bruh
-export QSYS_ROOTDIR="/home/kloud/QUARTUS/18.1/quartus/sopc_builder/bin"
 
 # Rootless docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
