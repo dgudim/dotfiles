@@ -28,6 +28,9 @@ export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export PLATFORMIO_CORE_DIR="$XDG_DATA_HOME"/platformio
 export SONARLINT_USER_HOME="$XDG_DATA_HOME"/sonarlint
 
+# Cache rust builds
+export CARGO_INCREMENTAL=1
+
 # Make sure the directory for history exists
 mkdir -p "${XDG_STATE_HOME}/bash"
 
@@ -90,12 +93,14 @@ eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/shell_theme.json)"
 
 source /usr/share/doc/find-the-command/ftc.bash askfirst
 
-gpgconf --launch gpg-agent
-export GPG_TTY=$(tty)
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-
-# Cache rust builds
-export CARGO_INCREMENTAL=1
+if [[ "$(whoami)" != "root" ]]; then
+    gpgconf --launch gpg-agent
+    export GPG_TTY=$(tty)
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+else
+    unset GPG_TTY
+    unset SSH_AUTH_SOCK
+fi
 
 [[ "$(whoami)" = "root" ]] && return
 

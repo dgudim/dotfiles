@@ -14,9 +14,15 @@ eos-settings-plasma
 eos-update-notifier
 welcome
 
+# Go back to wpa_supplicant
+iwd
+# Don't use it anymore
+nomachine
+# Replaced with ble.sh
+bash-preexec
+# Replaced with scrcpy
+droidcam
 
-iwd # Go back to wpa_supplicant
-nomachine # Don't use it anymore
-bash-preexec # Replaced with ble.sh
-droidcam # Replaced with scrcpy
+# Don't use it anymore
+dragon
 

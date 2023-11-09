@@ -22,7 +22,6 @@ docker-rootless-extras
 
 
 
-
 # CORE STUFF
 base
 base-devel
@@ -676,7 +675,6 @@ mplayer
 ## GUIS
 vlc
 mpv
-dragon
 haruna
 gpick
 hugin
@@ -841,4 +839,3 @@ typst
 
 
 # ----------------------------------------- MISC ------------------------------------------------
-
