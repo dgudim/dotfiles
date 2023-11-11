@@ -769,6 +769,7 @@ sysstat
 blas-openblas
 fuse-overlayfs
 zenity
+hdf5-openmpi
 
 
 
