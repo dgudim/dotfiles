@@ -1,6 +1,6 @@
 
 # Replace ls with exa
-alias ls='exa --all --icons --color=always --group-directories-first --long --git --color-scale --extended --header'
+alias ls='exa --all --icons --color=always --group-directories-first --long --git --color-scale=size --extended --header'
 alias la='exa --all --icons --color=always --group-directories-first'
 alias l='exa --classify --icons --color=always --group-directories-first'
 

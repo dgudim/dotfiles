@@ -51,6 +51,8 @@ enable_service ananicy.service
 enable_service libvirtd.socket
 enable_service libvirt-guests.service
 
+enable_service sshd.service
+
 {{ if ne .chezmoi.hostname "kloud-xps13" }}
 enable_service docker.socket 1
 {{ end }}

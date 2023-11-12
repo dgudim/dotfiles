@@ -1,6 +1,7 @@
 # file hash: {{ include .source_file | sha256sum }}
 
 echo -e "Installing \033[0;34m{{ .file }}\033[0m"
-cat {{ joinPath .chezmoi.sourceDir .source_file | quote }} | chezmoi execute-template > "/tmp/{{- .file -}}"
-sudo install -v --owner=root --group=root --mode=0644 "/tmp/{{- .file -}}" /etc
-sudo rm "/tmp/{{- .file -}}"
+TEMP_FILE=$(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32)
+cat {{ joinPath .chezmoi.sourceDir .source_file | quote }} | chezmoi execute-template > "/tmp/$TEMP_FILE"
+sudo install -v --owner=root --group=root --mode=0644 "/tmp/$TEMP_FILE" "{{- .file -}}"
+sudo rm "/tmp/$TEMP_FILE"
