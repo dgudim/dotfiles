@@ -8,6 +8,7 @@
 PURPLE='\033[0;35m'
 NC='\033[0m'
 BLUE='\033[0;34m'
+L_GREEN='\033[1;32m'
 
 echo -e "Copying ${BLUE}oh-my-posh$NC theme for the ${PURPLE}root user$NC"
 sudo mkdir -pv '/root/.config/oh-my-posh/'
@@ -16,3 +17,6 @@ echo -e "Copying ${BLUE}bash configs$NC for the ${PURPLE}root user$NC"
 sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bashrc" | quote }} /root/.bashrc
 sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bash_profile" | quote }} /root/.bash_profile
 sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bash_aliases" | quote }} /root/.bash_aliases
+
+source ~/.bashrc # Reload shell for current user
+echo -e "${L_GREEN}Shell config reloaded$NC"

@@ -53,6 +53,8 @@ enable_service libvirt-guests.service
 
 enable_service sshd.service
 
+enable_service updatedb.timer
+
 {{ if ne .chezmoi.hostname "kloud-xps13" }}
 enable_service docker.socket 1
 {{ end }}
