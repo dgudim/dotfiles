@@ -48,6 +48,8 @@ enable_service dbus-broker.service 1
 enable_service dbus-broker.service
 
 enable_service ananicy.service
+enable_service libvirtd.socket
+enable_service libvirt-guests.service
 
 {{ if ne .chezmoi.hostname "kloud-xps13" }}
 enable_service docker.socket 1
