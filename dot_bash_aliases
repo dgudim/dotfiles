@@ -54,8 +54,6 @@ alias labi_cpp='cd /home/kloud/Documents/shared/_projects/Cpp_stuff/cpp-labs/com
 
 alias weather='curl wttr.in'
 
-alias hs='hoard sync get && hoard sync save'
-
 alias filestat='duf && dust'
 
 alias pls='sudo "$BASH" -c "$(history -p !!)"'
