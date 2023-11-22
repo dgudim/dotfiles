@@ -44,3 +44,6 @@ eos-dracut
 
 # Power
 power-profiles-daemon
+
+# Auth
+pam_usb
