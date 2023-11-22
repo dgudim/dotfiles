@@ -55,6 +55,10 @@ enable_service sshd.service
 
 enable_service updatedb.timer
 
+{{ if eq .chezmoi.hostname "nuclear-submarine" }}
+enable_service pamusb-agent.service
+{{ end }}
+
 {{ if ne .chezmoi.hostname "kloud-xps13" }}
 enable_service docker.socket 1
 {{ end }}
