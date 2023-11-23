@@ -1,6 +1,9 @@
 #!/bin/bash
 
 set -e
+# set -u
+set -o pipefail
+# set -x
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -21,18 +24,32 @@ enable_service() {
     IS_USER=$2
 
     if [ -n "$IS_USER" ]; then
-        if [ "$(systemctl is-enabled --user $NAME)" == "disabled" ]; then
+        set +e # Ignore exit code
+        status=$(systemctl is-enabled --user $NAME)
+        set -e
+        if [ "$status" == "disabled" ]; then
             echo -e "${L_YELLOW}Enabling$NC $L_CYAN$NAME$NC (${YELLOW}user$NC)"
             systemctl enable --user $NAME
-        else
+        elif [ "$status" == "enabled" ]; then
             echo -e "$CYAN$NAME$NC already ${L_GREEN}enabled$NC (${YELLOW}user$NC)"
+        elif [ "$status" == "static" ]; then
+            echo -e "$CYAN$NAME$NC is marked as ${L_YELLOW}static$NC (${YELLOW}user$NC) ${GRAY}skipping$NC"
+        else
+            echo -e "$CYAN$NAME$NC ${RED}does not exit$NC on this machine (${YELLOW}user$NC) ${GRAY}skipping$NC"
         fi
     else
-        if [ "$(systemctl is-enabled $NAME)" == "disabled" ]; then
+        set +e # Ignore exit code
+        status=$(systemctl is-enabled $NAME)
+        set -e
+        if [ "$status" == "disabled" ]; then
             echo -e "${L_YELLOW}Enabling$NC $L_BLUE$NAME$NC (${PURPLE}system-wide$NC)"
             sudo systemctl enable $NAME
-        else
+        elif [ "$status" == "enabled" ]; then
             echo -e "$BLUE$NAME$NC already ${L_GREEN}enabled$NC (${PURPLE}system-wide$NC)"
+        elif [ "$status" == "static" ]; then
+            echo -e "$CYAN$NAME$NC is marked as ${L_YELLOW}static$NC (${PURPLE}system-wide$NC) ${GRAY}skipping$NC"
+        else
+            echo -e "$BLUE$NAME$NC ${RED}does not exit$NC on this machine (${PURPLE}system-wide$NC) ${GRAY}skipping$NC"
         fi
     fi
 }
@@ -52,6 +69,8 @@ enable_service libvirtd.socket
 enable_service libvirt-guests.service
 
 enable_service sshd.service
+
+enable_service avahi-daemon.service
 
 enable_service updatedb.timer
 
