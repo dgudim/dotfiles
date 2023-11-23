@@ -4,5 +4,6 @@
 {{ template "etc_install" dict "source_file" "etc/environment.tmpl" "file" "/etc/environment" "chezmoi" .chezmoi }}
 {{ template "etc_install" dict "source_file" "etc/vconsole.conf" "file" "/etc/vconsole.conf" "chezmoi" .chezmoi }}
 {{ template "etc_install" dict "source_file" "etc/ssh/sshd_config" "file" "/etc/ssh/sshd_config" "chezmoi" .chezmoi }}
+{{ template "etc_install" dict "source_file" "etc/nsswitch.conf" "file" "/etc/nsswitch.conf" "chezmoi" .chezmoi }}
 
 
