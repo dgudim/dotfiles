@@ -501,6 +501,7 @@ python-aiohttp
 python-defusedxml
 python-packaging
 python-pyqt5
+python-pyjacklib
 
 ## ANDROID AND JAVA
 jdk11-openjdk
