@@ -612,6 +612,13 @@ postman9-bin
 wireshark-qt
 zenmap
 
+## GNS3
+gns3-server
+gns3-gui
+ubridge
+vpcs
+dynamips
+
 
 
 
