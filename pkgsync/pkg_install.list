@@ -443,6 +443,7 @@ lib32-giflib
 wine-gecko
 wine-mono
 wine-staging
+wineasio
 winetricks-git
 vkd3d
 dxvk-bin
