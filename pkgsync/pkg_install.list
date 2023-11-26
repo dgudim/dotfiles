@@ -126,6 +126,7 @@ dmraid
 xfsprogs
 jfsutils
 e2fsprogs
+fatresize
 exfatprogs
 dosfstools
 btrfs-progs
@@ -226,7 +227,6 @@ ktorrent
 kwalletmanager
 ventoy-bin
 firefox
-gnome-disk-utility
 google-chrome
 meld
 kdiff3
@@ -234,6 +234,8 @@ kompare
 keepassxc
 gource
 gparted
+gnome-disk-utility
+partitionmanager
 onlyoffice-bin
 obsidian
 pinta
