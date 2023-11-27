@@ -339,6 +339,8 @@ asciinema
 asciinema-agg
 lazydocker
 oxker
+systeroid
+
 
 ## TOPS
 htop
@@ -371,6 +373,8 @@ chezmoi_modify_manager
 bash-completion
 mpv-mpris
 minq-ananicy-git
+udev-notify-git
+udev-usb-sync
 rlwrap
 
 

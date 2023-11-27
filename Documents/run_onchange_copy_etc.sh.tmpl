@@ -6,5 +6,7 @@
 {{ template "etc_install" dict "source_file" "etc/ssh/sshd_config" "file" "/etc/ssh/sshd_config" "chezmoi" .chezmoi }}
 {{ template "etc_install" dict "source_file" "etc/nsswitch.conf" "file" "/etc/nsswitch.conf" "chezmoi" .chezmoi }}
 {{ template "etc_install" dict "source_file" "etc/libvirt/qemu.conf" "file" "/etc/libvirt/qemu.conf" "chezmoi" .chezmoi }}
+{{ template "etc_install" dict "source_file" "etc/udev-notify.conf" "file" "/etc/udev-notify.conf" "chezmoi" .chezmoi }}
+{{ template "etc_install" dict "source_file" "etc/sysctl.d/99-network.conf" "file" "/etc/sysctl.d/99-network.conf" "chezmoi" .chezmoi }}
 
 

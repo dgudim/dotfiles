@@ -122,3 +122,14 @@ add_group kvm
 add_group libvirt
 
 echo -e "${L_GREEN}Group setup done!$NC"
+
+if ! test -f /etc/sysctl.d/99-maxperfwiz.conf; then
+    echo -e "\n${L_PURPLE}Starting maxperfwiz...$NC"
+    curl -O https://gitlab.com/cscs/maxperfwiz/raw/master/maxperfwiz
+    bash maxperfwiz
+    rm maxperfwiz
+    echo -e "${L_GREEN}Maxperfwiz tuning done!$NC"
+else
+    echo -e "\n${L_GREEN}Maxperfwiz already applied, but maybe go check for updates$NC"
+    echo "https://gitlab.com/cscs/maxperfwiz"
+fi
