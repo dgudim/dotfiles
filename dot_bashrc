@@ -28,6 +28,8 @@ export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export PLATFORMIO_CORE_DIR="$XDG_DATA_HOME"/platformio
 export SONARLINT_USER_HOME="$XDG_DATA_HOME"/sonarlint
 
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/rg.conf
+
 # Cache rust builds
 export CARGO_INCREMENTAL=1
 
