@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e
+set -o pipefail
+
 # theme hash: {{ include "dot_config/oh-my-posh/shell_theme_root.json" | sha256sum }}
 # aliases hash: {{ include "dot_bash_aliases" | sha256sum }}
 # aliases hash: {{ include "dot_bash_profile" | sha256sum }}

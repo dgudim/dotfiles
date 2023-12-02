@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -o pipefail
 
 L_YELLOW='\033[1;33m'
 L_BLUE='\033[1;34m'

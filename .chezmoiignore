@@ -1,7 +1,6 @@
 **/shell_theme_root.json
 /pkgsync
 **/*.src.ini
-/etc
 {{- if ne .chezmoi.hostname "nuclear-submarine" }}
     /.bash_aliases_work
 {{- end }}
