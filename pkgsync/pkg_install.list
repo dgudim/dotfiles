@@ -139,6 +139,7 @@ mdadm
 hdparm
 lvm2
 nbd
+encfs
 
 
 
@@ -400,6 +401,7 @@ kdeconnect
 kde-snap-assist
 kde-thumbnailer-apk-libarchive
 blesh-git
+plasma-vault
 
 ## KATE
 markdownpart
