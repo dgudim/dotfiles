@@ -1,5 +1,5 @@
 broadcom-wl-dkms
-bcm20702a1-firmware
+broadcom-bt-firmware-git
 intel-gpu-tools
 intel-media-sdk
 intel-ucode
