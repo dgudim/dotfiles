@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import shutil
 import os
 import sys
 
@@ -26,7 +27,7 @@ command_dir = getenv("CHEZMOI_COMMAND_DIR")
 file_to_add = getenv("CHEZMOI_ARGS").split(" ").pop(-1)
 source_path = os.path.join(command_dir, file_to_add)
 
-if source_path.index("/etc") == -1:
+if source_path.find("/etc") == -1:
     sys.exit(0)
 
 if not os.path.exists(source_path):
@@ -41,9 +42,8 @@ if st != "644":
 
 print(f"Detected a file in {L_CYAN}/etc{NC}, adding to chezmoi indirectly")
 home = getenv("HOME")
-chezmoi_etc_path = os.path.join(getenv("CHEZMOI_SOURCE_DIR"), "dot_config/etc_mirror")
-
-import shutil
+chezmoi_etc_path = os.path.join(
+    getenv("CHEZMOI_SOURCE_DIR"), "dot_config/etc_mirror")
 
 
 def copyto(src: str, dst: str):
@@ -60,4 +60,5 @@ def copyto(src: str, dst: str):
         print(f"  {RED}ERR: {e}{NC}")
 
 
-copyto(source_path, os.path.join(chezmoi_etc_path, source_path.replace("/etc/", "")))
+copyto(source_path, os.path.join(
+    chezmoi_etc_path, source_path.replace("/etc/", "")))
