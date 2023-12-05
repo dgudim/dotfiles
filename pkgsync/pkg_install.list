@@ -379,6 +379,7 @@ minq-ananicy-git
 udev-notify-git
 udev-usb-sync
 journalctl-desktop-notification-git
+syncthing-appmenu
 rlwrap
 
 
@@ -867,4 +868,3 @@ typst
 # ----------------------------------------- MISC ------------------------------------------------
 
 anki
-
