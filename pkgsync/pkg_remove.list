@@ -12,6 +12,7 @@ eos-plasma-sddm-config
 eos-quickstart
 eos-settings-plasma
 eos-update-notifier
+nvidia-inst
 welcome
 
 # Go back to wpa_supplicant
