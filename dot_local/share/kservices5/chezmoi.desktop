@@ -1,0 +1,15 @@
+[Desktop Action chezmoi-add]
+
+Exec=notify-send "Added %U" "$(chezmoi add '%U' > /dev/null && chezmoi git status)"
+
+Name=Chezmoi add
+Icon=node-add
+
+[Desktop Entry]
+Actions=chezmoi-add
+
+MimeType=application/octet-stream
+
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Priority=TopLevel

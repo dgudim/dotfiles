@@ -16,6 +16,29 @@ alias gpus='git push'
 alias gfc="git fetch origin --prune && for branch in \$(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '\$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", \$1); print \$1}'); do git branch -D \$branch; done && git maintenance run --auto && git maintenance run --task=gc"
 alias chzu='chezmoi update'
 
+# Scrcpy aliases
+aconn() {
+	adb connect kloud-phone:$1
+	adb devices
+}
+mirror-screen() {
+	scrcpy --no-audio
+}
+
+mirror-camera() {
+	scrcpy --video-source=camera --camera-facing=back --camera-size=1920x1080 --no-audio
+}
+
+virtual-camera() {
+	sudo modprobe v4l2loopback
+	scrcpy --video-source=camera --camera-facing=back --camera-size=1920x1080 --no-audio --v4l2-sink=/dev/video0 --no-video-playback --v4l2-buffer=100
+}
+
+virtual-screen() {
+	sudo modprobe v4l2loopback
+	scrcpy --no-audio --v4l2-sink=/dev/video0 --no-video-playback --v4l2-buffer=100
+}
+
 # Neofetch logo
 alias neofetch='neofetch --sixel /home/kloud/.config/neofetch/logo --image_size 455'
 
@@ -96,10 +119,6 @@ mount_shares(){
 	done
 }
 
-disable_cache(){
-	export PATH=/usr/bin:$PATH
-}
-
 unmount_shares(){
 	sudo umount ~/Documents/MOUNT_$1/*
 	printf "unmounted all shares\n"
@@ -162,18 +181,18 @@ download_yt_playlist(){
 	yt-dlp -x -f ba --embed-thumbnail --add-metadata --output '%(uploader)s - %(title)s.%(ext)s' $1
 }
 
-start_vpn_client(){
-    echo -n "password for kloud: "
-    read -s password
-    echo
-
-    echo $password | sudo -S vpnclient start
-    sleep 5
-    echo $password | sudo -S dhclient vpn_vpn
-    echo $password | sudo -S ip route del default via 172.16.22.1
-    route -n | grep vpn_vpn
-    ip address show vpn_vpn | grep inet
-}
+# start_vpn_client(){
+#     echo -n "password for kloud: "
+#     read -s password
+#     echo
+#
+#     echo $password | sudo -S vpnclient start
+#     sleep 5
+#     echo $password | sudo -S dhclient vpn_vpn
+#     echo $password | sudo -S ip route del default via 172.16.22.1
+#     route -n | grep vpn_vpn
+#     ip address show vpn_vpn | grep inet
+# }
 
 remove-lines() (
   remove_lines="$1"
