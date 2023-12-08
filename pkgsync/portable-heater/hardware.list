@@ -44,15 +44,3 @@ steam
 ## Browser sync to RAM
 profile-sync-daemon
 profile-sync-daemon-thunderbird
-
-# R
-gcc-fortran
-r
-radian
-r-dygraphs
-r-fontquiver
-r-httpgd
-r-languageserver
-r-markdown
-r-rmarkdown
-r-shiny

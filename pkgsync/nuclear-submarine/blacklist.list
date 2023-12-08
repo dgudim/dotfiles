@@ -90,6 +90,18 @@ sherlock-git
 scangearmp2-sane-git
 nheko-krunner-git
 
+## R
+gcc-fortran
+r
+radian
+r-dygraphs
+r-fontquiver
+r-httpgd
+r-languageserver
+r-markdown
+r-rmarkdown
+r-shiny
+
 # LaTeX stuff
 kile
 flex
