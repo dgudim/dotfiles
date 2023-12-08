@@ -534,7 +534,7 @@ logcat-colorize
 logcat-color3
 android-apktool
 android-sdk-build-tools
-scrcpy
+scrcpy-full-git
 
 ## C++
 make
