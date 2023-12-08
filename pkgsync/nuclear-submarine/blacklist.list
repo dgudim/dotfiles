@@ -20,7 +20,6 @@ adbfs-rootless-git
 logcat-colorize
 android-apktool
 android-sdk-build-tools
-scrcpy
 
 ## Other
 qtcreator
