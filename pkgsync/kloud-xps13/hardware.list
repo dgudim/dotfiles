@@ -1,4 +1,4 @@
-broadcom-wl-dkms
+# broadcom-wl-dkms
 broadcom-bt-firmware-git
 intel-gpu-tools
 intel-media-sdk
@@ -21,9 +21,6 @@ dellfan-git
 fancontrol-kcm
 
 # Boot stuff
-plymouth-theme-green-blocks-git
-plymouth-git
-plymouth-kcm
 systemd-boot-pacman-hook
 kernel-install-for-dracut
 
