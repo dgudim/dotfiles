@@ -8,18 +8,11 @@ qemu-system-ppc-firmware
 codon-bin
 
 ## Android
-jdk11-openjdk
-jre11-openjdk
-java17-openjfx
-jdk17-openjdk
-jre8-openjdk-headless
-android-sdk-platform-tools
 android-studio
 android-tools
 adbfs-rootless-git
 logcat-colorize
 android-apktool
-android-sdk-build-tools
 
 ## Other
 qtcreator
