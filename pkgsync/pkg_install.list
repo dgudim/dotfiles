@@ -600,6 +600,9 @@ networkmanager
 networkmanager-openvpn
 networkmanager-openconnect
 networkmanager-pptp
+networkmanager-l2tp
+strongswan
+openldap
 wpa_supplicant
 microsocks
 torsocks
