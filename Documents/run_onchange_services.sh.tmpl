@@ -80,9 +80,7 @@ enable_service updatedb.timer
 enable_service pamusb-agent.service
 {{ end }}
 
-{{ if ne .chezmoi.hostname "kloud-xps13" }}
 enable_service docker.socket 1
-{{ end }}
 
 {{ if (or (eq .chezmoi.hostname "sauron") (eq .chezmoi.hostname "portable-heater")) }}
 enable_service psd 1
