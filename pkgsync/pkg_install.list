@@ -521,6 +521,7 @@ python-pylint-venv
 python-reportlab
 python-tinycss2
 python-pyaml
+python-pydot
 python-bottle
 python-docker
 python-paramiko
