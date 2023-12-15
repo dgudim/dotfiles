@@ -7,3 +7,17 @@ res=$(notify-send -u critical --action=yes="Update now" "Dot files status" "$(ch
 if [ "$res" = "yes" ]; then
     konsole -e '$SHELL -c "chezmoi update; $SHELL"' &
 fi
+
+check_conflicts() {
+    FOLDERS=($(cat ~/.config/syncthing/config.xml | grep -Po '"/home.*?"|"/mnt.*?"'))
+
+    for folder in "${FOLDERS[@]}"; do
+        find $(echo $folder | tr -d '"') -name "*sync-conflict*"
+    done
+}
+
+CONFLICTS=$(check_conflicts)
+
+if [ ! -z "$CONFLICTS" ]; then
+    notify-send -u critical "Syncthing conflicts found" "$CONFLICTS"
+fi
