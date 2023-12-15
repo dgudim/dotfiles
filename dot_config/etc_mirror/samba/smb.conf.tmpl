@@ -1,0 +1,20 @@
+[global]
+security = user
+map to guest = bad user
+guest account = guest
+
+usershare path = /var/lib/samba/usershares
+usershare max shares = 100
+usershare allow guests = yes
+usershare owner only = no
+
+workgroup = WORKGROUP
+netbios name = {{ .chezmoi.hostname }}
+server string = Samba Server Version %v
+server role = standalone server
+log file = /var/log/samba/log.log
+max log size = 1000
+usershare allow guests = yes
+force create mode = 0666
+force directory mode = 0666
+

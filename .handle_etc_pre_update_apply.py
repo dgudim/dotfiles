@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import shutil
 import os
 import sys
 import glob
@@ -30,10 +31,9 @@ print(
 
 home = getenv("HOME")
 real_etc_path = "/etc"
-chezmoi_etc_path = os.path.join(getenv("CHEZMOI_SOURCE_DIR"), "dot_config/etc_mirror")
+chezmoi_etc_path = os.path.join(
+    getenv("CHEZMOI_SOURCE_DIR"), "dot_config/etc_mirror")
 local_mirror_etc_path = os.path.join(home, ".config/etc_mirror")
-
-import shutil
 
 
 def copyto(src: str, dst: str):
@@ -44,7 +44,7 @@ def copyto(src: str, dst: str):
     dst = os.path.dirname(dst)
     try:
         os.makedirs(dst, exist_ok=True)
-        shutil.copy2(src, dst)
+        os.system(f'cp -pf "{src}" "{dst}"')
         print(f"  {L_GREEN}OK{NC}")
     except Exception as e:
         print(f"  {RED}ERR: {e}{NC}")
@@ -53,7 +53,8 @@ def copyto(src: str, dst: str):
 for filepath in glob.iglob(chezmoi_etc_path + "**/**", recursive=True, dir_fd=False):
     if not os.path.isfile(filepath):
         continue
-    rel_path = filepath.replace(f"{chezmoi_etc_path}/", "").replace(".tmpl", "")
+    rel_path = filepath.replace(
+        f"{chezmoi_etc_path}/", "").replace(".tmpl", "")
     etc_file = os.path.join(real_etc_path, rel_path)
     local_mirror_file = os.path.join(local_mirror_etc_path, rel_path)
     copyto(etc_file, local_mirror_file)

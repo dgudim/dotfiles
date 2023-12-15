@@ -93,6 +93,11 @@ echo -e "\n${L_PURPLE}Setting up groups...$NC"
 
 add_group() {
 
+    if [ -z "$(getent group $1)" ]; then
+        echo -e "$CYAN$1$NC does not exist, ${L_CYAN}creating$NC"
+        sudo groupadd -r $1
+    fi
+
     if grep -q $1 /etc/group; then
         if id -nG "$USER" | grep -qw "$1"; then
             echo -e "$GREEN$USER$NC belongs to $CYAN$1$NC, ${GRAY}skipping$NC"
@@ -110,8 +115,7 @@ add_group wireshark
 add_group realtime
 add_group docker
 add_group i2c
-add_group sambashare
-add_group plugdev
+# add_group plugdev # Only used by razer udev rules
 add_group rfkill
 add_group video
 add_group input
@@ -120,6 +124,23 @@ add_group kvm
 add_group libvirt
 
 echo -e "${L_GREEN}Group setup done!$NC"
+
+{{- if eq .samba.enabled "true" }}
+
+echo -e "\n${L_PURPLE}Setting up samba...$NC"
+
+add_group sambashare
+
+sudo mkdir -p /var/lib/samba/usershares
+sudo chown root:sambashare /var/lib/samba/usershares
+sudo chmod 1770 /var/lib/samba/usershares
+
+enable_service smb.service
+enable_service nmb.service
+
+echo -e "${L_GREEN}Samba setup done!$NC"
+
+{{- end }}
 
 if ! test -f /etc/sysctl.d/99-maxperfwiz.conf; then
     echo -e "\n${L_PURPLE}Starting maxperfwiz...$NC"
