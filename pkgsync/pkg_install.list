@@ -376,6 +376,7 @@ tesseract-data-rus
 chezmoi_modify_manager
 bash-completion
 mpv-mpris
+smplayer-themes
 minq-ananicy-git
 udev-notify-git
 udev-usb-sync
@@ -397,6 +398,7 @@ kimageformats5
 kdeplasma-addons
 nheko-krunner-git
 plasma-browser-integration
+plasma-remotecontrollers
 kdeconnect
 kde-snap-assist
 kde-thumbnailer-apk-libarchive
@@ -719,6 +721,7 @@ mplayer
 vlc
 mpv
 haruna
+smplayer
 gpick
 hugin
 obs-studio
