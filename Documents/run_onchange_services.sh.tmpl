@@ -80,6 +80,7 @@ enable_service updatedb.timer
 {{ if eq .chezmoi.hostname "nuclear-submarine" }}
 enable_service pamusb-agent.service
 enable_service grub-btrfsd.service
+enable_service fprintd.service
 {{ end }}
 
 enable_service docker.socket 1
