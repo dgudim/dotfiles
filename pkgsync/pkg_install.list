@@ -109,7 +109,7 @@ bluez
 pahis
 solid5
 
-## PACMAN HOOKS
+## PACMAN HOOKS AND SCRIPTS
 pacman-systemd-inhibit
 eos-hooks
 informant
@@ -120,6 +120,7 @@ pacdiff-pacman-hook-git
 rebuild-detector
 find-the-command
 paccache-hook
+check-pacman-mtree
 
 ## FS TOOLS
 dmraid
