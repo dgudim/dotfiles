@@ -633,6 +633,7 @@ inetutils
 xl2tpd
 tor
 miniserve
+kiterunner-bin
 tcpdump
 ssh-audit
 ipcalc
