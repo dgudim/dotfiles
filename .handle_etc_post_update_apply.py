@@ -58,4 +58,4 @@ for mirror_filepath in glob.iglob(
         )
         print(f"  {RED}ERR: {e}{NC}")
 
-print(f"{GREEN}Finished copying to etc, {L_YELLOW}{entries} files {GREEN}processed{NC}")
+print(f"{L_GREEN}Finished copying to etc, {L_YELLOW}{entries} files {L_GREEN}processed{NC}")
