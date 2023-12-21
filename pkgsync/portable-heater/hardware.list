@@ -2,9 +2,6 @@
 systemd-boot-pacman-hook
 kernel-install-for-dracut
 
-# Power
-power-profiles-daemon
-
 # Hardware
 amd-ucode
 intel-ucode

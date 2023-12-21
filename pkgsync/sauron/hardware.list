@@ -8,9 +8,6 @@ nvidia-container-toolkit
 opencv-cuda
 cuda
 
-# Power
-power-profiles-daemon
-
 # Boot stuff
 grub
 eos-dracut
@@ -24,6 +21,10 @@ amd-ucode
 
 # Misc
 python310
+plasma5-wallpapers-wallpaper-engine
+noisetorch
+upscayl-bin
+ollama-cuda
 
 # Gaming
 steam
@@ -32,11 +33,6 @@ steam-native-runtime
 lib32-gamemode
 gamemode
 lutris-git
-
-# Misc
-plasma5-wallpapers-wallpaper-engine
-noisetorch
-upscayl-bin
 
 ## Browser sync to RAM
 profile-sync-daemon

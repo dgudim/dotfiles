@@ -89,6 +89,10 @@ enable_service docker.socket 1
 enable_service psd 1
 {{ end }}
 
+enable_service polkit.service
+enable_service rtkit-daemon.service
+
+
 echo -e "${L_GREEN}Service setup done!$NC"
 
 

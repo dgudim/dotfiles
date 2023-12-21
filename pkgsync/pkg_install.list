@@ -4,6 +4,10 @@ libinput-gestures
 
 
 
+# POWER STUFF
+power-profiles-daemon
+
+
 
 ## VIRTUALIZATION AND CONTAINERS
 qemu-desktop
@@ -277,7 +281,8 @@ crow-translate
 dbeaver
 dpscreenocr
 universal-android-debloater-bin
-
+freecad
+gromit-mpx
 
 
 
@@ -596,9 +601,7 @@ vscode-html-languageserver
 # NETWORKING
 dhclient
 dnsmasq
-ethtool
 openresolv
-netctl
 net-tools
 networkmanager
 networkmanager-openvpn
@@ -608,13 +611,9 @@ networkmanager-l2tp
 strongswan
 openldap
 wpa_supplicant
-microsocks
-torsocks
 mitmproxy
-vopono-bin
 openconnect
 nfs-utils
-nmap
 openvpn
 modemmanager
 ppp
@@ -622,7 +621,6 @@ pptpclient
 rp-pppoe
 wireless-regdb
 wireless_tools
-wget
 vpnc
 bind
 ndisc6
@@ -632,14 +630,24 @@ nss-mdns
 inetutils
 xl2tpd
 tor
-miniserve
-kiterunner-bin
 tcpdump
 ssh-audit
 ipcalc
 sipcalc
 openssh
+
+## CLIS
 traceroute
+globalping-cli
+kiterunner-bin
+miniserve
+wget
+microsocks
+torsocks
+vopono-bin
+nmap
+ethtool
+netctl
 
 ## GUIS
 protonvpn

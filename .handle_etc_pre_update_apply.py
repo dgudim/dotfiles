@@ -10,6 +10,7 @@ L_PURPLE = "\033[1;35m"
 NC = "\033[0m"
 L_GREEN = "\033[1;32m"
 YELLOW = "\033[0;33m"
+L_YELLOW = "\033[1;33m"
 L_CYAN = "\033[1;36m"
 L_BLUE = "\033[1;34m"
 BLUE = "\033[0;34m"
@@ -26,7 +27,7 @@ def getenv(name: str) -> str:
 
 
 print(
-    f"{L_PURPLE}Running {L_BLUE}etc pre update/apply hook{NC},{L_PURPLE} mirroring {L_CYAN}etc{L_PURPLE} state{NC}..."
+    f"{L_PURPLE}Running {L_BLUE}etc pre update/apply hook{NC},{L_PURPLE} mirroring {L_CYAN}/etc{L_PURPLE} state{NC}..."
 )
 
 home = getenv("HOME")
@@ -37,18 +38,20 @@ local_mirror_etc_path = os.path.join(home, ".config/etc_mirror")
 
 
 def copyto(src: str, dst: str):
-    print(
-        f"{GREEN}Copying{NC} {BLUE}{src}{NC} to {CYAN}{dst.replace(home, '~')}{NC}",
-        end="",
-    )
     dst = os.path.dirname(dst)
     try:
         os.makedirs(dst, exist_ok=True)
         os.system(f'cp -pf "{src}" "{dst}"')
-        print(f"  {L_GREEN}OK{NC}")
+        # print(f"  {L_GREEN}OK{NC}")
     except Exception as e:
+        print(
+            f"{GREEN}Copying{NC} {BLUE}{src}{NC} to {CYAN}{dst.replace(home, '~')}{NC}",
+            end="",
+        )
         print(f"  {RED}ERR: {e}{NC}")
 
+
+entries = 0
 
 for filepath in glob.iglob(chezmoi_etc_path + "**/**", recursive=True, dir_fd=False):
     if not os.path.isfile(filepath):
@@ -58,5 +61,6 @@ for filepath in glob.iglob(chezmoi_etc_path + "**/**", recursive=True, dir_fd=Fa
     etc_file = os.path.join(real_etc_path, rel_path)
     local_mirror_file = os.path.join(local_mirror_etc_path, rel_path)
     copyto(etc_file, local_mirror_file)
+    entries = entries + 1
 
-print(f"{L_GREEN}Finished mirroring etc state{NC}\n")
+print(f"{L_GREEN}Finished mirroring etc state{NC}, {L_YELLOW}{entries} files {L_GREEN}processed{NC}\n")
