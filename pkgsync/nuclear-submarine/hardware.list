@@ -27,6 +27,11 @@ realvnc-vnc-viewer
 dotnet-sdk
 aspnet-runtime
 aspnet-targeting-pack
+aspnet-runtime-7.0
+aspnet-targeting-pack-7.0
+dotnet-runtime-7.0
+dotnet-sdk-7.0
+dotnet-targeting-pack-7.0
 lens-bin
 mssql-server
 mssql-tools
