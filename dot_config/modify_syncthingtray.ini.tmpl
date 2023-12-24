@@ -5,7 +5,7 @@
 source "{{ .chezmoi.sourceDir }}/{{ .chezmoi.sourceFile | trimSuffix ".tmpl" | replace "modify_" "" }}.src.ini"
 
 ignore section "qt"
-ignore "tray" "connections\1\apiKey"
+ignore "tray" "connections\\1\\apiKey"
 
 # Add your ignores and transforms here
 #ignore section "my-section"

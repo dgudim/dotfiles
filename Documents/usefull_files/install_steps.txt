@@ -1,0 +1,5 @@
+- Look into fstab, add commit=60,noatime to ext4. compress=zstd:15,exec,X-fstrim.notrim to btrfs
+- Also in fstab - remove tmp mount, it's handled by systemd (sudo systemctl edit tmp.mount --full)
+- Turn off mitigations in /etc/kernel/cmdline, enable fstrim if using luks
+- Sync with chezmoi + syncthing
+- Copy over plasma settings manually

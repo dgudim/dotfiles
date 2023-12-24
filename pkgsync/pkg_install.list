@@ -112,6 +112,7 @@ haveged
 bluez
 pahis
 solid5
+mesa-utils
 
 ## PACMAN HOOKS AND SCRIPTS
 pacman-systemd-inhibit
@@ -157,6 +158,8 @@ adobe-source-han-sans-kr-fonts
 cantarell-fonts
 noto-color-emoji-fontconfig
 noto-fonts
+noto-fonts-extra
+noto-fonts-cjk
 noto-fonts-emoji
 ttf-bitstream-vera
 ttf-caladea
@@ -208,6 +211,7 @@ gtk3-classic
 kdialog
 kinit
 kscreen
+kgamma
 ksshaskpass
 accountsservice
 drkonqi
@@ -538,6 +542,7 @@ python-aiohttp
 python-defusedxml
 python-packaging
 python-pyqt5
+python-tqdm
 python-pyjacklib
 
 ## ANDROID AND JAVA
