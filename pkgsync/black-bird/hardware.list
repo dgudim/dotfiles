@@ -14,3 +14,6 @@ lib32-vulkan-mesa-layers
 # Boot stuff
 systemd-boot-pacman-hook
 kernel-install-for-dracut
+
+# Fingerprint sensor
+python-validity
