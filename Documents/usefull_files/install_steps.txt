@@ -1,7 +1,3 @@
-- Look into fstab, add commit=60,noatime to ext4.
-    compress=zstd:15,exec,X-fstrim.notrim to btrfs
-    windows_names,rw,uid=1000,gid=1000,async,nofail,prealloc,users,exec for ntfs
-- Also in fstab - remove tmp mount, it's handled by systemd (sudo systemctl edit tmp.mount --full)
-- Turn off mitigations in /etc/kernel/cmdline, enable fstrim if using luks
+- If using external drives with ext4/btrfs, change default opts in /etc/udisks2/mount_options.conf
 - Sync with chezmoi + syncthing
 - Copy over plasma settings manually

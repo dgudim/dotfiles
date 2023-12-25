@@ -34,6 +34,12 @@ progress=true
 
 [gpg]
     recipient = {{ $git_email | quote }}
+    args = ["--quiet"]
+
+[diff]
+    command = "delta"
+    exclude = ["scripts"]
+    args = ["--pager=0", "{{`{{ .Destination }}`}}", "{{`{{ .Target }}`}}"]
 
 [hooks.add.pre]
     command = ".local/share/chezmoi/.handle_etc_pre_add.py"
@@ -57,5 +63,8 @@ progress=true
 {{ else }}
 {{  writeToStdout "Inferred signing key: " }}
 {{  writeToStdout $signingkey }}
+{{  writeToStdout " (" }}
+{{  writeToStdout $git_email }}
+{{  writeToStdout ")" }}
 {{  writeToStdout "\n" }}
 {{ end }}

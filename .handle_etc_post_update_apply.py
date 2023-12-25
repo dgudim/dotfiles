@@ -25,7 +25,7 @@ def getenv(name: str) -> str:
 
 
 print(
-    f"{L_PURPLE}Running {L_BLUE}etc post update/apply hook{NC},{L_PURPLE} copying etc mirror to {L_CYAN}/etc{NC}..."
+    f"\n{L_PURPLE}Running {L_BLUE}etc post update/apply hook{NC},{L_PURPLE} copying etc mirror to {L_CYAN}/etc{NC}..."
 )
 
 home = getenv("HOME")

@@ -13,7 +13,7 @@ NC='\033[0m'
 BLUE='\033[0;34m'
 L_GREEN='\033[1;32m'
 
-echo -e "Copying ${BLUE}oh-my-posh$NC theme for the ${PURPLE}root user$NC"
+echo -e "\nCopying ${BLUE}oh-my-posh$NC theme for the ${PURPLE}root user$NC"
 sudo mkdir -pv '/root/.config/oh-my-posh/'
 sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_config/oh-my-posh/shell_theme_root.json" | quote }} /root/.config/oh-my-posh/shell_theme.json
 echo -e "Copying ${BLUE}bash configs$NC for the ${PURPLE}root user$NC"

@@ -8,7 +8,7 @@ NC='\033[0m'
 
 # theme hash: {{ include "dot_local/share/icons/icons.tar.gz" | sha256sum }}
 # theme hash: {{ include "dot_local/share/yakuake/skins/gruvbox-dark.tar.gz" | sha256sum }}
-echo -e "${L_PURPLE}Extracting icons$NC"
+echo -e "\n${L_PURPLE}Extracting icons$NC"
 cd "{{.chezmoi.homeDir}}/.local/share/icons/"
 tar -xzf icons.tar.gz
 echo -e "${L_PURPLE}Extracting yakuake theme$NC"

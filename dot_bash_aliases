@@ -14,7 +14,6 @@ alias man='batman'
 alias gpul='git pull'
 alias gpus='git push'
 alias gfc="git fetch origin --prune && for branch in \$(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '\$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", \$1); print \$1}'); do git branch -D \$branch; done && git maintenance run --auto && git maintenance run --task=gc"
-alias chzu='chezmoi update'
 
 # Scrcpy aliases
 aconn() {
@@ -92,7 +91,7 @@ alias butter_debutter='duperemove -r -d -h -v --dedupe-options=partial,same,fiem
 alias xps_aggressive_fancurve="sudo dellfan 0 1 && sudo systemctl start fancontrol && systemctl status fancontrol"
 alias xps_bios_fancurve="sudo dellfan 0 0 && sudo systemctl stop fancontrol && systemctl status fancontrol"
 
-__rank_mirrors(){
+__rank_mirrors() {
 	TMPFILE=$(mktemp)
 	sudo true
 	rate-mirrors --save=$TMPFILE $1
@@ -104,7 +103,22 @@ __rank_mirrors(){
 
 alias mirrors='__rank_mirrors arch mirrorlist && __rank_mirrors endeavouros endeavouros-mirrorlist && __rank_mirrors chaotic-aur chaotic-mirrorlist'
 
-mount_shares(){
+chzu() {
+	diff_len=$(chezmoi diff | wc | tr -d ' ')
+	if [ "$diff_len" = "000" ]; then
+		chezmoi update
+	else
+		chezmoi diff
+		yn=l
+		while [[ ! "$yn" =~ ^[YyNn]$ ]]; do
+			read -p "Apply?" -n 1 yn
+			echo
+		done
+		[[ "$yn" =~ ^[Yy]$ ]] && chezmoi update
+	fi
+}
+
+mount_shares() {
 	echo -n "password for kloud: "
 	read -s password
 	echo
@@ -119,12 +133,12 @@ mount_shares(){
 	done
 }
 
-unmount_shares(){
+unmount_shares() {
 	sudo umount ~/Documents/MOUNT_$1/*
 	printf "unmounted all shares\n"
 }
 
-b_kill(){
+b_kill() {
 	echo -n "password for kloud: "
 	read -s password
 	echo
@@ -143,7 +157,7 @@ batch(){
 	done
 }
 
-batch_dir(){
+batch_dir() {
 	for elem in $(/usr/bin/ls */ -d)
 	do
 	    printf "processing $elem \n"
@@ -169,7 +183,7 @@ batch_rec() {
 	done
 }
 
-get_power(){
+get_power() {
 	echo - | awk "{printf \"%.1f\", \
 $(( \
   $(cat /sys/class/power_supply/BAT*/current_now) * \
@@ -177,7 +191,7 @@ $(( \
 )) / 1000000000000 }" ; echo " W "
 }
 
-download_yt_playlist(){
+download_yt_playlist() {
 	yt-dlp -x -f ba --embed-thumbnail --add-metadata --output '%(uploader)s - %(title)s.%(ext)s' $1
 }
 
