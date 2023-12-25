@@ -66,15 +66,15 @@ warn += check_mount_opts(
 
 warn += check_mount_opts(fstab, "nfs", "defaults,nofail")
 
-grub = read_file("/etc/default/grub")
-if len(grub) > 0 and grub.find("mitigations=off") == -1:
-    warn += 1
-    print(f"{YELLOW}Turn off mitigations in grub{NC}")
-
 cmdline = read_file("/etc/kernel/cmdline")
 if len(cmdline) > 0 and cmdline.find("mitigations=off") == -1:
     warn += 1
     print(f"{YELLOW}Turn off mitigations in cmdline{NC}")
+elif len(cmdline) == 0:
+    grub = read_file("/etc/default/grub")
+    if len(grub) > 0 and grub.find("mitigations=off") == -1:
+        warn += 1
+        print(f"{YELLOW}Turn off mitigations in grub{NC}")
 
 if cmdline.find("rd.luks") != -1:
     os.system("sudo cat /etc/crypttab > /tmp/luks_crypttab")
@@ -101,4 +101,4 @@ if cmdline.find("rd.luks") != -1:
     else:
         print(f"{L_RED}Couldn't find luks root in fstab!{NC}")
 
-print(f"{L_GREEN}Finished running checks, {L_CYAN}{warn}{L_GREEN} warnings{NC}")
+print(f"{L_GREEN}Finished running checks, {L_CYAN}{warn}{L_GREEN} warning(s){NC}")
