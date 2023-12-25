@@ -45,10 +45,7 @@ for mirror_filepath in glob.iglob(
     try:
         os.system(f"sudo mkdir -p {os.path.dirname(target_etc_file)}")
         os.system(
-            f'sudo install --owner=root --group=root --mode=0644 "{mirror_filepath}" "{target_etc_file}" '
-            f'| sed /removed/s//`printf "{YELLOW}removed{NC}"`/'
-            f'| sed /\\-\\>/s//`printf "{L_GREEN}\\-\\>{NC}"`/'
-            ""
+            f'sudo install --owner=root --group=root --mode=0644 "{mirror_filepath}" "{target_etc_file}"'
         )
         entries = entries + 1
     except Exception as e:

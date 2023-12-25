@@ -41,6 +41,14 @@
           "type": "git"
         },
         {
+          "type": "project",
+          "style": "powerline",
+          "background": "#7e4d5d",
+          "foreground": "#ebdbb2",
+          "powerline_symbol": "",
+          "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} "
+        },
+        {
           "background": "#689d6a",
           "foreground": "#ebdbb2",
           "powerline_symbol": "",
@@ -143,7 +151,7 @@
         },
         {
           "background": "#ebdbb2",
-          "foreground": "#98971a",
+          "foreground": "#985117",
           "leading_diamond": "",
           "style": "diamond",
           "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
