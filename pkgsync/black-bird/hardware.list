@@ -5,7 +5,6 @@ lib32-libva-intel-driver
 lib32-vulkan-intel
 libva-intel-driver
 vulkan-intel
-xf86-video-intel
 libvdpau-va-gl-i965
 lib32-libvdpau-va-gl
 vulkan-mesa-layers
