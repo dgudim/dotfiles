@@ -16,7 +16,7 @@ BLUE = "\033[0;34m"
 CYAN = "\033[0;36m"
 GREEN = "\033[0;32m"
 
-print(f"\n{L_PURPLE}Running checks{NC}...")
+print(f"{L_PURPLE}Running checks{NC}...")
 
 warn = 0
 
@@ -101,4 +101,4 @@ if cmdline.find("rd.luks") != -1:
     else:
         print(f"{L_RED}Couldn't find luks root in fstab!{NC}")
 
-print(f"{L_GREEN}Finished running checks, {L_CYAN}{warn}{L_GREEN} warning(s){NC}")
+print(f"{L_GREEN}Finished running checks, {L_CYAN}{warn}{L_GREEN} warning(s){NC}\n")

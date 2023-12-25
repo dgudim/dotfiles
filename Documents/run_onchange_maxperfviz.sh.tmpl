@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Script hash: {{ output "sh" "-c" "cd /home/kloud/Documents/usefull_files && if [[ -f \"maxperfwiz\" ]]; then cat maxperfwiz | sha1sum; fi" | trim }}
+
+L_PURPLE='\033[1;35m'
+L_GREEN='\033[1;32m'
+NC='\033[0m'
+
+echo -e "${L_PURPLE}Starting maxperfwiz...$NC (https://gitlab.com/cscs/maxperfwiz)"
+bash "{{.chezmoi.homeDir}}/Documents/usefull_files/maxperfwiz"
+echo -e "${L_GREEN}Maxperfwiz tuning done!$NC\n"
+

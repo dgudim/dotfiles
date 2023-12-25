@@ -1,0 +1,4 @@
+["Documents/usefull_files/maxperfwiz"]
+    type = "file"
+    url = "https://gitlab.com/cscs/maxperfwiz/raw/master/maxperfwiz"
+    refreshPeriod = "168h"

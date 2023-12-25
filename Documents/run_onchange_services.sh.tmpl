@@ -55,7 +55,7 @@ enable_service() {
 }
 
 
-echo -e "\n${L_PURPLE}Setting up services...$NC"
+echo -e "${L_PURPLE}Setting up services...$NC"
 
 enable_service drkonqi-coredump-processor@.service
 enable_service drkonqi-coredump-launcher.socket 1
@@ -94,10 +94,10 @@ enable_service polkit.service
 enable_service rtkit-daemon.service
 
 
-echo -e "${L_GREEN}Service setup done!$NC"
+echo -e "${L_GREEN}Service setup done!$NC\n"
 
 
-echo -e "\n${L_PURPLE}Setting up groups...$NC"
+echo -e "${L_PURPLE}Setting up groups...$NC"
 
 add_group() {
 
@@ -131,11 +131,11 @@ add_group informant
 add_group kvm
 add_group libvirt
 
-echo -e "${L_GREEN}Group setup done!$NC"
+echo -e "${L_GREEN}Group setup done!$NC\n"
 
 {{- if eq .samba.enabled "true" }}
 
-echo -e "\n${L_PURPLE}Setting up samba...$NC"
+echo -e "${L_PURPLE}Setting up samba...$NC"
 
 add_group sambashare
 
@@ -146,17 +146,6 @@ sudo chmod 1770 /var/lib/samba/usershares
 enable_service smb.service
 enable_service nmb.service
 
-echo -e "${L_GREEN}Samba setup done!$NC"
+echo -e "${L_GREEN}Samba setup done!$NC\n"
 
 {{- end }}
-
-if ! test -f /etc/sysctl.d/99-maxperfwiz.conf; then
-    echo -e "\n${L_PURPLE}Starting maxperfwiz...$NC"
-    curl -O https://gitlab.com/cscs/maxperfwiz/raw/master/maxperfwiz
-    bash maxperfwiz
-    rm maxperfwiz
-    echo -e "${L_GREEN}Maxperfwiz tuning done!$NC"
-else
-    echo -e "\n${L_GREEN}Maxperfwiz already applied, but maybe go check for updates$NC"
-    echo "https://gitlab.com/cscs/maxperfwiz"
-fi
