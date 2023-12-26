@@ -35,8 +35,12 @@ lib32-libva-mesa-driver
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
-# Gayming
+# Gaming
 steam
+linux-steam-integration
+steam-native-runtime
+lib32-gamemode
+gamemode
 
 ## Browser sync to RAM
 profile-sync-daemon

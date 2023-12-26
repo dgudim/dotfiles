@@ -16,3 +16,10 @@ kernel-install-for-dracut
 
 # Fingerprint sensor
 python-validity
+
+# Gaming
+steam
+linux-steam-integration
+steam-native-runtime
+lib32-gamemode
+gamemode
