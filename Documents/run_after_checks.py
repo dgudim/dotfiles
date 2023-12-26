@@ -50,7 +50,7 @@ if fstab.find("/tmp") != -1:
     warn += 1
     print(f"{YELLOW}Consider removing /tmp from fstab{NC}")
 
-if fstab.find(" 3 ") != -1:
+if fstab.find(" 3") != -1:
     warn += 1
     print(f"{YELLOW}Consider changing fsck field to 2 from 3 fstab{NC}")
 
