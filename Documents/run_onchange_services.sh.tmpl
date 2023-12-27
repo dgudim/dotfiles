@@ -77,6 +77,7 @@ enable_service cups.service
 enable_service cups-browsed.service
 
 enable_service updatedb.timer
+enable_service fstrim.timer
 
 {{ if eq .chezmoi.hostname "nuclear-submarine" }}
 enable_service pamusb-agent.service
