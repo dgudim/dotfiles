@@ -101,4 +101,31 @@ if cmdline.find("rd.luks") != -1:
     else:
         print(f"{L_RED}Couldn't find luks root in fstab!{NC}")
 
+firefox_profile_root = "/home/kloud/.mozilla/firefox"
+firefox_profiles = [os.path.join(firefox_profile_root, d) for d in os.listdir(firefox_profile_root) if os.path.isdir(
+    os.path.join(firefox_profile_root, d)) and f"{d}".find("default-release") != -1]
+
+if len(firefox_profiles) == 0:
+    print(f"{L_RED}Couldn't find firefox profile{NC}")
+else:
+
+    def check_setting(s: str, setting: str):
+        if s.find(setting) == -1:
+            print(
+                f"{YELLOW}Consider adding {setting} to firefox{NC}"
+            )
+
+    about_config = read_file(os.path.join(firefox_profiles[0], "prefs.js"))
+    check_setting(about_config, "widget.use-xdg-desktop-portal.file-picker")
+    check_setting(about_config, "media.ffmpeg.vaapi.enabled")
+    check_setting(about_config, "media.av1.enabled")
+    check_setting(about_config, "gfx.x11-egl.force-enabled")
+    check_setting(about_config, "widget.dmabuf.force-enabled")
+    check_setting(about_config, "gfx.webrender.all")
+    check_setting(about_config, "gfx.webrender.compositor")
+    check_setting(about_config, "gfx.webrender.compositor.force-enabled")
+    check_setting(about_config, "dom.webgpu.enabled")
+    check_setting(about_config, "gfx.webrender.precache-shaders")
+    check_setting(about_config, "gfx.webrender.force-partial-present")
+
 print(f"{L_GREEN}Finished running checks, {L_CYAN}{warn}{L_GREEN} warning(s){NC}\n")
