@@ -104,9 +104,13 @@ __rank_mirrors() {
 alias mirrors='__rank_mirrors arch mirrorlist && __rank_mirrors endeavouros endeavouros-mirrorlist && __rank_mirrors chaotic-aur chaotic-mirrorlist'
 
 chzu() {
+
+	chezmoi git pull
+	chezmoi init
+
 	diff_len=$(chezmoi diff | wc | tr -d ' ')
 	if [ "$diff_len" = "000" ]; then
-		chezmoi update
+		chezmoi apply
 	else
 		chezmoi diff
 		yn=l
@@ -114,7 +118,7 @@ chzu() {
 			read -p "Apply?" -n 1 yn
 			echo
 		done
-		[[ "$yn" =~ ^[Yy]$ ]] && chezmoi update
+		[[ "$yn" =~ ^[Yy]$ ]] && chezmoi apply
 	fi
 }
 
