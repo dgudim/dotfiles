@@ -127,5 +127,6 @@ else:
     check_setting(about_config, "dom.webgpu.enabled")
     check_setting(about_config, "gfx.webrender.precache-shaders")
     check_setting(about_config, "gfx.webrender.force-partial-present")
+    check_setting(about_config, "svg.context-properties.content.enabled")
 
 print(f"{L_GREEN}Finished running checks, {L_CYAN}{warn}{L_GREEN} warning(s){NC}\n")
