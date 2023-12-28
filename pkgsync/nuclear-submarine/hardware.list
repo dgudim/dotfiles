@@ -35,6 +35,7 @@ dotnet-targeting-pack-7.0
 lens-bin
 mssql-server
 mssql-tools
+rider
 python39
 cassowary
 
