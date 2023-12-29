@@ -32,7 +32,7 @@ aspnet-targeting-pack-7.0
 dotnet-runtime-7.0
 dotnet-sdk-7.0
 dotnet-targeting-pack-7.0
-lens-bin
+openlens-bin
 mssql-server
 mssql-tools
 rider
