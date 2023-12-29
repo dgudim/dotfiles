@@ -52,6 +52,8 @@ shopt -s direxpand # perform word expansion when trying filename completion usef
 # a missing character, and one character too many. If a correction is found,
 # the corrected file name is printed, and the command proceeds.
 shopt -s cdspell 2>/dev/null
+# Correct minor directory typos during tab-completion (if supplied not exist)
+shopt -s dirspell
 
 # disable Ctrl-S ( flow control )
 stty -ixon
