@@ -101,6 +101,18 @@ bleopt complete_menu_maxlines=20
 bleopt complete_polling_cycle=75
 
 ##-----------------------------------------------------------------------------
+## Widgets
+
+function ble/widget/my/wrapshell {
+  ble/widget/beginning-of-logical-line
+  ble/widget/insert-string '$('
+  ble/widget/end-of-logical-line
+  ble/widget/insert-string ')'
+  ble/widget/beginning-of-logical-line
+}
+ble-bind -f C-s my/wrapshell
+
+##-----------------------------------------------------------------------------
 ## Color settings
 
 bleopt term_index_colors=256
