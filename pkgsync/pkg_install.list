@@ -354,6 +354,11 @@ systeroid
 testdisk
 genwipe.sh
 progress
+gum
+pastel
+sn0int
+so-bin
+the_silver_searcher
 
 
 ## TOPS
@@ -653,6 +658,9 @@ vopono-bin
 nmap
 ethtool
 netctl
+iptraf-ng
+xh
+
 
 ## GUIS
 protonvpn

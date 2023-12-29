@@ -66,6 +66,7 @@ alias lnn='/bin/ln'
 alias mkdir='mkdir -pv'
 
 alias op='xdg-open'
+alias gop='xdg-open $(gum file)'
 alias fop='op "$(fzf)"'
 complete -f op
 
