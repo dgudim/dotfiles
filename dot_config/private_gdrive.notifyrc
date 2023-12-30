@@ -1,0 +1,6 @@
+[Event/new-account-added]
+Action=Sound|Popup
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/new_account_added.ogg
+TTS=

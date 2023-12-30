@@ -1,0 +1,13 @@
+[Event/locked]
+Action=Sound
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/screen_locked.ogg
+TTS=
+
+[Event/unlocked]
+Action=Sound
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/screen_unlocked.ogg
+TTS=

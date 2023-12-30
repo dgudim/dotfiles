@@ -1,0 +1,6 @@
+[Event/AudioDeviceFallback]
+Action=Sound|Popup
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/general_status_deploy.ogg
+TTS=

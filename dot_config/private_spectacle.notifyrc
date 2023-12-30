@@ -1,0 +1,6 @@
+[Event/newScreenshotSaved]
+Action=Sound|Popup
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/screenshot_saved.ogg
+TTS=

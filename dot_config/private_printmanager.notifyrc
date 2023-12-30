@@ -1,0 +1,12 @@
+[Event/GetReady]
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/new_device3.ogg
+TTS=
+
+[Event/NewPrinterNotification]
+Action=Sound|Popup
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/new_device2.ogg
+TTS=

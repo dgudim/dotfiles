@@ -1,0 +1,13 @@
+[Event/needsPassword]
+Action=Sound|Popup
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/auth_request.ogg
+TTS=
+
+[Event/syncFailed]
+Action=Sound|Popup
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/general_error.ogg
+TTS=

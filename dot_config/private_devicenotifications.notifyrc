@@ -1,0 +1,5 @@
+[Event/safelyRemovable]
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/general_info4.ogg
+TTS=

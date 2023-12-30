@@ -1,0 +1,6 @@
+[Event/freespacenotif]
+Action=Sound|Popup
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/low_disk_space.ogg
+TTS=

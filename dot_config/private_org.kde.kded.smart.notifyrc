@@ -1,0 +1,6 @@
+[Event/imminentDeviceFailure]
+Action=Sound|Popup
+Execute=
+Logfile=
+Sound=/usr/share/sounds/subnautica_theme/disk_failure_imminent.ogg
+TTS=
