@@ -34,6 +34,8 @@ linux-firmware
 linux-headers
 linux-lts
 linux-lts-headers
+fwupd
+fwupd-efi
 dracut
 alsa-firmware
 alsa-plugins
