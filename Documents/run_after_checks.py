@@ -21,10 +21,6 @@ print(f"{L_PURPLE}Running checks{NC}...")
 warn = 0
 
 
-def findall(s: str, sub: str):
-    return [m.start() for m in re.finditer(sub, s)]
-
-
 def read_file(path: str) -> str:
     try:
         f = open(path, "r", encoding="utf-8")
@@ -35,13 +31,24 @@ def read_file(path: str) -> str:
         return ""
 
 
-def check_mount_opts(fstab: str, fs: str, opts: str):
+def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
     to_add = 0
-    entries = len(findall(fstab, f" {fs} "))
-    for opt in opts.split(","):
-        if entries > len(findall(fstab, f"({opt})")):
-            print(f"{YELLOW}Consider adding {opt} to {fs}{NC}")
-            to_add += 1
+
+    for line in fstabb.split("\n"):
+        if len(line) == 0 or line[0] == "#":
+            continue
+        for fs, opts in fsopts.items():
+            if line.find(f" {fs} ") == -1:
+                # Skip options for other filesystems
+                continue
+            # Yay, we found our target filesystem
+            for opt in opts:
+                if sum(1 for _ in re.finditer(f"({opt})", line)) != 1:
+                    print(f"{YELLOW}Consider adding {opt} to {fs}{NC} ({line})")
+                    to_add += 1
+            # A line can only contain 1 filesystem, exit, process next line
+            break
+
     return to_add
 
 
@@ -54,17 +61,26 @@ if fstab.find(" 3") != -1:
     warn += 1
     print(f"{YELLOW}Consider changing fsck field to 2 from 3 fstab{NC}")
 
-warn += check_mount_opts(fstab, "ext4", "defaults,commit=60,noatime")
-warn += check_mount_opts(fstab, "vfat", "defaults,noatime,umask=0077")
 warn += check_mount_opts(
-    fstab, "btrfs", "compress=zstd:[0-9]+,exec,noatime,X-fstrim\.notrim"
+    fstab,
+    {
+        "ext4": ["defaults", "commit=60", "noatime"],
+        "vfat": ["defaults", "noatime", "umask=0077"],
+        "btrfs": ["compress=zstd:[0-9]+", "exec", "noatime", "X-fstrim\.notrim"],
+        "ntfs": [
+            "windows_names",
+            "rw",
+            "uid=1000",
+            "gid=1000",
+            "async",
+            "nofail",
+            "prealloc",
+            "users",
+            "exec",
+        ],
+        "nfs": ["defaults", "nofail"],
+    },
 )
-
-warn += check_mount_opts(
-    fstab, "ntfs", "windows_names,rw,uid=1000,gid=1000,async,nofail,prealloc,users,exec"
-)
-
-warn += check_mount_opts(fstab, "nfs", "defaults,nofail")
 
 cmdline = read_file("/etc/kernel/cmdline")
 if len(cmdline) > 0 and cmdline.find("mitigations=off") == -1:
@@ -81,8 +97,7 @@ if cmdline.find("rd.luks") != -1:
     crypttab = read_file("/tmp/luks_crypttab")
     os.system("rm /tmp/luks_crypttab")
 
-    luks_root = re.search(
-        r"\/dev\/mapper\/luks-(.*?) *?\/ *?(ext4|btrfs)", fstab)
+    luks_root = re.search(r"\/dev\/mapper\/luks-(.*?) *?\/ *?(ext4|btrfs)", fstab)
     if luks_root is not None:
         luks_root_uuid = luks_root.group(1)
 
@@ -102,8 +117,12 @@ if cmdline.find("rd.luks") != -1:
         print(f"{L_RED}Couldn't find luks root in fstab!{NC}")
 
 firefox_profile_root = "/home/kloud/.mozilla/firefox"
-firefox_profiles = [os.path.join(firefox_profile_root, d) for d in os.listdir(firefox_profile_root) if os.path.isdir(
-    os.path.join(firefox_profile_root, d)) and f"{d}".find("default-release") != -1]
+firefox_profiles = [
+    os.path.join(firefox_profile_root, d)
+    for d in os.listdir(firefox_profile_root)
+    if os.path.isdir(os.path.join(firefox_profile_root, d))
+    and f"{d}".find("default-release") != -1
+]
 
 if len(firefox_profiles) == 0:
     print(f"{L_RED}Couldn't find firefox profile{NC}")
@@ -111,9 +130,7 @@ else:
 
     def check_setting(s: str, setting: str):
         if s.find(setting) == -1:
-            print(
-                f"{YELLOW}Consider adding {setting} to firefox{NC}"
-            )
+            print(f"{YELLOW}Consider adding {setting} to firefox{NC}")
 
     about_config = read_file(os.path.join(firefox_profiles[0], "prefs.js"))
     check_setting(about_config, "widget.use-xdg-desktop-portal.file-picker")
