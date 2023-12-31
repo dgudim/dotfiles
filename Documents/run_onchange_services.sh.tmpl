@@ -119,6 +119,7 @@ add_group() {
     fi
 }
 
+add_group tss # For tpm
 add_group sys
 add_group wireshark
 add_group realtime
@@ -127,9 +128,9 @@ add_group i2c
 # add_group plugdev # Only used by razer udev rules
 add_group rfkill
 add_group video
-add_group input
+add_group input # For joysticks
 add_group informant
-add_group kvm
+add_group kvm # For qemu
 add_group libvirt
 
 echo -e "${L_GREEN}Group setup done!$NC\n"
