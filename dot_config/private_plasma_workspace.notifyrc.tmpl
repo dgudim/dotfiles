@@ -42,7 +42,11 @@ TTS=
 Action=Sound
 Execute=
 Logfile=
+{{- if eq .chezmoi.hostname "sauron" }}
 Sound=/usr/share/sounds/subnautica_theme/session_exit.ogg
+{{- else }}
+Sound=/usr/share/sounds/subnautica_theme/session_exit2.ogg
+{{- end }}
 TTS=
 
 [Event/fatalerror]
@@ -110,7 +114,7 @@ Logfile=
 {{- if eq .chezmoi.hostname "sauron" }}
 Sound=/usr/share/sounds/subnautica_theme/session_welcome_long.ogg
 {{- else }}
-Sound=/usr/share/sounds/subnautica_theme/session_welcome_short.ogg
+Sound=/usr/share/sounds/subnautica_theme/session_welcome2.ogg
 {{- end }}
 TTS=
 
