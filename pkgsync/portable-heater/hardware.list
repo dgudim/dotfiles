@@ -45,3 +45,6 @@ gamemode
 ## Browser sync to RAM
 profile-sync-daemon
 profile-sync-daemon-thunderbird
+
+# Safety
+sync-pacman-hook-git
