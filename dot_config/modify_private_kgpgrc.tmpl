@@ -7,7 +7,6 @@ source "{{ .chezmoi.sourceDir }}/{{ .chezmoi.sourceFile | trimSuffix ".tmpl" | r
 ignore section "KFileDialog Settings"
 ignore section "MainWindow"
 ignore section "Editor"
-ignore section "Editor"
 set "Encryption" "file key" "{{ .gpg.signingkey }}"
 
 # Add your ignores and transforms here

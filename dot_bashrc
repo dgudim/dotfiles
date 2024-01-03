@@ -117,8 +117,8 @@ fi
 
 [[ "$(whoami)" = "root" ]] && return
 
-# Python stuff is in there
-export PATH=~/.local/bin:$PATH
+# Python and dotnet stuff is in there
+export PATH=~/.local/bin:$PATH:~/.dotnet/tools/
 
 # Rootless docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
