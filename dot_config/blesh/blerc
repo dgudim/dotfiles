@@ -1,3 +1,5 @@
+# https://github.com/akinomyoga/ble.sh#31-use-multiline-mode
+
 ble-sabbrev "~down=$HOME/Downloads"
 ble-sabbrev "~proj=$HOME/Documents/shared/_projects/"
 ble-sabbrev '\date'='date +%F'
@@ -33,7 +35,6 @@ bleopt history_limit_length=20000
 bleopt history_erasedups_limit=-50 # new items and 50 prev-session items
 
 ## The command history is shared with the other Bash ble.sh sessions with the history
-## sharing turned on (for suggestions)
 bleopt history_share=1
 
 ble-bind -f C-q menu-complete
@@ -80,11 +81,17 @@ bleopt vbell_align=right
 ## non-empty strings are set, the functionality is enabled. Otherwise, the
 ## functionality is inactive.
 
-bleopt complete_auto_delay=200
+bleopt complete_auto_delay=150
 bleopt complete_auto_complete=1
-bleopt complete_auto_history=1
+# Handled by atuin, turn off default completion
+bleopt complete_auto_history=0
 bleopt complete_menu_complete=1
 bleopt complete_menu_filter=1
+
+bind 'set completion-ignore-case on'
+# When filenames of the form dir/file* is shown in the menu, the part of the directory name dir/ is omitted by default.
+# When this Readline setting is turned on, the directory name of filename completions are not omitted.
+bind 'set menu-complete-display-prefix on'
 
 bleopt complete_ambiguous=
 
@@ -99,6 +106,13 @@ bleopt complete_menu_maxlines=20
 ## generating completion candidates.
 
 bleopt complete_polling_cycle=75
+
+bleopt edit_magic_expand=history:sabbrev:alias
+
+# This option configures the detailed behavior of the widget magic-space with a colon-separated list.
+# If the field inline-sabbrev-no-insert is specified, the insertion of SP is skipped when the inline sabbrev is performed by magic-space.
+
+bleopt edit_magic_opts=inline-sabbrev-no-insert
 
 ##-----------------------------------------------------------------------------
 ## Widgets
