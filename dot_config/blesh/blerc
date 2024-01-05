@@ -109,11 +109,6 @@ bleopt complete_polling_cycle=75
 
 bleopt edit_magic_expand=history:sabbrev:alias
 
-# This option configures the detailed behavior of the widget magic-space with a colon-separated list.
-# If the field inline-sabbrev-no-insert is specified, the insertion of SP is skipped when the inline sabbrev is performed by magic-space.
-
-bleopt edit_magic_opts=inline-sabbrev-no-insert
-
 ##-----------------------------------------------------------------------------
 ## Widgets
 
