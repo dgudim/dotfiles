@@ -84,7 +84,7 @@ bleopt vbell_align=right
 bleopt complete_auto_delay=150
 bleopt complete_auto_complete=1
 # Handled by atuin, turn off default completion
-bleopt complete_auto_history=0
+bleopt complete_auto_history=
 bleopt complete_menu_complete=1
 bleopt complete_menu_filter=1
 
