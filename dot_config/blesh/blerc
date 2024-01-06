@@ -2,12 +2,16 @@
 
 ble-sabbrev "~down=$HOME/Downloads"
 ble-sabbrev "~proj=$HOME/Documents/shared/_projects/"
-ble-sabbrev '\date'='date +%F'
 ble-sabbrev L='| less'
 ble-sabbrev M='| more'
 ble-sabbrev logs='sudo dmesg'
 ble-sabbrev -m @@='ble-palette'
 ble-sabbrev -m reload='reload'
+
+function blerc/define-sabbrev-date {
+  ble-sabbrev -m '\date'='ble/util/assign COMPREPLY "date +%F"'
+}
+blehook/eval-after-load complete blerc/define-sabbrev-date
 
 ##-----------------------------------------------------------------------------
 ## Basic settings
