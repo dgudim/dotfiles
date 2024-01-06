@@ -130,6 +130,8 @@ alias mirrors='__rank_mirrors arch mirrorlist && __rank_mirrors endeavouros ende
 
 chzu() {
 
+	yay
+
 	chezmoi git pull
 	chezmoi init
 
