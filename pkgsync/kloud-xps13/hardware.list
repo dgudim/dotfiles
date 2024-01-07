@@ -13,6 +13,15 @@ lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
+# Waydroid
+binder_linux-dkms
+cage
+lua-alt-getopt
+lua-filesystem
+python-pyclip
+waydroid
+waydroid-image
+
 # Battery stuff
 tlpui
 
