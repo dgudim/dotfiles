@@ -111,7 +111,7 @@ bleopt complete_menu_maxlines=20
 
 bleopt complete_polling_cycle=75
 
-bleopt edit_magic_expand=history:sabbrev:alias
+bleopt edit_magic_expand=history:sabbrev
 
 ##-----------------------------------------------------------------------------
 ## Widgets
