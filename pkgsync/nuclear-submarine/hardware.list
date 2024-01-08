@@ -38,6 +38,7 @@ mssql-tools
 rider
 python39
 cassowary
+flutter
 
 ## Kubernetes
 minikube
