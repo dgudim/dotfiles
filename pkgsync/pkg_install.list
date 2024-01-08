@@ -555,6 +555,7 @@ python-packaging
 python-pyqt5
 python-tqdm
 python-pyjacklib
+python-pycryptodome
 
 ## ANDROID AND JAVA
 jdk11-openjdk
