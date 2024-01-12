@@ -657,6 +657,7 @@ traceroute
 globalping-cli
 kiterunner-bin
 miniserve
+qrcp-git
 wget
 microsocks
 torsocks
