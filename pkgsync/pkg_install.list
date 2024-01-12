@@ -568,7 +568,6 @@ android-studio
 android-tools
 adbfs-rootless-git
 logcat-colorize
-logcat-color3
 android-apktool
 android-sdk-build-tools
 scrcpy-full-git
