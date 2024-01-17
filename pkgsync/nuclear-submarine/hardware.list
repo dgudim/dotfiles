@@ -42,6 +42,7 @@ cassowary
 flutter
 
 ## Kubernetes
+google-cloud-cli
 minikube
 kubectl
 helm
