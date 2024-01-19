@@ -502,6 +502,7 @@ perl
 perl-archive-zip
 visual-studio-code-bin
 strace
+pax-utils
 
 ## R
 gcc-fortran
