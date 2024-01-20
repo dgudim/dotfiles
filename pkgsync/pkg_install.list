@@ -21,6 +21,7 @@ libguestfs
 virt-manager
 docker
 docker-buildx
+docker-scout
 docker-compose
 docker-rootless-extras
 
