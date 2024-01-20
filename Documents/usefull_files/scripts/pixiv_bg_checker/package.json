@@ -1,0 +1,13 @@
+{
+  "name": "pixiv-bg-checker",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts"
+  },
+  "dependencies": {
+    "puppeteer-core": "^21.3.6"
+  },
+  "type": "module"
+}
