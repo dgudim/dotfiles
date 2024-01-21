@@ -385,7 +385,6 @@ glances
 
 # COMPLEMENTARY PACKAGES
 nano-syntax-highlighting-git
-vlc-plugin-fluidsynth-bin
 bat-extras
 aspell-en
 aspell-ru
