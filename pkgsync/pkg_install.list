@@ -572,7 +572,7 @@ android-studio
 android-tools
 adbfs-rootless-git
 logcat-colorize
-android-apktool
+android-apktool-bin
 android-sdk-build-tools
 scrcpy-full-git
 

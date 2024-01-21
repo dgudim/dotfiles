@@ -32,3 +32,6 @@ logcat-color3
 
 # Vlc now includes this
 vlc-plugin-fluidsynth-bin
+
+# Replaced with a bin variant
+android-apktool
