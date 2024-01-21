@@ -64,7 +64,7 @@
             "always_enabled": true
           },
           "style": "powerline",
-          "template": " 󰔟 {{ .FormattedMs }}⠀",
+          "template": " 󰔟 {{ .FormattedMs }} ",
           "type": "executiontime"
         },
         {
