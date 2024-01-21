@@ -27,3 +27,8 @@ droidcam
 # Don't use it anymore
 dragon
 
+# Use logcat-colorize instead
+logcat-color3
+
+# Vlc now includes this
+vlc-plugin-fluidsynth-bin
