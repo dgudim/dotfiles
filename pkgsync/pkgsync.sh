@@ -59,7 +59,7 @@ cat "$TMP_DIR/local_install.list" "$TMP_DIR/global_install.list" | sort -u > "$T
 cat "$TMP_DIR/local_black.list" "$TMP_DIR/global_black.list"     | sort -u > "$TMP_DIR/combined_black.list"
 
 # 23 = remove lines unique to FILE2 and lines that appear in both files
-# To add = locally installed (explicit) - global install list - local install list (hardware) - (blacklist (global) - blacklist (local))
+# To add = locally installed (explicit) - global install list - local install list (hardware) - (blacklist (global) + blacklist (local))
 comm -23 "$TMP_DIR/explicitly_installed.list" "$TMP_DIR/combined_install.list" | comm -23 - "$TMP_DIR/combined_black.list" > "$TMP_DIR/pkg_to_add.list"
 
 # To remove = (blacklist (global) + blacklist (local)) <<<-intersection with->>> locally installed (explicit)
@@ -70,7 +70,16 @@ comm -23 "$TMP_DIR/combined_install.list" "$TMP_DIR/combined_black.list" | comm 
 
 # To remove from install list = (global install list / local install list (hardware)) <<<-intersection with->>> (blacklist (global) / blacklist (local))
 comm -12 "$TMP_DIR/global_install.list" "$TMP_DIR/global_black.list" | tr -d '[:space:]' > "$TMP_DIR/pkg_to_check.list"
-comm -12 "$TMP_DIR/local_install.list" "$TMP_DIR/local_black.list" | tr -d '[:space:]' >> "$TMP_DIR/pkg_to_check.list"
+comm -12 "$TMP_DIR/local_install.list" "$TMP_DIR/combined_black.list" | tr -d '[:space:]' >> "$TMP_DIR/pkg_to_check.list"
+
+# Files in local blacklist, but not in global install
+comm -23 "$TMP_DIR/local_black.list" "$TMP_DIR/global_install.list" | tr -d '[:space:]' > "$TMP_DIR/pkg_to_check_black_install.list"
+
+# Files both in hardware (local install) and in global install
+comm -12 "$TMP_DIR/local_install.list" "$TMP_DIR/global_install.list" | tr -d '[:space:]' > "$TMP_DIR/pkg_to_check_global_local.list"
+
+# Files both in local blacklist and in global blacklist
+comm -12 "$TMP_DIR/local_black.list" "$TMP_DIR/global_black.list" | tr -d '[:space:]' > "$TMP_DIR/pkg_to_check_global_local_black.list"
 
 # offer to install missing packages
 if [ -s "$TMP_DIR/pkg_to_install.list" ]
@@ -128,3 +137,26 @@ then
     echo -e "\n${L_BLUE}---------------------------------------$NC"
 fi
 
+if [ -s "$TMP_DIR/pkg_to_check_black_install.list" ]
+then
+    echo -e "${L_YELLOW}There are packages in local blacklist, but not in global install list, maybe remove them?$NC"
+    echo -e "Packages:\n${L_BLUE}---------------------------------------$NC"
+    cat $TMP_DIR/pkg_to_check_black_install.list
+    echo -e "\n${L_BLUE}---------------------------------------$NC"
+fi
+
+if [ -s "$TMP_DIR/pkg_to_check_global_local.list" ]
+then
+    echo -e "${L_YELLOW}There are packages both in local install (hardware) and global install, maybe remove them?$NC"
+    echo -e "Packages:\n${L_BLUE}---------------------------------------$NC"
+    cat $TMP_DIR/pkg_to_check_global_local.list
+    echo -e "\n${L_BLUE}---------------------------------------$NC"
+fi
+
+if [ -s "$TMP_DIR/pkg_to_check_global_local_black.list" ]
+then
+    echo -e "${L_YELLOW}There are packages both in local blacklist and global blacklist, maybe remove them?$NC"
+    echo -e "Packages:\n${L_BLUE}---------------------------------------$NC"
+    cat $TMP_DIR/pkg_to_check_global_local_black.list
+    echo -e "\n${L_BLUE}---------------------------------------$NC"
+fi

@@ -6,7 +6,6 @@ lib32-vulkan-mesa-layers
 libva-mesa-driver
 lib32-libva-mesa-driver
 mesa-vdpau
-mesa-utils
 radeontop
 amdgpu_top-bin
 vulkan-radeon

@@ -12,7 +12,7 @@ android-studio
 android-tools
 adbfs-rootless-git
 logcat-colorize
-android-apktool
+android-apktool-bin
 
 ## Other
 qtcreator
@@ -76,7 +76,6 @@ darktable
 # Misc
 protonvpn
 ventoy-bin
-vlc-plugin-fluidsynth-bin
 betterdiscord-installer-bin
 sherlock-git
 scangearmp2-sane-git
