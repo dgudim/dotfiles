@@ -110,6 +110,7 @@ add_group() {
         else
             echo -e "$GREEN$USER$NC does not belong to $CYAN$1$NC, ${L_YELLOW}adding$NC"
             sudo usermod -aG $1 $USER
+            newgrp $1
         fi
     else
          echo -e "$CYAN$1$NC ${RED}does not exist$NC on this machine, ${GRAY}skipping$NC"
