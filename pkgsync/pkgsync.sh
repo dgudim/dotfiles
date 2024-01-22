@@ -119,13 +119,15 @@ fi
 if [ -s "$TMP_DIR/pkg_to_add.list" ]
 then
     yn=l
-    while [[ ! "$yn" =~ ^[YyNnAa]$ ]]
+    while [[ ! "$yn" =~ ^[YyNnAaRr]$ ]]
     do
-        read -p "$(echo -e ${PURPLE}"Append"$NC "packages unique to this computer to install list?" $YES_NO_MENU)" -n 1 yn
+        read -p "$(echo -e ${PURPLE}"Append"$NC "packages unique to this computer to install list?" ${GREEN}yes$NC/${YELLOW}no$NC/${BLUE}list$NC/${RED}remove$NC/${RED}abort${NC})...)" -n 1 yn
         echo
         [[ "$yn" =~ ^[Ll]$ ]] && cat "$TMP_DIR/pkg_to_add.list"
     done
     [[ "$yn" =~ ^[Yy]$ ]] && cat "$TMP_DIR/pkg_to_add.list" >> "$INSTALL_LIST"
+    [[ "$yn" =~ ^[Rr]$ ]] && sudo pacman -D --asdeps - < "$TMP_DIR/pkg_to_add.list"
+    [[ "$yn" =~ ^[Rr]$ ]] && sudo pacman -Runs --confirm - < "$TMP_DIR/pkg_to_add.list"
     [[ "$yn" =~ ^[Aa]$ ]] && exit 0
 fi
 
