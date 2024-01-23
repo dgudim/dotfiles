@@ -692,6 +692,7 @@ pipewire-alsa
 pipewire-jack
 pipewire-pulse
 pipewire-v4l2
+pipewire-zeroconf
 lsp-plugins
 zam-plugins
 amb-plugins
@@ -760,6 +761,7 @@ hugin
 obs-studio
 blender
 krita
+imv
 gwenview
 inkscape
 gpu-screen-recorder-gtk-git

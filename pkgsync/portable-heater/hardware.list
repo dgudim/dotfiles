@@ -22,7 +22,6 @@ vulkan-radeon
 ## Nvidia
 nvidia-dkms
 nvidia-hook
-nvidia-inst
 
 ## Wireless
 broadcom-wl-dkms

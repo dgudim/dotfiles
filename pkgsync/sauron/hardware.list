@@ -1,6 +1,6 @@
 # Nvidia
 nvidia-dkms
-nvidia-inst
+nvidia-hook
 nvidia-settings
 libva-nvidia-driver
 lib32-opencl-nvidia
