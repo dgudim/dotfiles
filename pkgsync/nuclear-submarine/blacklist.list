@@ -112,8 +112,6 @@ texlive-publishers
 python-weasyprint
 texlive-context
 texlive-xetex
-pandoc-cli
-pandoc-crossref
 plantuml-ascii-math
 asciidoctor
 blockdiag
