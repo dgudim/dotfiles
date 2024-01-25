@@ -299,9 +299,9 @@ kando-bin
 # CLI APPS
 neofetch
 cpufetch-git
+onefetch
 nano
 syncthing
-onefetch
 oh-my-posh-bin
 mosh
 ripgrep-all
@@ -368,6 +368,8 @@ so-bin
 the_silver_searcher
 just
 watchexec
+clipboard-bin
+yank
 
 
 ## TOPS
