@@ -162,6 +162,8 @@ chzu() {
 		done
 		[[ "$yn" =~ ^[Yy]$ ]] && chezmoi apply
 	fi
+
+	yay -Ycss
 }
 
 mount_shares() {
