@@ -76,6 +76,9 @@ rga-fzf() {
 	echo "opening $file" &&
 	xdg-open "$file"
 }
+rgc(){
+	rg --json $1 | delta --pager=0
+}
 
 # Neofetch logo
 alias neofetch='neofetch --sixel /home/kloud/.config/neofetch/logo --image_size 455'
