@@ -4,7 +4,7 @@ set -e
 set -o pipefail
 
 # theme hash: {{ include "dot_config/oh-my-posh/shell_theme_root.json" | sha256sum }}
-# aliases hash: {{ include "dot_bash_aliases" | sha256sum }}
+# aliases hash: {{ include "dot_bash_aliases.tmpl" | sha256sum }}
 # aliases hash: {{ include "dot_bash_profile" | sha256sum }}
 # rc hash: {{ include "dot_bashrc" | sha256sum }}
 
@@ -26,11 +26,12 @@ echo -e "${L_PURPLE}Copying shell configs for the ${RED}root ${L_PURPLE}user$NC"
 
 
 sudo mkdir -p '/root/.config/oh-my-posh/'
-sudo cp --remove-destination {{ joinPath .chezmoi.sourceDir "dot_config/oh-my-posh/shell_theme_root.json" | quote }} /root/.config/oh-my-posh/shell_theme.json
+sudo cp --remove-destination {{ joinPath .chezmoi.homeDir ".config/oh-my-posh/shell_theme_root.json" | quote }} /root/.config/oh-my-posh/shell_theme.json
 
-sudo cp --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bashrc" | quote }} /root/.bashrc
-sudo cp --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bash_profile" | quote }} /root/.bash_profile
-sudo cp --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bash_aliases" | quote }} /root/.bash_aliases
+sudo cp --remove-destination {{ joinPath .chezmoi.homeDir ".bashrc" | quote }} /root/.bashrc
+sudo cp --remove-destination {{ joinPath .chezmoi.homeDir ".bash_profile" | quote }} /root/.bash_profile
+sudo cp --remove-destination {{ joinPath .chezmoi.homeDir ".bash_aliases" | quote }} /root/.bash_aliases
 
 source ~/.bashrc # Reload shell for current user
+[[ ${BLE_VERSION-} ]] && ble-reload
 echo -e "${L_GREEN}Done, ${L_CYAN}shell config reloaded$NC\n"

@@ -2,6 +2,9 @@
 systemd-boot-pacman-hook
 kernel-install-for-dracut
 
+## Windows in boot menu
+edk2-shell
+
 # Hardware
 amd-ucode
 
