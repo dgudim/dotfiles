@@ -1,3 +1,10 @@
+# Boot stuff
+systemd-boot-pacman-hook
+kernel-install-for-dracut
+
+# Hardware
+amd-ucode
+
 # Nvidia
 nvidia-dkms
 nvidia-hook
@@ -8,16 +15,9 @@ nvidia-container-toolkit
 opencv-cuda
 cuda
 
-# Boot stuff
-grub
-eos-dracut
-
 # Rgb stuff
 openrazer-driver-dkms
 openrgb
-
-# Hardware
-amd-ucode
 
 # Misc
 python39

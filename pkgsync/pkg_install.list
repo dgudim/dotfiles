@@ -30,6 +30,7 @@ docker-rootless-extras
 # CORE STUFF
 base
 base-devel
+arch-install-scripts
 linux
 linux-firmware
 linux-headers
