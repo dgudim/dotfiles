@@ -484,7 +484,7 @@ lib32-giflib
 ## WINE
 wine-gecko
 wine-mono
-wine-staging
+wine
 wineasio
 winetricks-git
 vkd3d
