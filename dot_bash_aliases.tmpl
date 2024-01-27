@@ -6,7 +6,7 @@ alias l='exa --classify --icons --color=always --group-directories-first'
 
 # Replace cat with bat and man with batman
 export BAT_THEME=gruvbox-dark
-export BAT_STYLE=numbers,changes
+#export BAT_STYLE=numbers,changes
 alias cat='bat --paging=never'
 alias man='batman'
 
@@ -76,8 +76,11 @@ rga-fzf() {
 	echo "opening $file" &&
 	xdg-open "$file"
 }
+rgb(){
+	batgrep $@
+}
 rgc(){
-	rg --json $1 | delta --pager=0
+	rg --json $@ | delta --pager=0
 }
 
 # Neofetch logo
