@@ -127,12 +127,16 @@ alias reboot='sudo reboot now'
 alias shut='sudo shutdown now'
 
 alias reload='source ~/.bashrc'
+{{ if eq .chezmoi.hostname "nuclear-submarine" }}
 alias grub-reload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+{{ end }}
 
 # Laptop aliases
+{{ if eq .chezmoi.hostname "kloud-xps13" }}
 alias butter_debutter='duperemove -r -d -h -v --dedupe-options=partial,same,fiemap --hashfile=/home/kloud/Documents/butter_hashfile /mnt/storage_butter/'
 alias xps_aggressive_fancurve="sudo dellfan 0 1 && sudo systemctl start fancontrol && systemctl status fancontrol"
 alias xps_bios_fancurve="sudo dellfan 0 0 && sudo systemctl stop fancontrol && systemctl status fancontrol"
+{{ end }}
 
 __rank_mirrors() {
 	TMPFILE=$(mktemp)
