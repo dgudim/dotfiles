@@ -26,7 +26,7 @@ echo -e "${L_PURPLE}Copying shell configs for the ${RED}root ${L_PURPLE}user$NC"
 
 
 sudo mkdir -p '/root/.config/oh-my-posh/'
-sudo cp --remove-destination {{ joinPath .chezmoi.homeDir ".config/oh-my-posh/shell_theme_root.json" | quote }} /root/.config/oh-my-posh/shell_theme.json
+sudo cp --remove-destination {{ joinPath .chezmoi.sourceDir "dot_config/oh-my-posh/shell_theme_root.json" | quote }} /root/.config/oh-my-posh/shell_theme.json
 
 sudo cp --remove-destination {{ joinPath .chezmoi.homeDir ".bashrc" | quote }} /root/.bashrc
 sudo cp --remove-destination {{ joinPath .chezmoi.homeDir ".bash_profile" | quote }} /root/.bash_profile
