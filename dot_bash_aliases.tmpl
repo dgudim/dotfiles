@@ -65,8 +65,16 @@ function bu () {
 alias op='xdg-open'
 complete -f op
 gop() {
-	file="$(gum file)" && xdg-open "$file"
+	file="$(gum file --all --directory --file)";
+	if [[ -d $file ]]; then
+		cd "'$file'"
+	elif [[ -f $PASSED ]]; then
+		xdg-open "'$file'"
+	else
+		exit 0
+	fi
 }
+alias brl='br -sdp'
 
 # Neofetch logo
 alias neofetch='neofetch --sixel /home/kloud/.config/neofetch/logo --image_size 455'

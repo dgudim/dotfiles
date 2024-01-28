@@ -6,13 +6,20 @@
 # - Fuzzy-grep (rg-fzfc)
 # - Ripgrep with syntax highlighting (rgc and rgac)
 
+export __LS_COLORS=$(vivid generate gruvbox-dark)
+export __FZF_PREVIEW_SIZE="50%:wrap"
+
+fd() {
+	LS_COLORS="$__LS_COLORS" /usr/bin/fd -L --max-depth 10 "$@";
+}
+
 # Override default fzf completion, add bat preview (ctrl-t)
-export FZF_CTRL_T_OPTS="--preview \"bat --color=always --line-range=:500 {}\" --preview-window=\"50%:wrap\" --prompt 'All> '"
+export FZF_CTRL_T_OPTS="--preview \"fzf-handle-preview.sh {}\" --preview-window=\"$__FZF_PREVIEW_SIZE\" --prompt 'Search all> '"
 export FZF_DEFAULT_OPTS='--color=bg+:#32302f,bg:#282828,spinner:#fb4934,hl:#928374,fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934,marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#fb4934 --ansi'
-export FZF_CTRL_T_COMMAND="export LS_COLORS=\"\$(vivid generate gruvbox-dark)\"; fd -L --min-depth 1 --color always --max-results 300 -t f -t d -t l -t x -t e --unrestricted; unset LS_COLORS"
+export FZF_CTRL_T_COMMAND="fd --color always -t f -t d -t l -t x -t e --unrestricted"
 
 # Override default fzf completion, add colors
-export FZF_ALT_C_COMMAND="export LS_COLORS=\"\$(vivid generate gruvbox-dark)\"; fd -L --min-depth 1 --color always --max-results 300 -t d -t l --unrestricted; unset LS_COLORS"
+export FZF_ALT_C_COMMAND="fd --min-depth 1 --color always -t d -t l --unrestricted"
 export FZF_ALT_C_OPTS="--prompt 'Cd into> '"
 
 # __fzf_select__ ()
@@ -36,23 +43,25 @@ export FZF_ALT_C_OPTS="--prompt 'Cd into> '"
 # Search everything by content, including pdfs and archives, display preview with fzf
 rga-fzf() {
     local file RG_PREFIX;
-	RG_PREFIX="rga --files-with-matches --ignore-case"
-	file="$(fzf --sort \
-				--preview="[[ ! -z {} ]] && rga --context 5 --json {q} {} | delta --pager=0" \
-				--phony -q "$1" \
-				--bind "start:reload:$RG_PREFIX {q}" \
-		        --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
-				--preview-window="70%:wrap")" && xdg-open "$file"
+	RG_PREFIX="rga --files-with-matches"
+	fzf --sort \
+		--preview="[[ ! -z {} ]] && rga --line-number --context 5 --json {q} {} | delta --pager=0" \
+		--disabled -q "$1" \
+		--bind "start:reload:$RG_PREFIX {q}" \
+		--bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+		--preview-window="$__FZF_PREVIEW_SIZE" \
+		--bind 'enter:become(xdg-open {})'
 }
 # Fuzzy-grep (kinda) (initial grep via ripgrep, then fzf)
 rg-fzfc() {
     local file;
-	rg --line-buffered --color=always --line-number --no-heading --ignore-case "${*:-}" 2> /dev/null |
-	file="$(fzf --ansi --sort \
+	rg --line-buffered --color=always --line-number --no-heading "${*:-}" 2> /dev/null |
+	fzf --ansi --sort \
 		--color "hl:-1:underline,hl+:-1:underline:reverse" \
 		--delimiter : \
 		--preview '[[ ! -z {} ]] && bat --color=always {1} --highlight-line {2}' \
-		--preview-window="70%:wrap")" && xdg-open "$file"
+		--preview-window="$__FZF_PREVIEW_SIZE" \
+		--bind 'enter:become(kate {1} --line {2})'
 }
 # Search only text files
 rgc() {
@@ -62,9 +71,12 @@ rgc() {
 rgac() {
 	rga --json "$@" | delta --pager=0
 }
+fzf-preview() {
+	fzf -q "$1" --sort --preview "[[ ! -z {} ]] && fzf-handle-preview.sh {}" --preview-window="$__FZF_PREVIEW_SIZE" --prompt 'Search> '
+}
 # Fuzzy-open a file
 fop() {
-    local cmd file;
-	cmd="export LS_COLORS=\"\$(vivid generate gruvbox-dark)\"; fd -L --color always --max-results 300 -t f --unrestricted \$@; unset LS_COLORS";
-	file="$(eval "$cmd" | fzf --sort --preview "bat --color=always --line-range=:500 {}" --preview-window="50%:wrap" --prompt 'Search file> ')" && xdg-open "$file"
+    local file;
+	file="$(fd --color always -t f --unrestricted | fzf-preview "$1")" && xdg-open "$file"
 }
+
