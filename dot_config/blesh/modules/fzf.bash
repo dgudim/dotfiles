@@ -43,7 +43,7 @@ export FZF_ALT_C_OPTS="--prompt 'Cd into> '"
 # Search everything by content, including pdfs and archives, display preview with fzf
 rga-fzf() {
     local file RG_PREFIX;
-	RG_PREFIX="rga --files-with-matches"
+	RG_PREFIX="exa --color=always \$(rga --files-with-matches)"
 	fzf --sort \
 		--preview="[[ ! -z {} ]] && rga --line-number --context 5 --json {q} {} | delta --pager=0" \
 		--disabled -q "$1" \
@@ -72,11 +72,11 @@ rgac() {
 	rga --json "$@" | delta --pager=0
 }
 fzf-preview() {
-	fzf -q "$1" --sort --preview "[[ ! -z {} ]] && fzf-handle-preview.sh {}" --preview-window="$__FZF_PREVIEW_SIZE" --prompt 'Search> '
+	fzf -q "$1" --sort --preview "[[ ! -z {} ]] && fzf-handle-preview.sh {}" --preview-window="$__FZF_PREVIEW_SIZE" --prompt 'Search> ' "${@:2}"
 }
 # Fuzzy-open a file
 fop() {
     local file;
-	file="$(fd --color always -t f --unrestricted | fzf-preview "$1")" && xdg-open "$file"
+	file="$(fd --color always -t f --unrestricted "${@:2}" | fzf-preview "$1")" && xdg-open "$file"
 }
 
