@@ -65,11 +65,11 @@ function bu () {
 alias op='xdg-open'
 complete -f op
 gop() {
-	file="$(gum file --all --directory --file)";
+	file="$(gum file --all --file --directory)";
 	if [[ -d $file ]]; then
-		cd "'$file'"
-	elif [[ -f $PASSED ]]; then
-		xdg-open "'$file'"
+		cd "$file"
+	elif [[ -f $file ]]; then
+		xdg-open "$file"
 	else
 		exit 0
 	fi
