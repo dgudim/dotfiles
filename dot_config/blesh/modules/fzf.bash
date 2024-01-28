@@ -59,7 +59,7 @@ rg-fzfc() {
 	fzf --ansi --sort \
 		--color "hl:-1:underline,hl+:-1:underline:reverse" \
 		--delimiter : \
-		--preview '[[ ! -z {} ]] && bat --color=always {1} --highlight-line {2}' \
+		--preview '[[ ! -z {} ]] && bat --color=always {1} --highlight-line {2} --pager=never' \
 		--preview-window="$__FZF_PREVIEW_SIZE" \
 		--bind 'enter:become(kate {1} --line {2})'
 }
