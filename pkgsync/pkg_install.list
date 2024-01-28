@@ -389,6 +389,7 @@ glances
 
 # COMPLEMENTARY PACKAGES
 nano-syntax-highlighting-git
+vivid
 bat-extras
 aspell-en
 aspell-ru
