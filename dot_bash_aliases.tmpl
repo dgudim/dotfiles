@@ -6,9 +6,10 @@ alias l='exa --classify --icons --color=always --group-directories-first'
 
 # Replace cat with bat and man with batman
 export BAT_THEME=gruvbox-dark
-#export BAT_STYLE=numbers,changes
-alias cat='bat --paging=never'
-alias man='batman'
+export BAT_STYLE=full
+export BAT_PAGER="never"
+alias cat='bat'
+alias man='BAT_STYLE=numbers,grid batman --pager=less'
 
 # Git and chezmoi aliases
 alias gpul='git pull'

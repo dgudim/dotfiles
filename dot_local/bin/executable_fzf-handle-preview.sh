@@ -19,10 +19,11 @@ type=$(file --dereference --mime -- "$file")
 if [[ ! $type =~ image/ ]]; then
   if [[ $type =~ =binary ]]; then
     file "$1"
+    exa --color=always --icons --git --long --extended --color-scale=size "$1"
     exit
   fi
 
-  bat --line-range=:500 --color=always --pager=never -- "$file"
+  bat --style full --line-range=:500 --color=always --pager=never -- "$file"
   exit
 fi
 
