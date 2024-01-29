@@ -35,3 +35,6 @@ vlc-plugin-fluidsynth-bin
 
 # Replaced with a bin variant
 android-apktool
+
+# Replaced with vesktop
+discord-screenaudio
