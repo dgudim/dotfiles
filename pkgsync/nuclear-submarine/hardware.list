@@ -47,6 +47,7 @@ minikube
 kubectl
 helm
 k9s
+stern
 
 # Boot stuff
 grub-btrfs

@@ -229,6 +229,7 @@ drkonqi
 # GUI APPS
 konsole
 filelight
+jdiskreport
 spectacle
 dolphin
 ark
@@ -786,6 +787,7 @@ rawtherapee
 scale2x
 shutter-encoder-bin
 qwinff
+videomass
 czkawka-gui-bin
 kolourpaint
 
