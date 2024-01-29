@@ -42,9 +42,11 @@ flutter
 
 ## Kubernetes
 google-cloud-cli
+google-cloud-cli-gke-gcloud-auth-plugin
 minikube
 kubectl
 helm
+k9s
 
 # Boot stuff
 grub-btrfs

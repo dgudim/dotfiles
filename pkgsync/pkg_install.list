@@ -117,6 +117,7 @@ bluez
 pahis
 solid5
 tpm2-tools
+dos2unix
 
 ## PACMAN HOOKS AND SCRIPTS
 pacman-systemd-inhibit
