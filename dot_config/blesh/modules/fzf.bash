@@ -44,9 +44,9 @@ export FZF_ALT_C_OPTS="--prompt 'Cd into> '"
 # Search everything by content, including pdfs and archives, display preview with fzf
 rga-fzf() {
     local file RG_PREFIX;
-	RG_PREFIX="exa --color=always \$(rga --files-with-matches \"\${@:2}\""
+	RG_PREFIX="exa --color=always \$(rga --files-with-matches --line-buffered \"\${@:2}\""
 	fzf --sort \
-		--preview="[[ ! -z {} ]] && rga --line-number --context 5 --json {q} {} | delta --pager=0" \
+		--preview="[[ ! -z {} ]] && rga --line-number --line-buffered --context 5 --json {q} {} | delta --pager=0" \
 		--disabled -q "$1" \
 		--bind "start:reload:$RG_PREFIX {q})" \
 		--bind "change:reload:sleep 0.1; $RG_PREFIX {q}) || true" \
@@ -56,7 +56,7 @@ rga-fzf() {
 # Fuzzy-grep (kinda) (initial grep via ripgrep, then fzf)
 rg-fzfc() {
     local file;
-	rg --line-buffered --color=always --line-number --no-heading "${@:-}" 2> /dev/null |
+	rg --line-number --line-buffered --color=always --no-heading "${@:-}" 2> /dev/null |
 	fzf --ansi --sort \
 		--color "hl:-1:underline,hl+:-1:underline:reverse" \
 		--delimiter : \
