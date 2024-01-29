@@ -49,7 +49,7 @@ ble-bind -f C-q menu-complete
 
 ble-import -d integration/fzf-completion
 ble-import -d integration/fzf-key-bindings
-_ble_contrib_fzf_git_config=key-binding:sabbrev
+_ble_contrib_fzf_git_config=sabbrev
 ble-import -d integration/fzf-git
 ble-import -d ~/.config/blesh/modules/br.bash
 ble-import -d ~/.config/blesh/modules/fzf.bash
@@ -161,7 +161,7 @@ ble-color-setface syntax_varname            fg=208
 ble-color-setface syntax_delimiter          bold
 ble-color-setface syntax_param_expansion    fg=purple
 ble-color-setface syntax_history_expansion  bg=94,fg=231
-ble-color-setface syntax_function_name      fg=92,bold
+ble-color-setface syntax_function_name      fg=orange,bold
 ble-color-setface syntax_comment            fg=gray
 ble-color-setface syntax_glob               fg=magenta,bold
 ble-color-setface syntax_brace              fg=37,bold
