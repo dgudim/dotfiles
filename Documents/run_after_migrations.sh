@@ -14,6 +14,9 @@ rm -fv ~/.bash_history
 sudo rm -fv /root/.bash_history
 rm -fv ~/.config/dragonplayerrc
 
+rm -rfv ~/.config/BetterDiscord\ Installer
+rm -rfv ~/.config/BetterDiscord
+
 # Make sure kde notification service is started instead of dunst
 mkdir -p ~/.local/share/dbus-1/services/
 ln -sf /usr/share/dbus-1/services/org.kde.plasma.Notifications.service ~/.local/share/dbus-1/services/org.kde.plasma.Notifications.service
