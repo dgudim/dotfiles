@@ -41,17 +41,25 @@ export FZF_ALT_C_OPTS="--prompt 'Cd into> '"
 #     dir=$(set +o pipefail; eval "$cmd" | FZF_DEFAULT_OPTS="$opts" $(__fzfcmd)) && printf 'builtin cd -- %q' "$dir"
 # }
 
-# Search everything by content, including pdfs and archives, display preview with fzf
-rga-fzf() {
-    local file RG_PREFIX;
-	RG_PREFIX="exa --color=always \$(rga --files-with-matches --line-buffered \"\${@:2}\""
+__rgX-fzf() {
+	local file RG_PREFIX;
+	RG_PREFIX="exa --color=always \$($1 --files-with-matches --line-buffered \"\${@:3}\""
 	fzf --sort \
-		--preview="[[ ! -z {} ]] && rga --line-number --line-buffered --context 5 --json {q} {} | delta --pager=0" \
-		--disabled -q "$1" \
+		--preview="[[ ! -z {} ]] && $1 --line-number --line-buffered --context 5 --json {q} {} | delta --pager=0" \
+		--disabled -q "$2" \
 		--bind "start:reload:$RG_PREFIX {q})" \
 		--bind "change:reload:sleep 0.1; $RG_PREFIX {q}) || true" \
 		--preview-window="$__FZF_PREVIEW_WINDOW" \
 		--bind 'enter:become(xdg-open {})'
+}
+
+# Search everything by content, including pdfs and archives, display preview with fzf
+rga-fzf() {
+    __rgX-fzf rga "$@"
+}
+# Search text files by content, display preview with fzf
+rg-fzf() {
+    __rgX-fzf rg "$@"
 }
 # Fuzzy-grep (kinda) (initial grep via ripgrep, then fzf)
 rg-fzfc() {
