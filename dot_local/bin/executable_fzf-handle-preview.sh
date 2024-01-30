@@ -23,7 +23,7 @@ if [[ ! $type =~ image/ ]]; then
     exit
   fi
 
-  bat --style full --line-range=:500 --color=always --pager=never -- "$file"
+  bat --style full --line-range=:500 --color=always --pager=never --terminal-width $FZF_PREVIEW_COLUMNS -- "$file"
   exit
 fi
 
@@ -48,7 +48,7 @@ if [[ $KITTY_WINDOW_ID ]]; then
 
 # 2. Use chafa with Sixel output
 elif command -v chafa > /dev/null; then
-  chafa -f sixel -s "$dim" "$file"
+  chafa -f symbols -s "$dim" "$file"
   # Add a new line character so that fzf can display multiple images in the preview window
   echo
 
