@@ -19,6 +19,7 @@ guestfs-tools
 libvirt
 libguestfs
 virt-manager
+criu
 docker
 docker-buildx
 docker-scout
