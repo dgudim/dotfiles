@@ -534,6 +534,8 @@ shfmt
 
 ## PYTHON
 python
+ipython
+bpython
 python-lsp-black
 pip-autoremove
 autopep8
@@ -544,8 +546,6 @@ yapf
 mypy
 python-pipx
 codon-bin
-python-pylint
-python-pylint-venv
 
 ### LIBS
 python-reportlab
@@ -564,6 +564,10 @@ python-pyqt5
 python-tqdm
 python-pyjacklib
 python-pycryptodome
+python-pure-eval
+python-executing
+python-pylint
+python-pylint-venv
 
 ## ANDROID AND JAVA
 jdk11-openjdk
