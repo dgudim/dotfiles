@@ -14,6 +14,8 @@ alias man='BAT_STYLE=numbers,grid batman --pager=less'
 # Git and chezmoi aliases
 alias gpul='git pull'
 alias gpus='git push'
+alias gch='git checkout'
+alias gchb='git checkout -b'
 alias gfc="git fetch origin --prune && for branch in \$(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '\$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", \$1); print \$1}'); do git branch -D \$branch; done && git maintenance run --auto && git maintenance run --task=gc"
 
 # Scrcpy aliases
