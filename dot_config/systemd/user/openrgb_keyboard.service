@@ -1,0 +1,12 @@
+[Unit]
+Description=OpenRGB control
+After=openrgb.service
+Requires=openrgb.service
+
+[Service]
+Type=simple
+ExecStart=/mnt/fast_storage/projects/crab_rave/keyboard_vis/target/release/run.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=OpenRGB control
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/openrgb --startminimized --server
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target

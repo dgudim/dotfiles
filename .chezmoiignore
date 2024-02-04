@@ -4,3 +4,6 @@
 {{- if ne .chezmoi.hostname "nuclear-submarine" }}
     /.bash_aliases_work
 {{- end }}
+{{- if ne .chezmoi.hostname "sauron" }}
+    /dot_config/systemd/user/*
+{{- end }}

@@ -89,6 +89,11 @@ enable_service docker.socket 1
 enable_service psd 1
 {{ end }}
 
+{{ if eq .chezmoi.hostname "sauron" }}
+enable_service openrgb.service 1
+enable_service openrgb_keyboard.service 1
+{{ end }}
+
 enable_service polkit.service
 enable_service rtkit-daemon.service
 
