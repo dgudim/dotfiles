@@ -5,5 +5,5 @@
     /.bash_aliases_work
 {{- end }}
 {{- if ne .chezmoi.hostname "sauron" }}
-    /dot_config/systemd/user/*
+    /.config/systemd/user/*.service
 {{- end }}
