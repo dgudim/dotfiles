@@ -6,7 +6,10 @@ Requires=openrgb.service
 [Service]
 Type=simple
 ExecStart=/mnt/fast_storage/projects/crab_rave/keyboard_vis/target/release/run.sh
+Restart=always
 RemainAfterExit=yes
+RestartSec=3
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical.target
+
