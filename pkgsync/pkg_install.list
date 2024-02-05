@@ -547,6 +547,7 @@ twine
 yapf
 mypy
 python-pipx
+python-djlint
 codon-bin
 
 ### LIBS
