@@ -39,3 +39,7 @@ lutris-git
 ## Browser sync to RAM
 profile-sync-daemon
 profile-sync-daemon-thunderbird
+
+# For java classes
+intellij-idea-ultimate-edition
+intellij-idea-ultimate-edition-jre
