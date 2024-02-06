@@ -1,7 +1,3 @@
-# Boot stuff
-systemd-boot-pacman-hook
-kernel-install-for-dracut
-
 # Hardware
 amd-ucode
 intel-ucode

@@ -2,7 +2,9 @@
 gestures
 libinput-gestures
 
-
+# Boot stuff
+systemd-boot-pacman-hook
+kernel-install-for-dracut
 
 # POWER STUFF
 power-profiles-daemon

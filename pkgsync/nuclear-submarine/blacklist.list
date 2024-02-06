@@ -1,3 +1,7 @@
+# Boot stuff
+systemd-boot-pacman-hook
+kernel-install-for-dracut
+
 # Ignore dev stuff
 
 ## QEMU

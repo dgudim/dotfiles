@@ -29,10 +29,6 @@ tlpui
 dellfan-git
 fancontrol-kcm
 
-# Boot stuff
-systemd-boot-pacman-hook
-kernel-install-for-dracut
-
 ## Pentesting stuff
 wifite
 pixiewps

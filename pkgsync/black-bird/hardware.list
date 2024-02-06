@@ -10,10 +10,6 @@ lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
-# Boot stuff
-systemd-boot-pacman-hook
-kernel-install-for-dracut
-
 # Fingerprint sensor
 python-validity
 
@@ -23,3 +19,7 @@ linux-steam-integration
 steam-native-runtime
 lib32-gamemode
 gamemode
+
+# For java classes
+intellij-idea-ultimate-edition
+intellij-idea-ultimate-edition-jre
