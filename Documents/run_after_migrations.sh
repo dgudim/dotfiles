@@ -14,11 +14,15 @@ rm -fv ~/.bash_history
 sudo rm -fv /root/.bash_history
 rm -fv ~/.config/dragonplayerrc
 
+# Replaced with Vesktop
 rm -rfv ~/.config/BetterDiscord\ Installer
 rm -rfv ~/.config/BetterDiscord
 
 # Make sure kde notification service is started instead of dunst
 mkdir -p ~/.local/share/dbus-1/services/
 ln -sf /usr/share/dbus-1/services/org.kde.plasma.Notifications.service ~/.local/share/dbus-1/services/org.kde.plasma.Notifications.service
+
+# Moved to XDG
+rm -rfv ~/.ssr
 
 echo -e "${L_GREEN}Done!$NC\n"
