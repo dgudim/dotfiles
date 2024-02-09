@@ -17,6 +17,7 @@ rm -fv ~/.config/dragonplayerrc
 # Replaced with Vesktop
 rm -rfv ~/.config/BetterDiscord\ Installer
 rm -rfv ~/.config/BetterDiscord
+rm -rfv ~/.config/discord
 
 # Make sure kde notification service is started instead of dunst
 mkdir -p ~/.local/share/dbus-1/services/
