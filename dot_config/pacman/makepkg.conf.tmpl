@@ -11,7 +11,8 @@ CFLAGS="-march=native -O2 -pipe -fno-plt -fexceptions \
 CXXFLAGS="$CFLAGS -Wp,-D_GLIBCXX_ASSERTIONS"
 LDFLAGS="-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now,-fuse-ld=mold"
 LTOFLAGS="-flto=auto"
-RUSTFLAGS="-C opt-level=2 -C target-cpu=native -C link-arg=-fuse-ld=mold"
+# Set in cargo config
+RUSTFLAGS=""
 #-- Make Flags: change this for DistCC/SMP systems
 MAKEFLAGS="-j{{output "nproc" | trim}}"
 #-- Debugging flags
