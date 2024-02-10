@@ -573,6 +573,7 @@ python-pure-eval
 python-executing
 python-pylint
 python-pylint-venv
+python-dotenv
 
 ## ANDROID AND JAVA
 jdk11-openjdk
