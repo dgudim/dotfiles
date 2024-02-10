@@ -84,8 +84,9 @@ enable_service fprintd.service
 {{ end }}
 
 {{ if eq .chezmoi.hostname "black-bird" }}
-enable_service open-fprintd-resume
-enable_service open-fprintd-suspend
+# Still breaks (
+# enable_service open-fprintd-resume
+# enable_service open-fprintd-suspend
 {{ end }}
 
 enable_service docker.socket 1
