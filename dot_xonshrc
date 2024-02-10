@@ -1,0 +1,17 @@
+# XONSH WEBCONFIG START
+
+# XONSH WEBCONFIG END
+
+$PROMPT = '{INTENSE_GREEN}┬─[{YELLOW}{user}{RESET}@{BLUE}{hostname}{RESET}:{cwd}{INTENSE_GREEN}]─[{localtime}]─[{RESET}G:{INTENSE_GREEN}{curr_branch}=]\n{INTENSE_GREEN}╰─>{INTENSE_RED}{prompt_end}{RESET} '
+# $XONSH_COLOR_STYLE = 'gruvbox-dark'
+$XONSH_SHOW_TRACEBACK = True
+xontrib load fzf-widgets
+xontrib load coreutils
+
+$fzf_history_binding = "c-r"  # Ctrl+R
+$fzf_ssh_binding = "c-s"      # Ctrl+S
+$fzf_file_binding = "c-t"     # Ctrl+T
+$fzf_dir_binding = "c-g"      # Ctrl+G
+
+$fzf_find_command = "fd"
+$fzf_find_dirs_command = "fd -t d"
