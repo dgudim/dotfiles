@@ -83,6 +83,11 @@ enable_service grub-btrfsd.service
 enable_service fprintd.service
 {{ end }}
 
+{{ if eq .chezmoi.hostname "black-bird" }}
+enable_service open-fprintd-resume
+enable_service open-fprintd-suspend
+{{ end }}
+
 enable_service docker.socket 1
 
 {{ if (or (eq .chezmoi.hostname "sauron") (eq .chezmoi.hostname "portable-heater")) }}
