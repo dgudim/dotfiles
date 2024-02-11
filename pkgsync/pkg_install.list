@@ -299,6 +299,7 @@ universal-android-debloater-bin
 gromit-mpx
 ktouch
 kando-bin
+songrec
 
 
 
@@ -551,6 +552,8 @@ mypy
 python-pipx
 python-djlint
 codon-bin
+xonsh
+xontrib-fzf-widgets
 
 ### LIBS
 python-reportlab
@@ -574,6 +577,7 @@ python-executing
 python-pylint
 python-pylint-venv
 python-dotenv
+python-scapy
 
 ## ANDROID AND JAVA
 jdk11-openjdk
@@ -838,6 +842,7 @@ ipp-usb
 sdl_image
 opusfile
 upower
+bcc-tools
 
 
 
