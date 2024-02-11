@@ -38,7 +38,7 @@ progress=true
 
 [diff]
     command = "delta"
-    exclude = ["scripts"]
+    exclude = ["dirs", "scripts"]
     args = ["--pager=0", "{{`{{ .Destination }}`}}", "{{`{{ .Target }}`}}"]
 
 [hooks.add.pre]
