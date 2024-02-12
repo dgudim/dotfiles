@@ -578,6 +578,9 @@ python-pylint
 python-pylint-venv
 python-dotenv
 python-scapy
+python-matplotlib
+python-pyroute2
+python-netaddr
 
 ## ANDROID AND JAVA
 jdk11-openjdk

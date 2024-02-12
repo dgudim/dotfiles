@@ -42,3 +42,7 @@ profile-sync-daemon-thunderbird
 
 # Safety
 sync-pacman-hook-git
+
+# For java classes
+intellij-idea-ultimate-edition
+intellij-idea-ultimate-edition-jre
