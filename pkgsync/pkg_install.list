@@ -845,7 +845,6 @@ ipp-usb
 sdl_image
 opusfile
 upower
-bcc-tools
 
 
 
@@ -878,6 +877,7 @@ blas-openblas
 fuse-overlayfs
 zenity
 hdf5-openmpi
+bcc-tools
 
 
 
@@ -932,7 +932,6 @@ asciidoctor
 blockdiag
 pdf2svg
 biber
-ditaa
 gnuplot
 nwdiag
 seqdiag
@@ -945,6 +944,11 @@ dot2tex
 scour
 typst
 
+## Ascii
+ditaa
+boxes
+figlet
+toilet
 
 
 # ----------------------------------------- MISC ------------------------------------------------
