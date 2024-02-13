@@ -584,6 +584,7 @@ python-scapy
 python-matplotlib
 python-pyroute2
 python-netaddr
+python-prompt_toolkit
 
 ## ANDROID AND JAVA
 jdk11-openjdk
