@@ -952,8 +952,10 @@ typst
 ditaa
 boxes
 figlet
+figlet-fonts
 toilet
-
+toilet-fonts
+jave
 
 # ----------------------------------------- MISC ------------------------------------------------
 anki
