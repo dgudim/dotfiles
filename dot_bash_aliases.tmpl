@@ -167,6 +167,17 @@ chzu() {
 	yay -Ycss
 }
 
+figleta() {
+	fonts=($(find /usr/share/figlet/fonts/ -name "*.flf" | cut -d"/" -f6 | cut -d"." -f1))
+	for font in "${fonts[@]}"
+	do
+		echo "--------------------------------------------"
+		echo "$font"
+		echo ""
+		figlet -f $font $@
+	done
+}
+
 mount_shares() {
 	echo -n "password for kloud: "
 	read -s password
