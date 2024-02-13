@@ -128,6 +128,15 @@ function ble/widget/my/wrapshell {
 ble-bind -f C-s my/wrapshell
 
 ##-----------------------------------------------------------------------------
+## Hooks
+# https://github.com/akinomyoga/ble.sh/wiki/Manual-%C2%A71-Introduction#user-content-fn-blehook
+
+#blehook CHPWD!='my/blerc/direnv'
+#function my/blerc/direnv {
+#  eval "$("/usr/bin/direnv" export bash)";
+#}
+
+##-----------------------------------------------------------------------------
 ## Color settings
 
 bleopt term_index_colors=256
