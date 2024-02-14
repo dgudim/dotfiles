@@ -2,16 +2,9 @@
 
 # This is needed to figure out where the source file is.
 # See https://github.com/twpayne/chezmoi/issues/2934
-source "{{ .chezmoi.sourceDir }}/{{ .chezmoi.sourceFile | trimSuffix ".tmpl" | replace "modify_" "" }}.src.ini"
+source auto
 
-ignore "input" "audio_pulseaudio_source"
-ignore "input" "video_v4l2_device"
-ignore "input" "video_x"
-ignore "input" "video_y"
-ignore "input" "video_w"
-ignore "input" "video_h"
-ignore "input" "video_scaled_w"
-ignore "input" "video_scaled_h"
+ignore section "PlasmaRunnerManager"
 
 # Add your ignores and transforms here
 #ignore section "my-section"

@@ -2,14 +2,24 @@
 
 # This is needed to figure out where the source file is.
 # See https://github.com/twpayne/chezmoi/issues/2934
-source "{{ .chezmoi.sourceDir }}/{{ .chezmoi.sourceFile | trimSuffix ".tmpl" | replace "modify_" "" }}.src.ini"
-
-ignore "KeeShare" "Active"
-ignore "KeeShare" "Foreign"
-ignore "KeeShare" "Own"
+source auto
 
 # Add your ignores and transforms here
-#ignore section "my-section"
+
+ignore section "$Version"
+ignore section "<NO_SECTION>"
+
+ignore section "Baloo KEditCommentDialog"
+ignore section "CreateDialog"
+ignore section "ExtractDialog"
+ignore section "KPropertiesDialog"
+ignore section "ViewPropertiesDialog"
+
+ignore "General" "Version"
+ignore "General" "ViewPropsTimestamp"
+
+ignore section "MainWindow"
+
 #ignore "exact section name without brackets" "exact key name"
 #ignore regex "section.*" "key_prefix_.*"
 #transform "section" "key" transform_name read="the docs" for="more detail on transforms"

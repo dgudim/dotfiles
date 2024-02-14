@@ -4,12 +4,11 @@
 # See https://github.com/twpayne/chezmoi/issues/2934
 source auto
 
-ignore section "KFileDialog Settings"
-ignore section "MainWindow"
-ignore section "Editor"
-set "Encryption" "file key" "{{ .gpg.signingkey }}" separator="="
-
 # Add your ignores and transforms here
+
+ignore section "$Version"
+ignore section "Reviews"
+
 #ignore section "my-section"
 #ignore "exact section name without brackets" "exact key name"
 #ignore regex "section.*" "key_prefix_.*"
