@@ -52,7 +52,9 @@ export CARGO_INCREMENTAL=1
 # Make sure the directory for history exists
 mkdir -p "${XDG_STATE_HOME}/bash"
 
-# If not running interactively, don't do anything
+# Add user stuff to PATH
+[[ "$(whoami)" != "root" ]] && export PATH=~/.local/bin:~/.local/share/cargo/bin:$PATH:~/.dotnet/tools/
+# If not running interactively, exit
 [[ $- != *i* ]] && return
 
 set -o emacs # set edit mode
