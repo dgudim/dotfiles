@@ -489,6 +489,7 @@ lib32-vkd3d
 lib32-fluidsynth
 lib32-alsa-plugins
 lib32-giflib
+lib32-gperftools
 
 ## WINE
 wine-gecko
