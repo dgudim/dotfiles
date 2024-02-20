@@ -46,3 +46,4 @@ sync-pacman-hook-git
 # For java classes
 intellij-idea-ultimate-edition
 intellij-idea-ultimate-edition-jre
+zulu-jdk-fx-bin
