@@ -24,6 +24,7 @@ guestfs-tools
 libvirt
 libguestfs
 virt-manager
+quickgui-bin
 criu
 docker
 docker-buildx
