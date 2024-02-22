@@ -13,6 +13,9 @@ lib32-vulkan-mesa-layers
 # Fingerprint sensor
 python-validity
 
+# Check Point vpn
+snx
+
 # Gaming
 steam
 linux-steam-integration
