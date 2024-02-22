@@ -4,8 +4,8 @@
 # 49450 - 2281
 # 49400 - 1249
 
-export ON_TEMP=60
-export OFF_TEMP=45
+export ON_TEMP=57
+export OFF_TEMP=47
 export ON_HDD_TEMP=48
 export OFF_HDD_TEMP=40
 export MIN_COOLING_TIME=300 # 5 minutes
@@ -113,14 +113,14 @@ do
 
   drive_temp=$(max $drive12_temp $drive34_temp)
 
-  if (( drive_temp > ON_HDD_TEMP )); then
+  if (( drive_temp >= ON_HDD_TEMP )); then
     echo "Drives at $drive12_temp degrees (> $ON_HDD_TEMP), turning on"
     on
     sleep $MIN_COOLING_TIME
     continue
   fi
 
-  if (( core_temp > ON_TEMP )); then
+  if (( core_temp >= ON_TEMP )); then
     echo "Core at $core_temp degrees (> $ON_TEMP), turning on"
     on
     sleep $MIN_COOLING_TIME
