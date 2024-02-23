@@ -653,6 +653,7 @@ networkmanager-openvpn
 networkmanager-openconnect
 networkmanager-pptp
 networkmanager-l2tp
+networkmanager-strongswan
 strongswan
 openldap
 wpa_supplicant
