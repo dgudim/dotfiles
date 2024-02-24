@@ -79,7 +79,6 @@ man-db
 man-pages
 unrar
 unzip
-ntfs-3g
 ntp
 unarchiver
 usb_modeswitch
@@ -141,7 +140,21 @@ paccache-hook
 check-pacman-mtree
 
 ## FS TOOLS
+libblockdev-btrfs
+libblockdev-crypto
+libblockdev-dm
+libblockdev-fs
+libblockdev-lvm-dbus
+libblockdev-mpath
+libblockdev-nvdimm
+libblockdev-nvme
+libblockdev-part
+libblockdev-swap
+libblockdev-tools
+udisks2-btrfs
+udisks2-lvm2
 dmraid
+udftools
 xfsprogs
 jfsutils
 e2fsprogs
@@ -159,6 +172,8 @@ hdparm
 lvm2
 nbd
 encfs
+ntfs-3g
+fsarchiver
 
 
 
@@ -345,7 +360,6 @@ gitui
 lazygit
 compsize
 broot
-fsarchiver
 glow
 vim
 bfg
@@ -586,6 +600,7 @@ python-matplotlib
 python-pyroute2
 python-netaddr
 python-prompt_toolkit
+python-libblockdev
 
 ## ANDROID AND JAVA
 jdk11-openjdk
