@@ -146,7 +146,6 @@ libblockdev-dm
 libblockdev-fs
 libblockdev-lvm-dbus
 libblockdev-mpath
-libblockdev-nvdimm
 libblockdev-nvme
 libblockdev-part
 libblockdev-swap
@@ -154,7 +153,6 @@ libblockdev-tools
 udisks2-btrfs
 udisks2-lvm2
 dmraid
-udftools
 xfsprogs
 jfsutils
 e2fsprogs

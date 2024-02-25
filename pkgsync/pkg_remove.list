@@ -43,3 +43,10 @@ betterdiscord-installer-bin
 
 # Don't use it
 kio-s3
+
+# Used for NVDIMM (RAM with batteries)
+libblockdev-nvdimm
+
+# Used for CD drives
+udftools
+
