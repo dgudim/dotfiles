@@ -73,24 +73,27 @@ if fstab.find(" 3") != -1:
     print(f"{YELLOW}Consider changing fsck field to 2 from 3 fstab{NC}")
 
 print(f"{LIGHT_GRAY}Checking mount options{NC}")
+ntfs_mount_opts = [
+    "windows_names",
+    "rw",
+    "uid=1000",
+    "gid=1000",
+    "async",
+    "nofail",
+    "prealloc",
+    "users",
+    "exec",
+    "noatime",
+]
 warn += check_mount_opts(
     fstab,
     {
         "ext4": ["defaults", "commit=60", "noatime"],
         "vfat": ["defaults", "noatime", "umask=0077"],
         "btrfs": ["compress=zstd:[0-9]+", "exec", "noatime", "X-fstrim\.notrim"],
-        "ntfs3": [
-            "windows_names",
-            "rw",
-            "uid=1000",
-            "gid=1000",
-            "async",
-            "nofail",
-            "prealloc",
-            "users",
-            "exec",
-            "noatime",
-        ],
+        "ntfs": ntfs_mount_opts,
+        "ntfs3": ntfs_mount_opts,
+        "ntfs-3g": ntfs_mount_opts,
         "nfs": ["defaults", "nofail"],
     },
 )
