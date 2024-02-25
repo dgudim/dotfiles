@@ -40,6 +40,10 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
     for line in fstabb.split("\n"):
         if len(line) == 0 or line[0] == "#":
             continue
+        if line.find(" ntfs ") != -1:
+            # Replace with the new ntfs driver
+            print(f"{YELLOW}Consider replacing ntfs with ntfs3 {NC} ({line})")
+            continue
         for fs, opts in fsopts.items():
             if line.find(f" {fs} ") == -1:
                 # Skip options for other filesystems
@@ -75,7 +79,7 @@ warn += check_mount_opts(
         "ext4": ["defaults", "commit=60", "noatime"],
         "vfat": ["defaults", "noatime", "umask=0077"],
         "btrfs": ["compress=zstd:[0-9]+", "exec", "noatime", "X-fstrim\.notrim"],
-        "ntfs": [
+        "ntfs3": [
             "windows_names",
             "rw",
             "uid=1000",
@@ -85,6 +89,7 @@ warn += check_mount_opts(
             "prealloc",
             "users",
             "exec",
+            "noatime",
         ],
         "nfs": ["defaults", "nofail"],
     },
@@ -108,7 +113,8 @@ if cmdline.find("rd.luks") != -1:
     crypttab = read_file("/tmp/luks_crypttab")
     os.system("rm /tmp/luks_crypttab")
 
-    luks_root = re.search(r"\/dev\/mapper\/luks-(.*?) *?\/ *?(ext4|btrfs)", fstab)
+    luks_root = re.search(
+        r"\/dev\/mapper\/luks-(.*?) *?\/ *?(ext4|btrfs)", fstab)
     if luks_root is not None:
         luks_root_uuid = luks_root.group(1)
 
