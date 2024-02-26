@@ -1,0 +1,5 @@
+{{ if eq .chezmoi.hostname "portable-heater" }}
+ACTION=="add|change", ATTRS{idVendor}=="152d", ATTRS{idProduct}=="0583", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+{{- else }}
+# Only enabled on portable heater for fstrim
+{{- end }}
