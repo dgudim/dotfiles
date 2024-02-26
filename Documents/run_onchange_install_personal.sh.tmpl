@@ -7,15 +7,18 @@ L_PURPLE='\033[1;35m'
 L_GREEN='\033[1;32m'
 NC='\033[0m'
 
-# {{ output "sh" "-c" "cd /home/kloud/Documents/shared/_Personal        && tar cf - KDE-loginscreens       | sha1sum" | trim }}
-# {{ output "sh" "-c" "cd /home/kloud/Documents/shared/_Personal/Sounds && tar cf - subnautica_sound_theme | sha1sum" | trim }}
+# {{ output "sh" "-c" "cd /home/kloud/Documents/shared/_Personal                               && tar cf - KDE-loginscreens | sha1sum" | trim }}
+# {{ output "sh" "-c" "cd /home/kloud/Documents/shared/_Personal/Sounds/subnautica_sound_theme && tar cf - subnautica_theme | sha1sum" | trim }}
+# {{ output "sh" "-c" "cd /home/kloud/Documents/shared/_Personal/Sounds                        && tar cf - edexui           | sha1sum" | trim }}
 
 echo -e "${L_PURPLE}Installing kde loginscreens...$NC"
 cd /home/kloud/Documents/shared/_Personal/KDE-loginscreens
 bash install.sh
 echo -e "${L_GREEN}Kde loginscreens installed!$NC\n"
 
-echo -e "${L_PURPLE}Installing subnautica sound theme...$NC"
+echo -e "${L_PURPLE}Installing subnautica and edexui sound themes...$NC"
 cd /home/kloud/Documents/shared/_Personal/Sounds/subnautica_sound_theme
 bash install.sh
-echo -e "${L_GREEN}Subnautica sound theme installed!$NC\n"
+cd /home/kloud/Documents/shared/_Personal/Sounds/edexui
+bash install.sh
+echo -e "${L_GREEN}Subnautica and edexui sound themes installed!$NC\n"
