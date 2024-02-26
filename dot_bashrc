@@ -30,7 +30,7 @@ export SONARLINT_USER_HOME="$XDG_DATA_HOME"/sonarlint
 export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 
-export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/rg.conf
+export RIPGREP_CONFIG_PATH=/home/kloud/.config/ripgrep/rg.conf
 
 # GUM
 export GUM_INPUT_CURSOR_FOREGROUND="#FAB92D"

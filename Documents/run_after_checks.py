@@ -35,7 +35,7 @@ def read_file(path: str) -> str:
 
 
 def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
-    to_add = 0
+    warn = 0
 
     for line in fstabb.split("\n"):
         if len(line) == 0 or line[0] == "#":
@@ -43,7 +43,28 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
         if line.find(" ntfs ") != -1:
             # Replace with the new ntfs driver
             print(f"{YELLOW}Consider replacing ntfs with ntfs3 {NC} ({line})")
-            continue
+            warn += 1
+
+        dump_pass = re.search(r" (\d) *? (\d)", line)
+        if len(dump_pass.groups()) == 2:
+            fsck_pass = int(dump_pass.group(2).strip())
+            if fsck_pass > 2:
+                warn += 1
+                print(f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})")
+
+            if fsck_pass == 1 and line.find(" / ") == -1:
+                print(f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} (Only root should have pass value of 1) ({line})")
+
+            if fsck_pass != 1 and line.find(" / ") != -1:
+                print(f"{YELLOW}Consider changing fsck field to 1 from {fsck_pass} {NC} (Root should have pass value of 1) ({line})")
+
+            if fsck_pass == 0:
+                if line.find(" btrfs ") == -1:
+                    print(f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})")
+                else:
+                    print(f"{YELLOW}Consider changing fsck field to 0 from {fsck_pass} (Btrfs does not need it) {NC} ({line})")
+
+
         for fs, opts in fsopts.items():
             if line.find(f" {fs} ") == -1:
                 # Skip options for other filesystems
@@ -52,11 +73,11 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
             for opt in opts:
                 if sum(1 for _ in re.finditer(f"({opt})", line)) != 1:
                     print(f"{YELLOW}Consider adding {opt} to {fs}{NC} ({line})")
-                    to_add += 1
+                    warn += 1
             # A line can only contain 1 filesystem, exit, process next line
             break
 
-    return to_add
+    return warn
 
 
 print(f"{LIGHTER_GRAY}Checking fstab{NC}")
@@ -66,11 +87,6 @@ print(f"{LIGHT_GRAY}Checking tmp dir{NC}")
 if fstab.find("/tmp") != -1:
     warn += 1
     print(f"{YELLOW}Consider removing /tmp from fstab{NC}")
-
-print(f"{LIGHT_GRAY}Checking fsck field{NC}")
-if fstab.find(" 3") != -1:
-    warn += 1
-    print(f"{YELLOW}Consider changing fsck field to 2 from 3 fstab{NC}")
 
 print(f"{LIGHT_GRAY}Checking mount options{NC}")
 ntfs_mount_opts = [
@@ -100,15 +116,19 @@ warn += check_mount_opts(
 
 print(f"{LIGHTER_GRAY}Checking kernel cmdline{NC}")
 cmdline = read_file("/etc/kernel/cmdline")
-if len(cmdline) > 0 and cmdline.find("mitigations=off") == -1:
-    warn += 1
-    print(f"{YELLOW}Turn off mitigations in cmdline{NC}")
-elif len(cmdline) == 0:
-    grub = read_file("/etc/default/grub")
-    if len(grub) > 0 and grub.find("mitigations=off") == -1:
-        warn += 1
-        print(f"{YELLOW}Turn off mitigations in grub{NC}")
+grub = read_file("/etc/default/grub")
 
+bootfile = cmdline if len(cmdline) > 0 else grub
+
+if len(bootfile) > 0 and bootfile.find("mitigations=off") == -1:
+    warn += 1
+    print(f"{YELLOW}Turn off mitigations in kernel cmdline{NC}")
+
+if len(bootfile) > 0 and bootfile.find("rd.luks.options") != -1:
+    warn += 1
+    print(f"{YELLOW}Remove rd.luks.options from kernel cmdline{NC}")
+
+# https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
 if cmdline.find("rd.luks") != -1:
     print(f"{LIGHTER_GRAY}Checking /etc/crypttab{NC}")
 
@@ -120,6 +140,17 @@ if cmdline.find("rd.luks") != -1:
         r"\/dev\/mapper\/luks-(.*?) *?\/ *?(ext4|btrfs)", fstab)
     if luks_root is not None:
         luks_root_uuid = luks_root.group(1)
+        disk_dev_id = "/dev/" + os.path.basename(os.readlink(f"/dev/disk/by-uuid/{luks_root_uuid}"))
+
+        os.system(f"sudo cryptsetup luksDump {disk_dev_id} | grep Flags | cut -d':' -f2 > /tmp/luks_root_flags")
+        luks_root_flags = read_file("/tmp/luks_root_flags")
+        os.system("rm /tmp/luks_root_flags")
+
+        if luks_root_flags.find("allow-discards") == -1 or luks_root_flags.find("no-read-workqueue") == -1 or luks_root_flags.find("no-write-workqueue") == -1:
+            print(
+                f"{YELLOW}sudo cryptsetup --perf-no_read_workqueue --perf-no_write_workqueue --allow-discards --persistent refresh {disk_dev_id} luks-{luks_root_uuid}{NC}"
+            )
+            warn += 1
 
         luks_crypttab_opts = re.search(
             rf"UUID={luks_root_uuid} .*?\/crypto_keyfile\.bin .*?(.*)", crypttab
@@ -127,10 +158,10 @@ if cmdline.find("rd.luks") != -1:
 
         if (
             luks_crypttab_opts is not None
-            and luks_crypttab_opts.group(1).find("discard") == -1
+            and luks_crypttab_opts.group(1).find("discard") != -1
         ):
             print(
-                f"{YELLOW}Consider adding discard to luks {L_BLUE}{luks_root_uuid}{YELLOW} in crypttab{NC}"
+                f"{YELLOW}Consider removing discard from luks {L_BLUE}{luks_root_uuid}{YELLOW} in crypttab{NC}"
             )
             warn += 1
     else:

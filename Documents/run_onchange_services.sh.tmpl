@@ -22,16 +22,26 @@ NC='\033[0m'
 enable_service() {
     NAME=$1
     IS_USER=$2
+    DISABLE=$3
 
-    if [ -n "$IS_USER" ]; then
+    if [ -n "$IS_USER" ] && [ $IS_USER = "1" ]; then
         set +e # Ignore exit code
         status=$(systemctl is-enabled --user $NAME)
         set -e
         if [ "$status" == "disabled" ]; then
-            echo -e "${L_YELLOW}Enabling$NC $L_CYAN$NAME$NC (${YELLOW}user$NC)"
-            systemctl enable --user $NAME
+            if [ -n "$DISABLE" ] &&  [ $DISABLE = "1" ]; then
+                echo -e "$CYAN$NAME$NC already ${L_RED}disabled$NC (${YELLOW}user$NC)"
+            else
+                echo -e "${L_YELLOW}Enabling$NC $L_CYAN$NAME$NC (${YELLOW}user$NC)"
+                systemctl enable --user $NAME
+            fi
         elif [ "$status" == "enabled" ]; then
-            echo -e "$CYAN$NAME$NC already ${L_GREEN}enabled$NC (${YELLOW}user$NC)"
+            if [ -n "$DISABLE" ] &&  [ $DISABLE = "1" ]; then
+                echo -e "${L_PURPLE}Disabling$NC $L_CYAN$NAME$NC (${YELLOW}user$NC)"
+                systemctl disable --user $NAME
+            else
+                echo -e "$CYAN$NAME$NC already ${L_GREEN}enabled$NC (${YELLOW}user$NC)"
+            fi
         elif [ "$status" == "static" ]; then
             echo -e "$CYAN$NAME$NC is marked as ${L_YELLOW}static$NC (${YELLOW}user$NC) ${GRAY}skipping$NC"
         else
@@ -42,10 +52,19 @@ enable_service() {
         status=$(systemctl is-enabled $NAME)
         set -e
         if [ "$status" == "disabled" ]; then
-            echo -e "${L_YELLOW}Enabling$NC $L_BLUE$NAME$NC (${PURPLE}system-wide$NC)"
-            sudo systemctl enable $NAME
+            if [ -n "$DISABLE" ] &&  [ $DISABLE = "1" ]; then
+                echo -e "$BLUE$NAME$NC already ${L_RED}disabled$NC (${PURPLE}system-wide$NC)"
+            else
+                echo -e "${L_YELLOW}Enabling$NC $L_BLUE$NAME$NC (${PURPLE}system-wide$NC)"
+                sudo systemctl enable $NAME
+            fi
         elif [ "$status" == "enabled" ]; then
-            echo -e "$BLUE$NAME$NC already ${L_GREEN}enabled$NC (${PURPLE}system-wide$NC)"
+            if [ -n "$DISABLE" ] &&  [ $DISABLE = "1" ]; then
+                echo -e "${L_PURPLE}Disabling$NC $L_BLUE$NAME$NC (${PURPLE}system-wide$NC)"
+                sudo systemctl disable $NAME
+            else
+                echo -e "$BLUE$NAME$NC already ${L_GREEN}enabled$NC (${PURPLE}system-wide$NC)"
+            fi
         elif [ "$status" == "static" ]; then
             echo -e "$CYAN$NAME$NC is marked as ${L_YELLOW}static$NC (${PURPLE}system-wide$NC) ${GRAY}skipping$NC"
         else
@@ -75,7 +94,11 @@ enable_service cups.service
 enable_service cups-browsed.service
 
 enable_service updatedb.timer
-enable_service fstrim.timer
+{{ if eq .chezmoi.hostname "portable-heater" }}
+    enable_service fstrim.timer 0 1
+{{ else }}
+    enable_service fstrim.timer
+{{ end }}
 
 {{ if eq .chezmoi.hostname "nuclear-submarine" }}
 enable_service pamusb-agent.service

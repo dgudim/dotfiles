@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
+
+L_PURPLE='\033[1;35m'
+L_GREEN='\033[1;32m'
+NC='\033[0m'
+
+# {{ output "date" "+%U-%B-%Y" | trim }}
+
+{{ if eq .chezmoi.hostname "portable-heater" }}
+    echo -e "${L_PURPLE}Running weakly fstrim for portable-heater$NC..."
+    sudo cryptsetup --allow-discards refresh /dev/sda4 luks-3a5f817f-a019-4bd6-80f7-f3c163477c14
+    sudo systemctl start fstrim
+    echo -e "${L_GREEN}Done!$NC\n"
+{{- end }}
