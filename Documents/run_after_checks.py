@@ -49,20 +49,26 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
         if len(dump_pass.groups()) == 2:
             fsck_pass = int(dump_pass.group(2).strip())
             if fsck_pass > 2:
-                warn += 1
                 print(f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})")
+                warn += 1
 
             if fsck_pass == 1 and line.find(" / ") == -1:
                 print(f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} (Only root should have pass value of 1) ({line})")
+                warn += 1
 
             if fsck_pass != 1 and line.find(" / ") != -1:
                 print(f"{YELLOW}Consider changing fsck field to 1 from {fsck_pass} {NC} (Root should have pass value of 1) ({line})")
+                warn += 1
 
-            if fsck_pass == 0:
-                if line.find(" btrfs ") == -1:
-                    print(f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})")
-                else:
-                    print(f"{YELLOW}Consider changing fsck field to 0 from {fsck_pass} (Btrfs does not need it) {NC} ({line})")
+            btrfs_or_swap = line.find(" btrfs ") != -1 or line.find(" swap ") != -1
+
+            if fsck_pass == 0 and not btrfs_or_swap:
+                print(f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})")
+                warn += 1
+
+            if fsck_pass != 0 and btrfs_or_swap:
+                print(f"{YELLOW}Consider changing fsck field to 0 from {fsck_pass} (Btrfs/swap does not need it) {NC} ({line})")
+                warn += 1
 
 
         for fs, opts in fsopts.items():
