@@ -47,6 +47,9 @@ kio-s3
 # Used for NVDIMM (RAM with batteries)
 libblockdev-nvdimm
 
+# Used for enterprise stuff
+libblockdev-mpath
+
 # Used for CD drives
 udftools
 
