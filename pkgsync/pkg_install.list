@@ -145,7 +145,6 @@ libblockdev-crypto
 libblockdev-dm
 libblockdev-fs
 libblockdev-lvm-dbus
-libblockdev-mpath
 libblockdev-nvme
 libblockdev-part
 libblockdev-swap
