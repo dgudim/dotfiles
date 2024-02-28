@@ -54,7 +54,7 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
                   f"{YELLOW}Consider replacing ntfs with ntfs3 {NC} ({line})")
 
         dump_pass = re.search(r" (\d) *? (\d)", line)
-        if len(dump_pass.groups()) == 2:
+        if dump_pass is not None and len(dump_pass.groups()) == 2:
             fsck_pass = int(dump_pass.group(2).strip())
 
             run_check(fsck_pass > 2,
@@ -64,7 +64,7 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
                       f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} (Only root should have pass value of 1) ({line})")
 
 
-            run_check(fsck_pass != 1 and line.find(" / ") != -1,
+            run_check(fsck_pass != 1 and line.find(" / ") != -1 and line.find(" btrfs ") == -1,
                       f"{YELLOW}Consider changing fsck field to 1 from {fsck_pass} {NC} (Root should have pass value of 1) ({line})")
 
             btrfs_or_swap = line.find(" btrfs ") != -1 or line.find(" swap ") != -1
@@ -76,7 +76,7 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
                       f"{YELLOW}Consider changing fsck field to 0 from {fsck_pass} (Btrfs/swap does not need it) {NC} ({line})")
 
         else:
-            run_check(line.find(" bind ") == -1,
+            run_check(line.find(" bind ") == -1 and line.find(" swap ") == -1,
                       f"{YELLOW}Consider adding fsck field {NC} ({line})")
 
         for fs, opts in fsopts.items():
