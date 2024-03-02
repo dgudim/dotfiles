@@ -250,6 +250,7 @@ drkonqi
 konsole
 filelight
 jdiskreport
+qdirstat
 spectacle
 dolphin
 ark
@@ -300,7 +301,9 @@ barrier
 libreoffice-fresh
 smb4k
 sqlitebrowser
-qdirstat
+kalgebra
+kalzium
+kleopatra
 viber
 cpu-x
 anydesk-bin
@@ -598,6 +601,8 @@ python-pyroute2
 python-netaddr
 python-prompt_toolkit
 python-libblockdev
+python-ipywidgets
+python-networkx
 
 ## ANDROID AND JAVA
 jdk11-openjdk
