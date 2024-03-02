@@ -55,15 +55,17 @@ mkdir -p "${XDG_STATE_HOME}/bash"
 # Add user stuff to PATH
 [[ "$(whoami)" != "root" ]] && export PATH=~/.local/bin:~/.local/share/cargo/bin:$PATH:~/.dotnet/tools/
 # If not running interactively, exit
-[[ $- != *i* ]] && return
 
-set -o emacs # set edit mode
-set -o pipefail # fail if any command in pipe fails
-
-shopt -s checkwinsize # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
 shopt -s extglob # enable extended pattern matching features, see http://wiki.bash-hackers.org/syntax/pattern
 shopt -s globstar 2>/dev/null # turn on recursive globbing (enables ** to recurse all directories)
 shopt -s globasciiranges # Range expressions used in pattern matching bracket expressions test_[a-d]* behave as if in the traditional C locale when performing comparisons.
+
+set -o pipefail # fail if any command in pipe fails
+
+[[ $- != *i* ]] && return
+
+set -o emacs # set edit mode
+shopt -s checkwinsize # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
 # shopt -s failglob # Patterns which fail to match filenames during filename expansion result in an expansion error.
 shopt -s autocd # a command name that is the name of a directory is executed as if it were the argument to the cd command.
 shopt -s direxpand # perform word expansion when trying filename completion useful when trying to type path with variable on it
@@ -73,7 +75,7 @@ shopt -s dirspell # Correct minor directory typos during tab-completion (if supp
 
 shopt -s histappend # append to the history file, don't overwrite it
 
-stty -ixon # disable Ctrl-S ( flow control )
+stty -ixon # disable Ctrl-S to pause the terminal ( flow control )
 
 
 # set history length
@@ -110,7 +112,6 @@ eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/shell_theme.json)"
 source /usr/share/doc/find-the-command/ftc.bash askfirst
 
 if [[ "$(whoami)" != "root" ]]; then
-    gpgconf --launch gpg-agent
     export GPG_TTY=$(tty)
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 else

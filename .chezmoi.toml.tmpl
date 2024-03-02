@@ -18,6 +18,8 @@
 
 [data.gpg]
     signingkey = {{ $signingkey | quote }}
+    # https://www.gnupg.org/documentation/manuals/gnupg/Agent-Options.html#index-debug_002dlevel
+    loglevel = "basic"
 
 [data.x86_v3]
     enabled = {{ $enablex86v3 | quote }}
@@ -34,7 +36,7 @@ progress=true
 
 [gpg]
     recipient = {{ $git_email | quote }}
-    args = ["--quiet"]
+    loglevel = "basic"
 
 [diff]
     command = "delta"

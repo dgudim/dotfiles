@@ -303,7 +303,6 @@ smb4k
 sqlitebrowser
 kalgebra
 kalzium
-kleopatra
 viber
 cpu-x
 anydesk-bin
@@ -323,6 +322,7 @@ songrec
 
 
 # CLI APPS
+nushell
 neofetch
 cpufetch-git
 onefetch
@@ -412,6 +412,7 @@ glances
 
 
 # COMPLEMENTARY PACKAGES
+languagetool
 nano-syntax-highlighting-git
 vivid
 bat-extras
@@ -603,6 +604,7 @@ python-prompt_toolkit
 python-libblockdev
 python-ipywidgets
 python-networkx
+python-openbabel
 
 ## ANDROID AND JAVA
 jdk11-openjdk
@@ -656,6 +658,7 @@ bun-bin
 ## WEB
 dart-sass
 vscode-html-languageserver
+biome
 
 
 
@@ -879,7 +882,7 @@ unixodbc
 realtime-privileges
 rtkit
 innoextract
-dbus-broker
+dbus-broker-units
 pigz
 lbzip2
 pbzip2

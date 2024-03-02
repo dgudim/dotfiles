@@ -54,29 +54,33 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
                   f"{YELLOW}Consider replacing ntfs with ntfs3 {NC} ({line})")
 
         dump_pass = re.search(r" (\d) *? (\d)", line)
+
+        is_btrfs = line.find(" btrfs ") != -1
+        btrfs_swap_nfs_bind = is_btrfs or line.find(" swap ") != -1 or line.find(" nfs ") != -1 or line.find(" none ") != -1
+
         if dump_pass is not None and len(dump_pass.groups()) == 2:
             fsck_pass = int(dump_pass.group(2).strip())
+
+
+            is_root = line.find(" / ") != -1
 
             run_check(fsck_pass > 2,
                       f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})")
 
-            run_check(fsck_pass == 1 and line.find(" / ") == -1,
+            run_check(fsck_pass == 1 and not is_root,
                       f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} (Only root should have pass value of 1) ({line})")
 
-
-            run_check(fsck_pass != 1 and line.find(" / ") != -1 and line.find(" btrfs ") == -1,
+            run_check(fsck_pass != 1 and is_root and not is_btrfs,
                       f"{YELLOW}Consider changing fsck field to 1 from {fsck_pass} {NC} (Root should have pass value of 1) ({line})")
 
-            btrfs_or_swap = line.find(" btrfs ") != -1 or line.find(" swap ") != -1
-
-            run_check(fsck_pass == 0 and not btrfs_or_swap,
+            run_check(fsck_pass == 0 and not btrfs_swap_nfs_bind,
                       f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})")
 
-            run_check(fsck_pass != 0 and btrfs_or_swap,
-                      f"{YELLOW}Consider changing fsck field to 0 from {fsck_pass} (Btrfs/swap does not need it) {NC} ({line})")
+            run_check(fsck_pass != 0 and btrfs_swap_nfs_bind,
+                      f"{YELLOW}Consider changing fsck field to 0 from {fsck_pass} (Btrfs/swap/nfs/bind does not need it) {NC} ({line})")
 
         else:
-            run_check(line.find(" bind ") == -1 and line.find(" swap ") == -1,
+            run_check(not btrfs_swap_nfs_bind,
                       f"{YELLOW}Consider adding fsck field {NC} ({line})")
 
         for fs, opts in fsopts.items():
@@ -197,8 +201,8 @@ if len(firefox_profiles) == 0:
     print(f"{RED}Couldn't find firefox profile{NC}")
 else:
 
-    def check_setting(s: str, setting: str) -> int:
-        run_check(s.find(setting) == -1, f"{YELLOW}Consider adding {setting} to firefox{NC}")
+    def check_setting(s: str, setting_: str):
+        run_check(s.find(setting_) == -1, f"{YELLOW}Consider adding {setting_} to firefox{NC}")
 
     print(f"{GRAY}Selected firefox profile: {firefox_profiles[0]}{NC}")
 

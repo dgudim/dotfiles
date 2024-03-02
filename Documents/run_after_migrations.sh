@@ -26,4 +26,7 @@ ln -sf /usr/share/dbus-1/services/org.kde.plasma.Notifications.service ~/.local/
 # Moved to XDG
 rm -rfv ~/.ssr
 
+# No need to override since arched switched to dbus-broker by default
+rm -fv /home/kloud/.config/systemd/user/dbus.service
+
 echo -e "${L_GREEN}Done!$NC\n"
