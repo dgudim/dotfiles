@@ -631,7 +631,7 @@ heaptrack
 extra-cmake-modules
 sdl12-compat
 boost
-glfw-x11
+glfw
 mold
 
 ## JS
@@ -701,6 +701,7 @@ kiterunner-bin
 miniserve
 qrcp-git
 wget
+wget2
 microsocks
 torsocks
 vopono-bin
