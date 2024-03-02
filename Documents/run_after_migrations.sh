@@ -29,4 +29,7 @@ rm -rfv ~/.ssr
 # No need to override since arched switched to dbus-broker by default
 rm -fv /home/kloud/.config/systemd/user/dbus.service
 
+# Merged with main file
+sudo rm -fv /etc/debuginfod/alhp.urls
+
 echo -e "${L_GREEN}Done!$NC\n"
