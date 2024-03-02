@@ -1,3 +1,5 @@
 {{- if eq .x86_v3.enabled "true" -}}
 https://debuginfod.alhp.dev
+{{- else }}
+# Only enabled on x86_v3 systems
 {{- end }}
