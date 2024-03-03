@@ -53,13 +53,14 @@ def copyto(src: str, dst: str):
 
 entries = 0
 
+shutil.rmtree(local_mirror_etc_path)
 for filepath in glob.iglob(chezmoi_etc_path + "**/**", recursive=True, dir_fd=False):
     if not os.path.isfile(filepath):
         continue
-    rel_path = filepath.replace(
+    relative_path = filepath.replace(
         f"{chezmoi_etc_path}/", "").replace(".tmpl", "")
-    etc_file = os.path.join(real_etc_path, rel_path)
-    local_mirror_file = os.path.join(local_mirror_etc_path, rel_path)
+    etc_file = os.path.join(real_etc_path, relative_path)
+    local_mirror_file = os.path.join(local_mirror_etc_path, relative_path)
     copyto(etc_file, local_mirror_file)
     entries = entries + 1
 

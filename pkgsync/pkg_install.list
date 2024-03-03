@@ -322,15 +322,10 @@ songrec
 
 
 # CLI APPS
-nushell
-neofetch
-cpufetch-git
-onefetch
 nano
 syncthing
-oh-my-posh-bin
 mosh
-ripgrep-all
+ssh3
 rclone
 speedtest-cli
 dwarfs-bin
@@ -338,10 +333,7 @@ tldr
 tokei
 ccze
 perl-image-exiftool
-atuin
-hoard
 yt-dlp
-wireplumber
 bat
 mc
 jc
@@ -356,16 +348,12 @@ duf
 duperemove
 dust
 ncdu
-gitui
-lazygit
 compsize
-broot
 glow
 vim
 bfg
 chafa
 fd
-visidata
 symlinks
 tidy
 sherlock-git
@@ -373,29 +361,59 @@ gpart
 cpupower
 tmux
 zellij
-ytfzf
 xdotool
 lshw
-powershell
 rate-mirrors
 asciinema
 asciinema-agg
-lazydocker
-oxker
 systeroid
 testdisk
 genwipe.sh
 progress
-gum
-pastel
 sn0int
-so-bin
-the_silver_searcher
 just
 watchexec
+
+## TUIs
+lazydocker
+oxker
+gitui
+lazygit
+broot
+visidata
+
+## Shells
+xonsh
+nushell
+powershell
+
+## Tools
+gum
+pastel
+so-bin
+
+## Greps / search
+ugrep
+the_silver_searcher
+ripgrep-all
+ast-grep
+semgrep-bin
+
+## Shell integrations
+moar
+zoxide
+thefuck
+direnv
+oh-my-posh-bin
+atuin
+hoard
 clipboard-bin
 yank
 
+## Fetch
+neofetch
+cpufetch-git
+onefetch
 
 ## TOPS
 htop
@@ -435,6 +453,7 @@ journalctl-desktop-notification-git
 syncthing-appmenu
 rlwrap
 dbeaver-plugin-svg-format
+yt-dlp-drop-in
 
 
 
@@ -571,7 +590,6 @@ mypy
 python-pipx
 python-djlint
 codon-bin
-xonsh
 xontrib-fzf-widgets
 
 ### LIBS
@@ -605,6 +623,8 @@ python-libblockdev
 python-ipywidgets
 python-networkx
 python-openbabel
+python-psycopg2
+python-unidecode
 
 ## ANDROID AND JAVA
 jdk11-openjdk
@@ -701,6 +721,7 @@ ssh-audit
 ipcalc
 sipcalc
 openssh
+aria2
 
 ## CLIS
 traceroute
@@ -738,6 +759,7 @@ dynamips
 
 
 # AUDIO
+wireplumber
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
@@ -879,6 +901,8 @@ upower
 
 # MISC UTILS, OPT DEPS
 unixodbc
+antiword
+csvkit
 realtime-privileges
 rtkit
 innoextract

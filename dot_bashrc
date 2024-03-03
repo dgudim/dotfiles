@@ -30,6 +30,8 @@ export SONARLINT_USER_HOME="$XDG_DATA_HOME"/sonarlint
 export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 
+export GOPATH="$XDG_DATA_HOME"/go
+
 export RIPGREP_CONFIG_PATH=/home/kloud/.config/ripgrep/rg.conf
 
 # GUM
@@ -108,6 +110,8 @@ bind '"\e[1;5A": history-search-backward'
 bind '"\e[1;5B": history-search-forward'
 
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/shell_theme.json)"
+eval "$(zoxide init bash)"
+eval "$(direnv hook bash)"
 
 source /usr/share/doc/find-the-command/ftc.bash askfirst
 
