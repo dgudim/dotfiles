@@ -625,6 +625,8 @@ python-networkx
 python-openbabel
 python-psycopg2
 python-unidecode
+python-sympy
+python-tabulate
 
 ## ANDROID AND JAVA
 jdk11-openjdk
