@@ -144,11 +144,10 @@ libblockdev-btrfs
 libblockdev-crypto
 libblockdev-dm
 libblockdev-fs
-libblockdev-lvm-dbus
+libblockdev-lvm
 libblockdev-nvme
 libblockdev-part
 libblockdev-swap
-libblockdev-tools
 udisks2-btrfs
 udisks2-lvm2
 dmraid
@@ -627,6 +626,8 @@ python-psycopg2
 python-unidecode
 python-sympy
 python-tabulate
+python-pdftotext
+python-pystemmer
 
 ## ANDROID AND JAVA
 jdk11-openjdk
