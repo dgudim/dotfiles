@@ -9,13 +9,12 @@ alias l='exa --classify --icons --color=always --classify=always --group-directo
 export BATPIPE_ENABLE_COLOR=true
 export BATPIPE_INSIDE_LESS=false
 tview() {
-	MOAR="$MOAR --style=gruvbox" && batpipe "$@" | "$PAGER"
+	batpipe --color=always "$@" | "$PAGER"
 }
-export BAT_THEME=gruvbox-dark
-export BAT_STYLE=full
-export MOAR='--no-clear-on-exit --no-linenumbers --wrap --quit-if-one-screen'
+export BAT_CONFIG_PATH="/home/kloud/.config/bat/bat.conf"
+export MOAR='--no-linenumbers --wrap --no-clear-on-exit --quit-if-one-screen --style=gruvbox'
 export PAGER='moar'
-alias cat='bat --wrap=never'
+alias cat='bat'
 alias man='MOAR="--no-linenumbers --wrap" && batman'
 
 # Git and chezmoi aliases
