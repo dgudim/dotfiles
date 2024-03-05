@@ -6,57 +6,9 @@
 #    SETTINGS
 # ===============
 
-# Export XDG vars
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_CACHE_HOME="$HOME/.cache"
-
-export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
-export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
-export GNUPGHOME="$XDG_DATA_HOME"/gnupg
-
-export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
-export ANDROID_HOME="$ANDROID_USER_HOME"/Sdk
-
-export HISTFILE="${XDG_STATE_HOME}"/bash/history
-export CARGO_HOME="$XDG_DATA_HOME"/cargo
-export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/cuda_cache
-
-export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
-
-export PLATFORMIO_CORE_DIR="$XDG_DATA_HOME"/platformio
-export SONARLINT_USER_HOME="$XDG_DATA_HOME"/sonarlint
-export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
-export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
-
-export GOPATH="$XDG_DATA_HOME"/go
-
-export RIPGREP_CONFIG_PATH=/home/kloud/.config/ripgrep/rg.conf
-
-# GUM
-export GUM_INPUT_CURSOR_FOREGROUND="#FAB92D"
-export GUM_INPUT_PROMPT_FOREGROUND="#B16286"
-export GUM_FILE_CURSOR_FOREGROUND="#FAB92D"
-export GUM_FILE_DIRECTORY_FOREGROUND="#81A598"
-export GUM_FILE_PERMISSIONS_FOREGROUND="#928374"
-export GUM_FILE_SELECTED_FOREGROUND="#B2A527"
-export GUM_FILE_SYMLINK_FOREGROUND="#5F9368"
-export GUM_FILE_FILE_SIZE_FOREGROUND="#478487"
-
-# Clipboard
-export CLIPBOARD_NOAUDIO=1
-export CLIPBOARD_THEME=amber
-
-# Cache rust builds
-export CARGO_INCREMENTAL=1
-
-# Make sure the directory for history exists
-mkdir -p "${XDG_STATE_HOME}/bash"
-
-# Add user stuff to PATH
-[[ "$(whoami)" != "root" ]] && export PATH=~/.local/bin:~/.local/share/cargo/bin:$PATH:~/.dotnet/tools/
-# If not running interactively, exit
+if [ -f ~/.bash_env ]; then
+    . ~/.bash_env
+fi
 
 shopt -s extglob # enable extended pattern matching features, see http://wiki.bash-hackers.org/syntax/pattern
 shopt -s globstar 2>/dev/null # turn on recursive globbing (enables ** to recurse all directories)
@@ -64,6 +16,7 @@ shopt -s globasciiranges # Range expressions used in pattern matching bracket ex
 
 set -o pipefail # fail if any command in pipe fails
 
+# If not running interactively, exit
 [[ $- != *i* ]] && return
 
 set -o emacs # set edit mode
@@ -112,21 +65,8 @@ bind '"\e[1;5B": history-search-forward'
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/shell_theme.json)"
 eval "$(zoxide init bash)"
 eval "$(direnv hook bash)"
-
 source /usr/share/doc/find-the-command/ftc.bash askfirst
 
-if [[ "$(whoami)" != "root" ]]; then
-    export GPG_TTY=$(tty)
-    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-else
-    unset GPG_TTY
-    unset SSH_AUTH_SOCK
-fi
+# Attach ble.sh for regular user
+[[ "$(whoami)" != "root" ]] && ble-attach
 
-[[ "$(whoami)" = "root" ]] && return
-
-# Rootless docker
-export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
-
-# Attach ble.sh
-[[ ${BLE_VERSION-} ]] && ble-attach

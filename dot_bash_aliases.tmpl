@@ -11,7 +11,6 @@ export BATPIPE_INSIDE_LESS=false
 tview() {
 	batpipe --color=always "$@" | "$PAGER"
 }
-export BAT_CONFIG_PATH="/home/kloud/.config/bat/bat.conf"
 export MOAR='--no-linenumbers --wrap --no-clear-on-exit --quit-if-one-screen --style=gruvbox'
 export PAGER='moar'
 alias cat='bat'
