@@ -4,12 +4,18 @@ alias ls='exa --all --icons --color=always --classify=always --group-directories
 alias la='exa --all --icons --color=always --classify=always --group-directories-first'
 alias l='exa --classify --icons --color=always --classify=always --group-directories-first'
 
-# Replace cat with bat and man with batman
-export BAT_THEME=gruvbox-dark
-export BAT_STYLE=full
-export BAT_PAGER="never"
+# Replace cat with bat and man with batman, pager options
+# eval "$(batpipe)"
+export BATPIPE_ENABLE_COLOR=true
+export BATPIPE_INSIDE_LESS=false
+tview() {
+	batpipe --color=always "$@" | "$PAGER"
+}
+export BAT_CONFIG_PATH="/home/kloud/.config/bat/bat.conf"
+export MOAR='--no-linenumbers --wrap --no-clear-on-exit --quit-if-one-screen --style=gruvbox'
+export PAGER='moar'
 alias cat='bat'
-alias man='BAT_STYLE=numbers,grid batman --pager=less'
+alias man='MOAR="--no-linenumbers --wrap" && batman'
 
 # Git and chezmoi aliases
 alias gpul='git pull'
@@ -83,7 +89,7 @@ alias brl='br -sdp'
 alias neofetch='neofetch --sixel /home/kloud/.config/neofetch/logo --image_size 455'
 
 # Pacman aliases
-alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | less'
+alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | moar'
 alias orphans='pacman -Qtdq'
 alias broken='sudo pacman -Qkk | grep warning'
 
@@ -108,14 +114,17 @@ alias mkdir='mkdir -pv'
 
 # Random stuff
 alias git_vis='gource --colour-images -a 3 -s 1 -c 3'
-alias gl="BAT_PAGER=less git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short"
+alias gl="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short"
 alias labi_cpp='cd /home/kloud/Documents/shared/_projects/Cpp_stuff/cpp-labs/compiled_binaries_linux/ && ./menu.sh'
+alias systeminfo='inxi -v 8'
 
 alias weather='curl wttr.in'
 
 alias filestat='duf && dust'
 
 alias pls='sudo "$BASH" -c "$(history -p !!)"'
+
+alias qr='qrencode -t ansiutf8'
 
 alias reboot='sudo reboot now'
 alias shut='sudo shutdown now'
