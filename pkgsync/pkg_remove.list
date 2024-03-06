@@ -54,3 +54,5 @@ libblockdev-mpath
 # Used for CD drives
 udftools
 
+chaotic-kf5-dummy
+
