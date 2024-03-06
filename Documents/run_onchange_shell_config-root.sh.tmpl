@@ -5,8 +5,10 @@ set -o pipefail
 
 # theme hash: {{ include "dot_config/oh-my-posh/shell_theme_root.json" | sha256sum }}
 # aliases hash: {{ include "dot_bash_aliases.tmpl" | sha256sum }}
-# aliases hash: {{ include "dot_bash_profile" | sha256sum }}
+# profile hash: {{ include "dot_bash_profile" | sha256sum }}
+# env hash: {{ include "dot_bash_env" | sha256sum }}
 # rc hash: {{ include "dot_bashrc" | sha256sum }}
+# git hash: {{ include "dot_config/git/config.tmpl" | sha256sum }}
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -22,14 +24,23 @@ L_CYAN='\033[1;36m'
 GRAY='\033[1;30m'
 NC='\033[0m'
 
-echo -e "${L_PURPLE}Copying shell configs for the ${RED}root ${L_PURPLE}user$NC"
+echo -e "${L_PURPLE}Copying shell and git configs for the ${RED}root ${L_PURPLE}user$NC"
 
 
-sudo mkdir -p '/root/.config/oh-my-posh/'
-sudo cp --remove-destination {{ joinPath .chezmoi.sourceDir "dot_config/oh-my-posh/shell_theme_root.json" | quote }} /root/.config/oh-my-posh/shell_theme.json
+sudo mkdir -pv '/root/.config/oh-my-posh/'
+sudo mkdir -pv '/root/.config/git/'
 
-sudo cp --remove-destination {{ joinPath .chezmoi.homeDir ".bashrc" | quote }} /root/.bashrc
-sudo cp --remove-destination {{ joinPath .chezmoi.homeDir ".bash_profile" | quote }} /root/.bash_profile
-sudo cp --remove-destination {{ joinPath .chezmoi.homeDir ".bash_aliases" | quote }} /root/.bash_aliases
+# Oh-my-posh config
+sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_config/oh-my-posh/shell_theme_root.json" | quote }} /root/.config/oh-my-posh/shell_theme.json
+
+# Bash stuff
+sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bashrc" | quote }} /root/.bashrc
+sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bash_profile" | quote }} /root/.bash_profile
+sudo cp -v --remove-destination {{ joinPath .chezmoi.sourceDir "dot_bash_env" | quote }} /root/.bash_env
+cat {{ joinPath .chezmoi.sourceDir "dot_bash_aliases.tmpl" | quote }} | chezmoi execute-template | sudo tee /root/.bash_aliases 1>/dev/null
+
+# Git config
+cat {{ joinPath .chezmoi.sourceDir "dot_config/git/config.tmpl" | quote }} | chezmoi execute-template | sudo tee /root/.config/git/config 1>/dev/null
+
 
 echo -e "${L_GREEN}Done, ${L_CYAN}don't forget to reload shell config!$NC\n"

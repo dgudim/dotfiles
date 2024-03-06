@@ -45,7 +45,7 @@ __rgX-fzf() {
 	local file RG_PREFIX;
 	RG_PREFIX="exa --color=always \$($1 --files-with-matches --line-buffered \"\${@:3}\""
 	fzf --sort \
-		--preview="[[ ! -z {} ]] && $1 --line-number --line-buffered --context 5 --json {q} {} | delta --pager=0" \
+		--preview="[[ ! -z {} ]] && $1 --line-number --line-buffered --context 7 --json {q} {} | delta --pager=0" \
 		--disabled -q "$2" \
 		--bind "start:reload:$RG_PREFIX {q})" \
 		--bind "change:reload:sleep 0.1; $RG_PREFIX {q}) || true" \
