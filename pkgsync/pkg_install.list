@@ -441,6 +441,7 @@ hunspell-en_us
 hunspell-ru
 geoip-database-extra
 tesseract-data-rus
+tesseract-data-eng
 chezmoi_modify_manager
 bash-completion
 mpv-mpris
