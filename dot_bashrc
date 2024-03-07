@@ -61,6 +61,8 @@ fi
 
 bind '"\e[1;5A": history-search-backward'
 bind '"\e[1;5B": history-search-forward'
+# Unbind verbatim paste on Ctrl+v
+bind -r '\C-v'
 
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/shell_theme.json)"
 eval "$(zoxide init bash)"
