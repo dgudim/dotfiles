@@ -436,13 +436,16 @@ vivid
 bat-extras
 aspell-en
 aspell-ru
+aspell-lt
 hyphen-en
 hyphen-ru
 hunspell-en_us
 hunspell-ru
+hunspell-lt
 geoip-database-extra
 tesseract-data-rus
 tesseract-data-eng
+tesseract-data-lit
 chezmoi_modify_manager
 bash-completion
 mpv-mpris
@@ -699,6 +702,7 @@ networkmanager-openconnect
 networkmanager-pptp
 networkmanager-l2tp
 networkmanager-strongswan
+networkmanager-fortisslvpn
 strongswan
 openldap
 wpa_supplicant
@@ -889,7 +893,6 @@ freerdp
 cdrtools
 coin-or-mp
 shapelib
-libvoikko
 lib32-libid3tag
 openslide
 libappindicator-gtk3
