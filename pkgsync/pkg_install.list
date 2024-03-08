@@ -209,8 +209,8 @@ opendesktop-fonts
 # DESKTOP ENVIRONMENT
 libdecor
 plasma-desktop
-plasma-wayland-session
 packagekit-qt5
+packagekit-qt6
 xdg-desktop-portal
 xdg-desktop-portal-kde
 xdg-user-dirs
@@ -241,6 +241,10 @@ colord-kde
 ksshaskpass
 accountsservice
 drkonqi
+konsolepart5
+kplotting5
+kplotting
+oxygen-sounds
 
 
 
@@ -257,7 +261,6 @@ kate
 yakuake
 kcalc
 kile
-kplotting5
 krename
 krop
 ksystemlog
@@ -468,6 +471,7 @@ gvfs-google
 gvfs-mtp
 gvfs-nfs
 gvfs-smb
+kimageformats
 kimageformats5
 kdeplasma-addons
 nheko-krunner-git
@@ -478,6 +482,7 @@ kde-snap-assist
 kde-thumbnailer-apk-libarchive
 blesh-git
 plasma-vault
+plasma5-integration
 
 ## KATE
 markdownpart
@@ -489,6 +494,7 @@ kio-admin
 kio-fuse
 kio-gdrive
 kio-zeroconf
+kio5-extras
 ffmpegthumbnailer
 ffmpegthumbs
 dolphin-plugins
@@ -631,8 +637,12 @@ python-psycopg2
 python-unidecode
 python-sympy
 python-tabulate
-python-pdftotext
+python-trio
+python-twisted
+python-exceptiongroup
 python-pystemmer
+python-pyzmq
+python-priority
 
 ## ANDROID AND JAVA
 jdk11-openjdk
@@ -886,7 +896,7 @@ libtool
 libvncserver
 libwnck3
 qt5-charts
-qt5-imageformats
+qt6-charts
 ncurses5-compat-libs
 qt-jdenticon
 freerdp
@@ -966,7 +976,8 @@ gutenprint
 
 
 
-# DOCUMENT RENDERING
+# DOCUMENT RENDERING AND PROCESSING
+catdoc
 flex
 libgepub
 poppler-glib
@@ -982,6 +993,7 @@ texlive-formatsextra
 texlive-humanities
 texlive-publishers
 python-weasyprint
+python-pdftotext
 texlive-context
 texlive-xetex
 pandoc-cli
