@@ -85,7 +85,7 @@ gop() {
 alias brl='br -sdp'
 
 # Neofetch logo
-alias neofetch='neofetch --sixel /home/kloud/.config/neofetch/logo --image_size 455'
+alias fastfetch='fastfetch --logo-width 60 --logo /home/kloud/.config/neofetch/logo'
 
 # Pacman aliases
 alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | moar'
@@ -117,6 +117,7 @@ alias gl="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Cre
 alias labi_cpp='cd /home/kloud/Documents/shared/_projects/Cpp_stuff/cpp-labs/compiled_binaries_linux/ && ./menu.sh'
 alias systeminfo='inxi -v 8'
 alias ports='sudo nmap -p- -sV -O'
+alias lspci='lspci -k'
 
 alias weather='curl wttr.in'
 
