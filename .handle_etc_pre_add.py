@@ -24,41 +24,46 @@ def getenv(name: str) -> str:
 
 
 command_dir = getenv("CHEZMOI_COMMAND_DIR")
-file_to_add = getenv("CHEZMOI_ARGS").split(" ").pop(-1)
-source_path = os.path.join(command_dir, file_to_add)
+files_to_add = [os.path.join(command_dir, file_to_add) for file_to_add in getenv("CHEZMOI_ARGS").split(" ")[2:]]
 
-if source_path.find("/etc") == -1:
-    sys.exit(0)
+for file_to_add in files_to_add:
+    if file_to_add.find("/etc") != -1:
+        print(f"Detected file(s) in {L_CYAN}/etc{NC}, adding to chezmoi indirectly")
+        break
 
-if not os.path.exists(source_path):
-    print(f"{RED}File does not exist!!{NC}")
-    sys.exit(1)
+for source_path in files_to_add:
 
-st = oct(os.stat(source_path).st_mode & 0o777)[2:]
+    if source_path.find("/etc") == -1:
+        sys.exit(0)
 
-if st != "644":
-    print(f"{RED}Wrong permissions (got {st}, expected 644)!!{NC}")
-    sys.exit(0)
+    if not os.path.exists(source_path):
+        print(f"{RED}File does not exist!!{NC}")
+        sys.exit(1)
 
-print(f"Detected a file in {L_CYAN}/etc{NC}, adding to chezmoi indirectly")
-home = getenv("HOME")
-chezmoi_etc_path = os.path.join(
-    getenv("CHEZMOI_SOURCE_DIR"), "dot_config/etc_mirror")
+    st = oct(os.stat(source_path).st_mode & 0o777)[2:]
 
+    if st != "644":
+        print(f"{RED}Wrong permissions (got {st}, expected 644)!!{NC}")
+        sys.exit(0)
 
-def copyto(src: str, dst: str):
-    print(
-        f"{GREEN}Copying{NC} {BLUE}{src}{NC} to {CYAN}{dst.replace(home, '~')}{NC}",
-        end="",
-    )
-    dst = os.path.dirname(dst)
-    try:
-        os.makedirs(dst, exist_ok=True)
-        shutil.copy2(src, dst)
-        print(f"  {L_GREEN}OK{NC}")
-    except Exception as e:
-        print(f"  {RED}ERR: {e}{NC}")
+    home = getenv("HOME")
+    chezmoi_etc_path = os.path.join(
+        getenv("CHEZMOI_SOURCE_DIR"), "dot_config/etc_mirror")
 
 
-copyto(source_path, os.path.join(
-    chezmoi_etc_path, source_path.replace("/etc/", "")))
+    def copyto(src: str, dst: str):
+        print(
+            f"{GREEN}Copying{NC} {BLUE}{src}{NC} to {CYAN}{dst.replace(home, '~')}{NC}",
+            end="",
+        )
+        dst = os.path.dirname(dst)
+        try:
+            os.makedirs(dst, exist_ok=True)
+            shutil.copy2(src, dst)
+            print(f"  {L_GREEN}OK{NC}")
+        except Exception as e:
+            print(f"  {RED}ERR: {e}{NC}")
+
+
+    copyto(source_path, os.path.join(
+        chezmoi_etc_path, source_path.replace("/etc/", "")))
