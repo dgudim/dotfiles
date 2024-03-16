@@ -47,10 +47,13 @@ ble-bind -f C-q menu-complete
 ##-----------------------------------------------------------------------------
 ## Fzf bindings
 
+ble-import -d ~/.config/blesh/modules/pipx.bash
+
 ble-import -d integration/fzf-completion
 ble-import -d integration/fzf-key-bindings
 _ble_contrib_fzf_git_config=sabbrev
 ble-import -d integration/fzf-git
+
 ble-import -d ~/.config/blesh/modules/br.bash
 ble-import -d ~/.config/blesh/modules/fzf.bash
 ble-import -d ~/.config/blesh/modules/hoard.bash

@@ -20,7 +20,7 @@ set -o pipefail # fail if any command in pipe fails
 [[ $- != *i* ]] && return
 
 set -o emacs # set edit mode
-shopt -s checkwinsize # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
+[[ $DISPLAY ]] && shopt -s checkwinsize # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
 # shopt -s failglob # Patterns which fail to match filenames during filename expansion result in an expansion error.
 shopt -s autocd # a command name that is the name of a directory is executed as if it were the argument to the cd command.
 shopt -s direxpand # perform word expansion when trying filename completion useful when trying to type path with variable on it
@@ -61,8 +61,6 @@ fi
 
 bind '"\e[1;5A": history-search-backward'
 bind '"\e[1;5B": history-search-forward'
-# Unbind verbatim paste on Ctrl+v
-bind -r '\C-v'
 
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/shell_theme.json)"
 eval "$(zoxide init bash)"
@@ -72,3 +70,5 @@ source /usr/share/doc/find-the-command/ftc.bash askfirst
 # Attach ble.sh for regular user
 [[ "$(whoami)" != "root" ]] && ble-attach
 
+# Unbind verbatim paste on Ctrl+v
+bind -r '\C-v'
