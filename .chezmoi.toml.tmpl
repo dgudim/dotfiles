@@ -1,4 +1,5 @@
-{{- $fontsize := promptIntOnce . "konsole.fontsize" "Konsole font size" -}}
+{{- $konsole_fontsize := promptIntOnce . "konsole.fontsize" "Konsole font size" -}}
+{{- $kate_fontsize := promptIntOnce . "kate.fontsize" "Kate font size" -}}
 {{- $git_username := promptStringOnce . "git.git_username" "Git username" -}}
 {{- $git_email := promptStringOnce . "git.git_email" "Git email" -}}
 
@@ -10,7 +11,10 @@
 {{ $signingkey := output "env" $GIT_EMAIL_ENV "sh" "-c" "gpg --with-colons --locate-keys $GIT_EMAIL | grep pub | cut -d : -f 5" | trim }}
 
 [data.konsole]
-    fontsize = {{ $fontsize }}
+    fontsize = {{ $konsole_fontsize }}
+
+[data.kate]
+    fontsize = {{ $kate_fontsize }}
 
 [data.git]
     git_username = {{ $git_username | quote }}

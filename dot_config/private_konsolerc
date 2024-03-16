@@ -11,6 +11,9 @@ iconViewIconSize=64
 [KonsoleWindow]
 UseSingleInstance=true
 
+[MainWindow]
+ToolBarsMovable=Disabled
+
 [Open-with settings]
 CompletionMode=1
 History=kate

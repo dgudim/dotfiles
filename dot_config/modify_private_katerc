@@ -6,12 +6,7 @@ source auto
 
 # Add your ignores and transforms here
 
-ignore regex "KFileDialog Settings" "Recent Files.*"
-ignore regex "KFileDialog Settings" "Recent URLs.*"
-ignore section "KPropertiesDialog"
-ignore section "KTextEditor::Search"
-
-ignore section "MainWindow"
+set "KTextEditor Renderer" "Text Font" "FiraCode Nerd Font,{{ .kate.fontsize }},-1,5,400,0,0,0,0,0,0,0,0,0,0,1" separator="="
 
 #ignore "exact section name without brackets" "exact key name"
 #ignore regex "section.*" "key_prefix_.*"
