@@ -7,20 +7,22 @@
 # - Ripgrep with syntax highlighting (rgc and rgac)
 
 export __LS_COLORS=$(vivid generate gruvbox-dark)
+export __FD_OPTS="-L --max-depth 10"
 export __FZF_PREVIEW_WINDOW="right,50%,wrap,border-sharp"
 
 fd() {
-	LS_COLORS="$__LS_COLORS" /usr/bin/fd -L --max-depth 10 "$@";
+	LS_COLORS="$__LS_COLORS" /usr/bin/fd $__FD_OPTS "$@";
+	exit 0
 }
 
 # Override default fzf completion, add bat preview (ctrl-t)
 export FZF_CTRL_T_OPTS="--preview \"fzf-handle-preview.sh {}\" --preview-window=\"$__FZF_PREVIEW_WINDOW\" --prompt 'Search all> '"
 export FZF_DEFAULT_OPTS='--color=bg+:#32302f,bg:#282828,spinner:#fb4934,hl:#928374,fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934,marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#fb4934 --ansi --no-mouse --bind "alt-up:preview-half-page-up,alt-down:preview-half-page-down"'
 
-export FZF_CTRL_T_COMMAND="fd --color always -t f -t d -t l"
+export FZF_CTRL_T_COMMAND="LS_COLORS='$__LS_COLORS' $__FD_OPTS --color always -t f -t d -t l"
 
 # Override default fzf completion, add colors
-export FZF_ALT_C_COMMAND="fd --min-depth 1 --color always -t d -t l"
+export FZF_ALT_C_COMMAND="fd $__FD_OPTS --color always --min-depth 1 -t d -t l"
 export FZF_ALT_C_OPTS="--prompt 'Cd into> '"
 
 # __fzf_select__ ()
