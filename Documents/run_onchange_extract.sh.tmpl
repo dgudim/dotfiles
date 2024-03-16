@@ -10,7 +10,9 @@ NC='\033[0m'
 # theme hash: {{ include "dot_local/share/yakuake/skins/gruvbox-dark.tar.gz" | sha256sum }}
 echo -e "${L_PURPLE}Extracting icons$NC"
 cd "{{.chezmoi.homeDir}}/.local/share/icons/"
+rm -r Gruvbox
 tar -xzf icons.tar.gz
 echo -e "${L_PURPLE}Extracting yakuake theme$NC\n"
 cd "{{.chezmoi.homeDir}}/.local/share/yakuake/skins/"
+rm -r yakuake-gruvbox-dark
 tar -xzf gruvbox-dark.tar.gz

@@ -504,7 +504,7 @@ tumbler-extra-thumbnailers
 kdenetwork-filesharing
 
 ## SETTINGS
-systemd-kcm
+# systemd-kcm
 sddm-kcm
 flatpak-kcm
 # kcm-polkit-kde-git
