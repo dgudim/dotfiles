@@ -1,4 +1,5 @@
 [Event/criticalbattery]
+Action=Sound
 Execute=
 Logfile=
 Sound=/usr/share/sounds/subnautica_theme/power_critical4.ogg
@@ -12,24 +13,28 @@ Sound=/usr/share/sounds/subnautica_theme/battery_charged.ogg
 TTS=
 
 [Event/lowbattery]
+Action=Sound
 Execute=
 Logfile=
 Sound=/usr/share/sounds/subnautica_theme/power_low.ogg
 TTS=
 
 [Event/lowperipheralbattery]
+Action=Sound
 Execute=
 Logfile=
 Sound=/usr/share/sounds/subnautica_theme/power_low.ogg
 TTS=
 
 [Event/pluggedin]
+Action=Sound
 Execute=
 Logfile=
 Sound=/usr/share/sounds/subnautica_theme/power_connected.ogg
 TTS=
 
 [Event/unplugged]
+Action=Sound
 Execute=
 Logfile=
 Sound=/usr/share/sounds/subnautica_theme/power_removed.ogg

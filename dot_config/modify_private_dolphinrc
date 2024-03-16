@@ -17,6 +17,8 @@ ignore section "ViewPropertiesDialog"
 
 ignore "General" "Version"
 ignore "General" "ViewPropsTimestamp"
+ignore "KFileDialog Settings" "Recent Files[$e]"
+ignore "KFileDialog Settings" "Recent URLs[$e]"
 
 ignore section "MainWindow"
 

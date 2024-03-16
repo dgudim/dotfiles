@@ -194,7 +194,9 @@ firefox_settings = [
     "gfx.webrender.force-partial-present",
     "svg.context-properties.content.enabled",
     "accessibility.typeaheadfind.enablesound",
-    "accessibility.typeaheadfind.soundURL"
+    "accessibility.typeaheadfind.soundURL",
+    "apz.gtk.kinetic_scroll.enabled",
+    "widget.wayland.vsync.enabled"
 ]
 
 if len(firefox_profiles) == 0:

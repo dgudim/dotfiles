@@ -1,4 +1,5 @@
 [Event/GetReady]
+Action=Sound
 Execute=
 Logfile=
 Sound=/usr/share/sounds/subnautica_theme/new_device3.ogg

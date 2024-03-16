@@ -1,0 +1,15 @@
+[$Version]
+update_info=kwinrules.upd:replace-placement-string-to-enum,kwinrules.upd:use-virtual-desktop-ids
+
+[1]
+Description=Syncthingtray position
+position=1342,551
+positionrule=3
+title=Syncthing Tray
+titlematch=2
+wmclass=syncthingtray
+wmclassmatch=1
+
+[General]
+count=1
+rules=1

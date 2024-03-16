@@ -32,4 +32,11 @@ rm -fv /home/kloud/.config/systemd/user/dbus.service
 # Merged with main file
 sudo rm -fv /etc/debuginfod/alhp.urls
 
+# Delete plasma 5 stuff
+rm -fv /home/kloud/.config/khotkeysrc
+rm -fv /home/kloud/.config/kwalletd5.notifyrc
+rm -rfv /home/kloud/.local/share/kservices5
+rm -fv /home/kloud/.local/share/applications/gpick.desktop
+rm -rfv /home/kloud/.local/share/icons/Simp1e-Gruvbox-Dark
+
 echo -e "${L_GREEN}Done!$NC\n"

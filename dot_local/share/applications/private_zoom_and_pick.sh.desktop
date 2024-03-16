@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=bash /home/kloud/Documents/usefull_files/scripts/zoom_and_pick.sh
+Name=bash /home/kloud/Documents/usefull_files/scripts/zoom_and_pick.sh
+NoDisplay=true
+StartupNotify=false
+Type=Application
+X-KDE-GlobalAccel-CommandShortcut=true
