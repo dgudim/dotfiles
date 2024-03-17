@@ -13,6 +13,7 @@ rm -fv ~/.config/environment.d/xdg.conf
 rm -fv ~/.bash_history
 sudo rm -fv /root/.bash_history
 rm -fv ~/.config/dragonplayerrc
+rm -rfv ~/.config/nheko
 
 # Replaced with Vesktop
 rm -rfv ~/.config/BetterDiscord\ Installer

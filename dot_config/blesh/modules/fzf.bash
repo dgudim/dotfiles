@@ -12,7 +12,6 @@ export __FZF_PREVIEW_WINDOW="right,50%,wrap,border-sharp"
 
 fd() {
 	LS_COLORS="$__LS_COLORS" /usr/bin/fd $__FD_OPTS "$@";
-	exit 0
 }
 
 # Override default fzf completion, add bat preview (ctrl-t)
