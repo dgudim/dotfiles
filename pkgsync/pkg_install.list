@@ -285,7 +285,6 @@ syncthingtray
 okteta
 neochat
 okular
-nheko
 cinny-desktop-bin
 schildichat-desktop-bin
 rclone-browser
@@ -473,8 +472,8 @@ gvfs-nfs
 gvfs-smb
 kimageformats
 kimageformats5
+qt5-imageformats
 kdeplasma-addons
-nheko-krunner-git
 plasma-browser-integration
 kdeconnect
 kde-snap-assist
