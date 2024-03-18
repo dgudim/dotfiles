@@ -24,7 +24,6 @@ qtcreator
 # Ignore some gui apps
 obsidian
 neochat
-nheko
 cinny-desktop-bin
 schildichat-desktop-bin
 tokodon
@@ -82,7 +81,6 @@ protonvpn
 ventoy-bin
 sherlock-git
 scangearmp2-sane-git
-nheko-krunner-git
 
 ## R
 gcc-fortran
