@@ -208,7 +208,6 @@ opendesktop-fonts
 # DESKTOP ENVIRONMENT
 libdecor
 plasma-desktop
-packagekit-qt5
 packagekit-qt6
 xdg-desktop-portal
 xdg-desktop-portal-kde
@@ -225,7 +224,6 @@ kwallet5
 kwallet-pam
 kfind
 kgpg
-qgpgme-qt5
 kinfocenter
 bluedevil
 bluez-utils
@@ -832,7 +830,6 @@ vdpauinfo
 gst-plugin-pipewire
 gst-plugin-qmlgl
 gst-plugin-libcamera
-phonon-qt5-vlc
 colord
 atomicparsley
 curlew
