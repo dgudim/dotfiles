@@ -27,3 +27,12 @@ gamemode
 intellij-idea-ultimate-edition
 intellij-idea-ultimate-edition-jre
 zulu-jdk-fx-bin
+
+# Waydroid
+binder_linux-dkms
+cage
+lua-alt-getopt
+lua-filesystem
+python-pyclip
+waydroid
+waydroid-image
