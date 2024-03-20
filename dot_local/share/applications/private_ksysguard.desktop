@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=ksysguard
+Name=ksysguard
+NoDisplay=true
+StartupNotify=false
+Type=Application
+X-KDE-GlobalAccel-CommandShortcut=true

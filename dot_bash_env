@@ -48,7 +48,7 @@ export CARGO_INCREMENTAL=1
 
 if [[ "$(whoami)" != "root" ]]; then
     # Add user stuff to PATH
-    export PATH=~/.local/bin:~/.local/share/cargo/bin:$PATH:~/.dotnet/tools/
+    export PATH=~/.local/bin:~/.local/share/cargo/bin:$PATH
     # Rootless docker
     export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 

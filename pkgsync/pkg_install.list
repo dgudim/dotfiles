@@ -38,6 +38,7 @@ docker-rootless-extras
 base
 base-devel
 arch-install-scripts
+archlinux-contrib
 linux
 linux-firmware
 linux-headers
@@ -261,6 +262,7 @@ kile
 krename
 krop
 ksystemlog
+ksysguard6-git
 ktorrent
 kwalletmanager
 ventoy-bin
