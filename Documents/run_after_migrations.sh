@@ -39,5 +39,6 @@ rm -fv /home/kloud/.config/kwalletd5.notifyrc
 rm -rfv /home/kloud/.local/share/kservices5
 rm -fv /home/kloud/.local/share/applications/gpick.desktop
 rm -rfv /home/kloud/.local/share/icons/Simp1e-Gruvbox-Dark
+rm -rf /home/kloud/.local/share/applications/ksysguard.desktop
 
 echo -e "${L_GREEN}Done!$NC\n"
