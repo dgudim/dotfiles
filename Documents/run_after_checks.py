@@ -34,6 +34,7 @@ def read_file(path: str) -> str:
     except Exception:
         return ""
 
+
 def run_check(cond: bool, message: str):
     global warn
     global checks
@@ -42,6 +43,7 @@ def run_check(cond: bool, message: str):
     if cond:
         print(message)
         warn += 1
+
 
 def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
 
@@ -56,11 +58,11 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
         dump_pass = re.search(r" (\d) *? (\d)", line)
 
         is_btrfs = line.find(" btrfs ") != -1
-        btrfs_swap_nfs_bind = is_btrfs or line.find(" swap ") != -1 or line.find(" nfs ") != -1 or line.find(" none ") != -1
+        btrfs_swap_nfs_bind = is_btrfs or line.find(
+            " swap ") != -1 or line.find(" nfs ") != -1 or line.find(" none ") != -1
 
         if dump_pass is not None and len(dump_pass.groups()) == 2:
             fsck_pass = int(dump_pass.group(2).strip())
-
 
             is_root = line.find(" / ") != -1
 
@@ -99,7 +101,8 @@ print(f"{LIGHTER_GRAY}Checking fstab{NC}")
 fstab = read_file("/etc/fstab")
 
 print(f"{LIGHT_GRAY}Checking tmp dir{NC}")
-run_check(fstab.find("/tmp") != -1, f"{YELLOW}Consider removing /tmp from fstab{NC}")
+run_check(fstab.find("/tmp") != -1,
+          f"{YELLOW}Consider removing /tmp from fstab{NC}")
 
 print(f"{LIGHT_GRAY}Checking mount options{NC}")
 ntfs_mount_opts = [
@@ -151,9 +154,12 @@ if cmdline.find("rd.luks") != -1:
         r"\/dev\/mapper\/luks-(.*?) *?\/ *?(ext4|btrfs)", fstab)
     if luks_root is not None:
         luks_root_uuid = luks_root.group(1)
-        disk_dev_id = "/dev/" + os.path.basename(os.readlink(f"/dev/disk/by-uuid/{luks_root_uuid}"))
+        disk_dev_id = "/dev/" + \
+            os.path.basename(os.readlink(
+                f"/dev/disk/by-uuid/{luks_root_uuid}"))
 
-        os.system(f"sudo cryptsetup luksDump {disk_dev_id} | grep Flags | cut -d':' -f2 > /tmp/luks_root_flags")
+        os.system(
+            f"sudo cryptsetup luksDump {disk_dev_id} | grep Flags | cut -d':' -f2 > /tmp/luks_root_flags")
         luks_root_flags = read_file("/tmp/luks_root_flags")
         os.system("rm /tmp/luks_root_flags")
 
@@ -196,7 +202,9 @@ firefox_settings = [
     "accessibility.typeaheadfind.enablesound",
     "accessibility.typeaheadfind.soundURL",
     "apz.gtk.kinetic_scroll.enabled",
-    "widget.wayland.vsync.enabled"
+    "widget.wayland.vsync.enabled",
+    "browser.tabs.tabMinWidth",
+    "browser.compactmode.show"
 ]
 
 if len(firefox_profiles) == 0:
@@ -204,7 +212,8 @@ if len(firefox_profiles) == 0:
 else:
 
     def check_setting(s: str, setting_: str):
-        run_check(s.find(setting_) == -1, f"{YELLOW}Consider adding {setting_} to firefox{NC}")
+        run_check(s.find(setting_) == -1,
+                  f"{YELLOW}Consider adding {setting_} to firefox{NC}")
 
     print(f"{GRAY}Selected firefox profile: {firefox_profiles[0]}{NC}")
 
