@@ -204,7 +204,8 @@ firefox_settings = [
     "apz.gtk.kinetic_scroll.enabled",
     "widget.wayland.vsync.enabled",
     "browser.tabs.tabMinWidth",
-    "browser.compactmode.show"
+    "browser.compactmode.show",
+    "toolkit.legacyUserProfileCustomizations.stylesheets"
 ]
 
 if len(firefox_profiles) == 0:
@@ -216,6 +217,19 @@ else:
                   f"{YELLOW}Consider adding {setting_} to firefox{NC}")
 
     print(f"{GRAY}Selected firefox profile: {firefox_profiles[0]}{NC}")
+
+    USER_STYLE = """
+:root[uidensity="touch"] {
+    --tab-min-height: 15px !important;
+}
+"""
+
+    user_style_dir = os.path.join(firefox_profiles[0], "chrome")
+    user_style_path = os.path.join(user_style_dir, "userChrome.css");
+    os.makedirs(user_style_dir, exist_ok=True)
+    with open(user_style_path, "w", encoding="utf-8") as f:
+        f.write(USER_STYLE)
+    print(f"{LIGHT_GRAY}Updated {user_style_path}{NC}")
 
     about_config = read_file(os.path.join(firefox_profiles[0], "prefs.js"))
 
