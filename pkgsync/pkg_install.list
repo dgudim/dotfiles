@@ -64,6 +64,7 @@ xorg-mkfontscale
 wmctrl
 xsettingsd
 xterm
+evtest
 lsb-release
 os-prober
 xf86-input-libinput
@@ -80,6 +81,7 @@ man-db
 man-pages
 unrar
 unzip
+moreutils
 ntp
 unarchiver
 usb_modeswitch
@@ -374,6 +376,7 @@ progress
 sn0int
 just
 watchexec
+pipectl
 
 ## TUIs
 lazydocker
