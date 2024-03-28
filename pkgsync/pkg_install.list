@@ -644,6 +644,8 @@ python-exceptiongroup
 python-pystemmer
 python-pyzmq
 python-priority
+python-debugpy
+python-ipykernel
 
 ## ANDROID AND JAVA
 jdk11-openjdk
