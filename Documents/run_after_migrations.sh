@@ -42,6 +42,6 @@ rm -rfv /home/kloud/.local/share/icons/Simp1e-Gruvbox-Dark
 rm -rf /home/kloud/.local/share/applications/ksysguard.desktop
 
 # Delete sensitive data
-secret-tool clear user kloud
+secret-tool clear user kloud || true
 
 echo -e "${L_GREEN}Done!$NC\n"
