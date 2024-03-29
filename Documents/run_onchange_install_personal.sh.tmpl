@@ -22,3 +22,16 @@ bash install.sh
 cd /home/kloud/Documents/shared/_Personal/Sounds/edexui
 bash install.sh
 echo -e "${L_GREEN}Subnautica and edexui sound themes installed!$NC\n"
+
+# theme hash: {{ include "dot_local/share/icons/icons.tar.gz" | sha256sum }}
+# theme hash: {{ include "dot_local/share/yakuake/skins/gruvbox-dark.tar.gz" | sha256sum }}
+
+echo -e "${L_PURPLE}Extracting icons$NC"
+cd "{{.chezmoi.homeDir}}/.local/share/icons/"
+rm -r Gruvbox
+tar -xzf icons.tar.gz
+
+echo -e "${L_PURPLE}Extracting yakuake theme$NC\n"
+cd "{{.chezmoi.homeDir}}/.local/share/yakuake/skins/"
+rm -r yakuake-gruvbox-dark
+tar -xzf gruvbox-dark.tar.gz
