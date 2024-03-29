@@ -205,7 +205,8 @@ firefox_settings = [
     "widget.wayland.vsync.enabled",
     "browser.tabs.tabMinWidth",
     "browser.compactmode.show",
-    "toolkit.legacyUserProfileCustomizations.stylesheets"
+    "toolkit.legacyUserProfileCustomizations.stylesheets",
+    "browser.translations.automaticallyPopup"
 ]
 
 if len(firefox_profiles) == 0:
@@ -225,7 +226,7 @@ else:
 """
 
     user_style_dir = os.path.join(firefox_profiles[0], "chrome")
-    user_style_path = os.path.join(user_style_dir, "userChrome.css");
+    user_style_path = os.path.join(user_style_dir, "userChrome.css")
     os.makedirs(user_style_dir, exist_ok=True)
     with open(user_style_path, "w", encoding="utf-8") as f:
         f.write(USER_STYLE)
