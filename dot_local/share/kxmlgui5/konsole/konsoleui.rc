@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui version="20" name="konsole">
+<gui name="konsole" version="20">
  <MenuBar>
   <Menu name="file">
    <text>File</text>
@@ -69,8 +69,6 @@
   <Action name="split-view"/>
  </ToolBar>
  <ActionProperties>
-  <Action name="clone-tab" shortcut=""/>
-  <Action name="help_contents" shortcut=""/>
   <Action name="new-tab" shortcut="Alt+T"/>
  </ActionProperties>
 </gui>
