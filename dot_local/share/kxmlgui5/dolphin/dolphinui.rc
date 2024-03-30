@@ -1,7 +1,7 @@
 <!DOCTYPE gui>
-<gui name="dolphin" version="38" translationDomain="kxmlgui5">
+<gui name="dolphin" translationDomain="kxmlgui5" version="38">
  <MenuBar alreadyVisited="1">
-  <Menu noMerge="1" name="file" alreadyVisited="1">
+  <Menu alreadyVisited="1" name="file" noMerge="1">
    <text translationDomain="kxmlgui5">&amp;File</text>
    <Action name="file_new"/>
    <Separator weakSeparator="1"/>
@@ -26,7 +26,7 @@
    <Separator weakSeparator="1"/>
    <Action name="file_quit"/>
   </Menu>
-  <Menu noMerge="1" name="edit" alreadyVisited="1">
+  <Menu alreadyVisited="1" name="edit" noMerge="1">
    <text translationDomain="kxmlgui5">&amp;Edit</text>
    <Action name="edit_undo"/>
    <Separator weakSeparator="1"/>
@@ -54,7 +54,7 @@
    <Action name="edit_select_all"/>
    <Action name="invert_selection"/>
   </Menu>
-  <Menu noMerge="1" name="view" alreadyVisited="1">
+  <Menu alreadyVisited="1" name="view" noMerge="1">
    <text translationDomain="kxmlgui5">&amp;View</text>
    <Action name="view_zoom_in"/>
    <Action name="view_zoom_out"/>
@@ -78,7 +78,7 @@
    <Action name="stop"/>
    <Separator/>
    <Action name="panels"/>
-   <Menu noMerge="1" name="location_bar" icon="edit-select-text">
+   <Menu icon="edit-select-text" name="location_bar" noMerge="1">
     <text context="@title:menu" translationDomain="dolphin">Location Bar</text>
     <Action name="editable_location"/>
     <Action name="replace_location"/>
@@ -86,7 +86,7 @@
    <Separator/>
    <Action name="view_properties"/>
   </Menu>
-  <Menu noMerge="1" name="go" alreadyVisited="1">
+  <Menu alreadyVisited="1" name="go" noMerge="1">
    <text translationDomain="kxmlgui5">&amp;Go</text>
    <Action name="go_up"/>
    <Action name="go_back"/>
@@ -99,7 +99,7 @@
   <Separator weakSeparator="1"/>
   <Separator weakSeparator="1"/>
   <Separator weakSeparator="1"/>
-  <Menu noMerge="1" name="tools" alreadyVisited="1">
+  <Menu alreadyVisited="1" name="tools" noMerge="1">
    <text translationDomain="kxmlgui5">&amp;Tools</text>
    <Action name="open_preferred_search_tool"/>
    <Action name="open_terminal"/>
@@ -108,7 +108,7 @@
    <Action name="compare_files"/>
    <Action name="change_remote_encoding"/>
   </Menu>
-  <Menu noMerge="1" name="settings" alreadyVisited="1">
+  <Menu alreadyVisited="1" name="settings" noMerge="1">
    <text translationDomain="kxmlgui5">&amp;Settings</text>
    <Action name="options_show_menubar"/>
    <Merge name="StandardToolBarMenuHandler"/>
@@ -121,7 +121,7 @@
    <Action name="options_configure"/>
   </Menu>
   <Separator weakSeparator="1"/>
-  <Menu noMerge="1" name="help" alreadyVisited="1">
+  <Menu alreadyVisited="1" name="help" noMerge="1">
    <text translationDomain="kxmlgui5">&amp;Help</text>
    <Action name="help_contents"/>
    <Action name="help_whats_this"/>
@@ -135,7 +135,7 @@
    <Action name="help_about_kde"/>
   </Menu>
  </MenuBar>
- <ToolBar noMerge="1" name="mainToolBar" alreadyVisited="1">
+ <ToolBar alreadyVisited="1" name="mainToolBar" noMerge="1">
   <text context="@title:menu" translationDomain="dolphin">Main Toolbar</text>
   <Action name="go_back"/>
   <Action name="go_forward"/>
@@ -198,7 +198,8 @@
   <Action name="view_zoom_in" priority="0"/>
   <Action name="view_zoom_out" priority="0"/>
   <Action name="view_zoom_reset" priority="0"/>
-  <Action name="open_preferred_search_tool" iconText="KFind" priority="0"/>
+  <Action iconText="KFind" name="open_preferred_search_tool" priority="0"/>
   <Action name="new_tab" shortcut="Alt+T"/>
+  <Action name="show_terminal_panel" shortcut="Ctrl+`"/>
  </ActionProperties>
 </gui>
