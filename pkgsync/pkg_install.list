@@ -328,6 +328,7 @@ psensor
 # CLI APPS
 nano
 syncthing
+bup
 mosh
 ssh3
 rclone
@@ -509,6 +510,7 @@ kdenetwork-filesharing
 # systemd-kcm
 sddm-kcm
 flatpak-kcm
+kup
 # kcm-polkit-kde-git
 # kcm-uefi
 
