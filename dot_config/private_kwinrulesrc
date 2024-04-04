@@ -10,6 +10,13 @@ titlematch=2
 wmclass=syncthingtray
 wmclassmatch=1
 
+[2]
+Description=RealVNC rules
+disableglobalshortcuts=true
+disableglobalshortcutsrule=2
+wmclass=realvnc-vncviewer
+wmclassmatch=1
+
 [General]
 count=1
-rules=1
+rules=1,2
