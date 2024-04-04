@@ -1,0 +1,8 @@
+*[class*="avatarDecoration"], *[class*="newBadge"], *[class*="premiumBadge"], *[class*="premiumTab"] {
+    display: none;
+}
+
+*[class*="shyButton"] {
+    background: none;
+}
+
