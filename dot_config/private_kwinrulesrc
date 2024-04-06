@@ -18,5 +18,5 @@ wmclass=realvnc-vncviewer
 wmclassmatch=1
 
 [General]
-count=1
+count=2
 rules=1,2
