@@ -3,6 +3,8 @@ BackgroundColors=ColorsAccentWithTrafficLights
 BundledWindecoPresetsImportedVersion=4.4.2.breeze5.27.5.git
 ButtonIconStyle=StyleOxygen
 LockButtonBackgroundColorsActive=false
+ActiveTitlebarOpacity=100
+InactiveTitlebarOpacity=100
 
 [Windeco]
 IconSize=IconMedium

@@ -644,7 +644,6 @@ python-ipykernel
 
 ## ANDROID AND JAVA
 jdk11-openjdk
-jre11-openjdk
 jdk17-openjdk
 jdk8-openjdk
 jre8-openjdk-headless
