@@ -58,7 +58,6 @@ xterm
 evtest
 lsb-release
 os-prober
-xf86-input-libinput
 sudo
 sed
 less
