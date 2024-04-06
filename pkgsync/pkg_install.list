@@ -52,15 +52,6 @@ alsa-plugins
 alsa-utils
 sof-firmware
 archlinux-keyring
-xorg-server
-xorg-xdpyinfo
-xorg-xgamma
-xorg-xinit
-xorg-xinput
-xorg-xkill
-xorg-xrandr
-xorg-xwininfo
-xorg-mkfontscale
 wmctrl
 xsettingsd
 xterm
@@ -198,7 +189,9 @@ ttf-oswald
 ttf-quintessential
 ttf-ubuntu-font-family
 gnu-free-fonts
+xorg-mkfontscale
 xorg-fonts-misc
+xorg-fonts-alias-misc
 tex-gyre-fonts
 gsfonts
 ttf-droid
