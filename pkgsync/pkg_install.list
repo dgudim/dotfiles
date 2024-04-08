@@ -52,22 +52,12 @@ alsa-plugins
 alsa-utils
 sof-firmware
 archlinux-keyring
-xorg-server
-xorg-xdpyinfo
-xorg-xgamma
-xorg-xinit
-xorg-xinput
-xorg-xkill
-xorg-xrandr
-xorg-xwininfo
-xorg-mkfontscale
 wmctrl
 xsettingsd
 xterm
 evtest
 lsb-release
 os-prober
-xf86-input-libinput
 sudo
 sed
 less
@@ -198,7 +188,9 @@ ttf-oswald
 ttf-quintessential
 ttf-ubuntu-font-family
 gnu-free-fonts
+xorg-mkfontscale
 xorg-fonts-misc
+xorg-fonts-alias-misc
 tex-gyre-fonts
 gsfonts
 ttf-droid
@@ -652,7 +644,6 @@ python-ipykernel
 
 ## ANDROID AND JAVA
 jdk11-openjdk
-jre11-openjdk
 jdk17-openjdk
 jdk8-openjdk
 jre8-openjdk-headless
