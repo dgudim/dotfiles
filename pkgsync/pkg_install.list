@@ -395,7 +395,7 @@ spacer-bin
 ugrep
 the_silver_searcher
 ripgrep-all
-ast-grep
+ast-grep-bin
 semgrep-bin
 
 ## Shell integrations
