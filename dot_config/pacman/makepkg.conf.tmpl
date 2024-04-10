@@ -64,7 +64,7 @@ BUILDENV=(!distcc color !ccache check !sign fakeroot)
 OPTIONS=(strip docs !libtool !staticlibs emptydirs zipman purge !debug lto)
 
 # Update the source tree only on demand
-GITFLAGS="--filter=tree:0"
+# GITFLAGS="--filter=tree:0"
 
 # Better compression performance
 COMPRESSZST=(zstd -c -z -q --threads=0 -)
