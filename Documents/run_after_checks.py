@@ -206,7 +206,9 @@ firefox_settings = [
     "browser.tabs.tabMinWidth",
     "browser.compactmode.show",
     "toolkit.legacyUserProfileCustomizations.stylesheets",
-    "browser.translations.automaticallyPopup"
+    "browser.translations.automaticallyPopup",
+    "font.name-list.emoji", # Noto Color Emoji
+    "media.getusermedia.agc_enabled"
 ]
 
 if len(firefox_profiles) == 0:
