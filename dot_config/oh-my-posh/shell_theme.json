@@ -13,6 +13,15 @@
           "type": "os"
         },
         {
+          "type": "session",
+          "style": "diamond",
+          "foreground": "#ebdbb2",
+          "background": "#d65d0e",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": "{{ if .SSHSession }} ssh{{ end }}"
+        },
+        {
           "background": "#b16286",
           "foreground": "#ebdbb2",
           "powerline_symbol": "",
