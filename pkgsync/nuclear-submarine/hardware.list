@@ -8,6 +8,8 @@ mesa-vdpau
 radeontop
 amdgpu_top-bin
 vulkan-radeon
+libvdpau-va-gl
+lib32-libvdpau-va-gl
 
 # Hardware
 amd-ucode
