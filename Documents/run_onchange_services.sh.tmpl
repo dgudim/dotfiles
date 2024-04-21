@@ -82,6 +82,10 @@ enable_service drkonqi-coredump-cleanup.timer 1
 enable_service gpg-logger.service 1
 enable_service ydotool.service 1
 
+{{ if ne .chezmoi.hostname "portable-heater" }}
+enable_service systemd-boot-update
+{{ end }}
+
 enable_service cronie.service
 enable_service ananicy.service
 enable_service earlyoom.service
