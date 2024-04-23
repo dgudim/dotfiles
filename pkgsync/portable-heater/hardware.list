@@ -5,6 +5,7 @@ intel-ucode
 ## Intel
 intel-media-sdk
 intel-media-driver
+onevpl-intel-gpu
 vulkan-intel
 lib32-vulkan-intel
 libva-intel-driver

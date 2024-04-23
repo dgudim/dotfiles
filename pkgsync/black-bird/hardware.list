@@ -1,5 +1,6 @@
 intel-gpu-tools
 intel-media-sdk
+onevpl-intel-gpu
 intel-ucode
 lib32-libva-intel-driver
 lib32-vulkan-intel

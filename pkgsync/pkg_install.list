@@ -838,12 +838,12 @@ curlew
 mplayer
 
 ## GUIS
-vlc
+vlc-luajit
 mpv
 haruna
 smplayer
 hugin
-obs-studio
+obs-studio-tytan652
 blender
 krita
 imv
