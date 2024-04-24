@@ -832,7 +832,6 @@ gst-plugin-qmlgl
 gst-plugin-libcamera
 colord
 atomicparsley
-curlew
 
 ## CLIS
 mplayer
@@ -867,6 +866,7 @@ qwinff
 videomass
 czkawka-gui-bin
 kolourpaint
+curlew
 
 
 
