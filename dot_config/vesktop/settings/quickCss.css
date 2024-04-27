@@ -1,8 +1,11 @@
-*[class*="avatarDecoration"], *[class*="newBadge"], *[class*="premiumBadge"], *[class*="premiumTab"] {
-    display: none;
+*[class*="avatarDecoration"],
+*[class*="newBadge"],
+*[class*="premiumBadge"],
+*[class*="premiumTab"],
+*[class*="effect"] {
+  display: none;
 }
 
 *[class*="shyButton"] {
-    background: none;
+  background: none;
 }
-
