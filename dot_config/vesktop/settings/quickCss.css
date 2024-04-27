@@ -1,9 +1,31 @@
 *[class*="avatarDecoration"],
 *[class*="newBadge"],
-*[class*="premiumBadge"],
-*[class*="premiumTab"],
-*[class*="effect"] {
+*[class*="premium"],
+*[class*="effect"],
+div[aria-label="Family Centre"],
+div[aria-label="Connections"],
+div[aria-label="Subscriptions"],
+div[aria-controls="billing-tab"],
+div[aria-label="Gift Inventory"],
+div[aria-label="Gift Inventory"] + div,
+div[aria-controls="nitro-server-boost-tab"],
+div[aria-label="Clips"] {
   display: none;
+}
+
+div[class*="avatarPositionPremiumBanner"] {
+  top: 16px !important;
+}
+
+svg[class*="bannerSVGWrapper"] {
+  min-width: 340px !important;
+  min-height: 60px !important;
+  height: 60px;
+}
+
+div[role="dialog"] {
+  border: 1.5px solid #755716;
+  border-radius: 8px;
 }
 
 *[class*="shyButton"] {
