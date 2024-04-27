@@ -21,7 +21,9 @@
             "enabled": true
         },
         "AlwaysTrust": {
-            "enabled": true
+            "enabled": true,
+            "domain": true,
+            "file": true
         },
         "AnonymiseFileNames": {
             "enabled": false
@@ -125,7 +127,17 @@
             "enabled": false
         },
         "FakeNitro": {
-            "enabled": false
+            "enabled": true,
+            "enableEmojiBypass": true,
+            "emojiSize": 48,
+            "transformEmojis": true,
+            "enableStickerBypass": true,
+            "stickerSize": 160,
+            "transformStickers": true,
+            "transformCompoundSentence": false,
+            "enableStreamQualityBypass": false,
+            "useHyperLinks": true,
+            "hyperLinkText": "{{NAME}}"
         },
         "FakeProfileThemes": {
             "enabled": false,
@@ -192,7 +204,9 @@
             "enabled": false
         },
         "MemberCount": {
-            "enabled": true
+            "enabled": true,
+            "memberList": true,
+            "toolTip": true
         },
         "MessageClickActions": {
             "enabled": true,
@@ -211,7 +225,9 @@
             "ignoreSelf": true,
             "ignoreUsers": "",
             "ignoreChannels": "",
-            "ignoreGuilds": ""
+            "ignoreGuilds": "",
+            "logEdits": true,
+            "logDeletes": true
         },
         "MessageTags": {
             "enabled": false
@@ -544,9 +560,6 @@
         "ServerProfile": {
             "enabled": false
         },
-        "ShowTimeouts": {
-            "enabled": false
-        },
         "SuperReactionTweaks": {
             "enabled": false
         },
@@ -567,6 +580,36 @@
         },
         "NewGuildSettings": {
             "enabled": false
+        },
+        "ShowHiddenThings": {
+            "enabled": false
+        },
+        "BetterRoleContext": {
+            "enabled": false
+        },
+        "BetterSessions": {
+            "enabled": false
+        },
+        "BetterSettings": {
+            "enabled": false
+        },
+        "FriendsSince": {
+            "enabled": false
+        },
+        "ImplicitRelationships": {
+            "enabled": false
+        },
+        "OverrideForumDefaults": {
+            "enabled": false
+        },
+        "ResurrectHome": {
+            "enabled": false
+        },
+        "StreamerModeOnStream": {
+            "enabled": false
+        },
+        "UnlockedAvatarZoom": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -579,6 +622,6 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1708157128753
+        "settingsSyncVersion": 1714232910107
     }
 }
