@@ -586,6 +586,7 @@ ipython
 bpython
 python-lsp-black
 pip-autoremove
+pyupgrade
 autopep8
 flake8
 ruff
@@ -1021,3 +1022,4 @@ jave
 
 # ----------------------------------------- MISC ------------------------------------------------
 anki
+chntpw
