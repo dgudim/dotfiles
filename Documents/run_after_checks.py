@@ -122,7 +122,7 @@ check_mount_opts(
     {
         "ext4": ["defaults", "commit=60", "noatime"],
         "vfat": ["defaults", "noatime", "umask=0077"],
-        "btrfs": ["compress=zstd:[0-9]+", "exec", "noatime", "X-fstrim\.notrim"],
+        "btrfs": ["compress=zstd:[0-9]+", "exec", "noatime", r"X-fstrim\.notrim"],
         "ntfs": ntfs_mount_opts,
         "ntfs3": ntfs_mount_opts,
         "ntfs-3g": ntfs_mount_opts,
