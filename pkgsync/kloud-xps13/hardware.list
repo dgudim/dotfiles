@@ -5,7 +5,7 @@ intel-media-sdk
 intel-ucode
 lib32-vulkan-intel
 vulkan-intel
-libvdpau-va-gl-i965
+libvdpau-va-gl
 lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
