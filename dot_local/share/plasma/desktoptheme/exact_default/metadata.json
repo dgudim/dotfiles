@@ -1,0 +1,19 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Adhe",
+                "Email": "adhemarks@gmail@com"
+            }
+        ],
+        "Name": "Gruvbox Plasma",
+        "Description": "Gruvbox for plasma",
+        "Id": "gruvboxplasma",
+        "Version": "1.0",
+        "Category": "",
+        "EnabledByDefault": true,
+        "License": "GPL",
+        "Website": ""
+    },
+    "X-Plasma-API": "5.0"
+}
