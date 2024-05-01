@@ -7,7 +7,7 @@ import requests
 p_input = sys.argv[-1].strip()
 
 split = p_input.split("/")
-repo = split[0]
+repo = split[0].replace("chaotic-", "").replace("-x86-64-v3", "")
 package = split[1]
 
 try:
