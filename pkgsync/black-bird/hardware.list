@@ -1,12 +1,9 @@
 intel-gpu-tools
 intel-media-sdk
-onevpl-intel-gpu
 intel-ucode
-lib32-libva-intel-driver
 lib32-vulkan-intel
-libva-intel-driver
 vulkan-intel
-libvdpau-va-gl-i965
+libvdpau-va-gl
 lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers

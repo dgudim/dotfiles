@@ -3,9 +3,9 @@ amd-ucode
 intel-ucode
 
 ## Intel
+intel-gpu-tools
 intel-media-sdk
-intel-media-driver
-onevpl-intel-gpu
+vpl-gpu-rt
 vulkan-intel
 lib32-vulkan-intel
 libva-intel-driver
