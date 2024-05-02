@@ -16,6 +16,11 @@ LIBVA_DRIVER_NAME=nvidia
 MOZ_DISABLE_RDD_SANDBOX=1
 {{ end }}
 
+{{ if (or (eq .chezmoi.hostname "black-bird") (eq .chezmoi.hostname "kloud-xps13")) }}
+# Vdapau via libvdpau-va-gl
+VDPAU_DRIVER=va_gl
+{{ end }}
+
 KDE_COREDUMP_NOTIFY=1
 
 

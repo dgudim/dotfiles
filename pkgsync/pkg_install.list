@@ -573,7 +573,7 @@ r-shiny
 ## DBUS
 bustle
 dconf-editor
-d-feet
+d-spy
 
 ## SHELL
 shellcheck
@@ -1023,3 +1023,4 @@ jave
 # ----------------------------------------- MISC ------------------------------------------------
 anki
 chntpw
+minicom
