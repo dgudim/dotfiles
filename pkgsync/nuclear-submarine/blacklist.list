@@ -14,7 +14,6 @@ codon-bin
 android-studio
 android-tools
 adbfs-rootless-git
-logcat-colorize
 android-apktool-bin
 
 ## Other
@@ -83,17 +82,8 @@ ventoy-bin
 sherlock-git
 scangearmp2-sane-git
 
-## R
-gcc-fortran
-r
-radian
-r-dygraphs
-r-fontquiver
-r-httpgd
-r-languageserver
-r-markdown
-r-rmarkdown
-r-shiny
+
+
 
 # LaTeX stuff
 kile
