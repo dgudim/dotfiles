@@ -219,20 +219,29 @@ else:
         run_check(s.find(setting_) == -1,
                   f"{YELLOW}Consider adding {setting_} to firefox{NC}")
 
-    print(f"{GRAY}Selected firefox profile: {firefox_profiles[0]}{NC}")
+    print(f"{LIGHT_GRAY}Selected firefox profile: {firefox_profiles[0]}{NC}")
 
     USER_STYLE = """
+@import url("./firefox-csshacks/chrome/toolbars_below_content.css");
+
 :root[uidensity="touch"] {
     --tab-min-height: 15px !important;
 }
 """
 
     user_style_dir = os.path.join(firefox_profiles[0], "chrome")
+
+    print(f"{LIGHT_GRAY}Updating firefox userstyles{NC}")
+    if os.path.exists(user_style_dir):
+        os.system(f"cd {user_style_dir}/firefox-csshacks && git pull")
+    else:
+        os.system(f"cd {user_style_dir} && git clone https://github.com/MrOtherGuy/firefox-csshacks --depth 1")
+
     user_style_path = os.path.join(user_style_dir, "userChrome.css")
     os.makedirs(user_style_dir, exist_ok=True)
     with open(user_style_path, "w", encoding="utf-8") as f:
         f.write(USER_STYLE)
-    print(f"{LIGHT_GRAY}Updated {user_style_path}{NC}")
+    print(f"{GRAY}Updated {user_style_path}{NC}")
 
     about_config = read_file(os.path.join(firefox_profiles[0], "prefs.js"))
 
