@@ -227,6 +227,10 @@ else:
 :root[uidensity="touch"] {
     --tab-min-height: 15px !important;
 }
+
+#PlacesChevronPopup {
+    height: 500px !important;
+}
 """
 
     user_style_dir = os.path.join(firefox_profiles[0], "chrome")
