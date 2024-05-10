@@ -1,1 +1,0 @@
-nowatchdog nvme_load=YES reboot=bios mitigations=off resume=UUID=b79f103b-b242-432a-9c75-51cab48566cb quiet loglevel=3 splash vt.global_cursor_default=0
