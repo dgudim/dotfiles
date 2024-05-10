@@ -1,0 +1,17 @@
+{
+  "name": "vilniustech-timetable-grabber",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts"
+  },
+  "dependencies": {
+    "node-notifier": "^10.0.1",
+    "puppeteer-core": "^22.2.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/node-notifier": "^8.0.5"
+  }
+}
