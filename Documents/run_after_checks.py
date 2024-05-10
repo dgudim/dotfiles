@@ -232,8 +232,9 @@ else:
     user_style_dir = os.path.join(firefox_profiles[0], "chrome")
 
     print(f"{LIGHT_GRAY}Updating firefox userstyles{NC}")
-    if os.path.exists(user_style_dir):
-        os.system(f"cd {user_style_dir}/firefox-csshacks && git pull")
+    css_repo_path = os.path.join(user_style_dir, "firefox-csshacks")
+    if os.path.exists(css_repo_path):
+        os.system(f"cd {css_repo_path} && git pull")
     else:
         os.system(f"cd {user_style_dir} && git clone https://github.com/MrOtherGuy/firefox-csshacks --depth 1")
 
