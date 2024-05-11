@@ -126,7 +126,8 @@
 	log-diff = log -p
 	log-search-diff = log -p -S
 	pushf = push --force-with-lease
-	clone-fast = clone --filter=tree:0
+	clone-fast = clone --filter=tree:0 --depth=1
+	pr = pull --rebase
 
 [branch]
 	sort = -committerdate
