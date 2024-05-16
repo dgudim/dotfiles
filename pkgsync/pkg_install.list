@@ -799,6 +799,7 @@ sws
 sox
 flite
 mediainfo
+playerctl
 noise-suppression-for-voice
 
 ## GUIS
@@ -1025,3 +1026,4 @@ jave
 anki
 chntpw
 minicom
+
