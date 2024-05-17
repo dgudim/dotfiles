@@ -465,6 +465,9 @@ gvfs-google
 gvfs-mtp
 gvfs-nfs
 gvfs-smb
+gvfs-gphoto2
+gvfs-wsdd
+gvfs-dnssd
 kimageformats
 kimageformats5
 qt5-imageformats
@@ -552,6 +555,7 @@ git-filter-repo
 github-cli
 rust
 rust-src
+cargo-cache
 perl
 perl-archive-zip
 visual-studio-code-bin

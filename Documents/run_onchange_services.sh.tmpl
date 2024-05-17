@@ -94,6 +94,7 @@ enable_service bluetooth.service
 enable_service avahi-daemon.service
 enable_service cups.service
 enable_service cups-browsed.service
+enable_service adb.service
 
 enable_service updatedb.timer
 {{ if eq .chezmoi.hostname "portable-heater" }}
@@ -189,6 +190,7 @@ sudo chmod 1770 /var/lib/samba/usershares
 
 enable_service smb.service
 enable_service nmb.service
+enable_service wsdd.service
 
 echo -e "${L_GREEN}Samba setup done!$NC\n"
 
