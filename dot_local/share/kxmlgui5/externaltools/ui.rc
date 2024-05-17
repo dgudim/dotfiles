@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE gui>
+<gui name="externaltools" translationDomain="kateexternaltoolsplugin" version="6">
+ <MenuBar>
+  <Menu name="tools" noMerge="1">
+   <text translationDomain="kateexternaltoolsplugin">&amp;Tools</text>
+   <Action group="tools_operations3" name="tools_external"/>
+  </Menu>
+ </MenuBar>
+ <ToolBar name="mainToolBar" noMerge="1">
+  <text translationDomain="kateexternaltoolsplugin">Main Toolbar</text>
+  <Action name="externaltool_JSONFormatFullFile"/>
+  <Action name="externaltool_XMLFormatFullFile"/>
+ </ToolBar>
+</gui>
