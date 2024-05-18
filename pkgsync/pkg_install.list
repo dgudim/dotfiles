@@ -636,7 +636,6 @@ python-sympy
 python-tabulate
 python-trio
 python-twisted
-python-exceptiongroup
 python-pystemmer
 python-pyzmq
 python-priority
@@ -801,6 +800,7 @@ flite
 mediainfo
 playerctl
 noise-suppression-for-voice
+easyeffects
 
 ## GUIS
 ambix
@@ -1026,4 +1026,3 @@ jave
 anki
 chntpw
 minicom
-
