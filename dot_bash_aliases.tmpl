@@ -17,10 +17,11 @@ alias cat='bat'
 alias man='MOAR="--no-linenumbers --wrap" && batman'
 
 # Git and chezmoi aliases
-alias gpul='git pull'
-alias gpus='git push'
-alias gch='git checkout'
-alias gchb='git checkout -b'
+alias gpul='git pr'
+alias gpus='git pu'
+alias gpusf='git pu'
+alias gch='git co'
+alias gchb='git cb'
 alias gfc="git fetch origin --prune && for branch in \$(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '\$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", \$1); print \$1}'); do git branch -D \$branch; done && git maintenance run --auto && git maintenance run --task=gc && git fsck"
 
 # Scrcpy aliases
@@ -113,7 +114,6 @@ alias mkdir='mkdir -pv'
 
 # Random stuff
 alias git_vis='gource --colour-images -a 3 -s 1 -c 3'
-alias gl="git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short"
 alias labi_cpp='cd /home/kloud/Documents/shared/_projects/Cpp_stuff/cpp-labs/compiled_binaries_linux/ && ./menu.sh'
 alias systeminfo='inxi -v 8'
 alias ports='sudo nmap -p- -sV -O'

@@ -125,9 +125,22 @@
 	log-search = log -S
 	log-diff = log -p
 	log-search-diff = log -p -S
-	pushf = push --force-with-lease
 	clone-fast = clone --filter=tree:0 --depth=1
-	pr = pull --rebase
+	pr = 'git pull --rebase || git rebase --abort && git pull'
+	lol = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    lod = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
+    los = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    lo =  log --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short --graph
+    st = status --short --branch
+    puf = push --force-with-lease --tags
+    pu = push --tags
+    co = checkout
+    cb = checkout -b
+    aa = add --all
+    bv = branch -vv
+    ba = branch -ra
+    bd = branch -d
+    ca = commit --amend
 
 [branch]
 	sort = -committerdate
