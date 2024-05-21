@@ -132,8 +132,8 @@
     los = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
     lo =  log --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short --graph
     st = status --short --branch
-    puf = push --force-with-lease --tags
-    pu = push --tags
+    puf = push --force-with-lease
+    pu = push
     co = checkout
     cb = checkout -b
     aa = add --all
