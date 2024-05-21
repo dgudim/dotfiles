@@ -645,6 +645,16 @@ python-pyzmq
 python-priority
 python-debugpy
 python-ipykernel
+python-email-validator
+python-fastapi
+python-httpx
+python-pendulum
+python-phonenumbers
+python-pycountry
+python-python-multipart
+python-socksio
+python-ulid
+uvicorn
 
 ## ANDROID AND JAVA
 jdk11-openjdk
