@@ -8,6 +8,9 @@ lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
+# Fan
+thinkfan-ui
+
 # Fingerprint sensor
 python-validity
 
@@ -28,7 +31,6 @@ zulu-jdk-fx-bin
 
 # Waydroid
 binder_linux-dkms
-cage
 lua-alt-getopt
 lua-filesystem
 python-pyclip

@@ -12,7 +12,6 @@ lib32-vulkan-mesa-layers
 
 # Waydroid
 binder_linux-dkms
-cage
 lua-alt-getopt
 lua-filesystem
 python-pyclip
