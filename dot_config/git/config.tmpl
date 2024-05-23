@@ -126,7 +126,7 @@
 	log-diff = log -p
 	log-search-diff = log -p -S
 	clone-fast = clone --filter=tree:0 --depth=1
-	pr = "!git pull --rebase || git rebase --abort && git pull"
+	pr = "!git pull --rebase || (git rebase --abort && git pull)"
 	lol = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
     lod = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
     los = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
