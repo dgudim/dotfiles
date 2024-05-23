@@ -38,6 +38,9 @@
 ## possible values: return-original, return-query
 # exit_mode = "return-original"
 
+[sync]
+records = true
+
 workspaces = true
 inline_height=30
 
