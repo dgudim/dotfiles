@@ -137,7 +137,8 @@
             "transformCompoundSentence": false,
             "enableStreamQualityBypass": false,
             "useHyperLinks": true,
-            "hyperLinkText": "{{NAME}}"
+            "hyperLinkText": "{{NAME}}",
+            "disableEmbedPermissionCheck": false
         },
         "FakeProfileThemes": {
             "enabled": false,
@@ -270,6 +271,11 @@
                     "text": "VC Mod",
                     "showInChat": true,
                     "showInNotChat": true
+                },
+                "CHAT_MODERATOR": {
+                    "text": "Chat Mod",
+                    "showInChat": true,
+                    "showInNotChat": true
                 }
             }
         },
@@ -292,7 +298,8 @@
             "enabled": false
         },
         "NoTrack": {
-            "enabled": true
+            "enabled": true,
+            "disableAnalytics": true
         },
         "NoUnblockToJump": {
             "enabled": true
@@ -301,9 +308,6 @@
             "enabled": false
         },
         "oneko": {
-            "enabled": false
-        },
-        "Party mode 🎉": {
             "enabled": false
         },
         "PermissionsViewer": {
@@ -513,7 +517,9 @@
             "enabled": true
         },
         "Dearrow": {
-            "enabled": true
+            "enabled": true,
+            "hideButton": false,
+            "replaceElements": 0
         },
         "Decor": {
             "enabled": false
@@ -610,6 +616,51 @@
         },
         "UnlockedAvatarZoom": {
             "enabled": false
+        },
+        "PartyMode": {
+            "enabled": false
+        },
+        "AutomodContext": {
+            "enabled": false
+        },
+        "CtrlEnterSend": {
+            "enabled": false
+        },
+        "CustomIdle": {
+            "enabled": false
+        },
+        "ImageLink": {
+            "enabled": false
+        },
+        "MessageLatency": {
+            "enabled": false
+        },
+        "NoDefaultHangStatus": {
+            "enabled": false
+        },
+        "NoServerEmojis": {
+            "enabled": false
+        },
+        "PauseInvitesForever": {
+            "enabled": false
+        },
+        "ReplaceGoogleSearch": {
+            "enabled": false
+        },
+        "ReplyTimestamp": {
+            "enabled": false
+        },
+        "ShowTimeoutDuration": {
+            "enabled": false
+        },
+        "ValidReply": {
+            "enabled": false
+        },
+        "VoiceDownload": {
+            "enabled": false
+        },
+        "WebScreenShareFixes": {
+            "enabled": true
         }
     },
     "notifications": {
@@ -622,6 +673,6 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1714232910107
+        "settingsSyncVersion": 1716404315401
     }
 }
