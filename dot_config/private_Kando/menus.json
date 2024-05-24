@@ -1,0 +1,72 @@
+{
+  "menus": [
+    {
+      "nodes": {
+        "type": "submenu",
+        "name": "Main menu",
+        "icon": "sunny",
+        "iconTheme": "material-symbols-rounded",
+        "children": [
+          {
+            "type": "submenu",
+            "data": {},
+            "name": "Apps",
+            "icon": "apps",
+            "iconTheme": "material-symbols-rounded",
+            "children": [
+              {
+                "type": "command",
+                "data": {
+                  "command": ""
+                },
+                "name": "Launch Application",
+                "icon": "terminal",
+                "iconTheme": "material-symbols-rounded"
+              },
+              {
+                "type": "command",
+                "data": {
+                  "command": "vncviewer"
+                },
+                "name": "Vnc",
+                "icon": "atm",
+                "iconTheme": "material-symbols-rounded"
+              },
+              {
+                "type": "command",
+                "data": {
+                  "command": "konsole"
+                },
+                "name": "Konsole",
+                "icon": "terminal",
+                "iconTheme": "material-symbols-rounded"
+              },
+              {
+                "type": "command",
+                "data": {
+                  "command": ""
+                },
+                "name": "Launch Application",
+                "icon": "terminal",
+                "iconTheme": "material-symbols-rounded"
+              },
+              {
+                "type": "command",
+                "data": {
+                  "command": "konsole"
+                },
+                "name": "Konsole",
+                "icon": "terminal",
+                "iconTheme": "material-symbols-rounded"
+              }
+            ]
+          }
+        ]
+      },
+      "shortcut": "",
+      "shortcutID": "main-menu",
+      "centered": false
+    }
+  ],
+  "stash": []
+}
