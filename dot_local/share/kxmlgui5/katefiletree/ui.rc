@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
+<gui translationDomain="katefiletree" library="katefiletreeplugin" version="10" name="katefiletreeplugin">
+ <!-- merge in view -->
+ <MenuBar>
+  <Menu name="go">
+   <text>&amp;Go</text>
+   <Action group="switch_document" name="filetree_prev_document"/>
+   <Action group="switch_document" name="filetree_next_document"/>
+   <Action group="switch_document" name="filetree_show_active_document"/>
+  </Menu>
+ </MenuBar>
+ <ActionProperties scheme="Default"/>
+</gui>
+<!-- kate: space-indent on; indent-width 4; replace-tabs on; -->

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
+<gui translationDomain="tabswitcherplugin" library="tabswitcherplugin" version="3" name="tabswitcher">
+ <MenuBar>
+  <Menu merge="1" name="go">
+   <text>&amp;Go</text>
+   <Action group="view_switch_tab" name="view_lru_document_next"/>
+  </Menu>
+ </MenuBar>
+ <ActionProperties scheme="Default"/>
+</gui>
+<!-- kate: space-indent on; indent-width 4; replace-tabs on; -->
