@@ -234,7 +234,9 @@ accountsservice
 drkonqi
 kplotting5
 kplotting
+keditbookmarks
 oxygen-sounds
+harmony2
 
 
 
@@ -273,6 +275,8 @@ onlyoffice-bin
 obsidian
 pinta
 remmina
+krdc
+freerdp2
 syncthingtray
 okteta
 neochat
@@ -1015,6 +1019,7 @@ asciidoctor
 blockdiag
 pdf2svg
 biber
+d2
 gnuplot
 nwdiag
 seqdiag
@@ -1040,3 +1045,4 @@ jave
 anki
 chntpw
 minicom
+

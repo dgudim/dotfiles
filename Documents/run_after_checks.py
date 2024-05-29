@@ -223,6 +223,7 @@ else:
 
     USER_STYLE = """
 @import url("./firefox-csshacks/chrome/toolbars_below_content.css");
+@import url("./firefox-csshacks/chrome/iconized_main_menu.css");
 
 :root[uidensity="touch"] {
     --tab-min-height: 15px !important;
