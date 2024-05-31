@@ -485,6 +485,7 @@ kde-thumbnailer-apk
 blesh-git
 plasma-vault
 plasma5-integration
+plasma-thunderbolt
 kactivities-stats5
 
 ## KATE
@@ -714,6 +715,7 @@ bun-bin
 dart-sass
 vscode-html-languageserver
 biome
+asar
 
 
 
@@ -890,6 +892,7 @@ videomass
 czkawka-gui-bin
 kolourpaint
 curlew
+kamoso
 
 
 
