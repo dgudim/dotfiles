@@ -2,11 +2,19 @@
 
 cd "{{.chezmoi.sourceDir}}/pkgsync"
 bash pkgsync.sh
-# pipx install paginate-json
-# pipx install doc484
-# pipx install gruvbox-factory
 
-# cargo install checkexec
+install-pipx() {
+    pipx list | grep "\- " | cut -d ' ' -f 6 | grep "$1" || pipx install "$1"
+}
+
+install-pipx paginate-json
+install-pipx doc484
+install-pipx gruvbox-factory
+install-pipx semgrep
+
+cargo install checkexec
+cargo install cargo-update
+cargo install-update -a
 
 # wineasio-register
 # waydroid prop set persist.waydroid.multi_windows true
