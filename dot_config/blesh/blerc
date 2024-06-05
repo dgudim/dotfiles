@@ -47,7 +47,8 @@ ble-bind -f C-q menu-complete
 ##-----------------------------------------------------------------------------
 ## Fzf bindings
 
-ble-import -d ~/.config/blesh/modules/pipx.bash
+ble-import -d ~/.config/blesh/modules/pipx_completions.bash
+ble-import -d ~/.config/blesh/modules/docker_completions.bash
 
 ble-import -d integration/fzf-completion
 ble-import -d integration/fzf-key-bindings

@@ -4,14 +4,14 @@ cd "{{.chezmoi.sourceDir}}/pkgsync"
 bash pkgsync.sh
 
 install-pipx() {
-    pipx list | grep "\- " | cut -d ' ' -f 6 | grep "$1" > /dev/null || pipx install "$1"
+    pipx list | grep "\- " | cut -d ' ' -f 6 | grep "${2:-${1:-error}}" > /dev/null || pipx install "$1"
 }
 
 install-pipx paginate-json
 install-pipx doc484
 install-pipx gruvbox-factory
 install-pipx semgrep
-install-pipx sherlock-project
+install-pipx sherlock-project sherlock
 
 cargo install checkexec
 cargo install cargo-update
