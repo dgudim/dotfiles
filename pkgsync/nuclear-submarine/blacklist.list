@@ -33,6 +33,8 @@ anilibria-winmaclinux
 vesktop
 viber
 thunderbird
+pulseview
+sigrok-cli
 
 ## Video and audio
 lsp-plugins

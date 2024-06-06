@@ -42,6 +42,8 @@ cassowary
 flutter
 android-platform
 android-platform-33
+android-platform-30
+android-sdk-build-tools-30.0.3
 
 ## Kubernetes
 google-cloud-cli
