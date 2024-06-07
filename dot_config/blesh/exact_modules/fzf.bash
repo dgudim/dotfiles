@@ -18,10 +18,10 @@ fd() {
 export FZF_CTRL_T_OPTS="--preview \"fzf-handle-preview.sh {}\" --preview-window=\"$__FZF_PREVIEW_WINDOW\" --prompt 'Search all> '"
 export FZF_DEFAULT_OPTS='--color=bg+:#32302f,bg:#282828,spinner:#fb4934,hl:#928374,fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934,marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#fb4934 --ansi --no-mouse --bind "alt-up:preview-half-page-up,alt-down:preview-half-page-down"'
 
-export FZF_CTRL_T_COMMAND="LS_COLORS='$__LS_COLORS' fd $__FD_OPTS --color always -t f -t d -t l"
+export FZF_CTRL_T_COMMAND="LS_COLORS=\"\$__LS_COLORS\" fd $__FD_OPTS --color always -t f -t d -t l"
 
 # Override default fzf completion, add colors
-export FZF_ALT_C_COMMAND="LS_COLORS='$__LS_COLORS' fd $__FD_OPTS --color always --min-depth 1 -t d -t l"
+export FZF_ALT_C_COMMAND="LS_COLORS=\"\$__LS_COLORS\" fd $__FD_OPTS --color always --min-depth 1 -t d -t l"
 export FZF_ALT_C_OPTS="--prompt 'Cd into> '"
 
 # __fzf_select__ ()
