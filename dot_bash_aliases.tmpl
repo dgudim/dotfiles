@@ -150,7 +150,7 @@ __rank_mirrors() {
 	sudo mv /etc/pacman.d/$2 /etc/pacman.d/$2-backup
 	sudo mv $TMPFILE /etc/pacman.d/$2
 	echo "Moved to /etc/pacman.d/$2"
-	sudo chmod 755 /etc/pacman.d/$2"
+	sudo chmod 755 /etc/pacman.d/$2
 }
 
 alias mirrors='__rank_mirrors arch mirrorlist && __rank_mirrors endeavouros endeavouros-mirrorlist && __rank_mirrors chaotic-aur chaotic-mirrorlist'
