@@ -34,7 +34,7 @@ Architecture = auto
 Color
 ILoveCandy
 #NoProgressBar
-#CheckSpace
+CheckSpace
 VerbosePkgLists
 DisableDownloadTimeout
 ParallelDownloads = 5
@@ -74,10 +74,12 @@ LocalFileSigLevel = Optional
 
 [endeavouros]
 SigLevel = PackageRequired
+Include = /etc/pacman.d/pacserve
 Include = /etc/pacman.d/endeavouros-mirrorlist
 
 {{- if eq .x86_v3.enabled "true" }}
 [core-x86-64-v3]
+Include = /etc/pacman.d/pacserve
 Include = /etc/pacman.d/alhp-mirrorlist
 {{- end }}
 
@@ -85,14 +87,17 @@ Include = /etc/pacman.d/alhp-mirrorlist
 #Include = /etc/pacman.d/mirrorlist
 
 [core]
+Include = /etc/pacman.d/pacserve
 Include = /etc/pacman.d/mirrorlist
 
 {{- if eq .x86_v3.enabled "true" }}
 [extra-x86-64-v3]
+Include = /etc/pacman.d/pacserve
 Include = /etc/pacman.d/alhp-mirrorlist
 {{- end }}
 
 [extra]
+Include = /etc/pacman.d/pacserve
 Include = /etc/pacman.d/mirrorlist
 
 # If you want to run 32 bit applications on your x86_64 system,
@@ -103,16 +108,24 @@ Include = /etc/pacman.d/mirrorlist
 
 {{- if eq .x86_v3.enabled "true" }}
 [multilib-x86-64-v3]
+Include = /etc/pacman.d/pacserve
 Include = /etc/pacman.d/alhp-mirrorlist
 {{- end }}
 
 [multilib]
+Include = /etc/pacman.d/pacserve
 Include = /etc/pacman.d/mirrorlist
 
+[xyne-x86_64]
+Include = /etc/pacman.d/pacserve
+Server = https://xyne.dev/repos/xyne
+
 [chaotic-aur]
+Include = /etc/pacman.d/pacserve
 Include = /etc/pacman.d/chaotic-mirrorlist
 
 [python]
+Include = /etc/pacman.d/pacserve
 Server = https://ffy00.github.io/arch-python-repo/
 
 # [desolve]
