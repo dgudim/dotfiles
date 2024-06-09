@@ -255,7 +255,7 @@ yakuake
 kcalc
 kile
 krename
-krop
+krop-git
 ksystemlog
 kjournald
 ksysguard6-git
@@ -324,6 +324,7 @@ cobang
 
 
 # CLI APPS
+uhubctl
 nano
 syncthing
 bup
@@ -461,6 +462,7 @@ syncthing-appmenu
 rlwrap
 dbeaver-plugin-svg-format
 yt-dlp-drop-in
+xorg-xhost
 
 
 
@@ -661,6 +663,8 @@ python-pycountry
 python-python-multipart
 python-socksio
 python-ulid
+python-click-completion
+python-shellingham
 uvicorn
 
 ## ANDROID AND JAVA
@@ -696,6 +700,10 @@ sdl12-compat
 boost
 glfw
 mold
+
+## Arduino
+platformio-core
+platformio-core-udev
 
 ## JS
 nodejs-lts-hydrogen
