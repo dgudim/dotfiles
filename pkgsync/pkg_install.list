@@ -665,6 +665,7 @@ python-socksio
 python-ulid
 python-click-completion
 python-shellingham
+python-pypdf
 uvicorn
 
 ## ANDROID AND JAVA
