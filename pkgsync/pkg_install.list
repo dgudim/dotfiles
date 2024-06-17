@@ -775,6 +775,7 @@ traceroute
 globalping-cli
 kiterunner-bin
 miniserve
+quickserve
 qrcp-git
 wget
 wget2
@@ -787,7 +788,6 @@ netctl
 iptraf-ng
 iperf3
 xh
-
 
 ## GUIS
 protonvpn
@@ -845,6 +845,7 @@ setbfree
 reaper
 ocenaudio-bin
 ardour
+coppwr-bin
 
 
 
