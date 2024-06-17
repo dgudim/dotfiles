@@ -27,11 +27,14 @@ ln -sf /usr/share/dbus-1/services/org.kde.plasma.Notifications.service ~/.local/
 # Moved to XDG
 rm -rfv ~/.ssr
 
-# No need to override since arched switched to dbus-broker by default
+# No need to override since arch switched to dbus-broker by default
 rm -fv /home/kloud/.config/systemd/user/dbus.service
 
 # Merged with main file
 sudo rm -fv /etc/debuginfod/alhp.urls
+
+# Cleanup after viber
+rm -rfv ~/.ViberPC
 
 # Delete plasma 5 stuff
 rm -fv /home/kloud/.config/khotkeysrc
