@@ -767,6 +767,7 @@ ssh-audit
 ipcalc
 sipcalc
 openssh
+sshpass
 aria2
 
 ## CLIS
