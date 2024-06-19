@@ -563,9 +563,6 @@
         "SecretRingToneEnabler": {
             "enabled": false
         },
-        "ServerProfile": {
-            "enabled": false
-        },
         "SuperReactionTweaks": {
             "enabled": false
         },
@@ -661,6 +658,33 @@
         },
         "WebScreenShareFixes": {
             "enabled": true
+        },
+        "ServerInfo": {
+            "enabled": false
+        },
+        "MessageUpdaterAPI": {
+            "enabled": true
+        },
+        "AppleMusicRichPresence": {
+            "enabled": false
+        },
+        "CopyEmojiMarkdown": {
+            "enabled": false
+        },
+        "DontRoundMyTimestamps": {
+            "enabled": false
+        },
+        "MaskedLinkPaste": {
+            "enabled": false
+        },
+        "NoOnboardingDelay": {
+            "enabled": false
+        },
+        "Summaries": {
+            "enabled": false
+        },
+        "WatchTogetherAdblock": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -673,6 +697,6 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1716404315401
+        "settingsSyncVersion": 1718643630164
     }
 }
