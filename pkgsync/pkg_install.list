@@ -831,7 +831,6 @@ flite
 mediainfo
 playerctl
 noise-suppression-for-voice
-easyeffects
 
 ## GUIS
 ambix
@@ -846,8 +845,9 @@ reaper
 ocenaudio-bin
 ardour
 coppwr-bin
-
-
+easyeffects
+kid3
+nicotine+
 
 
 # GRAPHICS, VIDEO
