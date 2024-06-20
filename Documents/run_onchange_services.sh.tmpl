@@ -128,6 +128,11 @@ enable_service psd 1
 {{ if eq .chezmoi.hostname "sauron" }}
 enable_service openrgb.service 1
 enable_service openrgb_keyboard.service 1
+
+enable_service nvidia-hibernate.service
+enable_service nvidia-resume.service
+enable_service nvidia-suspend.service
+enable_service nvidia-persistenced.service
 {{ end }}
 
 enable_service polkit.service
