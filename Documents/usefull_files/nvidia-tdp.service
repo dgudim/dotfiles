@@ -1,0 +1,6 @@
+[Unit]
+Description=Set NVIDIA power limit above default
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/nvidia-smi -pl 204
