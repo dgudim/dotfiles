@@ -1,7 +1,6 @@
 # No touchpad and battery
 gestures
 libinput-gestures
-powertop
 
 # Replaced by opencv-cuda
 opencv
