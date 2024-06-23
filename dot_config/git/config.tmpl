@@ -141,6 +141,8 @@
     ba = branch -ra
     bd = branch -d
     ca = commit --amend
+    sync = "!git pr && git pu"
+    btemp = "!git bd temp && git cb temp"
 
 [branch]
 	sort = -committerdate
