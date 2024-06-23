@@ -98,6 +98,7 @@ enable_service adb.service
 
 enable_service updatedb.timer
 {{ if eq .chezmoi.hostname "portable-heater" }}
+    # Disable
     enable_service fstrim.timer 0 1
 {{ else }}
     enable_service fstrim.timer
@@ -121,8 +122,11 @@ enable_service systemd-boot-update
 
 enable_service docker.socket 1
 
-{{ if (or (eq .chezmoi.hostname "sauron") (eq .chezmoi.hostname "portable-heater")) }}
+{{ if eq .chezmoi.hostname "sauron" }}
 enable_service psd 1
+{{ else }}
+# Disable
+enable_service psd 1 1
 {{ end }}
 
 {{ if eq .chezmoi.hostname "sauron" }}
