@@ -117,6 +117,9 @@ alias git_vis='gource --colour-images -a 3 -s 1 -c 3'
 alias labi_cpp='cd /home/kloud/Documents/shared/_projects/Cpp_stuff/cpp-labs/compiled_binaries_linux/ && ./menu.sh'
 alias systeminfo='inxi -v 8'
 alias ports='sudo nmap -p- -sV -O'
+rdns() {
+	nmap -R -sn "$@" | grep for | cut -d " " -f 5-
+}
 alias lspci='lspci -k'
 
 alias weather='curl wttr.in'
