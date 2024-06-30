@@ -608,6 +608,7 @@ ruff
 twine
 yapf
 mypy
+python-pipx
 pipxu
 python-djlint
 codon-bin
