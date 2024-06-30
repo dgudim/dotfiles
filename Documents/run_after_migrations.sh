@@ -47,4 +47,7 @@ rm -rf /home/kloud/.local/share/applications/ksysguard.desktop
 # Delete sensitive data
 secret-tool clear user kloud || true
 
+# Replaced with pipxu
+rm -rfv /home/kloud/.local/share/pipx
+
 echo -e "${L_GREEN}Done!$NC\n"

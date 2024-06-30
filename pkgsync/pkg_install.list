@@ -596,6 +596,7 @@ shfmt
 
 ## PYTHON
 python
+uv
 ipython
 bpython
 python-lsp-black
@@ -607,12 +608,13 @@ ruff
 twine
 yapf
 mypy
-python-pipx
+pipxu
 python-djlint
 codon-bin
 xontrib-fzf-widgets
 
 ### LIBS
+python-uv
 python-reportlab
 python-tinycss2
 python-pyaml

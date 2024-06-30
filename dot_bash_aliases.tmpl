@@ -16,6 +16,9 @@ export PAGER='moar'
 alias cat='bat'
 alias man='MOAR="--no-linenumbers --wrap" && batman'
 
+# Faster pipx (Trick the completion into working, as there are no native completions for pipxus)
+alias pipx=pipxu
+
 # Git and chezmoi aliases
 alias gpul='git pr'
 alias gpus='git pu'

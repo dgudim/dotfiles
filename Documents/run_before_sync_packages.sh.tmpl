@@ -4,7 +4,7 @@ cd "{{.chezmoi.sourceDir}}/pkgsync"
 bash pkgsync.sh
 
 install-pipx() {
-    pipx list | grep "\- " | cut -d ' ' -f 6 | grep "${2:-${1:-error}}" > /dev/null || pipx install "$1"
+    pipxu list | grep "\- " | cut -d ' ' -f 6 | grep "${2:-${1:-error}}" > /dev/null || pipxu install "$1"
 }
 
 install-pipx paginate-json
