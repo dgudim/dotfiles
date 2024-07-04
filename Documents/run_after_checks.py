@@ -208,7 +208,8 @@ firefox_settings = [
     "toolkit.legacyUserProfileCustomizations.stylesheets",
     "browser.translations.automaticallyPopup",
     "font.name-list.emoji", # Noto Color Emoji
-    "media.getusermedia.agc_enabled"
+    "media.getusermedia.agc_enabled",
+    "extensions.quarantinedDomains.enabled"
 ]
 
 if len(firefox_profiles) == 0:
