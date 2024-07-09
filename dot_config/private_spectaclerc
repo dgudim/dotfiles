@@ -1,0 +1,15 @@
+[Annotations]
+annotationToolType=10
+rectangleStrokeColor=212,0,4
+textFont=Segoe UI,48,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+textFontColor=255,0,0
+
+[General]
+clipboardGroup=PostScreenshotCopyImage
+
+[ImageSave]
+lastImageSaveLocation=file:///home/kloud/Pictures/Screenshots/Screenshot_20240609_193453.png
+translatedScreenshotsFolder=Screenshots
+
+[VideoSave]
+translatedScreencastsFolder=Screencasts
