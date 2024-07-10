@@ -670,6 +670,7 @@ python-ulid
 python-click-completion
 python-shellingham
 python-pypdf
+python-semver
 uvicorn
 
 ## ANDROID AND JAVA
