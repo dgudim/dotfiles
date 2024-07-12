@@ -71,6 +71,9 @@ Logfile=
 Sound=/usr/share/sounds/subnautica_theme/general_info.ogg
 TTS=
 
+[Event/messageQuestion]
+Sound=file:///usr/share/sounds/subnautica_theme/general_question2.ogg
+
 [Event/messageWarning]
 Action=Sound
 Execute=
@@ -118,9 +121,9 @@ Action=Sound
 Execute=
 Logfile=
 {{- if eq .chezmoi.hostname "sauron" }}
-Sound=/usr/share/sounds/subnautica_theme/session_welcome_long.ogg
+Sound=file:///usr/share/sounds/subnautica_theme/session_welcome_long.ogg
 {{- else }}
-Sound=/usr/share/sounds/edexui/theme.ogg
+Sound=file:///usr/share/sounds/misc/powerup_creme.ogg
 {{- end }}
 TTS=
 
