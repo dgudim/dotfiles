@@ -16,12 +16,14 @@ cd /home/kloud/Documents/shared/_Personal/KDE-loginscreens
 bash install.sh
 echo -e "${L_GREEN}Kde loginscreens installed!$NC\n"
 
-echo -e "${L_PURPLE}Installing subnautica and edexui sound themes...$NC"
+echo -e "${L_PURPLE}Installing subnautica, edexui and misc sound themes...$NC"
 cd /home/kloud/Documents/shared/_Personal/Sounds/subnautica_sound_theme
 bash install.sh
 cd /home/kloud/Documents/shared/_Personal/Sounds/edexui
 bash install.sh
-echo -e "${L_GREEN}Subnautica and edexui sound themes installed!$NC\n"
+cd /home/kloud/Documents/shared/_Personal/Sounds/misc
+bash install.sh
+echo -e "${L_GREEN}Subnautica, edexui and misc sound themes installed!$NC\n"
 
 # theme hash: {{ include "dot_local/share/icons/icons.tar.gz" | sha256sum }}
 # theme hash: {{ include "dot_local/share/yakuake/skins/gruvbox-dark.tar.gz" | sha256sum }}
