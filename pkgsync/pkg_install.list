@@ -145,6 +145,7 @@ udisks2-lvm2
 dmraid
 xfsprogs
 jfsutils
+udftools
 e2fsprogs
 fatresize
 exfatprogs
