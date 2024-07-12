@@ -110,13 +110,6 @@ Logfile=
 Sound=/usr/share/sounds/subnautica_theme/general_error3.ogg
 TTS=
 
-[Event/sambaConfigFileMissing]
-Action=Sound|Popup
-Execute=
-Logfile=
-Sound=/usr/share/sounds/subnautica_theme/general_error.ogg
-TTS=
-
 [Event/shareMounted]
 Action=Sound|Popup
 Execute=

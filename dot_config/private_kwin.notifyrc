@@ -1,10 +1,3 @@
-[Event/compositingsuspendeddbus]
-Action=Sound|Popup
-Execute=
-Logfile=
-Sound=/usr/share/sounds/subnautica_theme/compositing_off.ogg
-TTS=
-
 [Event/graphicsreset]
 Action=Sound|Popup
 Execute=
