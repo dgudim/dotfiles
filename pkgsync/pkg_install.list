@@ -118,6 +118,8 @@ tpm2-tools
 dos2unix
 
 ## PACMAN HOOKS AND SCRIPTS
+pacmanlogviewer
+octopi
 pacman-systemd-inhibit
 eos-hooks
 informant
@@ -873,6 +875,7 @@ gst-plugin-pipewire
 gst-plugin-qmlgl
 gst-plugin-libcamera
 colord
+jpegoptim
 atomicparsley
 
 ## CLIS
