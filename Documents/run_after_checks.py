@@ -209,7 +209,9 @@ firefox_settings = [
     "browser.translations.automaticallyPopup",
     "font.name-list.emoji", # Noto Color Emoji
     "media.getusermedia.agc_enabled",
-    "extensions.quarantinedDomains.enabled"
+    "extensions.quarantinedDomains.enabled",
+    "dom.private-attribution.submission.enabled",
+    "browser.urlbar.suggest.trending"
 ]
 
 if len(firefox_profiles) == 0:
