@@ -50,7 +50,7 @@
             "enabled": true
         },
         "MessagePopoverAPI": {
-            "enabled": false
+            "enabled": true
         },
         "NoticesAPI": {
             "enabled": true
@@ -121,7 +121,8 @@
             "enabled": true
         },
         "Experiments": {
-            "enabled": false
+            "enabled": true,
+            "toolbarDevMenu": false
         },
         "F8Break": {
             "enabled": false
@@ -228,7 +229,8 @@
             "ignoreChannels": "",
             "ignoreGuilds": "",
             "logEdits": true,
-            "logDeletes": true
+            "logDeletes": true,
+            "collapseDeleted": false
         },
         "MessageTags": {
             "enabled": false
@@ -448,7 +450,7 @@
             "enabled": false
         },
         "TypingIndicator": {
-            "enabled": false
+            "enabled": true
         },
         "TypingTweaks": {
             "enabled": true,
@@ -457,10 +459,10 @@
             "alternativeFormatting": true
         },
         "Unindent": {
-            "enabled": false
+            "enabled": true
         },
         "UnsuppressEmbeds": {
-            "enabled": false
+            "enabled": true
         },
         "UrbanDictionary": {
             "enabled": false
@@ -476,7 +478,7 @@
             "enabled": false
         },
         "VoiceChatDoubleClick": {
-            "enabled": false
+            "enabled": true
         },
         "VcNarrator": {
             "enabled": false
@@ -493,7 +495,9 @@
             "enabled": false
         },
         "VoiceMessages": {
-            "enabled": false
+            "enabled": true,
+            "noiseSuppression": true,
+            "echoCancellation": true
         },
         "WebContextMenus": {
             "enabled": false,
@@ -577,31 +581,43 @@
             "enabled": false
         },
         "DisableCallIdle": {
-            "enabled": false
+            "enabled": true
         },
         "ChatInputButtonAPI": {
             "enabled": false
         },
         "NewGuildSettings": {
-            "enabled": false
+            "enabled": false,
+            "guild": true,
+            "messages": 3,
+            "everyone": true,
+            "role": true,
+            "highlights": true,
+            "events": true,
+            "showAllChannels": true
         },
         "ShowHiddenThings": {
             "enabled": false
         },
         "BetterRoleContext": {
-            "enabled": false
+            "enabled": true
         },
         "BetterSessions": {
-            "enabled": false
+            "enabled": true,
+            "backgroundCheck": false
         },
         "BetterSettings": {
-            "enabled": false
+            "enabled": true,
+            "disableFade": true,
+            "organizeMenu": true,
+            "eagerLoad": false
         },
         "FriendsSince": {
-            "enabled": false
+            "enabled": true
         },
         "ImplicitRelationships": {
-            "enabled": false
+            "enabled": true,
+            "sortByAffinity": true
         },
         "OverrideForumDefaults": {
             "enabled": false
@@ -622,19 +638,23 @@
             "enabled": false
         },
         "CtrlEnterSend": {
-            "enabled": false
+            "enabled": true,
+            "submitRule": "ctrl+enter",
+            "sendMessageInTheMiddleOfACodeBlock": true
         },
         "CustomIdle": {
-            "enabled": false
+            "enabled": true,
+            "idleTimeout": 4.964788732394366,
+            "remainInIdle": true
         },
         "ImageLink": {
-            "enabled": false
+            "enabled": true
         },
         "MessageLatency": {
             "enabled": false
         },
         "NoDefaultHangStatus": {
-            "enabled": false
+            "enabled": true
         },
         "NoServerEmojis": {
             "enabled": false
@@ -646,22 +666,22 @@
             "enabled": false
         },
         "ReplyTimestamp": {
-            "enabled": false
+            "enabled": true
         },
         "ShowTimeoutDuration": {
             "enabled": false
         },
         "ValidReply": {
-            "enabled": false
+            "enabled": true
         },
         "VoiceDownload": {
-            "enabled": false
+            "enabled": true
         },
         "WebScreenShareFixes": {
             "enabled": true
         },
         "ServerInfo": {
-            "enabled": false
+            "enabled": true
         },
         "MessageUpdaterAPI": {
             "enabled": true
@@ -670,13 +690,14 @@
             "enabled": false
         },
         "CopyEmojiMarkdown": {
-            "enabled": false
+            "enabled": true,
+            "copyUnicode": true
         },
         "DontRoundMyTimestamps": {
             "enabled": false
         },
         "MaskedLinkPaste": {
-            "enabled": false
+            "enabled": true
         },
         "NoOnboardingDelay": {
             "enabled": false
@@ -685,9 +706,20 @@
             "enabled": false
         },
         "WatchTogetherAdblock": {
-            "enabled": false
+            "enabled": true
         },
         "UserSettingsAPI": {
+            "enabled": true
+        },
+        "ConsoleJanitor": {
+            "enabled": false,
+            "disableNoisyLoggers": false,
+            "disableSpotifyLogger": true
+        },
+        "MentionAvatars": {
+            "enabled": true
+        },
+        "ShowAllRoles": {
             "enabled": true
         }
     },
@@ -701,6 +733,6 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1719155420533
+        "settingsSyncVersion": 1721409946175
     }
 }
