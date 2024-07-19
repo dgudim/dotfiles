@@ -18,5 +18,12 @@ wmclass=realvnc-vncviewer
 wmclassmatch=1
 
 [General]
-count=2
-rules=1,2
+count=3
+rules=1,2,e2941418-3813-40c3-b24b-73d47592112d
+
+[e2941418-3813-40c3-b24b-73d47592112d]
+Description=Life is strange rules
+disableglobalshortcuts=true
+disableglobalshortcutsrule=2
+wmclass=steam_app_319630
+wmclassmatch=1
