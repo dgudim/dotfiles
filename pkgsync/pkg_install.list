@@ -739,8 +739,6 @@ asar
 
 # NETWORKING
 dhclient
-dnsmasq
-openresolv
 net-tools
 networkmanager
 networkmanager-openvpn
@@ -793,7 +791,6 @@ torsocks
 vopono-bin
 nmap
 ethtool
-netctl
 iptraf-ng
 iperf3
 xh
