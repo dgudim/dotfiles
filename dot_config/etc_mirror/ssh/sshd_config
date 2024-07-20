@@ -79,7 +79,9 @@ GSSAPIAuthentication no
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
 # and KbdInteractiveAuthentication to 'no'.
-UsePAM no
+#
+# For systemd remote --user invocations
+UsePAM yes
 
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes

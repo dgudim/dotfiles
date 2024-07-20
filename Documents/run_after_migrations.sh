@@ -50,4 +50,7 @@ secret-tool clear user kloud || true
 # Replaced with pipxu
 rm -rfv /home/kloud/.local/share/pipx
 
+# Symlink to stub systemd-resolved stub resolver
+[ -L /etc/resolv.conf.bak ] || sudo ln -fvs /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
 echo -e "${L_GREEN}Done!$NC\n"
