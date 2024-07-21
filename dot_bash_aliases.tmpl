@@ -135,6 +135,18 @@ alias qr='qrencode -t ansiutf8'
 
 alias reboot='sudo reboot now'
 alias shut='sudo shutdown now'
+systemctl() {
+	if [ "$1" == "poweroff" ]; then
+		arr[0]="/usr/share/sounds/misc/turret-goodnight.mp3"
+		arr[1]="/usr/share/sounds/misc/we-are-done-here.oga"
+
+		rand=$(( $RANDOM % 2 ))
+
+		mpv --no-terminal "${arr[$rand]}" 2&>1 1>/dev/null
+	fi
+
+	/usr/bin/systemctl "$@"
+}
 
 alias reload='source ~/.bashrc'
 {{ if eq .chezmoi.hostname "nuclear-submarine" }}
