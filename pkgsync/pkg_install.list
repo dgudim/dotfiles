@@ -740,6 +740,7 @@ asar
 # NETWORKING
 dhclient
 net-tools
+systemd-resolvconf
 networkmanager
 networkmanager-openvpn
 networkmanager-openconnect
@@ -762,6 +763,7 @@ wireless-regdb
 wireless_tools
 vpnc
 bind
+ldns
 ndisc6
 gnu-netcat
 iptables-nft
@@ -794,12 +796,14 @@ ethtool
 iptraf-ng
 iperf3
 xh
+ngrep
 
 ## GUIS
 protonvpn
 postman9-bin
 wireshark-qt
 zenmap
+capnet-assist
 
 ## GNS3
 gns3-server
@@ -872,8 +876,10 @@ gst-plugin-pipewire
 gst-plugin-qmlgl
 gst-plugin-libcamera
 colord
+libuvc
 jpegoptim
 atomicparsley
+akvcam-dkms
 
 ## CLIS
 mplayer
@@ -885,6 +891,7 @@ haruna
 smplayer
 hugin
 obs-studio-tytan652
+obs-shaderfilter-git
 blender
 krita
 imv
@@ -910,6 +917,8 @@ czkawka-gui-bin
 kolourpaint
 curlew
 kamoso
+webcamoid
+cameractrls
 
 
 
