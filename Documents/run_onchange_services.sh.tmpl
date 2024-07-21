@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# {{ output "sh" "-c" "cat /home/kloud/.config/chezmoi/chezmoi.toml | sha1sum" | trim }}
+
 set -e
 # set -u
 set -o pipefail
