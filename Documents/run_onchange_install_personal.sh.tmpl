@@ -10,6 +10,7 @@ NC='\033[0m'
 # {{ output "sh" "-c" "cd /home/kloud/Documents/shared/_Personal                               && tar cf - KDE-loginscreens | sha1sum" | trim }}
 # {{ output "sh" "-c" "cd /home/kloud/Documents/shared/_Personal/Sounds/subnautica_sound_theme && tar cf - subnautica_theme | sha1sum" | trim }}
 # {{ output "sh" "-c" "cd /home/kloud/Documents/shared/_Personal/Sounds                        && tar cf - edexui           | sha1sum" | trim }}
+# {{ output "sh" "-c" "cd /home/kloud/Documents/shared/_Personal/Sounds                        && tar cf - misc             | sha1sum" | trim }}
 
 echo -e "${L_PURPLE}Installing kde loginscreens...$NC"
 cd /home/kloud/Documents/shared/_Personal/KDE-loginscreens
