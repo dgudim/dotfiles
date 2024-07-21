@@ -142,10 +142,10 @@ systemctl() {
 
 		rand=$(( $RANDOM % 2 ))
 
-		mpv --no-terminal "${arr[$rand]}" 2&>1 1>/dev/null
+		mpv --no-terminal "${arr[$rand]}" 2&>1 1>/dev/null && /usr/bin/systemctl "$@"
+	else
+		/usr/bin/systemctl "$@"
 	fi
-
-	/usr/bin/systemctl "$@"
 }
 
 alias reload='source ~/.bashrc'
