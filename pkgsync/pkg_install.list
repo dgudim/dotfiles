@@ -739,6 +739,7 @@ asar
 
 # NETWORKING
 dhclient
+dnsmasq
 net-tools
 systemd-resolvconf
 networkmanager
