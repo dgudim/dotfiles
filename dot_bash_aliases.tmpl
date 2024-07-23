@@ -16,7 +16,10 @@ export PAGER='moar'
 alias cat='bat'
 alias man='MOAR="--no-linenumbers --wrap" && batman'
 
-# Faster pipx (Trick the completion into working, as there are no native completions for pipxus)
+alias klogs='sudo journalctl -e -f -k -b | ccze -A -o nolookups | spacer'
+alias logs='sudo journalctl -e -f -b | ccze -A -o nolookups | spacer'
+
+# Faster pipx (Trick the completion into working, as there are no native completions for pipxu)
 alias pipx=pipxu
 
 # Git and chezmoi aliases
@@ -27,10 +30,41 @@ alias gch='git co'
 alias gchb='git cb'
 alias gfc="git fetch origin --prune && for branch in \$(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '\$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", \$1); print \$1}'); do git branch -D \$branch; done && git maintenance run --auto && git maintenance run --task=gc && git fsck"
 
-# Scrcpy aliases
+# Adb aliases
 aconn() {
 	adb connect kloud-phone:$1
 	adb devices
+}
+logcat() {
+
+	if [ "$1" = "all" ]; then
+		adb logcat | logcat-colorize
+		exit 0
+	fi
+
+	if [ "$1" = "raw" ]; then
+		adb logcat
+		exit 0
+	fi
+
+	APP="$(adb shell cmd package list packages | cut -d':' -f 2 | fzf)"
+
+	if [ -z ${PID-} ]; then
+		echo "No app specified"
+		exit 1
+	fi
+
+	PID="$(adb shell ps | grep $APP | tr -s [:space:] ' ' | cut -d' ' -f2)"
+
+	if [ -z ${PID-} ]; then
+	    echo "Showing all logs"
+	    sleep 2
+	    adb logcat | logcat-colorize
+	else
+	    echo "App PID: $PID"
+	    sleep 2
+	    adb logcat | grep -F "$PID" | logcat-colorize
+	fi
 }
 mirror-screen() {
 	scrcpy --no-audio

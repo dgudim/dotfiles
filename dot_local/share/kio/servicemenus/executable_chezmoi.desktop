@@ -5,11 +5,19 @@ Exec=notify-send "Added %U" "$(chezmoi add '%U' > /dev/null && chezmoi git statu
 Name=Chezmoi add
 Icon=node-add
 
+[Desktop Action chezmoi-add-encrypt]
+
+Exec=notify-send "Added %U" "$(chezmoi add --encrypt '%U' > /dev/null && chezmoi git status)"
+
+Name=Chezmoi add encrypted
+Icon=folder-locked-symbolic
+
 [Desktop Entry]
-Actions=chezmoi-add
+Actions=chezmoi-add;chezmoi-add-encrypt
 
 MimeType=application/octet-stream
 
-ServiceTypes=KonqPopupMenu/Plugin
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
 X-KDE-Priority=TopLevel
+X-KDE-Submenu=Chezmoi

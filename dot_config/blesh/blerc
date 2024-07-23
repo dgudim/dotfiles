@@ -3,9 +3,6 @@
 ble-sabbrev "~down=$HOME/Downloads"
 ble-sabbrev "~proj=$HOME/Documents/shared/_projects/"
 ble-sabbrev L='| moar'
-ble-sabbrev klogs='sudo journalctl -e -f -k -b | ccze -A -o nolookups | spacer'
-ble-sabbrev logs='sudo journalctl -e -f -b | ccze -A -o nolookups | spacer'
-ble-sabbrev gmount='gio mount'
 ble-sabbrev -m @@='ble-palette'
 ble-sabbrev -m reload='reload'
 
