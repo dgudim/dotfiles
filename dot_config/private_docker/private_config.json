@@ -1,0 +1,6 @@
+{
+	"auths": {
+		"nexus.bs2.lt": {}
+	},
+	"credsStore": "secretservice"
+}
