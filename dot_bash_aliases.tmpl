@@ -192,6 +192,8 @@ systemctl() {
 	fi
 }
 
+alias browser-hist='sqlite3 ~/.mozilla/firefox/*.default-release/places.sqlite "SELECT url FROM moz_places order by last_visit_date"'
+
 alias reload='source ~/.bashrc'
 {{ if eq .chezmoi.hostname "nuclear-submarine" }}
 alias grub-reload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
