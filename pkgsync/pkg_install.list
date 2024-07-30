@@ -30,6 +30,7 @@ docker-buildx
 docker-scout
 docker-compose
 docker-rootless-extras
+docker-credential-secretservice-bin
 
 
 
