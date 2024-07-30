@@ -23,6 +23,10 @@ alias logs='sudo journalctl -e -f -b | ccze -A -o nolookups | spacer'
 alias pipx=pipxu
 
 # Git and chezmoi aliases
+alias gcomm='git commit-def'
+alias gcomm-empty='git commit-empty'
+alias gcomm-ren='git commit-rename'
+alias gcomm-am='git commit-am'
 alias gpul='git pr'
 alias gpus='git pu'
 alias gpusf='git puf'
@@ -153,7 +157,13 @@ alias mkdir='mkdir -pv'
 alias git_vis='gource --colour-images -a 3 -s 1 -c 3'
 alias labi_cpp='cd /home/kloud/Documents/shared/_projects/Cpp_stuff/cpp-labs/compiled_binaries_linux/ && ./menu.sh'
 alias systeminfo='inxi -v 8'
-alias ports='sudo nmap -p- -sV -O'
+ports() {
+	if [ "$1" == "localhost" ]; then
+		sudo netstat -tulpn | grep LISTEN
+		return 0
+	fi
+	sudo nmap -p- -sV -O "$1"
+}
 rdns() {
 	nmap -R -sn "$@" | grep for | cut -d " " -f 5-
 }
