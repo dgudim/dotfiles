@@ -1,0 +1,25 @@
+#!/usr/bin/env chezmoi_modify_manager
+
+source auto
+
+# Add your ignores and transforms here
+#ignore section "my-section"
+#ignore "exact section name without brackets" "exact key name"
+#ignore regex "section.*" "key_prefix_.*"
+#transform "section" "key" transform_name read="the docs" for="more detail on transforms"
+
+ignore section "$Version"
+ignore section "DirSelect Dialog"
+ignore section "KScreen"
+ignore section "KShortcutsDialog Settings"
+ignore "General" "ColorSchemeHash"
+ignore "General" "LastUsedCustomAccentColor"
+
+
+set "General" "font" "Segoe UI,{{ .system.fontsize }},-1,5,400,0,0,0,0,0,0,0,0,0,0,1" separator="="
+set "WM" "activeFont" "Segoe UI,{{ .system.fontsize }},-1,5,400,0,0,0,0,0,0,0,0,0,0,1" separator="="
+set "General" "menuFont" "Segoe UI,{{ .system.fontsize }},-1,5,400,0,0,0,0,0,0,0,0,0,0,1" separator="="
+set "General" "toolBarFont" "Segoe UI,{{ .system.fontsize }},-1,5,400,0,0,0,0,0,0,0,0,0,0,1" separator="="
+set "General" "smallestReadableFont" "Segoe UI,{{ sub .system.fontsize 2 }},-1,5,400,0,0,0,0,0,0,0,0,0,0,1" separator="="
+set "General" "fixed" "Monospace,{{ sub .system.fontsize 1 }},-1,5,50,0,0,0,0,0" separator="="
+

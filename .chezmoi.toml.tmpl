@@ -1,5 +1,5 @@
 {{- $konsole_fontsize := promptIntOnce . "konsole.fontsize" "Konsole font size" -}}
-{{- $kate_fontsize := promptIntOnce . "kate.fontsize" "Kate font size" -}}
+{{- $system_fontsize := promptIntOnce . "system.fontsize" "System font size (kate + system)" -}}
 {{- $git_username := promptStringOnce . "git.git_username" "Git username" -}}
 {{- $git_email := promptStringOnce . "git.git_email" "Git email" -}}
 
@@ -13,8 +13,8 @@
 [data.konsole]
     fontsize = {{ $konsole_fontsize }}
 
-[data.kate]
-    fontsize = {{ $kate_fontsize }}
+[data.system]
+    fontsize = {{ $system_fontsize }}
 
 [data.git]
     git_username = {{ $git_username | quote }}
