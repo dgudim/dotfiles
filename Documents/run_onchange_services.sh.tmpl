@@ -125,12 +125,7 @@ enable_service systemd-boot-update
 
 enable_service docker.socket 1
 
-{{ if eq .chezmoi.hostname "sauron" }}
 enable_service psd 1
-{{ else }}
-# Disable
-enable_service psd 1 1
-{{ end }}
 
 {{ if eq .chezmoi.hostname "sauron" }}
 enable_service openrgb.service 1
