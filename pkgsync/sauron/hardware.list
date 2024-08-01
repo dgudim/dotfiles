@@ -35,7 +35,9 @@ linux-steam-integration
 steam-native-runtime
 lib32-gamemode
 gamemode
+gamescope
 lutris-git
+sunshine
 
 ## Browser sync to RAM
 profile-sync-daemon
@@ -46,3 +48,6 @@ intellij-idea-ultimate-edition
 intellij-idea-ultimate-edition-jre
 zulu-jdk-fx-bin
 postgresql
+
+# Stuff
+openbox

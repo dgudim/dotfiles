@@ -23,6 +23,7 @@ linux-steam-integration
 steam-native-runtime
 lib32-gamemode
 gamemode
+moonlight-qt
 
 # For java classes
 intellij-idea-ultimate-edition
