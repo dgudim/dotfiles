@@ -44,19 +44,19 @@ logcat() {
 
 	if [ "$1" = "all" ]; then
 		adb logcat | logcat-colorize
-		exit 0
+		return 0
 	fi
 
 	if [ "$1" = "raw" ]; then
 		adb logcat
-		exit 0
+		return 0
 	fi
 
 	APP="$(adb shell cmd package list packages | cut -d':' -f 2 | fzf)"
 
 	if [ -z ${PID-} ]; then
 		echo "No app specified"
-		exit 1
+		return 1
 	fi
 
 	PID="$(adb shell ps | grep $APP | tr -s [:space:] ' ' | cut -d' ' -f2)"
@@ -122,7 +122,7 @@ gop() {
 	elif [[ -f $file ]]; then
 		xdg-open "$file"
 	else
-		exit 0
+		return 0
 	fi
 }
 alias brl='br -sdp'
