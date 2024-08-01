@@ -203,8 +203,10 @@ sudo chmod 1770 /var/lib/samba/usershares
 
 enable_service smb.service
 enable_service nmb.service
-enable_service wsdd.service
 
 echo -e "${L_GREEN}Samba setup done!$NC\n"
 
 {{- end }}
+
+enable_service wsdd.service
+enable_service winbind.service
