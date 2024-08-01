@@ -471,6 +471,11 @@ dbeaver-plugin-svg-format
 yt-dlp-drop-in
 xorg-xhost
 
+## Browser sync to RAM
+profile-sync-daemon
+profile-sync-daemon-thunderbird
+
+
 
 
 # INTEGRATIONS

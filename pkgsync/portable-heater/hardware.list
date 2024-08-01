@@ -35,10 +35,6 @@ steam-native-runtime
 lib32-gamemode
 gamemode
 
-## Browser sync to RAM
-profile-sync-daemon
-profile-sync-daemon-thunderbird
-
 # Safety
 sync-pacman-hook-git
 

@@ -22,10 +22,6 @@ snapper
 snapper-gui-git
 fprintd
 
-## Browser sync to RAM
-profile-sync-daemon
-profile-sync-daemon-thunderbird
-
 # Not hardware, but work stuff instead
 slack-desktop-wayland
 realvnc-vnc-viewer
