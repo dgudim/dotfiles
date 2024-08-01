@@ -189,6 +189,9 @@ add_group informant
 add_group kvm # For qemu
 add_group libvirt
 
+enable_service wsdd.service
+enable_service winbind.service
+
 echo -e "${L_GREEN}Group setup done!$NC\n"
 
 {{- if eq .samba.enabled "true" }}
@@ -207,6 +210,3 @@ enable_service nmb.service
 echo -e "${L_GREEN}Samba setup done!$NC\n"
 
 {{- end }}
-
-enable_service wsdd.service
-enable_service winbind.service
