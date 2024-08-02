@@ -31,6 +31,7 @@ docker-scout
 docker-compose
 docker-rootless-extras
 docker-credential-secretservice-bin
+regclient-regctl
 
 
 
@@ -684,6 +685,13 @@ python-shellingham
 python-pypdf
 python-semver
 python-watchdog
+python-fastimport
+python-genshi
+python-gpgme
+python-js2py
+python-poetry
+python-pyinotify
+python-tzlocal
 uvicorn
 
 ## ANDROID AND JAVA
