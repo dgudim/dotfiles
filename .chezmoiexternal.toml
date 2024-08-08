@@ -3,6 +3,11 @@
     url = "https://gitlab.com/cscs/maxperfwiz/raw/master/maxperfwiz"
     refreshPeriod = "168h"
 
+["Documents/usefull_files/least_used.sh"]
+    type = "file"
+    url = "https://gist.githubusercontent.com/mtekman/9769fa3eb28dd0dbdd1e8ce802157e95/raw"
+    refreshPeriod = "168h"
+
 [".config/blesh/modules/forkrun.bash"]
     type = "file"
     url = "https://raw.githubusercontent.com/jkool702/forkrun/main/forkrun.bash"

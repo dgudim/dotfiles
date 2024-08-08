@@ -9,6 +9,7 @@ detailViewIconSize=256
 iconViewIconSize=64
 
 [KonsoleWindow]
+RememberWindowSize=false
 UseSingleInstance=true
 
 [MainWindow]
@@ -17,6 +18,9 @@ ToolBarsMovable=Disabled
 [Open-with settings]
 CompletionMode=1
 History=kate
+
+[SearchSettings]
+SearchRegExpression=true
 
 [TabBar]
 CloseTabOnMiddleMouseButton=true

@@ -57,7 +57,7 @@ ble-import -d ~/.config/blesh/modules/fzf.bash
 ble-import -d ~/.config/blesh/modules/hoard.bash
 ble-import -d ~/.config/blesh/modules/atuin.bash
 ble-import -d ~/.config/blesh/modules/thefuck.bash
-ble-import -d ~/.config/blesh/modules/forkrun.bash
+# ble-import -d ~/.config/blesh/modules/forkrun.bash
 
 ##-----------------------------------------------------------------------------
 ## Rendering options

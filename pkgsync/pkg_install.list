@@ -126,7 +126,6 @@ pacman-systemd-inhibit
 eos-hooks
 informant
 pacman-pstatus
-check-broken-packages-pacman-hook-git
 pacman-log-orphans-hook
 pacdiff-pacman-hook-git
 rebuild-detector

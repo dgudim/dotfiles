@@ -1,5 +1,6 @@
 [Show]
 chezmoi-add=true
+chezmoi-add-encrypt=true
 compressfileitemaction=true
 decrypt-view=true
 encrypt=true
