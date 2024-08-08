@@ -160,7 +160,7 @@ alias labi_cpp='cd /home/kloud/Documents/shared/_projects/Cpp_stuff/cpp-labs/com
 alias systeminfo='inxi -v 8'
 ports() {
 	if [ "$1" == "localhost" ]; then
-		sudo netstat -tulpn | grep LISTEN
+		sudo ss -unplut
 		return 0
 	fi
 	sudo nmap -p- -sV -O "$@"
