@@ -163,7 +163,7 @@ ports() {
 		sudo netstat -tulpn | grep LISTEN
 		return 0
 	fi
-	sudo nmap -p- -sV -O "$1"
+	sudo nmap -p- -sV -O "$@"
 }
 rdns() {
 	nmap -R -sn "$@" | grep for | cut -d " " -f 5-
