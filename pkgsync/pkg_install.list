@@ -168,6 +168,12 @@ gocryptfs
 ntfs-3g
 fsarchiver
 
+### GUIs
+gparted
+kdiskmark
+gnome-disk-utility
+partitionmanager
+
 
 
 # FONTS
@@ -275,9 +281,6 @@ kdiff3
 kompare
 keepassxc
 gource
-gparted
-gnome-disk-utility
-partitionmanager
 onlyoffice-bin
 obsidian
 pinta
@@ -692,6 +695,7 @@ python-js2py
 python-poetry
 python-pyinotify
 python-tzlocal
+python-pygraphviz
 uvicorn
 
 ## ANDROID AND JAVA
