@@ -86,5 +86,6 @@
  </Menu>
  <ActionProperties>
   <Action iconText="Dolphin" name="open-browser"/>
+  <Action name="edit_copy" shortcut="Ctrl+Shift+C; Alt+C"/>
  </ActionProperties>
 </gui>
