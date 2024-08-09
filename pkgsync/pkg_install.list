@@ -330,6 +330,8 @@ kommit
 cobang
 gtk3-demos
 gtk4-demos
+espanso-wayland-git
+espanso-gui
 
 
 
@@ -389,6 +391,7 @@ watchexec
 pipectl
 halp
 osquery
+translate-shell
 
 ## TUIs
 lazydocker
