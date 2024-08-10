@@ -35,6 +35,47 @@ alias gchb='git cb'
 alias gsync='git sync'
 alias gfc="git fetch origin --prune && for branch in \$(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '\$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", \$1); print \$1}'); do git branch -D \$branch; done && git maintenance run --auto && git maintenance run --task=gc && git fsck"
 
+git-merge-project-into-subfolder() {
+	# https://stackoverflow.com/questions/1425892/how-do-you-merge-two-git-repositories
+	if [ -z ${1+x} ]; then
+		echo "Repo to clone/merge is missing"
+		return 1
+	fi
+
+	if [ -z ${2+x} ]; then
+		echo "Branch name is missing"
+		return 1
+	fi
+
+	if [ -z ${3+x} ]; then
+		echo "Target directory name is missing"
+		return 1
+	fi
+
+	if ! git status; then
+	    echo "Current directory is not a git repo"
+		return 1
+	fi
+
+
+	orig_dir=$(pwd)
+	temp_repo_path=$(mktemp -d)
+
+	git clone "$1" "$temp_repo_path"
+	cd "$temp_repo_path" || return 1
+	git filter-repo --to-subdirectory-filter "$3"
+	cd "$orig_dir" || return 1
+
+	git remote add second-project "$temp_repo_path"
+	git fetch second-project --tags
+	git merge --allow-unrelated-histories "second-project/$2"
+	git remote remove second-project
+
+	/bin/rm -rf "$temp_repo_path"
+
+	echo "DONE!"
+}
+
 # Adb aliases
 aconn() {
 	adb connect kloud-phone:$1
