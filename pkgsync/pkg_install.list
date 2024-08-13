@@ -804,6 +804,7 @@ sipcalc
 openssh
 sshpass
 aria2
+bypass4netns
 
 ## CLIS
 traceroute
