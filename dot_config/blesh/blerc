@@ -5,6 +5,8 @@ ble-sabbrev "~proj=$HOME/Documents/shared/_projects/"
 ble-sabbrev L='| moar'
 ble-sabbrev -m @@='ble-palette'
 ble-sabbrev -m reload='reload'
+ble-sabbrev -m syscl-usr='systemctl --user'
+ble-sabbrev -m syscl-usr-enable='systemctl enable --user --now'
 
 function blerc/define-sabbrev-date {
   ble-sabbrev -m '\date'='ble/util/assign COMPREPLY "date +%F"'

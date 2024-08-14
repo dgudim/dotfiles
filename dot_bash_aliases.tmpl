@@ -214,7 +214,7 @@ alias i='kinfo'
 
 alias docker-clear-dagling='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 docker-view-parent() {
-	docker inspect --format='{{.Id}} {{.Parent}} {{.Config.Entrypoint}} {{.Config.Image}}' $(docker images --filter since="$1" -q)
+	docker inspect --format='{{"{{"}}.Id{{"}}"}} {{"{{"}}.Parent{{"}}"}} {{"{{"}}.Config.Entrypoint{{"}}"}} {{"{{"}}.Config.Image{{"}}"}}' $(docker images --filter since="$1" -q)
 }
 
 alias weather='curl wttr.in'
