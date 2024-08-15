@@ -37,6 +37,11 @@ matches:
       echo "var is unset"
       exit 1
     fi
+- trigger: :bash-file-check
+  replace: |
+    if [ ! -f /tmp/foo.txt ]; then
+      echo "File not found!"
+    fi
 - trigger: :bash-script-cd
   replace: |
     SCRIPT_PATH=${0%/*}

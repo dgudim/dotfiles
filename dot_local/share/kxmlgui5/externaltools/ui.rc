@@ -11,5 +11,6 @@
   <text translationDomain="kateexternaltoolsplugin">Main Toolbar</text>
   <Action name="externaltool_JSONFormatFullFile"/>
   <Action name="externaltool_XMLFormatFullFile"/>
+  <Action name="externaltool_Formatshellcode"/>
  </ToolBar>
 </gui>
