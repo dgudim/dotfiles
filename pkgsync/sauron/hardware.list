@@ -22,7 +22,7 @@ openrgb
 # Misc
 python39
 python310
-noisetorch
+noisetorch-git
 upscayl-bin
 ollama-cuda
 freecad
