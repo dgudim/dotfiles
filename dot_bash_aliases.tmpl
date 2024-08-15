@@ -1,10 +1,14 @@
 
-# Replace ls with exa
+################################################ Replace ls with exa ################################################
+
 alias ls='exa --all --icons --color=always --classify=always --group-directories-first --long --git --color-scale=size --extended --header'
 alias la='exa --all --icons --color=always --classify=always --group-directories-first'
 alias l='exa --classify --icons --color=always --classify=always --group-directories-first'
 
-# Replace cat with bat and man with batman, pager options
+
+
+################################################ Replace cat with bat and man with batman, pager options ################################################
+
 # eval "$(batpipe)"
 export BATPIPE_ENABLE_COLOR=true
 export BATPIPE_INSIDE_LESS=false
@@ -19,10 +23,16 @@ alias man='MOAR="--no-linenumbers --wrap" && batman'
 alias klogs='sudo journalctl -e -f -k -b | ccze -A -o nolookups | spacer'
 alias logs='sudo journalctl -e -f -b | ccze -A -o nolookups | spacer'
 
-# Faster pipx (Trick the completion into working, as there are no native completions for pipxu)
+
+
+################################################ Faster pipx (Trick the completion into working, as there are no native completions for pipxu) ################################################
+
 alias pipx=pipxu
 
-# Git and chezmoi aliases
+
+
+################################################ Git and chezmoi aliases ################################################
+
 alias gcomm='git commit-def'
 alias gcomm-empty='git commit-empty'
 alias gcomm-ren='git commit-rename'
@@ -34,6 +44,8 @@ alias gch='git co'
 alias gchb='git cb'
 alias gsync='git sync'
 alias gfc="git fetch origin --prune && for branch in \$(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '\$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", \$1); print \$1}'); do git branch -D \$branch; done && git maintenance run --auto && git maintenance run --task=gc && git fsck"
+
+alias git-vis='gource --colour-images -a 3 -s 1 -c 3'
 
 git-merge-project-into-subfolder() {
 	# https://stackoverflow.com/questions/1425892/how-do-you-merge-two-git-repositories
@@ -76,7 +88,8 @@ git-merge-project-into-subfolder() {
 	echo "DONE!"
 }
 
-# Adb aliases
+################################################ Adb aliases ################################################
+
 aconn() {
 	adb connect kloud-phone:$1
 	adb devices
@@ -130,7 +143,8 @@ virtual-screen() {
 	scrcpy --no-audio --v4l2-sink=/dev/video0 --no-video-playback --v4l2-buffer=100
 }
 
-# Fast cd
+################################################ Fast cd ################################################
+
 function bu () {
 	function usage () {
 		 cat <<-EOF
@@ -168,37 +182,60 @@ gop() {
 }
 alias brl='br -sdp'
 
-# Neofetch logo
+################################################ Neofetch logo ################################################
+
 alias fastfetch='fastfetch --cpu-temp --logo-width 60 --logo-padding-top 2 --logo /home/kloud/.config/neofetch/logo'
 
-# Pacman aliases
+
+
+################################################ Pacman aliases ################################################
+
 alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | moar'
 alias orphans='pacman -Qtdq'
 alias broken='sudo pacman -Qkk | grep warning'
 
-# Colorize grep and ip
+
+
+################################################ Colorize grep and ip ################################################
+
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
 
-# Interactive aliases
+
+
+################################################ Interactive aliases ################################################
+
 alias mv='mv -i'
 alias rm='rm -i'
 alias cp='cp -i'
 alias ln='ln -i'
 
-# Non-interactive aliases
+
+
+################################################ Non-interactive aliases ################################################
+
 alias mvn='/bin/mv'
 alias rmn='/bin/rm'
 alias cpn='/bin/cp'
 alias lnn='/bin/ln'
 
-# Auto subdir creation
+
+
+################################################ Auto subdir creation ################################################
+
 alias mkdir='mkdir -pv'
 
-# Random stuff
-alias git_vis='gource --colour-images -a 3 -s 1 -c 3'
+
+
+################################################ Random stuff ################################################
+
 alias labi_cpp='cd /home/kloud/Documents/shared/_projects/Cpp_stuff/cpp-labs/compiled_binaries_linux/ && ./menu.sh'
 alias systeminfo='inxi -v 8'
+
+
+
+################################################ Network stuff ################################################
+
 ports() {
 	if [ "$1" == "localhost" ]; then
 		sudo ss -unplut
@@ -209,6 +246,13 @@ ports() {
 rdns() {
 	nmap -R -sn "$@" | grep for | cut -d " " -f 5-
 }
+
+
+
+###############################################################################################################
+
+alias dd-watch='watch -n5 \'sudo kill -USR1 $(pgrep ^dd$)\''
+
 alias lspci='lspci -k'
 alias i='kinfo'
 
@@ -248,7 +292,7 @@ alias grub-reload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 {{ end }}
 
 {{ if eq .chezmoi.hostname "kloud-xps13" }}
-# Laptop aliases
+################################################ Laptop aliases ################################################
 alias butter_debutter='duperemove -r -d -h -v --dedupe-options=partial,same,fiemap --hashfile=/home/kloud/Documents/butter_hashfile /mnt/storage_butter/'
 alias xps_aggressive_fancurve="sudo dellfan 0 1 && sudo systemctl start fancontrol && systemctl status fancontrol"
 alias xps_bios_fancurve="sudo dellfan 0 0 && sudo systemctl stop fancontrol && systemctl status fancontrol"
