@@ -392,6 +392,9 @@ pipectl
 halp
 osquery
 translate-shell
+skopeo
+# start zenmap as root
+gksu
 
 ## TUIs
 lazydocker
@@ -902,6 +905,7 @@ vdpauinfo
 gst-plugin-pipewire
 gst-plugin-qmlgl
 gst-plugin-libcamera
+pipewire-libcamera
 colord
 libuvc
 jpegoptim
