@@ -251,7 +251,9 @@ rdns() {
 
 ###############################################################################################################
 
-alias dd-watch='watch -n5 \'sudo kill -USR1 $(pgrep ^dd$)\''
+dd-watch() {
+	watch -n5 'sudo kill -USR1 $(pgrep ^dd$)'
+}
 
 alias lspci='lspci -k'
 alias i='kinfo'
