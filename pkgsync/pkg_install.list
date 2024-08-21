@@ -332,6 +332,7 @@ gtk3-demos
 gtk4-demos
 espanso-wayland-git
 espanso-gui
+r-quick-share
 
 
 
@@ -888,6 +889,7 @@ coppwr-bin
 easyeffects
 kid3
 nicotine+
+pavucontrol-qt
 
 
 # GRAPHICS, VIDEO
