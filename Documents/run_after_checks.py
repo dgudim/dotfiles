@@ -2,6 +2,7 @@
 
 import re
 import os
+import glob
 
 RED = "\033[0;31m"
 L_RED = "\033[1;31m"
@@ -46,44 +47,61 @@ def run_check(cond: bool, message: str):
 
 
 def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
-
     for line in fstabb.split("\n"):
         if len(line) == 0 or line[0] == "#":
             continue
 
         # Replace with the new ntfs driver
-        run_check(line.find(" ntfs ") != -1,
-                  f"{YELLOW}Consider replacing ntfs with ntfs3 {NC} ({line})")
+        run_check(
+            line.find(" ntfs ") != -1,
+            f"{YELLOW}Consider replacing ntfs with ntfs3 {NC} ({line})",
+        )
 
         dump_pass = re.search(r" (\d) *? (\d)", line)
 
         is_btrfs = line.find(" btrfs ") != -1
-        btrfs_swap_nfs_bind = is_btrfs or line.find(
-            " swap ") != -1 or line.find(" nfs ") != -1 or line.find(" none ") != -1
+        btrfs_swap_nfs_bind = (
+            is_btrfs
+            or line.find(" swap ") != -1
+            or line.find(" nfs ") != -1
+            or line.find(" none ") != -1
+        )
 
         if dump_pass is not None and len(dump_pass.groups()) == 2:
             fsck_pass = int(dump_pass.group(2).strip())
 
             is_root = line.find(" / ") != -1
 
-            run_check(fsck_pass > 2,
-                      f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})")
+            run_check(
+                fsck_pass > 2,
+                f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})",
+            )
 
-            run_check(fsck_pass == 1 and not is_root,
-                      f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} (Only root should have pass value of 1) ({line})")
+            run_check(
+                fsck_pass == 1 and not is_root,
+                f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} (Only root should have pass value of 1) ({line})",
+            )
 
-            run_check(fsck_pass != 1 and is_root and not is_btrfs,
-                      f"{YELLOW}Consider changing fsck field to 1 from {fsck_pass} {NC} (Root should have pass value of 1) ({line})")
+            run_check(
+                fsck_pass != 1 and is_root and not is_btrfs,
+                f"{YELLOW}Consider changing fsck field to 1 from {fsck_pass} {NC} (Root should have pass value of 1) ({line})",
+            )
 
-            run_check(fsck_pass == 0 and not btrfs_swap_nfs_bind,
-                      f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})")
+            run_check(
+                fsck_pass == 0 and not btrfs_swap_nfs_bind,
+                f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})",
+            )
 
-            run_check(fsck_pass != 0 and btrfs_swap_nfs_bind,
-                      f"{YELLOW}Consider changing fsck field to 0 from {fsck_pass} (Btrfs/swap/nfs/bind does not need it) {NC} ({line})")
+            run_check(
+                fsck_pass != 0 and btrfs_swap_nfs_bind,
+                f"{YELLOW}Consider changing fsck field to 0 from {fsck_pass} (Btrfs/swap/nfs/bind does not need it) {NC} ({line})",
+            )
 
         else:
-            run_check(not btrfs_swap_nfs_bind,
-                      f"{YELLOW}Consider adding fsck field {NC} ({line})")
+            run_check(
+                not btrfs_swap_nfs_bind,
+                f"{YELLOW}Consider adding fsck field {NC} ({line})",
+            )
 
         for fs, opts in fsopts.items():
             if line.find(f" {fs} ") == -1:
@@ -91,8 +109,10 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
                 continue
             # Yay, we found our target filesystem
             for opt in opts:
-                run_check(sum(1 for _ in re.finditer(f"({opt})", line)) != 1,
-                          f"{YELLOW}Consider adding {opt} to {fs}{NC} ({line})")
+                run_check(
+                    sum(1 for _ in re.finditer(f"({opt})", line)) != 1,
+                    f"{YELLOW}Consider adding {opt} to {fs}{NC} ({line})",
+                )
             # A line can only contain 1 filesystem, exit, process next line
             break
 
@@ -101,8 +121,7 @@ print(f"{LIGHTER_GRAY}Checking fstab{NC}")
 fstab = read_file("/etc/fstab")
 
 print(f"{LIGHT_GRAY}Checking tmp dir{NC}")
-run_check(fstab.find("/tmp") != -1,
-          f"{YELLOW}Consider removing /tmp from fstab{NC}")
+run_check(fstab.find("/tmp") != -1, f"{YELLOW}Consider removing /tmp from fstab{NC}")
 
 print(f"{LIGHT_GRAY}Checking mount options{NC}")
 ntfs_mount_opts = [
@@ -136,11 +155,15 @@ grub = read_file("/etc/default/grub")
 
 bootfile = cmdline if len(cmdline) > 0 else grub
 
-run_check(len(bootfile) > 0 and bootfile.find("mitigations=off") == -1,
-          f"{YELLOW}Turn off mitigations in kernel cmdline{NC}")
+run_check(
+    len(bootfile) > 0 and bootfile.find("mitigations=off") == -1,
+    f"{YELLOW}Turn off mitigations in kernel cmdline{NC}",
+)
 
-run_check(len(bootfile) > 0 and bootfile.find("rd.luks.options") != -1,
-          f"{YELLOW}Remove rd.luks.options from kernel cmdline{NC}")
+run_check(
+    len(bootfile) > 0 and bootfile.find("rd.luks.options") != -1,
+    f"{YELLOW}Remove rd.luks.options from kernel cmdline{NC}",
+)
 
 # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
 if cmdline.find("rd.luks") != -1:
@@ -150,28 +173,35 @@ if cmdline.find("rd.luks") != -1:
     crypttab = read_file("/tmp/luks_crypttab")
     os.system("rm /tmp/luks_crypttab")
 
-    luks_root = re.search(
-        r"\/dev\/mapper\/luks-(.*?) *?\/ *?(ext4|btrfs)", fstab)
+    luks_root = re.search(r"\/dev\/mapper\/luks-(.*?) *?\/ *?(ext4|btrfs)", fstab)
     if luks_root is not None:
         luks_root_uuid = luks_root.group(1)
-        disk_dev_id = "/dev/" + \
-            os.path.basename(os.readlink(
-                f"/dev/disk/by-uuid/{luks_root_uuid}"))
+        disk_dev_id = "/dev/" + os.path.basename(
+            os.readlink(f"/dev/disk/by-uuid/{luks_root_uuid}")
+        )
 
         os.system(
-            f"sudo cryptsetup luksDump {disk_dev_id} | grep Flags | cut -d':' -f2 > /tmp/luks_root_flags")
+            f"sudo cryptsetup luksDump {disk_dev_id} | grep Flags | cut -d':' -f2 > /tmp/luks_root_flags"
+        )
         luks_root_flags = read_file("/tmp/luks_root_flags")
         os.system("rm /tmp/luks_root_flags")
 
-        run_check(luks_root_flags.find("allow-discards") == -1 or luks_root_flags.find("no-read-workqueue") == -1 or luks_root_flags.find("no-write-workqueue") == -1,
-                  f"{YELLOW}sudo cryptsetup --perf-no_read_workqueue --perf-no_write_workqueue --allow-discards --persistent refresh {disk_dev_id} luks-{luks_root_uuid}{NC}")
+        run_check(
+            luks_root_flags.find("allow-discards") == -1
+            or luks_root_flags.find("no-read-workqueue") == -1
+            or luks_root_flags.find("no-write-workqueue") == -1,
+            f"{YELLOW}sudo cryptsetup --perf-no_read_workqueue --perf-no_write_workqueue --allow-discards --persistent refresh {disk_dev_id} luks-{luks_root_uuid}{NC}",
+        )
 
         luks_crypttab_opts = re.search(
             rf"UUID={luks_root_uuid} .*?\/crypto_keyfile\.bin .*?(.*)", crypttab
         )
 
-        run_check(luks_crypttab_opts is not None and luks_crypttab_opts.group(1).find("discard") != -1,
-                  f"{YELLOW}Consider removing discard from luks {L_BLUE}{luks_root_uuid}{YELLOW} in crypttab{NC}")
+        run_check(
+            luks_crypttab_opts is not None
+            and luks_crypttab_opts.group(1).find("discard") != -1,
+            f"{YELLOW}Consider removing discard from luks {L_BLUE}{luks_root_uuid}{YELLOW} in crypttab{NC}",
+        )
 
     else:
         print(f"{RED}Couldn't find luks root in fstab!{NC}")
@@ -207,11 +237,11 @@ firefox_settings = [
     "browser.compactmode.show",
     "toolkit.legacyUserProfileCustomizations.stylesheets",
     "browser.translations.automaticallyPopup",
-    "font.name-list.emoji", # Noto Color Emoji
+    "font.name-list.emoji",  # Noto Color Emoji
     "media.getusermedia.agc_enabled",
     "extensions.quarantinedDomains.enabled",
     "dom.private-attribution.submission.enabled",
-    "browser.urlbar.suggest.trending"
+    "browser.urlbar.suggest.trending",
 ]
 
 if len(firefox_profiles) == 0:
@@ -219,8 +249,9 @@ if len(firefox_profiles) == 0:
 else:
 
     def check_setting(s: str, setting_: str):
-        run_check(s.find(setting_) == -1,
-                  f"{YELLOW}Consider adding {setting_} to firefox{NC}")
+        run_check(
+            s.find(setting_) == -1, f"{YELLOW}Consider adding {setting_} to firefox{NC}"
+        )
 
     print(f"{LIGHT_GRAY}Selected firefox profile: {firefox_profiles[0]}{NC}")
 
@@ -244,7 +275,9 @@ else:
     if os.path.exists(css_repo_path):
         os.system(f"cd {css_repo_path} && git pull")
     else:
-        os.system(f"cd {user_style_dir} && git clone https://github.com/MrOtherGuy/firefox-csshacks --depth 1")
+        os.system(
+            f"cd {user_style_dir} && git clone https://github.com/MrOtherGuy/firefox-csshacks --depth 1"
+        )
 
     user_style_path = os.path.join(user_style_dir, "userChrome.css")
     os.makedirs(user_style_dir, exist_ok=True)
@@ -257,4 +290,12 @@ else:
     for setting in firefox_settings:
         check_setting(about_config, setting)
 
-print(f"{L_GREEN}Finished running checks, {L_CYAN}{warn} / {checks}{L_GREEN} warning(s){NC}\n")
+    run_check(
+        len(glob.glob(os.path.join(firefox_profiles[0], "extensions", "magnolia*.xpi")))
+        == 0,
+        f"{YELLOW}Consider installing bypass paywalls{NC}",
+    )
+
+print(
+    f"{L_GREEN}Finished running checks, {L_CYAN}{warn} / {checks}{L_GREEN} warning(s){NC}\n"
+)
