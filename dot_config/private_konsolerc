@@ -24,6 +24,7 @@ SearchRegExpression=true
 
 [TabBar]
 CloseTabOnMiddleMouseButton=true
+TabBarPosition=Bottom
 
 [ThumbnailsSettings]
 ThumbnailShift=true
