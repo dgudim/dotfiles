@@ -283,7 +283,7 @@ systemctl() {
 
 		rand=$(( $RANDOM % 2 ))
 
-		mpv --no-terminal "${arr[$rand]}" 2&>1 1>/dev/null && /usr/bin/systemctl "$@"
+		mpv --no-terminal "${arr[$rand]}" > /dev/null && /usr/bin/systemctl "$@" # It is here like this for the ability to cancel the shutdown
 	else
 		/usr/bin/systemctl "$@"
 	fi
