@@ -278,10 +278,30 @@ alias reboot='sudo reboot now'
 alias shut='sudo shutdown now'
 systemctl() {
 	if [ "$1" == "poweroff" ]; then
-		arr[0]="/usr/share/sounds/misc/turret-goodnight.mp3"
-		arr[1]="/usr/share/sounds/misc/we-are-done-here.oga"
+		if [ -z ${EASTER_EGG+x} ]; then
+			arr[0]="/usr/share/sounds/misc/turret-goodnight.mp3"
+			arr[1]="/usr/share/sounds/misc/we-are-done-here.oga"
 
-		rand=$(( $RANDOM % 2 ))
+			rand=$(( $RANDOM % 2 ))
+		else
+			# More meme sounds if the EASTER_EGG is set
+			arr[0]="/usr/share/sounds/misc/anya-likes-peanuts.mp3"
+			arr[1]="/usr/share/sounds/misc/catsquish.mp3"
+			arr[2]="/usr/share/sounds/misc/domain_expansion.mp3"
+			arr[3]="/usr/share/sounds/misc/felix_bit_subarus_ear_scene_rezeroconverttoaudio.mp3"
+			arr[4]="/usr/share/sounds/misc/giornos-theme-but-its-in-windows-errors.mp3"
+			arr[5]="/usr/share/sounds/misc/huh-cat-meme.mp3"
+			arr[6]="/usr/share/sounds/misc/matt-rose-skull-emoji.mp3"
+			arr[7]="/usr/share/sounds/misc/oh-my-gah.mp3"
+			arr[8]="/usr/share/sounds/misc/portal2.mp3"
+			arr[9]="/usr/share/sounds/misc/rick-rolled.mp3"
+			arr[10]="/usr/share/sounds/misc/turret-goodnight.mp3"
+			arr[11]="/usr/share/sounds/misc/turret-thank-you.mp3"
+			arr[12]="/usr/share/sounds/misc/tuturu_1.mp3"
+			arr[13]="/usr/share/sounds/misc/we-are-done-here.oga"
+
+			rand=$(( $RANDOM % 14 ))
+		fi
 
 		mpv --no-terminal "${arr[$rand]}" > /dev/null && /usr/bin/systemctl "$@" # It is here like this for the ability to cancel the shutdown
 	else
