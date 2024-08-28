@@ -14,6 +14,10 @@ thinkfan-ui
 # Fingerprint sensor
 python-validity
 
+# Modem
+mmconneqt-git
+modem-manager-gui
+
 # Check Point vpn
 snx
 

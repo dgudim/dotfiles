@@ -897,6 +897,7 @@ mesa-utils
 libva-utils
 libpng12
 libjxl
+libultrahdr
 libsixel
 v4l2loopback-dkms
 v4l2loopback-utils
