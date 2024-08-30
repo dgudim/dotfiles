@@ -167,6 +167,7 @@ cryfs
 gocryptfs
 ntfs-3g
 fsarchiver
+watchman-bin
 
 ### GUIs
 gparted
@@ -835,6 +836,7 @@ postman9-bin
 wireshark-qt
 zenmap
 capnet-assist
+linux-wifi-hotspot
 
 ## GNS3
 gns3-server

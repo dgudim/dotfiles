@@ -4,7 +4,7 @@ cd "{{.chezmoi.sourceDir}}/pkgsync"
 bash pkgsync.sh
 
 install-pipx() {
-    pipxu list | grep "'${2:-${1:-error}}'" > /dev/null || pipxu install "$1"
+    pipxu list | grep "'${2:-${1:-error}}'" >/dev/null || pipxu install "$1"
 }
 
 install-pipx paginate-json
@@ -16,6 +16,7 @@ install-pipx sherlock-project sherlock
 
 cargo install checkexec
 cargo install cargo-update
+cargo install --git https://github.com/jgavris/rs-git-fsmonitor.git
 cargo install-update -a
 
 # wineasio-register
@@ -33,4 +34,3 @@ cargo install-update -a
 
 ## Rootless docker
 # usermod --add-subuids 100000-165535 --add-subgids 100000-165535 johndoe
-
