@@ -38,9 +38,6 @@
 ## possible values: return-original, return-query
 # exit_mode = "return-original"
 
-[sync]
-records = true
-
 workspaces = true
 inline_height=30
 
@@ -53,3 +50,6 @@ inline_height=30
 #   "^secret-cmd",
 #   "^innocuous-cmd .*--secret=.+"
 # ]
+
+[sync]
+records = true

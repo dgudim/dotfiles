@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=inode/directory;
+Actions=ShredFolder
+
+[Desktop Action ShredFolder]
+Name=Shred folder
+Name[it]=Trita cartella
+Icon=edit-delete-shred-symbolic
+Exec=kdialog --title "Shred folder" --warningyesno "Are you sure you want to shred %u and its contents?\nThis action is irreversible and the files won't be able to be recovered."; if [ $? = 0 ]; then find %u -type f -exec shred -u -f -z -n3 {} \; && rm -r %u; fi
+Exec[it]=kdialog --title "Trita cartella" --warningyesno "Sei sicuro di voler tritare %u ed il suo contenuto?\nL'azione è irreversibile e i file non potranno essere recuperati."; if [ $? = 0 ]; then find %u -type f -exec shred -u -f -z -n3 {} \; && rm -r %u; fi

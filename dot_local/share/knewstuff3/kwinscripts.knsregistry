@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE khotnewstuff3>
+<hotnewstuffregistry>
+ <stuff category="720">
+  <name>Shortcuts for KDE's built-in tiling feature</name>
+  <providerid>api.kde-look.org</providerid>
+  <author>de-ander-dog</author>
+  <homepage>https://store.kde.org/p/2154527</homepage>
+  <licence></licence>
+  <version></version>
+  <rating>58</rating>
+  <downloads>188</downloads>
+  <installedfile>/home/kloud/.local/share/kwin/scripts/returnToTile/</installedfile>
+  <id>2154527</id>
+  <releasedate>2024-05-31</releasedate>
+  <summary>Extends KDE's built-in tiling feature with shortcuts to quckly assign windows to tiles, as well as shortcuts to navigate between tiles and their respective windows. Also returns a maximized Window to its previously assigned tile upon unmaximization. Windows in tiles swap places if both windows are tiled.&lt;br />
+&lt;br />
+The idea behind the script was to use the number and Function keys for the shortcuts, so naturally only 10 tiles are supported.&lt;br />
+Meta+F1-10 assigns a window the specified tile.&lt;br />
+Ctrl+0-9 activates the window assigned to that specific tile, where number 0 counts as 10.&lt;br />
+&lt;br />
+Make sure that the  Shortcuts used in this script aren't already being used for something else, otherwise they won't register. Also, you might need to logout and back in after installing.&lt;br />
+(Previously called return to tile).</summary>
+  <changelog></changelog>
+  <preview>https://images.pling.com/cache/100x100-0/img/00/00/78/41/79/2154527/screenshot-20240525-125727.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-0/img/00/00/78/41/79/2154527/screenshot-20240525-125727.png</previewBig>
+  <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE3MTcxNTQ5MTciLCJvIjoiMSIsInMiOiJjN2IwMmQ3NGQ2ZjRlNjEwYjAwNTAzYTZhNDRmZGM5NjEzYzI3MDIyZjI0ZTJiYTAxNzFiNzg3N2NhZmYzZjQyMjExYjM1Yjc1ZDU3NmJjZTQ1NzZiZjNlMTQ2NGExZGE2YTI4MWRhYTNhZDEzOTQxNTg3ODQ3YTU5YWVkZjBhMSIsInQiOjE3MjExMTQyODEsInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.p0MrrUU2OCfXRccRJUKCZmrzR0acZVm255fB50Y4B1E/returnToTile1.3.zip</payload>
+  <tags>original-product,unix,linux,gplv3</tags>
+  <status>installed</status>
+ </stuff>
+ <stuff category="720">
+  <name>Sticky Window Snapping</name>
+  <providerid>api.kde-look.org</providerid>
+  <author>Flupp</author>
+  <homepage>https://store.kde.org/p/1112552</homepage>
+  <licence></licence>
+  <version>2.0</version>
+  <rating>88</rating>
+  <downloads>103119</downloads>
+  <installedfile>/home/kloud/.local/share/kwin/scripts/sticky-window-snapping/</installedfile>
+  <id>1112552</id>
+  <releasedate>2024-04-07</releasedate>
+  <summary>KWin script to let snapped window edges stick together when one window is resized.&lt;br />
+&lt;br />
+The script provides an easy to use configuration dialog, which can be reached via “systemsettings”. (However, note section “Bugs and Workarounds”.)&lt;br />
+&lt;br />
+When windows stick...</summary>
+  <changelog></changelog>
+  <preview>https://images.pling.com/cache/100x100-0/img/00/00/14/19/33/1112552/d03cd77736c12598c3f2b17ee729b44a422d.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-0/img/00/00/14/19/33/1112552/d03cd77736c12598c3f2b17ee729b44a422d.png</previewBig>
+  <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE3MTI1MTM3MzYiLCJvIjoiMSIsInMiOiJjYzZlNzQwNjNmYzBmOWJmY2UyYzc1OTZhMjFiMTUzYWI2NjkzZjczNGM2YTdiYTY3NmNkM2NjOWZjYTQyOWY1MTU4MmNlMjhkMjc1NGFmNGVkYzEwODQ2Y2JhMTRhMDhjZWQ0M2JmNzc2NzgwNTlkMGM4YzcyMzNlOWIxZWNlNCIsInQiOjE3MjExMTQwODYsInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.nQ7gYbi4E8KXecqYrn_XesZjA7PKjaAzLSOdTA_wte0/sticky-window-snapping-v2.0.kwinscript</payload>
+  <tags>linux,gplv2,original-product,unix</tags>
+  <status>installed</status>
+ </stuff>
+ <stuff category="720">
+  <name>Swap/Add/Remove - Virtual Desktop Shortcuts</name>
+  <providerid>api.kde-look.org</providerid>
+  <author>dedean16</author>
+  <homepage>https://store.kde.org/p/2164947</homepage>
+  <licence></licence>
+  <version>2.0</version>
+  <rating>50</rating>
+  <downloads>66</downloads>
+  <installedfile>/home/kloud/.local/share/kwin/scripts/swapdesktop2/</installedfile>
+  <id>2164947</id>
+  <releasedate>2024-06-14</releasedate>
+  <summary>Adds keyboard shortcuts to KWin for swapping, adding and removing virtual desktops. When swapping to the 0th/last+1 desktop, a new desktop will be added to make the swap possible.&lt;br />
+&lt;br />
+Updated to the Plasma 6 API. Works with both Wayland and X11.&lt;br />
+&lt;br />
+Default shortcuts are:&lt;br />
+ - Swap the current desktop's windows with next one: Meta+Shift+Alt+Right&lt;br />
+ - Swap the current desktop's windows with one above: Meta+Shift+Alt+Up&lt;br />
+ - Swap the current desktop's windows with one below: Meta+Shift+Alt+Down&lt;br />
+ - Swap the current desktop's windows with previous one: Meta+Shift+Alt+Left&lt;br />
+ - Add new desktop between current and next: Meta+Shift+Alt++&lt;br />
+ - Add new desktop between previous and current: Meta+Alt+=&lt;br />
+ - Remove current desktop and move its windows to next: Meta+Shift+Alt+_&lt;br />
+ - Remove current desktop and move its windows to previous: Meta+Alt+-&lt;br />
+&lt;br />
+These can be changed in System Settings → Global Shortcuts → KWin → (search for swapdesktop2)</summary>
+  <changelog></changelog>
+  <preview>https://images.pling.com/cache/100x100-0/img/00/00/54/99/23/2164947/logo4.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-0/img/00/00/54/99/23/2164947/logo4.png</previewBig>
+  <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE3MTgyNzQ2NzYiLCJvIjoiMSIsInMiOiJhMGFhZDVmNDFjN2JlODY0ZjQ2ZGUwYzFlNjJkMjZlNDhlZjY0ZGY2YjFjOGY3NjZkZDU5MTM2YWJmYmVjNmZjYmQ3ZTE0MDhiMDJhMTM3YWU3OTIwYjJiMTY0ZWQ0M2E1ZDgyYjFjOTg3ZmY1OTRmZjU4ZTQwMjVhYzdhZTFhYiIsInQiOjE3MjExMTQzMTcsInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.8tv16RdiacZIEXWIqlgl71vuSkU-CBx8enAwlxkOMkg/swapdesktop2.kwinscript</payload>
+  <tags>original-product,scripts,unix,desktops,gplv3,kde,kwin,linux</tags>
+  <status>installed</status>
+ </stuff>
+ <stuff category="720">
+  <name>KZones</name>
+  <providerid>api.kde-look.org</providerid>
+  <author>gerritdevriese</author>
+  <homepage>https://store.kde.org/p/1909220</homepage>
+  <licence></licence>
+  <version>0.7</version>
+  <rating>85</rating>
+  <downloads>5704</downloads>
+  <installedfile>/home/kloud/.local/share/kwin/scripts/kzones/</installedfile>
+  <id>1909220</id>
+  <releasedate>2024-04-04</releasedate>
+  <summary>Script for snapping windows into zones. Handy when using a (super) ultrawide monitor, an alternative to PowerToys FancyZones and Windows 11 snap layouts.&lt;br />
+&lt;br />
+Requires KDE Plasma 6 or higher. If you are running Plasma 5 don't update this script and install https://store.kde.org/p/2143914...</summary>
+  <changelog></changelog>
+  <preview>https://images.pling.com/cache/100x100-0/img/00/00/68/08/51/1909220/kzones.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-0/img/00/00/68/08/51/1909220/kzones.png</previewBig>
+  <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE3MTIxNzQ4MDIiLCJvIjoiMSIsInMiOiJiMjE2YzZmYjIxMDZjMjg5ZDQ5MDJjY2I3ZjcyY2I2OGRiODFhMDU4M2RhZjRhYzQ0MDUzZDNkZTJkMGQzODA5NTZiOTg2MTYxYWQzNTUyYmIzNzhkMDdkNDViZWNjYjIxYzM1M2IxYmYxZGU4MThmNDRmYTVmNDM0YjJiOGQwMSIsInQiOjE3MjExMTQ0NjksInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.85Iixb02bk-zEwOIAessvixuFvn41NLSAAQ9A0M9MAs/KZones.kwinscript</payload>
+  <tags>gplv3,linux,shortcuts,ultrawide,unix,tiling,zones,original-product,plasma-6</tags>
+  <status>installed</status>
+ </stuff>
+</hotnewstuffregistry>

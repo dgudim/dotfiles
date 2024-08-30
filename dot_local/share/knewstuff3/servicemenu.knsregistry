@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE khotnewstuff3>
+<hotnewstuffregistry>
+ <stuff category="102">
+  <name>Shred folder</name>
+  <providerid>api.kde-look.org</providerid>
+  <author>gianmarcogg03</author>
+  <homepage>https://store.kde.org/p/2196931</homepage>
+  <licence></licence>
+  <version>1.1</version>
+  <rating>50</rating>
+  <downloads>8</downloads>
+  <installedfile>/home/kloud/.local/share/servicemenu-download/shredfolder.desktop</installedfile>
+  <id>2196931</id>
+  <releasedate>2024-08-30</releasedate>
+  <summary>Simple service menu to shred and delete a folder with a confirmation dialog. Make sure you have the kdialog command line utility installed.</summary>
+  <changelog></changelog>
+  <preview>https://images.pling.com/cache/100x100-0/img/00/00/55/69/64/2196931/shredicon.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-0/img/00/00/55/69/64/2196931/shredicon.png</previewBig>
+  <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE3MjUwMDY2NDciLCJvIjoiMSIsInMiOiI3MjhmYjdjZjZlZTc1MjcyNmM5YzQ4YjFkZmVmMDUxNGY0YjcxN2VkNDY3N2E0YjFjYTI0YmM1YjI5MGYzMzk5ZThkMGVmYjAwZGJkNmQ0NzA3NWQ0ZmU1ZjY4ZjdkMzU5MWM0YzczZmFiNGM3ODNkNTRlYjk2YTFhYTcyNTZkNiIsInQiOjE3MjUwNDg2MDksInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.WTVzYHkclxN0fL4Yn8xj5Em7vCD-V45rToZotyVEj6A/shredfolder.desktop</payload>
+  <tags>addon,kde,kde-dolphin,kde-plasma,dolphin,cc0,original-product,shred</tags>
+  <status>installed</status>
+ </stuff>
+ <stuff category="102">
+  <name>Shred file</name>
+  <providerid>api.kde-look.org</providerid>
+  <author>gianmarcogg03</author>
+  <homepage>https://store.kde.org/p/2196925</homepage>
+  <licence></licence>
+  <version>1.0</version>
+  <rating>50</rating>
+  <downloads>18</downloads>
+  <installedfile>/home/kloud/.local/share/servicemenu-download/shredfile.desktop</installedfile>
+  <id>2196925</id>
+  <releasedate>2024-08-29</releasedate>
+  <summary>Simple service menu to shred and delete a file with a confirmation dialog. Make sure you have the kdialog command line utility installed.</summary>
+  <changelog></changelog>
+  <preview>https://images.pling.com/cache/100x100-0/img/00/00/55/69/64/2196925/shredicon.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-0/img/00/00/55/69/64/2196925/shredicon.png</previewBig>
+  <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE3MjQ5NTUzODYiLCJvIjoiMSIsInMiOiI5YTFlOGUyZWJhY2NiMjk5MmI2ZWUwYjI4MWE3YzljMjIwZGQ4NTRhNjlhYzg5YThkYzExNDk1MzRjN2RmYzVkZjdmZDA1NjAxZWVmMGMzNWFlYzIzNGE3MTg2OGQ3NGU1YTc1NGUwMWVlN2NiYjU3NzExMjQyMjAzN2VjYTFlZCIsInQiOjE3MjUwNDg2NzgsInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.bkCiRc2U6ExoukuoKOTIZxTm1PfLbXPwbOADDEnRcOs/shredfile.desktop</payload>
+  <tags>cc0,dolphin,kde,kde-dolphin,kde-plasma,shred,original-product,addon</tags>
+  <status>installed</status>
+ </stuff>
+</hotnewstuffregistry>

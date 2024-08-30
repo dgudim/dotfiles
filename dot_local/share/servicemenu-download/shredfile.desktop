@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=all/allfiles;
+Actions=Shred
+
+[Desktop Action Shred]
+Name=Shred file
+Name[it]=Trita file
+Icon=edit-delete-shred-symbolic
+Exec=kdialog --title "Shred file" --warningyesno "Are you sure you want to shred %u?\nThis action is irreversible and the file won't be able to be recovered."; if [ $? = 0 ]; then shred -u -f -z -n3 %u; fi
+Exec[it]=kdialog --title "Trita file" --warningyesno "Sei sicuro di voler tritare %u?\nL'azione è irreversibile e il file non potrà essere recuperato."; if [ $? = 0 ]; then shred -u -f -z -n3 %u; fi
