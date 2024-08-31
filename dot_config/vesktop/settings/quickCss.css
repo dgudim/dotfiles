@@ -9,7 +9,8 @@ div[aria-controls="billing-tab"],
 div[aria-label="Gift Inventory"],
 div[aria-label="Gift Inventory"] + div,
 div[aria-controls="nitro-server-boost-tab"],
-div[aria-label="Clips"] {
+div[aria-label="Clips"],
+div[class*="channelAppLauncher"] {
   display: none;
 }
 
