@@ -49,15 +49,18 @@ export CARGO_INCREMENTAL=1
 if [[ "$(whoami)" != "root" ]]; then
     # Add user stuff to PATH
     # Escape home variable for proper sed substitution
-    HOME_ESC=$(echo $HOME | sed 's/\//\\\//g')
-    CLEAN_PATH=$(echo $PATH | sed "s/$HOME_ESC\/.local\/share\/cargo\/bin://g" | sed "s/$HOME_ESC\/.local\/bin://g" | sed "s/$HOME_ESC\/.dotnet\/tools://g" )
+    HOME_ESC=$(echo "$HOME" | sed 's/\//\\\//g')
+    CLEAN_PATH=$(echo "$PATH" |
+        sed "s/$HOME_ESC\/.local\/share\/cargo\/bin://g" |
+        sed "s/$HOME_ESC\/.local\/bin://g" |
+        sed "s/:$HOME_ESC\/.dotnet\/tools\///g")
     export PATH=~/.local/bin:~/.local/share/cargo/bin:$CLEAN_PATH:~/.dotnet/tools/
 
     # Rootless docker
     export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
-    export GPG_TTY=$(tty)
-    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+    export GPG_TTY="$(tty)"
+    export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 else
     unset GPG_TTY
     unset SSH_AUTH_SOCK
