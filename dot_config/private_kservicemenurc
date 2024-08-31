@@ -1,4 +1,6 @@
 [Show]
+Shred=true
+ShredFolder=true
 chezmoi-add=true
 chezmoi-add-encrypt=true
 compressfileitemaction=true
@@ -15,6 +17,7 @@ kio-admin=true
 kompare=true
 makefileactions=true
 mountisoaction=true
+movetonewfolderitemaction=true
 plasmavaultfileitemaction=true
 rename=true
 runInKonsole=true

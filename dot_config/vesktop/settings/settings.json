@@ -200,7 +200,9 @@
             "useListeningStatus": true,
             "missingArt": "lastfmLogo",
             "username": "Kl0ud_",
-            "apiKey": "4127d918df9b162ba6b2b5a872aea681"
+            "apiKey": "4127d918df9b162ba6b2b5a872aea681",
+            "showLastFmLogo": true,
+            "shareSong": true
         },
         "LoadingQuotes": {
             "enabled": false
@@ -492,7 +494,8 @@
             "imgSize": "1024"
         },
         "ViewRaw": {
-            "enabled": false
+            "enabled": true,
+            "clickMethod": "Right"
         },
         "VoiceMessages": {
             "enabled": true,
@@ -716,11 +719,14 @@
         "MentionAvatars": {
             "enabled": true
         },
-        "ShowAllRoles": {
-            "enabled": true
-        },
         "YoutubeAdblock": {
             "enabled": true
+        },
+        "AlwaysExpandRoles": {
+            "enabled": true
+        },
+        "NoMaskedUrlPaste": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -733,6 +739,6 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1723209589354
+        "settingsSyncVersion": 1725121153428
     }
 }
