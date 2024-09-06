@@ -242,6 +242,7 @@ firefox_settings = [
     "extensions.quarantinedDomains.enabled",
     "dom.private-attribution.submission.enabled",
     "browser.urlbar.suggest.trending",
+    "apz.overscroll.enabled",
 ]
 
 if len(firefox_profiles) == 0:
