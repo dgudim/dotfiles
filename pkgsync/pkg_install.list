@@ -409,7 +409,7 @@ visidata
 ## Shells
 xonsh
 nushell
-powershell
+powershell-bin
 
 ## Tools
 gum
