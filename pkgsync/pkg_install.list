@@ -89,7 +89,7 @@ hwdetect
 hwinfo
 inotify-tools
 m4
-mlocate
+plocate
 mtools
 pkgconf
 pkgfile
@@ -355,6 +355,8 @@ yt-dlp
 bat
 mc
 jc
+go-yq
+jq
 rsync
 xdg-ninja-git
 chezmoi
@@ -594,6 +596,8 @@ perl-archive-zip
 visual-studio-code-bin
 strace
 pax-utils
+dockerfile-language-server-bin
+yamlfmt
 
 ## R
 # Disabled as not needed

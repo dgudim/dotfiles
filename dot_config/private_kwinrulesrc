@@ -1,15 +1,6 @@
 [$Version]
 update_info=kwinrules.upd:replace-placement-string-to-enum,kwinrules.upd:use-virtual-desktop-ids
 
-[1]
-Description=Syncthingtray position
-position=1342,551
-positionrule=3
-title=Syncthing Tray
-titlematch=2
-wmclass=syncthingtray
-wmclassmatch=1
-
 [2]
 Description=RealVNC rules
 disableglobalshortcuts=true
@@ -18,8 +9,8 @@ wmclass=realvnc-vncviewer
 wmclassmatch=1
 
 [General]
-count=3
-rules=1,2,e2941418-3813-40c3-b24b-73d47592112d
+count=2
+rules=2,e2941418-3813-40c3-b24b-73d47592112d
 
 [e2941418-3813-40c3-b24b-73d47592112d]
 Description=Life is strange rules
