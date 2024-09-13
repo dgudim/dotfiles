@@ -640,7 +640,6 @@ yapf
 mypy
 python-pipx
 pipxu
-python-djlint
 codon-bin
 xontrib-fzf-widgets
 
@@ -709,6 +708,7 @@ python-poetry
 python-pyinotify
 python-tzlocal
 python-pygraphviz
+python-regex
 uvicorn
 
 ## ANDROID AND JAVA
