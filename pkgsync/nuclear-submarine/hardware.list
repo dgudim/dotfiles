@@ -37,6 +37,7 @@ mssql-server
 mssql-tools
 rider
 python39
+python310
 cassowary
 flutter-bin
 android-platform
