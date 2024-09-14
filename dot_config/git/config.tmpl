@@ -123,12 +123,15 @@
     commit-empty =   "!f() { git add . && git commit         -S -a -m --allow-empty-message -m "";    }; f"
     commit-rename =  "!f() {              git commit --amend -S -a -m                         \"$1\"; }; f"
     commit-am =      "!f() { git add . && git commit --amend -S -a -m                         \"$1\"; }; f"
+    commit-amn =     "!f() { git add . && git commit --amend -S -a --no-edit                        ; }; f"
     undo1 = "reset --soft HEAD~1"
     undo2 = "reset --soft HEAD~2"
     undo3 = "reset --soft HEAD~3"
     reset-hard = "!f() { git reset --hard \"$1\" && git clean -f }; f"
     diffw = "diff -w"
     diffb = "diff -b"
+    diffws = "diff -w --staged"
+    diffbs = "diff -b --staged"
 	stasha = stash --all
 	blamec = blame -w -C
 	blamecc = blame -w -C -C
@@ -144,6 +147,7 @@
     lo =  log --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short --graph
     st = status --short --branch
     puf = push --force-with-lease
+    fop = fetch origin --prune
     pu = push
     co = checkout
     cb = checkout -b
