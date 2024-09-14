@@ -666,13 +666,14 @@
             "enabled": false
         },
         "ReplaceGoogleSearch": {
-            "enabled": false
+            "enabled": true
         },
         "ReplyTimestamp": {
             "enabled": true
         },
         "ShowTimeoutDuration": {
-            "enabled": false
+            "enabled": true,
+            "displayStyle": "ssalggnikool"
         },
         "ValidReply": {
             "enabled": true
@@ -703,7 +704,7 @@
             "enabled": true
         },
         "NoOnboardingDelay": {
-            "enabled": false
+            "enabled": true
         },
         "Summaries": {
             "enabled": false
@@ -727,6 +728,19 @@
         },
         "NoMaskedUrlPaste": {
             "enabled": false
+        },
+        "AccountPanelServerProfile": {
+            "enabled": true,
+            "prioritizeServerProfile": true
+        },
+        "CopyFileContents": {
+            "enabled": true
+        },
+        "StickerPaste": {
+            "enabled": true
+        },
+        "VolumeBooster": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -739,6 +753,6 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1725121153428
+        "settingsSyncVersion": 1726332339676
     }
 }
