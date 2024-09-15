@@ -334,6 +334,7 @@ gtk4-demos
 espanso-wayland-git
 espanso-gui
 r-quick-share
+waycheck
 
 
 
@@ -708,6 +709,15 @@ python-pyinotify
 python-tzlocal
 python-pygraphviz
 python-regex
+python-bottleneck
+python-fsspec
+python-mutagen
+python-pygit2
+python-lz4
+python-libarchive-c
+python-smbprotocol
+python-gssapi
+python-krb5
 uvicorn
 
 ## ANDROID AND JAVA
