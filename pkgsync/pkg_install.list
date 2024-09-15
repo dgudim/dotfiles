@@ -599,6 +599,7 @@ strace
 pax-utils
 dockerfile-language-server-bin
 yamlfmt
+gopls
 
 ## R
 # Disabled as not needed
@@ -753,10 +754,12 @@ sdl12-compat
 boost
 glfw
 mold
+ctags
 
 ## Arduino
 platformio-core
 platformio-core-udev
+arduino-ctags
 
 ## JS
 nodejs-lts-hydrogen
