@@ -211,6 +211,7 @@ ble-color-setface varname_empty             fg=blue
 ble-color-setface varname_export            fg=lime
 ble-color-setface varname_expr              fg=magenta
 ble-color-setface varname_hash              fg=yellow
+ble-color-setface varname_new               fg=green,underline
 ble-color-setface varname_number            fg=teal
 ble-color-setface varname_readonly          fg=navy
 ble-color-setface varname_transform         fg=magenta,underline
