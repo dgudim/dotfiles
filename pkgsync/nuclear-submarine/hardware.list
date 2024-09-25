@@ -21,6 +21,7 @@ snap-pac
 snapper
 snapper-gui-git
 fprintd
+thinkfan-ui
 
 # Not hardware, but work stuff instead
 realvnc-vnc-viewer

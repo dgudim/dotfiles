@@ -33,6 +33,9 @@ docker-rootless-extras
 docker-credential-secretservice-bin
 regclient-regctl
 
+### GUI
+dockeye-git
+
 
 
 # CORE STUFF
@@ -516,6 +519,10 @@ kde-thumbnailer-apk
 blesh-git
 plasma-vault
 plasma5-integration
+tumbler-extra-thumbnailers
+kdesdk-thumbnailers
+comicthumb
+icoextract
 plasma-thunderbolt
 kactivities-stats5
 
@@ -719,6 +726,7 @@ python-libarchive-c
 python-smbprotocol
 python-gssapi
 python-krb5
+python-pytest-xdist
 uvicorn
 
 ## ANDROID AND JAVA
