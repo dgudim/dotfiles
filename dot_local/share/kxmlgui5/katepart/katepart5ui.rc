@@ -1,5 +1,5 @@
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="KatePartView" translationDomain="ktexteditor6" version="107">
+<gui name="KatePartView" translationDomain="ktexteditor6" version="108">
  <MenuBar>
   <Menu name="file" noMerge="1">
    <text>&amp;File</text>
@@ -9,7 +9,7 @@
    <Action group="save_merge" name="file_save_copy_as"/>
    <Action group="revert_merge" name="file_reload"/>
    <Menu group="print_merge" name="file_export">
-    <text>Print/Export</text>
+    <text>&amp;Print/Export</text>
     <Action group="print_merge" name="file_print"/>
     <Action group="print_merge" name="file_print_preview"/>
     <Action group="print_merge" name="file_export_html"/>
