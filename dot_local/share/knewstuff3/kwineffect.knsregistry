@@ -2,28 +2,6 @@
 <!DOCTYPE khotnewstuff3>
 <hotnewstuffregistry>
  <stuff category="719">
-  <name>Squash2</name>
-  <providerid>api.kde-look.org</providerid>
-  <author>leo5sk</author>
-  <homepage>https://store.kde.org/p/1806319</homepage>
-  <licence></licence>
-  <version>1.0_6</version>
-  <rating>73</rating>
-  <downloads>5505</downloads>
-  <installedfile>/home/kloud/.local/share/kwin/effects/kwin4_effect_squash2/</installedfile>
-  <id>1806319</id>
-  <releasedate>2024-05-14</releasedate>
-  <summary>An effect to minimise and unminimise windows, modified from the default effect to be more in line with gnome animation style.&lt;br />
-&lt;br />
-</summary>
-  <changelog></changelog>
-  <preview>https://images.pling.com/cache/100x100-0/img/00/00/43/22/46/1806319/g52.png</preview>
-  <previewBig>https://images.pling.com/cache/770x540-0/img/00/00/43/22/46/1806319/g52.png</previewBig>
-  <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE2NTM1MDc1NTYiLCJvIjoiMSIsInMiOiI5NWI5MThhYjNiZGM2MDkwYTE4MGVmMDc3YTJhYjBlODBhN2IxYzVhNjljNzJjY2U5OTI0MmI3M2ZmZDE0MDVjYTdhYzQzZWYxM2I2OTAxZDJmZDdhOGFmMTgxNzcwYWFmZWRhODQwYWExMDU4NjIxODQyZjE1NDBiYzFkMTI2OCIsInQiOjE3MTU5NTYzODEsInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.mIyMT-MSYfOd5e7DJ2YVaAZ6pxo1CkyGDgsORH71u8Y/kwin4-effect-squash2.tar.gz</payload>
-  <tags>linux,minimize,kwin,original-product,unix,animation,gplv2-later,effect</tags>
-  <status>installed</status>
- </stuff>
- <stuff category="719">
   <name>TV Effect [Burn-My-Windows]</name>
   <providerid>api.kde-look.org</providerid>
   <author>schneegans</author>
@@ -31,7 +9,7 @@
   <licence></licence>
   <version>41</version>
   <rating>50</rating>
-  <downloads>1871</downloads>
+  <downloads>4733</downloads>
   <installedfile>/home/kloud/.local/share/kwin/effects/kwin4_effect_tv/</installedfile>
   <id>2133825</id>
   <releasedate>2024-02-29</releasedate>
@@ -40,33 +18,7 @@
   <preview>https://images.pling.com/img/00/00/67/07/53/2133825/tv.gif</preview>
   <previewBig>https://images.pling.com/img/00/00/67/07/53/2133825/tv.gif</previewBig>
   <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE3MDkyMTI5MzMiLCJvIjoiMSIsInMiOiIxZmIzNmI4ODdiOWI3N2VkZjc0MGU3MzRiMTM4NGYyZmIyMjdhZmIyNDRiMDQxOWE0ODc0Yzg5MzM1Yjg5MzBjNzM2MWE3ZjZiNjg2NjliNWM0YzgwMzM0MjNhYjMyNDExZmYyZGI0YmViNGJiOTAyNzMwMGUyM2E4YTQ1OTYyMCIsInQiOjE3MTU4OTM4MzMsInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.SU5Yo2U-CVBGPrmEIl2RNEh2Gw-gzCeMq_rsLG5D5Qg/kwin4-effect-tv.tar.gz</payload>
-  <tags>animation,original-product,unix,linux,gplv3</tags>
-  <status>installed</status>
- </stuff>
- <stuff category="719">
-  <name>Glide [Burn-My-Windows]</name>
-  <providerid>api.kde-look.org</providerid>
-  <author>schneegans</author>
-  <homepage>https://store.kde.org/p/2133839</homepage>
-  <licence></licence>
-  <version>41</version>
-  <rating>50</rating>
-  <downloads>954</downloads>
-  <installedfile>/home/kloud/.local/share/kwin/effects/kwin4_effect_glide/</installedfile>
-  <id>2133839</id>
-  <releasedate>2024-02-29</releasedate>
-  <summary>This is the KWin port of the Glide effect of the Burn-My-Windows GNOME Shell extension. &lt;a href="https://github.com/Schneegans/Burn-My-Windows#%EF%B8%8F-installation-kwin" target="_blank" rel="nofollow">You can find a list of all Burn-My-Windows effects which are currently available for KWin on GitHub.&lt;/a>&lt;br />
-&lt;br />
-&lt;strong>This effect requires at least KWin 5.25.0. Also, if the color picker widgets in the settings of any of the Burn-My-Windows effects do not work, you may have to install the package "libkf5widgetsaddons-dev" (Kubuntu, KDE Neon, etc) or "kwidgetsaddons-devel" (Fedora, OpenSuse, etc).&lt;/strong> If you encounter a bug or have a feature request, please open an issue on &lt;a href="https://github.com/Schneegans/Burn-My-Windows/issues" target="_blank" rel="nofollow">GitHub&lt;/a>!&lt;br />
-&lt;br />
-&lt;em>IMHO, there are many things which could be done to improve the KWin port of the extension. However, since I am not using KDE as a daily driver, I would appreciate it very much if someone volunteers to work on this port! I am happily receiving pull requests...&lt;/em>&lt;br />
-&lt;br />
-</summary>
-  <changelog></changelog>
-  <preview>https://images.pling.com/img/00/00/67/07/53/2133839/glide.gif</preview>
-  <previewBig>https://images.pling.com/img/00/00/67/07/53/2133839/glide.gif</previewBig>
-  <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE3MDkyMTQyNzkiLCJvIjoiMSIsInMiOiJlMWU1NjRhYjNiYmVkMmM1MTExZDZkNWYxYTU5ODI2ZjMyZDcxOGZjYmY2MjlkYzgzNzAxMTQ5YTkxYzEzNWM2YmExYTA2NjNiNDc2NTU2M2VlZmFiNzcwMTY2Y2FhOGIxYmM4NjM4NDZjZGM0OTY3ZTYyZDAwNmQxOGQyYWU4YyIsInQiOjE3MTU5NjU2NzAsInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.ES94jRJPAV2TU5g48yRkwSt0Bj7tJ5hIh72lci6535E/kwin4-effect-glide.tar.gz</payload>
-  <tags>unix,linux,gplv3,animation,original-product</tags>
+  <tags>unix,gplv3,linux,original-product,animation</tags>
   <status>installed</status>
  </stuff>
  <stuff category="719">
@@ -77,22 +29,16 @@
   <licence></licence>
   <version>41</version>
   <rating>50</rating>
-  <downloads>2862</downloads>
+  <downloads>7388</downloads>
   <installedfile>/home/kloud/.local/share/kwin/effects/kwin4_effect_glitch/</installedfile>
   <id>2133844</id>
   <releasedate>2024-02-29</releasedate>
-  <summary>This is the KWin port of the Glitch effect of the Burn-My-Windows GNOME Shell extension. &lt;a href="https://github.com/Schneegans/Burn-My-Windows#%EF%B8%8F-installation-kwin" target="_blank" rel="nofollow">You can find a list of all Burn-My-Windows effects which are currently available for KWin on GitHub.&lt;/a>&lt;br />
-&lt;br />
-&lt;strong>This effect requires at least KWin 5.25.0. Also, if the color picker widgets in the settings of any of the Burn-My-Windows effects do not work, you may have to install the package "libkf5widgetsaddons-dev" (Kubuntu, KDE Neon, etc) or "kwidgetsaddons-devel" (Fedora, OpenSuse, etc).&lt;/strong> If you encounter a bug or have a feature request, please open an issue on &lt;a href="https://github.com/Schneegans/Burn-My-Windows/issues" target="_blank" rel="nofollow">GitHub&lt;/a>!&lt;br />
-&lt;br />
-&lt;em>IMHO, there are many things which could be done to improve the KWin port of the extension. However, since I am not using KDE as a daily driver, I would appreciate it very much if someone volunteers to work on this port! I am happily receiving pull requests...&lt;/em>&lt;br />
-&lt;br />
-</summary>
+  <summary>This is the KWin port of the Glitch effect of the Burn-My-Windows GNOME Shell extension. &lt;a href="https://github.com/Schneegans/Burn-My-Windows#%EF%B8%8F-installation-kwin" target="_blank" rel="nofollow">You can find a list of all Burn-My-Windows effects which are currently available for KWin on...</summary>
   <changelog></changelog>
   <preview>https://images.pling.com/img/00/00/67/07/53/2133844/glitch.gif</preview>
   <previewBig>https://images.pling.com/img/00/00/67/07/53/2133844/glitch.gif</previewBig>
   <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE3MDkyMTQxNzMiLCJvIjoiMSIsInMiOiI2OTIzNDFhZDI2Y2JjZDg3ZjY1ZTA0NGUzNWNjZjgwYmU1ZDY3MjljNzA2NDFlNmIyYzBmODNlMmUxMGM0MTU4MzQwODI4NDY0ZjkzZDhkMzYxMDc3OWU5Yjg1YzM4Njg0NGFlZTYzMzViNWY2MjE0OTc4ZDUwNDdlYzQyNDA0NyIsInQiOjE3MTU4OTM1MjgsInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.QHrMobCqgDHY-asXYEpNxH8vQSijBHj1w1UxaJNRxVo/kwin4-effect-glitch.tar.gz</payload>
-  <tags>linux,gplv3,unix,original-product,animation</tags>
+  <tags>gplv3,linux,animation,unix,original-product</tags>
   <status>installed</status>
  </stuff>
  <stuff category="719">
@@ -102,8 +48,8 @@
   <homepage>https://store.kde.org/p/2136283</homepage>
   <licence></licence>
   <version>1.3</version>
-  <rating>69</rating>
-  <downloads>2284</downloads>
+  <rating>64</rating>
+  <downloads>5484</downloads>
   <installedfile>/home/kloud/.local/share/kwin/effects/kwin4_effect_geometry_change/</installedfile>
   <id>2136283</id>
   <releasedate>2024-03-30</releasedate>
@@ -114,7 +60,32 @@ Plasma 5 version here: https://www.pling.com/p/2026302/</summary>
   <preview>https://images.pling.com/img/00/00/71/57/04/2136283/recording.gif</preview>
   <previewBig>https://images.pling.com/img/00/00/71/57/04/2136283/recording.gif</previewBig>
   <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE3MTE3OTg2MDEiLCJvIjoiMSIsInMiOiJkY2IyYTU3ZDlmODRmZTZmZmQyMzI2ZTM2YjU2MTZlOGE0YTBlMjJiMjE1ZTE4ODYxN2E4YmIxMzU5Y2RlMWIzNThhOWE2OGIzNjAyMTc0MzQ0ZmYyZjk2YWY0ZDc3YmJiNjk0OTU0YWY0YzdjZWY1NjliOGQ3MjhiMzdlMDMzNyIsInQiOjE3MTU4OTM4MjIsInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.JHSbFIgrDhfavgO5Dz7dW3EoPy_Qrcr_Jdiyd08GQXY/kwin4-effect-geometry-change-1-3.tar.gz</payload>
-  <tags>original-product,gplv3,linux,unix</tags>
+  <tags>unix,gplv3,linux,original-product</tags>
   <status>installed</status>
+ </stuff>
+ <stuff category="719">
+  <name>Squash2</name>
+  <providerid>api.kde-look.org</providerid>
+  <author>leo5sk</author>
+  <homepage>https://store.kde.org/p/1806319</homepage>
+  <licence></licence>
+  <version>1.0_6</version>
+  <rating>73</rating>
+  <downloads>8859</downloads>
+  <installedfile>/home/kloud/.local/share/kwin/effects/kwin4_effect_squash2/</installedfile>
+  <id>1806319</id>
+  <releasedate>2024-05-14</releasedate>
+  <summary>An effect to minimise and unminimise windows, modified from the default effect to be more in line with gnome animation style.&lt;br />
+&lt;br />
+Use squash2.tar.gz for plamsa 6+.&lt;br />
+Use kwin4-effect-squash2.tar.gz for plasma 5 and below.&lt;br />
+&lt;br />
+</summary>
+  <changelog></changelog>
+  <preview>https://images.pling.com/cache/100x100-0/img/00/00/43/22/46/1806319/g52.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-0/img/00/00/43/22/46/1806319/g52.png</previewBig>
+  <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE2NTM1MDc1NTYiLCJvIjoiMSIsInMiOiJkMmE5MWFiZDVmOGE3OTU5ZDhmZDViNDA1YzdiNjY5MTI5N2VkZmE5NTg1NzM1NjI2NjEzZGE2OTdmNjQzMGZhNDU5MTVmYzAzNWQ1N2JlN2U0ZjM1MzJjZTVmZTZlNzY5ZTkxZGRjOGZjZTgyOGZlMjM2NDI4N2FkZjY0ODU0YyIsInQiOjE3MjcyNjYzNTUsInN0ZnAiOm51bGwsInN0aXAiOiIzMS40NC4xMDIuMjI1In0.DraunkQkvT6p46oyiNwjNUsvFhGyvGwJiaRFwbBAmrY/kwin4-effect-squash2.tar.gz</payload>
+  <tags>original-product,linux,minimize,kwin,gplv2-later,effect,animation,unix</tags>
+  <status>updateable</status>
  </stuff>
 </hotnewstuffregistry>

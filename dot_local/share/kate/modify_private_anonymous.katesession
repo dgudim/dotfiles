@@ -8,7 +8,7 @@ source auto
 #ignore regex "section.*" "key_prefix_.*"
 #transform "section" "key" transform_name read="the docs" for="more detail on transforms"
 
-ignore regex "MainWindow0.*" ".*"
+ignore regex "MainWindow..*" ".*"
 ignore section "Open MainWindows"
 ignore section "Open Documents"
 ignore section "Recent Files"

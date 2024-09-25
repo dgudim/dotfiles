@@ -9,6 +9,7 @@ ignore section "Compositing"
 ignore section "Desktops"
 ignore section ""
 ignore regex "Tiling.*" ".*"
+ignore "Xwayland" "Scale"
 
 # Add your ignores and transforms here
 #ignore section "my-section"
