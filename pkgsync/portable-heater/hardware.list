@@ -1,6 +1,7 @@
 # Hardware
 amd-ucode
 intel-ucode
+zenergy-dkms-git
 
 ## Intel
 intel-gpu-tools
@@ -50,3 +51,4 @@ postgresql
 dblatex
 gimp-git
 libnsgif
+python310

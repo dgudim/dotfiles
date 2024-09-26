@@ -413,6 +413,7 @@ lazygit
 tig
 broot
 visidata
+energygraph
 
 ## Shells
 xonsh
@@ -646,7 +647,6 @@ ruff
 twine
 yapf
 mypy
-python-pipx
 pipxu
 codon-bin
 xontrib-fzf-widgets
@@ -1020,6 +1020,7 @@ ipp-usb
 sdl_image
 opusfile
 upower
+libnma
 
 
 
