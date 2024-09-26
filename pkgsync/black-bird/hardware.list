@@ -39,3 +39,7 @@ python-pyclip
 waydroid
 waydroid-image
 waydroid-script-git
+
+# 3D
+prusa-slicer
+slicer-udev

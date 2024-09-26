@@ -15,6 +15,7 @@ kdeconnectfileitemaction=true
 kdiff3fileitemaction=true
 kio-admin=true
 kompare=true
+libsyncthingfileitemaction-qt6=true
 makefileactions=true
 mountisoaction=true
 movetonewfolderitemaction=true
