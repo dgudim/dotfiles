@@ -517,6 +517,8 @@ plasma-browser-integration
 kdeconnect
 kde-snap-assist
 kde-thumbnailer-apk
+stl-thumb-git
+stl-thumb-kde
 blesh-git
 plasma-vault
 plasma5-integration
@@ -608,6 +610,7 @@ pax-utils
 dockerfile-language-server-bin
 yamlfmt
 gopls
+gfold
 
 ## R
 # Disabled as not needed
@@ -726,7 +729,9 @@ python-libarchive-c
 python-smbprotocol
 python-gssapi
 python-krb5
+python-pytest
 python-pytest-xdist
+python-loguru
 uvicorn
 
 ## ANDROID AND JAVA

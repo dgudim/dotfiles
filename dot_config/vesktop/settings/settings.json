@@ -362,10 +362,8 @@
             "chatMentions": true,
             "memberList": true,
             "voiceUsers": true,
-            "reactorsList": true
-        },
-        "SearchReply": {
-            "enabled": false
+            "reactorsList": true,
+            "colorChatMessages": false
         },
         "SendTimestamps": {
             "enabled": false
@@ -471,7 +469,10 @@
         },
         "UserVoiceShow": {
             "enabled": true,
-            "showVoiceChannelSectionHeader": true
+            "showVoiceChannelSectionHeader": true,
+            "showInUserProfileModal": true,
+            "showInMemberList": true,
+            "showInMessages": true
         },
         "USRBG": {
             "enabled": false
@@ -527,7 +528,8 @@
         "Dearrow": {
             "enabled": true,
             "hideButton": false,
-            "replaceElements": 0
+            "replaceElements": 0,
+            "dearrowByDefault": true
         },
         "Decor": {
             "enabled": false
@@ -741,6 +743,9 @@
         },
         "VolumeBooster": {
             "enabled": false
+        },
+        "FullSearchContext": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -753,6 +758,6 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1726332339676
+        "settingsSyncVersion": 1727541082638
     }
 }
