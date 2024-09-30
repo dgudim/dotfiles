@@ -605,6 +605,7 @@ cargo-cache
 perl
 perl-archive-zip
 visual-studio-code-bin
+imhex
 strace
 pax-utils
 dockerfile-language-server-bin
