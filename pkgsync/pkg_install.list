@@ -871,6 +871,7 @@ wireshark-qt
 zenmap
 capnet-assist
 linux-wifi-hotspot
+httptoolkit-bin
 
 ## GNS3
 gns3-server
