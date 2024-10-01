@@ -101,7 +101,7 @@ enable_service adb.service
 
 enable_service smartd.service
 
-enable_service updatedb.timer
+enable_service plocate-updatedb.timer
 {{ if eq .chezmoi.hostname "portable-heater" }}
     # Disable
     enable_service fstrim.timer 0 1

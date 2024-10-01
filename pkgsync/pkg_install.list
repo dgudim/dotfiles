@@ -121,6 +121,7 @@ bluez-obex
 pahis
 tpm2-tools
 dos2unix
+tree
 
 ## PACMAN HOOKS AND SCRIPTS
 pacmanlogviewer
@@ -254,6 +255,7 @@ keditbookmarks
 oxygen-sounds
 harmony2
 krdp
+kcron
 
 
 
@@ -338,6 +340,7 @@ espanso-wayland-git
 espanso-gui
 r-quick-share
 waycheck
+mission-center
 
 
 
@@ -987,6 +990,8 @@ curlew
 kamoso
 webcamoid
 cameractrls
+jexiftoolgui
+vidcutter
 
 
 

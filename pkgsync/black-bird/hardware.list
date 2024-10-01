@@ -40,6 +40,9 @@ waydroid
 waydroid-image
 waydroid-script-git
 
+# For uni
+postgresql
+
 # 3D
-prusa-slicer
-slicer-udev
+# prusa-slicer
+# slicer-udev
