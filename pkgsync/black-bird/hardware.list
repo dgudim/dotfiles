@@ -8,8 +8,13 @@ lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
-# Fan
+# Thinkpad stuff
 thinkfan-ui
+ryzen_monitor-git
+ryzen_smu-dkms-git
+ryzen-ppd
+zenergy-dkms-git
+acpi_call-dkms
 
 # Fingerprint sensor
 python-validity

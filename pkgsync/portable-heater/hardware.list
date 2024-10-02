@@ -1,7 +1,6 @@
 # Hardware
 amd-ucode
 intel-ucode
-zenergy-dkms-git
 
 ## Intel
 intel-gpu-tools
@@ -14,6 +13,11 @@ lib32-libva-intel-driver
 
 ## Amd
 vulkan-radeon
+
+## Amd cpus
+ryzen_monitor-git
+ryzen_smu-dkms-git
+zenergy-dkms-git
 
 ## Nvidia
 nvidia-dkms

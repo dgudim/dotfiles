@@ -274,11 +274,19 @@ else:
     print(f"{LIGHT_GRAY}Updating firefox userstyles{NC}")
     css_repo_path = os.path.join(user_style_dir, "firefox-csshacks")
     if os.path.exists(css_repo_path):
-        os.system(f"cd {css_repo_path} && git pull")
+        os.system(
+            f"cd {css_repo_path} && git fetch origin && git reset --hard origin/master"
+        )
     else:
         os.system(
             f"cd {user_style_dir} && git clone https://github.com/MrOtherGuy/firefox-csshacks --depth 1"
         )
+
+    os.system(
+        f"cd {css_repo_path} && cd chrome && sed -i 's/order: 2;//g' toolbars_below_content.css"
+    )
+
+    print(f"{GRAY}Updated toolbars_below_content.css{NC}")
 
     user_style_path = os.path.join(user_style_dir, "userChrome.css")
     os.makedirs(user_style_dir, exist_ok=True)

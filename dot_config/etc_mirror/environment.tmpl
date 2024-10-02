@@ -16,7 +16,7 @@ LIBVA_DRIVER_NAME=nvidia
 MOZ_DISABLE_RDD_SANDBOX=1
 {{ end }}
 
-{{ if (or (eq .chezmoi.hostname "black-bird") (eq .chezmoi.hostname "kloud-xps13")) }}
+{{ if eq .chezmoi.hostname "black-bird" }}
 # Vdapau via libvdpau-va-gl
 VDPAU_DRIVER=va_gl
 {{ end }}

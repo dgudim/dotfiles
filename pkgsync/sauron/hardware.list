@@ -3,6 +3,10 @@ edk2-shell
 
 # Hardware
 amd-ucode
+
+# Amd cpu stuff
+ryzen_monitor-git
+ryzen_smu-dkms-git
 zenergy-dkms-git
 
 # Nvidia
@@ -39,6 +43,7 @@ gamemode
 gamescope
 lutris-git
 sunshine
+mangohud
 
 # For java classes
 intellij-idea-ultimate-edition
