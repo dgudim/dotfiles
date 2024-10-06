@@ -1,60 +1,62 @@
 matches:
-- trigger: :div
-  replace: <div>$|$</div>
-- trigger: :skull3
-  replace: 💀💀💀
-- trigger: :shrug
-  replace: ¯\_(ツ)_/¯
-- trigger: ":fliptable:"
-  replace: "(╯°□°）╯︵ ┻━┻"
-- trigger: ":fixtable:"
-  replace: "┬─┬ノ( º _ ºノ)"
-- trigger: ":angry-fliptable:"
-  replace: "‎(ﾉಥ益ಥ）ﾉ﻿ ┻━┻"
-- trigger: :bash-st
-  replace: |
-    #!/bin/bash
-    set -e
-    set -o pipefail
-- trigger: :bash-ask
-  replace: |
-    read -p "Are you sure? " -n 1 -r
-    echo    # (optional) move to a new line
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-        # do dangerous stuff
-    fi
-- trigger: :bash-exit-st
-  replace: |
-    if [ $? -eq 1 ]; then
-        echo "blah blah blah"
-    fi
-- trigger: :bash-fallback
-  replace: var="${VARIABLE:-$|$}"
-- trigger: :bash-var-unset
-  replace: |
-    if [ -z ${var+x} ]; then
-      echo "var is unset"
-      exit 1
-    fi
-- trigger: :bash-file-check
-  replace: |
-    if [ ! -f /tmp/foo.txt ]; then
-      echo "File not found!"
-    fi
-- trigger: :bash-script-cd
-  replace: |
-    SCRIPT_PATH=${0%/*}
-    if [ "$0" != "$SCRIPT_PATH" ] && [ "$SCRIPT_PATH" != "" ]; then
-        cd $SCRIPT_PATH
-    fi
-- trigger: :cbore
-  replace: "⌴"
-- trigger: ":Box:"
-  replace: "□"
-- trigger: ":cdot:"
-  replace: "⋅"
-- trigger: ":pm:"
-  replace: "±"
-- trigger: ":mp:"
-  replace: "∓"
+  - trigger: :div
+    replace: <div>$|$</div>
+  - trigger: :skull3
+    replace: 💀💀💀
+  - trigger: :shrug
+    replace: ¯\_(ツ)_/¯
+  - trigger: ":fliptable:"
+    replace: "(╯°□°）╯︵ ┻━┻"
+  - trigger: ":fixtable:"
+    replace: "┬─┬ノ( º _ ºノ)"
+  - trigger: ":angry-fliptable:"
+    replace: "‎(ﾉಥ益ಥ）ﾉ\uFEFF ┻━┻"
+  - trigger: :bash-st
+    replace: |
+      #!/bin/bash
+      set -e
+      set -o pipefail
+  - trigger: :bash-ask
+    replace: |
+      read -p "Are you sure? " -n 1 -r
+      echo    # (optional) move to a new line
+      if [[ $REPLY =~ ^[Yy]$ ]]
+      then
+          # do dangerous stuff
+      fi
+  - trigger: :bash-exit-st
+    replace: |
+      if [ $? -eq 1 ]; then
+          echo "blah blah blah"
+      fi
+  - trigger: :bash-fallback
+    replace: var="${VARIABLE:-$|$}"
+  - trigger: :bash-var-unset
+    replace: |
+      if [ -z ${var+x} ]; then
+        echo "var is unset"
+        exit 1
+      fi
+  - trigger: :bash-file-check
+    replace: |
+      if [ ! -f /tmp/foo.txt ]; then
+        echo "File not found!"
+      fi
+  - trigger: :bash-script-cd
+    replace: |
+      SCRIPT_PATH=${0%/*}
+      if [ "$0" != "$SCRIPT_PATH" ] && [ "$SCRIPT_PATH" != "" ]; then
+          cd $SCRIPT_PATH
+      fi
+  - trigger: :bash-ext-subs
+    replace: ${var%.*}.txt
+  - trigger: :cbore
+    replace: "⌴"
+  - trigger: ":Box:"
+    replace: "□"
+  - trigger: ":cdot:"
+    replace: "⋅"
+  - trigger: ":pm:"
+    replace: "±"
+  - trigger: ":mp:"
+    replace: "∓"
