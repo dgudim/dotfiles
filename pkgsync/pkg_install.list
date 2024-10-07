@@ -359,7 +359,6 @@ tldr
 tokei
 ccze
 logalize-bin
-perl-image-exiftool
 yt-dlp
 bat
 mc
@@ -952,10 +951,14 @@ colord
 libuvc
 jpegoptim
 atomicparsley
+avisynthplus
 akvcam-dkms
 
 ## CLIS
 mplayer
+perl-image-exiftool
+xcur2png
+autotrace
 
 ## GUIS
 vlc-luajit
