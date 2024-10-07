@@ -937,6 +937,7 @@ kmidimon
 
 # GRAPHICS, VIDEO
 mesa-utils
+devil
 libva-utils
 libpng12
 libjxl

@@ -11,7 +11,7 @@ export __FD_OPTS="-L --max-depth 10"
 export __FZF_PREVIEW_WINDOW="right,50%,wrap,border-sharp"
 
 fd() {
-	LS_COLORS="$__LS_COLORS" /usr/bin/fd $__FD_OPTS "$@";
+	LS_COLORS="$__LS_COLORS" /usr/bin/fd $__FD_OPTS "$@"
 }
 
 # Override default fzf completion, add bat preview (ctrl-t)
@@ -43,7 +43,7 @@ export FZF_ALT_C_OPTS="--prompt 'Cd into> '"
 # }
 
 __rgX-fzf() {
-	local file RG_PREFIX;
+	local file RG_PREFIX
 	RG_PREFIX="exa --color=always \$($1 --files-with-matches --line-buffered \"\${@:3}\""
 	fzf --sort \
 		--preview="[[ ! -z {} ]] && $1 --line-number --line-buffered --context 7 --json {q} {} | delta --pager=0" \
@@ -56,22 +56,22 @@ __rgX-fzf() {
 
 # Search everything by content, including pdfs and archives, display preview with fzf
 rga-fzf() {
-    __rgX-fzf rga "$@"
+	__rgX-fzf rga "$@"
 }
 # Search text files by content, display preview with fzf
 rg-fzf() {
-    __rgX-fzf rg "$@"
+	__rgX-fzf rg "$@"
 }
 # Fuzzy-grep (kinda) (initial grep via ripgrep, then fzf)
 rg-fzfc() {
-    local file;
-	rg --line-number --line-buffered --color=always --no-heading "${@:-}" 2> /dev/null |
-	fzf --ansi --sort \
-		--color "hl:-1:underline,hl+:-1:underline:reverse" \
-		--delimiter : \
-		--preview '[[ ! -z {} ]] && bat --color=always {1} --highlight-line {2} --pager=never --style full --terminal-width $FZF_PREVIEW_COLUMNS' \
-		--preview-window "$__FZF_PREVIEW_WINDOW,+{2}+3/3,~3" \
-		--bind 'enter:become(kate {1} --line {2})'
+	local file
+	rg --line-number --line-buffered --color=always --no-heading "${@:-}" 2>/dev/null |
+		fzf --ansi --sort \
+			--color "hl:-1:underline,hl+:-1:underline:reverse" \
+			--delimiter : \
+			--preview '[[ ! -z {} ]] && bat --color=always {1} --highlight-line {2} --pager=never --style full --terminal-width $FZF_PREVIEW_COLUMNS' \
+			--preview-window "$__FZF_PREVIEW_WINDOW,+{2}+3/3,~3" \
+			--bind 'enter:become(kate {1} --line {2})'
 }
 # Search only text files
 rgc() {
@@ -86,7 +86,15 @@ fzf-preview() {
 }
 # Fuzzy-open a file
 fop() {
-    local file;
+	local file
 	file="$(fd --color always -t f "${@:2}" | fzf-preview "$1")" && xdg-open "$file"
 }
 
+# Override git fzf 'gl' function to use delta
+_fzf_git_lreflogs() {
+	_fzf_git_check || return "$?"
+	git reflog --color=always --format="%C(blue)%gD %C(yellow)%h%C(auto)%d %gs" | ble/contrib/integration:fzf-git/fzf --ansi \
+		--border-label '📒 Reflogs' \
+		--preview 'git show {1} | delta' "$@" |
+		awk '{print $1}'
+}
