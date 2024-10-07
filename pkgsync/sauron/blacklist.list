@@ -4,3 +4,6 @@ libinput-gestures
 
 # Replaced by opencv-cuda
 opencv
+
+# Not moving
+capnet-assist
