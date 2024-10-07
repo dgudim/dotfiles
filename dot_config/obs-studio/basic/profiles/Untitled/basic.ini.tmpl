@@ -14,9 +14,13 @@ BindIP=default
 IPFamily=IPv4+IPv6
 NewSocketLoopEnable=false
 LowLatencyEnable=false
+BindInterface=default
 
 [Stream1]
 IgnoreRecommended=false
+EnableMultitrackVideo=false
+MultitrackVideoMaximumAggregateBitrateAuto=true
+MultitrackVideoMaximumVideoTracksAuto=true
 
 [SimpleOutput]
 FilePath=/home/kloud
@@ -34,8 +38,13 @@ RecRBPrefix=Replay
 StreamAudioEncoder=aac
 RecAudioEncoder=aac
 RecTracks=1
+{{ if eq .chezmoi.hostname "sauron" -}}
+StreamEncoder=nvenc
+RecEncoder=nvenc
+{{- else -}}
 StreamEncoder=x264
 RecEncoder=qsv
+{{- end }}
 
 [AdvOut]
 ApplyServiceSettings=true
@@ -52,7 +61,6 @@ RecEncoder=none
 FLVTrack=1
 FFOutputToFile=true
 FFFilePath=/home/kloud
-FFExtension=mp4
 FFVBitrate=2500
 FFVGOPSize=250
 FFUseRescale=false
@@ -72,6 +80,14 @@ RecRBTime=20
 RecRBSize=512
 AudioEncoder=libfdk_aac
 RecAudioEncoder=libfdk_aac
+StreamMultiTrackAudioMixes=1
+RecSplitFileType=Time
+FFFormat=
+FFFormatMimeType=
+FFVEncoderId=0
+FFVEncoder=
+FFAEncoderId=0
+FFAEncoder=
 
 [Video]
 BaseCX=1920
