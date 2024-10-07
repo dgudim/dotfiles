@@ -417,6 +417,8 @@ tig
 broot
 visidata
 energygraph
+systemctl-tui
+servicemaster-bin
 
 ## Shells
 xonsh
@@ -894,7 +896,10 @@ lsp-plugins
 zam-plugins
 amb-plugins
 mda.lv2
+guitarix
+gxplugins.lv2
 soundfont-fluid
+new-session-manager
 calf
 artyfx
 aubio
@@ -968,6 +973,12 @@ smplayer
 hugin
 obs-studio-tytan652
 obs-shaderfilter-git
+obs-3d-effect
+obs-multisource-effect
+obs-recursion-effect
+obs-retro-effects
+obs-streamfx-unstable
+obs-stroke-glow-shadow
 blender
 krita
 imv
@@ -1038,6 +1049,7 @@ sdl_image
 opusfile
 upower
 libnma
+fltk
 
 
 
