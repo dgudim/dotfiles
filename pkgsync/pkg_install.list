@@ -148,6 +148,7 @@ libblockdev-lvm
 libblockdev-nvme
 libblockdev-part
 libblockdev-swap
+libblockdev-smart
 udisks2-btrfs
 udisks2-lvm2
 dmraid
@@ -933,6 +934,8 @@ kid3
 nicotine+
 pavucontrol-qt
 kmidimon
+carla
+soundux-git
 
 
 # GRAPHICS, VIDEO
