@@ -1,6 +1,6 @@
 [Desktop Entry]
 Exec=bash /home/kloud/Documents/usefull_files/scripts/zoom_and_pick.sh
-Name=bash /home/kloud/Documents/usefull_files/scripts/zoom_and_pick.sh
+Name=Pick a color
 NoDisplay=true
 StartupNotify=false
 Type=Application

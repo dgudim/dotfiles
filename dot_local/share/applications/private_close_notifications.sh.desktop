@@ -1,6 +1,6 @@
 [Desktop Entry]
 Exec=bash /home/kloud/Documents/usefull_files/scripts/close_notifications.sh
-Name=bash /home/kloud/Documents/usefull_files/scripts/close_notifications.sh
+Name=Close notifications
 NoDisplay=true
 StartupNotify=false
 Type=Application
