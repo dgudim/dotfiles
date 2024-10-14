@@ -56,3 +56,6 @@ postgresql
 
 # Stuff
 openbox
+
+# For work repos
+encfs
