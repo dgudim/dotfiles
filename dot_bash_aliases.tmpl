@@ -249,6 +249,30 @@ rdns() {
 }
 
 
+#######################################  PYTHON  ##############################################################
+
+__pvenv_activate() {
+	bash -c "source '$1/bin/activate' && echo 'Spawned a subshell' && bash"
+	echo "Done! Consider setting up direnv for automatic activation"
+}
+
+pvenv() {
+	if [ -d ".venv" ]; then
+		echo "Found .venv, activating..."
+		__pvenv_activate ".venv"
+		return 0
+	fi
+
+	if [ -d "venv" ]; then
+		echo "Found venv, activating..."
+		__pvenv_activate "venv"
+		return 0
+	fi
+
+	echo "No venv found, creating one"
+	uv venv
+	__pvenv_activate ".venv"
+}
 
 ###############################################################################################################
 

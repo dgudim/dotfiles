@@ -42,6 +42,11 @@ matches:
       if [ ! -f /tmp/foo.txt ]; then
         echo "File not found!"
       fi
+  - trigger: :bash-dir-check
+    replace: |
+      if [ -d "$DIRECTORY" ]; then
+        echo "$DIRECTORY does exist."
+      fi
   - trigger: :bash-script-cd
     replace: |
       SCRIPT_PATH=${0%/*}
