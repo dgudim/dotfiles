@@ -610,6 +610,7 @@ rust-src
 cargo-cache
 perl
 perl-archive-zip
+perl-yaml-tiny
 visual-studio-code-bin
 imhex
 strace
