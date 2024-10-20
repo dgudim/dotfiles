@@ -66,7 +66,7 @@ git-merge-project-into-subfolder() {
 	fi
 
 	if ! git status; then
-	    echo "Current directory is not a git repo"
+		echo "Current directory is not a git repo"
 		return 1
 	fi
 
@@ -88,8 +88,6 @@ git-merge-project-into-subfolder() {
 
 	echo "DONE!"
 }
-
-# TODO: alias to save and restore current state (empty commit to a temp branch)
 
 ensure-worktree() {
     [ -z ${1+x} ] && echo "Please give me a branch" && return 1;
@@ -113,8 +111,19 @@ ensure-worktree() {
 				git branch --set-upstream-to="origin/$BRANCH" $BRANCH
 				echo "Done!"
 			else
-				echo "Aborting"
 				cd -
+				while [[ ! "$yn" =~ ^[YyNn]$ ]]
+				do
+					read -p "Try to create a new branch?" -n 1 yn
+					echo
+				done
+				if [[ "$yn" =~ ^[Yy]$ ]]
+				then
+					gchb $BRANCH
+					ensure-worktree $BRANCH
+				else
+					echo "Aborting"
+				fi
 			fi
 		fi
 	else
@@ -150,13 +159,13 @@ logcat() {
 	PID="$(adb shell ps | grep $APP | tr -s [:space:] ' ' | cut -d' ' -f2)"
 
 	if [ -z ${PID-} ]; then
-	    echo "Showing all logs"
-	    sleep 2
-	    adb logcat | logcat-colorize
+		echo "Showing all logs"
+		sleep 2
+		adb logcat | logcat-colorize
 	else
-	    echo "App PID: $PID"
-	    sleep 2
-	    adb logcat | grep -F "$PID" | logcat-colorize
+		echo "App PID: $PID"
+		sleep 2
+		adb logcat | grep -F "$PID" | logcat-colorize
 	fi
 }
 mirror-screen() {
@@ -285,7 +294,7 @@ rdns() {
 #######################################  PYTHON  ##############################################################
 
 __pvenv_activate() {
-	source '$1/bin/activate
+	source $1/bin/activate
 	echo "Done! Consider setting up direnv for automatic activation"
 }
 
@@ -498,4 +507,3 @@ remove-lines() (
 rgd() {
   rg --json -C 2 $1 | delta
 }
-
