@@ -407,6 +407,7 @@ halp
 osquery
 translate-shell
 skopeo
+x86-64-level
 # start zenmap as root
 gksu
 
