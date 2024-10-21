@@ -428,6 +428,8 @@ chzu() {
 	atuin stats
 
 	echo $(pacman-ps | wc -l) entries require restarting
+
+	dkms status | grep -i 'warning\|error'
 }
 
 figleta() {
