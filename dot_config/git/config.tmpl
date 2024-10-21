@@ -120,7 +120,7 @@
     autocorrect = prompt
 [alias]
     commit-def =     "!f() { git add . && git commit         -S -a -m                         \"$1\"; }; f"
-    commit-empty =   "!f() { git add . && git commit         -S -a -m --allow-empty-message -m "";    }; f"
+    commit-empty =   "!f() { git add . && git commit         -S -a    --allow-empty-message -m "";    }; f"
     commit-rename =  "!f() {              git commit --amend -S -a -m                         \"$1\"; }; f"
     commit-am =      "!f() { git add . && git commit --amend -S -a -m                         \"$1\"; }; f"
     commit-amn =     "!f() { git add . && git commit --amend -S -a --no-edit                        ; }; f"
