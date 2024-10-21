@@ -4,4 +4,4 @@ EnableMagicMimeActions=false
 [General]
 IgnoreImages=false
 MaxClipItems=100
-Version=6.2.0
+Version=6.2.1
