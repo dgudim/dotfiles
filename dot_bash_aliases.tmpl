@@ -41,7 +41,11 @@ alias gcomm-amn='git commit-amn'
 alias gpul='git pr'
 alias gpus='git pu'
 alias gpusf='git puf'
-alias gch='git co'
+gch() {
+	BRANCH=$(echo "$1" | cut -d'/' -f2)
+	git co "$BRANCH"
+}
+alias gchr='git co'
 alias gchb='git cb'
 alias gsync='git sync'
 alias gfc="git fetch origin --prune && for branch in \$(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '\$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", \$1); print \$1}'); do git branch -D \$branch; done && git maintenance run --auto && git maintenance run --task=gc && git fsck"
