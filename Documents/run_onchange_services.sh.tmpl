@@ -180,6 +180,9 @@ add_group i2c
 {{ if (or (eq .chezmoi.hostname "sauron") (eq .chezmoi.hostname "nuclear-submarine")) }}
 add_group plugdev # Only used by razer udev rules and goodix finger sensor
 {{ end }}
+{{ if eq .chezmoi.hostname "nuclear-submarine" }}
+add_group flutter
+{{ end }}
 add_group rfkill
 add_group video
 add_group input # For joysticks
