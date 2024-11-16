@@ -18,7 +18,7 @@ lib32-opencl-nvidia
 nvidia-container-toolkit
 opencv-cuda
 cuda
-nvidia-tweaks
+nvidia-patch
 
 # Rgb stuff
 openrazer-driver-dkms
