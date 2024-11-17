@@ -499,6 +499,8 @@ rlwrap
 dbeaver-plugin-svg-format
 yt-dlp-drop-in
 xorg-xhost
+awatcher-git
+aw-watcher-media-player-git
 
 ## Browser sync to RAM
 profile-sync-daemon

@@ -1,3 +1,5 @@
+encryption = "gpg"
+
 {{- $konsole_fontsize := promptIntOnce . "konsole.fontsize" "Konsole font size" -}}
 {{- $system_fontsize := promptIntOnce . "system.fontsize" "System font size (kate + system)" -}}
 {{- $git_username := promptStringOnce . "git.git_username" "Git username" -}}
@@ -10,6 +12,11 @@
 {{ $GIT_EMAIL_ENV := printf "%s=%s" "GIT_EMAIL" $git_email }}
 {{ $signingkey := output "env" $GIT_EMAIL_ENV "sh" "-c" "gpg --with-colons --locate-keys $GIT_EMAIL | grep pub | cut -d : -f 5" | trim }}
 
+[data.gpg]
+    signingkey = {{ $signingkey | quote }}
+    # https://www.gnupg.org/documentation/manuals/gnupg/Agent-Options.html#index-debug_002dlevel
+    loglevel = "none"
+
 [data.konsole]
     fontsize = {{ $konsole_fontsize }}
 
@@ -19,11 +26,6 @@
 [data.git]
     git_username = {{ $git_username | quote }}
     git_email = {{ $git_email | quote }}
-
-[data.gpg]
-    signingkey = {{ $signingkey | quote }}
-    # https://www.gnupg.org/documentation/manuals/gnupg/Agent-Options.html#index-debug_002dlevel
-    loglevel = "basic"
 
 [data.x86_v3]
     enabled = {{ $enablex86v3 | quote }}
@@ -35,7 +37,6 @@
     autoCommit = false
     autoPush = false
 
-encryption = "gpg"
 progress=true
 
 [gpg]
