@@ -99,6 +99,7 @@ ensure-worktree() {
     ROOT=$(git root)
     REPO_NAME=$(basename $ROOT) # (basename -s .git $(git remote get-url origin) ?)
 	if git status; then
+		git worktree prune
 		if git worktree list | grep -q "$BRANCH"; then
 			WORKTREE_DIR=$(git worktree list | grep "$BRANCH" | cut -d' ' -f1)
 			echo "Worktree already exists at $WORKTREE_DIR"

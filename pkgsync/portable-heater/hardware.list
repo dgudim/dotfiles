@@ -27,9 +27,6 @@ nvidia-hook
 broadcom-wl-dkms
 
 ## Misc
-mesa-vdpau
-libva-mesa-driver
-lib32-libva-mesa-driver
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
