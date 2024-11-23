@@ -995,7 +995,10 @@ krita
 imv
 gwenview
 inkscape
-gpu-screen-recorder-gtk-git
+gpu-screen-recorder
+gpu-screen-recorder-gtk
+gpu-screen-recorder-notification
+gpu-screen-recorder-ui
 simplescreenrecorder
 gimagereader-qt
 glava
