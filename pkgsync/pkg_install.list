@@ -408,8 +408,10 @@ osquery
 translate-shell
 skopeo
 x86-64-level
+msr-tools
 # start zenmap as root
 gksu
+lsix
 
 ## TUIs
 lazydocker
@@ -1082,6 +1084,7 @@ debtap
 s-nail
 arj
 sysbench
+stress-ng
 earlyoom
 sshfs
 xclip
