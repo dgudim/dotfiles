@@ -44,6 +44,9 @@ rm -fv /home/kloud/.local/share/applications/gpick.desktop
 rm -rfv /home/kloud/.local/share/icons/Simp1e-Gruvbox-Dark
 rm -rf /home/kloud/.local/share/applications/ksysguard.desktop
 
+# Fix activitywatch
+sudo rm -f /opt/activitywatch/libwayland-client.so.0
+
 # Delete sensitive data
 secret-tool clear user kloud || true
 
