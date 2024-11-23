@@ -155,13 +155,12 @@ logcat() {
 	fi
 
 	APP="$(adb shell cmd package list packages | cut -d':' -f 2 | fzf)"
+	PID="$(adb shell ps | grep $APP | tr -s [:space:] ' ' | cut -d' ' -f2)"
 
 	if [ -z ${PID-} ]; then
 		echo "No app specified"
 		return 1
 	fi
-
-	PID="$(adb shell ps | grep $APP | tr -s [:space:] ' ' | cut -d' ' -f2)"
 
 	if [ -z ${PID-} ]; then
 		echo "Showing all logs"
