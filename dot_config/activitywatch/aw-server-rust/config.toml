@@ -3,4 +3,5 @@
 #port = 5600
 #cors = []
 #
-#[custom_static]
+[custom_static]
+aw-watcher-media-player = "/home/kloud/.config/activitywatch/aw-server-rust/media-visualization"
