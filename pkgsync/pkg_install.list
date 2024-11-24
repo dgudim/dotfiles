@@ -49,6 +49,7 @@ linux-firmware
 linux-headers
 linux-lts
 linux-lts-headers
+scx-scheds
 fwupd
 fwupd-efi
 dracut
