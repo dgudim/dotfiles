@@ -2,14 +2,14 @@
 Description=OpenRGB control
 After=openrgb.service
 Requires=openrgb.service
+Conflicts=sleep.target
 
 [Service]
 Type=simple
 ExecStart=/mnt/fast_storage/projects/crab_rave/keyboard_vis/target/release/run.sh
 Restart=always
-RemainAfterExit=yes
-RestartSec=3
+RestartSec=1
 
 [Install]
-WantedBy=default.target
+WantedBy=awake.target
 
