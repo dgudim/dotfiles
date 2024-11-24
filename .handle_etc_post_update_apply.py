@@ -55,4 +55,13 @@ for mirror_filepath in glob.iglob(
         )
         print(f"  {RED}ERR: {e}{NC}")
 
-print(f"{L_GREEN}Finished copying to etc, {L_YELLOW}{entries} files {L_GREEN}processed{NC}")
+print(
+    f"{L_GREEN}Finished copying to etc, {L_YELLOW}{entries} files {L_GREEN}processed{NC}"
+)
+
+
+print(
+    f"{L_PURPLE}Running {L_BLUE}etc post update/apply hook{NC},{L_PURPLE} loading {L_CYAN}dconf{L_PURPLE} state{NC}..."
+)
+os.system("cd ~/.config/dconf/ && dconf load / < user.txt")
+print(f"{L_GREEN}Loaded dconf state{NC}\n")

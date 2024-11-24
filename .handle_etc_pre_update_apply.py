@@ -32,8 +32,7 @@ print(
 
 home = getenv("HOME")
 real_etc_path = "/etc"
-chezmoi_etc_path = os.path.join(
-    getenv("CHEZMOI_SOURCE_DIR"), "dot_config/etc_mirror")
+chezmoi_etc_path = os.path.join(getenv("CHEZMOI_SOURCE_DIR"), "dot_config/etc_mirror")
 local_mirror_etc_path = os.path.join(home, ".config/etc_mirror")
 
 
@@ -57,11 +56,19 @@ shutil.rmtree(local_mirror_etc_path)
 for filepath in glob.iglob(chezmoi_etc_path + "**/**", recursive=True, dir_fd=False):
     if not os.path.isfile(filepath):
         continue
-    relative_path = filepath.replace(
-        f"{chezmoi_etc_path}/", "").replace(".tmpl", "")
+    relative_path = filepath.replace(f"{chezmoi_etc_path}/", "").replace(".tmpl", "")
     etc_file = os.path.join(real_etc_path, relative_path)
     local_mirror_file = os.path.join(local_mirror_etc_path, relative_path)
     copyto(etc_file, local_mirror_file)
     entries = entries + 1
 
-print(f"{L_GREEN}Finished mirroring etc state{NC}, {L_YELLOW}{entries} files {L_GREEN}processed{NC}\n")
+print(
+    f"{L_GREEN}Finished mirroring etc state{NC}, {L_YELLOW}{entries} files {L_GREEN}processed{NC}\n"
+)
+
+
+print(
+    f"{L_PURPLE}Running {L_BLUE}etc pre update/apply hook{NC},{L_PURPLE} dumping {L_CYAN}dconf{L_PURPLE} state{NC}..."
+)
+os.system("cd ~/.config/dconf/ && dconf dump / > user.txt")
+print(f"{L_GREEN}Finished dumping dconf state{NC}\n")

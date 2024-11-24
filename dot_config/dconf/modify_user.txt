@@ -1,0 +1,33 @@
+#!/usr/bin/env chezmoi_modify_manager
+
+source auto
+
+no-warn-multiple-key-matches
+
+# Add your ignores and transforms here
+#ignore section "my-section"
+#ignore "exact section name without brackets" "exact key name"
+#ignore regex "section.*" "key_prefix_.*"
+#transform "section" "key" transform_name read="the docs" for="more detail on transforms"
+
+ignore regex ".*" ".*window-height.*"
+ignore regex ".*" ".*window-width.*"
+ignore regex ".*" ".*window-maximized.*"
+ignore regex ".*" ".*window-is-maximized.*"
+ignore regex ".*" ".*window-fullscreen.*"
+ignore regex ".*" ".*window-size.*"
+ignore regex ".*" ".*window-position.*"
+ignore regex ".*" ".*window-state.*"
+ignore regex ".*" ".*window-x"
+ignore regex ".*" ".*window-y"
+ignore regex ".*" ".*window-w"
+ignore regex ".*" ".*window-h"
+
+ignore regex "com/github/wwmm/easyeffects.*" ".*"
+ignore regex "com/rafaelmardojai/Blanket.*" ".*"
+ignore regex "com/github/tenderowl/frog.*" ".*"
+ignore regex "com/uploadedlobster/peek.*" ".*"
+ignore regex "com/github/tchx84/Flatseal.*" ".*"
+ignore regex "org/gnome/liferea.*" ".*"
+
+ignore regex "org/virt-manager/virt-manager/.*" ".*"
