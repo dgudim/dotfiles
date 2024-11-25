@@ -153,16 +153,27 @@ print(f"{LIGHTER_GRAY}Checking kernel cmdline{NC}")
 cmdline = read_file("/etc/kernel/cmdline")
 grub = read_file("/etc/default/grub")
 
-bootfile = cmdline if len(cmdline) > 0 else grub
+bootline = cmdline if len(cmdline) > 0 else grub
 
 run_check(
-    len(bootfile) > 0 and bootfile.find("mitigations=off") == -1,
+    len(bootline) > 0 and bootline.find("mitigations=off") == -1,
     f"{YELLOW}Turn off mitigations in kernel cmdline{NC}",
 )
 
 run_check(
-    len(bootfile) > 0 and bootfile.find("rd.luks.options") != -1,
+    len(bootline) > 0 and bootline.find("rd.luks.options") != -1,
     f"{YELLOW}Remove rd.luks.options from kernel cmdline{NC}",
+)
+
+# https://wiki.archlinux.org/title/Zswap
+run_check(
+    len(bootline) > 0
+    and (
+        bootline.find("zswap.enabled=1") == -1
+        or bootline.find("zswap.compressor=lz4") == -1
+        or bootline.find("zswap.max_pool_percent=20") == -1
+    ),
+    f"{YELLOW}Enable zswap in kernel cmdline{NC}",
 )
 
 # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
@@ -186,6 +197,7 @@ if cmdline.find("rd.luks") != -1:
         luks_root_flags = read_file("/tmp/luks_root_flags")
         os.system("rm /tmp/luks_root_flags")
 
+        # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance
         run_check(
             luks_root_flags.find("allow-discards") == -1
             or luks_root_flags.find("no-read-workqueue") == -1
