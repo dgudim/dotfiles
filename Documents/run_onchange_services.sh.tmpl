@@ -130,7 +130,7 @@ enable_service docker.socket 1
 enable_service psd 1
 
 enable_service "suspend@$USER"
-enable_service awake 1
+enable_service awake.target 1
 
 {{ if eq .chezmoi.hostname "sauron" }}
 enable_service openrgb.service 1
