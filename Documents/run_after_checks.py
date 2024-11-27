@@ -269,7 +269,7 @@ else:
     print(f"{LIGHT_GRAY}Selected firefox profile: {firefox_profiles[0]}{NC}")
 
     USER_STYLE = """
-@import url("./firefox-csshacks/chrome/toolbars_below_content.css");
+@import url("./firefox-csshacks/chrome/toolbars_below_content_v2.css");
 @import url("./firefox-csshacks/chrome/iconized_main_menu.css");
 
 :root[uidensity="touch"] {
@@ -295,10 +295,10 @@ else:
         )
 
     os.system(
-        f"cd {css_repo_path} && cd chrome && sed -i 's/order: 2;//g' toolbars_below_content.css"
+        f"cd {css_repo_path} && cd chrome && sed -i 's/order: 2;//g' toolbars_below_content_v2.css"
     )
 
-    print(f"{GRAY}Updated toolbars_below_content.css{NC}")
+    print(f"{GRAY}Updated toolbars_below_content_v2.css{NC}")
 
     user_style_path = os.path.join(user_style_dir, "userChrome.css")
     os.makedirs(user_style_dir, exist_ok=True)
