@@ -230,6 +230,10 @@ firefox_profiles = [
 
 firefox_settings = [
     "widget.use-xdg-desktop-portal.file-picker",
+    "widget.use-xdg-desktop-portal.location",
+    "widget.use-xdg-desktop-portal.mime-handler",
+    "widget.use-xdg-desktop-portal.open-uri",
+    "widget.use-xdg-desktop-portal.settings",
     "media.ffmpeg.vaapi.enabled",
     "media.av1.enabled",
     "gfx.x11-egl.force-enabled",
