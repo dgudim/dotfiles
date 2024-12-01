@@ -9,7 +9,10 @@ libinput-gestures
 kernel-install-for-dracut
 
 # POWER STUFF
-power-profiles-daemon
+tuned-ppd
+systemtap
+x86_energy_perf_policy
+virt-what
 
 
 
