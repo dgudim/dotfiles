@@ -177,7 +177,7 @@ run_check(
 )
 
 os.system(
-    'lscpu | grep "Vendor ID" | cut -d' ' -f 3- | tr -d "[:blank:]" > /tmp/cpu_vendor'
+    'lscpu | grep "Vendor ID" | cut -d" " -f 3- | tr -d "[:blank:]" > /tmp/cpu_vendor'
 )
 cpu_vendor = read_file("/tmp/cpu_vendor")
 if "amd" in cpu_vendor.lower():

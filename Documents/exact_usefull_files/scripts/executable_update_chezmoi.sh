@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e
+set -u
+
 sleep 15
 chezmoi git fetch
 paplay /usr/share/sounds/subnautica_theme/general_info.ogg &
@@ -9,11 +12,16 @@ if [ "$res" = "yes" ]; then
 fi
 
 check_conflicts() {
-    FOLDERS=($(cat ~/.config/syncthing/config.xml | grep -Po '"/home.*?"|"/mnt.*?"'))
+    if [ -f ~/.config/syncthing/config.xml ]; then
+        FOLDERS="$(cat ~/.config/syncthing/config.xml | grep -Po '"/home.*?"|"/mnt.*?"')"
+    else
+        FOLDERS="$(cat ~/.local/state/syncthing/config.xml | grep -Po '"/home.*?"|"/mnt.*?"')"
 
-    for folder in "${FOLDERS[@]}"; do
-        find $(echo $folder | tr -d '"') -name "*sync-conflict*"
-    done
+    fi
+
+    while IFS= read -r folder; do
+        find "$(echo "$folder" | tr -d '"')" -name "*sync-conflict*"
+    done <<<"$FOLDERS"
 }
 
 CONFLICTS=$(check_conflicts)

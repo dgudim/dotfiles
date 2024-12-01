@@ -238,7 +238,6 @@ plasma-nm
 plasma-pa
 plasma-disks
 powerdevil
-kwallet5
 kwallet-pam
 kfind
 kgpg
@@ -931,7 +930,7 @@ noise-suppression-for-voice
 ## GUIS
 ambix
 aeolus
-strawberry-qt5
+strawberry
 qpwgraph
 raysession
 audacity
