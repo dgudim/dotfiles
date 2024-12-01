@@ -176,6 +176,17 @@ run_check(
     f"{YELLOW}Enable zswap in kernel cmdline{NC}",
 )
 
+os.system(
+    'lscpu | grep "Vendor ID" | cut -d' ' -f 3- | tr -d "[:blank:]" > /tmp/cpu_vendor'
+)
+cpu_vendor = read_file("/tmp/cpu_vendor")
+if "amd" in cpu_vendor.lower():
+    run_check(
+        len(bootline) > 0 and bootline.find("amd_pstate=active") == -1,
+        f"{YELLOW}Set amd_pstate=active{NC}",
+    )
+os.system("rm /tmp/cpu_vendor")
+
 # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
 if cmdline.find("rd.luks") != -1:
     print(f"{LIGHTER_GRAY}Checking /etc/crypttab{NC}")
