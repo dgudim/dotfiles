@@ -1,5 +1,6 @@
 #New optional dependencies for openmpi
 #    hip-runtime-amd: ROCm support
+#    hiprt
 
 # LAPTOP STUFF
 gestures
