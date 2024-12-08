@@ -1070,7 +1070,6 @@ libvncserver
 libwnck3
 qt6-charts
 ncurses5-compat-libs
-qt-jdenticon
 freerdp
 cdrtools
 coin-or-mp
