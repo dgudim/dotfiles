@@ -29,7 +29,6 @@ acpi_call-dkms
 
 # Not hardware, but work stuff instead
 realvnc-vnc-viewer
-dotnet-sdk
 aspnet-runtime
 aspnet-targeting-pack
 aspnet-runtime-7.0

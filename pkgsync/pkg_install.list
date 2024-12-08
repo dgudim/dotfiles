@@ -798,6 +798,10 @@ glfw
 mold
 ctags
 
+# C#
+dotnet-sdk
+dotnet-runtime
+
 ## Arduino
 platformio-core
 platformio-core-udev

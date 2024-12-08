@@ -1,0 +1,18 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=/home/kloud/Documents/usefull_files/scripts/update_chezmoi.sh
+GenericName[en_US]=
+GenericName=
+Icon=breeze-settings
+MimeType=
+Name[en_US]=update_chezmoi.sh
+Name=update_chezmoi.sh
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-AutostartScript=true
+X-KDE-SubstituteUID=false
+X-KDE-Username=
