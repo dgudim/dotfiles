@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <KeyboardShortcuts />
+  <HasBeenRun>true</HasBeenRun>
+  <FirstRunDate>2024-12-08T12:30:28.8118092+02:00</FirstRunDate>
+  <Version>3</Version>
+  <SingleInstance>true</SingleInstance>
+  <FormStates>
+    <FormState>
+      <Name>SettingsForm</Name>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+      <Size>
+        <Width>497</Width>
+        <Height>344</Height>
+      </Size>
+      <Maximized>false</Maximized>
+    </FormState>
+    <FormState>
+      <Name>OcrDownloadForm</Name>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+      <Size>
+        <Width>742</Width>
+        <Height>491</Height>
+      </Size>
+      <Maximized>false</Maximized>
+    </FormState>
+    <FormState>
+      <Name>GtkDesktopForm</Name>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+      <Size>
+        <Width>1210</Width>
+        <Height>600</Height>
+      </Size>
+      <Maximized>false</Maximized>
+    </FormState>
+  </FormStates>
+</UserConfig>
