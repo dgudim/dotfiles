@@ -270,6 +270,7 @@ firefox_settings = [
     "dom.private-attribution.submission.enabled",
     "browser.urlbar.suggest.trending",
     "apz.overscroll.enabled",
+    "userchrome.toolbars-below-content.tabs-at-bottom.enabled",
 ]
 
 if len(firefox_profiles) == 0:
@@ -284,16 +285,33 @@ else:
     print(f"{LIGHT_GRAY}Selected firefox profile: {firefox_profiles[0]}{NC}")
 
     USER_STYLE = """
+@import url("./firefox-csshacks/chrome/compact_proton.css");
+@import url("./firefox-csshacks/chrome/compact_urlbar_megabar.css");
+@import url("./firefox-csshacks/chrome/compact_extensions_panel.css");
 @import url("./firefox-csshacks/chrome/toolbars_below_content_v2.css");
 @import url("./firefox-csshacks/chrome/iconized_main_menu.css");
+@import url("./firefox-csshacks/chrome/non_floating_sharp_tabs.css");
 
-:root[uidensity="touch"] {
-    --tab-min-height: 15px !important;
+:root {
+  --tab-min-height: 36px !important;
 }
 
 #PlacesChevronPopup {
-    height: 500px !important;
+  height: 500px !important;
 }
+
+.tab-close-button {
+  display: none;
+}
+
+#window-modal-dialog {
+  top: 80%;
+}
+
+#tabbrowser-arrowscrollbox {
+  height: 36px;
+}
+
 """
 
     user_style_dir = os.path.join(firefox_profiles[0], "chrome")
@@ -308,12 +326,6 @@ else:
         os.system(
             f"cd {user_style_dir} && git clone https://github.com/MrOtherGuy/firefox-csshacks --depth 1"
         )
-
-    os.system(
-        f"cd {css_repo_path} && cd chrome && sed -i 's/order: 2;//g' toolbars_below_content_v2.css"
-    )
-
-    print(f"{GRAY}Updated toolbars_below_content_v2.css{NC}")
 
     user_style_path = os.path.join(user_style_dir, "userChrome.css")
     os.makedirs(user_style_dir, exist_ok=True)
