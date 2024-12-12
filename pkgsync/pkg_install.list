@@ -1,5 +1,6 @@
 #New optional dependencies for openmpi
 #    hip-runtime-amd: ROCm support
+#    hiprt
 
 # LAPTOP STUFF
 gestures
@@ -59,6 +60,7 @@ dracut
 alsa-firmware
 alsa-plugins
 alsa-utils
+alsa-tools
 sof-firmware
 archlinux-keyring
 wmctrl
@@ -327,6 +329,7 @@ anydesk-bin
 gsmartcontrol
 diskmonitor
 skanpage
+naps2-bin
 freeplane
 crow-translate
 dbeaver
@@ -348,7 +351,9 @@ r-quick-share
 waycheck
 mission-center
 goldendict-ng
-
+mousam
+prusa-slicer
+serialplot-git
 
 
 # CLI APPS
@@ -370,6 +375,7 @@ bat
 mc
 jc
 go-yq
+angle-grinder
 jq
 rsync
 xdg-ninja-git
@@ -416,6 +422,7 @@ msr-tools
 # start zenmap as root
 gksu
 lsix
+biodiff
 
 ## TUIs
 lazydocker
@@ -428,6 +435,7 @@ visidata
 energygraph
 systemctl-tui
 servicemaster-bin
+lnav
 
 ## Shells
 xonsh
@@ -603,6 +611,8 @@ wineasio
 winetricks-git
 vkd3d
 dxvk-bin
+yabridge
+yabridgectl
 
 
 
@@ -614,6 +624,7 @@ git
 subversion
 git-delta
 git-filter-repo
+mergiraf-bin
 github-cli
 rust
 rust-src
@@ -787,10 +798,15 @@ glfw
 mold
 ctags
 
+# C#
+dotnet-sdk
+dotnet-runtime
+
 ## Arduino
 platformio-core
 platformio-core-udev
 arduino-ctags
+arduino-language-server
 
 ## JS
 nodejs-lts-hydrogen
@@ -926,6 +942,7 @@ flite
 mediainfo
 playerctl
 noise-suppression-for-voice
+audio-share-bin
 
 ## GUIS
 ambix
@@ -947,6 +964,7 @@ pavucontrol-qt
 kmidimon
 carla
 soundux-git
+cavalier
 
 
 # GRAPHICS, VIDEO
@@ -1038,6 +1056,10 @@ dracut-colors-git
 smplayer-themes
 xcursor-simp1e-gruvbox-dark
 
+## Addons
+plasma6-applets-panel-colorizer
+plasma6-wallpapers-smart-video-wallpaper-reborn
+
 
 
 
@@ -1052,7 +1074,6 @@ libvncserver
 libwnck3
 qt6-charts
 ncurses5-compat-libs
-qt-jdenticon
 freerdp
 cdrtools
 coin-or-mp

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Utility;
+Comment=Simple utility to manipulate the Tuned service
+Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=tuned-switcher org.easycoding.TunedSwitcher
+GenericName=Tuned profile switcher
+Icon=org.easycoding.TunedSwitcher
+Name=Tuned Switcher
+Terminal=false
+Type=Application
+X-Flatpak=org.easycoding.TunedSwitcher

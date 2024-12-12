@@ -98,6 +98,7 @@ ensure-worktree() {
     BRANCH=$(echo "$1" | cut -d'/' -f2)
     ROOT=$(git root)
     REPO_NAME=$(basename $ROOT) # (basename -s .git $(git remote get-url origin) ?)
+	git fetch
 	if git status; then
 		git worktree prune
 		if git worktree list | grep -q "$BRANCH"; then
