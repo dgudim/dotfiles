@@ -667,7 +667,6 @@ shfmt
 ## PYTHON
 python
 uv
-rye
 ipython
 bpython
 python-lsp-black
