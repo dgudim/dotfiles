@@ -139,7 +139,7 @@ informant
 pacman-pstatus
 pacman-log-orphans-hook
 pacdiff-pacman-hook-git
-rebuild-detector
+# rebuild-detector # check-broken-packages finds more broken packages
 find-the-command
 paccache-hook
 pacserve
