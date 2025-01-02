@@ -1,0 +1,10 @@
+#!/data/data/com.termux/files/usr/bin/bash
+cd /data/data/com.termux/files/home
+cd dotfiles
+eval $(okc-ssh-agent)
+git pull
+cd ..
+cp -f dotfiles/Documents/usefull_files/scripts/executable_work_hours.py storage/downloads/Workhours/work_hours.py
+cd storage/downloads/Workhours
+export FULL_NAME='Danila Gudim'
+python work_hours.py
