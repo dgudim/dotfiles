@@ -390,7 +390,7 @@ alias grub-reload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 
 butter_debutter() {
-	duperemove -r -d -h -v --dedupe-options=partial,same,fiemap --hashfile=/home/kloud/Documents/butter_hashfile "$@"
+	duperemove -r -d -h -v --hashfile=/home/kloud/Documents/butter_hashfile "$@"
 }
 
 __rank_mirrors() {
