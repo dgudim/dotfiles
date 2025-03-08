@@ -1,5 +1,6 @@
 **/shell_theme_root.json
 /pkgsync
+/Documents/termux
 **/*.src.ini
 {{- if ne .chezmoi.hostname "nuclear-submarine" }}
     /.bash_aliases_work
