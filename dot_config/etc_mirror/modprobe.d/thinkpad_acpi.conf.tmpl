@@ -1,5 +1,5 @@
-{{ if (or (eq .chezmoi.hostname "black-bird") (eq .chezmoi.hostname "nuclear-submarine")) }}
+{{ if (or (eq .chezmoi.hostname "black-bird") (eq .chezmoi.hostname "nuclear-submarine")) -}}
 options thinkpad_acpi fan_control=1
-{{- else }}
+{{- else -}}
 # Only enabled on thinkpads
-{{- end }}
+{{- end -}}

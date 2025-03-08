@@ -1,8 +1,9 @@
-{{ if eq .chezmoi.hostname "nuclear-submarine" }}
-acpi_call
-{{- end }}
-{{ if (or (eq .chezmoi.hostname "nuclear-submarine") (eq .chezmoi.hostname "sauron")) }}
+# {{ if eq .chezmoi.hostname "nuclear-submarine" }}
+# acpi_call
+# {{- end }}
+{{- if (or (eq .chezmoi.hostname "nuclear-submarine") (eq .chezmoi.hostname "sauron")) -}}
+# For monitor_cpu
 ryzen_smu
+# For energygraph
 zenergy
-{{- end }}
-#
+{{- end -}}
