@@ -1,5 +1,5 @@
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="KatePartView" translationDomain="ktexteditor6" version="108">
+<gui name="KatePartView" translationDomain="ktexteditor6" version="109">
  <MenuBar>
   <Menu name="file" noMerge="1">
    <text>&amp;File</text>
@@ -26,6 +26,7 @@
    <Action group="edit_paste_merge" name="edit_copy_file_location"/>
    <Action group="edit_paste_merge" name="edit_paste"/>
    <Action group="edit_paste_merge" name="edit_paste_selection"/>
+   <Action group="edit_paste_merge" name="edit_paste_from_file"/>
    <Action group="edit_paste_merge" name="edit_swap_with_clipboard"/>
    <Action group="edit_paste_merge" name="clipboard_history_paste"/>/>
     <Separator group="edit_select_merge"/>

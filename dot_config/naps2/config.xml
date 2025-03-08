@@ -31,6 +31,42 @@
       <Maximized>false</Maximized>
     </FormState>
     <FormState>
+      <Name>ProfilesForm</Name>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+      <Size>
+        <Width>700</Width>
+        <Height>150</Height>
+      </Size>
+      <Maximized>false</Maximized>
+    </FormState>
+    <FormState>
+      <Name>ChooseDeviceForm</Name>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+      <Size>
+        <Width>506</Width>
+        <Height>295</Height>
+      </Size>
+      <Maximized>false</Maximized>
+    </FormState>
+    <FormState>
+      <Name>EditProfileForm</Name>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+      <Size>
+        <Width>423</Width>
+        <Height>487</Height>
+      </Size>
+      <Maximized>false</Maximized>
+    </FormState>
+    <FormState>
       <Name>GtkDesktopForm</Name>
       <Location>
         <X>0</X>
@@ -40,7 +76,12 @@
         <Width>1210</Width>
         <Height>600</Height>
       </Size>
-      <Maximized>false</Maximized>
+      <Maximized>true</Maximized>
     </FormState>
   </FormStates>
+  <HasBeenPromptedForDonation>true</HasBeenPromptedForDonation>
+  <LastDonatePromptDate>2025-01-26T17:53:49.4666798+02:00</LastDonatePromptDate>
+  <ThumbnailSize>1024</ThumbnailSize>
+  <BatchSettings />
+  <DeviceListAsTextOnly>false</DeviceListAsTextOnly>
 </UserConfig>

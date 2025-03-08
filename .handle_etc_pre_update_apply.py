@@ -70,5 +70,15 @@ print(
 print(
     f"{L_PURPLE}Running {L_BLUE}etc pre update/apply hook{NC},{L_PURPLE} dumping {L_CYAN}dconf{L_PURPLE} state{NC}..."
 )
+
 os.system("cd ~/.config/dconf/ && dconf dump / > user.txt")
+
+print(
+    f"{L_PURPLE}Running {L_BLUE}etc pre update/apply hook{NC},{L_PURPLE} dumping {L_CYAN}activitywatch{L_PURPLE} settings{NC}..."
+)
+
+os.system(
+    "cd ~/.local/share/activitywatch/aw-server-rust/ && sqlite3 sqlite.db '.dump key_value' > settings.sql && sed -i 's/TRANSACTION;/TRANSACTION;DROP TABLE key_value;/g' settings.sql"
+)
+
 print(f"{L_GREEN}Finished dumping dconf state{NC}\n")

@@ -166,9 +166,6 @@
         "GifPaste": {
             "enabled": false
         },
-        "HideAttachments": {
-            "enabled": false
-        },
         "iLoveSpam": {
             "enabled": false
         },
@@ -202,7 +199,8 @@
             "username": "Kl0ud_",
             "apiKey": "4127d918df9b162ba6b2b5a872aea681",
             "showLastFmLogo": true,
-            "shareSong": true
+            "shareSong": true,
+            "hideWithActivity": false
         },
         "LoadingQuotes": {
             "enabled": false
@@ -360,7 +358,8 @@
             "memberList": true,
             "voiceUsers": true,
             "reactorsList": true,
-            "colorChatMessages": false
+            "colorChatMessages": false,
+            "pollResults": true
         },
         "SendTimestamps": {
             "enabled": false
@@ -752,6 +751,15 @@
         },
         "FixImagesQuality": {
             "enabled": false
+        },
+        "HideMedia": {
+            "enabled": false
+        },
+        "FullUserInChatbox": {
+            "enabled": false
+        },
+        "IrcColors": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -764,6 +772,7 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1731185695430
-    }
+        "settingsSyncVersion": 1740075814422
+    },
+    "eagerPatches": false
 }
