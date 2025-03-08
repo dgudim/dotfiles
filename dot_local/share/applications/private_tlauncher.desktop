@@ -1,0 +1,18 @@
+[Desktop Entry]
+Categories=Games
+Comment=TLauncher
+Exec=/usr/lib/jvm/java-21-openjdk/bin/java -jar /home/kloud/Documents/shared/_Personal/apps/TLauncher.jar
+GenericName=Minecraft launcher
+Icon=/home/kloud/Documents/shared/_Personal/apps/tl.png
+Keywords=minecraft;game
+Name=TLauncher
+NoDisplay=false
+Path=
+StartupNotify=true
+StartupWMClass=TLauncher
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+MimeType=
