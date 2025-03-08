@@ -3,6 +3,7 @@
 import re
 import os
 import glob
+import json
 
 RED = "\033[0;31m"
 L_RED = "\033[1;31m"
@@ -26,7 +27,7 @@ checks = 0
 warn = 0
 
 
-def read_file(path: str) -> str:
+def read_file(path: str, delete=False) -> str:
     try:
         f = open(path, "r", encoding="utf-8")
         contents = f.read()
@@ -34,6 +35,9 @@ def read_file(path: str) -> str:
         return contents
     except Exception:
         return ""
+    finally:
+        if delete:
+            os.system(f"rm {path}")
 
 
 def run_check(cond: bool, message: str):
@@ -179,21 +183,19 @@ run_check(
 os.system(
     'lscpu | grep "Vendor ID" | cut -d" " -f 3- | tr -d "[:blank:]" > /tmp/cpu_vendor'
 )
-cpu_vendor = read_file("/tmp/cpu_vendor")
+cpu_vendor = read_file("/tmp/cpu_vendor", True)
 if "amd" in cpu_vendor.lower():
     run_check(
         len(bootline) > 0 and bootline.find("amd_pstate=active") == -1,
         f"{YELLOW}Set amd_pstate=active{NC}",
     )
-os.system("rm /tmp/cpu_vendor")
 
 # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
 if cmdline.find("rd.luks") != -1:
     print(f"{LIGHTER_GRAY}Checking /etc/crypttab{NC}")
 
     os.system("sudo cat /etc/crypttab > /tmp/luks_crypttab")
-    crypttab = read_file("/tmp/luks_crypttab")
-    os.system("rm /tmp/luks_crypttab")
+    crypttab = read_file("/tmp/luks_crypttab", True)
 
     luks_root = re.search(r"\/dev\/mapper\/luks-(.*?) *?\/ *?(ext4|btrfs)", fstab)
     if luks_root is not None:
@@ -205,8 +207,7 @@ if cmdline.find("rd.luks") != -1:
         os.system(
             f"sudo cryptsetup luksDump {disk_dev_id} | grep Flags | cut -d':' -f2 > /tmp/luks_root_flags"
         )
-        luks_root_flags = read_file("/tmp/luks_root_flags")
-        os.system("rm /tmp/luks_root_flags")
+        luks_root_flags = read_file("/tmp/luks_root_flags", True)
 
         # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance
         run_check(
@@ -337,6 +338,34 @@ else:
 
     for setting in firefox_settings:
         check_setting(about_config, setting)
+
+    start_index = about_config.index('webextensions.uuids", "')
+    extensions_uuid_map = json.loads(
+        about_config[
+            start_index + 23 : about_config.index(");", start_index) - 1
+        ].replace("\\", "")
+    )
+
+    plasma_integration_uuid = extensions_uuid_map["plasma-browser-integration@kde.org"]
+
+    def_storage_path = os.path.join(firefox_profiles[0], "storage", "default")
+    plasma_integration_sqlite_db_path = glob.glob(
+        f'{next(
+            os.path.join(def_storage_path, d)
+            for d in os.listdir(def_storage_path)
+            if f"{d}".find(plasma_integration_uuid) != -1
+        )}/idb/*.sqlite'
+    )[0]
+
+    template_path = "/home/kloud/.local/share/chezmoi/private_dot_mozilla/private_firefox/template-plasma-integration.sqlite"
+
+    os.system(
+        f'sqldiff "{plasma_integration_sqlite_db_path}" "{template_path}" > /tmp/sqldiff-plasma-integration'
+    )
+    if len(read_file("/tmp/sqldiff-plasma-integration", True)) > 0:
+        print(
+            f"{YELLOW}Disable media integration in plasma extension, firefox has a native one{NC}",
+        )
 
     run_check(
         len(glob.glob(os.path.join(firefox_profiles[0], "extensions", "magnolia*.xpi")))
