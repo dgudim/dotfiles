@@ -23,9 +23,7 @@ fprintd
 thinkfan-ui
 ryzen_monitor-git
 ryzen_smu-dkms-git
-ryzen-ppd
 zenergy-dkms-git
-acpi_call-dkms
 
 # Not hardware, but work stuff instead
 realvnc-vnc-viewer

@@ -354,6 +354,7 @@ goldendict-ng
 mousam
 prusa-slicer
 serialplot-git
+textpieces
 
 
 # CLI APPS
@@ -423,6 +424,7 @@ msr-tools
 gksu
 lsix
 biodiff
+hexyl
 
 ## TUIs
 lazydocker
@@ -625,6 +627,7 @@ subversion
 git-delta
 git-filter-repo
 mergiraf-bin
+difftastic
 github-cli
 rust
 rust-src
@@ -633,7 +636,7 @@ perl
 perl-archive-zip
 perl-yaml-tiny
 visual-studio-code-bin
-imhex
+imhex-bin
 strace
 pax-utils
 dockerfile-language-server-bin
@@ -760,6 +763,7 @@ python-krb5
 python-pytest
 python-pytest-xdist
 python-loguru
+python-notify2
 uvicorn
 
 ## ANDROID AND JAVA
@@ -1124,6 +1128,7 @@ fuse-overlayfs
 zenity
 hdf5-openmpi
 bcc-tools
+fastjar
 
 
 
@@ -1179,6 +1184,8 @@ plantuml-ascii-math
 asciidoctor
 blockdiag
 pdf2svg
+odt2txt
+unrtf
 biber
 d2
 gnuplot

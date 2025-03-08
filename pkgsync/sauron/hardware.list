@@ -18,7 +18,7 @@ lib32-opencl-nvidia
 nvidia-container-toolkit
 opencv-cuda
 cuda
-nvidia-patch
+nvidia-patch-git
 
 # Rgb stuff
 openrazer-driver-dkms
@@ -46,17 +46,24 @@ lutris-git
 sunshine
 mangohud
 
-# 3D
-prusa-slicer
-
 # For java classes
 intellij-idea-ultimate-edition
 intellij-idea-ultimate-edition-jre
 zulu-jdk-fx-bin
 postgresql
 
+# Devel
+mono
+mono-msbuild
+mono-msbuild-sdkresolver
+mono-tools
+rider
+
 # Stuff
 openbox
 
 # For work repos
 encfs
+
+# 3D
+orca-slicer-bin
