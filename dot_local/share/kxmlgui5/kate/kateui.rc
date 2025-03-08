@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="kate" translationDomain="kate" version="105">
+<gui name="kate" translationDomain="kate" version="106">
  <MenuBar>
   <Menu name="file" noMerge="1">
    <text>&amp;File</text>
@@ -28,7 +28,7 @@
    <DefineGroup name="close_merge"/>
    <Separator/>
    <Menu name="file_file_actions">
-    <text>File Actions</text>
+    <text>File Act&amp;ions</text>
     <Action name="file_rename"/>
     <Action name="file_delete"/>
     <Action name="file_compare"/>
@@ -52,7 +52,7 @@
    <Separator/>
   </Menu>
   <Menu append="before_view" name="selection">
-   <text>&amp;Selection</text>
+   <text>Sele&amp;ction</text>
   </Menu>
   <Menu name="go">
    <text>&amp;Go</text>
@@ -141,6 +141,11 @@
    <Action name="help_welcome_page"/>
   </Menu>
  </MenuBar>
+ <ToolBar name="hamburgerBar" noMerge="1">
+  <text>Hamburger Menu Toolbar</text>
+  <Spacer/>
+  <Action name="hamburger_menu"/>
+ </ToolBar>
  <ToolBar name="mainToolBar" noMerge="1">
   <text>Main Toolbar</text>
   <Action name="file_new"/>
@@ -155,11 +160,6 @@
   <DefineGroup name="find_operations"/>
   <Separator/>
   <DefineGroup name="zoom_operations"/>
- </ToolBar>
- <ToolBar name="hamburgerBar" noMerge="1">
-  <text>Hamburger Menu Toolbar</text>
-  <Spacer/>
-  <Action name="hamburger_menu"/>
  </ToolBar>
  <Merge/>
  <Menu name="viewspace_popup" noMerge="1">
