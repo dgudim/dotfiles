@@ -28,7 +28,7 @@ ln -sf /usr/share/dbus-1/services/org.kde.plasma.Notifications.service ~/.local/
 rm -rfv ~/.ssr
 
 # No need to override since arch switched to dbus-broker by default
-rm -fv /home/kloud/.config/systemd/user/dbus.service
+rm -fv ~/.config/systemd/user/dbus.service
 
 # Merged with main file
 sudo rm -fv /etc/debuginfod/alhp.urls
@@ -37,12 +37,12 @@ sudo rm -fv /etc/debuginfod/alhp.urls
 rm -rfv ~/.ViberPC
 
 # Delete plasma 5 stuff
-rm -fv /home/kloud/.config/khotkeysrc
-rm -fv /home/kloud/.config/kwalletd5.notifyrc
-rm -rfv /home/kloud/.local/share/kservices5
-rm -fv /home/kloud/.local/share/applications/gpick.desktop
-rm -rfv /home/kloud/.local/share/icons/Simp1e-Gruvbox-Dark
-rm -rf /home/kloud/.local/share/applications/ksysguard.desktop
+rm -fv ~/.config/khotkeysrc
+rm -fv ~/.config/kwalletd5.notifyrc
+rm -rfv ~/.local/share/kservices5
+rm -fv ~/.local/share/applications/gpick.desktop
+rm -rfv ~/.local/share/icons/Simp1e-Gruvbox-Dark
+rm -rf ~/.local/share/applications/ksysguard.desktop
 
 # Fix activitywatch
 sudo rm -f /opt/activitywatch/libwayland-client.so.0
@@ -51,9 +51,12 @@ sudo rm -f /opt/activitywatch/libwayland-client.so.0
 secret-tool clear user kloud || true
 
 # Replaced with pipxu
-rm -rfv /home/kloud/.local/share/pipx
+rm -rfv ~/.local/share/pipx
 
 # Symlink to stub systemd-resolved stub resolver
 [ -L /etc/resolv.conf ] || sudo ln -fvs /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+# Renamed
+rm -fv ~/.config/autostart/syncthingtray-qt6.desktop
 
 echo -e "${L_GREEN}Done!$NC\n"
