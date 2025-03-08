@@ -22,6 +22,7 @@ FullHeightButtonWidthMarginLeft=4
 FullHeightButtonWidthMarginRight=9
 
 [ShadowStyle]
+ShadowColor=58,64,54
 ShadowSize=ShadowMedium
 ShadowStrength=204
 
@@ -43,7 +44,7 @@ ButtonIconStyle=StyleOxygen
 CornerRadius=2.5
 DrawBackgroundGradient=true
 IconSize=IconMedium
-WindowCornerRadius=5.499999999999996
+WindowCornerRadius=5
 
 [Windeco Exception 0]
 BorderSize=0
