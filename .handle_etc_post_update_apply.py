@@ -69,9 +69,8 @@ os.system("cd ~/.config/dconf/ && dconf load / < user.txt")
 print(
     f"{L_PURPLE}Running {L_BLUE}etc post update/apply hook{NC},{L_PURPLE} loading {L_CYAN}activitywatch{L_PURPLE} settings{NC}..."
 )
-
+os.system("killall aw-qt && killall aw-server-rust && sleep 5")
 os.system(
     "cd ~/.local/share/activitywatch/aw-server-rust/ && sqlite3 sqlite.db < settings.sql"
 )
-
-print(f"{L_GREEN}Loaded dconf state{NC}\n")
+os.system("aw-qt & disown")
