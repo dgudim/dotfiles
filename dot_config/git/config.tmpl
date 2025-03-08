@@ -2,6 +2,8 @@
     pager = delta
 	fsmonitor = rs-git-fsmonitor
 	untrackedcache = true
+	attributesfile = ~/.config/git/gitattributes
+	excludesfile = ~/.config/git/ignore
 
 [interactive]
     diffFilter = delta --color-only
@@ -97,11 +99,15 @@
 [merge]
     conflictstyle = diff3
     tool = kdiff3
+[merge "mergiraf"]
+    name = mergiraf
+    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P
 [diff]
     context = 10
 	colorMoved = default
 	colorMovedWS = allow-indentation-change
 	submodule = log
+	tool = xxdiff
 [status]
 	submoduleSummary = true
 [submodule]
@@ -132,6 +138,14 @@
     diffb = "diff -b"
     diffws = "diff -w --staged"
     diffbs = "diff -b --staged"
+
+    # `git log` with patches shown with difftastic.
+    dlog = -c diff.external=difft log -p --ext-diff
+    # Show the most recent commit with difftastic.
+    dshow = -c diff.external=difft show --ext-diff
+    # `git diff` with difftastic.
+    ddiff = -c diff.external=difft diff
+
 	stasha = stash --all
 	blamec = blame -w -C
 	blamecc = blame -w -C -C
@@ -167,3 +181,16 @@
 
 [rerere]
 	enabled = true
+[cola]
+	theme = default
+	icontheme = dark
+	boldheaders = true
+	statusshowtotals = true
+	statusindent = true
+	fontdiff = FiraCode Nerd Font Mono,10,-1,5,50,0,0,0,0,0
+	blameviewer = git gui blame
+	expandtab = true
+	spellcheck = true
+	notifyonpush = true
+	resizebrowsercolumns = true
+	refreshonfocus = true
