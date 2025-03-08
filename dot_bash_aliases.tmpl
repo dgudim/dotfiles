@@ -448,6 +448,11 @@ figleta() {
 	done
 }
 
+record-terminal() {
+	asciinema rec rec.cast
+	agg rec.cast --font-family 'FiraCode Nerd Font' --theme asciinema rec.gif
+}
+
 mount_shares() {
 	echo -n "password for kloud: "
 	read -s password
