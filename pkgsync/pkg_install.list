@@ -53,6 +53,8 @@ linux-firmware
 linux-headers
 linux-lts
 linux-lts-headers
+linux-cachyos
+linux-cachyos-headers
 scx-scheds
 fwupd
 fwupd-efi
@@ -139,7 +141,7 @@ informant
 pacman-pstatus
 pacman-log-orphans-hook
 pacdiff-pacman-hook-git
-rebuild-detector
+# rebuild-detector # check-broken-packages finds more broken packages
 find-the-command
 paccache-hook
 pacserve
@@ -506,7 +508,7 @@ tesseract-data-lit
 chezmoi_modify_manager
 bash-completion
 mpv-mpris
-minq-ananicy-git
+cachyos-ananicy-rules-git
 udev-notify-git
 udev-usb-sync
 journalctl-desktop-notification-git
@@ -899,7 +901,7 @@ ngrep
 
 ## GUIS
 proton-vpn-gtk-app
-postman9-bin
+hoppscotch-bin
 wireshark-qt
 zenmap
 capnet-assist

@@ -20,9 +20,8 @@ rm -rfv ~/.config/BetterDiscord\ Installer
 rm -rfv ~/.config/BetterDiscord
 rm -rfv ~/.config/discord
 
-# Make sure kde notification service is started instead of dunst
-mkdir -p ~/.local/share/dbus-1/services/
-ln -sf /usr/share/dbus-1/services/org.kde.plasma.Notifications.service ~/.local/share/dbus-1/services/org.kde.plasma.Notifications.service
+# Make sure kde notification service is started instead of dunst (obsolete, delete)
+rm -rfv ~/.local/share/dbus-1/services/org.kde.plasma.Notifications.service
 
 # Moved to XDG
 rm -rfv ~/.ssr

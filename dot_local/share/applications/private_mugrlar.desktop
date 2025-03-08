@@ -1,0 +1,18 @@
+[Desktop Entry]
+Categories=Audio
+Comment=Murglar
+Exec=/usr/lib/jvm/java-21-openjdk/bin/java -jar /home/kloud/Documents/shared/_Personal/apps/Murglar.jar
+GenericName=Music downloader
+Icon=/home/kloud/Documents/shared/_Personal/apps/app_icon.png
+Keywords=deezer;soundcloud;music;murglar
+Name=Murglar
+NoDisplay=false
+Path=
+StartupNotify=true
+StartupWMClass=Murglar
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+MimeType=

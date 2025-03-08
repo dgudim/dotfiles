@@ -48,6 +48,7 @@ android-platform-30
 android-sdk-build-tools-30.0.3
 timescaledb
 timescaledb-tune
+timescaledb-old-upgrade
 
 ## Kubernetes
 google-cloud-cli

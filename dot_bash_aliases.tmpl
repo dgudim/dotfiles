@@ -101,7 +101,7 @@ ensure-worktree() {
 	git fetch
 	if git status; then
 		git worktree prune
-		if git worktree list | grep -q "$BRANCH"; then
+		if git worktree list | grep -q "\[$BRANCH\]"; then
 			WORKTREE_DIR=$(git worktree list | grep "$BRANCH" | cut -d' ' -f1)
 			echo "Worktree already exists at $WORKTREE_DIR"
 			echo "cd $WORKTREE_DIR"
@@ -390,7 +390,7 @@ alias grub-reload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 
 butter_debutter() {
-	duperemove -r -d -h -v --dedupe-options=partial,same,fiemap --hashfile=/home/kloud/Documents/butter_hashfile "$@"
+	duperemove -r -d -h -v --hashfile=/home/kloud/Documents/butter_hashfile "$@"
 }
 
 __rank_mirrors() {
