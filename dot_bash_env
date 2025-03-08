@@ -46,6 +46,12 @@ export CLIPBOARD_THEME=amber
 # Cache rust builds
 export CARGO_INCREMENTAL=1
 
+export LESSOPEN="|lesspipe.sh %s"
+# https://github.com/Wilfred/difftastic/issues/551
+export LESS="-FinqRsX"
+export DFT_COLOR=always
+export LESSCOLORIZER='bat --style="changes,numbers,header"'
+
 if [[ "$(whoami)" != "root" ]]; then
     # Add user stuff to PATH
     # Escape home variable for proper sed substitution
