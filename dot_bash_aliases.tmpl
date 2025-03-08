@@ -434,6 +434,8 @@ chzu() {
 
 	echo $(pacman-ps | wc -l) entries require restarting
 
+	echo 'dkms vibe check...'
+
 	dkms status | grep -i 'warning\|error'
 }
 
