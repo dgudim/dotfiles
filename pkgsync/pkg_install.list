@@ -2,9 +2,8 @@
 #    hip-runtime-amd: ROCm support
 #    hiprt
 
-# LAPTOP STUFF
-gestures
-libinput-gestures
+# Laptop stuff
+kwin-gestures
 
 # Boot stuff
 kernel-install-for-dracut
