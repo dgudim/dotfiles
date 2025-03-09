@@ -1,5 +1,6 @@
 [General]
 FreeFloating=true
+historyBehavior=ImmediateCompletion
 
 [PlasmaRunnerManager]
 migrated=true
@@ -7,6 +8,7 @@ migrated=true
 [Plugins]
 appstreamEnabled=false
 baloosearchEnabled=true
+krunner_powerdevilEnabled=false
 shellEnabled=false
 
 [Plugins][Favorites]

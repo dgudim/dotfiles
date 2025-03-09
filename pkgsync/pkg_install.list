@@ -898,6 +898,7 @@ iptraf-ng
 iperf3
 xh
 ngrep
+tailscale
 
 ## GUIS
 proton-vpn-gtk-app
@@ -907,6 +908,7 @@ zenmap
 capnet-assist
 linux-wifi-hotspot
 httptoolkit-bin
+ktailctl
 
 ## GNS3
 gns3-server
