@@ -7,6 +7,7 @@ cp -rfv ~/.shortcuts ~/dotfiles/Documents/termux/.shortcuts
 cp -rfv ~/.termux ~/dotfiles/Documents/termux/.termux
 
 rm -rf ~/dotfiles/Documents/termux/.termux/tasker/slack_token.sh
+rm -rf ~/dotfiles/Documents/termux/.termux/tasker/lastfm_token.sh
 rm -rf ~/dotfiles/Documents/termux/.termux/tasker/node_modules/csv-simple-parser
 
 cd ~/dotfiles
