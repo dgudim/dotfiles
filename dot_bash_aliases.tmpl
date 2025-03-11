@@ -521,3 +521,164 @@ remove-lines() (
 rgd() {
   rg --json -C 2 $1 | delta
 }
+
+
+
+
+
+############ Remote connections
+
+gen_ssh_prompt() {
+    hash=$(md5sum <<< "$HOSTNAME")
+
+	to_decimal() {
+		xargs -i printf "%d\n" "0x{}"
+	}
+
+	to_color() {
+		to_decimal | awk '{print int($0/255.0*(37-30)+30)}'
+	}
+
+	to_32() {
+		to_decimal | awk '{print int($0/255.0*31)}'
+	}
+
+    generate_block() {
+
+		local span="$1"
+
+		id_symbols="▀▐■▁▂▃▄▅▆▇█▉▊▋▌▍▎▏▔▟▞▝▜▛▚▙▘▗▖▕▬◼";
+
+		select_at_pos() {
+			local pos="$1"
+			echo "${id_symbols:$(( pos % ${#id_symbols} )):1}"
+		}
+
+		local block_num=$(
+			echo "$hash" | cut -c$span | to_32
+		)
+
+		local block_color=$(
+			echo "$hash" | cut -c$span | to_color
+		)
+
+		local block_shape="$(select_at_pos $block_num)"
+
+		echo "\\[\\e[$block_color;1m\\]$block_shape"
+    }
+
+	local number=$(
+        echo "$hash" | cut -c-2 | to_color
+    )
+    local number2=$(
+		echo "$hash" | cut -c4-5 | to_color
+    )
+
+	local block1="$(
+		generate_block '5-6'
+    )"
+	local block2="$(
+		generate_block '7-8'
+    )"
+	local block3="$(
+		generate_block '9-10'
+    )"
+	local block4="$(
+		generate_block '11-12'
+    )"
+
+    printf '%s%s%s%s \\[\\e[%d;1m\\]◀%s\[\\e[30;1m\\]@\\[\\e[%d;1m\\]%s\\[\\e[m\\]' "$block1" "$block2" "$block3" "$block4" "$number" $(whoami) "$number2" "$HOSTNAME"
+}
+
+set_ssh_prompt() {
+	export PS1="$(gen_ssh_prompt)"'$ '
+}
+
+__download_helper() {
+	local download_url
+	local target_path
+
+	download_url="$1"
+	target_path="$2"
+
+	wget "$download_url" -O "$target_path" || curl --output "$target_path" "$download_url"
+}
+
+setup_ssh_shell_utils() {
+	echo "Setting up atuin..."
+
+	local init_file="/tmp/.atuinit"
+
+	if [ -f "$init_file" ]; then
+		return 0;
+	fi
+
+	local atuin_target_path="/tmp/atuin.tar.gz"
+	local extracted_path="/tmp/atuin-x86_64-unknown-linux-gnu/atuin"
+	local atuin_download_url="https://github.com/atuinsh/atuin/releases/download/v18.4.0/atuin-x86_64-unknown-linux-gnu.tar.gz"
+
+	local preexec_download_path="/tmp/.bash-preexec.sh"
+
+	if [ ! -f "$preexec_download_path" ]; then
+		__download_helper "https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh" "$preexec_download_path"
+	fi
+
+	echo '' > "$init_file"
+
+	if [ -f /usr/bin/atuin ]; then
+		echo "Atuin installed in default location, skipping installation"
+	else
+		if [ -f "$extracted_path" ]; then
+			echo "Atuin already downloaded"
+		else
+			__download_helper "$atuin_download_url" "$atuin_target_path"
+			tar -xzvf "$atuin_target_path" -C /tmp
+		fi
+
+		echo "export PATH=\"$extracted_path:\$PATH\"" >> "$init_file"
+	fi
+
+	echo "source '$preexec_download_path'" >> "$init_file"
+	echo 'eval "$(atuin init bash --disable-up-arrow)"' >> "$init_file"
+}
+
+launch_shell() {
+	local load_rc="$1"
+
+	setup_ssh_shell_utils;
+	set_ssh_prompt;
+
+	local shellrc_path="/tmp/.shellrc"
+	local my_init_file="/tmp/.atuinit"
+
+	echo "source /etc/profile" > "$shellrc_path"
+
+	if [ "$load_rc" = "true" ]; then
+		echo 'source ~/.bashrc' >> "$shellrc_path"
+
+	fi
+
+	echo "source '$my_init_file'" >> "$shellrc_path"
+
+	# Copy over needed fuctions to login shell rc
+	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt);" >> "$shellrc_path"
+	echo "set_ssh_prompt" >> "$shellrc_path"
+
+	bash --rcfile /tmp/.shellrc
+}
+
+get_ssh_init_str() {
+	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f setup_ssh_shell_utils); $(typeset -f launch_shell); launch_shell $1;"
+}
+
+ssh() {
+	/usr/bin/ssh -t "$@" "$(get_ssh_init_str false)"
+}
+
+ssh_rc() {
+	/usr/bin/ssh -t "$@" "$(get_ssh_init_str true)"
+}
+
+ssh_n() {
+	/usr/bin/ssh "$@"
+}

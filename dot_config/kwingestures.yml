@@ -8,8 +8,8 @@ touchpad:
 
     - type: hold
       fingers: 3
-      threshold: 750
-      keyboard_modifiers: [ctrl]
+      threshold: 800
+      keyboard_modifiers: [alt]
 
       actions:
         - on: begin
@@ -17,8 +17,8 @@ touchpad:
 
     - type: swipe
       fingers: 3
-      speed: fast
       direction: up_down
+      keyboard_modifiers: none
 
       actions:
         - on: begin
@@ -52,8 +52,25 @@ touchpad:
 
     - type: swipe
       fingers: 3
-      speed: slow
+      direction: left
+      keyboard_modifiers: [alt]
+
+      actions:
+        - keyboard: [leftmeta+left]
+
+    - type: swipe
+      fingers: 3
+      direction: right
+      keyboard_modifiers: [alt]
+
+      actions:
+        - keyboard: [leftmeta+right]
+
+
+    - type: swipe
+      fingers: 3
       direction: up_down
+      keyboard_modifiers: [alt, shift]
 
       actions:
         - on: update
@@ -65,42 +82,62 @@ touchpad:
           command: pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 
-    # - type: swipe
-    #   fingers: 3
-    #   speed: slow
-    #   direction: up_down
-    #
-    #   actions:
-    #     - on: update
-    #       interval: -10
-    #       keyboard_modifiers: alt
-    #       plasma_shortcut: kwin,Increase Opacity
-    #
-    #     - on: update
-    #       interval: 10
-    #       keyboard_modifiers: alt
-    #       plasma_shortcut: kwin,Decrease Opacity
+    - type: swipe
+      fingers: 3
+      direction: up_down
+      keyboard_modifiers: [shift]
+
+      actions:
+        - on: update
+          interval: -10
+          keyboard_modifiers: alt
+          plasma_shortcut: kwin,Increase Opacity
+
+        - on: update
+          interval: 10
+          keyboard_modifiers: alt
+          plasma_shortcut: kwin,Decrease Opacity
 
 
     # Close window
-    - type: pinch
+    - type: swipe
       fingers: 3
-      direction: out
+      direction: up
+      keyboard_modifiers: [alt]
 
       actions:
         # Maximize window if not fullscreen and not maximized
         - on: begin
           plasma_shortcut: kwin,Window Maximize
+          block_other: true # Prevent the fullscreen window action from triggering during the same gesture
 
           conditions:
             - negate: [window_state]
               window_state: [fullscreen, maximized]
 
-    - type: pinch
+
+        # Fullscreen a window if not fullscreen
+        - on: begin
+          plasma_shortcut: kwin,Window Fullscreen
+
+          conditions:
+            - negate: [window_state]
+              window_state: [fullscreen]
+
+    - type: swipe
       fingers: 3
-      direction: in
+      direction: down
+      keyboard_modifiers: [alt]
 
       actions:
+        # Unfullscreen window if fullscreen
+        - on: begin
+          plasma_shortcut: kwin,Window Fullscreen
+          block_other: true # Prevent the unmaximize window action from triggering during the same gesture
+
+          conditions:
+            - window_state: [fullscreen]
+
         # Unmaximize window if maximized
         - on: begin
           plasma_shortcut: kwin,Window Maximize
@@ -117,22 +154,15 @@ touchpad:
             - negate: [window_state]
               window_state: [fullscreen, maximized]
 
-    - type: pinch
-      fingers: 4
-      direction: in
+    - type: hold
+      fingers: 3
+      threshold: 800
+      keyboard_modifiers: none
 
       actions:
-        - plasma_shortcut: kwin,Window Above Other Windows
+        - on: begin
+          plasma_shortcut: kwin,Window Above Other Windows
 
           conditions:
             - negate: [window_state]
               window_state: [fullscreen, maximized]
-
-
-    - type: pinch
-      fingers: 4
-      direction: out
-
-      actions:
-        - plasma_shortcut: kwin,Window Fullscreen
-
