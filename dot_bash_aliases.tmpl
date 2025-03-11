@@ -1,11 +1,8 @@
-
 ################################################ Replace ls with exa ################################################
 
 alias ls='exa --all --icons --color=always --classify=always --group-directories-first --long --git --color-scale=size --extended --header'
 alias la='exa --all --icons --color=always --classify=always --group-directories-first'
 alias l='exa --classify --icons --color=always --classify=always --group-directories-first'
-
-
 
 ################################################ Replace cat with bat and man with batman, pager options ################################################
 
@@ -23,13 +20,9 @@ alias man='MOAR="--no-linenumbers --wrap" && batman'
 alias klogs='sudo journalctl -e -f -k -b | ccze -A -o nolookups | spacer'
 alias logs='sudo journalctl -e -f -b | ccze -A -o nolookups | spacer'
 
-
-
 ################################################ Faster pipx (Trick the completion into working, as there are no native completions for pipxu) ################################################
 
 alias pipx=pipxu
-
-
 
 ################################################ Git and chezmoi aliases ################################################
 
@@ -74,7 +67,6 @@ git-merge-project-into-subfolder() {
 		return 1
 	fi
 
-
 	orig_dir=$(pwd)
 	temp_repo_path=$(mktemp -d)
 
@@ -94,10 +86,10 @@ git-merge-project-into-subfolder() {
 }
 
 ensure-worktree() {
-    [ -z ${1+x} ] && echo "Please give me a branch" && return 1;
-    BRANCH=$(echo "$1" | cut -d'/' -f2)
-    ROOT=$(git root)
-    REPO_NAME=$(basename $ROOT) # (basename -s .git $(git remote get-url origin) ?)
+	[ -z ${1+x} ] && echo "Please give me a branch" && return 1
+	BRANCH=$(echo "$1" | cut -d'/' -f2)
+	ROOT=$(git root)
+	REPO_NAME=$(basename $ROOT) # (basename -s .git $(git remote get-url origin) ?)
 	git fetch
 	if git status; then
 		git worktree prune
@@ -118,13 +110,11 @@ ensure-worktree() {
 				echo "Done!"
 			else
 				cd -
-				while [[ ! "$yn" =~ ^[YyNn]$ ]]
-				do
+				while [[ ! "$yn" =~ ^[YyNn]$ ]]; do
 					read -p "Try to create a new branch?" -n 1 yn
 					echo
 				done
-				if [[ "$yn" =~ ^[Yy]$ ]]
-				then
+				if [[ "$yn" =~ ^[Yy]$ ]]; then
 					gchb $BRANCH
 					ensure-worktree $BRANCH
 				else
@@ -193,13 +183,13 @@ virtual-screen() {
 
 ################################################ Fast cd ################################################
 
-function bu () {
-	function usage () {
-		 cat <<-EOF
+function bu() {
+	function usage() {
+		cat <<-EOF
 			Usage: bu [N]
 							N        N is the number of level to move back up to, this argument must be a positive integer.
 							h help   displays this basic help menu.
-			EOF
+		EOF
 	}
 	# reset variables
 	STRARGMNT=""
@@ -207,7 +197,7 @@ function bu () {
 	# Make sure the provided argument is a positive integer:
 	if [[ ! -z "${FUNCTIONARG##*[!0-9]*}" ]]; then
 		for i in $(seq 1 $FUNCTIONARG); do
-				STRARGMNT+="../"
+			STRARGMNT+="../"
 		done
 		CMD="cd ${STRARGMNT}"
 		eval $CMD
@@ -219,7 +209,7 @@ function bu () {
 alias op='xdg-open'
 complete -f op
 gop() {
-	file="$(gum file --all --file --directory)";
+	file="$(gum file --all --file --directory)"
 	if [[ -d $file ]]; then
 		cd "$file"
 	elif [[ -f $file ]]; then
@@ -234,22 +224,16 @@ alias brl='br -sdp'
 
 alias fastfetch='fastfetch --cpu-temp --logo-width 60 --logo-padding-top 2 --logo /home/kloud/.config/neofetch/logo'
 
-
-
 ################################################ Pacman aliases ################################################
 
 alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | moar'
 alias orphans='pacman -Qtdq'
 alias broken='sudo pacman -Qkk | grep warning'
 
-
-
 ################################################ Colorize grep and ip ################################################
 
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
-
-
 
 ################################################ Interactive aliases ################################################
 
@@ -258,8 +242,6 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias ln='ln -i'
 
-
-
 ################################################ Non-interactive aliases ################################################
 
 alias mvn='/bin/mv'
@@ -267,20 +249,14 @@ alias rmn='/bin/rm'
 alias cpn='/bin/cp'
 alias lnn='/bin/ln'
 
-
-
 ################################################ Auto subdir creation ################################################
 
 alias mkdir='mkdir -pv'
-
-
 
 ################################################ Random stuff ################################################
 
 alias labi_cpp='cd /home/kloud/Documents/shared/_projects/Cpp_stuff/cpp-labs/compiled_binaries_linux/ && ./menu.sh'
 alias systeminfo='inxi -v 8'
-
-
 
 ################################################ Network stuff ################################################
 
@@ -294,7 +270,6 @@ ports() {
 rdns() {
 	nmap -R -sn "$@" | grep for | cut -d " " -f 5-
 }
-
 
 #######################################  PYTHON  ##############################################################
 
@@ -354,7 +329,7 @@ systemctl() {
 			arr[0]="/usr/share/sounds/misc/turret-goodnight.mp3"
 			arr[1]="/usr/share/sounds/misc/we-are-done-here.oga"
 
-			rand=$(( $RANDOM % 2 ))
+			rand=$(($RANDOM % 2))
 		else
 			# More meme sounds if the EASTER_EGG is set
 			arr[0]="/usr/share/sounds/misc/anya-likes-peanuts.mp3"
@@ -372,10 +347,10 @@ systemctl() {
 			arr[12]="/usr/share/sounds/misc/tuturu_1.mp3"
 			arr[13]="/usr/share/sounds/misc/we-are-done-here.oga"
 
-			rand=$(( $RANDOM % 14 ))
+			rand=$(($RANDOM % 14))
 		fi
 
-		mpv --no-terminal "${arr[$rand]}" > /dev/null && /usr/bin/systemctl "$@" # It is here like this for the ability to cancel the shutdown
+		mpv --no-terminal "${arr[$rand]}" >/dev/null && /usr/bin/systemctl "$@" # It is here like this for the ability to cancel the shutdown
 	else
 		/usr/bin/systemctl "$@"
 	fi
@@ -387,7 +362,6 @@ alias reload='source ~/.bashrc'
 {{ if eq .chezmoi.hostname "nuclear-submarine" }}
 alias grub-reload='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 {{ end }}
-
 
 butter_debutter() {
 	duperemove -r -d -h -v --hashfile=/home/kloud/Documents/butter_hashfile "$@"
@@ -441,8 +415,7 @@ chzu() {
 
 figleta() {
 	fonts=($(find /usr/share/figlet/fonts/ -name "*.flf" | cut -d"/" -f6 | cut -d"." -f1))
-	for font in "${fonts[@]}"
-	do
+	for font in "${fonts[@]}"; do
 		echo "--------------------------------------------"
 		echo "$font"
 		echo ""
@@ -459,11 +432,10 @@ mount_shares() {
 	echo -n "password for kloud: "
 	read -s password
 	echo
-	
+
 	FOLDERS=$(smbclient -L $1 -U=kloud%$password | grep Disk | grep -v [$] | cut -d" " -f1)
-	
-	for folder in $FOLDERS
-	do
+
+	for folder in $FOLDERS; do
 		mkdir /home/kloud/Documents/MOUNT_$1/$folder
 		echo $password | sudo -S mount -t cifs -o uid=kloud,username=kloud,password=$password //$1/$folder /home/kloud/Documents/MOUNT_$1/$folder
 		printf "mounted $folder\n"
@@ -479,7 +451,7 @@ b_kill() {
 	echo -n "password for kloud: "
 	read -s password
 	echo
-	
+
 	for run in {1..30}; do
 		echo $password | sudo -S l2ping -i hci1 -s 668 -f $1 &
 	done
@@ -487,10 +459,10 @@ b_kill() {
 
 get_power() {
 	echo - | awk "{printf \"%.1f\", \
-$(( \
-  $(cat /sys/class/power_supply/BAT*/current_now) * \
-  $(cat /sys/class/power_supply/BAT*/voltage_now) \
-)) / 1000000000000 }" ; echo " W "
+$((\
+	$(cat /sys/class/power_supply/BAT*/current_now) * \
+	$(cat /sys/class/power_supply/BAT*/voltage_now))) / 1000000000000 }"
+	echo " W "
 }
 
 download_yt_playlist() {
@@ -511,25 +483,21 @@ download_yt_playlist() {
 # }
 
 remove-lines() (
-  remove_lines="$1"
-  all_lines="$2"
-  tmp_file="$(mktemp)"
-  grep -Fvxf "$remove_lines" "$all_lines" > "$tmp_file"
-  mv "$tmp_file" "$all_lines"
+	remove_lines="$1"
+	all_lines="$2"
+	tmp_file="$(mktemp)"
+	grep -Fvxf "$remove_lines" "$all_lines" >"$tmp_file"
+	mv "$tmp_file" "$all_lines"
 )
 
 rgd() {
-  rg --json -C 2 $1 | delta
+	rg --json -C 2 $1 | delta
 }
-
-
-
-
 
 ############ Remote connections
 
 gen_ssh_prompt() {
-    hash=$(md5sum <<< "$HOSTNAME")
+	hash=$(md5sum <<<"$HOSTNAME")
 
 	to_decimal() {
 		xargs -i printf "%d\n" "0x{}"
@@ -543,15 +511,15 @@ gen_ssh_prompt() {
 		to_decimal | awk '{print int($0/255.0*31)}'
 	}
 
-    generate_block() {
+	generate_block() {
 
 		local span="$1"
 
-		id_symbols="▀▐■▁▂▃▄▅▆▇█▉▊▋▌▍▎▏▔▟▞▝▜▛▚▙▘▗▖▕▬◼";
+		id_symbols="▀▐■▁▂▃▄▅▆▇█▉▊▋▌▍▎▏▔▟▞▝▜▛▚▙▘▗▖▕▬◼"
 
 		select_at_pos() {
 			local pos="$1"
-			echo "${id_symbols:$(( pos % ${#id_symbols} )):1}"
+			echo "${id_symbols:$((pos % ${#id_symbols})):1}"
 		}
 
 		local block_num=$(
@@ -565,29 +533,29 @@ gen_ssh_prompt() {
 		local block_shape="$(select_at_pos $block_num)"
 
 		echo "\\[\\e[$block_color;1m\\]$block_shape"
-    }
+	}
 
 	local number=$(
-        echo "$hash" | cut -c-2 | to_color
-    )
-    local number2=$(
+		echo "$hash" | cut -c-2 | to_color
+	)
+	local number2=$(
 		echo "$hash" | cut -c4-5 | to_color
-    )
+	)
 
 	local block1="$(
 		generate_block '5-6'
-    )"
+	)"
 	local block2="$(
 		generate_block '7-8'
-    )"
+	)"
 	local block3="$(
 		generate_block '9-10'
-    )"
+	)"
 	local block4="$(
 		generate_block '11-12'
-    )"
+	)"
 
-    printf '%s%s%s%s \\[\\e[%d;1m\\]◀%s\[\\e[30;1m\\]@\\[\\e[%d;1m\\]%s\\[\\e[m\\]' "$block1" "$block2" "$block3" "$block4" "$number" $(whoami) "$number2" "$HOSTNAME"
+	printf '%s%s%s%s \\[\\e[%d;1m\\]◀%s\[\\e[30;1m\\]@\\[\\e[%d;1m\\]%s\\[\\e[m\\]' "$block1" "$block2" "$block3" "$block4" "$number" $(whoami) "$number2" "$HOSTNAME"
 }
 
 set_ssh_prompt() {
@@ -607,23 +575,24 @@ __download_helper() {
 setup_ssh_shell_utils() {
 	echo "Setting up atuin..."
 
-	local init_file="/tmp/.atuinit"
+	local tmpdir="$PREFIX/tmp"
+	local init_file="$tmpdir/.atuinit"
 
 	if [ -f "$init_file" ]; then
-		return 0;
+		return 0
 	fi
 
-	local atuin_target_path="/tmp/atuin.tar.gz"
-	local extracted_path="/tmp/atuin-x86_64-unknown-linux-gnu/atuin"
+	local atuin_target_path="$tmpdir/atuin.tar.gz"
+	local extracted_path="$tmpdir/atuin-x86_64-unknown-linux-gnu/atuin"
 	local atuin_download_url="https://github.com/atuinsh/atuin/releases/download/v18.4.0/atuin-x86_64-unknown-linux-gnu.tar.gz"
 
-	local preexec_download_path="/tmp/.bash-preexec.sh"
+	local preexec_download_path="$tmpdir/.bash-preexec.sh"
 
 	if [ ! -f "$preexec_download_path" ]; then
 		__download_helper "https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh" "$preexec_download_path"
 	fi
 
-	echo '' > "$init_file"
+	echo '' >"$init_file"
 
 	if [ -f /usr/bin/atuin ]; then
 		echo "Atuin installed in default location, skipping installation"
@@ -632,39 +601,45 @@ setup_ssh_shell_utils() {
 			echo "Atuin already downloaded"
 		else
 			__download_helper "$atuin_download_url" "$atuin_target_path"
-			tar -xzvf "$atuin_target_path" -C /tmp
+			tar -xzvf "$atuin_target_path" -C "$tmpdir"
 		fi
 
-		echo "export PATH=\"$extracted_path:\$PATH\"" >> "$init_file"
+		echo "export PATH=\"$extracted_path:\$PATH\"" >>"$init_file"
 	fi
 
-	echo "source '$preexec_download_path'" >> "$init_file"
-	echo 'eval "$(atuin init bash --disable-up-arrow)"' >> "$init_file"
+	echo "source '$preexec_download_path'" >>"$init_file"
+	echo 'eval "$(atuin init bash --disable-up-arrow)"' >>"$init_file"
 }
 
 launch_shell() {
 	local load_rc="$1"
 
-	setup_ssh_shell_utils;
-	set_ssh_prompt;
+	setup_ssh_shell_utils
+	set_ssh_prompt
 
-	local shellrc_path="/tmp/.shellrc"
-	local my_init_file="/tmp/.atuinit"
+	local tmpdir="$PREFIX/tmp"
 
-	echo "source /etc/profile" > "$shellrc_path"
+	local shellrc_path="$tmpdir/.shellrc"
+	local my_init_file="$tmpdir/.atuinit"
 
-	if [ "$load_rc" = "true" ]; then
-		echo 'source ~/.bashrc' >> "$shellrc_path"
-
+	if [[ "$PREFIX" == *"com.termux"* ]]; then
+		echo "Running under termux"
+		echo "source $PREFIX/etc/bash.bashrc" >"$shellrc_path"
+	else
+		echo "source /etc/profile" >"$shellrc_path"
 	fi
 
-	echo "source '$my_init_file'" >> "$shellrc_path"
+	if [ "$load_rc" = "true" ]; then
+		echo 'source ~/.bashrc' >>"$shellrc_path"
+	fi
+
+	echo "source '$my_init_file'" >>"$shellrc_path"
 
 	# Copy over needed fuctions to login shell rc
-	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt);" >> "$shellrc_path"
-	echo "set_ssh_prompt" >> "$shellrc_path"
+	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt);" >>"$shellrc_path"
+	echo "set_ssh_prompt" >>"$shellrc_path"
 
-	bash --rcfile /tmp/.shellrc
+	bash --rcfile "$tmpdir/.shellrc"
 }
 
 get_ssh_init_str() {
