@@ -1,0 +1,33 @@
+def time_delta_human_fmt(time_ms: float | datetime.timedelta):
+    units = ["years", "months", "days", "hours", "minutes", "seconds"]
+
+    if isinstance(time_ms, datetime.timedelta):
+        time_ms = time_ms.total_seconds() * 1000
+
+    delta = relativedelta(microseconds=int(time_ms * 1000))
+
+    formatted = [
+        f"{getattr(delta, unit)} {unit if getattr(delta, unit) > 1 else unit[:-1]}"  # months / month
+        for unit in units
+        if getattr(delta, unit)  # If the unit is defined in the delta
+    ]
+
+    rs = " ".join(formatted)
+
+    return rs if len(rs) > 0 else f"{time_ms / 1000:.4f} seconds"
+
+
+
+def size_fmt(num_bytes: float, suffix="B"):
+    for unit in ("", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi"):
+        if abs(num_bytes) < 1024.0:
+            return f"{num_bytes:.1f}{unit}{suffix}"
+        num_bytes /= 1024.0
+    return f"{num_bytes:.1f}Yi{suffix}"
+
+
+
+{ # https://stackoverflow.com/questions/58966324/grep-into-variable-and-maintain-stdout
+    VERSION_AND_STATUS=$(docker-build "$1" 2>&1 | tee >(grep '==>' | sed -e 's/==>//') >&3)
+} 3>&1 # 0^forecast:2.0.2-adadfc
+
