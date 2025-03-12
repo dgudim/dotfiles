@@ -838,6 +838,7 @@ asar
 # NETWORKING
 dhclient
 dnsmasq
+squid
 net-tools
 systemd-resolvconf
 networkmanager

@@ -562,11 +562,11 @@ gen_ssh_prompt() {
 		generate_block '11-12'
 	)"
 
-	printf '%s%s%s%s \\[\\e[%d;1m\\]◀%s\[\\e[;1m\\]@\\[\\e[%d;1m\\]%s\\[\\e[m\\] (%s) $(pwd) ' "$block1" "$block2" "$block3" "$block4" "$number" $(whoami) "$number2" "$full_hostname" "$ip"
+	printf '%s%s%s%s \\[\\e[%d;1m\\]◀%s\[\\e[;1m\\]@\\[\\e[%d;1m\\]%s\\[\\e[m\\] (%s)' "$block1" "$block2" "$block3" "$block4" "$number" $(whoami) "$number2" "$full_hostname" "$ip"
 }
 
 set_ssh_prompt() {
-	export PS1="$(gen_ssh_prompt)"'$ '
+	export PS1="$(gen_ssh_prompt) \$(pwd) "'$ '
 }
 
 __download_helper() {
@@ -608,7 +608,7 @@ __get_temp_dir() {
 setup_ssh_shell_utils() {
 	L_GREEN='\033[1;32m'
 	L_PURPLE='\033[1;35m'
-	L_CYAN='\033[0;36m'
+	L_CYAN='\033[1;36m'
 	L_YELLOW='\033[0;33m'
 	NC='\033[0m'
 
@@ -662,11 +662,14 @@ setup_ssh_shell_utils() {
 }
 
 launch_shell() {
+	export http_proxy=http://127.0.0.1:3129
+	export https_proxy=http://127.0.0.1:3129
+
 	L_GREEN='\033[1;32m'
 	L_PURPLE='\033[1;35m'
 	L_YELLOW='\033[0;33m'
 	L_BLUE='\033[1;34m'
-	GRAY='\033[0;30m'
+	GRAY='\033[1;30m'
 	NC='\033[0m'
 
 	echo -e "${L_YELLOW}Launching customized shell...${NC}"
@@ -682,11 +685,13 @@ launch_shell() {
 
 	echo -e "${GRAY}Constructing shell rc file ($shellrc_path)${NC}"
 
+	echo '' >"$shellrc_path"
+
 	if [[ "$PREFIX" == *"com.termux"* ]]; then
 		echo -e "${L_BLUE}Running under termux${NC}"
-		echo "source $PREFIX/etc/bash.bashrc" >"$shellrc_path"
+		echo "source $PREFIX/etc/bash.bashrc" >>"$shellrc_path"
 	else
-		echo "dialog() {}" >"$shellrc_path" # Disable 'template configurator'
+		echo "dialog() {}" >>"$shellrc_path" # Disable 'template configurator'
 		echo "source /etc/profile" >"$shellrc_path"
 		echo "unset -f dialog" >"$shellrc_path"
 	fi
@@ -699,11 +704,12 @@ launch_shell() {
 
 	# Copy over needed fuctions to login shell rc
 	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt);" >>"$shellrc_path"
+
 	echo "set_ssh_prompt" >>"$shellrc_path"
 
 	echo -e "${L_GREEN}Welcome!${NC}"
 
-	bash --rcfile "$tmpdir/.shellrc"
+	bash --rcfile "$shellrc_path"
 }
 
 get_ssh_init_str() {
@@ -711,11 +717,13 @@ get_ssh_init_str() {
 }
 
 ssh() {
-	/usr/bin/ssh -t "$@" "$(get_ssh_init_str false)"
+	systemctl is-active squid.service || systemctl start squid.service
+	/usr/bin/ssh -t -R 3129:localhost:3128 "$@" "$(get_ssh_init_str false)"
 }
 
 ssh_rc() {
-	/usr/bin/ssh -t "$@" "$(get_ssh_init_str true)"
+	systemctl is-active squid.service || systemctl start squid.service
+	/usr/bin/ssh -t -R 3129:localhost:3128 "$@" "$(get_ssh_init_str true)"
 }
 
 ssh_n() {
