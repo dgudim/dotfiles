@@ -494,10 +494,17 @@ rgd() {
 	rg --json -C 2 $1 | delta
 }
 
+
 ############ Remote connections
 
 gen_ssh_prompt() {
-	hash=$(md5sum <<<"$HOSTNAME")
+
+	local full_hostname="$(hostname --all-fqdns 2> /dev/null | cut -d ' ' -f1 || hostname --long)"
+	local ip="$(hostname --all-ip-addresses 2> /dev/null | cut -d ' ' -f1 || hostname --ip-addresses)"
+	local full_hostname="${full_hostname:-$HOSTNAME}"
+
+	combined_hostname="$full_hostname ($ip)"
+	hash=$(md5sum <<<"$combined_hostname")
 
 	to_decimal() {
 		xargs -i printf "%d\n" "0x{}"
@@ -555,7 +562,7 @@ gen_ssh_prompt() {
 		generate_block '11-12'
 	)"
 
-	printf '%s%s%s%s \\[\\e[%d;1m\\]◀%s\[\\e[30;1m\\]@\\[\\e[%d;1m\\]%s\\[\\e[m\\]' "$block1" "$block2" "$block3" "$block4" "$number" $(whoami) "$number2" "$HOSTNAME"
+	printf '%s%s%s%s \\[\\e[%d;1m\\]◀%s\[\\e[;1m\\]@\\[\\e[%d;1m\\]%s\\[\\e[m\\] (%s) $(pwd) ' "$block1" "$block2" "$block3" "$block4" "$number" $(whoami) "$number2" "$full_hostname" "$ip"
 }
 
 set_ssh_prompt() {
@@ -569,24 +576,59 @@ __download_helper() {
 	download_url="$1"
 	target_path="$2"
 
-	wget "$download_url" -O "$target_path" || curl --output "$target_path" "$download_url"
+	if command -v wget 2>&1 >/dev/null
+	then
+		echo "Using wget, downloading $download_url to $target_path"
+		wget --no-verbose "$download_url" -O "$target_path"
+		return 0
+	fi
+
+	if command -v curl 2>&1 >/dev/null
+	then
+		echo "Using curl, downloading $download_url to $target_path"
+		curl -s --output "$target_path" "$download_url"
+		return 0
+	fi
+
+	echo "No downloader found!"
+	exit 1
+}
+
+__get_temp_dir() {
+	if [[ "$PREFIX" != *"com.termux"* ]]; then
+		if mount | grep /tmp | grep -q noexec; then
+			PREFIX="$HOME/.user-config-transient"
+		fi
+	fi
+	dir="$PREFIX/tmp"
+	mkdir -p "$dir" 2>/dev/null > /dev/null
+	echo "$dir"
 }
 
 setup_ssh_shell_utils() {
-	echo "Setting up atuin..."
+	L_GREEN='\033[1;32m'
+	L_PURPLE='\033[1;35m'
+	L_CYAN='\033[1;36m'
+	L_YELLOW='\033[0;33m'
+	NC='\033[0m'
 
-	local tmpdir="$PREFIX/tmp"
+	echo -e "${L_YELLOW}Setting up environment...${NC}"
+
+	local tmpdir="$(__get_temp_dir)"
 	local init_file="$tmpdir/.atuinit"
 
 	if [ -f "$init_file" ]; then
+		echo -e "${L_CYAN}Using cached atuin init file${NC}"
 		return 0
 	fi
 
 	local atuin_target_path="$tmpdir/atuin.tar.gz"
-	local extracted_path="$tmpdir/atuin-x86_64-unknown-linux-gnu/atuin"
+	local extracted_path="$tmpdir/atuin-x86_64-unknown-linux-gnu/"
 	local atuin_download_url="https://github.com/atuinsh/atuin/releases/download/v18.4.0/atuin-x86_64-unknown-linux-gnu.tar.gz"
 
 	local preexec_download_path="$tmpdir/.bash-preexec.sh"
+
+	echo -e "${L_PURPLE}Downloading preexec${NC}"
 
 	if [ ! -f "$preexec_download_path" ]; then
 		__download_helper "https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh" "$preexec_download_path"
@@ -594,39 +636,59 @@ setup_ssh_shell_utils() {
 
 	echo '' >"$init_file"
 
+	echo -e "${L_PURPLE}Downloading atuin...${NC}"
+
 	if [ -f /usr/bin/atuin ]; then
 		echo "Atuin installed in default location, skipping installation"
 	else
-		if [ -f "$extracted_path" ]; then
-			echo "Atuin already downloaded"
+		if [ -d "$extracted_path" ]; then
+			echo "${L_CYAN}Atuin already downloaded${NC}"
 		else
 			__download_helper "$atuin_download_url" "$atuin_target_path"
+
+			echo -e "${L_PURPLE}Extracting atuin...${NC}"
 			tar -xzvf "$atuin_target_path" -C "$tmpdir"
 		fi
 
+		echo -e "${L_PURPLE}Adding atuin to path${NC}"
+
 		echo "export PATH=\"$extracted_path:\$PATH\"" >>"$init_file"
 	fi
+
+	echo -e "${L_PURPLE}Writing atuin init file${NC}"
 
 	echo "source '$preexec_download_path'" >>"$init_file"
 	echo 'eval "$(atuin init bash --disable-up-arrow)"' >>"$init_file"
 }
 
 launch_shell() {
+	L_GREEN='\033[1;32m'
+	L_PURPLE='\033[1;35m'
+	L_YELLOW='\033[0;33m'
+	L_BLUE='\033[1;34m'
+	GRAY='\033[1;30m'
+	NC='\033[0m'
+
+	echo -e "${L_YELLOW}Launching customized shell...${NC}"
+
 	local load_rc="$1"
 
-	setup_ssh_shell_utils
-	set_ssh_prompt
-
-	local tmpdir="$PREFIX/tmp"
+	local tmpdir="$(__get_temp_dir)"
 
 	local shellrc_path="$tmpdir/.shellrc"
 	local my_init_file="$tmpdir/.atuinit"
 
+	setup_ssh_shell_utils
+
+	echo -e "${GRAY}Constructing shell rc file ($shellrc_path)${NC}"
+
 	if [[ "$PREFIX" == *"com.termux"* ]]; then
-		echo "Running under termux"
+		echo -e "${L_BLUE}Running under termux${NC}"
 		echo "source $PREFIX/etc/bash.bashrc" >"$shellrc_path"
 	else
+		echo "dialog() {}" >"$shellrc_path" # Disable 'template configurator'
 		echo "source /etc/profile" >"$shellrc_path"
+		echo "unset -f dialog" >"$shellrc_path"
 	fi
 
 	if [ "$load_rc" = "true" ]; then
@@ -639,11 +701,13 @@ launch_shell() {
 	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt);" >>"$shellrc_path"
 	echo "set_ssh_prompt" >>"$shellrc_path"
 
+	echo -e "${L_GREEN}Welcome!${NC}"
+
 	bash --rcfile "$tmpdir/.shellrc"
 }
 
 get_ssh_init_str() {
-	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f setup_ssh_shell_utils); $(typeset -f launch_shell); launch_shell $1;"
+	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f __get_temp_dir); $(typeset -f setup_ssh_shell_utils); $(typeset -f launch_shell); launch_shell $1"
 }
 
 ssh() {
