@@ -689,11 +689,13 @@ launch_shell() {
 
 	if [[ "$PREFIX" == *"com.termux"* ]]; then
 		echo -e "${L_BLUE}Running under termux${NC}"
+		# profile automatically sources user bashrc, don't source
 		echo "source $PREFIX/etc/bash.bashrc" >>"$shellrc_path"
 	else
 		echo "dialog() {}" >>"$shellrc_path" # Disable 'template configurator'
-		echo "source /etc/profile" >"$shellrc_path"
-		echo "unset -f dialog" >"$shellrc_path"
+		echo "source /etc/profile" >>"$shellrc_path"
+		echo "source /etc/bashrc" >>"$shellrc_path"
+		echo "unset -f dialog" >>"$shellrc_path"
 	fi
 
 	if [ "$load_rc" = "true" ]; then
