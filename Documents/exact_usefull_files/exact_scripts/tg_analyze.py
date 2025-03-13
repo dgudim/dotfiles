@@ -34,6 +34,7 @@ START_DATE = datetime.datetime(year=2025, month=1, day=1)
 matched_words_per_user: dict[str, dict[str, list[Message]]] = {}
 word_match_lists = [
     ["<call_saul_0000>"],
+    ["🌚"],
     [" extra"],
     [" alright"],
     ["xd", "xdd", "xddd", "xdddd"],
