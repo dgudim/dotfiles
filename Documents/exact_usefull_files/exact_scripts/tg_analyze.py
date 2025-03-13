@@ -33,6 +33,7 @@ START_DATE = datetime.datetime(year=2025, month=1, day=1)
 
 matched_words_per_user: dict[str, dict[str, list[Message]]] = {}
 word_match_lists = [
+    ["<call_saul_0000>"],
     [" extra"],
     [" alright"],
     ["xd", "xdd", "xddd", "xdddd"],
@@ -42,7 +43,7 @@ word_match_lists = [
     [" nice"],
     [")"],
     [":)"],
-    [" damn"],
+    [" damn", " daaamn", " daamn", " daymn"],
     [" horny"],
     [" i'm sorry", " i am sorry"],
     [" uh huh"],
@@ -76,13 +77,21 @@ def classify_message(msg__: str, usr: str):
     return MessageType.SYMBOLIC
 
 
+total_call_duration = 0
+
 for msg in msgs:
     dt = datetime.datetime.fromtimestamp(int(msg["date_unixtime"]))
 
     if dt < START_DATE:
         continue
 
-    text = msg["text"]
+    if msg["type"] == "service":
+        text = "<call_saul_0000>"
+        username = msg["actor"]
+        total_call_duration += msg.get("duration_seconds", 0)
+    else:
+        username = msg["from"]
+        text = msg["text"]
 
     if isinstance(text, list):
         text_ = ""  # pylint: disable=invalid-name
@@ -96,7 +105,6 @@ for msg in msgs:
             text_ += f" {item['text']}"
         text = text_  # pylint: disable=invalid-name
 
-    username = msg["from"]
     message = Message(text, dt, username)
 
     per_day_messages[dt.date()].append(message)
@@ -110,6 +118,8 @@ for msg in msgs:
                 user_stats[match_list[0]] = word_group_stats
                 matched_words_per_user[username] = user_stats
                 break
+
+print(f"Total call duration: {total_call_duration}")
 
 for date, msgs in per_day_messages.items():
     per_type_counts: dict[MessageType, int] = defaultdict(int)
@@ -126,8 +136,17 @@ for date, msgs in per_day_messages.items():
 date_axis_data = list(per_day_message_lang_percentages.keys())
 fig, ax = plt.subplots()
 
-for m_type in [MessageType.MIXED, MessageType.ENG, MessageType.BEL, MessageType.RUS, MessageType.SYMBOLIC]:
-    x_axis_data = [point_data.get(m_type, 0) for point_data in per_day_message_lang_percentages.values()]
+for m_type in [
+    MessageType.MIXED,
+    MessageType.ENG,
+    MessageType.BEL,
+    MessageType.RUS,
+    MessageType.SYMBOLIC,
+]:
+    x_axis_data = [
+        point_data.get(m_type, 0)
+        for point_data in per_day_message_lang_percentages.values()
+    ]
     line = ax.plot(np.array(date_axis_data), x_axis_data)
     line[0].set_label(m_type)
 
@@ -150,7 +169,9 @@ for user, word_groups in matched_words_per_user.items():
 for graph_name, graph_datasets in graphs.items():
     fig, ax = plt.subplots()
 
-    totals_str = " | ".join(f"{dataset[0]}: {sum(dataset[2])}" for dataset in graph_datasets)
+    totals_str = " | ".join(
+        f"{dataset[0]}: {sum(dataset[2])}" for dataset in graph_datasets
+    )
 
     # union_dates = set(date_ for dataset in graph_datasets for date_ in dataset[0])
 
@@ -161,7 +182,9 @@ for graph_name, graph_datasets in graphs.items():
     #             dataset[1].append(0)
 
     for dataset, index in zip(graph_datasets, range(len(graph_datasets))):
-        bar = ax.bar(np.array(dataset[1]), np.array(dataset[2]) * (-1 if index % 2 else 1))
+        bar = ax.bar(
+            np.array(dataset[1]), np.array(dataset[2]) * (-1 if index % 2 else 1)
+        )
         bar.set_label(dataset[0])
 
     ax.set(xlabel="date", ylabel="count", title=f"{graph_name} ({totals_str})")
