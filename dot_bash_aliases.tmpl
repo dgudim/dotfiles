@@ -692,7 +692,7 @@ launch_shell() {
 		# profile automatically sources user bashrc, don't source
 		echo "source $PREFIX/etc/bash.bashrc" >>"$shellrc_path"
 	else
-		echo "dialog() {}" >>"$shellrc_path" # Disable 'template configurator'
+		echo "dialog() { :; }" >>"$shellrc_path" # Disable 'template configurator'
 		echo "source /etc/profile" >>"$shellrc_path"
 		echo "source /etc/bashrc" >>"$shellrc_path"
 		echo "unset -f dialog" >>"$shellrc_path"
