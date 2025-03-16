@@ -1,0 +1,24 @@
+pkgname='udev-notify-my'
+pkgver=0.3.0
+pkgrel=1
+pkgdesc='Show notifications when any USB device is plugged/unplugged'
+arch=('any')
+url='https://github.com/dgudim/udev-notify'
+license=('MIT')
+depends=('libnotify' 'sox' 'usbutils' 'sed' 'coreutils' 'grep' 'gawk' 'util-linux' 'bash')
+makedepends=('git' 'make')
+optdepends=('espeak-ng')
+provides=("${pkgname%-my}")
+conflicts=("${pkgname%-my}" "udev-notify-git")
+source=('git+https://github.com/dgudim/udev-notify.git')
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/${pkgname%-my}"
+  echo "0.3.0"
+}
+
+package() {
+  cd $srcdir/${pkgname%-my}
+  make DESTDIR="${pkgdir}" install
+}

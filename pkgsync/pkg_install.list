@@ -508,7 +508,7 @@ chezmoi_modify_manager
 bash-completion
 mpv-mpris
 cachyos-ananicy-rules-git
-udev-notify-git
+# udev-notify-git # Replaced with my local version
 udev-usb-sync
 journalctl-desktop-notification-git
 syncthing-appmenu

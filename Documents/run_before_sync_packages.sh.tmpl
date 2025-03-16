@@ -2,6 +2,7 @@
 
 cd "{{.chezmoi.sourceDir}}/pkgsync"
 bash pkgsync.sh
+bash pkg_build.sh
 
 install-pipx() {
     pipxu list | grep "'${2:-${1:-error}}'" >/dev/null || pipxu install "$1"

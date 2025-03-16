@@ -1,0 +1,16 @@
+[Desktop Entry]
+Categories=Application;Development;
+Comment=A cross-platform .NET IDE by JetBrains.
+Exec=/usr/share/rider/bin/rider.sh %f
+Icon=com.jetbrains.Rider
+Name=Rider
+NoDisplay=false
+Path=
+StartupNotify=false
+StartupWMClass=jetbrains-rider
+Terminal=false
+TerminalOptions=
+Type=Application
+Version=1.0
+X-KDE-SubstituteUID=false
+X-KDE-Username=
