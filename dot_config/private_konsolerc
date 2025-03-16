@@ -12,9 +12,6 @@ iconViewIconSize=64
 RememberWindowSize=false
 UseSingleInstance=true
 
-[MainWindow]
-ToolBarsMovable=Disabled
-
 [Open-with settings]
 CompletionMode=1
 History=kate

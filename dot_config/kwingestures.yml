@@ -15,6 +15,19 @@ touchpad:
         - on: begin
           plasma_shortcut: kwin,Window Close
 
+    - type: hold
+      fingers: 3
+      threshold: 800
+      keyboard_modifiers: none
+
+      actions:
+        - on: begin
+          plasma_shortcut: kwin,Window Above Other Windows
+
+          conditions:
+            - negate: [window_state]
+              window_state: [fullscreen, maximized]
+
     - type: swipe
       fingers: 3
       direction: up_down
@@ -66,6 +79,36 @@ touchpad:
       actions:
         - keyboard: [leftmeta+right]
 
+
+    - type: swipe
+      fingers: 3
+      direction: left
+      keyboard_modifiers: [shift]
+
+      actions:
+        - plasma_shortcut: kwin,Window One Desktop to the Left
+
+    - type: swipe
+      fingers: 3
+      direction: right
+      keyboard_modifiers: [shift]
+
+      actions:
+        - plasma_shortcut: kwin,Window One Desktop to the Right
+
+    - type: swipe
+      fingers: 3
+      direction: left_right
+      keyboard_modifiers: [alt, shift]
+
+      actions:
+        - on: update
+          interval: -10
+          plasma_shortcut: kmix,decrease_microphone_volume
+
+        - on: update
+          interval: 10
+          plasma_shortcut: kmix,increase_microphone_volume
 
     - type: swipe
       fingers: 3
@@ -149,19 +192,6 @@ touchpad:
         # Minimize window if not fullscreen and not maximized
         - on: begin
           plasma_shortcut: kwin,Window Minimize
-
-          conditions:
-            - negate: [window_state]
-              window_state: [fullscreen, maximized]
-
-    - type: hold
-      fingers: 3
-      threshold: 800
-      keyboard_modifiers: none
-
-      actions:
-        - on: begin
-          plasma_shortcut: kwin,Window Above Other Windows
 
           conditions:
             - negate: [window_state]

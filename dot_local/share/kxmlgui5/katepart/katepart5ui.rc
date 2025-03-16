@@ -1,5 +1,5 @@
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="KatePartView" translationDomain="ktexteditor6" version="109">
+<gui name="KatePartView" translationDomain="ktexteditor6" version="110">
  <MenuBar>
   <Menu name="file" noMerge="1">
    <text>&amp;File</text>
@@ -185,6 +185,7 @@
   <Separator group="popup_operations"/>
   <Action group="popup_operations" name="edit_cut"/>
   <Action group="popup_operations" name="edit_copy"/>
+  <Action group="popup_operations" name="edit_copy_html"/>
   <Action group="popup_operations" name="edit_paste"/>
   <Action group="popup_operations" name="edit_paste_selection"/>
   <Action group="popup_operations" name="edit_swap_with_clipboard"/>
