@@ -112,12 +112,13 @@ enable_service plocate-updatedb.timer
 {{ if eq .chezmoi.hostname "nuclear-submarine" }} # Work laptops
 enable_service systemd-boot-update 0 1
 
-enable_service pamusb-agent.service
 enable_service grub-btrfsd.service
 enable_service fprintd.service
 {{ else }}
 enable_service systemd-boot-update
 {{ end }}
+
+enable_service gpu-screen-recorder-ui 1
 
 {{ if eq .chezmoi.hostname "black-bird" }}
 # Still breaks (

@@ -63,6 +63,3 @@ stern
 grub-btrfs
 grub
 eos-dracut
-
-# Auth
-pam_usb
