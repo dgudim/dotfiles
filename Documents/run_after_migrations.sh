@@ -55,7 +55,11 @@ rm -rfv ~/.local/share/pipx
 # Symlink to stub systemd-resolved stub resolver
 [ -L /etc/resolv.conf ] || sudo ln -fvs /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
-# Renamed
+# Renamed + not used + useless
 rm -fv ~/.config/autostart/syncthingtray-qt6.desktop
+rm -fv ~/.config/autostart/remmina-applet.desktop
+rm -fv ~/.config/autostart/libinput-gestures.desktop
+
+mv -fvr /home/kloud/.ipython "$XDG_CONFIG_HOME"/ipython 2>/dev/null || true
 
 echo -e "${L_GREEN}Done!$NC\n"
