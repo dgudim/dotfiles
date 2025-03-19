@@ -10,6 +10,7 @@ ignore section "Desktops"
 ignore section ""
 ignore regex "Tiling.*" ".*"
 ignore "Xwayland" "Scale"
+ignore "NightColor" "DayTemperature"
 
 # Add your ignores and transforms here
 #ignore section "my-section"
