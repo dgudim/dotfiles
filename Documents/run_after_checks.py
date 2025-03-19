@@ -64,11 +64,12 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
         dump_pass = re.search(r" (\d) *? (\d)", line)
 
         is_btrfs = line.find(" btrfs ") != -1
-        btrfs_swap_nfs_bind = (
+        btrfs_swap_nfs_bind_tmp = (
             is_btrfs
             or line.find(" swap ") != -1
             or line.find(" nfs ") != -1
             or line.find(" none ") != -1
+            or line.find(" tmpfs ") != -1
         )
 
         if dump_pass is not None and len(dump_pass.groups()) == 2:
@@ -92,18 +93,18 @@ def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
             )
 
             run_check(
-                fsck_pass == 0 and not btrfs_swap_nfs_bind,
+                fsck_pass == 0 and not btrfs_swap_nfs_bind_tmp,
                 f"{YELLOW}Consider changing fsck field to 2 from {fsck_pass} {NC} ({line})",
             )
 
             run_check(
-                fsck_pass != 0 and btrfs_swap_nfs_bind,
+                fsck_pass != 0 and btrfs_swap_nfs_bind_tmp,
                 f"{YELLOW}Consider changing fsck field to 0 from {fsck_pass} (Btrfs/swap/nfs/bind does not need it) {NC} ({line})",
             )
 
         else:
             run_check(
-                not btrfs_swap_nfs_bind,
+                not btrfs_swap_nfs_bind_tmp,
                 f"{YELLOW}Consider adding fsck field {NC} ({line})",
             )
 
@@ -125,7 +126,7 @@ print(f"{LIGHTER_GRAY}Checking fstab{NC}")
 fstab = read_file("/etc/fstab")
 
 print(f"{LIGHT_GRAY}Checking tmp dir{NC}")
-run_check(fstab.find("/tmp") != -1, f"{YELLOW}Consider removing /tmp from fstab{NC}")
+run_check(fstab.find("/tmp") != -1 && fstab.find("size=") == -1, f"{YELLOW}Consider removing /tmp from fstab{NC}")
 
 print(f"{LIGHT_GRAY}Checking mount options{NC}")
 ntfs_mount_opts = [
@@ -145,7 +146,8 @@ check_mount_opts(
     {
         "ext4": ["defaults", "commit=60", "noatime"],
         "vfat": ["defaults", "noatime", "umask=0077"],
-        "btrfs": ["compress=zstd:[0-9]+", "exec", "noatime", r"X-fstrim\.notrim"],
+        "btrfs": ["compress=zstd:[0-9]+", "noatime", r"X-fstrim\.notrim"],
+        "tmp": ["noatime", "nosuid", "nodev", "inode64", "size=[0-9]+G"],
         "ntfs": ntfs_mount_opts,
         "ntfs3": ntfs_mount_opts,
         "ntfs-3g": ntfs_mount_opts,
@@ -245,6 +247,7 @@ firefox_settings = [
     "widget.use-xdg-desktop-portal.location",
     "widget.use-xdg-desktop-portal.mime-handler",
     "widget.use-xdg-desktop-portal.open-uri",
+    "widget.use-xdg-desktop-portal.native-messaging",
     "widget.use-xdg-desktop-portal.settings",
     "media.ffmpeg.vaapi.enabled",
     "media.av1.enabled",
@@ -350,11 +353,13 @@ else:
 
     def_storage_path = os.path.join(firefox_profiles[0], "storage", "default")
     plasma_integration_sqlite_db_path = glob.glob(
-        f'{next(
-            os.path.join(def_storage_path, d)
-            for d in os.listdir(def_storage_path)
-            if f"{d}".find(plasma_integration_uuid) != -1
-        )}/idb/*.sqlite'
+        f"{
+            next(
+                os.path.join(def_storage_path, d)
+                for d in os.listdir(def_storage_path)
+                if f'{d}'.find(plasma_integration_uuid) != -1
+            )
+        }/idb/*.sqlite"
     )[0]
 
     template_path = "/home/kloud/.local/share/chezmoi/private_dot_mozilla/private_firefox/template-plasma-integration.sqlite"

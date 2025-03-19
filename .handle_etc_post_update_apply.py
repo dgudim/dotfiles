@@ -73,4 +73,4 @@ os.system("killall aw-qt && killall aw-server-rust && sleep 5")
 os.system(
     "cd ~/.local/share/activitywatch/aw-server-rust/ && sqlite3 sqlite.db < settings.sql"
 )
-os.system("aw-qt & disown")
+os.system("aw-qt > /dev/null & disown")
