@@ -298,6 +298,30 @@ pvenv() {
 
 ###############################################################################################################
 
+clear-caches() {
+	read -p "Delete dotnet caches? [y/N] " -r
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		dotnet nuget locals --clear all
+	fi
+	read -p "Delete pip caches? [y/N] " -r
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		pip cache purge
+		uv cache prune
+	fi
+	read -p "Delete yay caches? [y/N] " -r
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		yay -Scc
+	fi
+	read -p "Delete cargo caches? [y/N] " -r
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		cargo cache trim --limit 0B
+	fi
+}
+
+dd-c-progress() {
+	sudo progress -w
+}
+
 dd-watch() {
 	watch -n5 'sudo kill -USR1 $(pgrep ^dd$)'
 }
