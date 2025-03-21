@@ -41,7 +41,7 @@ gch() {
 alias gchr='git co'
 alias gchb='git cb'
 alias gsync='git sync'
-alias gfc="git fetch origin --prune && for branch in \$(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '\$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", \$1); print \$1}'); do git branch -D \$branch; done && git maintenance run --auto && git maintenance run --task=gc && git fsck"
+alias gfc="git fetch origin --prune && for branch in \$(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '\$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", \$1); print \$1}'); do git branch -D \$branch; done && git maintenance run && git fsck"
 
 alias git-vis='gource --colour-images -a 3 -s 1 -c 3'
 
@@ -688,6 +688,8 @@ setup_ssh_shell_utils() {
 launch_shell() {
 	export http_proxy=http://127.0.0.1:3129
 	export https_proxy=http://127.0.0.1:3129
+
+	export TMOUT=6000 # Increase auto-logout time
 
 	L_GREEN='\033[1;32m'
 	L_PURPLE='\033[1;35m'

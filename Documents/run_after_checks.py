@@ -126,7 +126,10 @@ print(f"{LIGHTER_GRAY}Checking fstab{NC}")
 fstab = read_file("/etc/fstab")
 
 print(f"{LIGHT_GRAY}Checking tmp dir{NC}")
-run_check(fstab.find("/tmp") != -1 && fstab.find("size=") == -1, f"{YELLOW}Consider removing /tmp from fstab{NC}")
+run_check(
+    fstab.find("/tmp") != -1 and fstab.find("size=") == -1,
+    f"{YELLOW}Consider removing /tmp from fstab{NC}",
+)
 
 print(f"{LIGHT_GRAY}Checking mount options{NC}")
 ntfs_mount_opts = [

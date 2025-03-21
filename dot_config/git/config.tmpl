@@ -195,3 +195,23 @@
 	notifyonpush = true
 	resizebrowsercolumns = true
 	refreshonfocus = true
+[maintenance]
+    auto = false
+	strategy = incremental
+    repo = /home/kloud/.local/share/chezmoi
+    repo = /home/kloud/Documents/Projects/payments-mono/
+[maintenance "gc"]
+    enabled = true
+    schedule = disabled
+[maintenance "commit-graph"]
+    enabled = true
+    schedule = hourly
+[maintenance "prefetch"]
+    enabled = true
+    schedule = disabled
+[maintenance "loose-objects"]
+    enabled = true
+    schedule = daily
+[maintenance "incremental-repack"]
+    enabled = true
+    schedule = daily
