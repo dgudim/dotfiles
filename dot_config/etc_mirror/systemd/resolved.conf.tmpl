@@ -29,8 +29,9 @@ DNS=2a07:a8c1::e3:21b6#{{- .chezmoi.hostname -}}-e321b6.dns.nextdns.io
 Domains=~.
 DNSSEC=allow-downgrade
 DNSOverTLS=opportunistic
+# Handled by avahi
 MulticastDNS=no
-LLMNR=no
+LLMNR=yes
 Cache=yes
 CacheFromLocalhost=no
 #DNSStubListener=yes
