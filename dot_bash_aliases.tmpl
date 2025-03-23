@@ -298,6 +298,24 @@ pvenv() {
 
 ###############################################################################################################
 
+nvidia_run() {
+	export LIBVA_DRIVER_NAME=nvidia
+	"$@"
+}
+
+intel_run() {
+	export VDPAU_DRIVER=va_gl
+	"$@"
+}
+
+run_2gb() {
+	systemd-run --scope -p MemoryMax=2048M -p MemoryHigh=2048M "$@"
+}
+
+run_4gb() {
+	systemd-run --scope -p MemoryMax=4096M -p MemoryHigh=4096M "$@"
+}
+
 clear-caches() {
 	read -p "Delete dotnet caches? [y/N] " -r
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -315,6 +333,10 @@ clear-caches() {
 	read -p "Delete cargo caches? [y/N] " -r
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		cargo cache trim --limit 0B
+	fi
+	read -p "Delete docker caches? [y/N] " -r
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		docker system prune
 	fi
 }
 

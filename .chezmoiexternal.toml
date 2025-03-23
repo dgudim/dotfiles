@@ -1,6 +1,6 @@
 ["Documents/usefull_files/maxperfwiz"]
     type = "file"
-    url = "https://gitlab.com/cscs/maxperfwiz/raw/master/maxperfwiz"
+    url = "https://gitlab.com/cscs/maxperfwiz/raw/main/maxperfwiz"
     refreshPeriod = "168h"
 
 ["Documents/usefull_files/least_used.sh"]

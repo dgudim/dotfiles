@@ -47,9 +47,7 @@ base
 base-devel
 arch-install-scripts
 archlinux-contrib
-linux
 linux-firmware
-linux-headers
 linux-lts
 linux-lts-headers
 linux-cachyos
@@ -140,7 +138,7 @@ informant
 pacman-pstatus
 pacman-log-orphans-hook
 pacdiff-pacman-hook-git
-# rebuild-detector # check-broken-packages finds more broken packages
+check-broken-packages-pacman-hook-git
 find-the-command
 paccache-hook
 pacserve
@@ -426,6 +424,7 @@ gksu
 lsix
 biodiff
 hexyl
+topgrade
 
 ## TUIs
 lazydocker
@@ -508,8 +507,8 @@ chezmoi_modify_manager
 bash-completion
 mpv-mpris
 cachyos-ananicy-rules-git
-# udev-notify-git # Replaced with my local version
 arch-udev-usb-sync
+udev-notify-my
 journalctl-desktop-notification-git
 syncthing-appmenu
 rlwrap
@@ -765,6 +764,8 @@ python-pytest
 python-pytest-xdist
 python-loguru
 python-notify2
+python-pymupdf
+python-dirty-equals
 uvicorn
 
 ## ANDROID AND JAVA
@@ -813,7 +814,7 @@ arduino-ctags
 arduino-language-server
 
 ## JS
-nodejs-lts-hydrogen
+nodejs-lts-jod
 yarn
 npm
 npm-check-updates
@@ -1203,6 +1204,8 @@ img2pdf
 dot2tex
 scour
 typst
+mupdf
+mupdf-tools
 
 ## Ascii
 ditaa

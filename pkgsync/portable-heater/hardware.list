@@ -10,6 +10,7 @@ vulkan-intel
 lib32-vulkan-intel
 libva-intel-driver
 lib32-libva-intel-driver
+libvdpau-va-gl
 
 ## Amd
 vulkan-radeon
@@ -22,6 +23,12 @@ zenergy-dkms-git
 ## Nvidia
 nvidia-dkms
 nvidia-hook
+nvidia-settings
+libva-nvidia-driver
+opencl-nvidia
+lib32-opencl-nvidia
+lib32-nvidia-utils
+nvidia-container-toolkit
 
 ## Wireless
 broadcom-wl-dkms
@@ -42,7 +49,6 @@ sync-pacman-hook-git
 
 # For java classes
 intellij-idea-ultimate-edition
-intellij-idea-ultimate-edition-jre
 zulu-jdk-fx-bin
 
 # @@@

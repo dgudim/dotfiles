@@ -15,6 +15,7 @@ nvidia-hook
 nvidia-settings
 libva-nvidia-driver
 lib32-opencl-nvidia
+lib32-nvidia-utils
 nvidia-container-toolkit
 opencv-cuda
 cuda

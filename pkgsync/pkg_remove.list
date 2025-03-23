@@ -51,6 +51,27 @@ libblockdev-nvdimm
 # Used for enterprise stuff
 libblockdev-mpath
 
+# Plasma 5
 chaotic-kf5-dummy
 plasma-remotecontrollers
+
+# Replace by kwin-gestures
+gestures
+libinput-gestures
+
+# Replaced by hoppscotch
+postman9-bin
+
+# check-broken-packages finds more broken packages
+rebuild-detector
+
+# Replcaed by uv
+rye
+
+# Replaced by cachyos version
+minq-ananicy-git
+
+# Replaced with my local version
+udev-notify-git
+
 
