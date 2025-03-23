@@ -1,0 +1,8 @@
+{
+    "disable-autoplay-next": true,
+    "send-large-photos": true,
+    "show-peer-id-below-about": true,
+    "use-small-msg-bubble-radius": true,
+    "view-profile-in-chats-list-context-menu": true,
+    "webview-debug-enabled": true
+}
