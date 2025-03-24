@@ -381,6 +381,16 @@ else:
         f"{YELLOW}Consider installing bypass paywalls{NC}",
     )
 
+    run_check(
+        len(
+            glob.glob(
+                os.path.join(firefox_profiles[0], "extensions", "support@z-lib.do.xpi")
+            )
+        )
+        == 0,
+        f"{YELLOW}Consider installing z-lib{NC}",
+    )
+
 print(
     f"{L_GREEN}Finished running checks, {L_CYAN}{warn} / {checks}{L_GREEN} warning(s){NC}\n"
 )
