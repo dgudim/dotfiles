@@ -250,7 +250,7 @@ firefox_settings = [
     "widget.use-xdg-desktop-portal.location",
     "widget.use-xdg-desktop-portal.mime-handler",
     "widget.use-xdg-desktop-portal.open-uri",
-    "widget.use-xdg-desktop-portal.native-messaging",
+    #    "widget.use-xdg-desktop-portal.native-messaging",
     "widget.use-xdg-desktop-portal.settings",
     "media.ffmpeg.vaapi.enabled",
     "media.av1.enabled",
