@@ -4,7 +4,7 @@
     "autoUpdateNotification": true,
     "useQuickCss": true,
     "themeLinks": [
-        "https://raw.githubusercontent.com/shvedes/discord-gruvbox/main/gruvbox.theme.css"
+        "https://raw.githubusercontent.com/refact0r/system24/refs/heads/main/theme/flavors/gruvbox-material.theme.css"
     ],
     "enabledThemes": [
         "Gruvbox.theme.css"
@@ -197,7 +197,7 @@
             "useListeningStatus": true,
             "missingArt": "lastfmLogo",
             "username": "Kl0ud_",
-            "apiKey": "4127d918df9b162ba6b2b5a872aea681",
+            "apiKey": "",
             "showLastFmLogo": true,
             "shareSong": true,
             "hideWithActivity": false
@@ -446,7 +446,9 @@
             "enabled": false
         },
         "TypingIndicator": {
-            "enabled": true
+            "enabled": true,
+            "includeMutedChannels": false,
+            "includeCurrentChannel": true
         },
         "TypingTweaks": {
             "enabled": true,
@@ -716,7 +718,8 @@
             "disableSpotifyLogger": true
         },
         "MentionAvatars": {
-            "enabled": true
+            "enabled": true,
+            "showAtSymbol": true
         },
         "YoutubeAdblock": {
             "enabled": true
@@ -772,7 +775,7 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1740075814422
+        "settingsSyncVersion": 1742972715349
     },
     "eagerPatches": false
 }
