@@ -37,3 +37,8 @@ def batcher(iterable: Iterable, batch_size: int):
     iterator = iter(iterable)
     while batch := list(islice(iterator, batch_size)):
         yield batch
+
+
+times, times_with_contexts = zip(*reversed(sorted(zip(times, times_with_contexts))))
+times = list(times)
+times_with_contexts = list(times_with_contexts)
