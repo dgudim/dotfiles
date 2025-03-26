@@ -756,6 +756,7 @@ launch_shell() {
 	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt);" >>"$shellrc_path"
 
 	echo "set_ssh_prompt" >>"$shellrc_path"
+	echo "export TMOUT=6000 # Increase auto-logout time" >>"$shellrc_path"
 
 	echo -e "${L_GREEN}Welcome!${NC}"
 
