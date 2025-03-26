@@ -31,3 +31,9 @@ def size_fmt(num_bytes: float, suffix="B"):
     VERSION_AND_STATUS=$(docker-build "$1" 2>&1 | tee >(grep '==>' | sed -e 's/==>//') >&3)
 } 3>&1 # 0^forecast:2.0.2-adadfc
 
+
+
+def batcher(iterable: Iterable, batch_size: int):
+    iterator = iter(iterable)
+    while batch := list(islice(iterator, batch_size)):
+        yield batch
