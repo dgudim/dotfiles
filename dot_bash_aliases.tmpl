@@ -608,11 +608,11 @@ gen_ssh_prompt() {
 		generate_block '11-12'
 	)"
 
-	printf '%s%s%s%s \\[\\e[%d;1m\\]◀%s\[\\e[;1m\\]@\\[\\e[%d;1m\\]%s\\[\\e[m\\] (%s)' "$block1" "$block2" "$block3" "$block4" "$number" $(whoami) "$number2" "$full_hostname" "$ip"
+	printf '%s%s%s%s \\[\\e[%d;1m\\]◀%s\[\\e[;1m\\]@\\[\\e[%d;1m\\]%s\\[\\e[m\\] (%s)' "$block1" "$block2" "$block3" "$block4" "$number" "\$(whoami)" "$number2" "$full_hostname" "$ip"
 }
 
 set_ssh_prompt() {
-	export PS1="$(gen_ssh_prompt) \$(pwd) "'$ '
+	export PS1="$(gen_ssh_prompt) \$(pwd) "'$([[ $(whoami) = root ]] && echo -e "\[\e[31;1m\]#\[\e[m\] " || echo "$ ")'
 }
 
 __download_helper() {
@@ -656,6 +656,7 @@ setup_ssh_shell_utils() {
 	L_PURPLE='\033[1;35m'
 	L_CYAN='\033[1;36m'
 	L_YELLOW='\033[0;33m'
+	GRAY='\033[1;30m'
 	NC='\033[0m'
 
 	echo -e "${L_YELLOW}Setting up environment...${NC}"
@@ -705,6 +706,11 @@ setup_ssh_shell_utils() {
 
 	echo "source '$preexec_download_path'" >>"$init_file"
 	echo 'eval "$(atuin init bash --disable-up-arrow)"' >>"$init_file"
+
+	echo -e "${GRAY}Writing atuin config${NC}"
+
+	mkdir -pv ~/.config/atuin
+	echo -e "workspaces = true\ninline_height=30\n" > ~/.config/atuin/config.toml
 }
 
 launch_shell() {
