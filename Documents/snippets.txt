@@ -26,6 +26,13 @@ def size_fmt(num_bytes: float, suffix="B"):
     return f"{num_bytes:.1f}Yi{suffix}"
 
 
+def large_num_fmt(num: float):
+    for mult in ("", "K", "KK", "KKK"):
+        if abs(num) < 1000.0:
+            return f"{num:.2f}{mult}"
+        num /= 1000.0
+    return f"{num:.2f}KKKK"
+
 
 { # https://stackoverflow.com/questions/58966324/grep-into-variable-and-maintain-stdout
     VERSION_AND_STATUS=$(docker-build "$1" 2>&1 | tee >(grep '==>' | sed -e 's/==>//') >&3)
