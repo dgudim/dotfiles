@@ -517,6 +517,7 @@ yt-dlp-drop-in
 xorg-xhost
 awatcher-git
 aw-watcher-media-player-git
+slicer-udev
 
 ## Browser sync to RAM
 profile-sync-daemon
