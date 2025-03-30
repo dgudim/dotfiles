@@ -12,6 +12,7 @@ ignore section "FileDialogSize"
 ignore section "KFileDialog Settings"
 ignore regex "PlasmaViews.*" ".*"
 ignore section "Updates"
+ignore section "Applets"
 
 #ignore section "my-section"
 #ignore "exact section name without brackets" "exact key name"
