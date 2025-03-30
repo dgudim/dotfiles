@@ -24,6 +24,9 @@ class GeometryChangeEffect {
         window.windowFrameGeometryChanged.connect(
             this.onWindowFrameGeometryChanged.bind(this),
         );
+        window.windowMaximizedStateAboutToChange.connect(
+            this.onWindowMaximizedStateAboutToChange.bind(this),
+        );
         window.windowStartUserMovedResized.connect(
             this.onWindowStartUserMovedResized.bind(this),
         );
@@ -49,19 +52,19 @@ class GeometryChangeEffect {
     }
 
     onWindowFrameGeometryChanged(window, oldGeometry) {
-        if (!window.onCurrentDesktop) {
-            return;
-        }
-
-        if (window.move || window.resize || this.userResizing || window.minimized || !window.managed) {
-            return;
-        }
-
-        if (!(window.normalWindow || window.dialog || window.modal)) {
-            return;
-        }
-
-        if (this.isWindowClassExluded(window.windowClass)) {
+        const windowTypeSupportsAnimation = window.normalWindow || window.dialog || window.modal;
+        const isUserMoveResize = window.move || window.resize || this.userResizing;
+        const maximizationChange = window.geometryChangeMaximizedStateAboutToChange === true;
+        delete window.geometryChangeMaximizedStateAboutToChange;
+        if (
+            !window.managed ||
+            !window.visible ||
+            !window.onCurrentDesktop ||
+            window.minimized ||
+            !windowTypeSupportsAnimation ||
+            isUserMoveResize && !maximizationChange ||
+            this.isWindowClassExluded(window.windowClass)
+        ) {
             return;
         }
 
@@ -116,6 +119,10 @@ class GeometryChangeEffect {
             curve: QEasingCurve.OutExpo,
             animations: animations,
         });
+    }
+
+    onWindowMaximizedStateAboutToChange(window, horizontal, vertical) {
+        window.geometryChangeMaximizedStateAboutToChange = true;
     }
 
     onWindowStartUserMovedResized(window) {
