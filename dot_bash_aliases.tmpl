@@ -234,6 +234,11 @@ alias broken='sudo pacman -Qkk | grep warning'
 
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
+ipa() {
+	ip a
+	ip route
+	route -n
+}
 
 ################################################ Interactive aliases ################################################
 
