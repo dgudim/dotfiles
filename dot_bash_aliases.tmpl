@@ -768,6 +768,7 @@ launch_shell() {
 
 	echo "set_ssh_prompt" >>"$shellrc_path"
 	echo "export TMOUT=6000 # Increase auto-logout time" >>"$shellrc_path"
+	echo "alias kubectl='https_proxy= kubectl'" >>"$shellrc_path"
 
 	echo -e "${L_GREEN}Welcome!${NC}"
 
