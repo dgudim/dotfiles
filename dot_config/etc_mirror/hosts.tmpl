@@ -12,3 +12,6 @@ ff02::2    ip6-allrouters
 192.168.50.123 sauron.local
 192.168.50.1 router
 192.168.50.1 router.local
+{{ if eq .chezmoi.hostname "nuclear-submarine" }}
+192.168.134.179 v-savitarna.office.5ci.lt
+{{ end }}
