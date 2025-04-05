@@ -58,6 +58,7 @@ kubectl
 helm
 k9s
 stern
+karpor
 
 # Boot stuff
 grub-btrfs

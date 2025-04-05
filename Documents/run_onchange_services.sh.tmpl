@@ -103,6 +103,8 @@ enable_service tailscaled.service
 
 enable_service smartd.service
 
+enable_service acpid.service
+
 enable_service plocate-updatedb.timer
 {{ if eq .chezmoi.hostname "portable-heater" }}
     # Disable
@@ -117,11 +119,11 @@ enable_service systemd-boot-update 0 1
 enable_service grub-btrfsd.service
 enable_service fprintd.service
 
-enable_service displaylink.service
 {{ else }}
 enable_service systemd-boot-update
 {{ end }}
 
+enable_service displaylink.service
 enable_service gpu-screen-recorder-ui 1
 
 {{ if eq .chezmoi.hostname "black-bird" }}

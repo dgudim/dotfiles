@@ -13,22 +13,22 @@ div[aria-label="Clips"],
 div[class*="channelAppLauncher"] {
   display: none;
 }
-
+/* 
 div[class*="avatarPositionPremiumBanner"] {
   top: 16px !important;
-}
+} */
 
-svg[class*="bannerSVGWrapper"] {
+/* svg[class*="bannerSVGWrapper"] {
   min-width: 340px !important;
   min-height: 60px !important;
   height: 60px;
-}
-
+} */
+/* 
 div[role="dialog"] {
   border: 1.5px solid #755716;
   border-radius: 8px;
-}
-
+} */
+/* 
 *[class*="shyButton"] {
   background: none;
-}
+} */
