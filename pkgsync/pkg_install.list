@@ -968,6 +968,7 @@ mediainfo
 playerctl
 noise-suppression-for-voice
 audio-share-bin
+rescrobbled-git
 
 ## GUIS
 ambix
