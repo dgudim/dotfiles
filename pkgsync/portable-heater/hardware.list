@@ -12,6 +12,9 @@ libva-intel-driver
 lib32-libva-intel-driver
 libvdpau-va-gl
 
+intel-compute-runtime-legacy-bin
+intel-graphics-compiler-legacy-bin
+
 ## Amd
 vulkan-radeon
 
@@ -54,6 +57,7 @@ zulu-jdk-fx-bin
 # @@@
 oracle-sqldeveloper
 postgresql
+rider
 
 dblatex
 libnsgif

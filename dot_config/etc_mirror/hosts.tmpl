@@ -1,6 +1,6 @@
 # Host addresses
 127.0.0.1  localhost
-127.0.1.1  {{- .chezmoi.hostname -}}
+127.0.1.1  {{ .chezmoi.hostname }}
 ::1        localhost ip6-localhost ip6-loopback
 ff02::1    ip6-allnodes
 ff02::2    ip6-allrouters
@@ -12,3 +12,6 @@ ff02::2    ip6-allrouters
 192.168.50.123 sauron.local
 192.168.50.1 router
 192.168.50.1 router.local
+{{ if eq .chezmoi.hostname "nuclear-submarine" }}
+192.168.134.179 v-savitarna.office.5ci.lt
+{{ end }}

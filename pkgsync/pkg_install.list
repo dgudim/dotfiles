@@ -3,7 +3,7 @@
 #    hiprt
 
 # Laptop stuff
-kwin-gestures
+input-actions
 
 # Boot stuff
 kernel-install-for-dracut
@@ -263,12 +263,15 @@ oxygen-sounds
 harmony2
 krdp
 kcron
+kwin-scripts-sticky-window-snapping-git
+plasma6-runners-emojirunner
 
 
 
 
 # GUI APPS
 konsole
+systemdgenie
 filelight
 jdiskreport
 qdirstat
@@ -313,11 +316,10 @@ pdfarranger
 tokodon
 zoom
 calibre
-telegram-desktop
+telegram-desktop-bin
 anilibria-winmaclinux
 vesktop
 discover
-barrier
 libreoffice-fresh
 smb4k
 sqlitebrowser
@@ -357,11 +359,15 @@ textpieces
 
 
 # CLI APPS
+acpid
 uhubctl
 nano
+ouch
 syncthing
 bup
+parallel
 mosh
+chrpath
 ssh3
 rclone
 speedtest-cli
@@ -447,7 +453,7 @@ powershell-bin
 ## Tools
 gum
 pastel
-so-bin
+okolors-git
 spacer-bin
 
 ## Greps / search
@@ -542,7 +548,7 @@ qt5-imageformats
 kdeplasma-addons
 plasma-browser-integration
 kdeconnect
-kde-snap-assist
+# kde-snap-assist
 kde-thumbnailer-apk
 stl-thumb-git
 stl-thumb-kde
@@ -555,6 +561,7 @@ comicthumb
 icoextract
 plasma-thunderbolt
 kactivities-stats5
+ocs-url
 
 ## KATE
 markdownpart
@@ -605,6 +612,8 @@ lib32-fluidsynth
 lib32-alsa-plugins
 lib32-giflib
 lib32-gperftools
+lib32-sdl2-compat
+lib32-libdecor
 
 ## WINE
 wine-gecko
@@ -644,6 +653,7 @@ dockerfile-language-server-bin
 yamlfmt
 gopls
 gfold
+wild
 
 ## R
 # Disabled as not needed
@@ -768,10 +778,13 @@ python-notify2
 python-pymupdf
 python-dirty-equals
 python-pycurl
+python-levenshtein
+python-libevdev
+python-musicbrainzngs
 uvicorn
 
 ## ANDROID AND JAVA
-jdk11-openjdk
+jre21-openjdk
 jdk17-openjdk
 jdk8-openjdk
 jre8-openjdk-headless
@@ -812,8 +825,10 @@ dotnet-runtime
 ## Arduino
 platformio-core
 platformio-core-udev
-arduino-ctags
+# arduino-ctags
 arduino-language-server
+avr-binutils
+avrdude
 
 ## JS
 nodejs-lts-jod
@@ -912,6 +927,7 @@ capnet-assist
 linux-wifi-hotspot
 httptoolkit-bin
 ktailctl
+localsend
 
 ## GNS3
 gns3-server
@@ -953,6 +969,7 @@ mediainfo
 playerctl
 noise-suppression-for-voice
 audio-share-bin
+rescrobbled-git
 
 ## GUIS
 ambix
@@ -975,6 +992,7 @@ kmidimon
 carla
 soundux-git
 cavalier
+tageditor-qt6
 
 
 # GRAPHICS, VIDEO
@@ -997,10 +1015,14 @@ gst-plugin-libcamera
 pipewire-libcamera
 colord
 libuvc
+brightnessctl
+light
 jpegoptim
 atomicparsley
 avisynthplus
 akvcam-dkms
+opentimelineio
+displaylink
 
 ## CLIS
 mplayer
@@ -1011,7 +1033,6 @@ autotrace
 ## GUIS
 vlc-luajit
 mpv
-haruna
 smplayer
 hugin
 obs-studio-tytan652
@@ -1054,6 +1075,7 @@ webcamoid
 cameractrls
 jexiftoolgui
 vidcutter
+vipsdisp
 
 
 

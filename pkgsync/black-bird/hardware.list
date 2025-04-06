@@ -8,6 +8,9 @@ lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
+intel-compute-runtime-legacy-bin
+intel-graphics-compiler-legacy-bin
+
 # Thinkpad stuff
 thinkfan-ui
 
@@ -19,11 +22,11 @@ mmconneqt-git
 modem-manager-gui-hg
 
 # Gaming
-steam
-linux-steam-integration
-steam-native-runtime
-lib32-gamemode
-gamemode
+# steam
+# linux-steam-integration
+# steam-native-runtime
+# lib32-gamemode
+# gamemode
 moonlight-qt
 
 # For java classes
@@ -40,6 +43,7 @@ waydroid-image
 waydroid-script-git
 
 # For uni
+oracle-datamodeler
 postgresql
 
 # 3D
