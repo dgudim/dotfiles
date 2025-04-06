@@ -10,7 +10,8 @@ environment = []
 #ldcache = "/etc/ld.so.cache"
 ldconfig = "@/sbin/ldconfig"
 load-kmods = true
-#no-cgroups = false
+# For rootless mode, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+no-cgroups = true
 #path = "/usr/bin/nvidia-container-cli"
 #root = "/run/nvidia/driver"
 #user = "root:video"
