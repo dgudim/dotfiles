@@ -264,6 +264,7 @@ harmony2
 krdp
 kcron
 kwin-scripts-sticky-window-snapping-git
+kwin-scripts-kzones
 plasma6-runners-emojirunner
 
 
@@ -359,6 +360,7 @@ textpieces
 
 
 # CLI APPS
+ascii
 acpid
 uhubctl
 nano
@@ -816,6 +818,7 @@ sdl12-compat
 boost
 glfw
 mold
+lld
 ctags
 
 # C#
@@ -1083,7 +1086,7 @@ vipsdisp
 # THEMES AND STUFF
 numix-icon-theme-git
 papirus-icon-theme
-klassy
+klassy-git
 dracut-colors-git
 smplayer-themes
 xcursor-simp1e-gruvbox-dark

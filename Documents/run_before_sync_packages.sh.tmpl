@@ -45,6 +45,11 @@ tldr --update
 fwupdmgr update
 sudo dotnet workload update --from-previous-sdk
 
+{{ if (or (eq .chezmoi.hostname "sauron") (eq .chezmoi.hostname "portable-heater")) }}
+adwaita-steam-gtk --install
+adwaita-steam-gtk --update
+{{ end }}
+
 # wineasio-register
 # setup_dxvk install
 # https://askubuntu.com/questions/299286/how-to-recover-focus-after-losing-it-while-using-wine

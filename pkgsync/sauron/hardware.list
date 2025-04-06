@@ -40,6 +40,7 @@ dsnote-git
 steam
 linux-steam-integration
 steam-native-runtime
+adwsteamgtk
 lib32-gamemode
 gamemode
 gamescope
@@ -49,7 +50,6 @@ mangohud
 
 # For java classes
 intellij-idea-ultimate-edition
-intellij-idea-ultimate-edition-jre
 zulu-jdk-fx-bin
 postgresql
 

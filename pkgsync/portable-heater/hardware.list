@@ -44,6 +44,7 @@ lib32-vulkan-mesa-layers
 steam
 linux-steam-integration
 steam-native-runtime
+adwsteamgtk
 lib32-gamemode
 gamemode
 

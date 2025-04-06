@@ -1,5 +1,5 @@
 # No touchpad and battery
-kwin-gestures
+input-actions
 
 # Replaced by opencv-cuda
 opencv
