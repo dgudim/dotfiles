@@ -3,7 +3,7 @@
 #    hiprt
 
 # Laptop stuff
-kwin-gestures
+input-actions
 
 # Boot stuff
 kernel-install-for-dracut
@@ -320,7 +320,6 @@ telegram-desktop-bin
 anilibria-winmaclinux
 vesktop
 discover
-barrier
 libreoffice-fresh
 smb4k
 sqlitebrowser
@@ -549,7 +548,7 @@ qt5-imageformats
 kdeplasma-addons
 plasma-browser-integration
 kdeconnect
-kde-snap-assist
+# kde-snap-assist
 kde-thumbnailer-apk
 stl-thumb-git
 stl-thumb-kde
@@ -824,7 +823,7 @@ dotnet-runtime
 ## Arduino
 platformio-core
 platformio-core-udev
-arduino-ctags
+# arduino-ctags
 arduino-language-server
 avr-binutils
 avrdude

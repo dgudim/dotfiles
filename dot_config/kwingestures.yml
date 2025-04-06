@@ -50,6 +50,26 @@ touchpad:
 
     - type: swipe
       fingers: 3
+      direction: left_right
+      keyboard_modifiers: [meta]
+
+      actions:
+        - on: begin
+          input:
+            - keyboard: [+leftmeta]
+            - mouse: [+right]
+
+        - on: update
+          input:
+            - mouse: [move_by_delta]
+
+        - on: end_cancel
+          input:
+            - keyboard: [-leftmeta]
+            - mouse: [-right]
+
+    - type: swipe
+      fingers: 3
       direction: left
 
       actions:
@@ -133,13 +153,25 @@ touchpad:
       actions:
         - on: update
           interval: -10
-          keyboard_modifiers: alt
           plasma_shortcut: kwin,Increase Opacity
 
         - on: update
           interval: 10
-          keyboard_modifiers: alt
           plasma_shortcut: kwin,Decrease Opacity
+
+    - type: swipe
+      fingers: 3
+      direction: up_down
+      keyboard_modifiers: [meta]
+
+      actions:
+        - on: update
+          interval: -5
+          plasma_shortcut: org_kde_powerdevil,Increase Screen Brightness Small
+
+        - on: update
+          interval: 5
+          plasma_shortcut: org_kde_powerdevil,Decrease Screen Brightness Small
 
 
     # Close window
