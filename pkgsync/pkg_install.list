@@ -767,6 +767,7 @@ python-loguru
 python-notify2
 python-pymupdf
 python-dirty-equals
+python-pycurl
 uvicorn
 
 ## ANDROID AND JAVA
