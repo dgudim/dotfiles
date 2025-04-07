@@ -715,7 +715,7 @@ setup_ssh_shell_utils() {
 	echo -e "${GRAY}Writing atuin config${NC}"
 
 	mkdir -pv ~/.config/atuin
-	echo -e "workspaces = true\ninline_height=30\n" > ~/.config/atuin/config.toml
+	echo -e "update_check = false\nworkspaces = true\ninline_height=30\n" > ~/.config/atuin/config.toml
 }
 
 launch_shell() {
