@@ -126,6 +126,7 @@
 [help]
     autocorrect = prompt
 [alias]
+    maintenance-s =  "!f() { git maintenance "$@" || true; }; f"
     commit-def =     "!f() { git add . && git commit         -S -a -m                         \"$1\"; }; f"
     commit-empty =   "!f() { git add . && git commit         -S -a    --allow-empty-message -m "";    }; f"
     commit-rename =  "!f() {              git commit --amend -S -a -m                         \"$1\"; }; f"
