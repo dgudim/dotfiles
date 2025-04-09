@@ -31,8 +31,8 @@
 #LoginGraceTime 2m
 #PermitRootLogin prohibit-password
 #StrictModes yes
-#MaxAuthTries 6
-#MaxSessions 10
+MaxAuthTries 6
+MaxSessions 25
 
 PubkeyAuthentication yes
 
