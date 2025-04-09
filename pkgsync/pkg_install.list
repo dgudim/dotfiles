@@ -357,7 +357,7 @@ mousam
 prusa-slicer
 serialplot-git
 textpieces
-
+kcolorchooser
 
 # CLI APPS
 ascii
