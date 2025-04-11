@@ -497,6 +497,7 @@ glances
 # COMPLEMENTARY PACKAGES
 languagetool
 nano-syntax-highlighting-git
+docker-color-output-git
 vivid
 bat-extras
 aspell-en
