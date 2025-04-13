@@ -11,6 +11,7 @@ ignore section ""
 ignore regex "Tiling.*" ".*"
 ignore "Xwayland" "Scale"
 ignore "NightColor" "DayTemperature"
+ignore regex "Activities.*" ".*"
 
 # Add your ignores and transforms here
 #ignore section "my-section"

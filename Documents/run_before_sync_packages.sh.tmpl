@@ -36,8 +36,10 @@ cargo install-update -a
 
 install-flatpak org.easycoding.TunedSwitcher
 flatpak update
+flatpak uninstall --unused --delete-data
 
 install-dotnet csharprepl
+install-dotnet dotnet-ef
 
 code --update-extensions
 lensfun-update-data

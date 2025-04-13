@@ -88,7 +88,7 @@
             "enabled": false
         },
         "BetterUploadButton": {
-            "enabled": false
+            "enabled": true
         },
         "BlurNSFW": {
             "enabled": true,
@@ -197,7 +197,7 @@
             "useListeningStatus": true,
             "missingArt": "lastfmLogo",
             "username": "Kl0ud_",
-            "apiKey": "4127d918df9b162ba6b2b5a872aea681",
+            "apiKey": "",
             "showLastFmLogo": true,
             "shareSong": true,
             "hideWithActivity": false
@@ -416,7 +416,7 @@
             "enabled": true
         },
         "BiggerStreamPreview": {
-            "enabled": false
+            "enabled": true
         },
         "FavoriteGifSearch": {
             "enabled": false
@@ -515,7 +515,7 @@
             "enabled": false
         },
         "BetterGifPicker": {
-            "enabled": false
+            "enabled": true
         },
         "ClientTheme": {
             "enabled": false
@@ -763,6 +763,9 @@
         },
         "IrcColors": {
             "enabled": false
+        },
+        "DisableDeepLinks": {
+            "enabled": true
         }
     },
     "notifications": {
@@ -775,7 +778,7 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1742972715349
+        "settingsSyncVersion": 1744529108120
     },
     "eagerPatches": false
 }
