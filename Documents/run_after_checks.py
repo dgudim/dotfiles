@@ -368,7 +368,7 @@ else:
     template_path = "/home/kloud/.local/share/chezmoi/private_dot_mozilla/private_firefox/template-plasma-integration.sqlite"
 
     os.system(
-        f'sqldiff "{plasma_integration_sqlite_db_path}" "{template_path}" > /tmp/sqldiff-plasma-integration'
+        f'sqldiff "{plasma_integration_sqlite_db_path}" "{template_path}" | grep object_data > /tmp/sqldiff-plasma-integration'
     )
     if len(read_file("/tmp/sqldiff-plasma-integration", True)) > 0:
         print(
