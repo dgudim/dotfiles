@@ -695,7 +695,6 @@ ruff
 twine
 yapf
 mypy
-pipxu
 codon-bin
 xontrib-fzf-widgets
 

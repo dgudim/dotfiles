@@ -49,8 +49,9 @@ sudo rm -f /opt/activitywatch/libwayland-client.so.0
 # Delete sensitive data
 secret-tool clear user kloud || true
 
-# Replaced with pipxu
+# Replaced with uv tool
 rm -rfv ~/.local/share/pipx
+rm -rfv ~/.local/share/pipxu
 
 # Symlink to stub systemd-resolved stub resolver
 [ -L /etc/resolv.conf ] || sudo ln -fvs /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
