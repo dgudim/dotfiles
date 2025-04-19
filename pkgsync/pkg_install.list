@@ -625,7 +625,7 @@ wine
 wineasio
 winetricks-git
 vkd3d
-dxvk-bin
+bottles
 yabridge
 yabridgectl
 
@@ -687,7 +687,7 @@ uv
 ipython
 bpython
 python-lsp-black
-pip-autoremove
+python-pip
 pyupgrade
 autopep8
 flake8
@@ -1214,15 +1214,12 @@ pandoc-cli
 pandoc-crossref
 plantuml-ascii-math
 asciidoctor
-blockdiag
 pdf2svg
 odt2txt
 unrtf
 biber
 d2
 gnuplot
-nwdiag
-seqdiag
 groff
 ghostscript
 bison
