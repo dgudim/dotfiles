@@ -8,6 +8,11 @@ lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
+#Btrfs
+btrfs-assistant
+btrfs-list
+btrfsmaintenance
+
 intel-compute-runtime-legacy-bin
 intel-graphics-compiler-legacy-bin
 

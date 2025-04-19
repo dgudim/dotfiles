@@ -11,6 +11,7 @@ lib32-vulkan-intel
 intel-hybrid-codec-driver-git
 libva-intel-driver-hybrid
 libvdpau-va-gl
+lib32-libvdpau-va-gl
 
 intel-compute-runtime-legacy-bin
 intel-graphics-compiler-legacy-bin
