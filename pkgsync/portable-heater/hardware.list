@@ -8,8 +8,8 @@ intel-media-sdk
 vpl-gpu-rt
 vulkan-intel
 lib32-vulkan-intel
-libva-intel-driver
-lib32-libva-intel-driver
+intel-hybrid-codec-driver-git
+libva-intel-driver-hybrid
 libvdpau-va-gl
 
 intel-compute-runtime-legacy-bin
