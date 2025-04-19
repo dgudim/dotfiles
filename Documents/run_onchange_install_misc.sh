@@ -1,3 +1,4 @@
+#!/bin/bash
 
 {{ if (or (eq .chezmoi.hostname "sauron") (eq .chezmoi.hostname "portable-heater")) }}
 adwaita-steam-gtk --install
