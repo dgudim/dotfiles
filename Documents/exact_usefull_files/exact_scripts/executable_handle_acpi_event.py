@@ -11,7 +11,7 @@ def pause_media():
 
 
 def turn_off_keyboard_backlight():
-    os.system('brightnessctl --device "tpacpi::kbd_backlight" set 0')
+    os.system('sleep 3 && brightnessctl --device "tpacpi::kbd_backlight" set 0')
 
 
 def main():

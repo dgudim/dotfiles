@@ -8,6 +8,11 @@ lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
+#Btrfs
+btrfs-assistant
+btrfs-list
+btrfsmaintenance
+
 intel-compute-runtime-legacy-bin
 intel-graphics-compiler-legacy-bin
 
@@ -35,13 +40,13 @@ intellij-idea-ultimate-edition
 zulu-jdk-fx-bin
 
 # Waydroid
-binder_linux-dkms
-lua-alt-getopt
-lua-filesystem
-python-pyclip
-waydroid
-waydroid-image
-waydroid-script-git
+# binder_linux-dkms
+# lua-alt-getopt
+# lua-filesystem
+# python-pyclip
+# waydroid
+# waydroid-image
+# waydroid-script-git
 
 # For uni
 oracle-datamodeler

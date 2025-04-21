@@ -197,7 +197,7 @@
             "useListeningStatus": true,
             "missingArt": "lastfmLogo",
             "username": "Kl0ud_",
-            "apiKey": "4127d918df9b162ba6b2b5a872aea681",
+            "apiKey": "",
             "showLastFmLogo": true,
             "shareSong": true,
             "hideWithActivity": false
@@ -778,7 +778,7 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1744529142016
+        "settingsSyncVersion": 1742972715349
     },
     "eagerPatches": false
 }

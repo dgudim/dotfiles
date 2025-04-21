@@ -12,7 +12,7 @@ def time_delta_human_fmt(time_ms: float | datetime.timedelta):
         if getattr(delta, unit)  # If the unit is defined in the delta
     ]
 
-    rs = " ".join(formatted)
+    rs = (" ".join(formatted)).strip()
 
     return rs if len(rs) > 0 else f"{time_ms / 1000:.4f} seconds"
 
@@ -49,3 +49,50 @@ def batcher(iterable: Iterable, batch_size: int):
 times, times_with_contexts = zip(*reversed(sorted(zip(times, times_with_contexts))))
 times = list(times)
 times_with_contexts = list(times_with_contexts)
+
+
+
+
+
+
+
+
+# https://www.scivision.dev/platform-independent-ulimit-number-of-open-files-increase/
+def raise_nofile(nofile_atleast=4096):
+    """
+    sets nofile soft limit to at least 4096 (default is 1024)
+    """
+    if res is None:
+        return
+
+    # (0) what is current ulimit -n setting?
+    soft, ohard = res.getrlimit(res.RLIMIT_NOFILE)
+    hard = ohard
+    # (1) increase limit (soft and even hard) if needed
+    if soft < nofile_atleast:
+        soft = nofile_atleast
+
+        hard = max(hard, soft)
+
+        logger.info(f"Setting soft & hard ulimit -n {soft} {hard}")
+        try:
+            res.setrlimit(res.RLIMIT_NOFILE, (soft, hard))
+        except (ValueError, res.error):
+            try:
+                hard = soft
+                logger.error(f"Trouble with max limit, retrying with soft,hard {soft},{hard}")
+                res.setrlimit(res.RLIMIT_NOFILE, (soft, hard))
+            except Exception:  # pylint: disable=W0718
+                logger.error("Failed to set ulimit, giving up")
+
+
+
+
+def ex_to_str(ex: Exception):
+    exceptions: list[BaseException] = []
+    current_ex: BaseException | None = ex
+    while current_ex is not None:
+        exceptions.append(current_ex)
+        current_ex = current_ex.__cause__ or current_ex.__context__
+
+    return " <-- ".join([f"{classname(e)}: {e}" for e in exceptions])

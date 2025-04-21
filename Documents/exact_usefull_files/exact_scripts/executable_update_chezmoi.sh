@@ -20,7 +20,7 @@ check_conflicts() {
     fi
 
     while IFS= read -r folder; do
-        find "$(echo "$folder" | tr -d '"')" -name "*sync-conflict*"
+        find "$(echo "$folder" | tr -d '"')" -name "*sync-conflict*" -not -path "./.stversions/*"
     done <<<"$FOLDERS"
 }
 

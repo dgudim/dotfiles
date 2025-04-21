@@ -4,10 +4,6 @@ cd "{{.chezmoi.sourceDir}}/pkgsync"
 bash pkgsync.sh
 bash pkg_build.sh
 
-install-pipx() {
-    pipxu list | grep "'${2:-${1:-error}}'" >/dev/null || pipxu install "$1"
-}
-
 install-flatpak() {
     flatpak install "$1"
 }
@@ -16,16 +12,22 @@ install-dotnet() {
     dotnet tool install -g "$1" || dotnet tool update -g "$1"
 }
 
-install-pipx paginate-json
-install-pipx doc484
-install-pipx gruvbox-factory
-install-pipx semgrep
-install-pipx gallery-dl
-install-pipx djlint
-install-pipx exrex
-install-pipx sherlock-project sherlock
-# install-pipx aw-watcher-netstatus
-# install-pipx https://github.com/rtnhn/aw-importer-lastfm.git aw-importer-lastfm
+uv tool install paginate-json
+uv tool install doc484
+uv tool install gruvbox-factory
+uv tool install semgrep
+uv tool install gallery-dl
+uv tool install djlint
+uv tool install exrex
+uv tool install sherlock-project
+uv tool install nwdiag
+uv tool install blockdiag
+uv tool install seqdiag
+uv tool install pip-autoremove
+uv tool install rembg[cpu,cli]
+# aw-watcher-netstatus
+# https://github.com/rtnhn/aw-importer-lastfm.git aw-importer-lastfm
+uv tool upgrade --all
 
 cargo install checkexec
 cargo install cargo-update
@@ -37,8 +39,10 @@ cargo install-update -a
 
 install-flatpak org.easycoding.TunedSwitcher
 flatpak update
+flatpak uninstall --unused --delete-data
 
 install-dotnet csharprepl
+install-dotnet dotnet-ef
 
 code --update-extensions
 lensfun-update-data
@@ -47,27 +51,3 @@ fwupdmgr update
 sudo dotnet workload update --from-previous-sdk
 
 update-mime-database /home/kloud/.local/share/mime/
-
-{{ if (or (eq .chezmoi.hostname "sauron") (eq .chezmoi.hostname "portable-heater")) }}
-adwaita-steam-gtk --install
-adwaita-steam-gtk --update
-{{ end }}
-
-# wineasio-register
-# setup_dxvk install
-# https://askubuntu.com/questions/299286/how-to-recover-focus-after-losing-it-while-using-wine
-# wine reg add 'HKEY_CURRENT_USER\Software\Wine\X11 Driver' /t REG_SZ /v UseTakeFocus /d N /f
-
-# waydroid prop set persist.waydroid.multi_windows true
-#
-# default (/etc/machine-id)-*-arch*-*.conf
-# timeout 5
-# console-mode max
-#
-# Crontab:
-# disable usb wakeup: @reboot sleep 10 && echo "XHC" > /proc/acpi/wakeup
-
-# Polkit-1  /usr/lib/pam.d/polkit-1
-
-## Rootless docker
-# usermod --add-subuids 100000-165535 --add-subgids 100000-165535 johndoe

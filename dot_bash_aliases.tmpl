@@ -20,10 +20,6 @@ alias man='MOAR="--no-linenumbers --wrap" && batman'
 alias klogs='sudo journalctl -e -f -k -b | ccze -A -o nolookups | spacer'
 alias logs='sudo journalctl -e -f -b | ccze -A -o nolookups | spacer'
 
-################################################ Faster pipx (Trick the completion into working, as there are no native completions for pipxu) ################################################
-
-alias pipx=pipxu
-
 ################################################ Git and chezmoi aliases ################################################
 
 alias gcomm='git commit-def'
@@ -230,7 +226,7 @@ alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | c
 alias orphans='pacman -Qtdq'
 alias broken='sudo pacman -Qkk | grep warning'
 
-################################################ Colorize grep and ip ################################################
+################################################ Colorize stuff ################################################
 
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
@@ -238,6 +234,9 @@ ipa() {
 	ip a
 	ip route
 	route -n
+}
+docker_col() {
+	/usr/bin/docker "$@" | docker-color-output
 }
 
 ################################################ Interactive aliases ################################################

@@ -284,7 +284,7 @@ yakuake
 kcalc
 kile
 krename
-krop-git
+krop
 ksystemlog
 kjournald
 ksysguard6-git
@@ -357,7 +357,7 @@ mousam
 prusa-slicer
 serialplot-git
 textpieces
-
+kcolorchooser
 
 # CLI APPS
 ascii
@@ -497,6 +497,7 @@ glances
 # COMPLEMENTARY PACKAGES
 languagetool
 nano-syntax-highlighting-git
+docker-color-output-git
 vivid
 bat-extras
 aspell-en
@@ -624,7 +625,7 @@ wine
 wineasio
 winetricks-git
 vkd3d
-dxvk-bin
+bottles
 yabridge
 yabridgectl
 
@@ -686,7 +687,7 @@ uv
 ipython
 bpython
 python-lsp-black
-pip-autoremove
+python-pip
 pyupgrade
 autopep8
 flake8
@@ -694,7 +695,6 @@ ruff
 twine
 yapf
 mypy
-pipxu
 codon-bin
 xontrib-fzf-widgets
 
@@ -1195,6 +1195,7 @@ catdoc
 flex
 libgepub
 poppler-glib
+poppler-qt5
 texlab
 texinfo
 texlive-latexextra
@@ -1214,15 +1215,12 @@ pandoc-cli
 pandoc-crossref
 plantuml-ascii-math
 asciidoctor
-blockdiag
 pdf2svg
 odt2txt
 unrtf
 biber
 d2
 gnuplot
-nwdiag
-seqdiag
 groff
 ghostscript
 bison
