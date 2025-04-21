@@ -533,6 +533,7 @@ xorg-xhost
 awatcher-git
 aw-watcher-media-player-git
 slicer-udev
+gjs
 
 ## Browser sync to RAM
 profile-sync-daemon
@@ -793,6 +794,7 @@ python-pycurl
 python-levenshtein
 python-libevdev
 python-musicbrainzngs
+python-webcolorspython-webcolorspython-webcolorspython-webcolorspython-webcolors
 uvicorn
 
 ## ANDROID AND JAVA
