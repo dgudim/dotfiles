@@ -794,7 +794,7 @@ python-pycurl
 python-levenshtein
 python-libevdev
 python-musicbrainzngs
-python-webcolorspython-webcolorspython-webcolorspython-webcolorspython-webcolors
+python-webcolors
 uvicorn
 
 ## ANDROID AND JAVA
