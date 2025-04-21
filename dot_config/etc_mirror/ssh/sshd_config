@@ -1,4 +1,5 @@
-#	$OpenBSD: sshd_config,v 1.104 2021/07/02 05:11:21 dtucker Exp $
+# Include drop-in configurations
+Include /etc/ssh/sshd_config.d/*.conf
 
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
@@ -57,7 +58,9 @@ HostbasedAuthentication no
 PasswordAuthentication no
 PermitEmptyPasswords no
 
-# Change to no to disable s/key passwords
+# Change to "no" to disable keyboard-interactive authentication.  Depending on
+# the system's configuration, this may involve passwords, challenge-response,
+# one-time passwords or some combination of these and other methods.
 KbdInteractiveAuthentication no
 
 # Kerberos options

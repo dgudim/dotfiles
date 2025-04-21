@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+    <mime-type type="application/x-dwarfs">
+        <comment>Dwarfs archive</comment>
+        <icon name="/home/kloud/Documents/shared/_Personal/Pictures/Icons and fonts/dwarf.png"/>
+        <glob-deleteall/>
+        <glob pattern="*.dwarfs"/>
+    </mime-type>
+</mime-info>

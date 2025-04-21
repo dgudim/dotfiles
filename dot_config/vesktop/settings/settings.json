@@ -88,7 +88,7 @@
             "enabled": false
         },
         "BetterUploadButton": {
-            "enabled": false
+            "enabled": true
         },
         "BlurNSFW": {
             "enabled": true,
@@ -416,7 +416,7 @@
             "enabled": true
         },
         "BiggerStreamPreview": {
-            "enabled": false
+            "enabled": true
         },
         "FavoriteGifSearch": {
             "enabled": false
@@ -515,7 +515,7 @@
             "enabled": false
         },
         "BetterGifPicker": {
-            "enabled": false
+            "enabled": true
         },
         "ClientTheme": {
             "enabled": false
@@ -763,6 +763,9 @@
         },
         "IrcColors": {
             "enabled": false
+        },
+        "DisableDeepLinks": {
+            "enabled": true
         }
     },
     "notifications": {
@@ -775,7 +778,7 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1742972715349
+        "settingsSyncVersion": 1744529142016
     },
     "eagerPatches": false
 }
