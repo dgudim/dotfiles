@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="kate" translationDomain="kate" version="106">
+<gui name="kate" translationDomain="kate" version="107">
  <MenuBar>
   <Menu name="file" noMerge="1">
    <text>&amp;File</text>
@@ -25,6 +25,7 @@
    <Action name="file_close_other"/>
    <Action name="file_close_all"/>
    <Action name="file_close_orphaned"/>
+   <Action name="file_close_window"/>
    <DefineGroup name="close_merge"/>
    <Separator/>
    <Menu name="file_file_actions">
@@ -141,11 +142,6 @@
    <Action name="help_welcome_page"/>
   </Menu>
  </MenuBar>
- <ToolBar name="hamburgerBar" noMerge="1">
-  <text>Hamburger Menu Toolbar</text>
-  <Spacer/>
-  <Action name="hamburger_menu"/>
- </ToolBar>
  <ToolBar name="mainToolBar" noMerge="1">
   <text>Main Toolbar</text>
   <Action name="file_new"/>
@@ -160,6 +156,11 @@
   <DefineGroup name="find_operations"/>
   <Separator/>
   <DefineGroup name="zoom_operations"/>
+ </ToolBar>
+ <ToolBar name="hamburgerBar" noMerge="1">
+  <text>Hamburger Menu Toolbar</text>
+  <Spacer/>
+  <Action name="hamburger_menu"/>
  </ToolBar>
  <Merge/>
  <Menu name="viewspace_popup" noMerge="1">

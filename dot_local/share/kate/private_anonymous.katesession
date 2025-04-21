@@ -1,0 +1,213 @@
+[Document 0]
+URL=file:///home/kloud/.local/share/chezmoi/dot_config/private_katerc.src.ini
+
+[Kate Plugins]
+cmaketoolsplugin=false
+compilerexplorer=true
+eslintplugin=true
+externaltoolsplugin=true
+formatplugin=true
+katebacktracebrowserplugin=false
+katebuildplugin=false
+katecloseexceptplugin=true
+katecolorpickerplugin=true
+katectagsplugin=true
+katefilebrowserplugin=true
+katefiletreeplugin=true
+kategdbplugin=false
+kategitblameplugin=true
+katekonsoleplugin=true
+kateprojectplugin=true
+katereplicodeplugin=false
+katesearchplugin=true
+katesnippetsplugin=false
+katesqlplugin=true
+katesymbolviewerplugin=true
+katexmlcheckplugin=true
+katexmltoolsplugin=true
+keyboardmacrosplugin=false
+ktexteditorpreviewplugin=true
+latexcompletionplugin=true
+lspclientplugin=true
+openlinkplugin=true
+rainbowparens=true
+rbqlplugin=true
+tabswitcherplugin=true
+templateplugin=false
+textfilterplugin=true
+
+[MainWindow0]
+Active ViewSpace=0
+Kate-MDI-H-Splitter=0,1830,0
+Kate-MDI-Sidebar-0-Bar-0-TvList=kate_private_plugin_katefiletreeplugin,kateproject,kateprojectgit,lspclient_symbol_outline,kate_private_plugin_katefileselectorplugin,kate_private_plugin_katesql_schemabrowser,kate_plugin_symbolviewer
+Kate-MDI-Sidebar-0-LastSize=200
+Kate-MDI-Sidebar-0-SectSizes=0
+Kate-MDI-Sidebar-0-Splitter=923
+Kate-MDI-Sidebar-1-Bar-0-TvList=ktexteditorpreviewplugin
+Kate-MDI-Sidebar-1-LastSize=464
+Kate-MDI-Sidebar-1-SectSizes=0
+Kate-MDI-Sidebar-1-Splitter=923
+Kate-MDI-Sidebar-2-Bar-0-TvList=
+Kate-MDI-Sidebar-2-LastSize=200
+Kate-MDI-Sidebar-2-SectSizes=0
+Kate-MDI-Sidebar-2-Splitter=975
+Kate-MDI-Sidebar-3-Bar-0-TvList=output,diagnostics,kate_plugin_katesearch,kateprojectinfo,kate_private_plugin_katekonsoleplugin,kate_plugin_katectagsplugin,kate_private_plugin_katesql_output,rainbow_csv_toolview
+Kate-MDI-Sidebar-3-LastSize=264
+Kate-MDI-Sidebar-3-SectSizes=0
+Kate-MDI-Sidebar-3-Splitter=1205
+Kate-MDI-Sidebar-Style=2
+Kate-MDI-Sidebar-Visible=true
+Kate-MDI-ToolView-diagnostics-Position=3
+Kate-MDI-ToolView-diagnostics-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-diagnostics-Visible=false
+Kate-MDI-ToolView-kate_plugin_katectagsplugin-Position=3
+Kate-MDI-ToolView-kate_plugin_katectagsplugin-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-kate_plugin_katectagsplugin-Visible=false
+Kate-MDI-ToolView-kate_plugin_katesearch-Position=3
+Kate-MDI-ToolView-kate_plugin_katesearch-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-kate_plugin_katesearch-Visible=false
+Kate-MDI-ToolView-kate_plugin_symbolviewer-Position=0
+Kate-MDI-ToolView-kate_plugin_symbolviewer-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-kate_plugin_symbolviewer-Visible=false
+Kate-MDI-ToolView-kate_private_plugin_katefileselectorplugin-Position=0
+Kate-MDI-ToolView-kate_private_plugin_katefileselectorplugin-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-kate_private_plugin_katefileselectorplugin-Visible=false
+Kate-MDI-ToolView-kate_private_plugin_katefiletreeplugin-Position=0
+Kate-MDI-ToolView-kate_private_plugin_katefiletreeplugin-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-kate_private_plugin_katefiletreeplugin-Visible=false
+Kate-MDI-ToolView-kate_private_plugin_katekonsoleplugin-Position=3
+Kate-MDI-ToolView-kate_private_plugin_katekonsoleplugin-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-kate_private_plugin_katekonsoleplugin-Visible=false
+Kate-MDI-ToolView-kate_private_plugin_katesql_output-Position=3
+Kate-MDI-ToolView-kate_private_plugin_katesql_output-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-kate_private_plugin_katesql_output-Visible=false
+Kate-MDI-ToolView-kate_private_plugin_katesql_schemabrowser-Position=0
+Kate-MDI-ToolView-kate_private_plugin_katesql_schemabrowser-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-kate_private_plugin_katesql_schemabrowser-Visible=false
+Kate-MDI-ToolView-kateproject-Position=0
+Kate-MDI-ToolView-kateproject-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-kateproject-Visible=false
+Kate-MDI-ToolView-kateprojectgit-Position=0
+Kate-MDI-ToolView-kateprojectgit-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-kateprojectgit-Visible=false
+Kate-MDI-ToolView-kateprojectinfo-Position=3
+Kate-MDI-ToolView-kateprojectinfo-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-kateprojectinfo-Visible=false
+Kate-MDI-ToolView-ktexteditorpreviewplugin-Position=1
+Kate-MDI-ToolView-ktexteditorpreviewplugin-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-ktexteditorpreviewplugin-Visible=false
+Kate-MDI-ToolView-lspclient_symbol_outline-Position=0
+Kate-MDI-ToolView-lspclient_symbol_outline-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-lspclient_symbol_outline-Visible=false
+Kate-MDI-ToolView-output-Position=3
+Kate-MDI-ToolView-output-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-output-Visible=true
+Kate-MDI-ToolView-rainbow_csv_toolview-Position=3
+Kate-MDI-ToolView-rainbow_csv_toolview-Show-Button-In-Sidebar=true
+Kate-MDI-ToolView-rainbow_csv_toolview-Visible=false
+Kate-MDI-V-Splitter=0,658,264
+
+[MainWindow0 Settings]
+WindowState=2
+
+[MainWindow0-Splitter 0]
+Children=MainWindow0-ViewSpace 0
+Orientation=1
+Sizes=1830
+
+[MainWindow0-ViewSpace 0]
+Active View=0
+Count=1
+Documents=0
+View 0=0
+
+[MainWindow0-ViewSpace 0 0]
+CursorColumn=28
+CursorLine=130
+ScrollLine=108
+
+[Open Documents]
+Count=1
+
+[Open MainWindows]
+Count=1
+
+[Plugin:katecloseexceptplugin:][menu]
+ShowConfirmation=false
+
+[Plugin:katectagsplugin:MainWindow:0]
+SessionDatabase=
+SessionNumTargets=0
+TagsGenCMD=ctags -R --c++-types=+px --extra=+q --excmd=pattern --exclude=Makefile --exclude=.
+
+[Plugin:katefilebrowserplugin:MainWindow:0]
+Allow Expansion=false
+Decoration position=2
+Show Inline Previews=true
+Show Preview=false
+Show hidden files=false
+Sort by=Name
+Sort directories first=true
+Sort hidden files last=false
+Sort reversed=false
+View Style=DetailTree
+auto sync folder=true
+filter history=
+highlight current file=true
+location=file:///home/kloud/.local/share/chezmoi/dot_config/
+
+[Plugin:kateprojectplugin:]
+projects=
+
+[Plugin:katesearchplugin:MainWindow:0]
+BinaryFiles=false
+CurrentExcludeFilter=0
+CurrentFilter=0
+ExcludeFilters=\\0
+ExpandSearchResults=false
+Filters=\\0
+FollowSymLink=false
+HiddenFiles=false
+MatchCase=false
+Place=2
+Recursive=true
+Replaces=DoodleJump
+Search=GameOfLife
+SearchAsYouTypeAllProjects=true
+SearchAsYouTypeCurrentFile=true
+SearchAsYouTypeFolder=true
+SearchAsYouTypeOpenFiles=true
+SearchAsYouTypeProject=true
+SearchDiskFiles=/home/kloud/Downloads/DoodleJump
+SearchDiskFiless=/home/kloud/Downloads/DoodleJump
+SizeLimit=128
+UseRegExp=false
+
+[Plugin:katesqlplugin:MainWindow:0]
+LastUsed=
+
+[Plugin:ktexteditorpreviewplugin:MainWindow:0]
+automaticUpdate=false
+documentLocked=false
+
+[Recent Files]
+File1[$e]=$HOME/Downloads/sierra_em7455_tooling/fw-download-tool-readme.txt
+File10[$e]=$HOME/.local/share/chezmoi/dot_config/private_katerc.src.ini
+File2[$e]=$HOME/Downloads/sierra_em7455_tooling/swi_setusbcomp.pl
+File3[$e]=$HOME/Downloads/sierra_em7455_tooling/Low Power Mode EM7455 EM7430 EM7511 EM7565/EM7511_Exit_LPM.cmd
+File4[$e]=$HOME/Downloads/sierra_em7455_tooling/bin/readme.txt
+File5[$e]=$HOME/Downloads/sierra_em7455_tooling/webresources/sierra-wireless-modems/README.md
+File6[$e]=$HOME/Downloads/sierra_em7455_tooling/links.txt
+File7[$e]=$HOME/Downloads/sierra_em7455_tooling/firmware/readme.txt
+File8[$e]=$HOME/Downloads/sierra_em7455_tooling/Low Power Mode EM7455 EM7430 EM7511 EM7565/!!! ЧИТАЙ ЕСЛИ НЕ ПИДОР !!!.txt
+File9[$e]=$HOME/Downloads/sierra_em7455_tooling/firmware/fw-download-tool/fw-download-tool-readme.txt
+Name1[$e]=fw-download-tool-readme.txt
+Name10[$e]=private_katerc.src.ini
+Name2[$e]=swi_setusbcomp.pl
+Name3[$e]=EM7511_Exit_LPM.cmd
+Name4[$e]=readme.txt
+Name5[$e]=README.md
+Name6[$e]=links.txt
+Name7[$e]=readme.txt
+Name8[$e]=!!! ЧИТАЙ ЕСЛИ НЕ ПИДОР !!!.txt
+Name9[$e]=fw-download-tool-readme.txt
