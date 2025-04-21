@@ -32,7 +32,7 @@ uv tool upgrade --all
 cargo install checkexec
 cargo install cargo-update
 cargo install cargo-edit
-cargo install qemu-rdp
+# cargo install qemu-rdp
 cargo install --git https://github.com/jgavris/rs-git-fsmonitor.git
 # cargo install --git https://github.com/brayo-pip/aw-watcher-lastfm.git
 cargo install-update -a
@@ -44,10 +44,11 @@ flatpak uninstall --unused --delete-data
 install-dotnet csharprepl
 install-dotnet dotnet-ef
 
-code --update-extensions
-lensfun-update-data
-tldr --update
+code --update-extensions &
+lensfun-update-data &
+tldr --update &
+sudo dotnet workload update --from-previous-sdk &
+wait
 fwupdmgr update
-sudo dotnet workload update --from-previous-sdk
 
 update-mime-database /home/kloud/.local/share/mime/

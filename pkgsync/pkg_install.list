@@ -358,6 +358,7 @@ prusa-slicer
 serialplot-git
 textpieces
 kcolorchooser
+morphosis
 
 # CLI APPS
 ascii
@@ -378,7 +379,9 @@ tldr
 tokei
 ccze
 logalize-bin
+hl
 yt-dlp
+lesspipe
 bat
 mc
 jc
@@ -433,6 +436,8 @@ lsix
 biodiff
 hexyl
 topgrade
+# Custom boot logo iso extractor
+geteltorito
 
 ## TUIs
 lazydocker
@@ -498,6 +503,7 @@ glances
 languagetool
 nano-syntax-highlighting-git
 docker-color-output-git
+postgrestools-bin
 vivid
 bat-extras
 aspell-en
@@ -648,6 +654,10 @@ cargo-cache
 perl
 perl-archive-zip
 perl-yaml-tiny
+perl-ipc-shareable
+perl-json
+perl-string-crc32
+perl-uuid-tiny
 visual-studio-code-bin
 imhex-bin
 strace
@@ -905,6 +915,7 @@ bypass4netns
 traceroute
 globalping-cli
 kiterunner-bin
+icann-rdap-bin
 miniserve
 quickserve
 qrcp-git
