@@ -534,6 +534,7 @@ awatcher-git
 aw-watcher-media-player-git
 slicer-udev
 gjs
+nawk
 
 ## Browser sync to RAM
 profile-sync-daemon
