@@ -690,7 +690,7 @@ python-lsp-black
 python-pip
 pyupgrade
 autopep8
-flake8
+python-flake8
 ruff
 twine
 yapf
