@@ -4,7 +4,7 @@
     "autoUpdateNotification": true,
     "useQuickCss": true,
     "themeLinks": [
-        "https://raw.githubusercontent.com/refact0r/system24/refs/heads/main/theme/flavors/gruvbox-material.theme.css"
+        "https://refact0r.github.io/system24/build/system24.css"
     ],
     "enabledThemes": [
         "Gruvbox.theme.css"
@@ -197,7 +197,6 @@
             "useListeningStatus": true,
             "missingArt": "lastfmLogo",
             "username": "Kl0ud_",
-            "apiKey": "",
             "showLastFmLogo": true,
             "shareSong": true,
             "hideWithActivity": false
@@ -778,7 +777,7 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1742972715349
+        "settingsSyncVersion": 1745505236162
     },
     "eagerPatches": false
 }
