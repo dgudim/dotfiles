@@ -458,6 +458,10 @@ chzu() {
 
 	echo $(pacman-ps | wc -l) entries require restarting
 
+	{{ if eq .chezmoi.hostname "sauron" }}
+	gopreload-batch-refresh.sh
+	{{ end }}
+
 	echo 'dkms vibe check...'
 
 	dkms status | grep -i 'warning\|error'

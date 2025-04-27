@@ -63,4 +63,6 @@ rm -fv ~/.config/autostart/libinput-gestures.desktop
 
 mv -fvr /home/kloud/.ipython "$XDG_CONFIG_HOME"/ipython 2>/dev/null || true
 
+if [[ "$(hostname)" == *"sauron"* ]]; then sudo chown -R kloud:kloud /usr/share/gopreload; fi
+
 echo -e "${L_GREEN}Done!$NC\n"
