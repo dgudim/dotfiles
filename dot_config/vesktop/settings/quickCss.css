@@ -120,17 +120,17 @@ body {
 
     /* text colors */
     --text-0: var(--bg-3); /* text on colored elements */
-    --text-1: hsl(226, 64%, 95%); /* other normally white text */
-    --text-2: #cdd6f4; /* headings and important text */
-    --text-3: #bac2de; /* normal text */
-    --text-4: #7f849c; /* icon buttons and channels */
-    --text-5: #585b70; /* muted channels/chats and timestamps */
+    --text-1: hsl(33, 78%, 89%); /* other normally white text */
+    --text-2: #ffe5bd; /* headings and important text */
+    --text-3: #d3c5a0; /* normal text */
+    --text-4: #837668; /* icon buttons and channels */
+    --text-5: #817c72; /* muted channels/chats and timestamps */
 
     /* background and dark colors */
-    --bg-1: #45475a; /* dark buttons when clicked */
-    --bg-2: #313244; /* dark buttons */
-    --bg-3: #181825; /* spacing, secondary elements */
-    --bg-4: #1e1e2e; /* main background color */
+    --bg-1: #5a4b45; /* dark buttons when clicked */
+    --bg-2: #443131; /* dark buttons */
+    --bg-3: #251825; /* spacing, secondary elements */
+    --bg-4: #232423; /* main background color */
     --hover: hsla(235, 15%, 53%, 0.1); /* channels and buttons when hovered */
     --active: hsla(235, 15%, 53%, 0.2); /* channels and buttons when clicked or selected */
     --active-2: hsla(235, 15%, 53%, 0.3); /* extra state for transparent buttons */
@@ -162,33 +162,33 @@ body {
     --button-border: hsl(235, 0%, 100%, 0.1); /* neutral border color of buttons */
 
     /* base colors */
-    --red-1: hsl(343deg, 81%, 80%);
-    --red-2: hsl(343deg, 81%, 75%);
-    --red-3: hsl(343deg, 81%, 75%);
-    --red-4: hsl(343deg, 81%, 70%);
-    --red-5: hsl(343deg, 81%, 65%);
+    --red-1: hsl(3deg,   75.8%, 45%);
+    --red-2: hsl(3deg,   75.8%, 35%);
+    --red-3: hsl(3deg,   75.8%, 35%);
+    --red-4: hsl(3deg,   75.8%, 25%);
+    --red-5: hsl(3deg,   75.8%, 20%);
 
-    --green-1: hsl(115deg, 54%, 81%);
-    --green-2: hsl(115deg, 54%, 76%);
-    --green-3: hsl(115deg, 54%, 76%);
-    --green-4: hsl(115deg, 54%, 71%);
-    --green-5: hsl(115deg, 54%, 66%);
+    --green-1: hsl(105, 27.4%, 55.7%);
+    --green-2: hsl(105, 27.4%, 51.7%);
+    --green-3: hsl(105, 27.4%, 47.7%);
+    --green-4: hsl(105, 27.4%, 41.7%);
+    --green-5: hsl(105, 27.4%, 38.7%);
 
-    --blue-1: hsl(199deg, 76%, 74%);
-    --blue-2: hsl(199deg, 76%, 69%);
-    --blue-3: hsl(199deg, 76%, 69%);
-    --blue-4: hsl(199deg, 76%, 64%);
-    --blue-5: hsl(199deg, 76%, 59%);
+    --blue-1: hsl(158, 13.1%, 52.2%);
+    --blue-2: hsl(158, 13.1%, 48.2%);
+    --blue-3: hsl(158, 13.1%, 45.2%);
+    --blue-4: hsl(158, 13.1%, 41.2%);
+    --blue-5: hsl(158, 13.1%, 38.2%);
 
-    --yellow-1: hsl(41deg, 86%, 88%);
-    --yellow-2: hsl(41deg, 86%, 83%);
-    --yellow-3: hsl(41deg, 86%, 83%);
-    --yellow-4: hsl(41deg, 86%, 78%);
-    --yellow-5: hsl(41deg, 86%, 73%);
+    --yellow-1: hsl(42deg, 74.7%, 52.0%);
+    --yellow-2: hsl(42deg, 74.7%, 48.0%);
+    --yellow-3: hsl(42deg, 74.7%, 43.0%);
+    --yellow-4: hsl(42deg, 74.7%, 37.0%);
+    --yellow-5: hsl(42deg, 74.7%, 30.0%);
 
-    --purple-1: hsl(267deg, 84%, 86%);
-    --purple-2: hsl(267deg, 84%, 81%);
-    --purple-3: hsl(267deg, 84%, 81%);
-    --purple-4: hsl(267deg, 84%, 76%);
-    --purple-5: hsl(267deg, 84%, 71%);
+    --purple-1: hsl(333deg, 29.6%, 50%);
+    --purple-2: hsl(333deg, 29.6%, 45%);
+    --purple-3: hsl(333deg, 29.6%, 40%);
+    --purple-4: hsl(333deg, 29.6%, 35%);
+    --purple-5: hsl(333deg, 29.6%, 30%);
 }
