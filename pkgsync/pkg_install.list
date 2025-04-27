@@ -812,6 +812,8 @@ logcat-colorize
 android-apktool-bin
 android-sdk-build-tools
 scrcpy-full-git
+jadx
+jadx-gui-desktop
 
 ## C++
 make
@@ -988,6 +990,7 @@ playerctl
 noise-suppression-for-voice
 audio-share-bin
 rescrobbled-git
+shairport-sync-mpris-git
 
 ## GUIS
 ambix
