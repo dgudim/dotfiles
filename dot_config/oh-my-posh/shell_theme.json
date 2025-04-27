@@ -304,7 +304,7 @@
           "properties": {
             "cache_duration": "none"
           },
-          "template": " <#458588><b>󱐋</b></><b> {{ .UserName }}</b> <#26C6DA>❯</><#458588>❯</>",
+          "template": " <#7caea2><b>󱐋</b></><b> {{ .UserName }}</b> <#e78a4d>❯</><#7caea2>❯</>",
           "foreground": "#b16286",
           "type": "text",
           "style": "plain"
