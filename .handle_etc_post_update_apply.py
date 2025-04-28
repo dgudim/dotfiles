@@ -44,8 +44,12 @@ for mirror_filepath in glob.iglob(
 
     try:
         os.system(f"sudo mkdir -p {os.path.dirname(target_etc_file)}")
+        mode = "0644"
+        if target_etc_file.endswith(".sh"):
+            print(f"Using mode: 755 for {target_etc_file}")
+            mode = "0755"
         os.system(
-            f'sudo install --owner=root --group=root --mode=0644 "{mirror_filepath}" "{target_etc_file}"'
+            f'sudo install --owner=root --group=root --mode={mode} "{mirror_filepath}" "{target_etc_file}"'
         )
         entries = entries + 1
     except Exception as e:
