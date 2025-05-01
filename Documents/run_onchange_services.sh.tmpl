@@ -78,6 +78,9 @@ enable_service() {
 
 echo -e "${L_PURPLE}Setting up services...$NC"
 
+enable_service dbus.service
+enable_service dbus.service 1
+
 enable_service drkonqi-coredump-processor@.service
 enable_service drkonqi-coredump-launcher.socket 1
 enable_service drkonqi-coredump-cleanup.timer 1
