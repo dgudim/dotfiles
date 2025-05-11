@@ -5,6 +5,10 @@ adwaita-steam-gtk --install
 adwaita-steam-gtk --update
 {{ end }}
 
+{{ if (eq .chezmoi.hostname "sauron") }}
+sudo chown kloud:kloud -R /usr/share/gopreload/
+{{ end }}
+
 wineasio-register
 # setup_dxvk install
 # https://askubuntu.com/questions/299286/how-to-recover-focus-after-losing-it-while-using-wine

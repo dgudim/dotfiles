@@ -322,6 +322,7 @@ anilibria-winmaclinux
 vesktop
 discover
 libreoffice-fresh
+eloquent
 smb4k
 sqlitebrowser
 kalgebra
@@ -431,8 +432,6 @@ translate-shell
 skopeo
 x86-64-level
 msr-tools
-# start zenmap as root
-gksu
 lsix
 biodiff
 hexyl
@@ -1056,6 +1055,7 @@ mplayer
 perl-image-exiftool
 xcur2png
 autotrace
+jpeg2png-git
 
 ## GUIS
 vlc-luajit
