@@ -50,7 +50,7 @@ mangohud
 
 # For java classes
 intellij-idea-ultimate-edition
-zulu-jdk-fx-bin
+# zulu-jdk-fx-bin
 postgresql
 
 # Devel

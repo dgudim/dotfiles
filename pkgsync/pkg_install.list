@@ -801,10 +801,8 @@ python-webcolors
 uvicorn
 
 ## ANDROID AND JAVA
-jre21-openjdk
-jdk17-openjdk
+jdk-openjdk
 jdk8-openjdk
-jre8-openjdk-headless
 android-sdk-platform-tools
 android-studio
 android-tools

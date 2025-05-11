@@ -54,7 +54,7 @@ sync-pacman-hook-git
 
 # For java classes
 intellij-idea-ultimate-edition
-zulu-jdk-fx-bin
+# zulu-jdk-fx-bin
 
 # @@@
 oracle-sqldeveloper

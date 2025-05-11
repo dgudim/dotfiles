@@ -37,7 +37,7 @@ moonlight-qt
 
 # For java classes
 intellij-idea-ultimate-edition
-zulu-jdk-fx-bin
+# zulu-jdk-fx-bin
 
 # Waydroid
 # binder_linux-dkms
@@ -49,7 +49,7 @@ zulu-jdk-fx-bin
 # waydroid-script-git
 
 # For uni
-oracle-datamodeler
+# oracle-datamodeler
 postgresql
 
 # 3D
