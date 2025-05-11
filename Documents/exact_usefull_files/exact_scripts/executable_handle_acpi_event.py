@@ -7,7 +7,7 @@ import sys
 
 
 def pause_media():
-    os.system("playerctl pause")
+    os.system("playerctl pause --all-players")
 
 
 def turn_off_keyboard_backlight():
