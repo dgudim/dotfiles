@@ -359,6 +359,7 @@ serialplot-git
 textpieces
 kcolorchooser
 morphosis
+evtest-qt-git
 
 # CLI APPS
 ascii
@@ -536,6 +537,7 @@ slicer-udev
 gjs
 nawk
 open-in-native-client
+waypipe
 
 ## Browser sync to RAM
 profile-sync-daemon
@@ -916,6 +918,7 @@ openssh
 sshpass
 aria2
 bypass4netns
+pwru
 
 ## CLIS
 traceroute
@@ -960,7 +963,6 @@ dynamips
 
 
 # AUDIO
-wireplumber
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
@@ -991,6 +993,8 @@ noise-suppression-for-voice
 audio-share-bin
 rescrobbled-git
 shairport-sync-mpris-git
+snapcast-gui-git
+opus-tools
 
 ## GUIS
 ambix
@@ -1014,7 +1018,9 @@ carla
 soundux-git
 cavalier
 tageditor-qt6
-
+spotube-bin
+plugdata-bin
+wireplumber
 
 # GRAPHICS, VIDEO
 mesa-utils
@@ -1065,6 +1071,7 @@ obs-retro-effects
 obs-streamfx-unstable
 obs-stroke-glow-shadow
 blender
+meshlab-appimage
 krita
 imv
 gwenview
