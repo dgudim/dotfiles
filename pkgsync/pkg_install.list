@@ -317,7 +317,7 @@ pdfarranger
 tokodon
 zoom
 calibre
-telegram-desktop-bin
+ayugram-desktop-git
 anilibria-winmaclinux
 vesktop
 discover
@@ -361,6 +361,8 @@ textpieces
 kcolorchooser
 morphosis
 evtest-qt-git
+# - qr/barcode generation
+zint-qt
 
 # CLI APPS
 ascii
