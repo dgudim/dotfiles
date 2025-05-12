@@ -1,5 +1,6 @@
 intel-gpu-tools
 intel-media-sdk
+intel-media-driver-legacy-bin
 intel-ucode
 lib32-vulkan-intel
 vulkan-intel
@@ -13,6 +14,7 @@ btrfs-assistant
 btrfs-list
 btrfsmaintenance
 
+# Opencl
 intel-compute-runtime-legacy-bin
 intel-graphics-compiler-legacy-bin
 
