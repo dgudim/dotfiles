@@ -58,7 +58,6 @@ sync-pacman-hook-git
 
 # @@@
 oracle-sqldeveloper
-postgresql
 rider
 
 dblatex

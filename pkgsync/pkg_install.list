@@ -266,12 +266,14 @@ kcron
 kwin-scripts-sticky-window-snapping-git
 kwin-scripts-kzones
 plasma6-runners-emojirunner
+plasma6-applets-wallpaper-effects
 
 
 
 
 # GUI APPS
 konsole
+kclock
 systemdgenie
 filelight
 jdiskreport
@@ -440,6 +442,7 @@ hexyl
 topgrade
 # Custom boot logo iso extractor
 geteltorito
+procs
 
 ## TUIs
 lazydocker
@@ -506,6 +509,7 @@ languagetool
 nano-syntax-highlighting-git
 docker-color-output-git
 postgrestools-bin
+postgresql-old-upgrade
 vivid
 bat-extras
 aspell-en
@@ -577,6 +581,7 @@ icoextract
 plasma-thunderbolt
 kactivities-stats5
 ocs-url
+kamera
 
 ## KATE
 markdownpart
@@ -664,18 +669,22 @@ perl-ipc-shareable
 perl-json
 perl-string-crc32
 perl-uuid-tiny
+perl-file-basedir
+perl-path-class
 visual-studio-code-bin
 imhex-bin
 strace
 pax-utils
 dockerfile-language-server-bin
+vscode-json-languageserver
 yamlfmt
 gopls
 gfold
 wild
+dockerfmt
 
 ## DBs
-postgres
+postgresql
 
 ## R
 # Disabled as not needed
@@ -803,6 +812,15 @@ python-levenshtein
 python-libevdev
 python-musicbrainzngs
 python-webcolors
+python-brotlicffi
+python-kubernetes
+python-linkify-it-py
+python-netifaces2
+python-pickleshare
+python-psycopg
+python-pyodbc
+python-pyu2f
+python-sortedcollections
 uvicorn
 
 ## ANDROID AND JAVA
@@ -818,7 +836,7 @@ android-sdk-build-tools
 scrcpy-full-git
 jadx
 jadx-gui-desktop
-intellij-idea-ultimate-editio
+intellij-idea-ultimate-edition
 
 ## C++
 make
@@ -943,6 +961,7 @@ iperf3
 xh
 ngrep
 tailscale
+wrk
 
 ## GUIS
 proton-vpn-gtk-app
@@ -954,6 +973,7 @@ linux-wifi-hotspot
 httptoolkit-bin
 ktailctl
 localsend
+flying-carpet-bin
 
 ## GNS3
 gns3-server
@@ -1153,6 +1173,7 @@ opusfile
 upower
 libnma
 fltk
+geocode-glib
 
 
 
