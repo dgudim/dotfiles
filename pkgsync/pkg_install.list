@@ -674,6 +674,9 @@ gopls
 gfold
 wild
 
+## DBs
+postgres
+
 ## R
 # Disabled as not needed
 # gcc-fortran
@@ -815,6 +818,7 @@ android-sdk-build-tools
 scrcpy-full-git
 jadx
 jadx-gui-desktop
+intellij-idea-ultimate-editio
 
 ## C++
 make
