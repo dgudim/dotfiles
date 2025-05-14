@@ -56,5 +56,5 @@
     "stickerConfirmation": false,
     "useScheduledMessages": false,
     "voiceConfirmation": true,
-    "wideMultiplier": 1.9
+    "wideMultiplier": 1.0
 }
