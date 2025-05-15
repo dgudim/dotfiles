@@ -663,6 +663,8 @@ github-cli
 rust
 rust-src
 cargo-cache
+cargo-binstall
+cargo-run-bin
 perl
 perl-archive-zip
 perl-yaml-tiny

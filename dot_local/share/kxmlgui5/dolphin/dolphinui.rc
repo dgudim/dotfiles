@@ -136,7 +136,7 @@
   <Action name="go_home" priority="0"/>
   <Action name="go_up" priority="0"/>
   <Action name="icons" priority="0"/>
-  <Action name="new_tab" shortcut="Alt+T"/>
+  <Action name="new_tab" shortcut="; "/>
   <Action iconText="KFind" name="open_preferred_search_tool" priority="0"/>
   <Action name="show_in_groups" priority="0"/>
   <Action name="show_preview" priority="0"/>
@@ -147,5 +147,6 @@
   <Action name="view_zoom_in" priority="0"/>
   <Action name="view_zoom_out" priority="0"/>
   <Action name="view_zoom_reset" priority="0"/>
+  <Action name="open_terminal_here" shortcut="Alt+T"/>
  </ActionProperties>
 </gui>
