@@ -78,6 +78,9 @@ enable_service() {
 
 echo -e "${L_PURPLE}Setting up services...$NC"
 
+sudo systemctl daemon-reload
+systemctl daemon-reload --user
+
 enable_service drkonqi-coredump-processor@.service
 enable_service drkonqi-coredump-launcher.socket 1
 enable_service drkonqi-coredump-cleanup.timer 1
@@ -149,6 +152,13 @@ enable_service nvidia-suspend.service
 enable_service nvidia-persistenced.service
 
 enable_service gopreload.service
+
+enable_service shairport-sync.service 0 1
+enable_service shairport-sync.service 1
+
+enable_service sunshine.service 1
+
+enable_service nvidia-tdp.timer
 {{ end }}
 
 enable_service polkit.service
@@ -159,7 +169,10 @@ enable_service pacserve.service
 enable_service espanso.service 1
 enable_service rescrobbled.service 1
 
-cd /home/kloud/.local/share/chezmoi/ && git maintenance start
+cd /home/kloud/.local/share/chezmoi/
+p="$(pwd)"
+systemctl is-active --user git-maintenance@daily.timer || git maintenance start
+cd "$p"
 
 echo -e "${L_GREEN}Service setup done!$NC\n"
 

@@ -536,6 +536,7 @@ slicer-udev
 gjs
 nawk
 open-in-native-client
+vdhcoapp
 
 ## Browser sync to RAM
 profile-sync-daemon
@@ -990,7 +991,7 @@ playerctl
 noise-suppression-for-voice
 audio-share-bin
 rescrobbled-git
-shairport-sync-mpris-git
+shairport-sync
 
 ## GUIS
 ambix
