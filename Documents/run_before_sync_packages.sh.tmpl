@@ -24,16 +24,18 @@ uv tool install nwdiag
 uv tool install blockdiag
 uv tool install seqdiag
 uv tool install pip-autoremove
+uv tool install ty
 uv tool install rembg[cpu,cli]
 # aw-watcher-netstatus
 # https://github.com/rtnhn/aw-importer-lastfm.git aw-importer-lastfm
 uv tool upgrade --all
 
-cargo install checkexec
-cargo install cargo-update
-cargo install cargo-edit
-# cargo install qemu-rdp
-cargo install --git https://github.com/jgavris/rs-git-fsmonitor.git
+cargo binstall checkexec
+cargo binstall cargo-update
+cargo binstall cargo-edit
+cargo binstall wild-linker
+# cargo binstall qemu-rdp
+cargo binstall --git https://github.com/jgavris/rs-git-fsmonitor.git
 # cargo install --git https://github.com/brayo-pip/aw-watcher-lastfm.git
 cargo install-update -a
 

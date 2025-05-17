@@ -228,6 +228,7 @@ alias broken='sudo pacman -Qkk | grep warning'
 
 ################################################ Colorize stuff ################################################
 
+alias csharprepl='csharprepl --useTerminalPaletteTheme'
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
 ipa() {
@@ -341,6 +342,10 @@ clear-caches() {
 	read -p "Delete docker caches? [y/N] " -r
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		docker system prune
+	fi
+	read -p "Delete systemd caches? [y/N] " -r
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		sudo systemd-tmpfiles --clean
 	fi
 }
 

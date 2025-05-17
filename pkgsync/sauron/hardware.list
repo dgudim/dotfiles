@@ -50,9 +50,7 @@ sunshine
 mangohud
 
 # For java classes
-intellij-idea-ultimate-edition
-zulu-jdk-fx-bin
-postgresql
+# zulu-jdk-fx-bin
 
 # Devel
 mono

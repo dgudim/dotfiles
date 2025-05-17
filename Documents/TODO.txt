@@ -1,0 +1,4 @@
+sddm on wayland (black screen)
+langugaetool integration in a bunch of places (host server?)
+junction (gtk app) fast startup
+firejail + apparmor / path redirection

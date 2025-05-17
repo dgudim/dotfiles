@@ -64,6 +64,7 @@ shutter-encoder-bin
 xnviewmp-system-libs
 krita
 blender
+meshlab-appimage
 digikam
 kphotoalbum
 handbrake
@@ -77,6 +78,7 @@ darktable
 
 # Misc
 scangearmp2-sane-git
+shairport-sync-mpris-git
 
 
 
@@ -102,13 +104,10 @@ texlive-context
 texlive-xetex
 plantuml-ascii-math
 asciidoctor
-blockdiag
 pdf2svg
 biber
 ditaa
 gnuplot
-nwdiag
-seqdiag
 groff
 ghostscript
 bison

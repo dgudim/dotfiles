@@ -1,5 +1,6 @@
 intel-gpu-tools
 intel-media-sdk
+intel-media-driver-legacy-bin
 intel-ucode
 lib32-vulkan-intel
 vulkan-intel
@@ -13,6 +14,7 @@ btrfs-assistant
 btrfs-list
 btrfsmaintenance
 
+# Opencl
 intel-compute-runtime-legacy-bin
 intel-graphics-compiler-legacy-bin
 
@@ -36,8 +38,7 @@ modem-manager-gui-hg
 moonlight-qt
 
 # For java classes
-intellij-idea-ultimate-edition
-zulu-jdk-fx-bin
+# zulu-jdk-fx-bin
 
 # Waydroid
 # binder_linux-dkms
@@ -49,8 +50,7 @@ zulu-jdk-fx-bin
 # waydroid-script-git
 
 # For uni
-oracle-datamodeler
-postgresql
+# oracle-datamodeler
 
 # 3D
 # prusa-slicer

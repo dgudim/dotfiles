@@ -26,9 +26,6 @@ rm -rfv ~/.local/share/dbus-1/services/org.kde.plasma.Notifications.service
 # Moved to XDG
 rm -rfv ~/.ssr
 
-# No need to override since arch switched to dbus-broker by default
-rm -fv ~/.config/systemd/user/dbus.service
-
 # Merged with main file
 sudo rm -fv /etc/debuginfod/alhp.urls
 
