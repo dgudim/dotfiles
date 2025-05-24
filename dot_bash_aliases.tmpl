@@ -684,7 +684,12 @@ setup_ssh_shell_utils() {
 
 	local atuin_target_path="$tmpdir/atuin.tar.gz"
 	local extracted_path="$tmpdir/atuin-x86_64-unknown-linux-gnu/"
-	local atuin_download_url="https://github.com/atuinsh/atuin/releases/latest/download/atuin-x86_64-unknown-linux-gnu.tar.gz"
+
+	if [[ "$(uname -a)" == *"aarch64"* ]]; then
+		local atuin_download_url="https://github.com/atuinsh/atuin/releases/latest/download/atuin-aarch64-unknown-linux-gnu.tar.gz"
+	else
+		local atuin_download_url="https://github.com/atuinsh/atuin/releases/latest/download/atuin-x86_64-unknown-linux-gnu.tar.gz"
+	fi
 
 	local preexec_download_path="$tmpdir/.bash-preexec.sh"
 
