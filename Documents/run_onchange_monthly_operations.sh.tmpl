@@ -10,8 +10,13 @@ NC='\033[0m'
 # {{ output "date" "+%m-%Y" | trim }}
 
 {{ if eq .chezmoi.hostname "portable-heater" }}
-    echo -e "${L_PURPLE}Running monthly fstrim for portable-heater$NC..."
-    sudo cryptsetup --allow-discards refresh /dev/sda4 luks-3a5f817f-a019-4bd6-80f7-f3c163477c14
-    sudo systemctl start fstrim
-    echo -e "${L_GREEN}Done!$NC\n"
+echo -e "${L_PURPLE}Running monthly fstrim for portable-heater$NC..."
+sudo cryptsetup --allow-discards refresh /dev/sda4 luks-3a5f817f-a019-4bd6-80f7-f3c163477c14
+sudo systemctl start fstrim
+echo -e "${L_GREEN}Done!$NC\n"
 {{- end }}
+
+echo -e "${L_PURPLE}Running monthly jetbrains trial refresh$NC..."
+rm -v /home/$USER/.config/JetBrains/*/*.key
+rm -rv /home/$USER/.java/.userPrefs
+echo -e "${L_GREEN}Done!$NC\n"
