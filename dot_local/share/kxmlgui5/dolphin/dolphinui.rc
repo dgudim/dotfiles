@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="dolphin" version="42">
+<gui name="dolphin" version="43">
  <MenuBar>
   <Menu name="file">
    <Action name="new_menu"/>
@@ -126,6 +126,7 @@
   </disable>
  </State>
  <ActionProperties scheme="Default">
+  <Action name="view_mode" priority="0"/>
   <Action name="compact" priority="0"/>
   <Action name="details" priority="0"/>
   <Action name="edit_copy" priority="0"/>
