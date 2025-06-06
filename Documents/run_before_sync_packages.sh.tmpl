@@ -39,6 +39,12 @@ cargo binstall --git https://github.com/jgavris/rs-git-fsmonitor.git rs-git-fsmo
 # cargo install --git https://github.com/brayo-pip/aw-watcher-lastfm.git
 cargo install-update -a
 
+go install github.com/cweill/gotests/gotests@latest
+go install github.com/fatih/gomodifytags@latest
+go install github.com/josharian/impl@latest
+go install github.com/haya14busa/goplay/cmd/goplay@latest
+go install honnef.co/go/tools/cmd/staticcheck@latest
+
 install-flatpak org.easycoding.TunedSwitcher
 flatpak update
 flatpak uninstall --unused --delete-data
