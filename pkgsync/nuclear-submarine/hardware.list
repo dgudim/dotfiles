@@ -56,7 +56,6 @@ timescaledb-old-upgrade
 maven
 mongodb
 mongodb-compass
-pev2-electron
 
 ## Kubernetes
 google-cloud-cli

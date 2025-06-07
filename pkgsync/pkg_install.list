@@ -36,9 +36,10 @@ docker-rootless-extras
 docker-credential-secretservice-bin
 docker-slim-bin
 regclient-regctl
+dive
 
 ### GUI
-dockeye-git
+# dockeye-git
 
 
 
@@ -441,6 +442,7 @@ lsix
 biodiff
 hexyl
 topgrade
+0xtools
 # Custom boot logo iso extractor
 geteltorito
 procs
@@ -689,6 +691,7 @@ dockerfmt
 
 ## DBs
 postgresql
+pev2-electron
 
 ## R
 # Disabled as not needed
@@ -868,13 +871,15 @@ ctags
 dotnet-sdk
 dotnet-runtime
 
-## Arduino
+## Arduino, stm32
 platformio-core
 platformio-core-udev
 # arduino-ctags
 arduino-language-server
 avr-binutils
 avrdude
+# Stm32
+openocd
 
 ## JS
 nodejs-lts-jod
@@ -1103,6 +1108,7 @@ meshlab-appimage
 krita
 imv
 gwenview
+yuview
 inkscape
 gpu-screen-recorder
 gpu-screen-recorder-gtk
