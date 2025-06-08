@@ -111,6 +111,8 @@ enable_service smartd.service
 
 enable_service acpid.service
 
+enable_service tuned-ppd.service
+
 enable_service plocate-updatedb.timer
 {{ if eq .chezmoi.hostname "portable-heater" }}
     # Disable
