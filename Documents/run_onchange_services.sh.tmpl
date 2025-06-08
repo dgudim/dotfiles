@@ -81,8 +81,9 @@ echo -e "${L_PURPLE}Setting up services...$NC"
 sudo systemctl daemon-reload
 systemctl daemon-reload --user
 
-enable_service dbus-broker.service
-enable_service dbus-broker.service 1
+# Activated by socket
+enable_service dbus-broker.service 0 0
+enable_service dbus-broker.service 1 0
 
 enable_service drkonqi-coredump-processor@.service
 enable_service drkonqi-coredump-launcher.socket 1
