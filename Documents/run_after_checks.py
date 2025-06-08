@@ -194,6 +194,7 @@ if "amd" in cpu_vendor.lower():
         len(bootline) > 0 and bootline.find("amd_pstate=active") == -1,
         f"{YELLOW}Set amd_pstate=active{NC}",
     )
+    # NOTE: intel_pstate is used automatically, no need to check and enforce
 
 # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
 if cmdline.find("rd.luks") != -1:
