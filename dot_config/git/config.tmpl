@@ -200,7 +200,9 @@
     auto = false
 	strategy = incremental
     repo = /home/kloud/.local/share/chezmoi
+    {{- if eq .chezmoi.hostname "nuclear-submarine" }}
     repo = /home/kloud/Documents/Projects/payments-mono/
+    {{- end }}
     repo = /home/kloud/Documents/shared/obsidian_vault
 [maintenance "gc"]
     enabled = true
