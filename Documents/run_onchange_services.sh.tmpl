@@ -82,8 +82,8 @@ sudo systemctl daemon-reload
 systemctl daemon-reload --user
 
 # Activated by socket
-enable_service dbus-broker.service 0 0
-enable_service dbus-broker.service 1 0
+enable_service dbus-broker.service 0 1
+enable_service dbus-broker.service 1 1
 
 enable_service drkonqi-coredump-processor@.service
 enable_service drkonqi-coredump-launcher.socket 1
