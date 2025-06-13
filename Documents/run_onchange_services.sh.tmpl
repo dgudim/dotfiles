@@ -128,6 +128,8 @@ enable_service systemd-boot-update 0 1
 enable_service grub-btrfsd.service
 enable_service fprintd.service
 
+enable_service snapper_cleanup.timer
+
 {{ else }}
 enable_service systemd-boot-update
 {{ end }}
@@ -139,6 +141,7 @@ enable_service gpu-screen-recorder-ui 1
 enable_service open-fprintd-resume 0 1
 enable_service open-fprintd-suspend 0 1
 enable_service ModemManager
+enable_service snapper_cleanup.timer
 {{ end }}
 
 enable_service docker.socket 1
