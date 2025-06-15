@@ -392,6 +392,10 @@ else:
         f"{YELLOW}Consider installing z-lib{NC}",
     )
 
+os.system(
+    f'if command -v snapper >/dev/null 2>&1; then if ! snapper list-configs | grep -q root; then echo "{YELLOW}Create snapshot config in snapper!{NC}"; fi fi'
+)
+
 print(
     f"{L_GREEN}Finished running checks, {L_CYAN}{warn} / {checks}{L_GREEN} warning(s){NC}\n"
 )
