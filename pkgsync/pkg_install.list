@@ -446,6 +446,7 @@ topgrade
 # Custom boot logo iso extractor
 geteltorito
 procs
+fbgrab
 
 ## BTRFS
 compsize
