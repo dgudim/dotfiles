@@ -11,7 +11,9 @@ lib32-vulkan-mesa-layers
 
 #Btrfs
 btrfs-assistant
-btrfs-list
+snap-pac
+snapper
+snapper-gui-git
 btrfsmaintenance
 
 # Opencl

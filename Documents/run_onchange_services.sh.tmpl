@@ -75,15 +75,25 @@ enable_service() {
     fi
 }
 
+reload_daemon() {
+    sudo systemctl daemon-reload
+    systemctl daemon-reload --user
+}
 
 echo -e "${L_PURPLE}Setting up services...$NC"
 
-sudo systemctl daemon-reload
-systemctl daemon-reload --user
+reload_daemon
 
 # Activated by socket
 enable_service dbus-broker.service 0 1
 enable_service dbus-broker.service 1 1
+
+# Setup kmscon
+sudo ln -svf '/usr/lib/systemd/system/kmsconvt@.service' '/etc/systemd/system/autovt@.service'
+reload_daemon
+enable_service getty@tty1
+enable_service getty@tty2
+enable_service getty@tty3
 
 enable_service drkonqi-coredump-processor@.service
 enable_service drkonqi-coredump-launcher.socket 1

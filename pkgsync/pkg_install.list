@@ -129,6 +129,7 @@ pahis
 tpm2-tools
 dos2unix
 tree
+kmscon-patched-git
 
 ## PACMAN HOOKS AND SCRIPTS
 pacmanlogviewer
@@ -265,6 +266,7 @@ harmony2
 krdp
 kcron
 kwin-scripts-sticky-window-snapping-git
+kwin-effect-rounded-corners-git
 kwin-scripts-kzones
 plasma6-runners-emojirunner
 plasma6-applets-wallpaper-effects
@@ -404,10 +406,8 @@ eza
 downgrade
 inxi
 duf
-duperemove
 dust
 ncdu
-compsize
 glow
 vim
 bfg
@@ -446,6 +446,12 @@ topgrade
 # Custom boot logo iso extractor
 geteltorito
 procs
+
+## BTRFS
+compsize
+duperemove
+btdu
+btrfs-list
 
 ## TUIs
 lazydocker
