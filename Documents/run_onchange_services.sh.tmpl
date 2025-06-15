@@ -108,6 +108,7 @@ enable_service libvirtd.socket
 enable_service libvirt-guests.service
 
 enable_service sshd.service
+enable_service tailscaled.service
 
 enable_service bluetooth.service
 enable_service avahi-daemon.service
@@ -116,15 +117,15 @@ enable_service cups-browsed.service
 enable_service systemd-resolved.service
 enable_service adb.service
 
-enable_service tailscaled.service
-
 enable_service smartd.service
-
 enable_service acpid.service
 
 enable_service tuned-ppd.service
 
+enable_service snapper_cleanup.timer
+
 enable_service plocate-updatedb.timer
+
 {{ if eq .chezmoi.hostname "portable-heater" }}
     # Disable
     enable_service fstrim.timer 0 1
@@ -133,26 +134,21 @@ enable_service plocate-updatedb.timer
 {{ end }}
 
 {{ if eq .chezmoi.hostname "nuclear-submarine" }} # Work laptop
-enable_service systemd-boot-update 0 1
-
-enable_service grub-btrfsd.service
-enable_service fprintd.service
-
-enable_service snapper_cleanup.timer
-
+    # Disable
+    enable_service systemd-boot-update 0 1
+    # Snapshots with grub
+    enable_service grub-btrfsd.service
 {{ else }}
-enable_service systemd-boot-update
+    enable_service systemd-boot-update
 {{ end }}
 
 enable_service displaylink.service
 enable_service gpu-screen-recorder-ui 1
 
-{{ if eq .chezmoi.hostname "black-bird" }}
+enable_service fprintd.service
 enable_service open-fprintd-resume 0 1
 enable_service open-fprintd-suspend 0 1
 enable_service ModemManager
-enable_service snapper_cleanup.timer
-{{ end }}
 
 enable_service docker.socket 1
 
