@@ -15,6 +15,7 @@ snap-pac
 snapper
 snapper-gui-git
 btrfsmaintenance
+bees
 
 # Opencl
 intel-compute-runtime-legacy-bin
