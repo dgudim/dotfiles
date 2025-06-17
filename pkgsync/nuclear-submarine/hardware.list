@@ -18,6 +18,7 @@ snap-pac
 snapper
 snapper-gui-git
 fprintd
+displaylink
 
 # Thinkpad + AMD
 thinkfan-ui
