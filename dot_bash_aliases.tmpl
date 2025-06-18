@@ -302,6 +302,32 @@ pvenv() {
 
 ###############################################################################################################
 
+btrfs_chroot() {
+	if [ -z ${1+x} ]; then
+		echo "Please provide a root partition";
+		return 1;
+	fi
+
+	if [ -z ${2+x} ]; then
+		echo "Please provide a efi partition";
+		return 1;
+	fi
+
+	root_part="$1"
+	efi_part="$2"
+
+	sudo mkdir -p /mnt/chroot
+
+	sudo mount "$root_part" /mnt/chroot -o subvol=@
+	sudo mount "$root_part" /mnt/chroot/var/log -o subvol=@log
+	sudo mount "$root_part" /mnt/chroot/var/cache -o subvol=@cache
+	sudo mount "$root_part" /mnt/chroot/home -o subvol=@home
+	sudo mount "$efi_part"  /mnt/chroot/boot/efi
+	sudo mount "$efi_part"  /mnt/chroot/efi
+
+	sudo arch-chroot /mnt/chroot
+}
+
 nvidia_run() {
 	export LIBVA_DRIVER_NAME=nvidia
 	"$@"
