@@ -36,9 +36,10 @@ docker-rootless-extras
 docker-credential-secretservice-bin
 docker-slim-bin
 regclient-regctl
+dive
 
 ### GUI
-dockeye-git
+# dockeye-git
 
 
 
@@ -128,6 +129,7 @@ pahis
 tpm2-tools
 dos2unix
 tree
+kmscon-patched-git
 
 ## PACMAN HOOKS AND SCRIPTS
 pacmanlogviewer
@@ -264,14 +266,17 @@ harmony2
 krdp
 kcron
 kwin-scripts-sticky-window-snapping-git
+kwin-effect-rounded-corners-git
 kwin-scripts-kzones
 plasma6-runners-emojirunner
+plasma6-applets-wallpaper-effects
 
 
 
 
 # GUI APPS
 konsole
+kclock
 systemdgenie
 filelight
 jdiskreport
@@ -317,11 +322,12 @@ pdfarranger
 tokodon
 zoom
 calibre
-telegram-desktop-bin
+ayugram-desktop-git
 anilibria-winmaclinux
 vesktop
 discover
 libreoffice-fresh
+eloquent
 smb4k
 sqlitebrowser
 kalgebra
@@ -345,6 +351,7 @@ songrec
 psensor
 kommit
 cobang
+qrca
 gtk3-demos
 gtk4-demos
 espanso-wayland-git
@@ -359,6 +366,9 @@ serialplot-git
 textpieces
 kcolorchooser
 morphosis
+evtest-qt-git
+# - qr/barcode generation
+zint-qt
 
 # CLI APPS
 ascii
@@ -396,10 +406,8 @@ eza
 downgrade
 inxi
 duf
-duperemove
 dust
 ncdu
-compsize
 glow
 vim
 bfg
@@ -430,14 +438,21 @@ translate-shell
 skopeo
 x86-64-level
 msr-tools
-# start zenmap as root
-gksu
 lsix
 biodiff
 hexyl
 topgrade
+0xtools
 # Custom boot logo iso extractor
 geteltorito
+procs
+fbgrab
+
+## BTRFS
+compsize
+duperemove
+btdu
+btrfs-list
 
 ## TUIs
 lazydocker
@@ -504,6 +519,7 @@ languagetool
 nano-syntax-highlighting-git
 docker-color-output-git
 postgrestools-bin
+postgresql-old-upgrade
 vivid
 bat-extras
 aspell-en
@@ -534,6 +550,10 @@ awatcher-git
 aw-watcher-media-player-git
 slicer-udev
 gjs
+nawk
+open-in-native-client
+waypipe
+vdhcoapp
 
 ## Browser sync to RAM
 profile-sync-daemon
@@ -572,6 +592,7 @@ icoextract
 plasma-thunderbolt
 kactivities-stats5
 ocs-url
+kamera
 
 ## KATE
 markdownpart
@@ -652,6 +673,8 @@ github-cli
 rust
 rust-src
 cargo-cache
+cargo-binstall
+cargo-run-bin
 perl
 perl-archive-zip
 perl-yaml-tiny
@@ -659,15 +682,23 @@ perl-ipc-shareable
 perl-json
 perl-string-crc32
 perl-uuid-tiny
+perl-file-basedir
+perl-path-class
 visual-studio-code-bin
 imhex-bin
 strace
 pax-utils
 dockerfile-language-server-bin
+vscode-json-languageserver
 yamlfmt
 gopls
 gfold
 wild
+dockerfmt
+
+## DBs
+postgresql
+pev2-electron
 
 ## R
 # Disabled as not needed
@@ -795,13 +826,20 @@ python-levenshtein
 python-libevdev
 python-musicbrainzngs
 python-webcolors
+python-brotlicffi
+python-kubernetes
+python-linkify-it-py
+python-netifaces2
+python-pickleshare
+python-psycopg
+python-pyodbc
+python-pyu2f
+python-sortedcollections
 uvicorn
 
 ## ANDROID AND JAVA
-jre21-openjdk
-jdk17-openjdk
+jdk-openjdk
 jdk8-openjdk
-jre8-openjdk-headless
 android-sdk-platform-tools
 android-studio
 android-tools
@@ -810,6 +848,9 @@ logcat-colorize
 android-apktool-bin
 android-sdk-build-tools
 scrcpy-full-git
+jadx
+jadx-gui-desktop
+intellij-idea-ultimate-edition
 
 ## C++
 make
@@ -837,13 +878,15 @@ ctags
 dotnet-sdk
 dotnet-runtime
 
-## Arduino
+## Arduino, stm32
 platformio-core
 platformio-core-udev
 # arduino-ctags
 arduino-language-server
 avr-binutils
 avrdude
+# Stm32
+openocd
 
 ## JS
 nodejs-lts-jod
@@ -912,6 +955,7 @@ openssh
 sshpass
 aria2
 bypass4netns
+pwru
 
 ## CLIS
 traceroute
@@ -933,6 +977,7 @@ iperf3
 xh
 ngrep
 tailscale
+wrk
 
 ## GUIS
 proton-vpn-gtk-app
@@ -944,6 +989,7 @@ linux-wifi-hotspot
 httptoolkit-bin
 ktailctl
 localsend
+flying-carpet-bin
 
 ## GNS3
 gns3-server
@@ -956,7 +1002,6 @@ dynamips
 
 
 # AUDIO
-wireplumber
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
@@ -986,6 +1031,9 @@ playerctl
 noise-suppression-for-voice
 audio-share-bin
 rescrobbled-git
+shairport-sync-mpris-git
+snapcast-gui-git
+opus-tools
 
 ## GUIS
 ambix
@@ -1009,7 +1057,9 @@ carla
 soundux-git
 cavalier
 tageditor-qt6
-
+spotube-bin
+plugdata-bin
+wireplumber
 
 # GRAPHICS, VIDEO
 mesa-utils
@@ -1038,13 +1088,13 @@ atomicparsley
 avisynthplus
 akvcam-dkms
 opentimelineio
-displaylink
 
 ## CLIS
 mplayer
 perl-image-exiftool
 xcur2png
 autotrace
+jpeg2png-git
 
 ## GUIS
 vlc-luajit
@@ -1060,9 +1110,11 @@ obs-retro-effects
 obs-streamfx-unstable
 obs-stroke-glow-shadow
 blender
+meshlab-appimage
 krita
 imv
 gwenview
+yuview
 inkscape
 gpu-screen-recorder
 gpu-screen-recorder-gtk
@@ -1137,6 +1189,7 @@ opusfile
 upower
 libnma
 fltk
+geocode-glib
 
 
 

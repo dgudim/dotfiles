@@ -5,6 +5,7 @@ intel-ucode
 ## Intel
 intel-gpu-tools
 intel-media-sdk
+intel-media-driver-legacy-bin
 vpl-gpu-rt
 vulkan-intel
 lib32-vulkan-intel
@@ -53,12 +54,10 @@ gamemode
 sync-pacman-hook-git
 
 # For java classes
-intellij-idea-ultimate-edition
-zulu-jdk-fx-bin
+# zulu-jdk-fx-bin
 
 # @@@
 oracle-sqldeveloper
-postgresql
 rider
 
 dblatex

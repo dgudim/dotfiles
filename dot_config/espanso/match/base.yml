@@ -55,6 +55,8 @@ matches:
       fi
   - trigger: :bash-ext-subs
     replace: ${var%.*}.txt
+  - trigger: :tm
+    replace: "™"
   - trigger: :cbore
     replace: "⌴"
   - trigger: ":Box:"

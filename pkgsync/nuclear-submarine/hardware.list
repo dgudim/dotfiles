@@ -7,17 +7,19 @@ amdgpu_top-bin
 vulkan-radeon
 libvdpau-va-gl
 lib32-libvdpau-va-gl
+lib32-vulkan-radeon
 
 # Hardware
 amd-ucode
 libfprint-2-tod1-goodix
 btrfs-assistant
-btrfs-list
 btrfsmaintenance
+bees
 snap-pac
 snapper
 snapper-gui-git
 fprintd
+displaylink
 
 # Thinkpad + AMD
 thinkfan-ui
@@ -34,7 +36,10 @@ aspnet-targeting-pack-7.0
 dotnet-runtime-7.0
 dotnet-sdk-7.0
 dotnet-targeting-pack-7.0
-openlens-bin
+aspnet-runtime-8.0
+dotnet-runtime-8.0
+dotnet-sdk-8.0
+freelens-bin
 mssql-server
 mssql-tools
 rider
@@ -49,6 +54,9 @@ android-sdk-build-tools-30.0.3
 timescaledb
 timescaledb-tune
 timescaledb-old-upgrade
+maven
+mongodb
+mongodb-compass
 
 ## Kubernetes
 google-cloud-cli
@@ -64,3 +72,11 @@ karpor
 grub-btrfs
 grub
 eos-dracut
+
+# Forecast reports
+texlive-fontsextra
+texlive-fontsrecommended
+texlive-langenglish
+texlive-langother
+texlive-luatex
+texlive-plaingeneric

@@ -1,10 +1,13 @@
+[unstable]
+profile-rustflags = true
+
 [target.x86_64-unknown-linux-gnu]
 rustflags = ["-C", "opt-level=2", "-C", "target-cpu=native", "-C", "force-frame-pointers=yes", "-C", "link-arg=-fuse-ld=mold"]
 
 # Faster compilations when doing cargo run
-# https://davidlattimore.github.io/working-on-rust-iteration-time.html
+# https://davidlattimore.github.io/posts/2024/02/04/speeding-up-the-rust-edit-build-run-cycle.html
 [profile.dev]
 # opt-level = 1          # Use slightly better optimizations.
 debug = 0                # Skip compiling the debug information
 strip = "debuginfo"      # Skip linking the debug information
-
+rustflags = ["-C", "link-arg=-fuse-ld=wild"]

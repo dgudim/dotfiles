@@ -228,6 +228,7 @@ alias broken='sudo pacman -Qkk | grep warning'
 
 ################################################ Colorize stuff ################################################
 
+alias csharprepl='csharprepl --useTerminalPaletteTheme'
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
 ipa() {
@@ -248,10 +249,10 @@ alias ln='ln -i'
 
 ################################################ Non-interactive aliases ################################################
 
-alias mvn='/bin/mv'
-alias rmn='/bin/rm'
-alias cpn='/bin/cp'
-alias lnn='/bin/ln'
+alias mv_n='/bin/mv'
+alias rm_n='/bin/rm'
+alias cp_n='/bin/cp'
+alias ln_n='/bin/ln'
 
 ################################################ Auto subdir creation ################################################
 
@@ -328,6 +329,10 @@ btrfs_chroot() {
 	sudo arch-chroot /mnt/chroot
 }
 
+wine_wayland() {
+	DISPLAY= wine "$@"
+}
+
 nvidia_run() {
 	export LIBVA_DRIVER_NAME=nvidia
 	"$@"
@@ -367,6 +372,10 @@ clear-caches() {
 	read -p "Delete docker caches? [y/N] " -r
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		docker system prune
+	fi
+	read -p "Delete systemd caches? [y/N] " -r
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		sudo systemd-tmpfiles --clean
 	fi
 }
 
@@ -483,6 +492,10 @@ chzu() {
 	atuin stats
 
 	echo $(pacman-ps | wc -l) entries require restarting
+
+	{{ if eq .chezmoi.hostname "sauron" }}
+	gopreload-batch-refresh.sh
+	{{ end }}
 
 	echo 'dkms vibe check...'
 
@@ -681,7 +694,19 @@ __get_temp_dir() {
 	echo "$dir"
 }
 
+proxy_on() {
+	export http_proxy=http://127.0.0.1:3129
+	export https_proxy=http://127.0.0.1:3129
+}
+
+proxy_off() {
+	unset http_proxy
+	unset https_proxy
+}
+
 setup_ssh_shell_utils() {
+	proxy_on
+
 	L_GREEN='\033[1;32m'
 	L_PURPLE='\033[1;35m'
 	L_CYAN='\033[1;36m'
@@ -701,7 +726,12 @@ setup_ssh_shell_utils() {
 
 	local atuin_target_path="$tmpdir/atuin.tar.gz"
 	local extracted_path="$tmpdir/atuin-x86_64-unknown-linux-gnu/"
-	local atuin_download_url="https://github.com/atuinsh/atuin/releases/latest/download/atuin-x86_64-unknown-linux-gnu.tar.gz"
+
+	if [[ "$(uname -a)" == *"aarch64"* ]]; then
+		local atuin_download_url="https://github.com/atuinsh/atuin/releases/latest/download/atuin-aarch64-unknown-linux-gnu.tar.gz"
+	else
+		local atuin_download_url="https://github.com/atuinsh/atuin/releases/latest/download/atuin-x86_64-unknown-linux-gnu.tar.gz"
+	fi
 
 	local preexec_download_path="$tmpdir/.bash-preexec.sh"
 
@@ -741,12 +771,11 @@ setup_ssh_shell_utils() {
 
 	mkdir -pv ~/.config/atuin
 	echo -e "update_check = false\nworkspaces = true\ninline_height=30\n" > ~/.config/atuin/config.toml
+
+	proxy_off
 }
 
 launch_shell() {
-	export http_proxy=http://127.0.0.1:3129
-	export https_proxy=http://127.0.0.1:3129
-
 	export TMOUT=6000 # Increase auto-logout time
 
 	L_GREEN='\033[1;32m'
@@ -801,7 +830,7 @@ launch_shell() {
 }
 
 get_ssh_init_str() {
-	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f __get_temp_dir); $(typeset -f setup_ssh_shell_utils); $(typeset -f launch_shell); launch_shell $1"
+	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f __get_temp_dir); $(typeset -f proxy_on); $(typeset -f proxy_off); $(typeset -f setup_ssh_shell_utils); $(typeset -f launch_shell); launch_shell $1"
 }
 
 ssh() {

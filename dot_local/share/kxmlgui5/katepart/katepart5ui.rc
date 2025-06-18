@@ -1,5 +1,5 @@
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="KatePartView" translationDomain="ktexteditor6" version="110">
+<gui name="KatePartView" translationDomain="ktexteditor6" version="111">
  <MenuBar>
   <Menu name="file" noMerge="1">
    <text>&amp;File</text>
@@ -197,6 +197,13 @@
   <Separator group="popup_operations"/>
   <Action group="popup_operations" name="tools_create_snippet"/>
   <Separator group="popup_operations"/>
+  <Menu group="popup_operations" name="speech">
+   <text>Text to Speech</text>
+   <Action group="popup_operations" name="tools_speech_stop"/>
+   <Action group="popup_operations" name="tools_speech_pause"/>
+   <Action group="popup_operations" name="tools_speech_resume"/>
+  </Menu>
+  <Action group="popup_operations" name="tools_speech_say"/>
  </Menu>
  <ActionProperties>
   <Action name="tools_lowercase" shortcut="Ctrl+Shift+U; Alt+L"/>

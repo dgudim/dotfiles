@@ -9,6 +9,7 @@ ButtonBackgroundColorsActive=AccentTrafficLights
 ButtonBackgroundColorsInactive=AccentTrafficLights
 ButtonBackgroundOpacityActive=45
 ButtonBackgroundOpacityInactive=45
+ButtonIconColorsActive=TitleBarText
 CloseButtonIconColorActive=AsSelected
 CloseButtonIconColorInactive=AsSelected
 UseHoverAccentActive=true

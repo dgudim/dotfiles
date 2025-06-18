@@ -194,6 +194,7 @@ if "amd" in cpu_vendor.lower():
         len(bootline) > 0 and bootline.find("amd_pstate=active") == -1,
         f"{YELLOW}Set amd_pstate=active{NC}",
     )
+    # NOTE: intel_pstate is used automatically, no need to check and enforce
 
 # https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
 if cmdline.find("rd.luks") != -1:
@@ -390,6 +391,10 @@ else:
         == 0,
         f"{YELLOW}Consider installing z-lib{NC}",
     )
+
+os.system(
+    f'if command -v snapper >/dev/null 2>&1; then if ! snapper list-configs | grep -q root; then echo "{YELLOW}Create snapshot config in snapper!{NC}"; fi fi'
+)
 
 print(
     f"{L_GREEN}Finished running checks, {L_CYAN}{warn} / {checks}{L_GREEN} warning(s){NC}\n"

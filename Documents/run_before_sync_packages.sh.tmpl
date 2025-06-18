@@ -24,20 +24,29 @@ uv tool install nwdiag
 uv tool install blockdiag
 uv tool install seqdiag
 uv tool install pip-autoremove
+uv tool install ty
 uv tool install rembg[cpu,cli]
 # aw-watcher-netstatus
 # https://github.com/rtnhn/aw-importer-lastfm.git aw-importer-lastfm
 uv tool upgrade --all
 
-cargo install checkexec
-cargo install cargo-update
-cargo install cargo-edit
-# cargo install qemu-rdp
-cargo install --git https://github.com/jgavris/rs-git-fsmonitor.git
+cargo binstall checkexec
+cargo binstall cargo-update
+cargo binstall cargo-edit
+cargo binstall wild-linker
+# cargo binstall qemu-rdp
+cargo binstall --git https://github.com/jgavris/rs-git-fsmonitor.git rs-git-fsmonitor
 # cargo install --git https://github.com/brayo-pip/aw-watcher-lastfm.git
 cargo install-update -a
 
+go install github.com/cweill/gotests/gotests@latest
+go install github.com/fatih/gomodifytags@latest
+go install github.com/josharian/impl@latest
+go install github.com/haya14busa/goplay/cmd/goplay@latest
+go install honnef.co/go/tools/cmd/staticcheck@latest
+
 install-flatpak org.easycoding.TunedSwitcher
+install-flatpak net.mkiol.Jupii
 flatpak update
 flatpak uninstall --unused --delete-data
 

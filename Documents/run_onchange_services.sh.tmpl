@@ -75,8 +75,22 @@ enable_service() {
     fi
 }
 
+reload_daemon() {
+    sudo systemctl daemon-reload
+    systemctl daemon-reload --user
+}
 
 echo -e "${L_PURPLE}Setting up services...$NC"
+
+reload_daemon
+
+# Activated by socket
+enable_service dbus-broker.service 0 1
+enable_service dbus-broker.service 1 1
+
+# Setup kmscon
+sudo ln -svf '/usr/lib/systemd/system/kmsconvt@.service' '/etc/systemd/system/autovt@.service'
+reload_daemon
 
 enable_service drkonqi-coredump-processor@.service
 enable_service drkonqi-coredump-launcher.socket 1
@@ -91,6 +105,7 @@ enable_service libvirtd.socket
 enable_service libvirt-guests.service
 
 enable_service sshd.service
+enable_service tailscaled.service
 
 enable_service bluetooth.service
 enable_service avahi-daemon.service
@@ -99,13 +114,15 @@ enable_service cups-browsed.service
 enable_service systemd-resolved.service
 enable_service adb.service
 
-enable_service tailscaled.service
-
 enable_service smartd.service
-
 enable_service acpid.service
 
+enable_service tuned-ppd.service
+
+enable_service snapper_cleanup.timer
+
 enable_service plocate-updatedb.timer
+
 {{ if eq .chezmoi.hostname "portable-heater" }}
     # Disable
     enable_service fstrim.timer 0 1
@@ -114,23 +131,24 @@ enable_service plocate-updatedb.timer
 {{ end }}
 
 {{ if eq .chezmoi.hostname "nuclear-submarine" }} # Work laptop
-enable_service systemd-boot-update 0 1
-
-enable_service grub-btrfsd.service
-enable_service fprintd.service
-
+    # Disable
+    enable_service systemd-boot-update 0 1
+    # Snapshots with grub
+    enable_service grub-btrfsd.service
+    # Lenovo dock
+    enable_service displaylink.service
 {{ else }}
-enable_service systemd-boot-update
+    enable_service systemd-boot-update
+    # Disable
+    enable_service displaylink.service 0 1
 {{ end }}
 
-enable_service displaylink.service
 enable_service gpu-screen-recorder-ui 1
 
-{{ if eq .chezmoi.hostname "black-bird" }}
-# Still breaks (
-# enable_service open-fprintd-resume
-# enable_service open-fprintd-suspend
-{{ end }}
+enable_service fprintd.service
+enable_service open-fprintd-resume 0 1
+enable_service open-fprintd-suspend 0 1
+enable_service ModemManager
 
 enable_service docker.socket 1
 
@@ -147,6 +165,15 @@ enable_service nvidia-hibernate.service
 enable_service nvidia-resume.service
 enable_service nvidia-suspend.service
 enable_service nvidia-persistenced.service
+
+enable_service gopreload.service
+
+enable_service shairport-sync.service 0 1
+enable_service shairport-sync.service 1
+
+enable_service sunshine.service 1
+
+enable_service nvidia-tdp.timer
 {{ end }}
 
 enable_service polkit.service
@@ -157,7 +184,10 @@ enable_service pacserve.service
 enable_service espanso.service 1
 enable_service rescrobbled.service 1
 
-cd /home/kloud/.local/share/chezmoi/ && git maintenance start
+cd /home/kloud/.local/share/chezmoi/
+p="$(pwd)"
+systemctl is-active --user git-maintenance@daily.timer || git maintenance start
+cd "$p"
 
 echo -e "${L_GREEN}Service setup done!$NC\n"
 
