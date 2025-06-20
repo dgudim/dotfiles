@@ -1,4 +1,5 @@
 # Boot stuff
+# For systemd-boot
 kernel-install-for-dracut
 
 # Ignore dev stuff

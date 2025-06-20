@@ -3,7 +3,7 @@ rocm-smi-lib
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 radeontop
-amdgpu_top-bin
+amdgpu_top
 vulkan-radeon
 libvdpau-va-gl
 lib32-libvdpau-va-gl
@@ -69,9 +69,13 @@ stern
 karpor
 
 # Boot stuff
-grub-btrfs
-grub
-eos-dracut
+# For grub
+# grub-btrfs
+# grub
+# eos-dracut
+limine
+limine-dracut-support
+limine-snapper-sync
 
 # Forecast reports
 texlive-fontsextra

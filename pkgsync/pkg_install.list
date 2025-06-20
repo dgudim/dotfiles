@@ -688,7 +688,7 @@ visual-studio-code-bin
 imhex-bin
 strace
 pax-utils
-dockerfile-language-server-bin
+dockerfile-language-server
 vscode-json-languageserver
 yamlfmt
 gopls

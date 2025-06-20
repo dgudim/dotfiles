@@ -134,7 +134,7 @@ enable_service plocate-updatedb.timer
     # Disable
     enable_service systemd-boot-update 0 1
     # Snapshots with grub
-    enable_service grub-btrfsd.service
+    enable_service limine-snapper-sync.service
     # Lenovo dock
     enable_service displaylink.service
 {{ else }}
