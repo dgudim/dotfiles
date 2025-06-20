@@ -42,6 +42,8 @@ broadcom-wl-dkms
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
+plasma-x11-session
+
 # Gaming
 steam
 linux-steam-integration
