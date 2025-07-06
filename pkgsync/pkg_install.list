@@ -49,6 +49,7 @@ base-devel
 arch-install-scripts
 archlinux-contrib
 linux-firmware
+linux-firmware-marvell
 linux-lts
 linux-lts-headers
 linux-cachyos
