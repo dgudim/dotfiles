@@ -6,6 +6,7 @@ reflector-simple
 eos-bash-shared
 endeavouros-theming
 endeavouros-keyring
+eos-hooks
 eos-apps-info
 eos-log-tool
 eos-packagelist
