@@ -73,9 +73,9 @@ LocalFileSigLevel = Optional
 # repo name header and Include lines. You can add preferred servers immediately
 # after the header, and they will be used before the default mirrors.
 
-[endeavouros]
-Include = /etc/pacman.d/pacserve
-Include = /etc/pacman.d/endeavouros-mirrorlist
+#[endeavouros]
+#Include = /etc/pacman.d/pacserve
+#Include = /etc/pacman.d/endeavouros-mirrorlist
 
 {{- if eq .x86_v3.enabled "true" }}
 [core-x86-64-v3]

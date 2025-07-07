@@ -626,7 +626,7 @@ kup
 # ALHP, EOS, CHAOTIC
 alhp-keyring
 alhp-mirrorlist
-endeavouros-keyring
+# endeavouros-keyring
 chaotic-keyring
 
 
