@@ -133,7 +133,7 @@ enable_service plocate-updatedb.timer
 {{ if eq .chezmoi.hostname "nuclear-submarine" }} # Work laptop
     # Disable
     enable_service systemd-boot-update 0 1
-    # Snapshots with grub
+    # Snapshots with limine
     enable_service limine-snapper-sync.service
     # Lenovo dock
     enable_service displaylink.service
