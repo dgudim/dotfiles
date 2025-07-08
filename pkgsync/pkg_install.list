@@ -127,7 +127,6 @@ entr
 haveged
 bluez
 bluez-obex
-pahis
 tpm2-tools
 dos2unix
 tree
@@ -137,7 +136,6 @@ kmscon-patched-git
 pacmanlogviewer
 octopi
 pacman-systemd-inhibit
-eos-hooks
 informant
 pacman-pstatus
 pacman-log-orphans-hook
