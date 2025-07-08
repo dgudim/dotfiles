@@ -119,7 +119,10 @@ enable_service acpid.service
 
 enable_service tuned-ppd.service
 
-enable_service snapper_cleanup.timer
+enable_service snapper-cleanup.timer
+enable_service snapper-backup.timer 0 1
+enable_service snapper-boot.timer 0 1
+enable_service snapper-timeline.timer 0 1
 
 enable_service plocate-updatedb.timer
 
