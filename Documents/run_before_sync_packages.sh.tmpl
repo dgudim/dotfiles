@@ -58,6 +58,7 @@ lensfun-update-data &
 tldr --update &
 sudo dotnet workload update --from-previous-sdk &
 wait
+fwupdmgr refresh || true
 fwupdmgr update
 
 update-mime-database /home/kloud/.local/share/mime/

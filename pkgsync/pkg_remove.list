@@ -15,6 +15,7 @@ eos-plasma-sddm-config
 eos-quickstart
 eos-settings-plasma
 eos-update-notifier
+kernel-install-for-dracut
 nvidia-inst
 welcome
 

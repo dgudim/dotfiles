@@ -9,6 +9,9 @@ lib32-libvdpau-va-gl
 vulkan-mesa-layers
 lib32-vulkan-mesa-layers
 
+#Boot
+limine-snapper-sync
+
 #Btrfs
 btrfs-assistant
 snap-pac

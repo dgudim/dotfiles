@@ -17,6 +17,6 @@ echo -e "${L_GREEN}Done!$NC\n"
 {{- end }}
 
 echo -e "${L_PURPLE}Running monthly jetbrains trial refresh$NC..."
-rm -v /home/$USER/.config/JetBrains/*/*.key
-rm -rv /home/$USER/.java/.userPrefs
+rm -v /home/$USER/.config/JetBrains/*/*.key || true
+rm -rv /home/$USER/.java/.userPrefs || true
 echo -e "${L_GREEN}Done!$NC\n"

@@ -69,12 +69,6 @@ stern
 karpor
 
 # Boot stuff
-# For grub
-# grub-btrfs
-# grub
-# eos-dracut
-limine
-limine-dracut-support
 limine-snapper-sync
 
 # Forecast reports

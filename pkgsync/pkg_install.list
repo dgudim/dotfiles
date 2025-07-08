@@ -6,7 +6,8 @@
 input-actions
 
 # Boot stuff
-kernel-install-for-dracut
+limine
+limine-dracut-support
 
 # POWER STUFF
 tuned-ppd
@@ -836,6 +837,7 @@ python-psycopg
 python-pyodbc
 python-pyu2f
 python-sortedcollections
+python-merge3
 uvicorn
 
 ## ANDROID AND JAVA
@@ -1118,10 +1120,10 @@ imv
 gwenview
 yuview
 inkscape
-gpu-screen-recorder
-gpu-screen-recorder-gtk
-gpu-screen-recorder-notification
-gpu-screen-recorder-ui
+gpu-screen-recorder-git
+gpu-screen-recorder-gtk-git
+gpu-screen-recorder-notification-git
+gpu-screen-recorder-ui-git
 simplescreenrecorder
 gimagereader-qt
 glava
