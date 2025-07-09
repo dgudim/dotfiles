@@ -58,6 +58,8 @@ rm -fv ~/.config/autostart/syncthingtray-qt6.desktop
 rm -fv ~/.config/autostart/remmina-applet.desktop
 rm -fv ~/.config/autostart/libinput-gestures.desktop
 
+rm -fv ~/.config/policykit1-kde.notifyrc
+
 mv -fvr /home/kloud/.ipython "$XDG_CONFIG_HOME"/ipython 2>/dev/null || true
 
 if [[ "$(hostname)" == *"sauron"* ]]; then sudo chown -R kloud:kloud /usr/share/gopreload; fi
