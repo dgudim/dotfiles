@@ -3,7 +3,8 @@ import shutil
 import os
 import sys
 import glob
-
+import importlib.util
+from pathlib import Path
 
 RED = "\033[0;31m"
 L_PURPLE = "\033[1;35m"
@@ -66,17 +67,19 @@ print(
     f"{L_GREEN}Finished mirroring etc state{NC}, {L_YELLOW}{entries} files {L_GREEN}processed{NC}\n"
 )
 
+print(f"{L_PURPLE}Running {L_BLUE}etc pre update/apply hooks{NC}")
 
-print(
-    f"{L_PURPLE}Running {L_BLUE}etc pre update/apply hook{NC},{L_PURPLE} dumping {L_CYAN}dconf{L_PURPLE} state{NC}..."
-)
+chezmoi_home = getenv("CHEZMOI_SOURCE_DIR")
+hooks_path = os.path.join(chezmoi_home, "update_apply_hooks")
+for hook_filepath in glob.iglob(hooks_path + "**/**", recursive=False, dir_fd=False):
+    if not os.path.isfile(hook_filepath):
+        continue
 
-os.system("cd ~/.config/dconf/ && dconf dump / > user.txt")
+    hook_filepath_path = Path(hook_filepath)
 
-print(
-    f"{L_PURPLE}Running {L_BLUE}etc pre update/apply hook{NC},{L_PURPLE} dumping {L_CYAN}activitywatch{L_PURPLE} settings{NC}..."
-)
+    module = importlib.import_module(
+        f"update_apply_hooks.{hook_filepath_path.stem}",
+        package=str(hook_filepath_path.absolute()),
+    )
 
-os.system(
-    "cd ~/.local/share/activitywatch/aw-server-rust/ && sqlite3 sqlite.db '.dump key_value' > settings.sql && sed -i 's/TRANSACTION;/TRANSACTION;DROP TABLE key_value;/g' settings.sql"
-)
+    module.pre()

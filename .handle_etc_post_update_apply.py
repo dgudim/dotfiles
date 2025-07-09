@@ -2,6 +2,8 @@
 import os
 import sys
 import glob
+import importlib.util
+from pathlib import Path
 
 RED = "\033[0;31m"
 L_PURPLE = "\033[1;35m"
@@ -64,17 +66,19 @@ print(
 )
 
 
-print(
-    f"{L_PURPLE}Running {L_BLUE}etc post update/apply hook{NC},{L_PURPLE} loading {L_CYAN}dconf{L_PURPLE} state{NC}..."
-)
+print(f"{L_PURPLE}Running {L_BLUE}etc post update/apply hooks{NC}")
 
-os.system("cd ~/.config/dconf/ && dconf load / < user.txt")
+chezmoi_home = getenv("CHEZMOI_SOURCE_DIR")
+hooks_path = os.path.join(chezmoi_home, "update_apply_hooks")
+for hook_filepath in glob.iglob(hooks_path + "**/**", recursive=False, dir_fd=False):
+    if not os.path.isfile(hook_filepath):
+        continue
 
-print(
-    f"{L_PURPLE}Running {L_BLUE}etc post update/apply hook{NC},{L_PURPLE} loading {L_CYAN}activitywatch{L_PURPLE} settings{NC}..."
-)
-os.system("killall aw-qt && killall aw-server-rust && sleep 5")
-os.system(
-    "cd ~/.local/share/activitywatch/aw-server-rust/ && sqlite3 sqlite.db < settings.sql"
-)
-os.system("aw-qt > /dev/null & disown")
+    hook_filepath_path = Path(hook_filepath)
+
+    module = importlib.import_module(
+        f"update_apply_hooks.{hook_filepath_path.stem}",
+        package=str(hook_filepath_path.absolute()),
+    )
+
+    module.post()

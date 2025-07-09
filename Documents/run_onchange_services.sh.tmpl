@@ -119,11 +119,6 @@ enable_service acpid.service
 
 enable_service tuned-ppd.service
 
-enable_service snapper-cleanup.timer
-enable_service snapper-backup.timer 0 1
-enable_service snapper-boot.timer 0 1
-enable_service snapper-timeline.timer 0 1
-
 enable_service plocate-updatedb.timer
 
 {{ if eq .chezmoi.hostname "portable-heater" }}
@@ -136,21 +131,25 @@ enable_service plocate-updatedb.timer
 # Disable
 enable_service systemd-boot-update 0 1
 
-{{ if (or (eq .chezmoi.hostname "black-bird") (eq .chezmoi.hostname "nuclear-submarine")) }}
-    # Snapshots with limine
-    enable_service limine-snapper-sync.service
-{{ end }}
+# Lenovo dock on work laptop
+enable_service displaylink.service
 
-{{ if eq .chezmoi.hostname "nuclear-submarine" }} # Work laptop
-    # Lenovo dock
-    enable_service displaylink.service
-{{ else }}
-    # Disable
-    enable_service displaylink.service 0 1
-{{ end }}
+# Snapshots with limine on personal and work laptop
+enable_service limine-snapper-sync.service
+
+enable_service snapper-cleanup.timer
+enable_service snapper-backup.timer 0 1
+enable_service snapper-boot.timer 0 1
+enable_service snapper-timeline.timer 0 1
+
+# Fingerprints on personal and work laptop
+
+enable_service fprintd.service
+enable_service open-fprintd-resume 0 1
+enable_service open-fprintd-suspend 0 1
 
 {{ if eq .chezmoi.hostname "black-bird" }}
-    # Modem
+    # 4G modem
     enable_service ModemManager
 {{ else }}
     # Disable
@@ -158,10 +157,6 @@ enable_service systemd-boot-update 0 1
 {{ end }}
 
 enable_service gpu-screen-recorder-ui 1
-
-enable_service fprintd.service
-enable_service open-fprintd-resume 0 1
-enable_service open-fprintd-suspend 0 1
 
 enable_service docker.socket 1
 
@@ -178,6 +173,7 @@ enable_service nvidia-hibernate.service
 enable_service nvidia-resume.service
 enable_service nvidia-suspend.service
 enable_service nvidia-persistenced.service
+enable_service nvidia-tdp.timer
 
 enable_service gopreload.service
 
@@ -185,8 +181,6 @@ enable_service shairport-sync.service 0 1
 enable_service shairport-sync.service 1
 
 enable_service sunshine.service 1
-
-enable_service nvidia-tdp.timer
 {{ end }}
 
 enable_service polkit.service
