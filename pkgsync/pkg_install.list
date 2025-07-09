@@ -643,7 +643,6 @@ lib32-fluidsynth
 lib32-alsa-plugins
 lib32-giflib
 lib32-gperftools
-lib32-sdl2-compat
 lib32-libdecor
 
 ## WINE
@@ -820,12 +819,10 @@ python-loguru
 python-notify2
 python-pymupdf
 python-dirty-equals
-python-pycurl
 python-levenshtein
 python-libevdev
 python-musicbrainzngs
 python-webcolors
-python-brotlicffi
 python-kubernetes
 python-linkify-it-py
 python-netifaces2

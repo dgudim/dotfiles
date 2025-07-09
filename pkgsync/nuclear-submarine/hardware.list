@@ -6,7 +6,6 @@ radeontop
 amdgpu_top
 vulkan-radeon
 libvdpau-va-gl
-lib32-libvdpau-va-gl
 lib32-vulkan-radeon
 
 # Hardware

@@ -1,3 +1,9 @@
 {
-    "formatOnSave": false
+    "formatOnSave": false,
+    "formatterForDockerfile": "dockfmt",
+    "docker": {
+        "command": [
+            "dockfmt"
+        ]
+    }
 }
