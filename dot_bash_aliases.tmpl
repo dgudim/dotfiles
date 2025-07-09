@@ -303,6 +303,10 @@ pvenv() {
 
 ###############################################################################################################
 
+lsblk() {
+	/usr/bin/lsblk "$@" --fs
+}
+
 btrfs_chroot() {
 	if [ -z ${1+x} ]; then
 		echo "Please provide a root partition";
