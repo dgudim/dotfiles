@@ -921,7 +921,6 @@ systemd-resolvconf
 networkmanager
 networkmanager-openvpn
 networkmanager-openconnect
-networkmanager-pptp
 networkmanager-l2tp
 networkmanager-strongswan
 networkmanager-fortisslvpn
@@ -932,10 +931,6 @@ mitmproxy
 openconnect
 nfs-utils
 openvpn
-modemmanager
-ppp
-pptpclient
-rp-pppoe
 wireless-regdb
 wireless_tools
 vpnc

@@ -136,7 +136,6 @@ enable_service plocate-updatedb.timer
 # Disable
 enable_service systemd-boot-update 0 1
 
-
 {{ if (or (eq .chezmoi.hostname "black-bird") (eq .chezmoi.hostname "nuclear-submarine")) }}
     # Snapshots with limine
     enable_service limine-snapper-sync.service
@@ -150,12 +149,19 @@ enable_service systemd-boot-update 0 1
     enable_service displaylink.service 0 1
 {{ end }}
 
+{{ if eq .chezmoi.hostname "black-bird" }}
+    # Modem
+    enable_service ModemManager
+{{ else }}
+    # Disable
+    enable_service ModemManager 0 1
+{{ end }}
+
 enable_service gpu-screen-recorder-ui 1
 
 enable_service fprintd.service
 enable_service open-fprintd-resume 0 1
 enable_service open-fprintd-suspend 0 1
-enable_service ModemManager
 
 enable_service docker.socket 1
 

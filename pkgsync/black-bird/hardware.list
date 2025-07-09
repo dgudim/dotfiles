@@ -31,6 +31,7 @@ thinkfan-ui
 python-validity
 
 # Modem
+modemmanager
 mmconneqt-git
 modem-manager-gui-hg
 
