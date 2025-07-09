@@ -1,5 +1,5 @@
 pkgname='udev-notify-my'
-pkgver=0.3.3
+pkgver=0.3.4
 pkgrel=1
 pkgdesc='Show notifications when any USB device is plugged/unplugged'
 arch=('any')
