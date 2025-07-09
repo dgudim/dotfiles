@@ -1,0 +1,14 @@
+{
+    "servers": {
+        "systemd": {
+            "command": ["systemd-lsp"],
+            "url": "https://github.com/JFryy/systemd-lsp",
+            "highlightingModeRegex": "^systemd unit$"
+        },
+	"docker": {
+            "command": ["docker-language-server", "start", "--stdio"],
+            "url": "https://github.com/docker/docker-language-server",
+            "highlightingModeRegex": "^Dockerfile$"
+        }
+    }
+}
