@@ -35,14 +35,20 @@ LIMIT_USAGE_PERCENT=85
 
 ### Root Subvolume Path:
 ### Set the path to your root subvolume. The default value for some distros is "/@".
+{{- if eq .chezmoi.hostname "black-bird" }}
+ROOT_SUBVOLUME_PATH="/"
+{{- else }}
 ROOT_SUBVOLUME_PATH="/@"
-
+{{- end }}
 
 ### Root Snapshot Path:
 ### Specify the path to your root snapshots. The default is "/@/.snapshots", which is used for the default Snapper layout.
 ### Note: The tool supports Snapper with any custom layout within the same filesystem, but not random Btrfs layouts without Snapper.
+{{- if eq .chezmoi.hostname "black-bird" }}
+ROOT_SNAPSHOTS_PATH="/.snapshots"
+{{- else }}
 ROOT_SNAPSHOTS_PATH="/@/.snapshots"
-
+{{- end }}
 
 ### Restore Method Selection:
 ### Choose whether to enable rsync for restoration. If enabled, the tool will prompt you to choose between rsync or btrfs during the restore process.
