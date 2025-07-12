@@ -304,7 +304,11 @@ pvenv() {
 ###############################################################################################################
 
 lsblk() {
-	/usr/bin/lsblk "$@" --fs
+	/usr/bin/lsblk -o NAME,FSTYPE,UUID,PARTUUID,PARTTYPENAME,MOUNTPOINT,SIZE "$@"
+}
+
+lsblk_n() {
+	/usr/bin/lsblk "$@"
 }
 
 btrfs_chroot() {
@@ -327,8 +331,7 @@ btrfs_chroot() {
 	sudo mount "$root_part" /mnt/chroot/var/log -o subvol=@log
 	sudo mount "$root_part" /mnt/chroot/var/cache -o subvol=@cache
 	sudo mount "$root_part" /mnt/chroot/home -o subvol=@home
-	sudo mount "$efi_part"  /mnt/chroot/boot/efi
-	sudo mount "$efi_part"  /mnt/chroot/efi
+	sudo mount "$efi_part"  /mnt/chroot/boot/
 
 	sudo arch-chroot /mnt/chroot
 }
