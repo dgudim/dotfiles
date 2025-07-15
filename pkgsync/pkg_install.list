@@ -261,7 +261,6 @@ drkonqi
 kplotting5
 kplotting
 keditbookmarks
-oxygen-sounds
 harmony2
 krdp
 kcron
@@ -276,6 +275,7 @@ plasma6-applets-wallpaper-effects
 
 # GUI APPS
 konsole
+cool-retro-term
 kclock
 systemdgenie
 filelight
@@ -357,6 +357,7 @@ gtk4-demos
 espanso-wayland-git
 espanso-gui
 r-quick-share
+packet
 waycheck
 mission-center
 goldendict-ng
@@ -519,7 +520,9 @@ languagetool
 nano-syntax-highlighting-git
 docker-color-output-git
 postgrestools-bin
+pgcli
 postgresql-old-upgrade
+lssecret-git
 vivid
 bat-extras
 aspell-en
@@ -553,7 +556,10 @@ gjs
 nawk
 open-in-native-client
 waypipe
+# For media downloader in the browser
 vdhcoapp
+# For limine snapper sync
+b3sum
 
 ## Browser sync to RAM
 profile-sync-daemon
@@ -580,12 +586,10 @@ plasma-browser-integration
 kdeconnect
 # kde-snap-assist
 kde-thumbnailer-apk
-stl-thumb-git
-stl-thumb-kde
+stl2thumbnail-git
 blesh-git
 plasma-vault
 plasma5-integration
-tumbler-extra-thumbnailers
 kdesdk-thumbnailers
 comicthumb
 icoextract
@@ -832,6 +836,8 @@ python-pyodbc
 python-pyu2f
 python-sortedcollections
 python-merge3
+python-sshtunnel
+python-brotlicffi
 uvicorn
 
 ## ANDROID AND JAVA
@@ -870,6 +876,7 @@ glfw
 mold
 lld
 ctags
+gammaray
 
 # C#
 dotnet-sdk
@@ -884,6 +891,9 @@ avr-binutils
 avrdude
 # Stm32
 openocd
+
+## GO
+delve
 
 ## JS
 nodejs-lts-jod
@@ -941,6 +951,7 @@ xl2tpd
 tor
 tcpdump
 ssh-audit
+autossh
 ipcalc
 sipcalc
 openssh
@@ -1090,7 +1101,7 @@ autotrace
 jpeg2png-git
 
 ## GUIS
-vlc-luajit
+vlc
 mpv
 smplayer
 hugin
