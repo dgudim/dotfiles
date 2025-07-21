@@ -10,6 +10,8 @@ lib32-vulkan-mesa-layers
 
 #Boot
 limine-snapper-sync
+plymouth
+plymouth-kcm
 
 #Btrfs
 btrfs-assistant
@@ -61,3 +63,4 @@ moonlight-qt
 # 3D
 # prusa-slicer
 # slicer-udev
+

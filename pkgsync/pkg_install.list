@@ -560,6 +560,7 @@ waypipe
 vdhcoapp
 # For limine snapper sync
 b3sum
+vlc-plugins-all
 
 ## Browser sync to RAM
 profile-sync-daemon
