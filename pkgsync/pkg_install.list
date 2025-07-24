@@ -319,6 +319,7 @@ rclone-browser
 thunderbird
 plasma-systemmonitor
 pdfarranger
+karp-git
 tokodon
 zoom
 calibre
@@ -371,6 +372,7 @@ evtest-qt-git
 # - qr/barcode generation
 zint-qt
 kweather
+piki-git
 
 # CLI APPS
 ascii
@@ -1147,6 +1149,7 @@ czkawka-gui-bin
 kolourpaint
 curlew
 kamoso
+plasma-camera-git
 webcamoid
 cameractrls
 jexiftoolgui
