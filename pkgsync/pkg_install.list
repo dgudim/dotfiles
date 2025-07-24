@@ -449,6 +449,7 @@ topgrade
 geteltorito
 procs
 fbgrab
+wikiman
 
 ## BTRFS
 compsize
@@ -562,6 +563,7 @@ vdhcoapp
 # For limine snapper sync
 b3sum
 vlc-plugins-all
+arch-wiki-docs
 
 ## Browser sync to RAM
 profile-sync-daemon
