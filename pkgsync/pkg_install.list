@@ -370,6 +370,7 @@ morphosis
 evtest-qt-git
 # - qr/barcode generation
 zint-qt
+kweather
 
 # CLI APPS
 ascii
