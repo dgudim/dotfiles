@@ -257,6 +257,7 @@ firefox_settings = [
     "media.av1.enabled",
     "gfx.x11-egl.force-enabled",
     "widget.dmabuf.force-enabled",
+    "media.hardware-video-decoding.force-enabled",
     "gfx.webrender.all",
     "gfx.webrender.compositor",
     "gfx.webrender.compositor.force-enabled",

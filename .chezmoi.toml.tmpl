@@ -44,8 +44,8 @@ progress=true
     loglevel = "basic"
 
 [diff]
-    pager="delta" # https://github.com/twpayne/chezmoi/issues/3523
-    command = "delta"
+    pager="delta"
+    # command = "delta"
     exclude = ["dirs", "scripts"]
     args = ["--pager=0", "{{`{{ .Destination }}`}}", "{{`{{ .Target }}`}}"]
 

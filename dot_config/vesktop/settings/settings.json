@@ -117,9 +117,6 @@
             "type": 0,
             "timestampMode": 0
         },
-        "EmoteCloner": {
-            "enabled": true
-        },
         "Experiments": {
             "enabled": true,
             "toolbarDevMenu": false
@@ -765,6 +762,9 @@
         },
         "DisableDeepLinks": {
             "enabled": true
+        },
+        "ExpressionCloner": {
+            "enabled": true
         }
     },
     "notifications": {
@@ -777,7 +777,7 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1745505236162
+        "settingsSyncVersion": 1751909124556
     },
     "eagerPatches": false
 }

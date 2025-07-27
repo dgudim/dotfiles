@@ -600,7 +600,6 @@ kdesdk-thumbnailers
 comicthumb
 icoextract
 plasma-thunderbolt
-kactivities-stats5
 ocs-url
 kamera
 
@@ -614,7 +613,6 @@ kio-admin
 kio-fuse
 kio-gdrive
 kio-zeroconf
-kio5-extras
 ffmpegthumbnailer
 ffmpegthumbs
 dolphin-plugins
