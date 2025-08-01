@@ -688,7 +688,6 @@ perl-yaml-tiny
 perl-ipc-shareable
 perl-json
 perl-string-crc32
-perl-uuid-tiny
 perl-file-basedir
 perl-path-class
 visual-studio-code-bin
