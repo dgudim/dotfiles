@@ -701,6 +701,7 @@ gopls
 gfold
 wild
 dockerfmt
+lemminx
 
 ## DBs
 postgresql
