@@ -78,4 +78,7 @@ minq-ananicy-git
 # Replaced with my local version
 udev-notify-git
 
+# Not used
+perl-uuid-tiny
+
 
