@@ -168,13 +168,11 @@ mirror-camera() {
 }
 
 virtual-camera() {
-	sudo modprobe v4l2loopback card_label=Video-Loopback exclusive_caps=1
-	scrcpy --video-source=camera --camera-facing=back --camera-size=1920x1080 --no-audio --v4l2-sink=/dev/video0 --no-video-playback --v4l2-buffer=100
+	scrcpy --video-source=camera --camera-facing=back --camera-size=1920x1080 --no-audio --v4l2-sink=/dev/video10 --no-video-playback --v4l2-buffer=100
 }
 
 virtual-screen() {
-	sudo modprobe v4l2loopback card_label=Video-Loopback exclusive_caps=1
-	scrcpy --no-audio --v4l2-sink=/dev/video0 --no-video-playback --v4l2-buffer=100
+	scrcpy --no-audio --v4l2-sink=/dev/video10 --no-video-playback --v4l2-buffer=100
 }
 
 ################################################ Fast cd ################################################

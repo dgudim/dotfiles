@@ -1,5 +1,1 @@
-{{- if eq .chezmoi.hostname "sauron" -}}
-options v4l2loopback_dc width=1920 height=1080
-{{- else -}}
-# Only enabled on sauron
-{{- end }}
+options v4l2loopback exclusive_caps=1 video_nr=10,11,12 card_label=Video-Loopback
