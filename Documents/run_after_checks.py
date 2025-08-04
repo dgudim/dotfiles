@@ -4,6 +4,8 @@ import re
 import os
 import glob
 import json
+import shutil
+from pathlib import Path
 
 RED = "\033[0;31m"
 L_RED = "\033[1;31m"
@@ -48,6 +50,17 @@ def run_check(cond: bool, message: str):
     if cond:
         print(message)
         warn += 1
+
+
+def is_root_btrfs(fstabb: str):
+    for line in fstabb.split("\n"):
+        if len(line) == 0 or line[0] == "#":
+            continue
+
+        if line.find(" btrfs ") != -1 and line.find(" / ") != -1:
+            return True
+
+    return False
 
 
 def check_mount_opts(fstabb: str, fsopts: dict[str, list[str]]):
@@ -149,7 +162,7 @@ check_mount_opts(
     {
         "ext4": ["defaults", "commit=60", "noatime"],
         "vfat": ["defaults", "noatime", "umask=0077"],
-        "btrfs": ["compress=zstd:[0-9]+", "noatime", r"X-fstrim\.notrim"],
+        "btrfs": ["compress=zstd:[0-9]+", "noatime", r"X-fstrim\.notrim", "subvol="],
         "tmp": ["noatime", "nosuid", "nodev", "inode64", "size=[0-9]+G"],
         "ntfs": ntfs_mount_opts,
         "ntfs3": ntfs_mount_opts,
@@ -163,6 +176,11 @@ cmdline = read_file("/etc/kernel/cmdline")
 grub = read_file("/etc/default/grub")
 
 bootline = cmdline if len(cmdline) > 0 else grub
+
+run_check(
+    len(bootline) > 0 and bootline.find("nvme_load=YES nowatchdog rw") == -1,
+    f"{YELLOW}Add kernel boot defaults (nvme_load=YES nowatchdog rw){NC}",
+)
 
 run_check(
     len(bootline) > 0 and bootline.find("mitigations=off") == -1,
@@ -184,6 +202,12 @@ run_check(
     ),
     f"{YELLOW}Enable zswap in kernel cmdline{NC}",
 )
+
+if is_root_btrfs(fstab):
+    run_check(
+        len(bootline) > 0 and bootline.find("rootflags=") == -1,
+        f"{YELLOW}Specify btrfs root subvolume (rootflags=subvol=<fill>){NC}",
+    )
 
 os.system(
     'lscpu | grep "Vendor ID" | cut -d" " -f 3- | tr -d "[:blank:]" > /tmp/cpu_vendor'
@@ -301,6 +325,10 @@ else:
 @import url("./firefox-csshacks/chrome/iconized_main_menu.css");
 @import url("./firefox-csshacks/chrome/non_floating_sharp_tabs.css");
 
+#TabsToolbar-customization-target {
+  height: 100%;
+}
+
 :root {
   --tab-min-height: 36px !important;
 }
@@ -313,6 +341,7 @@ else:
   display: none;
 }
 
+/* Close tabs dialogs and stuff */
 #window-modal-dialog {
   top: 80%;
 }
@@ -393,9 +422,33 @@ else:
         f"{YELLOW}Consider installing z-lib{NC}",
     )
 
-os.system(
-    f'if command -v snapper >/dev/null 2>&1; then if ! snapper list-configs | grep -q root; then echo "{YELLOW}Create snapshot config in snapper!{NC}"; fi fi'
-)
+if is_root_btrfs(fstab):
+    has_snapper = shutil.which("snapper")
+
+    os.system(
+        f'if ! snapper list-configs | grep -q root; then echo "{YELLOW}Create snapshot config in snapper!{NC}"; fi'
+    )
+
+    for root, _, config in Path("/etc/snapper/configs").walk():
+        real_path = Path(root, *config)
+        os.system(f"sudo cat {real_path.absolute()} > /tmp/__snapper_conf")
+        config_content = read_file("/tmp/__snapper_conf", True)
+
+        run_check(
+            'NUMBER_CLEANUP="yes"' not in config_content,
+            f"{YELLOW}Enable number cleanup in {config} snapper config{NC}",
+        )
+
+        run_check(
+            'NUMBER_LIMIT="6"' not in config_content,
+            f"{YELLOW}Set number limit to 6 in {config} snapper config{NC}",
+        )
+
+        run_check(
+            'TIMELINE_CREATE="no"' not in config_content,
+            f"{YELLOW}Disable timeline snapshots in {config} snapper config{NC}",
+        )
+
 
 print(
     f"{L_GREEN}Finished running checks, {L_CYAN}{warn} / {checks}{L_GREEN} warning(s){NC}\n"

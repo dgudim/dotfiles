@@ -137,6 +137,13 @@ enable_service displaylink.service
 # Snapshots with limine on personal and work laptop
 enable_service limine-snapper-sync.service
 
+enable_service btrfsmaintenance-refresh.path
+
+enable_service btrfs-balance.timer
+enable_service btrfs-scrub.timer
+enable_service btrfs-trim.timer 0 1
+enable_service btrfs-defrag.timer 0 1
+
 enable_service snapper-cleanup.timer
 enable_service snapper-backup.timer 0 1
 enable_service snapper-boot.timer 0 1
