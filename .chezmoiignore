@@ -8,6 +8,8 @@
 {{- if ne .chezmoi.hostname "sauron" }}
     /.config/systemd/user/openrgb.service
     /.config/systemd/user/openrgb_keyboard.service
+    /.config/wireplumber/wireplumber.conf.d/disable-extra-mics.conf
+    /.config/pipewire/pipewire.conf.d/vibration-speaker.conf
 {{- end }}
 /update_apply_hooks
 .gitignore
