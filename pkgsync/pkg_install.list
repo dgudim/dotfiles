@@ -512,7 +512,7 @@ btop
 ctop
 nvtop
 bottom
-iotop
+iotop-c
 powertop
 bandwhich
 glances
@@ -680,6 +680,7 @@ difftastic
 github-cli
 rust
 rust-src
+rustowl
 cargo-cache
 cargo-binstall
 cargo-run-bin
@@ -986,6 +987,7 @@ xh
 ngrep
 tailscale
 wrk
+httpie
 
 ## GUIS
 proton-vpn-gtk-app

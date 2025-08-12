@@ -81,4 +81,5 @@ udev-notify-git
 # Not used
 perl-uuid-tiny
 
-
+# Replaced with iotop-c
+iotop

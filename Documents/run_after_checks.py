@@ -429,25 +429,26 @@ if is_root_btrfs(fstab):
         f'if ! snapper list-configs | grep -q root; then echo "{YELLOW}Create snapshot config in snapper!{NC}"; fi'
     )
 
-    for root, _, config in Path("/etc/snapper/configs").walk():
-        real_path = Path(root, *config)
-        os.system(f"sudo cat {real_path.absolute()} > /tmp/__snapper_conf")
-        config_content = read_file("/tmp/__snapper_conf", True)
+    for root, _, files in Path("/etc/snapper/configs").walk():
+        for filename in files:
+            real_path = Path(root, filename)
+            os.system(f"sudo cat {real_path.absolute()} > /tmp/__snapper_conf")
+            config_content = read_file("/tmp/__snapper_conf", True)
 
-        run_check(
-            'NUMBER_CLEANUP="yes"' not in config_content,
-            f"{YELLOW}Enable number cleanup in {config} snapper config{NC}",
-        )
+            run_check(
+                'NUMBER_CLEANUP="yes"' not in config_content,
+                f"{YELLOW}Enable number cleanup in '{filename}' snapper config{NC}",
+            )
 
-        run_check(
-            'NUMBER_LIMIT="6"' not in config_content,
-            f"{YELLOW}Set number limit to 6 in {config} snapper config{NC}",
-        )
+            run_check(
+                'NUMBER_LIMIT="6"' not in config_content,
+                f"{YELLOW}Set number limit to 6 in '{filename}' snapper config{NC}",
+            )
 
-        run_check(
-            'TIMELINE_CREATE="no"' not in config_content,
-            f"{YELLOW}Disable timeline snapshots in {config} snapper config{NC}",
-        )
+            run_check(
+                'TIMELINE_CREATE="no"' not in config_content,
+                f"{YELLOW}Disable timeline snapshots in '{filename}' snapper config{NC}",
+            )
 
 
 print(
