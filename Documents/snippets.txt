@@ -54,6 +54,12 @@ times_with_contexts = list(times_with_contexts)
 
 
 
+def daterange(start_date: datetime.date, end_date: datetime.date):
+    days = int((end_date - start_date).days) - 1
+    for n in range(days):
+        yield start_date + datetime.timedelta(n + 1)
+
+
 
 
 
