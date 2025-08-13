@@ -83,3 +83,5 @@ perl-uuid-tiny
 
 gcc13
 
+# Replaced with iotop-c
+iotop
