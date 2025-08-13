@@ -38,6 +38,9 @@
 ## possible values: return-original, return-query
 # exit_mode = "return-original"
 
+## Defaults to false. If enabled, when triggered after && or ||, Atuin will complete commands to chain rather than replace the current line.
+command_chaining = true
+
 workspaces = true
 inline_height=30
 
@@ -53,3 +56,6 @@ inline_height=30
 
 [sync]
 records = true
+
+# [daemon]
+# enabled = true
