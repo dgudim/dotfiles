@@ -41,4 +41,26 @@
   <tags>cc0,dolphin,kde,kde-dolphin,kde-plasma,shred,original-product,addon</tags>
   <status>installed</status>
  </stuff>
+ <stuff category="102">
+  <name>Compare using Meld</name>
+  <providerid>api.kde-look.org</providerid>
+  <author>ashark</author>
+  <homepage>https://store.kde.org/p/1541201</homepage>
+  <licence></licence>
+  <version>1.0</version>
+  <rating>68</rating>
+  <downloads>4243</downloads>
+  <installedfile>/home/kloud/.local/share/servicemenu-download/compare-using-meld-20210620011130.desktop</installedfile>
+  <id>1541201</id>
+  <releasedate>2021-06-29</releasedate>
+  <summary>&lt;p>As Kompare is not fully capable compared to Meld, this menu item allows you to use Meld when needed.
+Supports launching meld as root.&lt;/p>
+</summary>
+  <changelog></changelog>
+  <preview>https://images.pling.com/cache/100x100-4/img/00/00/61/82/55/1541201/06bb395f74b28f1d11d580d955594a72d1886e9f975d5821342c95236540fd010859.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-4/img/00/00/61/82/55/1541201/06bb395f74b28f1d11d580d955594a72d1886e9f975d5821342c95236540fd010859.png</previewBig>
+  <payload>https://files06.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTYyNDE1MTk4MCwibyI6IjEiLCJzIjoiZWNiZjA3YmQxMTNkYzBhMzE0MjRjNjMzZDU5YmY2M2RiYmQwMjY4MTEzYjk3ZTU0MzkzYjYyOTdmZjZkMjI4YTdhYmY0M2E2ZmM1MjVkZTEwZDFmYWE3MGE4ZDdjNTY2NjIzNDUwODdkYTFmMWFiZmVjNTkxYTdkMzIyMTUxYzciLCJ0IjoxNzU1MDczNDQ1LCJzdGZwIjpudWxsLCJzdGlwIjoiMzEuNDQuMTAyLjIyNSJ9.GhyOzDzoi8nap579Jk3BpqG5G87-VreV9-_LCyRl-vE/compare-using-meld-20210620011130.desktop</payload>
+  <tags>addon,compare,diff,kompare,gplv3,meld,original-product</tags>
+  <status>installed</status>
+ </stuff>
 </hotnewstuffregistry>

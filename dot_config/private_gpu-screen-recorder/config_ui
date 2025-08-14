@@ -47,7 +47,7 @@ replay.record_options.framerate_mode vfr
 replay.record_options.merge_audio_tracks true
 replay.record_options.overclock false
 replay.record_options.record_area_height 0
-replay.record_options.record_area_option eDP-1
+replay.record_options.record_area_option portal
 replay.record_options.record_area_width 0
 replay.record_options.record_cursor true
 replay.record_options.restore_portal_session true
