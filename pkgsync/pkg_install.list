@@ -448,7 +448,7 @@ lsix
 biodiff
 hexyl
 topgrade
-0xtools
+0xtools-git
 # Custom boot logo iso extractor
 geteltorito
 procs
@@ -735,6 +735,9 @@ python
 uv
 ipython
 bpython
+# basedpyright-bin
+python-pylsp-mypy
+python-lsp-ruff
 python-lsp-black
 python-pip
 pyupgrade

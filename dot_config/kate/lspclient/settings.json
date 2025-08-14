@@ -6,9 +6,33 @@
             "highlightingModeRegex": "^systemd unit$"
         },
 	"docker": {
-            "command": ["docker-language-server", "start", "--stdio"],
+			"command": ["docker-language-server", "start", "--stdio"],
             "url": "https://github.com/docker/docker-language-server",
             "highlightingModeRegex": "^Dockerfile$"
-        }
-    }
+        },
+	"python": {
+			"command": [
+				"./home/kloud/.local/bin/pylsp_in_venv.sh", "%{Project:NativePath}"
+			],
+			"root": ".",
+			"url": "https://github.com/python-lsp/python-lsp-server",
+			"highlightingModeRegex": "^Python$",
+			"settings": {
+				"pylsp": {
+					"plugins": {
+						"pycodestyle": {
+							"enabled": false
+						},
+						"ruff": {
+							"enabled": true
+						},
+						"mypy": {
+							"enabled": true
+						}
+					}
+				}
+			}
+		}
+	}
 }
+

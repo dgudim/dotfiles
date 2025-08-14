@@ -294,6 +294,12 @@ pvenv() {
 		return 0
 	fi
 
+	if [ -f "pyproject.toml" ]; then
+		echo "Found pyproject.toml, activating..."
+		$(poetry env activate)
+		return 0
+	fi
+
 	echo "No venv found, creating one"
 	uv venv "$@"
 	__pvenv_activate ".venv"
