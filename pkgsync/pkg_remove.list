@@ -58,6 +58,11 @@ libblockdev-mpath
 # Plasma 5
 chaotic-kf5-dummy
 plasma-remotecontrollers
+qt5-imageformats
+qt5-sensors
+qt5-tools
+kimageformats5
+poppler-qt5
 
 # Replace by kwin-gestures
 gestures
@@ -85,3 +90,9 @@ gcc13
 
 # Replaced with iotop-c
 iotop
+
+# Not used
+syncthing-appmenu
+diskmonitor
+pacman-pstatus
+informant

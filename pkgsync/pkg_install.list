@@ -136,8 +136,8 @@ kmscon-patched-git
 pacmanlogviewer
 octopi
 pacman-systemd-inhibit
-informant
-pacman-pstatus
+# informant
+# pacman-pstatus
 pacman-log-orphans-hook
 pacdiff-pacman-hook-git
 check-broken-packages-pacman-hook-git
@@ -270,6 +270,7 @@ kwin-scripts-kzones
 plasma6-runners-emojirunner
 plasma6-applets-wallpaper-effects
 plasma6-applets-kurve
+plasma5-wallpapers-dynamic
 
 
 
@@ -337,7 +338,7 @@ kalzium
 cpu-x
 anydesk-bin
 gsmartcontrol
-diskmonitor
+# diskmonitor
 skanpage
 naps2-bin
 freeplane
@@ -549,7 +550,7 @@ cachyos-ananicy-rules-git
 arch-udev-usb-sync
 udev-notify-my
 journalctl-desktop-notification-git
-syncthing-appmenu
+# syncthing-appmenu
 rlwrap
 dbeaver-plugin-svg-format
 yt-dlp-drop-in
@@ -567,6 +568,7 @@ vdhcoapp
 b3sum
 vlc-plugins-all
 arch-wiki-docs
+lsfg-vk-git
 
 ## Browser sync to RAM
 profile-sync-daemon
@@ -586,8 +588,6 @@ gvfs-gphoto2
 gvfs-wsdd
 gvfs-dnssd
 kimageformats
-kimageformats5
-qt5-imageformats
 kdeplasma-addons
 plasma-browser-integration
 kdeconnect
@@ -680,7 +680,6 @@ difftastic
 github-cli
 rust
 rust-src
-rustowl
 cargo-cache
 cargo-binstall
 cargo-run-bin
@@ -1204,6 +1203,7 @@ upower
 libnma
 fltk
 geocode-glib
+libfaketime
 
 
 
@@ -1275,7 +1275,7 @@ catdoc
 flex
 libgepub
 poppler-glib
-poppler-qt5
+# poppler-qt5
 texlab
 texinfo
 texlive-latexextra
