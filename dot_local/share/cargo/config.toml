@@ -2,7 +2,7 @@
 profile-rustflags = true
 
 [target.x86_64-unknown-linux-gnu]
-rustflags = ["-C", "opt-level=2", "-C", "target-cpu=native", "-C", "force-frame-pointers=yes", "-C", "link-arg=-fuse-ld=mold"]
+rustflags = ["-C", "opt-level=2", "-C", "target-cpu=native", "-C", "force-frame-pointers=yes", "-C", "link-args=-fuse-ld=lld"]
 
 # Faster compilations when doing cargo run
 # https://davidlattimore.github.io/posts/2024/02/04/speeding-up-the-rust-edit-build-run-cycle.html
