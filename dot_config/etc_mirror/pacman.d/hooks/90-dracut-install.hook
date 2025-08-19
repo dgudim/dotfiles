@@ -1,0 +1,3 @@
+[Action]
+Description = Disabled because there is dracut limine hook
+When = PostTransaction
