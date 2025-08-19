@@ -64,4 +64,8 @@ mv -fvr /home/kloud/.ipython "$XDG_CONFIG_HOME"/ipython 2>/dev/null || true
 
 if [[ "$(hostname)" == *"sauron"* ]]; then sudo chown -R kloud:kloud /usr/share/gopreload; fi
 
+# Created by old dracut hook, not used anymore
+sudo rm -rfv /boot/vmlinuz-linux-*
+sudo rm -rfv /boot/initramfs-linux-*
+
 echo -e "${L_GREEN}Done!$NC\n"
