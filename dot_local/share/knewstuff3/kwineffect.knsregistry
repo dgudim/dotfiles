@@ -2,27 +2,50 @@
 <!DOCTYPE khotnewstuff3>
 <hotnewstuffregistry>
  <stuff category="719">
+  <name>Geometry Change</name>
+  <providerid>api.kde-look.org</providerid>
+  <author>fptr</author>
+  <homepage>https://store.kde.org/p/2136283</homepage>
+  <licence></licence>
+  <version>1.5</version>
+  <rating>72</rating>
+  <downloads>20118</downloads>
+  <installedfile>/home/kloud/.local/share/kwin/effects/kwin4_effect_geometry_change/</installedfile>
+  <id>2136283</id>
+  <releasedate>2025-05-14</releasedate>
+  <summary>&lt;p>Animation for windows moved or resized by programs or scripts&lt;/p>
+
+&lt;p>Plasma 5 version here: https://www.pling.com/p/2026302/&lt;/p>
+</summary>
+  <changelog></changelog>
+  <preview>https://images.pling.com/img/00/00/71/57/04/2136283/recording.gif</preview>
+  <previewBig>https://images.pling.com/img/00/00/71/57/04/2136283/recording.gif</previewBig>
+  <payload>https://files06.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTc0NzI1MDM4NiwibyI6IjEiLCJzIjoiMzViZWIxZDQ2NzJlYTA0Y2FiZmQzYzBmMGE5NmZkY2IzMjYzMTJmOTllNDRiMzA5Nzk0YzYxYjU5NDE4Yzg2NzdmMmZiOTQyMTBmOGU2ZjdlN2VmOTM3MTk5YTFkMDcwMDE2MmRiZjZkOWU4YjgyNDcwNjIwZGE5ZDdlODkxYmMiLCJ0IjoxNzU1Nzc4MzIwLCJzdGZwIjpudWxsLCJzdGlwIjoiMzEuNDQuMTAyLjIyNSJ9.tmE5V87f6hMl61grbRcpzSNj6xqUv3M79Nxr1JquD9s/kwin4-effect-geometry-change-1-5.tar.gz</payload>
+  <tags>unix,linux,gplv3,original-product</tags>
+  <status>installed</status>
+ </stuff>
+ <stuff category="719">
   <name>Squash2</name>
   <providerid>api.kde-look.org</providerid>
   <author>leo5sk</author>
   <homepage>https://store.kde.org/p/1806319</homepage>
   <licence></licence>
-  <version>1.0_6</version>
-  <rating>73</rating>
-  <downloads>11605</downloads>
-  <installedfile>/home/kloud/.local/share/kwin/effects/squash2/</installedfile>
+  <version>1.0_6_2</version>
+  <rating>76</rating>
+  <downloads>16574</downloads>
+  <installedfile>/home/kloud/.local/share/kwin/effects/kwin4_effect_squash2/</installedfile>
   <id>1806319</id>
-  <releasedate>2024-05-14</releasedate>
+  <releasedate>2024-05-18</releasedate>
   <summary>&lt;p>An effect to minimise and unminimise windows, modified from the default effect to be more in line with gnome animation style.&lt;/p>
 
 &lt;p>Use squash2.tar.gz for plamsa 6+.
 Use kwin4-effect-squash2.tar.gz for plasma 5 and below.&lt;/p>
 </summary>
   <changelog></changelog>
-  <preview>https://images.pling.com/cache/100x100-0/img/00/00/43/22/46/1806319/g52.png</preview>
-  <previewBig>https://images.pling.com/cache/770x540-0/img/00/00/43/22/46/1806319/g52.png</previewBig>
-  <payload>https://files06.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTcxNjA2MzQ1MSwibyI6IjEiLCJzIjoiMWI4OGYzODgwMWEwZTEyY2UwZmZhYjZiYWMwY2E3OTNkODljMDIxNDkzMzU0Zjc2ZGYxNzljMTYyMGI0MTdlN2JiYzc0OGE1YTc4OGMxMDI5M2UyNmE4MTY0NTc5MmM2ZWI0OGU0OTlhOTg1OWNmMzlkNzQ2YjVhOWIzZDU5YTUiLCJ0IjoxNzQzMzYzMDQzLCJzdGZwIjpudWxsLCJzdGlwIjoiNzguNjIuMTMyLjMifQ.YG18ELKXtjUXDl31SLNCvz-HG0DOtn0OZukFw_OMWbU/squash2.tar.gz</payload>
-  <tags>linux,minimize,effect,gplv2-later,kwin,original-product,animation,unix</tags>
+  <preview>https://images.pling.com/cache/100x100-4/img/00/00/43/22/46/1806319/g52.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-4/img/00/00/43/22/46/1806319/g52.png</previewBig>
+  <payload>https://files06.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTY1MzUwNzU1NiwibyI6IjEiLCJzIjoiZDk0ZGNhZDNiOTJkZmMxMzc4NDFkNGI5ODg4NzFjYjVlNzdmZDcxOWNlNGQ1N2NhOWI5MmIzNDhkNzFjYWY4M2ExZDQyNTg3OWQwMDAwNDk1ODMxMDdmZDIzMzQxZDc0NjIzN2Y5ZjA2NmVjY2FmMTI3OTNjYjQ5NDZmYjQwZjkiLCJ0IjoxNzU1Nzc4MzIwLCJzdGZwIjpudWxsLCJzdGlwIjoiMzEuNDQuMTAyLjIyNSJ9.noLcwrNiThORka76j3-J7pzQPDKtOB3quKoamzLzO2Q/kwin4-effect-squash2.tar.gz</payload>
+  <tags>animation,gplv2-later,effect,kwin,linux,minimize,unix,original-product</tags>
   <status>installed</status>
  </stuff>
  <stuff category="719">
@@ -33,7 +56,7 @@ Use kwin4-effect-squash2.tar.gz for plasma 5 and below.&lt;/p>
   <licence></licence>
   <version>44</version>
   <rating>58</rating>
-  <downloads>6698</downloads>
+  <downloads>6225</downloads>
   <installedfile>/home/kloud/.local/share/kwin/effects/kwin6_effect_tv/</installedfile>
   <id>2133825</id>
   <releasedate>2024-11-06</releasedate>
@@ -47,30 +70,7 @@ Use kwin4-effect-squash2.tar.gz for plasma 5 and below.&lt;/p>
   <preview>https://images.pling.com/img/00/00/67/07/53/2133825/tv.gif</preview>
   <previewBig>https://images.pling.com/img/00/00/67/07/53/2133825/tv.gif</previewBig>
   <payload>https://files06.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTczMDkwNTgzNywibyI6IjEiLCJzIjoiMTY3ZDkxNGZkZTBjZjM2YzM4YzdjYzc0N2YwNTU4ODhhNmJiNjg5MzgzNmYxZjZkMWYyZGE5MmZjZjRmNTZiZDI1NzgwY2Q3NDA2YjJmMGIwZmY4MWIyYmJlZjFjOTZhMTE2YmJkMjA3ZTJiYjNhN2ZiZTA1ZTJkNGNmMTI1MjkiLCJ0IjoxNzQzMzYyOTg4LCJzdGZwIjpudWxsLCJzdGlwIjoiNzguNjIuMTMyLjMifQ.KvSSyb_KqNouZ5czRD__ODuA8lRxdKDW8q-iO7AJV2E/kwin6-effect-tv.tar.gz</payload>
-  <tags>unix,original-product,linux,gplv3,animation</tags>
-  <status>installed</status>
- </stuff>
- <stuff category="719">
-  <name>Geometry Change</name>
-  <providerid>api.kde-look.org</providerid>
-  <author>fptr</author>
-  <homepage>https://store.kde.org/p/2136283</homepage>
-  <licence></licence>
-  <version>1.4</version>
-  <rating>72</rating>
-  <downloads>8281</downloads>
-  <installedfile>/home/kloud/.local/share/kwin/effects/kwin4_effect_geometry_change/</installedfile>
-  <id>2136283</id>
-  <releasedate>2025-03-15</releasedate>
-  <summary>&lt;p>Animation for windows moved or resized by programs or scripts&lt;/p>
-
-&lt;p>Plasma 5 version here: https://www.pling.com/p/2026302/&lt;/p>
-</summary>
-  <changelog></changelog>
-  <preview>https://images.pling.com/img/00/00/71/57/04/2136283/recording.gif</preview>
-  <previewBig>https://images.pling.com/img/00/00/71/57/04/2136283/recording.gif</previewBig>
-  <payload>https://files06.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTc0MjA0NDc5OSwibyI6IjEiLCJzIjoiNmVkMTZhMWJjNjg3ZDk0N2RlYjQ1N2YzOGU1OWNjZTYwMzkzM2RlY2EzZTVmOGUwZjRlOTNjOGRjN2VhYzcyODYwYzBjMGM4YTc2ZjM5ZGY4YmFjNDI4OThiNDJhOGRmODVhYTUxZTQwMzhkODVkNjFiMjQ0OGIyNzQ4M2FlOTEiLCJ0IjoxNzQzMzYyOTU5LCJzdGZwIjpudWxsLCJzdGlwIjoiNzguNjIuMTMyLjMifQ.WYKz66zpsRm1ZMvSoa0Z8ZeHlVqUdYH94NL1IwwQnjo/kwin4-effect-geometry-change-1-4.tar.gz</payload>
-  <tags>unix,original-product,gplv3,linux</tags>
+  <tags>animation,gplv3,linux,unix,original-product</tags>
   <status>installed</status>
  </stuff>
  <stuff category="719">
@@ -81,7 +81,7 @@ Use kwin4-effect-squash2.tar.gz for plasma 5 and below.&lt;/p>
   <licence></licence>
   <version>44</version>
   <rating>50</rating>
-  <downloads>11004</downloads>
+  <downloads>11021</downloads>
   <installedfile>/home/kloud/.local/share/kwin/effects/kwin6_effect_glitch/</installedfile>
   <id>2133844</id>
   <releasedate>2024-11-06</releasedate>
@@ -95,7 +95,7 @@ Use kwin4-effect-squash2.tar.gz for plasma 5 and below.&lt;/p>
   <preview>https://images.pling.com/img/00/00/67/07/53/2133844/glitch.gif</preview>
   <previewBig>https://images.pling.com/img/00/00/67/07/53/2133844/glitch.gif</previewBig>
   <payload>https://files06.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTczMDkwNTg5OSwibyI6IjEiLCJzIjoiMDk0Mzk3YTBmOWE1MDE5ZjNkZTJiODYxODU5MWM0YzA2MWEyNTE2ZjlhNjA0ZDE1OTE2YjA0MjFkZjAyMWYxMjcwMDkxMzY2MjU0YWY2ZDdhYWQ0ZTZjZGM5ZGY3MjY1YWNhZjVkZTIzYjJjOGNlODZhZGNiYzVlZWVlZWYzZTUiLCJ0IjoxNzQzMzYyOTg0LCJzdGZwIjpudWxsLCJzdGlwIjoiNzguNjIuMTMyLjMifQ.nydRrKlII9iV2_15aH5lFGuMNYKxTLCUbdEd6O4nqw8/kwin6-effect-glitch.tar.gz</payload>
-  <tags>original-product,animation,linux,gplv3,unix</tags>
+  <tags>original-product,linux,unix,animation,gplv3</tags>
   <status>installed</status>
  </stuff>
 </hotnewstuffregistry>

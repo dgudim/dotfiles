@@ -1,6 +1,5 @@
 /*
-
-    SPDX-FileCopyrightText:
+    This file is not part of the KDE project.
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -8,9 +7,9 @@
 "use strict";
 
 var squashEffect = {
-    duration: animationTime(250),
+    duration: animationTime(350),
     loadConfig: function () {
-        squashEffect.duration = animationTime(250);
+        squashEffect.duration = animationTime(350);
     },
     slotWindowMinimized: function (window) {
         if (effects.hasActiveFullScreenEffect) {
@@ -44,7 +43,7 @@ var squashEffect = {
         window.minimizeAnimation = animate({
             window: window,
             curve: QEasingCurve.OutExpo,
-            duration: squashEffect.duration,
+            duration: squashEffect.duration+50,
             animations: [
                 {
                     type: Effect.Size,
@@ -144,22 +143,10 @@ var squashEffect = {
             ]
         });
     },
-    slotWindowAdded: function (window) {
-        window.minimizedChanged.connect(() => {
-            if (window.minimized) {
-                squashEffect.slotWindowMinimized(window);
-            } else {
-                squashEffect.slotWindowUnminimized(window);
-            }
-        });
-    },
     init: function () {
         effect.configChanged.connect(squashEffect.loadConfig);
-
-        effects.windowAdded.connect(squashEffect.slotWindowAdded);
-        for (const window of effects.stackingOrder) {
-            squashEffect.slotWindowAdded(window);
-        }
+        effects.windowMinimized.connect(squashEffect.slotWindowMinimized);
+        effects.windowUnminimized.connect(squashEffect.slotWindowUnminimized);
     }
 };
 

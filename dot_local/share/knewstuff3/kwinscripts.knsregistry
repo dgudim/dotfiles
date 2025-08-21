@@ -2,30 +2,31 @@
 <!DOCTYPE khotnewstuff3>
 <hotnewstuffregistry>
  <stuff category="720">
-  <name>Shortcuts for KDE's built-in tiling feature</name>
+  <name>Shortkuts</name>
   <providerid>api.kde-look.org</providerid>
   <author>de-ander-dog</author>
   <homepage>https://store.kde.org/p/2154527</homepage>
   <licence></licence>
   <version></version>
-  <rating>58</rating>
-  <downloads>188</downloads>
+  <rating>63</rating>
+  <downloads>455</downloads>
   <installedfile>/home/kloud/.local/share/kwin/scripts/returnToTile/</installedfile>
   <id>2154527</id>
-  <releasedate>2024-05-31</releasedate>
-  <summary>Extends KDE's built-in tiling feature with shortcuts to quckly assign windows to tiles, as well as shortcuts to navigate between tiles and their respective windows. Also returns a maximized Window to its previously assigned tile upon unmaximization. Windows in tiles swap places if both windows are tiled.&lt;br />
-&lt;br />
-The idea behind the script was to use the number and Function keys for the shortcuts, so naturally only 10 tiles are supported.&lt;br />
-Meta+F1-10 assigns a window the specified tile.&lt;br />
-Ctrl+0-9 activates the window assigned to that specific tile, where number 0 counts as 10.&lt;br />
-&lt;br />
-Make sure that the  Shortcuts used in this script aren't already being used for something else, otherwise they won't register. Also, you might need to logout and back in after installing.&lt;br />
-(Previously called return to tile).</summary>
+  <releasedate>2024-09-30</releasedate>
+  <summary>&lt;p>Extends KDE's built-in tiling feature with shortcuts to quckly assign windows to tiles, as well as shortcuts to navigate between tiles and their respective windows. Also returns a maximized Window to its previously assigned tile upon unmaximization. Windows in tiles swap places if both windows are tiled.&lt;/p>
+
+&lt;p>The idea behind the script was to use the number and Function keys for the shortcuts, so naturally only 10 tiles are supported.
+Meta+F1-10 assigns a window the specified tile.
+Ctrl+0-9 activates the window assigned to that specific tile, where number 0 counts as 10.&lt;/p>
+
+&lt;p>Make sure that the  Shortcuts used in this script aren't already being used for something else, otherwise they won't register. Also, you might need to logout and back in after installing.
+(Previously called return to tile).&lt;/p>
+</summary>
   <changelog></changelog>
-  <preview>https://images.pling.com/cache/100x100-0/img/00/00/78/41/79/2154527/screenshot-20240525-125727.png</preview>
-  <previewBig>https://images.pling.com/cache/770x540-0/img/00/00/78/41/79/2154527/screenshot-20240525-125727.png</previewBig>
-  <payload>https://files04.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE3MTcxNTQ5MTciLCJvIjoiMSIsInMiOiJjN2IwMmQ3NGQ2ZjRlNjEwYjAwNTAzYTZhNDRmZGM5NjEzYzI3MDIyZjI0ZTJiYTAxNzFiNzg3N2NhZmYzZjQyMjExYjM1Yjc1ZDU3NmJjZTQ1NzZiZjNlMTQ2NGExZGE2YTI4MWRhYTNhZDEzOTQxNTg3ODQ3YTU5YWVkZjBhMSIsInQiOjE3MjExMTQyODEsInN0ZnAiOm51bGwsInN0aXAiOiI3OC42Mi4xMzIuMyJ9.p0MrrUU2OCfXRccRJUKCZmrzR0acZVm255fB50Y4B1E/returnToTile1.3.zip</payload>
-  <tags>original-product,unix,linux,gplv3</tags>
+  <preview>https://images.pling.com/cache/100x100-4/img/00/00/78/41/79/2154527/screenshot-20240525-125727.png</preview>
+  <previewBig>https://images.pling.com/cache/770x540-4/img/00/00/78/41/79/2154527/screenshot-20240525-125727.png</previewBig>
+  <payload>https://files06.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTcyNzcxMDE0NywibyI6IjEiLCJzIjoiNWQwZmE4NmRlNDI2MWE0NzAzNTVkODY1ODk4MGYxZjQxNzg0YTg1YTU3ZjM2YjMyMGIzYjJkMjg1YmJjMTg5ZGFmYjBhY2Q4YjQxOGQ2OWRjM2I4YzNhMThiYmZiZTQxMmViZDRjM2QzYzFlNjU2OWY2OTM1ZDM0NDBkZDI1OWQiLCJ0IjoxNzU1Nzc4MzIwLCJzdGZwIjpudWxsLCJzdGlwIjoiMzEuNDQuMTAyLjIyNSJ9.odc2PSGkbtq9XfMrX-ELXRiZ-2yuKXJvJeyPcniAG-w/returnToTile.zip</payload>
+  <tags>unix,original-product,linux,gplv3</tags>
   <status>installed</status>
  </stuff>
 </hotnewstuffregistry>
