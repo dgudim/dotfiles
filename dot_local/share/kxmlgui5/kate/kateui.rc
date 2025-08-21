@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="kate" translationDomain="kate" version="107">
+<gui name="kate" translationDomain="kate" version="110">
  <MenuBar>
   <Menu name="file" noMerge="1">
    <text>&amp;File</text>
@@ -35,6 +35,7 @@
     <Action name="file_compare"/>
     <Separator/>
     <Action name="file_copy_filepath"/>
+    <Action name="file_copy_filename"/>
     <Action name="file_open_containing_folder"/>
     <Action name="file_properties"/>
    </Menu>
@@ -102,6 +103,7 @@
    </Menu>
    <Separator/>
    <Merge name="kate_mdi_view_actions"/>
+   <Action name="view_windows"/>
    <Separator/>
    <DefineGroup name="view_operations"/>
   </Menu>
@@ -142,6 +144,11 @@
    <Action name="help_welcome_page"/>
   </Menu>
  </MenuBar>
+ <ToolBar name="hamburgerBar" noMerge="1">
+  <text>Hamburger Menu Toolbar</text>
+  <Spacer/>
+  <Action name="hamburger_menu"/>
+ </ToolBar>
  <ToolBar name="mainToolBar" noMerge="1">
   <text>Main Toolbar</text>
   <Action name="file_new"/>
@@ -156,11 +163,6 @@
   <DefineGroup name="find_operations"/>
   <Separator/>
   <DefineGroup name="zoom_operations"/>
- </ToolBar>
- <ToolBar name="hamburgerBar" noMerge="1">
-  <text>Hamburger Menu Toolbar</text>
-  <Spacer/>
-  <Action name="hamburger_menu"/>
  </ToolBar>
  <Merge/>
  <Menu name="viewspace_popup" noMerge="1">
