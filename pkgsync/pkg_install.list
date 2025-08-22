@@ -250,7 +250,7 @@ bluez-utils
 breeze-gtk
 breeze5
 kde-gtk-config
-gtk3-classic
+gtk3-patched-filechooser-icon-view
 kdialog
 kinit
 kscreen
