@@ -11,7 +11,7 @@ def pause_media():
 
 
 def turn_off_keyboard_backlight():
-    command = 'qdbus org.kde.kglobalaccel /component/org_kde_powerdevil org.kde.kglobalaccel.Component.invokeShortcut "Decrease Keyboard Brightness"'
+    command = 'qdbus6 org.kde.kglobalaccel /component/org_kde_powerdevil org.kde.kglobalaccel.Component.invokeShortcut "Decrease Keyboard Brightness"'
     os.system(f"sleep 2 && {command}")
     os.system(f"sleep 3 && {command}")
     # os.system('sleep 3 && brightnessctl --device "tpacpi::kbd_backlight" set 0')
