@@ -570,6 +570,7 @@ vdhcoapp
 # For limine snapper sync
 b3sum
 vlc-plugins-all
+vlc-gui-ncurses
 arch-wiki-docs
 lsfg-vk-git
 
@@ -849,6 +850,8 @@ python-sortedcollections
 python-merge3
 python-sshtunnel
 python-brotlicffi
+python-pystache
+python-pyasn
 uvicorn
 
 ## ANDROID AND JAVA
