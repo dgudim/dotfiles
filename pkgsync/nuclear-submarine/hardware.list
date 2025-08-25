@@ -77,3 +77,6 @@ texlive-langenglish
 texlive-langother
 texlive-luatex
 texlive-plaingeneric
+
+# Jasper
+jdk17-openjdk
