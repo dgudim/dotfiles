@@ -198,6 +198,8 @@ enable_service pacserve.service
 enable_service espanso.service 1
 enable_service rescrobbled.service 1
 
+enable_service appimagelauncherd.service 1 1
+
 cd /home/kloud/.local/share/chezmoi/
 p="$(pwd)"
 systemctl is-active --user git-maintenance@daily.timer || git maintenance start
