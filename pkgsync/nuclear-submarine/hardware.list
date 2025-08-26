@@ -25,6 +25,7 @@ thinkfan-ui
 ryzen_monitor-git
 ryzen_smu-dkms-git
 zenergy-dkms-git
+amdsmi
 
 # Not hardware, but work stuff instead
 realvnc-vnc-viewer
