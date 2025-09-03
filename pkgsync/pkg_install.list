@@ -446,6 +446,7 @@ osquery
 translate-shell
 skopeo
 x86-64-level
+# For dell cpu constantly throttling
 msr-tools
 lsix
 biodiff
