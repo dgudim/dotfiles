@@ -145,6 +145,7 @@ find-the-command
 paccache-hook
 pacserve
 check-pacman-mtree
+kernel-modules-hook-bindmount
 
 ## FS TOOLS
 libblockdev-btrfs
@@ -283,6 +284,7 @@ cool-retro-term
 kclock
 systemdgenie
 filelight
+kdf
 jdiskreport
 qdirstat
 spectacle
