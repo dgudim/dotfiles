@@ -10,7 +10,6 @@ codon-bin
 ## Android
 android-studio
 android-tools
-adbfs-rootless-git
 android-apktool-bin
 
 ## Other

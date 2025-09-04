@@ -1,7 +1,7 @@
 [Actions]
-EnableMagicMimeActions=false
+EnableMagicMimeActions=true
 
 [General]
 IgnoreImages=false
 MaxClipItems=100
-Version=6.2.1
+Version=6.4.4
