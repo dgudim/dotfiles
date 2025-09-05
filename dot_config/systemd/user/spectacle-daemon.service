@@ -1,0 +1,13 @@
+[Unit]
+Description=Spectacle background daemon
+After=multi-user.target sddm.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/spectacle --dbus
+Restart=always
+RemainAfterExit=no
+RestartSec=1
+
+[Install]
+WantedBy=default.target
