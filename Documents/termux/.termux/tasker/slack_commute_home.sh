@@ -2,7 +2,6 @@
 
 source ./slack_token.sh
 
-curl -X POST 'https://slack.com/api/users.profile.set' \
--H "$SLACK_TOKEN" \
+with_token curl -X POST 'https://slack.com/api/users.profile.set' \
 -H 'Content-Type: application/json; charset=utf-8' \
--d '{ "profile": {"status_text": "Going home", "status_emoji": ":go_to_home:" }}' | jq
+-d '{ "profile": {"status_text": "Going home", "status_emoji": ":go_to_home:" }}'
