@@ -63,6 +63,7 @@ qt5-sensors
 qt5-tools
 kimageformats5
 poppler-qt5
+kplotting5
 
 # Replace by kwin-gestures
 gestures
