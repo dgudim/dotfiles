@@ -12,7 +12,7 @@
         },
 	"python": {
 			"command": [
-				"./home/kloud/.local/bin/pylsp_in_venv.sh", "%{Project:NativePath}"
+				"/home/kloud/.local/bin/pylsp_in_venv.sh", "%{Project:NativePath}"
 			],
 			"root": ".",
 			"url": "https://github.com/python-lsp/python-lsp-server",
