@@ -1,0 +1,270 @@
+<application>
+  <component name="FileEditorProviderManager">{
+  &quot;selectedProviders&quot;: {
+    &quot;text-editor,JavaFX-Scene-Builder&quot;: &quot;text-editor&quot;
+  }
+}</component>
+  <component name="GradleJvmSupportMatrix">
+    <option name="compatibility">
+      <list>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="INF-5.0" />
+          <option name="javaVersionInfo" value="6-8" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="INF-INF" />
+          <option name="javaVersionInfo" value="8-9" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="4.3-INF" />
+          <option name="javaVersionInfo" value="9-10" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="4.7-INF" />
+          <option name="javaVersionInfo" value="10-11" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="5.0-INF" />
+          <option name="javaVersionInfo" value="11-12" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="5.4-INF" />
+          <option name="javaVersionInfo" value="12-13" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="6.0-INF" />
+          <option name="javaVersionInfo" value="13-14" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="6.3-INF" />
+          <option name="javaVersionInfo" value="14-15" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="6.7-INF" />
+          <option name="javaVersionInfo" value="15-16" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="7.0-INF" />
+          <option name="javaVersionInfo" value="16-17" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="7.2-INF" />
+          <option name="javaVersionInfo" value="17-18" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="7.5-INF" />
+          <option name="javaVersionInfo" value="18-19" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="7.6-INF" />
+          <option name="javaVersionInfo" value="19-20" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="8.3-INF" />
+          <option name="javaVersionInfo" value="20-21" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="8.5-INF" />
+          <option name="javaVersionInfo" value="21-22" />
+        </VersionMapping>
+      </list>
+    </option>
+    <option name="default" value="false" />
+    <option name="ideVersion" value="2023.3.6" />
+    <option name="lastUpdateTime" value="1712043747097" />
+    <option name="supportedGradleVersions">
+      <list>
+        <option value="3.0" />
+        <option value="3.1" />
+        <option value="3.2" />
+        <option value="3.3" />
+        <option value="3.4" />
+        <option value="3.5" />
+        <option value="4.0" />
+        <option value="4.1" />
+        <option value="4.2" />
+        <option value="4.3" />
+        <option value="4.4" />
+        <option value="4.5" />
+        <option value="4.5.1" />
+        <option value="4.6" />
+        <option value="4.7" />
+        <option value="4.8" />
+        <option value="4.9" />
+        <option value="4.10" />
+        <option value="4.10.3" />
+        <option value="5.0" />
+        <option value="5.1" />
+        <option value="5.2" />
+        <option value="5.3" />
+        <option value="5.3.1" />
+        <option value="5.4" />
+        <option value="5.4.1" />
+        <option value="5.5" />
+        <option value="5.5.1" />
+        <option value="5.6" />
+        <option value="5.6.2" />
+        <option value="6.0" />
+        <option value="6.0.1" />
+        <option value="6.1" />
+        <option value="6.2" />
+        <option value="6.3" />
+        <option value="6.4" />
+        <option value="6.5" />
+        <option value="6.6" />
+        <option value="6.7" />
+        <option value="6.8" />
+        <option value="6.8.3" />
+        <option value="6.9" />
+        <option value="7.0" />
+        <option value="7.1" />
+        <option value="7.2" />
+        <option value="7.3" />
+        <option value="7.4" />
+        <option value="7.5" />
+        <option value="7.5.1" />
+        <option value="7.6" />
+        <option value="8.0" />
+        <option value="8.1" />
+        <option value="8.2" />
+        <option value="8.3" />
+        <option value="8.4" />
+        <option value="8.5" />
+        <option value="8.6" />
+      </list>
+    </option>
+    <option name="supportedJavaVersions">
+      <list>
+        <option value="8" />
+        <option value="9" />
+        <option value="10" />
+        <option value="11" />
+        <option value="12" />
+        <option value="13" />
+        <option value="14" />
+        <option value="15" />
+        <option value="16" />
+        <option value="17" />
+        <option value="18" />
+        <option value="19" />
+        <option value="20" />
+        <option value="21" />
+      </list>
+    </option>
+  </component>
+  <component name="LangManager">
+    <option name="languageName" value="JAVA" />
+  </component>
+  <component name="NotRoamableUiSettings">
+    <option name="fontFace" value="SF UI  Text" />
+    <option name="fontSize" value="13.0" />
+    <option name="ideScale" value="1.25" />
+    <option name="presentationModeIdeScale" value="1.75" />
+    <option name="overrideLafFonts" value="true" />
+  </component>
+  <component name="PropertyService"><![CDATA[{
+  "keyToString": {
+    "ColorChooser.RecentColors": "62-162-187-255,,,78-168-216-255,,,187-106-27-255,,,255-144-37-255",
+    "IdeErrorsDialog.LAST_OK_ACTION": "REPORT_AND_CLEAR_ALL",
+    "InstalledPluginsSearchHistory": "docstring\ndoc\ndo\nnew ui\nol",
+    "JUnitSupport.hidePassedTests": "false",
+    "KEYMAP": "forward\nback\nformat\nrename",
+    "LAST_CALCULATED_COLOR_INDEX_KEY": "8",
+    "LayoutCode.optimizeImports": "true",
+    "LayoutCode.processChangedText": "false",
+    "LayoutCode.rearrangeEntries": "true",
+    "MarketplacePluginsSearchHistory": "unit test\nunit\nuni\njavadoc\njavad",
+    "MemberChooser.copyJavadoc": "false",
+    "MemberChooser.showClasses": "true",
+    "PluginConfigurable.selectionTab": "1",
+    "RunOnceActivity.Run Grazie Token Refresher": "true",
+    "RunOnceActivity.TerminalOptionsProvider.migration.2025.1.1": "true",
+    "RunOnceActivity.VFSInitializationConditionsToFusReporter": "true",
+    "RunOnceActivity.git.modal.commit.toggle": "true",
+    "RunOnceActivity.java.code.vision.default.position.was.set": "true",
+    "RunOnceActivity.llm.show.ai.promotion.window.on.start": "true",
+    "SettingsSearchHistory": "javadoc\nnew ui\ntodo\nkeymap\nkeyma",
+    "UltimateProfiler.RunWidget.Splitter.Proportion.Run": "0.77888334",
+    "ai.assistant.toolwindow.shown.at.start": "true",
+    "ask.about.ctrl.y.shortcut.v2": "true",
+    "build.toolwindow.Build Output.selection.state": "com.intellij.build.BuildTreeConsoleView",
+    "build.toolwindow.Sync.selection.state": "com.intellij.build.BuildTreeConsoleView",
+    "build.toolwindow.run.selection.state": "com.intellij.build.BuildTreeConsoleView",
+    "bundled.plugins.list.saved.version": "IU-233.15026.9",
+    "com.github.evgenys91.machinet.userId": "37ba7f97-efd4-430c-9e64-7b68f2f3cf88",
+    "com.intellij.ide.projectWizard.generators.JavaNewProjectWizard$Step.selectedStep": "IntelliJ",
+    "com.intellij.ide.wizard.NewProjectWizardLanguageStep.selectedStep": "Java",
+    "com.intellij.openapi.roots.ui.configuration.TabbedModuleEditor.selectedEditor": "Sources",
+    "decompiler.legal.notice.accepted": "true",
+    "defaultJdkConfigured": "true",
+    "enter_selection_count": "5",
+    "evlsprt.233": "18d7b490700",
+    "evlsprt.241": "18eb5360480",
+    "evlsprt.243": "194f706b700",
+    "evlsprt3.233": "3",
+    "evlsprt3.241": "7",
+    "evlsprt3.243": "3",
+    "evlsprt3.252": "6",
+    "exception.accepted.notices": ":d4a3ab85",
+    "experimental.ui.on.first.startup": "true",
+    "experimental.ui.onboarding.proposed.version": "243.23654.189",
+    "experimental.ui.used.version": "243.23654.189",
+    "file.gist.reindex.count": "16",
+    "fileTypeChangedCounter": "4",
+    "fontSizeToResetConsole": "13.0",
+    "fontSizeToResetEditor": "13.0",
+    "got.it.tooltip.reader.mode.got.it": "1",
+    "got.it.tooltip.settings.sync.in.settings": "1",
+    "gotit.previous.run": "IU-243.23654.189",
+    "ide.memory.adjusted": "true",
+    "ide.updates.old.dirs.scan.scheduled": "1758099222454",
+    "idea.islands.enabled": "true",
+    "ift.hide.welcome.screen.promo": "true",
+    "input.method.disabler.muted": "true",
+    "installed.kotlin.plugin.version": "252.25557.131-IJ",
+    "jdk.selected.JAVA_MODULE": "17",
+    "llm.installer.last.toolwindow.state": "AI_ASSISTANT",
+    "migrated.non.roamable.values.from.general.settings": "true",
+    "previousColorScheme": "_@user_Gruvbox Dark Medium",
+    "project.wizard.group": "NPW.simple-project",
+    "registry.to.advanced.settings.migration.build": "IU-252.25557.131",
+    "terminal.gen.one.option.visible": "false",
+    "trial.state.last.availability.check": "1757494395407",
+    "trial.state.last.availability.state": "true",
+    "trial.state.last.state": "TRIAL_AVAILABLE",
+    "ts.lib.d.ts.version": "5.6.3"
+  },
+  "keyToStringList": {
+    "fileTypeDetectors": [
+      "com.intellij.ide.scratch.ScratchFileServiceImpl$Detector",
+      "com.intellij.profiler.ultimate.hprof.impl.HprofFileTypeDetector",
+      "com.intellij.docker.dockerFile.DockerFileTypeDetector",
+      "org.jetbrains.plugins.textmate.TextMateFileType$TextMateFileDetector"
+    ]
+  }
+}]]></component>
+  <component name="ShownTips">{
+  &quot;shownTips&quot;: {
+    &quot;SpeedSearch&quot;: 1709272075491,
+    &quot;SearchEverywhere&quot;: 1739366360091,
+    &quot;CommentCode&quot;: 1709629220000,
+    &quot;ShowUsages&quot;: 1739968114130,
+    &quot;ContextActions&quot;: 1707812231913,
+    &quot;FindInPath&quot;: 1713252271080
+  },
+  &quot;proposedTips&quot;: {
+    &quot;SpeedSearch&quot;: 1709272075060,
+    &quot;SearchEverywhere&quot;: 1739366359328,
+    &quot;CommentCode&quot;: 1709629219677,
+    &quot;ShowUsages&quot;: 1739968112956,
+    &quot;ContextActions&quot;: 1707812231535,
+    &quot;FindInPath&quot;: 1713252270743
+  },
+  &quot;tipsOrderSeed&quot;: 1707812231458
+}</component>
+  <component name="TerminalCommandHistoryManager">
+    <command-history-files>
+      <command-history-file filename="hw1-history" project-path="/home/kloud/Documents/shared/obsidian_vault/uni/Distributed systems/homeworks/hw1/hw1" last-access-time="1739992498834" />
+    </command-history-files>
+  </component>
+</application>

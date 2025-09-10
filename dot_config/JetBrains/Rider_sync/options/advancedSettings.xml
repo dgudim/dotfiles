@@ -1,0 +1,12 @@
+<application>
+  <component name="AdvancedSettings">
+    <option name="settings">
+      <map>
+        <entry key="confirm.rerun.with.termination" value="false" />
+        <entry key="documentation.components.enable.highlighting.of.links" value="true" />
+        <entry key="documentation.components.enable.inline.code.highlighting" value="AS_DEFAULT_CODE" />
+        <entry key="editor.skip.selecting.line.after.copy.empty.selection" value="true" />
+      </map>
+    </option>
+  </component>
+</application>

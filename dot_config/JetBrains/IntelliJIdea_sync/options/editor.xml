@@ -1,0 +1,28 @@
+<application>
+  <component name="CodeInsightSettings">
+    <option name="USE_INSTANCEOF_ON_EQUALS_PARAMETER" value="true" />
+  </component>
+  <component name="CodeVisionSettings">
+    <option name="defaultPosition" value="Right" />
+  </component>
+  <component name="DaemonCodeAnalyzerSettings">
+    <option name="AUTOREPARSE_DELAY" value="0" />
+  </component>
+  <component name="EditorSettings">
+    <option name="USE_EDITOR_FONT_IN_INLAYS" value="true" />
+  </component>
+  <component name="TodoConfiguration">
+    <pattern pattern="\btodo\b.*" />
+    <pattern pattern="\bfixme\b.*" />
+    <pattern useCustomColors="true" pattern="\bnote\b.*">
+      <option name="FOREGROUND" value="4ea8d8" />
+      <option name="FONT_TYPE" value="2" />
+      <option name="ERROR_STRIPE_COLOR" value="a74c0" />
+    </pattern>
+    <pattern useCustomColors="true" pattern="\btldr\b.*">
+      <option name="FOREGROUND" value="ff9025" />
+      <option name="FONT_TYPE" value="2" />
+      <option name="ERROR_STRIPE_COLOR" value="a74c0" />
+    </pattern>
+  </component>
+</application>

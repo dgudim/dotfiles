@@ -1,0 +1,15 @@
+<scheme name="_@user_Light" version="142" parent_scheme="Default">
+  <option name="FONT_SCALE" value="1.0" />
+  <metaInfo>
+    <property name="created">2024-02-06T13:30:30</property>
+    <property name="ide">idea</property>
+    <property name="ideVersion">2023.3.3.0.0</property>
+    <property name="modified">2024-02-06T13:32:39</property>
+    <property name="originalScheme">Light</property>
+    <property name="partialSave">true</property>
+    <property name="pluginId">com.intellij</property>
+  </metaInfo>
+  <option name="CONSOLE_FONT_NAME" value="FiraCode Nerd Font Mono" />
+  <option name="CONSOLE_FONT_SIZE" value="12" />
+  <option name="CONSOLE_LINE_SPACING" value="1.2" />
+</scheme>

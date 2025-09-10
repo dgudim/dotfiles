@@ -1,0 +1,63 @@
+<application>
+  <component name="FileEditorProviderManager">{}</component>
+  <component name="LangManager">
+    <option name="languageName" value="C#" />
+  </component>
+  <component name="NotRoamableUiSettings">
+    <option name="fontSize" value="13.0" />
+    <option name="ideScale" value="1.25" />
+    <option name="presentationModeIdeScale" value="1.75" />
+    <option name="overrideLafFonts" value="true" />
+  </component>
+  <component name="PropertyService"><![CDATA[{
+  "keyToString": {
+    "Debug.Allow.Typing": "true",
+    "LAST_CALCULATED_COLOR_INDEX_KEY": "8",
+    "NextRunPlatformUpdateBuild": "RD-243.25659.34",
+    "NextRunPlatformUpdateSelfBuild": "RD-243.23654.126",
+    "NextRunPlatformUpdateVersion": "2024.3.6",
+    "RD.Init.Cfg.2": "true",
+    "RD.Init.DialogShown.Ide": "true",
+    "Rider.Current.Build.Use.Start": "2025-03-05T17:51:36.405194917Z",
+    "Rider.Last.Started.IDE.Build": "RD-243.23654.126",
+    "RiderProblemsViewApplicationState.ContextShortcutLearnedName": "true",
+    "RunOnceActivity.VFSInitializationConditionsToFusReporter": "true",
+    "ask.about.ctrl.y.shortcut.v2": "true",
+    "enter_selection_count": "5",
+    "evlsprt.243": "195632c4300",
+    "evlsprt3.243": "4",
+    "experimental.ui.first.promotion.localdate": "2025-03-05",
+    "experimental.ui.on.first.startup": "false",
+    "fileTypeChangedCounter": "2",
+    "fontSizeToResetConsole": "13.0",
+    "fontSizeToResetEditor": "13.0",
+    "input.method.disabler.muted": "true",
+    "last_selected_project_template": "Project Type_Console",
+    "llm.installer.last.toolwindow.state": "AI_ASSISTANT",
+    "migrated.non.roamable.values.from.general.settings": "true",
+    "previousColorScheme": "_@user_Gruvbox Dark Medium",
+    "promo.ignore.ultimate.edition": "true",
+    "registry.to.advanced.settings.migration.build": "RD-243.23654.126",
+    "settings.code.style.selected.tab.C#": "Naming",
+    "toolwindow.stripes.buttons.info.shown": "true",
+    "ts.lib.d.ts.version": "5.6.3"
+  },
+  "keyToStringList": {
+    "fileTypeDetectors": [
+      "com.intellij.ide.scratch.ScratchFileServiceImpl$Detector",
+      "com.jetbrains.rider.cpp.fileType.CppHeaderFileTypeDetector",
+      "com.intellij.docker.dockerFile.DockerFileTypeDetector",
+      "com.intellij.javascript.debugger.sourcemap.SourceMapFileType$MyFileTypeDetector",
+      "com.intellij.database.vfs.DbStorageFileType$Detector",
+      "com.jetbrains.nodejs.util.NodeFileTypeDetector$JavaScriptFileTypeDetector",
+      "com.jetbrains.nodejs.util.NodeFileTypeDetector$TypeScriptFileTypeDetector",
+      "org.jetbrains.plugins.textmate.TextMateFileType$TextMateFileDetector"
+    ]
+  }
+}]]></component>
+  <component name="TerminalCommandHistoryManager">
+    <command-history-files>
+      <command-history-file filename="hw1-history" project-path="/home/kloud/Documents/shared/obsidian_vault/uni/Distributed systems/homeworks/hw1/hw1" last-access-time="1739992498834" />
+    </command-history-files>
+  </component>
+</application>
