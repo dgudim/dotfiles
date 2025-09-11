@@ -6,6 +6,16 @@ from pathlib import Path
 import os
 import re
 import shutil
+import sys
+
+
+def getenv(name: str) -> str:
+    val = os.getenv(name)
+    if not val:
+        print(f"{RED}{name} is unset!!{NC}")
+        sys.exit(1)
+    return val
+
 
 RED = "\033[0;31m"
 PURPLE = "\033[0;35m"
@@ -23,7 +33,7 @@ GRAY = "\033[38;5;240m"
 LIGHT_GRAY = "\033[38;5;242m"
 LIGHTER_GRAY = "\033[38;5;246m"
 
-home = os.environ["HOME"] or ""
+HOME = Path(getenv("HOME"))
 
 SYNC_DIR_POSTFIX = "_sync"
 
@@ -41,9 +51,9 @@ class ProgramConfig:
 configs: list[ProgramConfig] = [
     ProgramConfig(
         name="Intellij idea",
-        config_location=Path(home, ".config/JetBrains"),
+        config_location=Path(HOME, ".config/JetBrains"),
         settings_dir_prefix="IntelliJIdea",
-        data_location=Path(home, ".local/share/JetBrains/"),
+        data_location=Path(HOME, ".local/share/JetBrains/"),
         config_files_to_sync={
             "options/other.xml",
             "options/advancedSettings.xml",
@@ -60,9 +70,9 @@ configs: list[ProgramConfig] = [
     ),
     ProgramConfig(
         name="Rider",
-        config_location=Path(home, ".config/JetBrains"),
+        config_location=Path(HOME, ".config/JetBrains"),
         settings_dir_prefix="Rider",
-        data_location=Path(home, ".local/share/JetBrains/"),
+        data_location=Path(HOME, ".local/share/JetBrains/"),
         config_files_to_sync={
             "options/other.xml",
             "options/advancedSettings.xml",
@@ -79,7 +89,7 @@ configs: list[ProgramConfig] = [
     ),
     ProgramConfig(
         name="Blender",
-        config_location=Path(home, ".config/blender"),
+        config_location=Path(HOME, ".config/blender"),
         settings_dir_prefix="",
         data_location=None,
         config_files_to_sync={
@@ -107,19 +117,16 @@ def get_all_versioned_dirs(base_path: Path, dir_prefix: str):
     )
 
     dirs: dict[float, VersionedDirectory] = {}
-    max_version = 0
+    max_version: float = 0
     for dir_ in base_path.glob(f"{dir_prefix}*"):
         if str(dir_).endswith(SYNC_DIR_POSTFIX):
             continue
         version = float(dir_.name.replace(dir_prefix, ""))
         print(f"{GRAY}    -> Found dir: {dir_}, {LIGHT_GRAY}version: {L_YELLOW}{version}{NC}")
 
-        versioned_dir = VersionedDirectory(is_latest=False, version=version, path_=dir_)
+        dirs[version] = VersionedDirectory(is_latest=False, version=version, path_=dir_)
 
-        dirs[version] = versioned_dir
-
-        if version > max_version:
-            max_version = version
+        max_version = max(max_version, version)
 
     if max_version > 0:
         dirs[max_version].is_latest = True
@@ -174,7 +181,7 @@ def process_versioned_dirs_cleanup_and_copy_sync_files(
 
     for file_to_sync_pattern in files_to_sync_patterns:
         for source_file in source_files:
-            source_file_rel = str(source_file).replace(f"{str(sync_files_source)}/", "")
+            source_file_rel = str(source_file).removeprefix(f"{str(sync_files_source)}/")
             if (
                 isinstance(file_to_sync_pattern, re.Pattern) and file_to_sync_pattern.match(source_file_rel)
             ) or file_to_sync_pattern == source_file_rel:
@@ -187,15 +194,22 @@ def process_versioned_dirs_cleanup_and_copy_sync_files(
                 target_file.write_bytes(source_file.read_bytes())
 
                 print(
-                    f"{GREEN} copied {GRAY}{str(source_file).removeprefix(f'{home}/')} to {str(target_file).removeprefix(f'{home}/')})"
+                    f"{GREEN} copied {GRAY}{str(source_file).replace(str(HOME), '~')} to {str(target_file).replace(str(HOME), '~')})"
                 )
 
     print(
         f"{NC}Matched {PURPLE}{len(matched_patterns)}{NC}/{PURPLE}{len(files_to_sync_patterns)} {NC}patterns, copied {L_YELLOW}{copied_files}{NC} files"
     )
 
+    unmatched_patterns = files_to_sync_patterns - matched_patterns
+
+    if len(unmatched_patterns) > 0:
+        print(f"{YELLOW}Unmatched patterns: {L_YELLOW}{unmatched_patterns}{NC}")
+
 
 def pre():
+    print(f"{L_PURPLE} Copying versioned {L_CYAN}program settings {L_PURPLE}to sync dir...{NC}")
+
     for config in configs:
         print(f"{LIGHTER_GRAY}==== Processing: {L_CYAN}{config.name}{NC}")
 
@@ -219,6 +233,8 @@ def pre():
 
 
 def post():
+    print(f"{L_PURPLE} Applying versioned {L_CYAN}program settings {L_PURPLE}from sync dir...{NC}")
+
     for config in configs:
         print(f"{LIGHTER_GRAY}==== Processing: {L_CYAN}{config.name}{NC}")
 

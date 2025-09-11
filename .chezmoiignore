@@ -12,4 +12,5 @@
     /.config/pipewire/pipewire.conf.d/vibration-speaker.conf
 {{- end }}
 /update_apply_hooks
+/common_functions.py
 .gitignore
