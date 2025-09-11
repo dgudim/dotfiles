@@ -496,7 +496,7 @@ ripgrep-all
 ast-grep-bin
 
 ## Shell integrations
-moar
+moor
 zoxide
 thefuck
 direnv

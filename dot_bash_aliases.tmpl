@@ -12,10 +12,10 @@ export BATPIPE_INSIDE_LESS=false
 tview() {
 	batpipe --color=always "$@" | "$PAGER"
 }
-export MOAR='--no-linenumbers --wrap --no-clear-on-exit --quit-if-one-screen --style=gruvbox'
-export PAGER='moar'
+export MOOR='--no-linenumbers --wrap --no-clear-on-exit --quit-if-one-screen --style=gruvbox'
+export PAGER='moor'
 alias cat='bat'
-alias man='MOAR="--no-linenumbers --wrap" && batman'
+alias man='MOOR="--no-linenumbers --wrap" && batman'
 
 alias klogs='sudo journalctl -e -f -k -b | ccze -A -o nolookups | spacer'
 alias logs='sudo journalctl -e -f -b | ccze -A -o nolookups | spacer'
@@ -222,7 +222,7 @@ alias fastfetch='fastfetch --logo-width 60 --logo-padding-top 2 --logo /home/klo
 
 ################################################ Pacman aliases ################################################
 
-alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | moar'
+alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | moor'
 alias orphans='pacman -Qtdq'
 alias broken='sudo pacman -Qkk | grep warning'
 

@@ -2,11 +2,11 @@
 
 ble-sabbrev "~down=$HOME/Downloads"
 ble-sabbrev "~proj=$HOME/Documents/shared/_projects/"
-ble-sabbrev L='| moar'
+ble-sabbrev L='| moor'
 ble-sabbrev -m @@='ble-palette'
 ble-sabbrev -m reload='reload'
-ble-sabbrev syscl-usr='systemctl --user'
-ble-sabbrev syscl-usr-enable='systemctl enable --user --now'
+ble-sabbrev systcl-usr='systemctl --user'
+ble-sabbrev systcl-usr-enable='systemctl enable --user --now'
 ble-sabbrev chezmoimm='chezmoi_modify_manager'
 
 function blerc/define-sabbrev-date {
