@@ -1,0 +1,232 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 3D Print Toolbox 1.2.0\n"
+"POT-Creation-Date: 2025-05-01\n"
+"PO-Revision-Date: 2025-05-06\n"
+"Last-Translator: Zhang Chenming (张宸铭) @zcm\n"
+"Language-Team: Mikhail Rachinskiy\n"
+"Language: zh_HANS\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Analyze"
+msgstr "分析"
+
+msgid "Checks"
+msgstr "检查"
+
+msgid "Scale To"
+msgstr "缩放到"
+
+msgid "Scene Scale"
+msgstr "场景缩放"
+
+msgid "Copy Textures"
+msgstr "复制材质"
+
+msgid "Volume: {}³"
+msgstr "体积: {}³"
+
+msgid "Area: {}²"
+msgstr "表面积: {}²"
+
+msgid "Non-manifold Edges: {}"
+msgstr "非流形边: {}"
+
+msgid "Bad Contiguous Edges: {}"
+msgstr "反向面交界（不良交界边）: {}"
+
+msgid "Intersect Face: {}"
+msgstr "交叉面: {}"
+
+msgid "Zero Faces: {}"
+msgstr "零面积面: {}"
+
+msgid "Zero Edges: {}"
+msgstr "零长度边: {}"
+
+msgid "Non-flat Faces: {}"
+msgstr "不平坦面: {}"
+
+msgid "Thin Faces: {}"
+msgstr "薄面: {}"
+
+msgid "Sharp Edge: {}"
+msgstr "锐夹角边: {}"
+
+msgid "Overhang Face: {}"
+msgstr "悬空面: {}"
+
+msgid "Report the volume of the active mesh"
+msgstr "显示所选网格体的体积"
+
+msgid "Report the surface area of the active mesh"
+msgstr "显示所选网格体的表面积"
+
+msgid "Check for geometry is solid (has valid inside/outside) and correct normals"
+msgstr "检验几何体正确包围（具有有效的内外空间）并有正确的法向"
+
+msgid "Check for self intersections"
+msgstr "检出自相交"
+
+msgid "Check for zero area faces and zero length edges"
+msgstr "检出零面积面和零长度边（重合顶点）"
+
+msgid "Check for non-flat faces"
+msgstr "检出不平坦面"
+
+msgid "Check for wall thickness below specified value"
+msgstr "检出薄于指定值的体厚度"
+
+msgid "Check for edges sharper than a specified angle"
+msgstr "检出锐于指定值的边夹角"
+
+msgid "Check for faces that overhang past a specified angle"
+msgstr "检出低于指定角度的悬空面"
+
+msgid "Run all checks"
+msgstr "执行所有检查"
+
+msgid "Select the data associated with this report"
+msgstr "选中触发此项的元素"
+
+msgid "Clear report"
+msgstr "清除报告"
+
+msgid "Cleanup loose geometry, interior faces, non-manifold vertices and inverted normals"
+msgstr "清理松散几何体、内部面、非流形顶点和错反的法向"
+
+msgid "Minimum Thickness"
+msgstr "最小厚度"
+
+msgid "Export Directory"
+msgstr "导出路径"
+
+msgid "Export file in ASCII format"
+msgstr "用ASCII格式导出文件"
+
+msgid "Apply scene scale on export"
+msgstr "导出时应用场景缩放"
+
+msgid "Copy textures on export to the output path"
+msgstr "将材质贴图复制到导出路径"
+
+msgid "Export selected objects using settings below"
+msgstr "按下方的设置导出选择的物体"
+
+msgid "Create offset surface"
+msgstr "创建偏移的表面"
+
+msgid "Offset direction relative to the object surface"
+msgstr "物体表面选择偏移的方向"
+
+msgid "Surface offset in relation to original mesh"
+msgstr "物体表面的偏移量"
+
+msgid "Size of the voxel used for volume evaluation. Lower values preserve finer details"
+msgstr "用于采样体积的体素大小，越低的值保留越多细节"
+
+msgid "Hollow Duplicate"
+msgstr "复制式中空化"
+
+msgid "Create hollowed out copy of the object"
+msgstr "在创建的中空化表面物体中包含原物体的拷贝"
+
+msgid "Rotate object so the selected faces lie, on average, parallel to the XY plane"
+msgstr "旋转物体以使所选择的面平行于坐标系中的XY面"
+
+msgid "Weight by Face Area"
+msgstr "根据面积加权"
+
+msgid "Take face area into account when calculating rotation"
+msgstr "计算旋转时考虑各面面积"
+
+msgid "Multiple selected objects. Only the active one will be evaluated"
+msgstr "检查到多选物体，将仅检查激活的物体"
+
+msgid "Report is out of date, re-run check"
+msgstr "报告已过时，需要重新运行检查"
+
+msgid "Modified: {:+} vertices, {:+} edges, {:+} faces"
+msgstr "修改了: {:+} 个顶点, {:+} 条边, {:+} 个面"
+
+msgid "Make sure target mesh has closed surface and offset value is less than half of target thickness"
+msgstr "确认目标几何体具有闭合的表面，且所指定的偏移量低于目标厚度的一般"
+
+msgid "Scaled by {}"
+msgstr "缩放到 {} 倍"
+
+msgid ", Clamping {}-Axis"
+msgstr ", 钳制 {} 轴"
+
+msgid "At least one mesh object must be selected"
+msgstr "需要最少选择一个网格体"
+
+msgid "Object has zero volume"
+msgstr "物体体积为零"
+
+msgid "Object has zero bounds"
+msgstr "物体尺寸为零"
+
+msgid "Exported: {!r}"
+msgstr "已导出到: {!r}"
+
+msgid "Export failed"
+msgstr "导出失败"
+
+msgctxt "Operator"
+msgid "Volume"
+msgstr "体积"
+
+msgctxt "Operator"
+msgid "Area"
+msgstr "表面积"
+
+msgctxt "Operator"
+msgid "Solid"
+msgstr "正确包围"
+
+msgctxt "Operator"
+msgid "Intersections"
+msgstr "自相交"
+
+msgctxt "Operator"
+msgid "Degenerate"
+msgstr "短线小面重合点"
+
+msgctxt "Operator"
+msgid "Non-Planar"
+msgstr "不平坦面"
+
+msgctxt "Operator"
+msgid "Thickness"
+msgstr "厚度"
+
+msgctxt "Operator"
+msgid "Sharp"
+msgstr "锐角"
+
+msgctxt "Operator"
+msgid "Overhang"
+msgstr "悬空"
+
+msgctxt "Operator"
+msgid "Check All"
+msgstr "检查所有"
+
+msgctxt "Operator"
+msgid "Make Manifold"
+msgstr "流形化"
+
+msgctxt "Operator"
+msgid "Hollow"
+msgstr "中空化"
+
+msgctxt "Operator"
+msgid "Align XY"
+msgstr "对齐到XY面"
+
+msgctxt "Operator"
+msgid "Bounds"
+msgstr "轴向最长尺寸"

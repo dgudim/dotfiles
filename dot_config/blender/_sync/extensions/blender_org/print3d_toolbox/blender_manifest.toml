@@ -1,0 +1,20 @@
+schema_version = "1.0.0"
+id = "print3d_toolbox"
+name = "3D Print Toolbox"
+version = "1.2.1"
+tagline = "Utilities for 3D printing"
+maintainer = "Mikhail Rachinskiy"
+type = "add-on"
+tags = ["Mesh"]
+blender_version_min = "4.2.0"
+license = ["SPDX:GPL-3.0-or-later"]
+website = "https://projects.blender.org/extensions/print3d_toolbox"
+copyright = [
+    "2013-2024 Campbell Barton",
+    "2016-2025 Mikhail Rachinskiy",
+    "2022 Jaggz H.",
+    "2024-2025 Ubiratan Freitas",
+]
+
+[permissions]
+files = "Export STL, PLY, OBJ files"

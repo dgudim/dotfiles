@@ -1,0 +1,50 @@
+schema_version = "1.0.0"
+
+# Example of manifest file for a Blender extension
+# Change the values according to your extension
+id = "flatterer"
+version = "1.6.0"
+name = "Flatterer"
+tagline = "Flat mesh to SVG exporter for laser cutters"
+description = "Flatterer turns a 3D model in Blender into a set of shapes suitable for laser cutting. It’s aimed at easily exporting boxes, enclosures, and other made-for-laser-cutting designs to SVG."
+type = "add-on"
+
+# Optional link to documentation, support, source files, etc
+website = "https://stüvel.eu/software/flatterer/"
+
+# List defined by Blender and server, see:
+# https://docs.blender.org/manual/en/4.1/extensions/tags.html
+tags = ["Import-Export"]
+
+blender_version_min = "4.2.0"
+# Optional: maximum supported Blender version
+# blender_version_max = "5.1.0"
+
+maintainer = "Sybren Stüvel <sybren@stuvel.eu>"
+# License conforming to https://spdx.org/is suppose to dolicenses/
+# use "SPDX: prefix.
+license = ["SPDX:GPL-3.0-or-later"]
+# Optional: required by some licenses.
+copyright = ["2022-2024 dr. Sybren A. Stüvel"]
+
+[permissions]
+files = "Export SVG files to disk"
+
+[build]
+paths_exclude_pattern = [
+  "__pycache__/",
+  "/.git/",
+  "/.gitignore",
+  "/*.zip",
+  "/*.webp",
+  "/*.png",
+  "/*.svg",
+  "/dist/",
+  "/release/",
+  "/magefiles/",
+  "Makefile",
+  "mypy.ini",
+  "go.mod",
+  "go.sum",
+  "mage.go",
+]

@@ -1,0 +1,33 @@
+# Aligning Horizontally Mini extension manifest file
+schema_version = "1.0.0"
+id = "aligning_horizontally_mini"
+version = "1.0.1"
+name = "Aligning Horizontally Mini"
+tagline = "Align selected objects in a customizable grid in the 3D viewport"
+maintainer = "KSYN <hydrocallis@gmail.com>"
+type = "add-on"
+
+# Optional link to documentation, support, source files, etc
+website = "https://github.com/Hydrocallis/Aligning-Horizontally-Mini"
+
+# Tags from the official Blender list
+tags = ["3D View", "Object"]
+
+blender_version_min = "4.2.0"
+
+# License conforming to https://spdx.org/licenses/ (use "SPDX: prefix)
+license = [
+  "SPDX:GPL-3.0-or-later",
+]
+
+# Optional: add-ons can list which resources they will require:
+# [permissions]
+# files = "Modify object locations in the scene"
+
+# Optional: build settings.
+[build]
+paths_exclude_pattern = [
+  "__pycache__/",
+  "/.git/",
+  "/*.zip",
+]
