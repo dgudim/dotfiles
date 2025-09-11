@@ -32,8 +32,8 @@ SYNC_DIR_POSTFIX = "_sync"
 class ProgramConfig:
     name: str
     settings_dir_prefix: str
-    config_location: Path
-    data_location: Path
+    config_location: Path | None
+    data_location: Path | None
     config_files_to_sync: set[str | re.Pattern]
     data_files_to_sync: set[str | re.Pattern]
 
@@ -77,7 +77,21 @@ configs: list[ProgramConfig] = [
         },
         data_files_to_sync={re.compile("classic-ui/.*"), re.compile("Gruvbox_Theme.*")},
     ),
+    ProgramConfig(
+        name="Blender",
+        config_location=Path(home, ".config/blender"),
+        settings_dir_prefix="",
+        data_location=None,
+        config_files_to_sync={
+            "config/userpref.blend",
+            re.compile("extensions/blender_org/.*"),
+            re.compile("scripts/.*"),
+        },
+        data_files_to_sync=set(),
+    ),
 ]
+
+ignore_patterns = ["__pycache__"]
 
 
 @dataclass
@@ -119,7 +133,7 @@ class CopyDirection(Enum):
 
 
 def process_versioned_dirs_cleanup_and_copy_sync_files(
-    base_path: Path, dir_prefix: str, log_name: str, files_to_sync_patterns: list[str], copy_: CopyDirection
+    base_path: Path, dir_prefix: str, log_name: str, files_to_sync_patterns: set[str | re.Pattern], copy_: CopyDirection
 ):
     versioned_dirs = get_all_versioned_dirs(base_path, dir_prefix)
 
@@ -131,7 +145,7 @@ def process_versioned_dirs_cleanup_and_copy_sync_files(
         print(f"{GRAY}  Nothing found")
         return
 
-    latest_program_dir: Path
+    latest_program_dir: Path | None = None
 
     for versioned_dir in versioned_dirs:
         if not versioned_dir.is_latest:
@@ -140,12 +154,20 @@ def process_versioned_dirs_cleanup_and_copy_sync_files(
         else:
             latest_program_dir = versioned_dir.path_
 
+    assert (
+        latest_program_dir is not None
+    )  # Can't be None, we checked for versioned_dirs size higher and there MUST be 1 dir marked as latest
+
     sync_files_source = latest_program_dir if copy_ == CopyDirection.TO_SYNC_DIR_FROM_LATEST_PROGRAM_DIR else sync_dir
     sync_files_target = sync_dir if copy_ == CopyDirection.TO_SYNC_DIR_FROM_LATEST_PROGRAM_DIR else latest_program_dir
 
     print(f"{LIGHTER_GRAY}  Copying synced files")
 
-    source_files = [f for f in sync_files_source.rglob("*") if f.is_file()]
+    source_files = [
+        f
+        for f in sync_files_source.rglob("*")
+        if f.is_file() and not any((ignore_pattern in str(f)) for ignore_pattern in ignore_patterns)
+    ]
 
     matched_patterns = set()
     copied_files = 0
@@ -164,7 +186,9 @@ def process_versioned_dirs_cleanup_and_copy_sync_files(
                 os.makedirs(os.path.dirname(target_file), exist_ok=True)
                 target_file.write_bytes(source_file.read_bytes())
 
-                print(f"{GREEN} copied {GRAY}{str(source_file).removeprefix(f"{home}/")} to {str(target_file).removeprefix(f"{home}/")})")
+                print(
+                    f"{GREEN} copied {GRAY}{str(source_file).removeprefix(f'{home}/')} to {str(target_file).removeprefix(f'{home}/')})"
+                )
 
     print(
         f"{NC}Matched {PURPLE}{len(matched_patterns)}{NC}/{PURPLE}{len(files_to_sync_patterns)} {NC}patterns, copied {L_YELLOW}{copied_files}{NC} files"
@@ -175,36 +199,43 @@ def pre():
     for config in configs:
         print(f"{LIGHTER_GRAY}==== Processing: {L_CYAN}{config.name}{NC}")
 
-        process_versioned_dirs_cleanup_and_copy_sync_files(
-            config.data_location,
-            config.settings_dir_prefix,
-            "data",
-            config.data_files_to_sync,
-            CopyDirection.TO_SYNC_DIR_FROM_LATEST_PROGRAM_DIR,
-        )
-        process_versioned_dirs_cleanup_and_copy_sync_files(
-            config.config_location,
-            config.settings_dir_prefix,
-            "config",
-            config.config_files_to_sync,
-            CopyDirection.TO_SYNC_DIR_FROM_LATEST_PROGRAM_DIR,
-        )
+        if config.data_location is not None:
+            process_versioned_dirs_cleanup_and_copy_sync_files(
+                config.data_location,
+                config.settings_dir_prefix,
+                "data",
+                config.data_files_to_sync,
+                CopyDirection.TO_SYNC_DIR_FROM_LATEST_PROGRAM_DIR,
+            )
+
+        if config.config_location is not None:
+            process_versioned_dirs_cleanup_and_copy_sync_files(
+                config.config_location,
+                config.settings_dir_prefix,
+                "config",
+                config.config_files_to_sync,
+                CopyDirection.TO_SYNC_DIR_FROM_LATEST_PROGRAM_DIR,
+            )
+
 
 def post():
     for config in configs:
         print(f"{LIGHTER_GRAY}==== Processing: {L_CYAN}{config.name}{NC}")
 
-        process_versioned_dirs_cleanup_and_copy_sync_files(
-            config.data_location,
-            config.settings_dir_prefix,
-            "data",
-            config.data_files_to_sync,
-            CopyDirection.TO_LATEST_PROGRAM_DIR_FROM_SYNC_DIR,
-        )
-        process_versioned_dirs_cleanup_and_copy_sync_files(
-            config.config_location,
-            config.settings_dir_prefix,
-            "config",
-            config.config_files_to_sync,
-            CopyDirection.TO_LATEST_PROGRAM_DIR_FROM_SYNC_DIR,
-        )
+        if config.data_location is not None:
+            process_versioned_dirs_cleanup_and_copy_sync_files(
+                config.data_location,
+                config.settings_dir_prefix,
+                "data",
+                config.data_files_to_sync,
+                CopyDirection.TO_LATEST_PROGRAM_DIR_FROM_SYNC_DIR,
+            )
+
+        if config.config_location is not None:
+            process_versioned_dirs_cleanup_and_copy_sync_files(
+                config.config_location,
+                config.settings_dir_prefix,
+                "config",
+                config.config_files_to_sync,
+                CopyDirection.TO_LATEST_PROGRAM_DIR_FROM_SYNC_DIR,
+            )
