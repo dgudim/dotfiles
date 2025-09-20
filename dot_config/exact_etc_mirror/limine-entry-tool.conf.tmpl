@@ -105,3 +105,10 @@ DRACUT_FALLBACK=yes
 ### - Duplicate 'initramfs' and 'vmlinuz' files are removed when 'limine-dracut' or 'limine-update' is run to generate a UKI.
 ### - UKI ignores booting into a snapshot when Secure Boot is enabled. To resolve this, any embedded kernel cmdline is removed from the UKI, which will then read the external kernel cmdline.
 ENABLE_UKI=no
+
+
+
+# Don't registed efi when booted from portable drive
+{{- if eq .chezmoi.hostname "portable-heater" }}
+NO_EFI_REGISTER=1
+{{- end }}
