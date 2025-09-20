@@ -449,6 +449,8 @@ systemctl() {
 		fi
 
 		mpv --no-terminal "${arr[$rand]}" >/dev/null && /usr/bin/systemctl "$@" # It is here like this for the ability to cancel the shutdown
+	elif [ "$1" == "start" ]; then
+		/usr/bin/systemctl "$@" --verbose
 	else
 		/usr/bin/systemctl "$@"
 	fi
