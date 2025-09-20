@@ -44,8 +44,8 @@ progress=true
     loglevel = "basic"
 
 [diff]
-    pager="delta"
-    # command = "delta"
+    pager=""
+    command = "delta"
     exclude = ["dirs", "scripts"]
     args = ["--pager=0", "{{`{{ .Destination }}`}}", "{{`{{ .Target }}`}}"]
 
