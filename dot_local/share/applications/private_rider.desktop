@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Application;Development;
 Comment=A cross-platform .NET IDE by JetBrains.
-Exec=/usr/share/rider/bin/rider.sh %f
+Exec=/usr/bin/rider %f
 Icon=com.jetbrains.Rider
 Name=Rider
 NoDisplay=false
