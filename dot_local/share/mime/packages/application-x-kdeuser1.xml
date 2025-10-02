@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+    <mime-type type="application/x-kdeuser1">
+        <comment>Db File</comment>
+        <icon name="application-vnd.sqlite3"/>
+        <glob-deleteall/>
+        <glob pattern="*.DB"/>
+        <glob pattern="*.db"/>
+    </mime-type>
+</mime-info>
