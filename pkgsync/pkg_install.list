@@ -866,7 +866,7 @@ adbfs-rootless-git
 logcat-colorize
 android-apktool-bin
 android-sdk-build-tools
-scrcpy-full-git
+scrcpy
 jadx
 jadx-gui-desktop
 intellij-idea-ultimate-edition
