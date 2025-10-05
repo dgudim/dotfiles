@@ -26,7 +26,6 @@ zenergy-dkms-git
 
 ## Nvidia
 nvidia-dkms
-nvidia-hook
 nvidia-settings
 libva-nvidia-driver
 opencl-nvidia
