@@ -4,11 +4,17 @@
     <mouse-shortcut keystroke="button4" />
     <keyboard-shortcut first-keystroke="alt left" />
   </action>
+  <action id="Console.TableResult.GotoReferencedResult">
+    <mouse-shortcut keystroke="button1 doubleClick" />
+    <keyboard-shortcut first-keystroke="enter" />
+    <keyboard-shortcut first-keystroke="alt enter" />
+  </action>
   <action id="Forward">
     <keyboard-shortcut first-keystroke="ctrl alt right" />
     <mouse-shortcut keystroke="button5" />
     <keyboard-shortcut first-keystroke="alt right" />
   </action>
+  <action id="GotoNextError" />
   <action id="NextTab" />
   <action id="PreviousTab" />
   <action id="ReformatCode">
@@ -16,7 +22,8 @@
     <keyboard-shortcut first-keystroke="alt f" />
   </action>
   <action id="RenameElement">
-    <keyboard-shortcut first-keystroke="shift f6" />
     <keyboard-shortcut first-keystroke="f2" />
   </action>
+  <action id="SwitcherNextProblem" />
+  <action id="SwitcherNextProblemFallback" />
 </keymap>
