@@ -14,3 +14,6 @@
 /update_apply_hooks
 /common_functions.py
 .gitignore
+**/nuclear-submarine-00-plasma-pa.conf
+**/sauron-00-plasma-pa.conf
+**/black-bird-00-plasma-pa.conf
