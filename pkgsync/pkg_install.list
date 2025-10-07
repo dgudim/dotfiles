@@ -457,6 +457,7 @@ geteltorito
 procs
 fbgrab
 wikiman
+binwalk
 
 ## BTRFS
 compsize
