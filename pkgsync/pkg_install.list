@@ -253,7 +253,6 @@ breeze5
 kde-gtk-config
 gtk3-patched-filechooser-icon-view
 kdialog
-kinit
 kscreen
 colord-kde
 ksshaskpass
@@ -556,7 +555,6 @@ udev-notify-my
 journalctl-desktop-notification-git
 # syncthing-appmenu
 rlwrap
-dbeaver-plugin-svg-format
 yt-dlp-drop-in
 xorg-xhost
 awatcher-git

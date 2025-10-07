@@ -99,3 +99,7 @@ pacman-pstatus
 informant
 kdf
 zoom
+
+# Obsolete
+dbeaver-plugin-svg-format
+kinit
