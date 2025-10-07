@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
+<gui library="libkatexmltoolsplugin" name="katexmltools" translationDomain="katexmltools" version="9">
+ <MenuBar>
+  <Menu name="xml">
+   <text>&amp;XML</text>
+   <Action name="xml_tool_insert_element"/>
+   <Action name="xml_tool_close_element"/>
+   <Action name="xml_tool_assign"/>
+  </Menu>
+ </MenuBar>
+ <ActionProperties scheme="Default"/>
+</gui>
+<!-- kate: space-indent on; indent-width 4; replace-tabs on; -->

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
+<gui library="katecloseexceptplugin" name="katecloseexcept" translationDomain="katecloseexceptplugin" version="4">
+ <MenuBar>
+  <Menu name="file">
+   <text>&amp;File</text>
+   <Action group="close_merge" name="file_close_except"/>
+   <Action group="close_merge" name="file_close_like"/>
+  </Menu>
+ </MenuBar>
+ <ActionProperties scheme="Default"/>
+</gui>
+<!-- kate: space-indent on; indent-width 4; replace-tabs on; -->

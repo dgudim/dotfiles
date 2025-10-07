@@ -13,4 +13,7 @@
   <Action name="externaltool_XMLFormatFullFile"/>
   <Action name="externaltool_Formatshellcode"/>
  </ToolBar>
+ <ActionProperties scheme="Default">
+  <Action name="externaltool_JSONFormatFullFile" shortcut=""/>
+ </ActionProperties>
 </gui>

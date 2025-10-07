@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui library="libkatetextfilterplugin" name="katetextfilter" translationDomain="katetextfilter" version="5">
+<gui library="formatplugin" name="formatplugin" translationDomain="formatplugin" version="1">
  <MenuBar>
-  <Menu name="tools">
-   <text>&amp;Tools</text>
-   <Action group="tools_konsole" name="edit_filter"/>
+  <Menu name="edit">
+   <Action name="format_on_save"/>
+   <Action name="format_document"/>
   </Menu>
  </MenuBar>
  <ActionProperties scheme="Default"/>
