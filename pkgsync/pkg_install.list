@@ -561,6 +561,7 @@ xorg-xhost
 awatcher-git
 aw-watcher-media-player-git
 slicer-udev
+android-udev
 gjs
 nawk
 open-in-native-client
