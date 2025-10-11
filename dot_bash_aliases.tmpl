@@ -712,8 +712,8 @@ proxy_on() {
 }
 
 proxy_off() {
-	unset http_proxy
-	unset https_proxy
+	export http_proxy
+	export https_proxy
 }
 
 setup_ssh_shell_utils() {
