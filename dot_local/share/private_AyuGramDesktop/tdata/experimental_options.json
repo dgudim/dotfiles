@@ -1,5 +1,6 @@
 {
     "disable-autoplay-next": true,
     "use-small-msg-bubble-radius": true,
+    "view-profile-in-chats-list-context-menu": true,
     "webview-debug-enabled": true
 }
