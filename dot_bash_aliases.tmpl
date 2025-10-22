@@ -782,7 +782,7 @@ setup_ssh_shell_utils() {
 	echo -e "${GRAY}Writing atuin config${NC}"
 
 	mkdir -pv ~/.config/atuin
-	echo -e "update_check = false\nworkspaces = true\ninline_height=30\n" > ~/.config/atuin/config.toml
+	echo -e "$1" > ~/.config/atuin/config.toml
 
 	proxy_off
 }
@@ -806,7 +806,7 @@ launch_shell() {
 	local shellrc_path="$tmpdir/.shellrc"
 	local my_init_file="$tmpdir/.atuinit"
 
-	setup_ssh_shell_utils
+	setup_ssh_shell_utils "$2"
 
 	echo -e "${GRAY}Constructing shell rc file ($shellrc_path)${NC}"
 
@@ -842,12 +842,12 @@ launch_shell() {
 }
 
 get_ssh_init_str() {
-	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f __get_temp_dir); $(typeset -f proxy_on); $(typeset -f proxy_off); $(typeset -f setup_ssh_shell_utils); $(typeset -f launch_shell); launch_shell $1"
+	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f __get_temp_dir); $(typeset -f proxy_on); $(typeset -f proxy_off); $(typeset -f setup_ssh_shell_utils); $(typeset -f launch_shell); launch_shell $1 '$2'"
 }
 
 ssh() {
 	systemctl is-active squid.service || systemctl start squid.service
-	/usr/bin/ssh -t -R 3129:localhost:3128 "$@" "$(get_ssh_init_str false)"
+	/usr/bin/ssh -t -R 3129:localhost:3128 "$@" "$(get_ssh_init_str false "$(/bin/cat ~/.config/atuin/config.toml)" )"
 }
 
 ssh_rc() {

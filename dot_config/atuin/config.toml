@@ -28,21 +28,23 @@
 
 ## which search mode to use
 ## possible values: prefix, fulltext, fuzzy
-# search_mode = "prefix"
+search_mode = "fuzzy"
 
 ## which style to use
 ## possible values: auto, full, compact
-#style = "auto"
+style = "compact"
 
 ## what to do when the escape key is pressed when searching
 ## possible values: return-original, return-query
-# exit_mode = "return-original"
+exit_mode = "return-original"
 
 ## Defaults to false. If enabled, when triggered after && or ||, Atuin will complete commands to chain rather than replace the current line.
 command_chaining = true
 
 workspaces = true
 inline_height=30
+
+show_numeric_shortcuts=false
 
 ## prevent commands matching any of these regexes from being written to history.
 ## Note that these regular expressions are unanchored, i.e. if they don't start
