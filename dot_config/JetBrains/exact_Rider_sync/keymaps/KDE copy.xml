@@ -29,6 +29,9 @@
   <action id="RenameElement">
     <keyboard-shortcut first-keystroke="f2" />
   </action>
+  <action id="SaveAsTemplate">
+    <keyboard-shortcut first-keystroke="ctrl comma" />
+  </action>
   <action id="SwitcherNextProblem" />
   <action id="SwitcherNextProblemFallback" />
 </keymap>

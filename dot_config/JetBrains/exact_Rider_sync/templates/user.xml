@@ -1,0 +1,33 @@
+<templateSet group="user">
+  <template name="sta" value="public interface I$NAME$&#10;{&#10;    Task&lt;IState&gt; New();&#10;}&#10;&#10;public class $NAME$: BaseUserEntryCodeState&#10;{&#10;    public record Factory : I$NAME$&#10;    {&#10;        public Task&lt;IState&gt; New()&#10;        {&#10;            return Task.FromResult&lt;IState&gt;(new $NAME$());&#10;        }&#10;    }&#10;&#10;    private $NAME$()&#10;    {&#10;    }&#10;}" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="ANY_OPENAPI_JSON_FILE" value="false" />
+      <option name="ANY_OPENAPI_YAML_FILE" value="false" />
+      <option name="Angular" value="false" />
+      <option name="CSS" value="false" />
+      <option name="GDSCRIPT" value="false" />
+      <option name="GENERAL_JSON_FILE" value="false" />
+      <option name="GENERAL_YAML_FILE" value="false" />
+      <option name="HTML" value="false" />
+      <option name="HTTP_CLIENT_ENVIRONMENT" value="false" />
+      <option name="Handlebars" value="false" />
+      <option name="JADE" value="false" />
+      <option name="JAVA_SCRIPT" value="false" />
+      <option name="JSON" value="false" />
+      <option name="JUST" value="false" />
+      <option name="KUBERNETES_RESOURCE" value="false" />
+      <option name="OTHER" value="true" />
+      <option name="PROTO" value="false" />
+      <option name="PROTOTEXT" value="false" />
+      <option name="Properties" value="false" />
+      <option name="Python" value="false" />
+      <option name="REQUEST" value="false" />
+      <option name="SHELL_SCRIPT" value="false" />
+      <option name="SQL" value="false" />
+      <option name="TypeScript" value="false" />
+      <option name="Vue" value="false" />
+      <option name="XML" value="false" />
+    </context>
+  </template>
+</templateSet>
