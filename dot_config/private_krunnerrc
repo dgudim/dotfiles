@@ -8,6 +8,10 @@ migrated=true
 [Plugins]
 appstreamEnabled=false
 baloosearchEnabled=true
+browserhistoryEnabled=false
+browsertabsEnabled=false
+krunner_katesessionsEnabled=false
+krunner_konsoleprofilesEnabled=false
 krunner_powerdevilEnabled=false
 shellEnabled=false
 
