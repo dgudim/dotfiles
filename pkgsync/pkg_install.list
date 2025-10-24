@@ -376,6 +376,7 @@ evtest-qt-git
 zint-qt
 kweather
 piki-git
+lact
 
 # CLI APPS
 fyi
