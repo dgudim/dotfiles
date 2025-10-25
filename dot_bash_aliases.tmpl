@@ -782,7 +782,7 @@ setup_ssh_shell_utils() {
 	echo -e "${GRAY}Writing atuin config${NC}"
 
 	mkdir -pv ~/.config/atuin
-	echo -e "$1" > ~/.config/atuin/config.toml
+	echo "$1" > ~/.config/atuin/config.toml
 
 	proxy_off
 }
