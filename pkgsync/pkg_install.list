@@ -1251,7 +1251,7 @@ blas-openblas
 fuse-overlayfs
 zenity
 hdf5-openmpi
-bcc-tools
+bcc-libbpf-tools
 fastjar
 libwebp-utils
 
