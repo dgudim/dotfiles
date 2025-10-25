@@ -1,0 +1,17 @@
+[Desktop Entry]
+Categories=Utility;Office;
+Comment=Extract text from an image directly into clipboard
+Exec=normcap --screenshot-handler dbus_portal
+GenericName=OCR powered screen-capture tool
+Icon=com.github.dynobo.normcap
+Keywords=Text;Extraction;OCR;
+Name=NormCap
+NoDisplay=false
+Path=
+PrefersNonDefaultGPU=false
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
