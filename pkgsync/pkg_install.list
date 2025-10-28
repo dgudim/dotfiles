@@ -1205,7 +1205,7 @@ coin-or-mp
 shapelib
 lib32-libid3tag
 openslide
-libappindicator-gtk3
+libappindicator
 geoip
 opencv
 ipp-usb
