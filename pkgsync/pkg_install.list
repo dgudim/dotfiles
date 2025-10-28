@@ -647,7 +647,7 @@ chaotic-keyring
 
 
 # LIB32 STUFF, COMPATABILITY AND WINE
-lib32-libappindicator-gtk3
+lib32-libappindicator
 lib32-libavtp
 lib32-libsamplerate
 lib32-pipewire-jack
