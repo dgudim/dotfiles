@@ -62,6 +62,7 @@ if [[ "$(whoami)" != "root" ]]; then
         sed "s/$HOME_ESC\/.local\/share\/cargo\/bin://g" |
         sed "s/$HOME_ESC\/.local\/bin://g" |
         sed "s/$HOME_ESC\/.local\/share\/go\/bin://g" |
+        sed "s/$HOME_ESC\/Documents\/usefull_files\/scripts\/://g" |
         sed "s/:$HOME_ESC\/.dotnet\/tools\///g")
     export PATH=~/.local/bin:~/.local/share/cargo/bin:~/.local/share/go/bin:~/Documents/usefull_files/scripts/:$CLEAN_PATH:~/.dotnet/tools/
 
