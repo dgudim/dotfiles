@@ -277,6 +277,7 @@ kvantum-qt5
 
 
 # GUI APPS
+merkuro
 konsole
 cool-retro-term
 kclock
@@ -331,7 +332,6 @@ anilibria-winmaclinux
 vesktop
 discover
 libreoffice-fresh
-eloquent
 smb4k
 sqlitebrowser
 kalgebra
@@ -379,6 +379,8 @@ piki-git
 lact
 
 # CLI APPS
+grex
+croc
 fyi
 ascii
 acpid
@@ -527,7 +529,7 @@ glances
 
 
 # COMPLEMENTARY PACKAGES
-languagetool
+kdepim-addons
 nano-syntax-highlighting-git
 docker-color-output-git
 postgrestools-bin
