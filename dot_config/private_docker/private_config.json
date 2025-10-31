@@ -1,5 +1,6 @@
 {
 	"auths": {
+		"gitlab.bs2.lt": {},
 		"nexus.bs2.lt": {}
 	},
 	"credsStore": "secretservice"
