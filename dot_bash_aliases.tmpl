@@ -845,14 +845,78 @@ get_ssh_init_str() {
 	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f __get_temp_dir); $(typeset -f proxy_on); $(typeset -f proxy_off); $(typeset -f setup_ssh_shell_utils); $(typeset -f launch_shell); launch_shell $1 '$2'"
 }
 
+setup_remote_shared_directory() {
+	local tmpdir="$(__get_temp_dir)"
+	local shared_dir_path="$tmpdir/.shared"
+	mkdir -p "$shared_dir_path" 2>/dev/null > /dev/null
+	echo $shared_dir_path
+}
+
+setup_local_shared_directory() {
+	local remote_id="$(/usr/bin/ssh "$@" "cat /etc/machine-id")"
+	local local_shared_dir_path="/tmp/shared-$remote_id"
+	mkdir -p "$local_shared_dir_path" 2>/dev/null > /dev/null
+	echo "$local_shared_dir_path"
+}
+
+
+setup_ssh_fileshare() {
+	GREEN='\033[0;32m'
+	PURPLE='\033[0;35m'
+	BLUE='\033[0;34m'
+	GRAY='\033[0;30m'
+	NC='\033[0m'
+
+	echo -e "${BLUE}Trying to mount remote host shared folder${NC}"
+	local remote_shared_dir_path="$(/usr/bin/ssh "$@" "$(typeset -f __get_temp_dir); $(typeset -f setup_remote_shared_directory); setup_remote_shared_directory")"
+
+	echo -e "${GREEN}Made directory on the remote${NC}: $remote_shared_dir_path"
+
+	echo -e "${GREEN}Made local directory for sharing with the remote${NC}: $local_shared_dir_path"
+
+	/usr/bin/sshfs -o compression=yes -o reconnect -o idmap=user $@:$remote_shared_dir_path "$local_shared_dir_path"
+
+	if [ $? -eq 0 ]; then
+		echo -e "${GREEN}Mounted! [remote]: $remote_shared_dir_path <-> [local]: $local_shared_dir_path"
+	else
+		echo -e "${PURPLE} Error mounting :("
+	fi
+
+}
+
 ssh() {
+
+	export local_shared_dir_path="$(setup_local_shared_directory "$@")"
+	setup_ssh_fileshare "$@"
+
 	systemctl is-active squid.service || systemctl start squid.service
-	/usr/bin/ssh -t -R 3129:localhost:3128 "$@" "$(get_ssh_init_str false "$(/bin/cat ~/.config/atuin/config.toml)" )"
+	/usr/bin/ssh -t -R 3129:localhost:3128 "$@" "$(get_ssh_init_str false)"
+
+	umount "$local_shared_dir_path"
+	echo "Unmounted $local_shared_dir_path"
 }
 
 ssh_rc() {
+
+	export local_shared_dir_path="$(setup_local_shared_directory "$@")"
+	setup_ssh_fileshare "$@"
+
 	systemctl is-active squid.service || systemctl start squid.service
 	/usr/bin/ssh -t -R 3129:localhost:3128 "$@" "$(get_ssh_init_str true)"
+
+	umount "$local_shared_dir_path"
+	echo "Unmounted $local_shared_dir_path"
+}
+
+ssh_s() {
+
+	export local_shared_dir_path="$(setup_local_shared_directory "$@")"
+	setup_ssh_fileshare "$@"
+
+	/usr/bin/ssh "$@"
+
+	umount "$local_shared_dir_path"
+	echo "Unmounted $local_shared_dir_path"
 }
 
 ssh_n() {
