@@ -5,9 +5,6 @@
   <component name="CodeVisionSettings">
     <option name="defaultPosition" value="Right" />
   </component>
-  <component name="DaemonCodeAnalyzerSettings">
-    <option name="AUTOREPARSE_DELAY" value="0" />
-  </component>
   <component name="EditorSettings">
     <option name="USE_EDITOR_FONT_IN_INLAYS" value="true" />
   </component>

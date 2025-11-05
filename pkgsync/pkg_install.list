@@ -857,6 +857,7 @@ python-sshtunnel
 python-brotlicffi
 python-pystache
 python-pyasn
+python-aiosqlite
 uvicorn
 
 ## ANDROID AND JAVA
@@ -1218,6 +1219,7 @@ libnma
 fltk
 geocode-glib
 libfaketime
+libwmf
 
 
 

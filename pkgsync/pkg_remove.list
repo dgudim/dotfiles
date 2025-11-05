@@ -100,6 +100,7 @@ informant
 kdf
 zoom
 eloquent
+languagetool
 
 # Obsolete
 dbeaver-plugin-svg-format
