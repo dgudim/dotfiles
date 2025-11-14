@@ -719,32 +719,53 @@ proxy_off() {
 }
 
 setup_ssh_shell_utils() {
-	proxy_on
 
 	L_GREEN='\033[1;32m'
+	PURPLE='\033[0;35m'
 	L_PURPLE='\033[1;35m'
 	L_CYAN='\033[1;36m'
 	L_YELLOW='\033[0;33m'
 	GRAY='\033[1;30m'
 	NC='\033[0m'
 
+	__download_and_extract() {
+
+		local name="$1"
+		local download_url="$2"
+
+		local target_download_path="$tmpdir/$name.tar.gz"
+		local extracted_path="$tmpdir/$name-$arch-unknown-linux-gnu/"
+
+		echo -e "${PURPLE}Downloading $name...${NC}"
+
+		if [ -f /usr/bin/$name ]; then
+			echo "$name installed in default location, skipping installation"
+		else
+			if [ -d "$extracted_path" ]; then
+				echo -e "${L_CYAN}$name already downloaded${NC}"
+			else
+				__download_helper "$download_url" "$target_download_path"
+
+				echo -e "${PURPLE}Extracting $name...${NC}"
+				tar -xzvf "$target_download_path" -C "$tmpdir"
+			fi
+
+			echo -e "${L_PURPLE}Adding $name to path${NC}"
+
+			echo "export PATH=\"$extracted_path:\$PATH\"" >>"$init_file"
+		fi
+	}
+
+	proxy_on
+
 	echo -e "${L_YELLOW}Setting up environment...${NC}"
 
-	local tmpdir="$(__get_temp_dir)"
-	local init_file="$tmpdir/.atuinit"
+	tmpdir="$(__get_temp_dir)"
+	init_file="$tmpdir/.atuinit"
 
 	if [ -f "$init_file" ]; then
 		echo -e "${L_CYAN}Using cached atuin init file${NC}"
 		return 0
-	fi
-
-	local atuin_target_path="$tmpdir/atuin.tar.gz"
-	local extracted_path="$tmpdir/atuin-x86_64-unknown-linux-gnu/"
-
-	if [[ "$(uname -a)" == *"aarch64"* ]]; then
-		local atuin_download_url="https://github.com/atuinsh/atuin/releases/latest/download/atuin-aarch64-unknown-linux-gnu.tar.gz"
-	else
-		local atuin_download_url="https://github.com/atuinsh/atuin/releases/latest/download/atuin-x86_64-unknown-linux-gnu.tar.gz"
 	fi
 
 	local preexec_download_path="$tmpdir/.bash-preexec.sh"
@@ -757,24 +778,16 @@ setup_ssh_shell_utils() {
 
 	echo '' >"$init_file"
 
-	echo -e "${L_PURPLE}Downloading atuin...${NC}"
-
-	if [ -f /usr/bin/atuin ]; then
-		echo "Atuin installed in default location, skipping installation"
+	if [[ "$(uname -a)" == *"aarch64"* ]]; then
+		arch="aarch64"
 	else
-		if [ -d "$extracted_path" ]; then
-			echo "${L_CYAN}Atuin already downloaded${NC}"
-		else
-			__download_helper "$atuin_download_url" "$atuin_target_path"
-
-			echo -e "${L_PURPLE}Extracting atuin...${NC}"
-			tar -xzvf "$atuin_target_path" -C "$tmpdir"
-		fi
-
-		echo -e "${L_PURPLE}Adding atuin to path${NC}"
-
-		echo "export PATH=\"$extracted_path:\$PATH\"" >>"$init_file"
+		arch="x86_64"
 	fi
+
+	echo -e "${GRAY}Running on $arch ${NC}"
+
+	__download_and_extract ouch "https://github.com/ouch-org/ouch/releases/latest/download/ouch-$arch-unknown-linux-gnu.tar.gz"
+	__download_and_extract atuin "https://github.com/atuinsh/atuin/releases/latest/download/atuin-$arch-unknown-linux-gnu.tar.gz"
 
 	echo -e "${L_PURPLE}Writing atuin init file${NC}"
 
@@ -879,9 +892,9 @@ setup_ssh_fileshare() {
 	/usr/bin/sshfs -o compression=yes -o reconnect -o idmap=user $@:$remote_shared_dir_path "$local_shared_dir_path"
 
 	if [ $? -eq 0 ]; then
-		echo -e "${GREEN}Mounted! [remote]: $remote_shared_dir_path <-> [local]: $local_shared_dir_path"
+		echo -e "${GREEN}Mounted! [remote]: $remote_shared_dir_path <-> [local]: $local_shared_dir_path${NC}"
 	else
-		echo -e "${PURPLE} Error mounting :("
+		echo -e "${PURPLE} Error mounting :(${NC}"
 	fi
 
 }

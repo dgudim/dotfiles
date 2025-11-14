@@ -131,6 +131,7 @@ tpm2-tools
 dos2unix
 tree
 kmscon-patched-git
+gtk3
 
 ## PACMAN HOOKS AND SCRIPTS
 pacmanlogviewer
@@ -251,7 +252,6 @@ bluez-utils
 breeze-gtk
 breeze5
 kde-gtk-config
-gtk3-patched-filechooser-icon-view
 kdialog
 kscreen
 colord-kde
@@ -343,7 +343,6 @@ gsmartcontrol
 skanpage
 naps2-bin
 freeplane
-crow-translate-git
 dbeaver
 dpscreenocr
 normcap
@@ -445,7 +444,7 @@ watchexec
 pipectl
 halp
 osquery
-translate-shell
+python-translate-shell
 skopeo
 x86-64-level
 # For dell cpu constantly throttling
@@ -470,7 +469,6 @@ btrfs-list
 
 ## TUIs
 lazydocker
-oxker
 gitui
 lazygit
 tig

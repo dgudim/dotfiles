@@ -6,8 +6,10 @@ rustflags = ["-C", "opt-level=2", "-C", "target-cpu=native", "-C", "force-frame-
 
 # Faster compilations when doing cargo run
 # https://davidlattimore.github.io/posts/2024/02/04/speeding-up-the-rust-edit-build-run-cycle.html
-# [profile.dev]
-# # opt-level = 1          # Use slightly better optimizations.
-# debug = 0                # Skip compiling the debug information
+[profile.dev]
+# opt-level = 1          # Use slightly better optimizations.
+debug = 0                # Skip compiling the debug information
 # strip = "debuginfo"      # Skip linking the debug information
-# rustflags = ["-C", "link-arg=-fuse-ld=wild"]
+split-debuginfo="unpacked"
+rustflags = ["-C", "link-arg=-fuse-ld=wild"]
+

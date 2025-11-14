@@ -16,16 +16,36 @@
 #ESP_PATH="/boot"
 
 
-### Kernel Command Line Configuration:
-### Set multiple kernel command lines, including parameters, for specific kernel entries.
-### If not set, the tool will attempt to read the kernel parameters from '/etc/kernel/cmdline' or '/proc/cmdline'.
-### [default] applies to any kernel entries without a specific configuration.
-### Optionally, [fallback] applies to kernel entries that include the name *fallback*.
-### Optionally, custom ["kernel name"] entries correspond to kernel entry names in the boot menu, allowing unique cmdline per kernel entry.
-#KERNEL_CMDLINE[default]=""
-#KERNEL_CMDLINE[fallback]=""
-#KERNEL_CMDLINE["linux-lts"]=""
-#KERNEL_CMDLINE["linux-zen"]=""
+### Kernel Command Line Configuration
+### Define one or more kernel command lines (parameters) for specific kernel entries.
+### If unset, the tool will try to read them from '/etc/kernel/cmdline' or '/proc/cmdline'.
+###
+### Rules:
+### * KERNEL_CMDLINE[default] applies to any kernel entries without specific configuration.
+### * KERNEL_CMDLINE[fallback] applies to kernel entries with names containing *fallback*
+### * KERNEL_CMDLINE[kernel name] applies to a specific kernel entry.
+###
+### Operators:
+### * `+=` appends parameters to an existing cmdline for the same KERNEL_CMDLINE[<key>]
+###    Commonly used in drop-in configs: /etc/limine-entry-tool.d/*.conf
+###    Ignores /etc/kernel/cmdline and /proc/cmdline
+### * `=` replaces an existing cmdline for the same KERNEL_CMDLINE[<key>]
+###    Note: /etc/default/limine overrides any drop-in configs, so `+=` is recommended in that file.
+###
+### Tip:
+### If unsure which parameters to use, copy them from `/proc/cmdline` into KERNEL_CMDLINE[default],
+### but ensure your system is not a live ISO, temporary environment, or snapshot.
+###
+### Examples:
+
+{{ if eq .chezmoi.hostname "black-bird" }}
+    KERNEL_CMDLINE[default]="nvme_load=YES nowatchdog rw mitigations=off zswap.enabled=1 zswap.compressor=lz4 zswap.max_pool_percent=20 rd.luks.uuid=1c5c824f-40e6-49f6-918c-8e09f46f731c root=/dev/mapper/luks-1c5c824f-40e6-49f6-918c-8e09f46f731c rootflags=subvol=/ rd.luks.uuid=16b658ff-614b-4cfb-a576-f284e9368530 quiet splash"
+{{ end }}
+
+#KERNEL_CMDLINE[default]+="rw root=UUID=..."
+#KERNEL_CMDLINE[default]+="quiet splash"
+#KERNEL_CMDLINE[fallback]=
+#KERNEL_CMDLINE[linux-zen]=
 
 
 ### Formatting Boot Entry:
@@ -39,8 +59,9 @@ ENABLE_VERIFICATION=yes
 
 
 ### Automatic Config Backup:
-### Create a backup of '$ESP_PATH/limine.conf' before saving, if '$ESP_PATH/limine.conf.old' is older than the specified time (in hours).
-### If not set, the default threshold is 8 hours.
+### Creates a backup of '$ESP_PATH/limine.conf' before saving any changes,
+### but only if '$ESP_PATH/limine.conf.old' is older than the specified time (in hours).
+### Default: 6 hours if unset.
 BACKUP_THRESHOLD=8
 
 
@@ -51,13 +72,13 @@ BOOT_ORDER="*lts, *, *fallback, Snapshots"
 ENABLE_SORT=no
 
 
-### Custom Java Binary Path
+### Custom Java Binary Path:
 ### Set this to specify a custom Java binary path instead of using the system default.
 ### If left unset, the default system Java will be used.
 #JAVA_BIN_PATH="/usr/lib/jvm/java-21-openjdk/bin"
 
 
-### Default Boot Fallback
+### Default Boot Fallback:
 ### Set Limine as the default boot fallback at '$ESP_PATH/EFI/BOOT/BOOTX64.EFI'. (yes|no)
 ENABLE_LIMINE_FALLBACK=yes
 
@@ -66,6 +87,9 @@ ENABLE_LIMINE_FALLBACK=yes
 ### Automatically add systemd-boot, rEFInd, or the default EFI loader to Limine if they are found in the ESP. (yes|no)
 FIND_BOOTLOADERS=yes
 
+### Quiet Mode
+### Set to "yes" to hide all success messages and avoid log spam. (yes|no)
+QUIET_MODE=yes
 
 ### Enroll Limine Config
 ### Automatically enrolls the Limine config into the Limine binary to protect it from modifications.
@@ -90,7 +114,11 @@ FIND_BOOTLOADERS=yes
 ### Dracut Fallback Configuration:
 ### Automatically create a kernel fallback image using Dracut. (yes|no)
 ### If set to 'yes,' this will consume a lot of storage space, especially when taking multiple snapshots.
+{{- if eq .chezmoi.hostname "portable-heater" }}
 DRACUT_FALLBACK=yes
+{{ else }}
+DRACUT_FALLBACK=no
+{{- end }}
 
 
 ### UKI (Unified Kernel Image):
@@ -111,4 +139,5 @@ ENABLE_UKI=no
 # Don't registed efi when booted from portable drive
 {{- if eq .chezmoi.hostname "portable-heater" }}
 NO_EFI_REGISTER=1
+SKIP_UEFI=yes
 {{- end }}
