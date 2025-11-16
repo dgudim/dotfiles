@@ -15,3 +15,7 @@
 /common_functions.py
 /__pycache__
 .gitignore
+**/nuclear-submarine-00-plasma-pa.conf
+**/sauron-00-plasma-pa.conf
+**/black-bird-00-plasma-pa.conf
+**/__pycache__

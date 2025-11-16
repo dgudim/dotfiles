@@ -68,4 +68,7 @@ if [[ "$(hostname)" == *"sauron"* ]]; then sudo chown -R kloud:kloud /usr/share/
 sudo rm -rfv /boot/vmlinuz-linux-*
 sudo rm -rfv /boot/initramfs-linux-*
 
+# https://wiki.archlinux.org/title/Limine#Configurations
+sudo ln -fv /etc/limine-entry-tool.conf /etc/default/limine
+
 echo -e "${L_GREEN}Done!$NC\n"

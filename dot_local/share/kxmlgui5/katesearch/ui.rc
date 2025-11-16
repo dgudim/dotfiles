@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui translationDomain="katesearch" library="libkatesearchplugin" version="7" name="katesearch">
+<gui library="libkatesearchplugin" name="katesearch" translationDomain="katesearch" version="7">
  <MenuBar>
   <Menu name="edit">
    <text>&amp;Edit</text>

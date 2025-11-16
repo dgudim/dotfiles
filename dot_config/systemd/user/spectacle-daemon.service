@@ -7,7 +7,7 @@ Type=simple
 ExecStart=/usr/bin/spectacle --dbus
 Restart=always
 RemainAfterExit=no
-RestartSec=1
+RestartSec=0
 
 [Install]
 WantedBy=default.target

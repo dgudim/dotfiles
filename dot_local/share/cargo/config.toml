@@ -9,5 +9,7 @@ rustflags = ["-C", "opt-level=2", "-C", "target-cpu=native", "-C", "force-frame-
 # [profile.dev]
 # # opt-level = 1          # Use slightly better optimizations.
 # debug = 0                # Skip compiling the debug information
-# strip = "debuginfo"      # Skip linking the debug information
+# # strip = "debuginfo"      # Skip linking the debug information
+# split-debuginfo="unpacked"
 # rustflags = ["-C", "link-arg=-fuse-ld=wild"]
+

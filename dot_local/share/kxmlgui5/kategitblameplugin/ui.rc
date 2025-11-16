@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
+<gui library="kategitblameplugin" name="kategitblameplugin" translationDomain="kategitblameplugin" version="3">
+ <MenuBar>
+  <Menu name="tools">
+   <text>&amp;Tools</text>
+   <Action group="tools_git_blame" name="git_blame_show"/>
+   <Action group="tools_git_blame" name="git_blame_toggle"/>
+  </Menu>
+ </MenuBar>
+ <ActionProperties scheme="Default"/>
+</gui>
+<!-- kate: space-indent on; indent-width 4; replace-tabs on; -->

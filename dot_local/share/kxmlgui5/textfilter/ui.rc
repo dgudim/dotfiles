@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui translationDomain="katetextfilter" library="libkatetextfilterplugin" version="5" name="katetextfilter">
+<gui library="libkatetextfilterplugin" name="katetextfilter" translationDomain="katetextfilter" version="5">
  <MenuBar>
   <Menu name="tools">
    <text>&amp;Tools</text>

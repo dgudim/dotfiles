@@ -451,6 +451,8 @@ systemctl() {
 		mpv --no-terminal "${arr[$rand]}" >/dev/null && /usr/bin/systemctl "$@" # It is here like this for the ability to cancel the shutdown
 	elif [ "$1" == "start" ]; then
 		/usr/bin/systemctl "$@" --verbose
+	elif [ "$1" == "stop" ]; then
+		/usr/bin/systemctl "$@" --verbose
 	else
 		/usr/bin/systemctl "$@"
 	fi
@@ -712,37 +714,58 @@ proxy_on() {
 }
 
 proxy_off() {
-	unset http_proxy
-	unset https_proxy
+	export http_proxy
+	export https_proxy
 }
 
 setup_ssh_shell_utils() {
-	proxy_on
 
 	L_GREEN='\033[1;32m'
+	PURPLE='\033[0;35m'
 	L_PURPLE='\033[1;35m'
 	L_CYAN='\033[1;36m'
 	L_YELLOW='\033[0;33m'
 	GRAY='\033[1;30m'
 	NC='\033[0m'
 
+	__download_and_extract() {
+
+		local name="$1"
+		local download_url="$2"
+
+		local target_download_path="$tmpdir/$name.tar.gz"
+		local extracted_path="$tmpdir/$name-$arch-unknown-linux-gnu/"
+
+		echo -e "${PURPLE}Downloading $name...${NC}"
+
+		if [ -f /usr/bin/$name ]; then
+			echo "$name installed in default location, skipping installation"
+		else
+			if [ -d "$extracted_path" ]; then
+				echo -e "${L_CYAN}$name already downloaded${NC}"
+			else
+				__download_helper "$download_url" "$target_download_path"
+
+				echo -e "${PURPLE}Extracting $name...${NC}"
+				tar -xzvf "$target_download_path" -C "$tmpdir"
+			fi
+
+			echo -e "${L_PURPLE}Adding $name to path${NC}"
+
+			echo "export PATH=\"$extracted_path:\$PATH\"" >>"$init_file"
+		fi
+	}
+
+	proxy_on
+
 	echo -e "${L_YELLOW}Setting up environment...${NC}"
 
-	local tmpdir="$(__get_temp_dir)"
-	local init_file="$tmpdir/.atuinit"
+	tmpdir="$(__get_temp_dir)"
+	init_file="$tmpdir/.atuinit"
 
 	if [ -f "$init_file" ]; then
 		echo -e "${L_CYAN}Using cached atuin init file${NC}"
 		return 0
-	fi
-
-	local atuin_target_path="$tmpdir/atuin.tar.gz"
-	local extracted_path="$tmpdir/atuin-x86_64-unknown-linux-gnu/"
-
-	if [[ "$(uname -a)" == *"aarch64"* ]]; then
-		local atuin_download_url="https://github.com/atuinsh/atuin/releases/latest/download/atuin-aarch64-unknown-linux-gnu.tar.gz"
-	else
-		local atuin_download_url="https://github.com/atuinsh/atuin/releases/latest/download/atuin-x86_64-unknown-linux-gnu.tar.gz"
 	fi
 
 	local preexec_download_path="$tmpdir/.bash-preexec.sh"
@@ -755,24 +778,16 @@ setup_ssh_shell_utils() {
 
 	echo '' >"$init_file"
 
-	echo -e "${L_PURPLE}Downloading atuin...${NC}"
-
-	if [ -f /usr/bin/atuin ]; then
-		echo "Atuin installed in default location, skipping installation"
+	if [[ "$(uname -a)" == *"aarch64"* ]]; then
+		arch="aarch64"
 	else
-		if [ -d "$extracted_path" ]; then
-			echo "${L_CYAN}Atuin already downloaded${NC}"
-		else
-			__download_helper "$atuin_download_url" "$atuin_target_path"
-
-			echo -e "${L_PURPLE}Extracting atuin...${NC}"
-			tar -xzvf "$atuin_target_path" -C "$tmpdir"
-		fi
-
-		echo -e "${L_PURPLE}Adding atuin to path${NC}"
-
-		echo "export PATH=\"$extracted_path:\$PATH\"" >>"$init_file"
+		arch="x86_64"
 	fi
+
+	echo -e "${GRAY}Running on $arch ${NC}"
+
+	__download_and_extract ouch "https://github.com/ouch-org/ouch/releases/latest/download/ouch-$arch-unknown-linux-gnu.tar.gz"
+	__download_and_extract atuin "https://github.com/atuinsh/atuin/releases/latest/download/atuin-$arch-unknown-linux-gnu.tar.gz"
 
 	echo -e "${L_PURPLE}Writing atuin init file${NC}"
 
@@ -782,7 +797,7 @@ setup_ssh_shell_utils() {
 	echo -e "${GRAY}Writing atuin config${NC}"
 
 	mkdir -pv ~/.config/atuin
-	echo -e "update_check = false\nworkspaces = true\ninline_height=30\n" > ~/.config/atuin/config.toml
+	echo "$1" > ~/.config/atuin/config.toml
 
 	proxy_off
 }
@@ -812,7 +827,7 @@ launch_shell() {
 	local shellrc_path="$tmpdir/.shellrc"
 	local my_init_file="$tmpdir/.atuinit"
 
-	setup_ssh_shell_utils
+	setup_ssh_shell_utils "$2"
 
 	echo -e "${GRAY}Constructing shell rc file ($shellrc_path)${NC}"
 
@@ -848,17 +863,81 @@ launch_shell() {
 }
 
 get_ssh_init_str() {
-	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f __get_temp_dir); $(typeset -f proxy_on); $(typeset -f proxy_off); $(typeset -f setup_ssh_shell_utils); $(typeset -f launch_shell); launch_shell $1"
+	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f __get_temp_dir); $(typeset -f proxy_on); $(typeset -f proxy_off); $(typeset -f setup_ssh_shell_utils); $(typeset -f launch_shell); launch_shell $1 '$2'"
+}
+
+setup_remote_shared_directory() {
+	local tmpdir="$(__get_temp_dir)"
+	local shared_dir_path="$tmpdir/.shared"
+	mkdir -p "$shared_dir_path" 2>/dev/null > /dev/null
+	echo $shared_dir_path
+}
+
+setup_local_shared_directory() {
+	local remote_id="$(/usr/bin/ssh "$@" "cat /etc/machine-id")"
+	local local_shared_dir_path="/tmp/shared-$remote_id"
+	mkdir -p "$local_shared_dir_path" 2>/dev/null > /dev/null
+	echo "$local_shared_dir_path"
+}
+
+
+setup_ssh_fileshare() {
+	GREEN='\033[0;32m'
+	PURPLE='\033[0;35m'
+	BLUE='\033[0;34m'
+	GRAY='\033[0;30m'
+	NC='\033[0m'
+
+	echo -e "${BLUE}Trying to mount remote host shared folder${NC}"
+	local remote_shared_dir_path="$(/usr/bin/ssh "$@" "$(typeset -f __get_temp_dir); $(typeset -f setup_remote_shared_directory); setup_remote_shared_directory")"
+
+	echo -e "${GREEN}Made directory on the remote${NC}: $remote_shared_dir_path"
+
+	echo -e "${GREEN}Made local directory for sharing with the remote${NC}: $local_shared_dir_path"
+
+	/usr/bin/sshfs -o compression=yes -o reconnect -o idmap=user $@:$remote_shared_dir_path "$local_shared_dir_path"
+
+	if [ $? -eq 0 ]; then
+		echo -e "${GREEN}Mounted! [remote]: $remote_shared_dir_path <-> [local]: $local_shared_dir_path${NC}"
+	else
+		echo -e "${PURPLE} Error mounting :(${NC}"
+	fi
+
 }
 
 ssh() {
+
+	export local_shared_dir_path="$(setup_local_shared_directory "$@")"
+	setup_ssh_fileshare "$@"
+
 	systemctl is-active squid.service || systemctl start squid.service
 	/usr/bin/ssh -t -R 3129:localhost:3128 "$@" "$(get_ssh_init_str false)"
+
+	umount "$local_shared_dir_path"
+	echo "Unmounted $local_shared_dir_path"
 }
 
 ssh_rc() {
+
+	export local_shared_dir_path="$(setup_local_shared_directory "$@")"
+	setup_ssh_fileshare "$@"
+
 	systemctl is-active squid.service || systemctl start squid.service
 	/usr/bin/ssh -t -R 3129:localhost:3128 "$@" "$(get_ssh_init_str true)"
+
+	umount "$local_shared_dir_path"
+	echo "Unmounted $local_shared_dir_path"
+}
+
+ssh_s() {
+
+	export local_shared_dir_path="$(setup_local_shared_directory "$@")"
+	setup_ssh_fileshare "$@"
+
+	/usr/bin/ssh "$@"
+
+	umount "$local_shared_dir_path"
+	echo "Unmounted $local_shared_dir_path"
 }
 
 ssh_n() {

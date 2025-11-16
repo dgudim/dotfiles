@@ -131,6 +131,7 @@ tpm2-tools
 dos2unix
 tree
 kmscon-patched-git
+gtk3
 
 ## PACMAN HOOKS AND SCRIPTS
 pacmanlogviewer
@@ -251,9 +252,7 @@ bluez-utils
 breeze-gtk
 breeze5
 kde-gtk-config
-gtk3-patched-filechooser-icon-view
 kdialog
-kinit
 kscreen
 colord-kde
 ksshaskpass
@@ -278,6 +277,7 @@ kvantum-qt5
 
 
 # GUI APPS
+merkuro
 konsole
 cool-retro-term
 kclock
@@ -332,7 +332,6 @@ anilibria-winmaclinux
 vesktop
 discover
 libreoffice-fresh
-eloquent
 smb4k
 sqlitebrowser
 kalgebra
@@ -344,7 +343,6 @@ gsmartcontrol
 skanpage
 naps2-bin
 freeplane
-crow-translate-git
 dbeaver
 dpscreenocr
 normcap
@@ -377,8 +375,11 @@ evtest-qt-git
 zint-qt
 kweather
 piki-git
+lact
 
 # CLI APPS
+grex
+croc
 fyi
 ascii
 acpid
@@ -443,7 +444,7 @@ watchexec
 pipectl
 halp
 osquery
-translate-shell
+python-translate-shell
 skopeo
 x86-64-level
 # For dell cpu constantly throttling
@@ -458,6 +459,7 @@ geteltorito
 procs
 fbgrab
 wikiman
+binwalk
 
 ## BTRFS
 compsize
@@ -467,7 +469,6 @@ btrfs-list
 
 ## TUIs
 lazydocker
-oxker
 gitui
 lazygit
 tig
@@ -526,7 +527,7 @@ glances
 
 
 # COMPLEMENTARY PACKAGES
-languagetool
+kdepim-addons
 nano-syntax-highlighting-git
 docker-color-output-git
 postgrestools-bin
@@ -556,12 +557,12 @@ udev-notify-my
 journalctl-desktop-notification-git
 # syncthing-appmenu
 rlwrap
-dbeaver-plugin-svg-format
 yt-dlp-drop-in
 xorg-xhost
 awatcher-git
 aw-watcher-media-player-git
 slicer-udev
+android-udev
 gjs
 nawk
 open-in-native-client
@@ -575,6 +576,8 @@ vlc-gui-ncurses
 arch-wiki-docs
 lsfg-vk-git
 xsane-gimp
+yt-dlp-ejs
+dblatex
 
 ## Browser sync to RAM
 profile-sync-daemon
@@ -647,7 +650,7 @@ chaotic-keyring
 
 
 # LIB32 STUFF, COMPATABILITY AND WINE
-lib32-libappindicator-gtk3
+lib32-libappindicator
 lib32-libavtp
 lib32-libsamplerate
 lib32-pipewire-jack
@@ -855,6 +858,7 @@ python-sshtunnel
 python-brotlicffi
 python-pystache
 python-pyasn
+python-aiosqlite
 uvicorn
 
 ## ANDROID AND JAVA
@@ -1205,7 +1209,7 @@ coin-or-mp
 shapelib
 lib32-libid3tag
 openslide
-libappindicator-gtk3
+libappindicator
 geoip
 opencv
 ipp-usb
@@ -1216,6 +1220,7 @@ libnma
 fltk
 geocode-glib
 libfaketime
+libwmf
 
 
 
@@ -1251,7 +1256,7 @@ blas-openblas
 fuse-overlayfs
 zenity
 hdf5-openmpi
-bcc-tools
+bcc-libbpf-tools
 fastjar
 libwebp-utils
 

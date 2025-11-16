@@ -99,3 +99,15 @@ pacman-pstatus
 informant
 kdf
 zoom
+eloquent
+languagetool
+
+# Obsolete
+dbeaver-plugin-svg-format
+kinit
+
+# Replaced with flatpak
+crow-translate-git
+
+# Replaced with cargo binstall
+oxker

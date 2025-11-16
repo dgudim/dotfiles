@@ -12,6 +12,7 @@ export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
 export ANDROID_HOME="$ANDROID_USER_HOME"/Sdk
 
 export IPYTHONDIR="$XDG_CONFIG_HOME"/ipython
+export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
 
 # Make sure the directory for history exists
 mkdir -p "${XDG_STATE_HOME}/bash"
@@ -62,6 +63,7 @@ if [[ "$(whoami)" != "root" ]]; then
         sed "s/$HOME_ESC\/.local\/share\/cargo\/bin://g" |
         sed "s/$HOME_ESC\/.local\/bin://g" |
         sed "s/$HOME_ESC\/.local\/share\/go\/bin://g" |
+        sed "s/$HOME_ESC\/Documents\/usefull_files\/scripts\/://g" |
         sed "s/:$HOME_ESC\/.dotnet\/tools\///g")
     export PATH=~/.local/bin:~/.local/share/cargo/bin:~/.local/share/go/bin:~/Documents/usefull_files/scripts/:$CLEAN_PATH:~/.dotnet/tools/
 
