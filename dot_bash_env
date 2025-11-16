@@ -12,6 +12,7 @@ export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
 export ANDROID_HOME="$ANDROID_USER_HOME"/Sdk
 
 export IPYTHONDIR="$XDG_CONFIG_HOME"/ipython
+export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
 
 # Make sure the directory for history exists
 mkdir -p "${XDG_STATE_HOME}/bash"
