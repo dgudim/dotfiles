@@ -5,7 +5,9 @@
   </component>
   <component name="NotRoamableUiSettings">
     <option name="fontSize" value="13.0" />
+    {{- if eq .chezmoi.hostname "nuclear-submarine" }}
     <option name="ideScale" value="1.25" />
+    {{- end}}
     <option name="presentationModeIdeScale" value="1.75" />
     <option name="overrideLafFonts" value="true" />
   </component>

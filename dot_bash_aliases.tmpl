@@ -788,14 +788,20 @@ setup_ssh_shell_utils() {
 }
 
 launch_shell() {
-	export TMOUT=6000 # Increase auto-logout time
-
 	L_GREEN='\033[1;32m'
 	L_PURPLE='\033[1;35m'
 	L_YELLOW='\033[0;33m'
 	L_BLUE='\033[1;34m'
 	GRAY='\033[1;30m'
 	NC='\033[0m'
+
+	if [ -f ~/.config/.myman-machine-flag ]; then
+		echo "${L_YELLOW}Owned machine detected, skipping deployment :)${NC}"
+		bash --login
+		return
+	fi
+
+	export TMOUT=6000 # Increase auto-logout time
 
 	echo -e "${L_YELLOW}Launching customized shell...${NC}"
 
