@@ -1,1 +1,7 @@
-#!/usr/bin/venv python3
+#!/usr/bin/env -S uv run --script
+
+# /// script
+# dependencies = [
+#   "requests"
+# ]
+# ///
