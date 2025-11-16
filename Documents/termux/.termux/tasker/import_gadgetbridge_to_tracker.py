@@ -86,7 +86,7 @@ for i, row in enumerate(rows):
     if (
         i < len(rows) - 1
         and duration <= TINY_EVENT_THRESHOLD  # Take small events
-        and rows[i + 1][0] - end < SLEEP_BREAK_THRESH  # Don't add to the next session
+        and rows[i + 1][0] - end < SLEEP_BREAK_THRESH  # Don't add to the next sleep session
     ):
         event_time_extension += duration
         merged += 1

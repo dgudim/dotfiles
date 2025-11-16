@@ -25,7 +25,7 @@ class ScrobbleRecord:
 
 api_key = os.environ["LASTFM_API_KEY"]
 username = "Kl0ud_"
-chunk_merge_threshold_seconds = 60 * 8    # 8 minutes
+chunk_merge_threshold_seconds = 60 * 8    # 8 minutes DON'T CHANGE THIS OR REIMPORT EVERYTHING. Used as a 'duration tag length multiplier' as well
 avg_song_duration_seconds = int(60 * 3.5) # 3.5 minutes
 
 last_import_timestamp_file = Path("./last_import_lastfm_timstamp.txt")
