@@ -1,6 +1,6 @@
 #!/usr/bin/env -S uv run --script
 
-# /// script
+#
 # dependencies = [
 #   "aw_client",
 #   "python-dateutil"
@@ -17,11 +17,11 @@ import sys
 from aw_client import ActivityWatchClient
 from aw_core import Event
 
-TARGET_BUCKET = "aw-watcher-window_nuclear-submarine-synced-from-nuclear-submarine"
-CHUNK_MERGE_THRESHOLD = datetime.timedelta(minutes=5)
+TARGET_BUCKET = "aw-watcher-android-test"
+CHUNK_MERGE_THRESHOLD = datetime.timedelta(minutes=11)
 CHUNK_MERGE_THRESHOLD_SEC = CHUNK_MERGE_THRESHOLD.total_seconds()
 
-CHUNK_LENGTH_THRESHOLD_SEC = 60 * 2.5
+CHUNK_LENGTH_THRESHOLD_SEC = 60 * 3
 
 
 @dataclass
@@ -73,16 +73,16 @@ class AppEntry:
 
             if (end - start).total_seconds() < CHUNK_LENGTH_THRESHOLD_SEC:
                 print(f"Chunk {i} of {self.activity_name} is too short, skipping")
-                break
+                continue
 
             length_seconds = (end - start).total_seconds()
-            if length_seconds <= 5:
+            if length_seconds <= 5 * 60:
                 LENGTH_TAG = "Very short"
-            elif length_seconds <= 10:
+            elif length_seconds <= 10 * 60:
                 LENGTH_TAG = "Short"
-            elif length_seconds <= 20:
+            elif length_seconds <= 20 * 60:
                 LENGTH_TAG = "Medium"
-            elif length_seconds <= 30:
+            elif length_seconds <= 30 * 60:
                 LENGTH_TAG = "Long"
             else:
                 LENGTH_TAG = "Very long"
@@ -91,7 +91,7 @@ class AppEntry:
             print(f"Importing chunk: {start} - {end} ({i}/{TOTAL_CHUNKS}/{int(i / TOTAL_CHUNKS * 100)}%)")
             os.system(
                 f"am broadcast -a com.razeeman.util.simpletimetracker.ACTION_ADD_RECORD \
-        --es extra_activity_name 'Music' \
+        --es extra_activity_name '{self.activity_name}' \
         --es extra_record_time_started '{int(start.timestamp() * 1000)}' \
         --es extra_record_time_ended '{int(end.timestamp() * 1000)}' \
         --es extra_record_tag '{LENGTH_TAG}' \
