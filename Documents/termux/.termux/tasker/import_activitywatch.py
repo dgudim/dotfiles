@@ -21,7 +21,7 @@ TARGET_BUCKET = "aw-watcher-android-test"
 CHUNK_MERGE_THRESHOLD = datetime.timedelta(minutes=11)
 CHUNK_MERGE_THRESHOLD_SEC = CHUNK_MERGE_THRESHOLD.total_seconds()
 
-CHUNK_LENGTH_THRESHOLD_SEC = 60 * 3
+CHUNK_LENGTH_THRESHOLD_SEC = 60 * 5
 
 
 @dataclass
@@ -76,13 +76,13 @@ class AppEntry:
                 continue
 
             length_seconds = (end - start).total_seconds()
-            if length_seconds <= 5 * 60:
+            if length_seconds <= 10 * 60:
                 LENGTH_TAG = "Very short"
-            elif length_seconds <= 10 * 60:
-                LENGTH_TAG = "Short"
             elif length_seconds <= 20 * 60:
-                LENGTH_TAG = "Medium"
+                LENGTH_TAG = "Short"
             elif length_seconds <= 30 * 60:
+                LENGTH_TAG = "Medium"
+            elif length_seconds <= 40 * 60:
                 LENGTH_TAG = "Long"
             else:
                 LENGTH_TAG = "Very long"
@@ -104,7 +104,7 @@ class AppEntry:
 app_map: list[AppEntry] = [
     AppEntry(activity_name="YouTube", matching_names=["UwUTube", "YouTube"]),
     AppEntry(activity_name="Browsing", matching_names=["Chrome", "Cromite", "Firefox", "chromium"]),
-    AppEntry(activity_name="News", matching_names=["Feeder", "YouTube"]),
+    AppEntry(activity_name="News", matching_names=["Feeder"]),
     AppEntry(activity_name="IM", matching_names=["Nagram", "Discord", "Aliucord", "UwUCord"]),
 ]
 
