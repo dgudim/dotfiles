@@ -738,7 +738,7 @@ setup_ssh_shell_utils() {
 
 		echo -e "${PURPLE}Downloading $name...${NC}"
 
-		if [ -f /usr/bin/$name ]; then
+		if [ -f /usr/bin/$name ] || [ -f /data/data/com.termux/files/usr/bin/$name ]; then
 			echo "$name installed in default location, skipping installation"
 		else
 			if [ -d "$extracted_path" ]; then
@@ -874,7 +874,7 @@ setup_remote_shared_directory() {
 }
 
 setup_local_shared_directory() {
-	local remote_id="$(/usr/bin/ssh "$@" "cat /etc/machine-id")"
+	local remote_id="$(/usr/bin/ssh "$@" "cat /etc/machine-id 2> /dev/null || (termux-telephony-deviceinfo > /dev/null && echo termux)")"
 	local local_shared_dir_path="/tmp/shared-$remote_id"
 	mkdir -p "$local_shared_dir_path" 2>/dev/null > /dev/null
 	echo "$local_shared_dir_path"
@@ -895,7 +895,7 @@ setup_ssh_fileshare() {
 
 	echo -e "${GREEN}Made local directory for sharing with the remote${NC}: $local_shared_dir_path"
 
-	/usr/bin/sshfs -o compression=yes -o reconnect -o idmap=user $@:$remote_shared_dir_path "$local_shared_dir_path"
+	/usr/bin/sshfs -o compression=yes -o reconnect -o idmap=user $1:$remote_shared_dir_path "$local_shared_dir_path"
 
 	if [ $? -eq 0 ]; then
 		echo -e "${GREEN}Mounted! [remote]: $remote_shared_dir_path <-> [local]: $local_shared_dir_path${NC}"
