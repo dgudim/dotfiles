@@ -44,6 +44,8 @@ KERNEL_CMDLINE[default]="nvme_load=YES nowatchdog rw mitigations=off zswap.enabl
 KERNEL_CMDLINE[default]="nvme_load=YES nowatchdog rw mitigations=off zswap.enabled=1 zswap.compressor=lz4 zswap.max_pool_percent=20 amd_pstate=active root=UUID=aedf61ca-76c1-4522-bfac-9f534304292b resume=UUID=ec851086-4c72-42c4-a605-a6d1a8774413 drm.edid_firmware=DVI-D-1:edid/samsung-q800t-hdmi2.1 video=DVI-D-1:e"
 {{ else if eq .chezmoi.hostname "nuclear-submarine" }}
 KERNEL_CMDLINE[default]="nvme_load=YES nowatchdog rw mitigations=off zswap.enabled=1 zswap.compressor=lz4 zswap.max_pool_percent=20 amd_pstate=active root=UUID=e53e5317-0e09-42f1-8c1f-e64dfb96437e rootflags=subvol=@"
+{{ else if eq .chezmoi.hostname "portable-heater" }}
+KERNEL_CMDLINE[default]="nvme_load=YES nowatchdog rw mitigations=off zswap.enabled=1 zswap.compressor=lz4 zswap.max_pool_percent=20 rd.luks.uuid=3a5f817f-a019-4bd6-80f7-f3c163477c14 root=/dev/mapper/luks-3a5f817f-a019-4bd6-80f7-f3c163477c14"
 {{ end }}
 
 #KERNEL_CMDLINE[default]+="rw root=UUID=..."
