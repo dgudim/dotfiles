@@ -117,7 +117,7 @@ last_import_dt_utc = datetime.datetime.fromtimestamp(0, tz=TZ)
 
 if last_import_timestamp_file.exists():
     last_import_dt_utc = datetime.datetime.fromtimestamp(
-        int(last_import_timestamp_file.read_text(encoding="utf8").strip()), tz=TZ
+        float(last_import_timestamp_file.read_text(encoding="utf8").strip()), tz=TZ
     )
 
 current_dt = datetime.datetime.now(tz=TZ)
