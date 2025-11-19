@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+    <entry name="firstStart" type="Bool">
+      <default>true</default>
+    </entry>
+    <entry name="url" type="String" />
+    <entry name="compact" type="Bool" />
+    <entry name="flat" type="Bool" />
+    <entry name="fontSize" type="Int" />
+    <entry name="iconSize" type="Int" />
+    <entry name="widgetWidth" type="Double">
+      <default>-1</default>
+    </entry>
+    <entry name="widgetHeight" type="Double">
+      <default>-1</default>
+    </entry>
+    <entry name="cellWidth" type="Double" />
+    <entry name="cellHeight" type="Double" />
+    <entry name="gridHorizontalSpacing" type="Double" />
+    <entry name="gridVerticalSpacing" type="Double" />
+  </group>
+  <group name="Items">
+    <entry name="items" type="String">
+      <default>[]</default>
+    </entry>
+    <entry name="autoBackupFile" type="String"></entry>
+  </group>
+</kcfg>
