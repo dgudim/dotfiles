@@ -685,7 +685,7 @@ git
 subversion
 git-delta
 git-filter-repo
-mergiraf-bin
+mergiraf
 difftastic
 github-cli
 rust
@@ -702,7 +702,7 @@ perl-string-crc32
 perl-file-basedir
 perl-path-class
 visual-studio-code-bin
-imhex-bin
+imhex
 strace
 pax-utils
 vscode-json-languageserver
