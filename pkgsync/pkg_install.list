@@ -378,6 +378,7 @@ piki-git
 lact
 
 # CLI APPS
+cpu_rec
 grex
 croc
 fyi
@@ -761,6 +762,7 @@ codon-bin
 xontrib-fzf-widgets
 
 ### LIBS
+python-capstone
 python-uv
 python-reportlab
 python-tinycss2

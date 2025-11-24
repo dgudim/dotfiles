@@ -60,6 +60,5 @@ sync-pacman-hook-git
 # oracle-sqldeveloper
 rider
 
-dblatex
 libnsgif
 python310
