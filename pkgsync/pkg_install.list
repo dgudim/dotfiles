@@ -713,6 +713,7 @@ gfold
 wild
 dockerfmt
 lemminx
+plasma-sdk
 
 ## DBs
 postgresql
@@ -766,6 +767,7 @@ python-capstone
 python-uv
 python-reportlab
 python-tinycss2
+python-pypng
 python-pyaml
 python-pydot
 python-bottle
