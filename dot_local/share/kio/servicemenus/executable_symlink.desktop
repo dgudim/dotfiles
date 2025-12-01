@@ -1,23 +1,23 @@
-[Desktop Action chezmoi-add]
+[Desktop Action symlink-materialize]
 
 Exec=notify-send "Added %U" "$(chezmoi_modify_manager -s '%U' && chezmoi git status)"
 
-Name=Chezmoi add
-Icon=node-add
+Name=Materialize
+Icon=folder-download-symbolic
 
-[Desktop Action chezmoi-add-encrypt]
+[Desktop Action symlink-to-relative]
 
 Exec=notify-send "Added %U" "$(chezmoi add --encrypt '%U' && chezmoi git status)"
 
-Name=Chezmoi add encrypted
-Icon=folder-locked-symbolic
+Name=To relative
+Icon=folder
 
 [Desktop Entry]
-Actions=chezmoi-add;chezmoi-add-encrypt
+Actions=symlink-materialize;symlink-to-relative
 
-MimeType=application/octet-stream;inode/directory;
+MimeType=inode/symlink;
 
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
 X-KDE-Priority=TopLevel
-X-KDE-Submenu=Chezmoi
+X-KDE-Submenu=Symlink actions

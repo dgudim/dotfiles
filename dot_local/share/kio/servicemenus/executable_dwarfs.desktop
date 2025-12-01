@@ -8,7 +8,7 @@ Icon=node-add
 [Desktop Entry]
 Actions=dwarfs-mount
 
-MimeType=application/x-dwarfs
+MimeType=application/x-dwarfs;
 
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
