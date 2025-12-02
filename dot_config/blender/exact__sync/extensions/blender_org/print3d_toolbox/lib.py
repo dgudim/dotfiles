@@ -59,13 +59,13 @@ def bmesh_copy_from_object(obj: Object, transform=True, triangulate=True, apply_
     # would save ram
 
     if transform:
-        matrix = obj.matrix_world.copy()
-        if not matrix.is_identity:
-            bm.transform(matrix)
-            # Update normals if the matrix has no rotation.
-            matrix.translation.zero()
-            if not matrix.is_identity:
-                bm.normal_update()
+        mat = obj.matrix_world.copy()
+        # Avoid floating-point error when object is far away from scene center
+        mat.translation.zero()
+        if not mat.is_identity:
+            bm.transform(mat)
+            # Update normals if matrix has no rotation.
+            bm.normal_update()
 
     if triangulate:
         bmesh.ops.triangulate(bm, faces=bm.faces)

@@ -4,9 +4,12 @@ from .. import __package__ as base_package
 from ..functions.poll import (
     basic_poll,
     is_instanced_data,
+    destructive_op_confirmation,
+)
+from ..functions.modifier import (
+    apply_modifiers,
 )
 from ..functions.object import (
-    apply_modifier,
     object_visibility_set,
     delete_empty_collection,
     delete_cutter,
@@ -45,7 +48,7 @@ class OBJECT_OT_boolean_toggle_cutter(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return basic_poll(context, check_linked=True)
+        return basic_poll(cls, context, check_linked=True)
 
     def execute(self, context):
         if self.method == 'SPECIFIED':
@@ -118,7 +121,7 @@ class OBJECT_OT_boolean_remove_cutter(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return basic_poll(context, check_linked=True)
+        return basic_poll(cls, context, check_linked=True)
 
     def execute(self, context):
         prefs = context.preferences.addons[base_package].preferences
@@ -220,7 +223,7 @@ class OBJECT_OT_boolean_apply_cutter(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return basic_poll(context, check_linked=True)
+        return basic_poll(cls, context, check_linked=True)
 
 
     def invoke(self, context, event):
@@ -232,25 +235,9 @@ class OBJECT_OT_boolean_apply_cutter(bpy.types.Operator):
 
         elif self.method == 'ALL':
             self.cutters = list_selected_cutters(context)
-            self.canvases = []
+            self.canvases = list_cutter_users(self.cutters)
 
-            for obj in list_cutter_users(self.cutters):
-                # excude_canvases_with_shape_keys
-                if obj.data.shape_keys:
-                    self.report({'ERROR'}, f"Modifiers can't be applied to {obj.name} because it has shape keys")
-                    continue
-
-                self.canvases.append(obj)
-
-
-        if any(obj for obj in self.canvases if is_instanced_data(obj)):
-            return context.window_manager.invoke_confirm(self, event,
-                                                        title="Apply Boolean Cutter", confirm_text="Yes", icon='WARNING',
-                                                        message=("Canvas object(s) have instanced object data.\n"
-                                                                 "In order to apply modifiers, they need to be made single-user.\n"
-                                                                 "Do you proceed?"))
-        else:
-            return self.execute(context)
+        return destructive_op_confirmation(self, context, event, self.canvases, title="Apply Boolean Cutter")
 
 
     def execute(self, context):
@@ -258,6 +245,8 @@ class OBJECT_OT_boolean_apply_cutter(bpy.types.Operator):
         leftovers = []
 
         if self.cutters:
+            # Select all faces of the cutter so that newly created faces in canvas
+            # are also selected after applying the modifier.
             for cutter in self.cutters:
                 for face in cutter.data.polygons:
                     face.select = True
@@ -266,10 +255,12 @@ class OBJECT_OT_boolean_apply_cutter(bpy.types.Operator):
             for canvas in self.canvases:
                 context.view_layer.objects.active = canvas
 
+                boolean_mods = []
                 for mod in canvas.modifiers:
                     if "boolean_" in mod.name:
                         if mod.object in self.cutters:
-                            apply_modifier(context, canvas, mod, single_user=True)
+                            boolean_mods.append(mod)
+                apply_modifiers(context, canvas, boolean_mods)
 
                 # remove_canvas_property_if_needed
                 other_cutters, __ = list_canvas_cutters([canvas])
@@ -281,9 +272,11 @@ class OBJECT_OT_boolean_apply_cutter(bpy.types.Operator):
             if self.method == 'SPECIFIED':
                 # Apply Modifier for Slices (for_specified_method)
                 for slice in self.slices:
+                    boolean_mods = []
                     for mod in slice.modifiers:
                         if mod.type == 'BOOLEAN' and mod.object in self.cutters:
-                            apply_modifier(context, slice, mod, single_user=True)
+                            boolean_mods.append(mod)
+                    apply_modifiers(context, slice, boolean_mods)
 
 
             unused_cutters, leftovers = list_unused_cutters(self.cutters, self.canvases, do_leftovers=True)

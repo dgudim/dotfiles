@@ -1,85 +1,9 @@
-import bpy, bmesh, mathutils
+import bpy
+import mathutils
 from .. import __package__ as base_package
 
 
 #### ------------------------------ FUNCTIONS ------------------------------ ####
-
-def add_boolean_modifier(self, context, canvas, cutter, mode, solver, apply=False, pin=False, redo=True, single_user=False):
-    "Adds boolean modifier with specified cutter and properties to a single object"
-
-    prefs = context.preferences.addons[base_package].preferences
-
-    modifier = canvas.modifiers.new("boolean_" + cutter.name, 'BOOLEAN')
-    modifier.operation = mode
-    modifier.object = cutter
-    modifier.solver = solver
-
-    if redo:
-        modifier.material_mode = self.material_mode
-        modifier.use_self = self.use_self
-        modifier.use_hole_tolerant = self.use_hole_tolerant
-        modifier.double_threshold = self.double_threshold
-
-    if prefs.show_in_editmode:
-        modifier.show_in_editmode = True
-
-    if pin:
-        index = canvas.modifiers.find(modifier.name)
-        canvas.modifiers.move(index, 0)
-
-    if apply:
-        for face in cutter.data.polygons:
-            face.select = True
-
-        if context.mode == 'EDIT_MESH':
-            """Applying boolean modifier in mesh edit mode:"""
-            """1. Hiding other visible modifiers and creating new (temporary) mesh from evaluated object"""
-            """2. Transfering temporary mesh to `bmesh` to update active mesh in edit mode"""
-            """3. Removing boolean modifier and purging temporary mesh"""
-            """4. Restoring visibility of other modifiers from (1)"""
-
-            visible_modifiers = []
-            for mod in canvas.modifiers:
-                if mod == modifier:
-                    continue
-                if mod.show_viewport == True:
-                    visible_modifiers.append(mod)
-                    mod.show_viewport = False
-
-            evaluated_obj = canvas.evaluated_get(context.evaluated_depsgraph_get())
-            temp_data = bpy.data.meshes.new_from_object(evaluated_obj)
-
-            bm = bmesh.from_edit_mesh(canvas.data)
-            bm.clear()
-            bm.from_mesh(temp_data)
-            bmesh.update_edit_mesh(canvas.data)
-            evaluated_obj.to_mesh_clear()
-
-            canvas.modifiers.remove(modifier)
-            bpy.data.meshes.remove(temp_data)
-
-            for mod in visible_modifiers:
-                mod.show_viewport = True
-
-        else:
-            context_override = {'object': canvas, 'mode': 'OBJECT'}
-            with context.temp_override(**context_override):
-                apply_modifier(context, canvas, modifier, single_user=single_user)
-
-
-def apply_modifier(context, obj, modifier, single_user=False):
-    """Applies given modifier to object."""
-
-    context.view_layer.objects.active = obj
-
-    try:
-        bpy.ops.object.modifier_apply(modifier=modifier.name)
-    except:
-        if single_user:
-            # Make Single User
-            context.active_object.data = context.active_object.data.copy()
-            bpy.ops.object.modifier_apply(modifier=modifier.name)
-
 
 def set_cutter_properties(context, canvas, cutter, mode, parent=True, hide=False, collection=True):
     """Ensures cutter is properly set: has right properties, is hidden, in a collection & parented"""

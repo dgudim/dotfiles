@@ -1,14 +1,17 @@
-import bpy, itertools
+import bpy
+import itertools
 from .. import __package__ as base_package
 
 from ..functions.poll import (
     basic_poll,
     is_canvas,
     is_instanced_data,
+    destructive_op_confirmation,
+)
+from ..functions.modifier import (
+    apply_modifiers,
 )
 from ..functions.object import (
-    apply_modifier,
-    convert_to_mesh,
     object_visibility_set,
     delete_empty_collection,
     delete_cutter,
@@ -36,7 +39,7 @@ class OBJECT_OT_boolean_toggle_all(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return basic_poll(context, check_linked=True) and is_canvas(context.active_object)
+        return basic_poll(cls, context, check_linked=True) and is_canvas(context.active_object)
 
     def execute(self, context):
         canvases = list_selected_canvases(context)
@@ -79,7 +82,7 @@ class OBJECT_OT_boolean_remove_all(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return basic_poll(context, check_linked=True) and is_canvas(context.active_object)
+        return basic_poll(cls, context, check_linked=True) and is_canvas(context.active_object)
 
     def execute(self, context):
         prefs = context.preferences.addons[base_package].preferences
@@ -153,29 +156,12 @@ class OBJECT_OT_boolean_apply_all(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return basic_poll(context, check_linked=True) and is_canvas(context.active_object)
+        return basic_poll(cls, context, check_linked=True) and is_canvas(context.active_object)
 
 
     def invoke(self, context, event):
-        # Filter Objects
-        self.canvases = []
-        for obj in list_selected_canvases(context):
-            # excude_canvases_with_shape_keys
-            if obj.data.shape_keys:
-                self.report({'ERROR'}, f"Modifiers can't be applied to {obj.name} because it has shape keys")
-                continue
-
-            self.canvases.append(obj)
-
-
-        if any(obj for obj in self.canvases if is_instanced_data(obj)):
-            return context.window_manager.invoke_confirm(self, event,
-                                                        title="Apply Boolean Cutters", confirm_text="Yes", icon='WARNING',
-                                                        message=("Canvas object(s) have instanced object data.\n"
-                                                                 "In order to apply modifiers, they need to be made single-user.\n"
-                                                                 "Do you proceed?"))
-        else:
-            return self.execute(context)
+        self.canvases = list_selected_canvases(context)
+        return destructive_op_confirmation(self, context, event, self.canvases, title="Apply Boolean Cutters")
 
 
     def execute(self, context):
@@ -184,6 +170,8 @@ class OBJECT_OT_boolean_apply_all(bpy.types.Operator):
         cutters, __ = list_canvas_cutters(self.canvases)
         slices = list_canvas_slices(self.canvases)
 
+        # Select all faces of the cutter so that newly created faces in canvas
+        # are also selected after applying the modifier.
         for cutter in cutters:
             for face in cutter.data.polygons:
                 face.select = True
@@ -193,17 +181,13 @@ class OBJECT_OT_boolean_apply_all(bpy.types.Operator):
 
             # Apply Modifiers
             if prefs.apply_order == 'ALL':
-                convert_to_mesh(context, canvas)
-
+                modifiers = [mod for mod in canvas.modifiers]
             elif prefs.apply_order == 'BEFORE':
                 modifiers = list_pre_boolean_modifiers(canvas)
-                for mod in modifiers:
-                    apply_modifier(context, canvas, mod, single_user=True)
-
             elif prefs.apply_order == 'BOOLEANS':
-                for mod in canvas.modifiers:
-                    if mod.type == 'BOOLEAN' and "boolean_" in mod.name:
-                        apply_modifier(context, canvas, mod, single_user=True)
+                modifiers = [mod for mod in canvas.modifiers if mod.type == 'BOOLEAN' and "boolean_" in mod.name]
+
+            apply_modifiers(context, canvas, modifiers)
 
             # remove_boolean_properties
             canvas.booleans.canvas = False

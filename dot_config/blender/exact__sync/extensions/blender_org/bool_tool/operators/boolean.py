@@ -1,4 +1,5 @@
 import bpy
+from collections import defaultdict
 from .. import __package__ as base_package
 
 from ..functions.poll import (
@@ -6,30 +7,33 @@ from ..functions.poll import (
     is_linked,
     is_instanced_data,
     list_candidate_objects,
+    destructive_op_confirmation,
+)
+from ..functions.modifier import (
+    add_boolean_modifier,
+    apply_modifiers,
 )
 from ..functions.object import (
-    apply_modifier,
-    convert_to_mesh,
-    add_boolean_modifier,
     set_cutter_properties,
     change_parent,
     create_slice,
     delete_cutter,
 )
 from ..functions.list import (
-    list_cutter_users,
     list_pre_boolean_modifiers,
 )
 
+
+#### ------------------------------ PROPERTIES ------------------------------ ####
 
 class ModifierProperties():
     material_mode: bpy.props.EnumProperty(
         name = "Materials",
         description = "Method for setting materials on the new faces",
-        items = (('INDEX', "Index Based", "Set the material on new faces based on the order of the material slot lists. If a material doesn’t exist on the\n"
-                  "modifier object, the face will use the same material slot or the first if the object doesn’t have enough slots."),
-                 ('TRANSFER', "Transfer", "Transfer materials from non-empty slots to the result mesh, adding new materials as necessary.\n"
-                  "For empty slots, fall back to using the same material index as the operand mesh.")),
+        items = (('INDEX', "Index Based", ("Set the material on new faces based on the order of the material slot lists. If a material doesn't exist on the\n"
+                                           "modifier object, the face will use the same material slot or the first if the object doesn't have enough slots.")),
+                 ('TRANSFER', "Transfer", ("Transfer materials from non-empty slots to the result mesh, adding new materials as necessary.\n"
+                                           "For empty slots, fall back to using the same material index as the operand mesh."))),
         default = 'INDEX',
     )
     use_self: bpy.props.BoolProperty(
@@ -60,7 +64,7 @@ class ModifierProperties():
             layout.prop(self, "material_mode")
             layout.prop(self, "use_self")
             layout.prop(self, "use_hole_tolerant")
-        elif prefs.solver == 'FAST':
+        elif prefs.solver == 'FLOAT':
             layout.prop(self, "double_threshold")
 
 
@@ -68,20 +72,20 @@ class ModifierProperties():
 #### ------------------------------ /brush_boolean/ ------------------------------ ####
 
 class BrushBoolean(ModifierProperties):
+    @classmethod
+    def poll(cls, context):
+        return basic_poll(cls, context)
+
 
     def invoke(self, context, event):
-        # abort_when_no_selected_objects
+        # Abort if there are less than 2 selected objects.
         if len(context.selected_objects) < 2:
             self.report({'WARNING'}, "Boolean operator needs at least two selected objects")
             return {'CANCELLED'}
 
-        # abort_when_linked
+        # Abort if active object is linked.
         if is_linked(context, context.active_object):
-            self.report({'WARNING'}, "Booleans can not be performed on linked objects")
-            return {'CANCELLED'}
-
-        self.cutters = list_candidate_objects(self, context, context.active_object)
-        if len(self.cutters) == 0:
+            self.report({'WARNING'}, "Boolean operators cannot be performed on linked objects")
             return {'CANCELLED'}
 
         return self.execute(context)
@@ -90,20 +94,23 @@ class BrushBoolean(ModifierProperties):
     def execute(self, context):
         prefs = context.preferences.addons[base_package].preferences
         canvas = context.active_object
+        cutters = list_candidate_objects(self, context, context.active_object)
 
-        # Create Slices
+        if len(cutters) == 0:
+            return {'CANCELLED'}
+
+        # Create slices.
         if self.mode == "SLICE":
-            for cutter in self.cutters:
-                """NOTE: Slices need to be created in separate loop to avoid inheriting boolean modifiers that operator adds"""
+            for cutter in cutters:
+                """NOTE: Slices need to be created in a separate loop to avoid inheriting boolean modifiers that the operator adds."""
                 slice = create_slice(context, canvas, modifier=True)
-                add_boolean_modifier(self, context, slice, cutter, "INTERSECT", prefs.solver)
+                add_boolean_modifier(self, context, slice, cutter, "INTERSECT", prefs.solver, pin=prefs.pin)
 
-        for cutter in self.cutters:
+        for cutter in cutters:
+            mode = "DIFFERENCE" if self.mode == "SLICE" else self.mode
             set_cutter_properties(context, canvas, cutter, self.mode, parent=prefs.parent, collection=prefs.use_collection)
-            add_boolean_modifier(self, context, canvas, cutter, "DIFFERENCE" if self.mode == "SLICE" else self.mode, prefs.solver, pin=prefs.pin)
+            add_boolean_modifier(self, context, canvas, cutter, mode, prefs.solver, pin=prefs.pin)
 
-
-        context.view_layer.objects.active = canvas
         canvas.booleans.canvas = True
 
         return {'FINISHED'}
@@ -115,10 +122,6 @@ class OBJECT_OT_boolean_brush_union(bpy.types.Operator, BrushBoolean):
     bl_description = "Merge selected objects into active one"
     bl_options = {'REGISTER', 'UNDO'}
 
-    @classmethod
-    def poll(cls, context):
-        return basic_poll(context)
-
     mode = "UNION"
 
 
@@ -127,10 +130,6 @@ class OBJECT_OT_boolean_brush_intersect(bpy.types.Operator, BrushBoolean):
     bl_label = "Boolean Intersection (Brush)"
     bl_description = "Only keep the parts of the active object that are interesecting selected objects"
     bl_options = {'REGISTER', 'UNDO'}
-
-    @classmethod
-    def poll(cls, context):
-        return basic_poll(context)
 
     mode = "INTERSECT"
 
@@ -141,10 +140,6 @@ class OBJECT_OT_boolean_brush_difference(bpy.types.Operator, BrushBoolean):
     bl_description = "Subtract selected objects from active one"
     bl_options = {'REGISTER', 'UNDO'}
 
-    @classmethod
-    def poll(cls, context):
-        return basic_poll(context)
-
     mode = "DIFFERENCE"
 
 
@@ -154,10 +149,6 @@ class OBJECT_OT_boolean_brush_slice(bpy.types.Operator, BrushBoolean):
     bl_description = "Slice active object along the selected ones. Will create slices as separate objects"
     bl_options = {'REGISTER', 'UNDO'}
 
-    @classmethod
-    def poll(cls, context):
-        return basic_poll(context)
-
     mode = "SLICE"
 
 
@@ -165,78 +156,81 @@ class OBJECT_OT_boolean_brush_slice(bpy.types.Operator, BrushBoolean):
 #### ------------------------------ /auto_boolean/ ------------------------------ ####
 
 class AutoBoolean(ModifierProperties):
+    @classmethod
+    def poll(cls, context):
+        return basic_poll(cls, context)
+
 
     def invoke(self, context, event):
-        # abort_when_no_selected_objects
+        # Abort if there are less than 2 selected objects.
         if len(context.selected_objects) < 2:
             self.report({'WARNING'}, "Boolean operator needs at least two selected objects")
             return {'CANCELLED'}
 
-        # abort_when_linked
+        # Abort if active object is linked.
         if is_linked(context, context.active_object):
-            self.report({'ERROR'}, "Modifiers can't be applied to linked object")
+            self.report({'ERROR'}, "Modifiers cannot be applied to linked object")
             return {'CANCELLED'}
 
-        self.cutters = list_candidate_objects(self, context, context.active_object)
-        if len(self.cutters) == 0:
-            return {'CANCELLED'}
-
-
-        if is_instanced_data(context.active_object):
-            return context.window_manager.invoke_confirm(self, event,
-                                                        title="Auto Boolean", confirm_text="Yes", icon='WARNING',
-                                                        message=("Canvas object has instanced object data.\n"
-                                                                 "In order to apply modifiers, it needs to be made single-user.\n"
-                                                                 "Do you proceed?"))
-        else:
-            return self.execute(context)
+        return destructive_op_confirmation(self, context, event, [context.active_object], title="Auto Boolean")
 
 
     def execute(self, context):
         prefs = context.preferences.addons[base_package].preferences
         canvas = context.active_object
+        cutters = list_candidate_objects(self, context, context.active_object)
+        new_modifiers = defaultdict(list)
 
-        # apply_modifiers
-        if (prefs.apply_order == 'ALL') or (prefs.apply_order == 'BEFORE' and prefs.pin == False):
-            convert_to_mesh(context, canvas)
-        else:
-            if canvas.data.shape_keys:
-                self.report({'ERROR'}, "Modifiers can't be applied to object with shape keys")
-                return {'CANCELLED'}
+        if len(cutters) == 0:
+            return {'CANCELLED'}
 
-
-        # Create Slices
+        # Create slices.
         if self.mode == "SLICE":
-            for cutter in self.cutters:
-                """NOTE: Slices need to be created in separate loop to avoid inheriting boolean modifiers that operator adds"""
+            for cutter in cutters:
+                """NOTE: Slices need to be created in a separate loop to avoid inheriting boolean modifiers that the operator adds."""
                 slice = create_slice(context, canvas)
-                add_boolean_modifier(self, context, slice, cutter, "INTERSECT", prefs.solver, apply=True, single_user=True)
+                modifier = add_boolean_modifier(self, context, slice, cutter, "INTERSECT", prefs.solver, pin=prefs.pin)
+                new_modifiers[slice].append(modifier)
+                slice.select_set(True)
 
-
-        for cutter in self.cutters:
-            # Add Modifier (& Apply)
+        for cutter in cutters:
+            # Add boolean modifier on canvas.
             mode = "DIFFERENCE" if self.mode == "SLICE" else self.mode
-            add_boolean_modifier(self, context, canvas, cutter, mode, prefs.solver, apply=True, pin=prefs.pin, single_user=True)
+            modifier = add_boolean_modifier(self, context, canvas, cutter, mode, prefs.solver, pin=prefs.pin)
+            new_modifiers[canvas].append(modifier)
 
-            # Transfer Children
+            # Transfer cutters children to canvas.
             for child in cutter.children:
                 change_parent(child, canvas)
 
-            # Delete Cutter
+            # Select all faces of the cutter so that newly created faces in canvas
+            # are also selected after applying the modifier.
+            for face in cutter.data.polygons:
+                face.select = True
+
+        # Apply modifiers on canvas & slices.
+        for obj, modifiers in new_modifiers.items():
+            modifiers = self._get_modifiers_to_apply(prefs, obj, modifiers)
+            apply_modifiers(context, obj, modifiers)
+
+        # Delete cutters.
+        for cutter in cutters:
             delete_cutter(cutter)
 
-            if self.mode == "SLICE":
-                slice.select_set(True)
-                context.view_layer.objects.active = slice
-
-
-        # apply_modifiers_before_final_boolean
-        if prefs.apply_order == 'BEFORE' and prefs.pin:
-            modifiers = list_pre_boolean_modifiers(canvas)
-            for mod in modifiers:
-                apply_modifier(context, canvas, mod, single_user=True)
-
         return {'FINISHED'}
+
+
+    def _get_modifiers_to_apply(self, prefs, obj, new_modifiers) -> list:
+        """Returns a list of modifiers that need to be applied based on add-on preferences."""
+
+        if prefs.apply_order == 'ALL':
+            modifiers = [mod for mod in obj.modifiers]
+        elif prefs.apply_order == 'BOOLEANS':
+            modifiers = new_modifiers
+        elif prefs.apply_order == 'BEFORE':
+            modifiers = list_pre_boolean_modifiers(obj)
+
+        return modifiers
 
 
 class OBJECT_OT_boolean_auto_union(bpy.types.Operator, AutoBoolean):
@@ -244,10 +238,6 @@ class OBJECT_OT_boolean_auto_union(bpy.types.Operator, AutoBoolean):
     bl_label = "Boolean Union (Auto)"
     bl_description = "Merge selected objects into active one"
     bl_options = {'REGISTER', 'UNDO'}
-
-    @classmethod
-    def poll(cls, context):
-        return basic_poll(context)
 
     mode = "UNION"
 
@@ -258,10 +248,6 @@ class OBJECT_OT_boolean_auto_difference(bpy.types.Operator, AutoBoolean):
     bl_description = "Subtract selected objects from active one"
     bl_options = {'REGISTER', 'UNDO'}
 
-    @classmethod
-    def poll(cls, context):
-        return basic_poll(context)
-
     mode = "DIFFERENCE"
 
 
@@ -271,10 +257,6 @@ class OBJECT_OT_boolean_auto_intersect(bpy.types.Operator, AutoBoolean):
     bl_description = "Only keep the parts of the active object that are interesecting selected objects"
     bl_options = {'REGISTER', 'UNDO'}
 
-    @classmethod
-    def poll(cls, context):
-        return basic_poll(context)
-
     mode = "INTERSECT"
 
 
@@ -283,10 +265,6 @@ class OBJECT_OT_boolean_auto_slice(bpy.types.Operator, AutoBoolean):
     bl_label = "Boolean Slice (Auto)"
     bl_description = "Slice active object along the selected ones. Will create slices as separate objects"
     bl_options = {'REGISTER', 'UNDO'}
-
-    @classmethod
-    def poll(cls, context):
-        return basic_poll(context)
 
     mode = "SLICE"
 
@@ -317,7 +295,7 @@ def register():
     addon = bpy.context.window_manager.keyconfigs.addon
     km = addon.keymaps.new(name="Object Mode")
 
-    # brush_operators
+    # Brush Operators
     kmi = km.keymap_items.new("object.boolean_brush_union", 'NUMPAD_PLUS', 'PRESS', ctrl=True)
     kmi.active = True
     addon_keymaps.append((km, kmi))
@@ -334,7 +312,7 @@ def register():
     kmi.active = True
     addon_keymaps.append((km, kmi))
 
-    # auto_operators
+    # Auto Operators
     kmi = km.keymap_items.new("object.boolean_auto_union", 'NUMPAD_PLUS', 'PRESS', ctrl=True, shift=True)
     kmi.active = True
     addon_keymaps.append((km, kmi))

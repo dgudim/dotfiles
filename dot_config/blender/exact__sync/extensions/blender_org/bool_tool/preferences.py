@@ -5,7 +5,7 @@ from . import ui
 #### ------------------------------ FUNCTIONS ------------------------------ ####
 
 def update_sidebar_category(self, context):
-    """Change sidebar category of add-ons panels"""
+    """Change sidebar category of add-ons panel."""
 
     panel_classes = [
         ui.VIEW3D_PT_boolean,
@@ -31,13 +31,12 @@ class BoolToolPreferences(bpy.types.AddonPreferences):
     # UI
     show_in_sidebar: bpy.props.BoolProperty(
         name = "Show Addon Panel in Sidebar",
-        description = ("Add add-on operators and properties to 3D viewport sidebar category.\n"
-                       "Most of the features are already available in 3D viewport's Object > Boolean menu, but brush list is only in sidebar panel"),
+        description = "Add a sidebar panel in 3D Viewport with add-ons operators and properties",
         default = True,
     )
     sidebar_category: bpy.props.StringProperty(
         name = "Category Name",
-        description = "Set sidebar category name. You can type in name of the existing category and panel will be added there, instead of creating new category",
+        description = "Sidebar category name. Using the name of the existing category will add panel there",
         default = "Edit",
         update = update_sidebar_category,
     )
@@ -46,10 +45,10 @@ class BoolToolPreferences(bpy.types.AddonPreferences):
     solver: bpy.props.EnumProperty(
         name = "Boolean Solver",
         description = "Which solver to use for automatic and brush booleans",
-        items = [('FAST', "Fast", ""),
+        items = [('FLOAT', "Float", ""),
                  ('EXACT', "Exact", ""),
                  ('MANIFOLD', "Manifold", "")],
-        default = 'FAST',
+        default = 'FLOAT',
     )
     wireframe: bpy.props.BoolProperty(
         name = "Display Cutters as Wireframe",
@@ -99,6 +98,14 @@ class BoolToolPreferences(bpy.types.AddonPreferences):
     )
 
     # Features
+    fast_modifier_apply: bpy.props.BoolProperty(
+        name = "Faster Destructive Booleans",
+        description = ("Experimental method of applying modifiers that results in 30-50% faster destructive booleans.\n"
+                       "Performance improvements also affect the add-ons operators that apply cutters.\n"
+                       "However, changing modifier properties in the redo panel (like material transfer)\n"
+                       "is not available for this method yet."),
+        default = False,
+    )
     double_click: bpy.props.BoolProperty(
         name = "Double-click Select",
         description = ("Select boolean cutters by dbl-clicking on the boolean modifier.\n"
@@ -158,6 +165,7 @@ class BoolToolPreferences(bpy.types.AddonPreferences):
         # Features
         layout.separator()
         col = layout.column(align=True, heading="Features")
+        col.prop(self, "fast_modifier_apply")
         col.prop(self, "double_click")
 
         # Experimentals

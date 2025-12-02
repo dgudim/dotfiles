@@ -1,0 +1,17 @@
+schema_version = "1.0.0"
+
+id = "Cad_measure_extension"
+version = "2.0.0"
+name = "Cad_Dimensions"
+tagline = "Extension for a new measuring system"
+maintainer = "Mr.nobody"
+# Supported types: "add-on", "theme"
+type = "add-on"
+
+
+blender_version_min = "4.2.0"
+
+license = [
+  "SPDX:GPL-3.0-or-later",
+]
+

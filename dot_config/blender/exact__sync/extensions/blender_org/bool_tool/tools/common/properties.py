@@ -1,4 +1,5 @@
-import bpy, math
+import bpy
+import math
 
 
 #### ------------------------------ PROPERTIES ------------------------------ ####
@@ -23,10 +24,10 @@ class CarverModifierProperties():
     # MODIFIER-properties
     solver: bpy.props.EnumProperty(
         name = "Solver",
-        items = [('FAST', "Fast", ""),
+        items = [('FLOAT', "Float", ""),
                  ('EXACT', "Exact", ""),
                  ('MANIFOLD', "Manifold", "")],
-        default = 'FAST',
+        default = 'FLOAT',
     )
     pin: bpy.props.BoolProperty(
         name = "Pin Boolean Modifier",

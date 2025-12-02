@@ -78,7 +78,7 @@ class MESH_OT_hollow(Operator):
 
         # Apply transforms, avoid translating the mesh
         mat = obj.matrix_world.copy()
-        mat.translation = 0, 0, 0
+        mat.translation.zero()
         mesh_target.transform(mat)
 
         # Read mesh to numpy arrays

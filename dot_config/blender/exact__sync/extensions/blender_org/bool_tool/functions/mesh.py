@@ -1,4 +1,7 @@
-import bpy, bmesh, mathutils, math
+import bpy
+import bmesh
+import mathutils
+import math
 from bpy_extras import view3d_utils
 
 
@@ -19,8 +22,8 @@ def create_cutter_shape(self, context):
     if self.depth == 'CURSOR':
         plane_point = context.scene.cursor.location
     elif self.depth == 'VIEW':
-        plane_point = mathutils.Vector((0.0, 0.0, 0.0))
-
+        __, plane_point = combined_bounding_box(self.selected_objects)
+        plane_point = mathutils.Vector(plane_point)
 
     # Create Mesh & Object
     faces = {}
@@ -61,7 +64,7 @@ def extrude(self, mesh):
     faces = [f for f in bm.faces]
 
     # move_the_mesh_towards_view
-    box_bounding = combined_bounding_box(self.selected_objects)
+    box_bounding, __ = combined_bounding_box(self.selected_objects)
     for face in faces:
         for vert in face.verts:
             vert.co += -self.view_depth * box_bounding
@@ -85,7 +88,7 @@ def extrude(self, mesh):
 
 def combined_bounding_box(objects):
     """Calculate the combined bounding box of multiple objects."""
-    
+
     min_corner = mathutils.Vector((float('inf'), float('inf'), float('inf')))
     max_corner = mathutils.Vector((-float('inf'), -float('inf'), -float('inf')))
 
@@ -103,7 +106,10 @@ def combined_bounding_box(objects):
 
     # Calculate the diagonal of the combined bounding box
     bounding_box_diag = (max_corner - min_corner).length
-    return bounding_box_diag
+    # Calculate the center of bounding box
+    bounding_box_center = (max_corner + min_corner) * 0.5
+
+    return bounding_box_diag, bounding_box_center
 
 
 def create_face(context, direction, depth, bm, name, faces, verts, polyline=False):
