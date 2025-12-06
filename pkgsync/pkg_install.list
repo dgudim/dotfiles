@@ -130,7 +130,7 @@ bluez-obex
 tpm2-tools
 dos2unix
 tree
-kmscon-patched-git
+kmscon
 gtk3
 
 ## PACMAN HOOKS AND SCRIPTS
