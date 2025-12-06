@@ -101,6 +101,8 @@ kdf
 zoom
 eloquent
 languagetool
+linux-steam-integration
+steam-native-runtime
 
 # Obsolete
 dbeaver-plugin-svg-format

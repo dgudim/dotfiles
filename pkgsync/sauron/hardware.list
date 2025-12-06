@@ -35,8 +35,6 @@ gopreload-git
 
 # Gaming
 steam
-linux-steam-integration
-steam-native-runtime
 adwsteamgtk
 lib32-gamemode
 gamemode
