@@ -277,6 +277,7 @@ kvantum-qt5
 
 
 # GUI APPS
+alt-sendme-bin
 merkuro
 konsole
 cool-retro-term
@@ -381,6 +382,8 @@ lact
 cpu_rec
 grex
 croc
+sendme-bin
+dumbpipe-bin
 fyi
 ascii
 acpid
