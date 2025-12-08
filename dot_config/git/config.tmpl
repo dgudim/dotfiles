@@ -219,3 +219,11 @@
 [maintenance "incremental-repack"]
     enabled = true
     schedule = daily
+
+
+[includeIf "gitdir:~/Documents/Projects/personal"]
+    path = ~/.config/git/include_user_personal
+
+
+[includeIf "gitdir:~/Documents/shared/_projects/work"]
+    path = ~/.config/git/include_user_work
