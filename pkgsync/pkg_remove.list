@@ -108,6 +108,20 @@ steam-native-runtime
 dbeaver-plugin-svg-format
 kinit
 
+# Replaced with a different version
+translate-shell
+mergiraf-bin
+
+# Only needed as a dependency
+ppp
+pptpclient
+networkmanager-pptp
+lib32-libvdpau-va-gl
+lib32-sdl2-compat
+rp-pppoe
+kplotting5
+botan2
+
 # Replaced with flatpak
 crow-translate-git
 

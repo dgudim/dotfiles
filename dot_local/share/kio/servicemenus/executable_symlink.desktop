@@ -1,13 +1,13 @@
 [Desktop Action symlink-materialize]
 
-Exec=notify-send "Added %U" "$(chezmoi_modify_manager -s '%U' && chezmoi git status)"
+Exec=notify-send "Not implemented"
 
 Name=Materialize
 Icon=folder-download-symbolic
 
 [Desktop Action symlink-to-relative]
 
-Exec=notify-send "Added %U" "$(chezmoi add --encrypt '%U' && chezmoi git status)"
+Exec=notify-send "Not implemented"
 
 Name=To relative
 Icon=folder

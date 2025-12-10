@@ -1,6 +1,6 @@
 [Desktop Action chezmoi-add]
 
-Exec=notify-send "Added %U" "$(chezmoi_modify_manager -s '%U' && chezmoi git status)"
+Exec=notify-send "Added %U" "$(chezmoi_multiadd '%U' && chezmoi git status)"
 
 Name=Chezmoi add
 Icon=node-add

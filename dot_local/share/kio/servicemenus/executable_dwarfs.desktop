@@ -1,6 +1,6 @@
 [Desktop Action dwarfs-mount]
 
-Exec=notify-send "Added %U" "$(chezmoi_modify_manager -s '%U' && chezmoi git status)"
+Exec=notify-send "Not implemented"
 
 Name=Dwarfs mount
 Icon=node-add

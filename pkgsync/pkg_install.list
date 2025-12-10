@@ -763,6 +763,8 @@ codon-bin
 xontrib-fzf-widgets
 
 ### LIBS
+python-pycurl
+python-pyglet
 python-capstone
 python-uv
 python-reportlab
@@ -1263,6 +1265,9 @@ hdf5-openmpi
 bcc-libbpf-tools
 fastjar
 libwebp-utils
+bluez-tools
+usbip
+bindfs
 
 
 
