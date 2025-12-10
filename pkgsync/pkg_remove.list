@@ -104,6 +104,8 @@ languagetool
 linux-steam-integration
 steam-native-runtime
 
+kmscon-patched-git
+
 # Obsolete
 dbeaver-plugin-svg-format
 kinit

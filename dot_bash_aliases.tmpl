@@ -81,6 +81,7 @@ git-merge-project-into-subfolder() {
 	echo "DONE!"
 }
 
+
 ensure-worktree() {
 	[ -z ${1+x} ] && echo "Please give me a branch" && return 1
 	BRANCH=$(echo "$1" | cut -d'/' -f2)

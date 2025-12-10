@@ -130,7 +130,7 @@ bluez-obex
 tpm2-tools
 dos2unix
 tree
-kmscon-patched-git
+kmscon
 gtk3
 
 ## PACMAN HOOKS AND SCRIPTS
@@ -277,6 +277,7 @@ kvantum-qt5
 
 
 # GUI APPS
+alt-sendme-bin
 merkuro
 konsole
 cool-retro-term
@@ -381,6 +382,8 @@ lact
 cpu_rec
 grex
 croc
+sendme-bin
+dumbpipe-bin
 fyi
 ascii
 acpid
@@ -1268,6 +1271,7 @@ libwebp-utils
 bluez-tools
 usbip
 bindfs
+libinput-tools
 
 
 
