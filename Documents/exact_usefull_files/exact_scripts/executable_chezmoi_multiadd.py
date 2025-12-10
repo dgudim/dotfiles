@@ -26,8 +26,8 @@ for path in (Path(p) for p in files_to_add):
 for file_ in files_to_add_resolved:
     if file_.is_symlink():
         print(f"Adding {L_CYAN}'{file_}'{NC} (symlink)")
-        os.system(f'chezmoi add "{file_}"')
+        os.system(f'chezmoi add --template-symlinks "{file_.absolute()}"')
     else:
         print(f"Adding {L_PURPLE}'{file_}'{NC}")
-        os.system(f'chezmoi_modify_manager -s "{file_}"')
+        os.system(f'chezmoi_modify_manager -s "{file_.absolute()}"')
 
