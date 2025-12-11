@@ -603,6 +603,26 @@ rgd() {
 
 # For replacing pods in kube deployment
 
+kube-logs() {
+	local pod_substring="$1"
+
+    if [[ -z "$pod_substring" ]]; then
+        echo "Usage: kube-logs <pod_name>"
+        return 1
+    fi
+
+    local pod_name
+    pod_name=$(kubectl get pods --no-headers -o custom-columns=":metadata.name" | grep "\-$pod_substring\-" | head -n 1)
+
+    if [[ -z "$pod_name" ]]; then
+        echo -e "${RED}Error${NC}: No pod found matching ${L_CYAN}'$pod_substring'${NC}"
+        return 1
+    fi
+    echo -e "${PURPLE}Found pod: ${CYAN}$pod_name${NC}"
+
+    kubectl logs -f "$pod_name"
+}
+
 kube-replace() {
 
     RED='\033[1;31m'
@@ -619,11 +639,11 @@ kube-replace() {
     GRAY='\033[1;30m'
     NC='\033[0m'
 
-    local new_image="$1"
-    local pod_substring="$2"
+    local pod_substring="$1"
+    local new_image="$2"
 
     if [[ -z "$new_image" || -z "$pod_substring" ]]; then
-        echo "Usage: kube-replace <new_image> <pod_name>"
+        echo "Usage: kube-replace <pod_name> <new_image>"
         return 1
     fi
 
