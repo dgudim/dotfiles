@@ -957,7 +957,7 @@ launch_shell() {
 }
 
 get_ssh_init_str() {
-	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f __get_temp_dir); $(typeset -f proxy_on); $(typeset -f proxy_off); $(typeset -f setup_ssh_shell_utils); $(typeset -f kube-replace); $(typeset -f launch_shell); launch_shell $1 '$2'"
+	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt); $(typeset -f __download_helper); $(typeset -f __get_temp_dir); $(typeset -f proxy_on); $(typeset -f proxy_off); $(typeset -f setup_ssh_shell_utils); $(typeset -f kube-replace); $(typeset -f kube-logs); $(typeset -f launch_shell); launch_shell $1 '$2'"
 }
 
 setup_remote_shared_directory() {
