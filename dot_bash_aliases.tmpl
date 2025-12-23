@@ -19,6 +19,9 @@ alias man='MOOR="--no-linenumbers --wrap" && batman'
 
 alias klogs='sudo journalctl -e -f -k -b | ccze -A -o nolookups | spacer'
 alias logs='sudo journalctl -e -f -b | ccze -A -o nolookups | spacer'
+dmesg() {
+	/usr/bin/dmesg -T
+}
 
 ################################################ Git and chezmoi aliases ################################################
 
@@ -905,7 +908,7 @@ launch_shell() {
 	NC='\033[0m'
 
 	if [ -f ~/.config/.myman-machine-flag ]; then
-		echo "${L_YELLOW}Owned machine detected, skipping deployment :)${NC}"
+		echo -e "${L_YELLOW}Owned machine detected, skipping deployment :)${NC}"
 		bash --login
 		return
 	fi
