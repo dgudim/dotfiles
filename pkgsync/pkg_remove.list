@@ -127,5 +127,8 @@ botan2
 # Replaced with flatpak
 crow-translate-git
 
+# Only a dependency
+fakeroot
+
 # Replaced with cargo binstall
 oxker

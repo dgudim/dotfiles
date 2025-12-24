@@ -90,7 +90,6 @@ unarchiver
 usb_modeswitch
 usbutils
 dmidecode
-fakeroot
 grep
 smartmontools
 efibootmgr
