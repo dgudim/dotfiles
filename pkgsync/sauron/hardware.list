@@ -7,7 +7,7 @@ ryzen_smu-dkms-git
 zenergy-dkms-git
 
 # Nvidia
-nvidia-dkms
+nvidia-open-dkms
 nvidia-settings
 libva-nvidia-driver
 lib32-opencl-nvidia
