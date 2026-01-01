@@ -132,3 +132,5 @@ fakeroot
 
 # Replaced with cargo binstall
 oxker
+chezmoi_modify_manager
+ast-grep-bin

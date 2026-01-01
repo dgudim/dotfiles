@@ -497,7 +497,7 @@ spacer-bin
 ugrep
 the_silver_searcher
 ripgrep-all
-ast-grep-bin
+# ast-grep-bin
 
 ## Shell integrations
 moor
@@ -551,7 +551,6 @@ geoip-database-extra
 tesseract-data-rus
 tesseract-data-eng
 tesseract-data-lit
-chezmoi_modify_manager
 bash-completion
 mpv-mpris
 cachyos-ananicy-rules-git
