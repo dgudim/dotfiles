@@ -44,6 +44,7 @@ TitleBarTopMargin=1.95
 ButtonIconStyle=StyleOxygen
 CornerRadius=2.5
 DrawBackgroundGradient=true
+DrawTitleBarSeparator=false
 IconSize=IconMedium
 WindowCornerRadius=5
 
