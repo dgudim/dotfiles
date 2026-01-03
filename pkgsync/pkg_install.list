@@ -312,7 +312,7 @@ obsidian
 pinta
 remmina
 krdc
-freerdp2
+freerdp
 syncthingtray-qt6
 okteta
 neochat
@@ -819,7 +819,6 @@ python-pycountry
 python-python-multipart
 python-socksio
 python-ulid
-python-click-completion
 python-shellingham
 python-pypdf
 python-semver
@@ -827,7 +826,6 @@ python-watchdog
 python-fastimport
 python-genshi
 python-gpgme
-python-js2py
 python-poetry
 python-pyinotify
 python-tzlocal
@@ -934,7 +932,7 @@ esbuild
 eslint
 eslint_d
 eslint-language-server
-bun-bin
+bun
 
 ## WEB
 dart-sass

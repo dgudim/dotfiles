@@ -134,3 +134,9 @@ fakeroot
 oxker
 chezmoi_modify_manager
 ast-grep-bin
+
+# Not in the aur
+bun-bin
+python-js2py
+python-click-completion
+python-pyjsparser
