@@ -1,2 +1,0 @@
-1. Install gallery-dl
-2. Place the script near pending.txt written by tasker
