@@ -4,7 +4,8 @@
 # dependencies = [
 #   "requests",
 #   "gallery_dl",
-#   "googletrans"
+#   "googletrans",
+#   "pykakasi"
 # ]
 # ///
 
