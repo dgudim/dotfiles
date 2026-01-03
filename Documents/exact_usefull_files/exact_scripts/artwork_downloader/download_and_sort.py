@@ -877,11 +877,11 @@ exported_opml_contents = f"""
   </head>
   <body>
     <outline title="Artstation" text="Artstation">
-    {"\n".join(f'<outline feeder:notify="false" feeder:fullTextByDefault="false" feeder:openArticlesWith="" feeder:alternateId="false" title="{author_info["artstation_username"]} on artstation" text="{author_info["artstation_username"]} on artstation" type="rss" xmlUrl="{get_artstation_rss_url(author_info)}"/>' for author_info in authors_to_export_filtered)}
+    {"\n".join(f'    <outline feeder:notify="false" feeder:fullTextByDefault="false" feeder:openArticlesWith="" feeder:alternateId="false" title="{author_info["artstation_username"]} on artstation" text="{author_info["artstation_username"]} on artstation" type="rss" xmlUrl="{get_artstation_rss_url(author_info)}"/>' for author_info in authors_to_export_filtered)}
     </outline>
   </body>
 </opml>
-"""
+""".strip()
 
 Path(FEEDER_EXPORTS_PATH, ARTSTATION_OPML_EXPORT_FILENAME).write_text(exported_opml_contents, encoding="utf-8")
 print(f"╰─{L_GREEN}OK{NC}")
