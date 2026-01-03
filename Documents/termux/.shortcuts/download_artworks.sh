@@ -8,3 +8,5 @@ cp -fv ~/dotfiles/Documents/usefull_files/scripts/artwork_downloader/executable_
 
 cd ~/.temp_artwork_downloader
 uv run download_and_sort.py
+
+
