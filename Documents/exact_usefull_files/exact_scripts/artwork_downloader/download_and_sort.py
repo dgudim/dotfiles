@@ -15,6 +15,7 @@ import io
 import json
 import re
 import shutil
+import os
 import subprocess
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -70,10 +71,10 @@ class ImageInfo(TypedDict):
 
 BASE_DIR = Path(__file__).parent
 
-PENDING_ARTSTATION_IMAGES_FILE_LOCATION = Path("./pending.txt")
-PIXIV_IMAGES_SOURCE_DIR = Path("./pixiv")
+PENDING_ARTSTATION_IMAGES_FILE_LOCATION = Path(os.environ.get("PENDING_ARTSTATION_IMAGES_FILE_LOCATION", "./pending.txt"))
+PIXIV_IMAGES_SOURCE_DIR = Path(os.environ.get("PIXIV_IMAGES_SOURCE_DIR", "./pixiv"))
 
-BASE_PERSONAL_DIR = Path("/home/kloud/Documents/shared/_Personal")
+BASE_PERSONAL_DIR = Path(os.environ.get("BASE_PERSONAL_DIR", "/home/kloud/Documents/shared/_Personal"))
 BASE_PICTURES_DIR = Path(BASE_PERSONAL_DIR, "Pictures")
 
 TARGET_DIRECTORY_PATH = Path(BASE_PICTURES_DIR, "backgrounds")
