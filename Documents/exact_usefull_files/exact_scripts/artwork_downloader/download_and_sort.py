@@ -1,5 +1,13 @@
 #!/usr/bin/venv python3
 
+# /// script
+# dependencies = [
+#   "requests",
+#   "gallery_dl",
+#   "googletrans"
+# ]
+# ///
+
 import asyncio
 import datetime
 import io
