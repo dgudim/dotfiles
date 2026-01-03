@@ -107,6 +107,7 @@ directory_update_time_cache: dict[
     str, float
 ] = {}  # Last recorded time a certain directory was updated, used for skipping changing modification datetime
 
+TEMPORARY_DIRECTORY_PATH.mkdir(exist_ok=True, parents=True)
 
 def err_exit(msg: str) -> NoReturn:
     print(f"{L_RED}ERROR: {msg}{NC}")
