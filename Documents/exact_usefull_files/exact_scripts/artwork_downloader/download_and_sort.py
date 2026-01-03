@@ -733,8 +733,8 @@ for author_dir in PIXIV_IMAGES_SOURCE_DIR.iterdir():
 
         image_title_readable = name_to_human_readable(image_title)
         image_slug = (
-            re.compile(" *").sub(
-                "-", " ".join([ch if ch.isalpha() else " " for ch in image_title_readable.lower().strip()])
+            re.compile(" +").sub(
+                "-", "".join([ch if ch.isalnum() else " " for ch in image_title_readable.lower().strip().strip("-_+")])
             )
             if len(image_title_readable) > 0
             else ""
