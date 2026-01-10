@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: 3D Print Toolbox 1.2.0\n"
-"POT-Creation-Date: 2025-05-01\n"
+"Project-Id-Version: 3D Print Toolbox 1.3.0\n"
+"POT-Creation-Date: 2025-12-29\n"
 "PO-Revision-Date: 2025-05-09\n"
 "Last-Translator: Óscar Hernández\n"
 "Language-Team: Mikhail Rachinskiy\n"
@@ -25,38 +25,38 @@ msgstr "Escala de Escena"
 msgid "Copy Textures"
 msgstr "Copiar Texturas"
 
-msgid "Volume: {}³"
-msgstr "Volumen: {}³"
+msgid "Volume"
+msgstr "Volumen"
 
-msgid "Area: {}²"
-msgstr "Área: {}²"
+msgid "Area"
+msgstr "Área"
 
-msgid "Non-manifold Edges: {}"
-msgstr "Aristas No Desplegables: {}"
+msgid "Non-manifold Edges"
+msgstr "Aristas No Desplegables"
 
-msgid "Bad Contiguous Edges: {}"
-msgstr "Aristas Contiguas Incorrectas: {}"
+msgid "Bad Contiguous Edges"
+msgstr "Aristas Contiguas Incorrectas"
 
-msgid "Intersect Face: {}"
-msgstr "Caras Intersectadas: {}"
+msgid "Intersect Faces"
+msgstr "Caras Intersectadas"
 
-msgid "Zero Faces: {}"
-msgstr "Caras Nulas: {}"
+msgid "Zero Faces"
+msgstr "Caras Nulas"
 
-msgid "Zero Edges: {}"
-msgstr "Aristas Nulas: {}"
+msgid "Zero Edges"
+msgstr "Aristas Nulas"
 
-msgid "Non-flat Faces: {}"
-msgstr "Caras No Planas: {}"
+msgid "Non-flat Faces"
+msgstr "Caras No Planas"
 
-msgid "Thin Faces: {}"
-msgstr "Caras Delgadas: {}"
+msgid "Thin Faces"
+msgstr "Caras Delgadas"
 
-msgid "Sharp Edge: {}"
-msgstr "Aristas Definidas: {}"
+msgid "Sharp Edges"
+msgstr "Aristas Definidas"
 
-msgid "Overhang Face: {}"
-msgstr "Caras Sobresalientes: {}"
+msgid "Overhang Faces"
+msgstr "Caras Sobresalientes"
 
 msgid "Report the volume of the active mesh"
 msgstr "Informa del volumen de la malla activa"
@@ -69,6 +69,9 @@ msgstr "Comprobar que la geometría sea sólida (contenga un interior y exterior
 
 msgid "Check for self intersections"
 msgstr "Comprobar intersecciones propias"
+
+msgid "Count mesh islands"
+msgstr ""
 
 msgid "Check for zero area faces and zero length edges"
 msgstr "Comprobar si hay caras de área cero y aristas de longitud cero"
@@ -133,6 +136,21 @@ msgstr "Duplicado de Hueco"
 msgid "Create hollowed out copy of the object"
 msgstr "Crear una copia ahuecada del objeto"
 
+msgid "Offset Surface Only"
+msgstr ""
+
+msgid "Remove original and keep offset surface"
+msgstr ""
+
+msgid "Cut geometry along a plane"
+msgstr ""
+
+msgid "Slice on axis"
+msgstr ""
+
+msgid "Cutting plane position"
+msgstr ""
+
 msgid "Rotate object so the selected faces lie, on average, parallel to the XY plane"
 msgstr "Rotar el objeto de modo que las caras seleccionadas queden, en promedio, paralelas al plano XY"
 
@@ -153,6 +171,9 @@ msgstr "Modificado: {:+} vértices, {:+} aristas, {:+} caras"
 
 msgid "Make sure target mesh has closed surface and offset value is less than half of target thickness"
 msgstr "Asegúrate de que la malla de destino tenga una superficie cerrada y que el valor de desplazamiento sea menor que la mitad del grosor del destino"
+
+msgid "Target must have closed surface and offset value less than half of target thickness"
+msgstr ""
 
 msgid "Scaled by {}"
 msgstr "Escalado por {}"
@@ -190,6 +211,10 @@ msgstr "Sólido"
 msgctxt "Operator"
 msgid "Intersections"
 msgstr "Intersecciones"
+
+msgctxt "Operator"
+msgid "Shells"
+msgstr ""
 
 msgctxt "Operator"
 msgid "Degenerate"

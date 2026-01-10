@@ -101,4 +101,4 @@ class SceneProperties(PropertyGroup):
 
     @staticmethod
     def get_report():
-        return report.info()
+        return report.get()

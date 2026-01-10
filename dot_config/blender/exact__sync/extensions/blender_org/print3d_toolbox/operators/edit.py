@@ -2,15 +2,143 @@
 # SPDX-FileCopyrightText: 2013-2022 Campbell Barton
 # SPDX-FileCopyrightText: 2016-2025 Mikhail Rachinskiy
 # SPDX-FileCopyrightText: 2022 Align XY by Jaggz H.
-# SPDX-FileCopyrightText: 2024-2025 Hollow by Ubiratan Freitas
+# SPDX-FileCopyrightText: 2024-2025 Hollow, Bisect by Ubiratan Freitas
 
 import math
 
-import bmesh
 import bpy
 from bpy.app.translations import pgettext_tip as tip_
 from bpy.props import BoolProperty, EnumProperty, FloatProperty, IntProperty
 from bpy.types import Operator
+
+
+class MESH_OT_bisect(Operator):
+    bl_idname = "mesh.print3d_bisect"
+    bl_label = "Bisect"
+    bl_description = "Cut geometry along a plane"
+    bl_options = {"REGISTER", "UNDO", "PRESET"}
+
+    bisect_x: BoolProperty(
+        name="X",
+        description="Slice on axis",
+    )
+    bisect_y: BoolProperty(
+        name="Y",
+        description="Slice on axis",
+    )
+    bisect_z: BoolProperty(
+        name="Z",
+        description="Slice on axis",
+    )
+
+    flip_x: BoolProperty(
+        name="Flip",
+        description="Flips the direction of the slice",
+    )
+    flip_y: BoolProperty(
+        name="Flip",
+        description="Flips the direction of the slice",
+    )
+    flip_z: BoolProperty(
+        name="Flip",
+        description="Flips the direction of the slice",
+    )
+
+    factor_x: FloatProperty(
+        name="Factor",
+        description="Cutting plane position",
+        subtype="FACTOR",
+        min=0.0,
+        max=1.0,
+        default=0.5,
+    )
+    factor_y: FloatProperty(
+        name="Factor",
+        description="Cutting plane position",
+        subtype="FACTOR",
+        min=0.0,
+        max=1.0,
+        default=0.5,
+    )
+    factor_z: FloatProperty(
+        name="Factor",
+        description="Cutting plane position",
+        subtype="FACTOR",
+        min=0.0,
+        max=1.0,
+        default=0.5,
+    )
+
+    def draw(self, context):
+        layout = self.layout
+        layout.use_property_split = True
+        layout.use_property_decorate = False
+
+        layout.separator()
+
+        box = layout.box()
+        col = box.column()
+        col.use_property_split = False
+        col.prop(self, "bisect_x")
+        col = box.column()
+        col.enabled = self.bisect_x
+        col.prop(self, "factor_x")
+        col.prop(self, "flip_x")
+
+        layout.separator()
+
+        box = layout.box()
+        col = box.column()
+        col.use_property_split = False
+        col.prop(self, "bisect_y")
+        col = box.column()
+        col.enabled = self.bisect_y
+        col.prop(self, "factor_y")
+        col.prop(self, "flip_y")
+
+        layout.separator()
+
+        box = layout.box()
+        col = box.column()
+        col.use_property_split = False
+        col.prop(self, "bisect_z")
+        col = box.column()
+        col.enabled = self.bisect_z
+        col.prop(self, "factor_z")
+        col.prop(self, "flip_z")
+
+    @classmethod
+    def poll(cls, context):
+        return bpy.app.version >= (4, 5, 0)
+
+    def execute(self, context):
+        from .. import lib
+
+        md = lib.gn_setup("Bisect", context.object)
+
+        md["Socket_12"] = self.bisect_x
+        md["Socket_3"] = self.factor_x
+        md["Socket_4"] = self.flip_x
+
+        md["Socket_16"] = self.bisect_y
+        md["Socket_6"] = self.factor_y
+        md["Socket_7"] = self.flip_y
+
+        md["Socket_14"] = self.bisect_z
+        md["Socket_9"] = self.factor_z
+        md["Socket_10"] = self.flip_z
+
+        return {"FINISHED"}
+
+    def invoke(self, context, event):
+        if context.object is None or not context.object.select_get():
+            return {"CANCELLED"}
+
+        if context.mode == "EDIT_MESH":
+            bpy.ops.object.mode_set(mode="OBJECT")
+
+        wm = context.window_manager
+        return wm.invoke_props_popup(self, event)
 
 
 class MESH_OT_hollow(Operator):
@@ -48,6 +176,10 @@ class MESH_OT_hollow(Operator):
         name="Hollow Duplicate",
         description="Create hollowed out copy of the object",
     )
+    offset_surface_only: BoolProperty(
+        name="Offset Surface Only",
+        description="Remove original and keep offset surface",
+    )
 
     def draw(self, context):
         layout = self.layout
@@ -59,9 +191,47 @@ class MESH_OT_hollow(Operator):
         layout.prop(self, "offset_direction", expand=True)
         layout.prop(self, "offset")
         layout.prop(self, "voxel_size")
-        layout.prop(self, "make_hollow_duplicate")
+        if bpy.app.version >= (5, 0, 0):
+            layout.prop(self, "offset_surface_only")
+        else:
+            layout.prop(self, "make_hollow_duplicate")
 
     def execute(self, context):
+        if not self.offset:
+            return {"FINISHED"}
+
+        if bpy.app.version >= (5, 0, 0):
+            self.hollow_gn(context)
+        else:
+            self.hollow_openvdb(context)
+
+        return {"FINISHED"}
+
+    def invoke(self, context, event):
+        if context.object is None or not context.object.select_get():
+            return {"CANCELLED"}
+
+        if context.mode == "EDIT_MESH":
+            bpy.ops.object.mode_set(mode="OBJECT")
+
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+
+    def hollow_gn(self, context):
+        from .. import lib
+
+        md = lib.gn_setup("Hollow", context.object)
+        md["Socket_5"] = ["INSIDE", "OUTSIDE"].index(self.offset_direction)
+        md["Socket_3"] = self.offset
+        md["Socket_2"] = self.voxel_size
+        md["Socket_4"] = self.offset_surface_only
+
+        context.view_layer.update()
+        if md.node_warnings:
+            md.id_data.modifiers.remove(md)
+            self.report({"ERROR"}, "Make sure target mesh has closed surface and offset value is less than half of target thickness")
+
+    def hollow_openvdb(self, context):
         import numpy as np
 
         if bpy.app.version >= (4, 4, 0):
@@ -69,10 +239,7 @@ class MESH_OT_hollow(Operator):
         else:
             import pyopenvdb as vdb
 
-        if not self.offset:
-            return {"FINISHED"}
-
-        obj = context.active_object
+        obj = context.object
         depsgraph = context.evaluated_depsgraph_get()
         mesh_target = bpy.data.meshes.new_from_object(obj.evaluated_get(depsgraph))
 
@@ -92,7 +259,7 @@ class MESH_OT_hollow(Operator):
         tris.shape = (-1, 3)
 
         # Generate VDB levelset
-        half_width = max(3.0, math.ceil(abs(self.offset) / self.voxel_size) + 2.0) # half_width has to envelop offset
+        half_width = max(3.0, math.ceil(self.offset / self.voxel_size) + 2.0) # half_width has to envelop offset
         trans = vdb.createLinearTransform(self.voxel_size)
         levelset = vdb.FloatGrid.createLevelSetFromPolygons(verts, triangles=tris, transform=trans, halfWidth=half_width)
 
@@ -101,7 +268,7 @@ class MESH_OT_hollow(Operator):
             newverts, newquads = levelset.convertToQuads(-self.offset)
             if newquads.size == 0:
                 self.report({"ERROR"}, "Make sure target mesh has closed surface and offset value is less than half of target thickness")
-                return {"FINISHED"}
+                return
         else:
             newverts, newquads = levelset.convertToQuads(self.offset)
 
@@ -131,18 +298,6 @@ class MESH_OT_hollow(Operator):
         else:
             bpy.data.meshes.remove(mesh_target)
 
-        return {"FINISHED"}
-
-    def invoke(self, context, event):
-        if not context.selected_objects:
-            return {"CANCELLED"}
-
-        if context.mode == "EDIT_MESH":
-            bpy.ops.object.mode_set(mode="OBJECT")
-
-        wm = context.window_manager
-        return wm.invoke_props_dialog(self)
-
 
 class OBJECT_OT_align_xy(Operator):
     bl_idname = "object.print3d_align_xy"
@@ -159,7 +314,7 @@ class OBJECT_OT_align_xy(Operator):
     def execute(self, context):
         # FIXME: Undo is inconsistent.
         # FIXME: Would be nicer if rotate could pick some object-local axis.
-
+        import bmesh
         from mathutils import Vector
 
         self.context = context

@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2013-2022 Campbell Barton
 # SPDX-FileCopyrightText: 2017-2025 Mikhail Rachinskiy
 
-import bmesh
+import bpy
 from bpy.types import Object, Panel
 
 from . import report
@@ -25,32 +25,28 @@ class Sidebar:
 class VIEW3D_PT_print3d_analyze(Sidebar, Panel):
     bl_label = "Analyze"
 
-    _type_to_icon = {
-        bmesh.types.BMVert: "VERTEXSEL",
-        bmesh.types.BMEdge: "EDGESEL",
-        bmesh.types.BMFace: "FACESEL",
-    }
-
     def draw_report(self, context):
         layout = self.layout
-        info = report.info()
+        data = report.get()
 
-        if info:
+        if data:
             is_edit = context.edit_object is not None
 
             row = layout.row()
             row.label(text="Result")
             row.operator("wm.print3d_report_clear", text="", icon="X")
 
-            box = layout.box()
-            col = box.column()
+            row = layout.box().row()
+            col1 = row.column()
+            col2 = row.column()
+            row.alignment = col1.alignment = col2.alignment = "LEFT"
 
-            for i, (text, data) in enumerate(info):
-                if is_edit and data and data[1]:
-                    bm_type, _bm_array = data
-                    col.operator("mesh.print3d_select_report", text=text, icon=self._type_to_icon[bm_type],).index = i
+            for i, item in enumerate(data):
+                col1.label(text=item.name)
+                if is_edit and item.indices:
+                    col2.operator("mesh.print3d_select_report", text=item.value, icon=item.icon).index = i
                 else:
-                    col.label(text=text)
+                    col2.label(text=item.value)
 
     def draw(self, context):
         layout = self.layout
@@ -69,6 +65,8 @@ class VIEW3D_PT_print3d_analyze(Sidebar, Panel):
         col = layout.column(align=True)
         col.operator("mesh.print3d_check_solid")
         col.operator("mesh.print3d_check_intersect")
+        if bpy.app.version >= (4, 3, 0):
+            col.operator("mesh.print3d_check_shells")
         row = col.row(align=True)
         row.operator("mesh.print3d_check_degenerate")
         row.prop(props, "threshold_zero", text="")
@@ -109,6 +107,9 @@ class VIEW3D_PT_print3d_edit(Sidebar, Panel):
         is_mesh = _is_mesh(context.object)
 
         layout.operator("mesh.print3d_hollow")
+
+        if bpy.app.version >= (4, 5, 0):
+            layout.operator("mesh.print3d_bisect")
 
         row = layout.row()
         row.enabled = is_mesh
