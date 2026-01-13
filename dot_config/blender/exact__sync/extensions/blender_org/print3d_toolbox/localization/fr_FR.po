@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: 3D Print Toolbox 1.2.0\n"
-"POT-Creation-Date: 2025-05-01\n"
+"Project-Id-Version: 3D Print Toolbox 1.3.0\n"
+"POT-Creation-Date: 2025-12-29\n"
 "PO-Revision-Date: 2025-05-08\n"
 "Last-Translator: Mathieu Moutarde @Mathieu-14\n"
 "Language-Team: Mikhail Rachinskiy\n"
@@ -25,38 +25,38 @@ msgstr "Étirement de la scène"
 msgid "Copy Textures"
 msgstr "Copier les textures"
 
-msgid "Volume: {}³"
-msgstr "Volume: {}³"
+msgid "Volume"
+msgstr "Volume"
 
-msgid "Area: {}²"
-msgstr "Zone: {}²"
+msgid "Area"
+msgstr "Zone"
 
-msgid "Non-manifold Edges: {}"
-msgstr "Arêtes discontinues: {}"
+msgid "Non-manifold Edges"
+msgstr "Arêtes discontinues"
 
-msgid "Bad Contiguous Edges: {}"
-msgstr "Mauvais bords contigus: {}"
+msgid "Bad Contiguous Edges"
+msgstr "Mauvais bords contigus"
 
-msgid "Intersect Face: {}"
-msgstr "Intersection de face: {}"
+msgid "Intersect Faces"
+msgstr "Intersection de faces"
 
-msgid "Zero Faces: {}"
-msgstr "Faces Zéro: {}"
+msgid "Zero Faces"
+msgstr "Faces Zéro"
 
-msgid "Zero Edges: {}"
-msgstr "Arêtes Zéro: {}"
+msgid "Zero Edges"
+msgstr "Arêtes Zéro"
 
-msgid "Non-flat Faces: {}"
-msgstr "Faces non plates: {}"
+msgid "Non-flat Faces"
+msgstr "Faces non plates"
 
-msgid "Thin Faces: {}"
-msgstr "Faces minces: {}"
+msgid "Thin Faces"
+msgstr "Faces minces"
 
-msgid "Sharp Edge: {}"
-msgstr "Arêtes vives: {}"
+msgid "Sharp Edges"
+msgstr "Arêtes vives"
 
-msgid "Overhang Face: {}"
-msgstr "Face en surplomb: {}"
+msgid "Overhang Faces"
+msgstr "Faces en surplomb"
 
 msgid "Report the volume of the active mesh"
 msgstr "Indiquer le volume du maillage actif"
@@ -69,6 +69,9 @@ msgstr "Vérifiez que la géométrie est solide (a un intérieur/extérieur vali
 
 msgid "Check for self intersections"
 msgstr "Vérifiez les intersections automatiques"
+
+msgid "Count mesh islands"
+msgstr ""
 
 msgid "Check for zero area faces and zero length edges"
 msgstr "Vérifiez les faces de surface nulle et les arêtes de longueur nulle"
@@ -133,6 +136,21 @@ msgstr "Duplicata creux"
 msgid "Create hollowed out copy of the object"
 msgstr "Créer une copie évidée de l'objet"
 
+msgid "Offset Surface Only"
+msgstr ""
+
+msgid "Remove original and keep offset surface"
+msgstr ""
+
+msgid "Cut geometry along a plane"
+msgstr ""
+
+msgid "Slice on axis"
+msgstr ""
+
+msgid "Cutting plane position"
+msgstr ""
+
 msgid "Rotate object so the selected faces lie, on average, parallel to the XY plane"
 msgstr "Faire pivoter l'objet de sorte que les faces sélectionnées soient, en moyenne, parallèles au plan XY"
 
@@ -153,6 +171,9 @@ msgstr "Modifié: {:+} vertices, {:+} arrêtes, {:+} faces"
 
 msgid "Make sure target mesh has closed surface and offset value is less than half of target thickness"
 msgstr "Assurez-vous que le maillage cible a une surface fermée et que la valeur de décalage est inférieure à la moitié de l'épaisseur de la cible"
+
+msgid "Target must have closed surface and offset value less than half of target thickness"
+msgstr ""
 
 msgid "Scaled by {}"
 msgstr "Mis à l'échelle par {}"
@@ -190,6 +211,10 @@ msgstr "Solide"
 msgctxt "Operator"
 msgid "Intersections"
 msgstr "Intersections"
+
+msgctxt "Operator"
+msgid "Shells"
+msgstr ""
 
 msgctxt "Operator"
 msgid "Degenerate"

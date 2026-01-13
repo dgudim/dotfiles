@@ -4,10 +4,7 @@
 
 import math
 
-import bmesh
 import bpy
-from bmesh.types import BMEdge, BMFace, BMVert
-from bpy.app.translations import pgettext_tip as tip_
 from bpy.props import IntProperty
 from bpy.types import Object, Operator
 
@@ -66,7 +63,7 @@ class MESH_OT_info_volume(Operator):
             volume_str = lib.clean_float(volume_unit, 4)
             volume_fmt = f"{volume_str} {symbol}"
 
-        report.update((tip_("Volume: {}³").format(volume_fmt), None))
+        report.update(report.info("Volume", f"{volume_fmt}³"))
 
         return {"FINISHED"}
 
@@ -97,7 +94,7 @@ class MESH_OT_info_area(Operator):
             area_str = lib.clean_float(area_unit, 4)
             area_fmt = f"{area_str} {symbol}"
 
-        report.update((tip_("Area: {}²").format(area_fmt), None))
+        report.update(report.info("Area", f"{area_fmt}²"))
 
         return {"FINISHED"}
 
@@ -109,9 +106,9 @@ class MESH_OT_info_area(Operator):
 def execute_check(self, context):
     obj = context.active_object
 
-    info = []
-    self.main_check(obj, info)
-    report.update(*info)
+    data = []
+    self.main_check(obj, data)
+    report.update(*data)
 
     multiple_obj_warning(self, context)
 
@@ -129,21 +126,19 @@ class MESH_OT_check_solid(Operator):
     bl_description = "Check for geometry is solid (has valid inside/outside) and correct normals"
 
     @staticmethod
-    def main_check(obj: Object, info: list):
+    def main_check(obj: Object, data: list):
         import array
         from .. import lib
 
         # TODO bow-tie quads
 
         bm = lib.bmesh_copy_from_object(obj, transform=False, triangulate=False)
-
         edges_non_manifold = array.array("i", (i for i, ele in enumerate(bm.edges) if not ele.is_manifold))
         edges_non_contig = array.array("i", (i for i, ele in enumerate(bm.edges) if ele.is_manifold and (not ele.is_contiguous)))
-
-        info.append((tip_("Non-manifold Edges: {}").format(len(edges_non_manifold)), (BMEdge, edges_non_manifold)))
-        info.append((tip_("Bad Contiguous Edges: {}").format(len(edges_non_contig)), (BMEdge, edges_non_contig)))
-
         bm.free()
+
+        data.append(report.edge("Non-manifold Edges", len(edges_non_manifold), edges_non_manifold))
+        data.append(report.edge("Bad Contiguous Edges", len(edges_non_contig), edges_non_contig))
 
     def execute(self, context):
         return execute_check(self, context)
@@ -155,11 +150,81 @@ class MESH_OT_check_intersections(Operator):
     bl_description = "Check for self intersections"
 
     @staticmethod
-    def main_check(obj: Object, info: list):
+    def main_check(obj: Object, data: list):
         from .. import lib
 
         faces_intersect = lib.bmesh_check_self_intersect_object(obj)
-        info.append((tip_("Intersect Face: {}").format(len(faces_intersect)), (BMFace, faces_intersect)))
+        data.append(report.face("Intersect Faces", len(faces_intersect), faces_intersect))
+
+    def execute(self, context):
+        return execute_check(self, context)
+
+
+class MESH_OT_check_shells(Operator):
+    bl_idname = "mesh.print3d_check_shells"
+    bl_label = "Shells"
+    bl_description = "Count mesh islands"
+
+    @staticmethod
+    def main_check(obj: Object, data: list):
+        if bpy.app.version < (4, 3, 0):
+            return
+
+        ng = bpy.data.node_groups.new(".shells", "GeometryNodeTree")
+
+        sock_geo_in = ng.interface.new_socket("Geometry", in_out="INPUT", socket_type="NodeSocketGeometry")
+        sock_geo_out = ng.interface.new_socket("Geometry", in_out="OUTPUT", socket_type="NodeSocketGeometry")
+
+        nodes = ng.nodes
+
+        in_ = nodes.new("NodeGroupInput")
+        in_.location.x = -200
+        in_.select = False
+        in_geo = in_.outputs[sock_geo_in.identifier]
+
+        out = nodes.new("NodeGroupOutput")
+        out.location.x = 400
+        out.select = False
+        out_geo = out.inputs[sock_geo_out.identifier]
+
+        stats = nodes.new("GeometryNodeAttributeStatistic")
+        stats.location.y = -60
+        stats.select = False
+        stats.domain = "FACE"
+
+        island = nodes.new("GeometryNodeInputMeshIsland")
+        island.location = -200, -350
+        island.select = False
+
+        tostring = nodes.new("FunctionNodeValueToString")
+        tostring.location = 200, -150
+        tostring.select = False
+        tostring.data_type = "INT"
+
+        warn = nodes.new("GeometryNodeWarning")
+        warn.location = 400, -150
+        warn.select = False
+        warn.warning_type = "INFO"
+
+        ng.links.new(in_geo, out_geo)
+        ng.links.new(in_geo, stats.inputs["Geometry"])
+        ng.links.new(island.outputs["Island Count"], stats.inputs["Attribute"])
+        ng.links.new(stats.outputs["Max"], tostring.inputs["Value"])
+        ng.links.new(tostring.outputs["String"], warn.inputs["Message"])
+
+        md = obj.modifiers.new(ng.name, "NODES")
+        md.node_group = ng
+
+        bpy.context.view_layer.update()
+        try:
+            shells = md.node_warnings[0].message
+        except:
+            shells = "ERROR"
+
+        obj.modifiers.remove(md)
+        bpy.data.node_groups.remove(ng)
+
+        data.append(report.info("Shells", shells))
 
     def execute(self, context):
         return execute_check(self, context)
@@ -171,21 +236,19 @@ class MESH_OT_check_degenerate(Operator):
     bl_description = "Check for zero area faces and zero length edges"
 
     @staticmethod
-    def main_check(obj: Object, info: list):
+    def main_check(obj: Object, data: list):
         import array
         from .. import lib
 
         threshold = bpy.context.scene.print3d_toolbox.threshold_zero
 
         bm = lib.bmesh_copy_from_object(obj, transform=False, triangulate=False)
-
         faces_zero = array.array("i", (i for i, ele in enumerate(bm.faces) if ele.calc_area() <= threshold))
         edges_zero = array.array("i", (i for i, ele in enumerate(bm.edges) if ele.calc_length() <= threshold))
-
-        info.append((tip_("Zero Faces: {}").format(len(faces_zero)), (BMFace, faces_zero)))
-        info.append((tip_("Zero Edges: {}").format(len(edges_zero)), (BMEdge, edges_zero)))
-
         bm.free()
+
+        data.append(report.face("Zero Faces", len(faces_zero), faces_zero))
+        data.append(report.edge("Zero Edges", len(edges_zero), edges_zero))
 
     def execute(self, context):
         return execute_check(self, context)
@@ -197,7 +260,7 @@ class MESH_OT_check_nonplanar(Operator):
     bl_description = "Check for non-flat faces"
 
     @staticmethod
-    def main_check(obj: Object, info: list):
+    def main_check(obj: Object, data: list):
         import array
         from .. import lib
 
@@ -207,10 +270,9 @@ class MESH_OT_check_nonplanar(Operator):
         bm.normal_update()
 
         faces_distort = array.array("i", (i for i, ele in enumerate(bm.faces) if lib.face_is_distorted(ele, angle_nonplanar)))
-
-        info.append((tip_("Non-flat Faces: {}").format(len(faces_distort)), (BMFace, faces_distort)))
-
         bm.free()
+
+        data.append(report.face("Non-flat Faces", len(faces_distort), faces_distort))
 
     def execute(self, context):
         return execute_check(self, context)
@@ -222,13 +284,13 @@ class MESH_OT_check_thick(Operator):
     bl_description = "Check for wall thickness below specified value"
 
     @staticmethod
-    def main_check(obj: Object, info: list):
+    def main_check(obj: Object, data: list):
         from .. import lib
 
         thickness_min = bpy.context.scene.print3d_toolbox.thickness_min
-
         faces_error = lib.bmesh_check_thick_object(obj, thickness_min)
-        info.append((tip_("Thin Faces: {}").format(len(faces_error)), (BMFace, faces_error)))
+
+        data.append(report.face("Thin Faces", len(faces_error), faces_error))
 
     def execute(self, context):
         return execute_check(self, context)
@@ -240,7 +302,7 @@ class MESH_OT_check_sharp(Operator):
     bl_description = "Check for edges sharper than a specified angle"
 
     @staticmethod
-    def main_check(obj: Object, info: list):
+    def main_check(obj: Object, data: list):
         from .. import lib
 
         angle_sharp = bpy.context.scene.print3d_toolbox.angle_sharp
@@ -252,9 +314,9 @@ class MESH_OT_check_sharp(Operator):
             ele.index for ele in bm.edges
             if ele.is_manifold and ele.calc_face_angle_signed() > angle_sharp
         ]
-
-        info.append((tip_("Sharp Edge: {}").format(len(edges_sharp)), (BMEdge, edges_sharp)))
         bm.free()
+
+        data.append(report.edge("Sharp Edges", len(edges_sharp), edges_sharp))
 
     def execute(self, context):
         return execute_check(self, context)
@@ -266,14 +328,14 @@ class MESH_OT_check_overhang(Operator):
     bl_description = "Check for faces that overhang past a specified angle"
 
     @staticmethod
-    def main_check(obj: Object, info: list):
+    def main_check(obj: Object, data: list):
         from mathutils import Vector
         from .. import lib
 
         angle_overhang = (math.pi / 2.0) - bpy.context.scene.print3d_toolbox.angle_overhang
 
         if angle_overhang == math.pi:
-            info.append(("Skipping Overhang", ()))
+            data.append(report.info("Skipping Overhang", ""))
             return
 
         bm = lib.bmesh_copy_from_object(obj, transform=True, triangulate=False)
@@ -287,9 +349,9 @@ class MESH_OT_check_overhang(Operator):
             ele.index for ele in bm.faces
             if z_down_angle(ele.normal, 4.0) < angle_overhang
         ]
-
-        info.append((tip_("Overhang Face: {}").format(len(faces_overhang)), (BMFace, faces_overhang)))
         bm.free()
+
+        data.append(report.face("Overhang Faces", len(faces_overhang), faces_overhang))
 
     def execute(self, context):
         return execute_check(self, context)
@@ -304,6 +366,7 @@ class MESH_OT_check_all(Operator):
     check_cls = (
         MESH_OT_check_solid,
         MESH_OT_check_intersections,
+        MESH_OT_check_shells,
         MESH_OT_check_degenerate,
         MESH_OT_check_nonplanar,
         MESH_OT_check_thick,
@@ -314,11 +377,11 @@ class MESH_OT_check_all(Operator):
     def execute(self, context):
         obj = context.active_object
 
-        info = []
+        data = []
         for cls in self.check_cls:
-            cls.main_check(obj, info)
+            cls.main_check(obj, data)
 
-        report.update(*info)
+        report.update(*data)
 
         multiple_obj_warning(self, context)
 
@@ -333,33 +396,21 @@ class MESH_OT_report_select(Operator):
 
     index: IntProperty()
 
-    _type_to_mode = {
-        BMVert: "VERT",
-        BMEdge: "EDGE",
-        BMFace: "FACE",
-    }
-
-    _type_to_attr = {
-        BMVert: "verts",
-        BMEdge: "edges",
-        BMFace: "faces",
-    }
-
     def execute(self, context):
+        import bmesh
+
         obj = context.edit_object
-        info = report.info()
-        _text, data = info[self.index]
-        bm_type, bm_array = data
+        item = report.get()[self.index]
 
         bpy.ops.mesh.reveal()
         bpy.ops.mesh.select_all(action="DESELECT")
-        bpy.ops.mesh.select_mode(type=self._type_to_mode[bm_type])
+        bpy.ops.mesh.select_mode(type=item.select_mode)
 
         bm = bmesh.from_edit_mesh(obj.data)
-        elems = getattr(bm, MESH_OT_report_select._type_to_attr[bm_type])[:]
+        elems = getattr(bm, item.bm_attribute)[:]
 
         try:
-            for i in bm_array:
+            for i in item.indices:
                 elems[i].select_set(True)
         except:
             # possible arrays are out of sync

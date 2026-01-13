@@ -1,101 +1,158 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-// import org.kde.kirigami 2.4 as Kirigami
+import org.kde.plasma.core as PlasmaCore
+import org.kde.ksvg as KSvg
+import org.kde.iconthemes as KIconThemes
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasmoid
 import QtQuick.Dialogs
-import org.kde.plasma.private.quicklaunch 1.0
 import "."
+import "../"
 
 ColumnLayout {
-    Layout.fillWidth: true
-    Layout.fillHeight: true
-    id: groupedActions
+    id: root
+    Layout.preferredWidth: 450
     property var confInternalName: ""
     property ListModel modelData
     property var sectionLabel: ""
     property alias configValue: actionCombo.configValue
     property alias commandValue: internalValue.value
     property alias applicationUrlValue: btnAddLauncher.applicationUrl
+    property string customName
+    property string customIcon
+
     property bool showSeparator: true
+    property bool showCustomNameAndIcon: false
     property bool isLoading: true
-    
-    Item { implicitHeight: 4}
 
     Item {
-        // HACK: Workaround for the command TextArea being marqued as changed when focused
-        // requesting a confirmation that isnt actually needed, so store its value
-        // here and update it only when textarea singals onTextChanged
+        // HACK: Workaround for the command TextArea being marked as changed when focused
+        // requesting a confirmation that isn't actually needed, so store its value
+        // here and update it only when textarea signals onTextChanged
         // there is probably a simpler way or something I've missed...
         id: internalValue
-        property string value:""
+        property string value: ""
         // onValueChanged: console.log("internal value changed to:",value)
         Component.onCompleted: {
-            commandTextArea.text = value
+            commandTextArea.text = value;
         }
+        visible: false
     }
 
-    MyComboBox {
+    FilterListView {
         id: actionCombo
         Layout.fillWidth: true
-        model: modelData
-        textRole: "label"
-        configName: confInternalName
-        isLoading: groupedActions.isLoading
+        configName: root.confInternalName
+        componentValue: configValue.split(",")[0]
+        customIcon: root.customIcon
+        customName: root.customName
+        showCustomIcon: root.showCustomNameAndIcon
+    }
+
+    RowLayout {
+        visible: actionCombo.showList && root.showCustomNameAndIcon
+        Label {
+            text: i18n("Name:")
+        }
+        TextField {
+            Layout.fillWidth: true
+            placeholderText: i18n("Custom name")
+            text: root.customName
+            onTextChanged: root.customName = text
+        }
+        Label {
+            text: i18n("Icon:")
+        }
+        Button {
+            id: iconButton
+            hoverEnabled: true
+            ToolTip.delay: Kirigami.Units.toolTipDelay
+            ToolTip.text: i18nc("@info:tooltip", "Icon name is \"%1\"", root.customIcon)
+            ToolTip.visible: iconButton.hovered && root.customIcon.length > 0
+
+            KIconThemes.IconDialog {
+                id: iconDialog
+                onIconNameChanged: {
+                    root.customIcon = iconName;
+                }
+            }
+
+            onPressed: iconMenu.opened ? iconMenu.close() : iconMenu.open()
+
+            Kirigami.Icon {
+                anchors.centerIn: parent
+                width: parent.width
+                height: width
+                source: root.customIcon
+            }
+
+            Menu {
+                id: iconMenu
+
+                // Appear below the button
+                y: parent.height
+
+                MenuItem {
+                    text: i18nc("@item:inmenu Open icon chooser dialog", "Choose…")
+                    icon.name: "document-open-folder"
+                    Accessible.description: i18nc("@info:whatsthis", "Choose an icon for Application Launcher")
+                    onClicked: iconDialog.open()
+                }
+                MenuItem {
+                    text: i18nc("@item:inmenu Reset icon to default", "Reset to default icon")
+                    icon.name: "edit-clear"
+                    enabled: root.customIcon !== ""
+                    onClicked: root.customIcon = ""
+                }
+                MenuItem {
+                    text: i18nc("@action:inmenu", "Remove icon")
+                    icon.name: "delete"
+                    enabled: root.customIcon !== ""
+                    onClicked: root.customIcon = ""
+                }
+            }
+        }
     }
 
     // Command area
     RowLayout {
-        visible: modelData.get(actionCombo.currentIndex)["component"] == "custom_command"
-
-        TextArea {
-            wrapMode: TextArea.Wrap
-            topPadding: activeFocus?6:10
-            bottomPadding: activeFocus?22:10
-            leftPadding: 10
-            rightPadding: 10
+        Label {
+            text: i18n("Command:")
+        }
+        TextField {
             id: commandTextArea
-            Layout.fillWidth: true
+            visible: actionCombo.componentValue == "custom_command"
+            wrapMode: TextArea.Wrap
             selectByMouse: true
-            placeholderText: qsTr("Enter shell command or pick a executable")
-
+            placeholderText: qsTr("command script or executable")
             onTextChanged: internalValue.value = text
             persistentSelection: false
-
-            // cursor position
-            property int cursorLine: 1 + text.substring(0, cursorPosition).split("\n").length - 1
-            property int cursorColumn: cursorPosition - text.lastIndexOf("\n", cursorPosition - 1)
-
-            Text {
-                anchors.bottom: parent.bottom
-                anchors.right: parent.right
-                horizontalAlignment: Text.AlignRight
-                text: commandTextArea.cursorLine + ", " + commandTextArea.cursorColumn
-                color: Kirigami.Theme.textColor
-                anchors.rightMargin: 8
-                anchors.bottomMargin: 5
-                opacity: parent.activeFocus?.6:0
-            }
+            Layout.fillWidth: true
+            Kirigami.SpellCheck.enabled: false
         }
-
+        visible: actionCombo.componentValue == "custom_command"
+        Item {
+            Layout.fillWidth: true
+        }
         Button {
-            id:btnCmdCopy
+            id: btnCmdCopy
             icon.name: "edit-copy"
             onClicked: {
-                if (commandTextArea.text.length > 0){
-                    commandTextArea.selectAll()
-                    commandTextArea.copy()
+                if (commandTextArea.text.length > 0) {
+                    commandTextArea.selectAll();
+                    commandTextArea.copy();
                 }
             }
         }
 
         Button {
-            id:btnCmdPaste
+            id: btnCmdPaste
             icon.name: "edit-paste"
             onClicked: {
-                commandTextArea.text=""
-                commandTextArea.paste()
-                internalValue.value = commandTextArea.text
+                commandTextArea.text = "";
+                commandTextArea.paste();
+                internalValue.value = commandTextArea.text;
             }
         }
 
@@ -106,139 +163,157 @@ ColumnLayout {
             ToolTip.visible: hovered
             ToolTip.text: "Pick a executable file"
             onClicked: {
-                fileDialogExec.open()
+                fileDialogExec.open();
             }
         }
 
         Button {
-            id:btnCmdClean
+            id: btnCmdClean
             icon.name: "document-cleanup"
             onClicked: commandTextArea.text = ""
         }
     }
 
-    // App selection
-    Logic {
-        id: logic
-        onLauncherAdded: {
-            var launcher = logic.launcherData(url)
-            console.log("APP:",url)
-            btnAddLauncher.text = launcher.applicationName + " - Tap to change"
-            btnAddLauncher.applicationUrl = url
-            btnAddLauncher.icon.name = launcher.iconName || "fork"
-
-            hiddenAppText.text = url
+    QuickLaunch {
+        id: quickLaunch
+        onLauncherAdded: url => {
+            var launcher = quickLaunch.launcherData(url);
+            console.log("APP:", url);
+            btnAddLauncher.text = launcher.applicationName + " - Tap to change";
+            btnAddLauncher.applicationUrl = url;
+            btnAddLauncher.icon.name = launcher.iconName || "fork";
+            hiddenAppText.text = url;
         }
+        onLogicChanged: {
+            if (logic) {
+                root.updateAppButton(root.applicationUrlValue);
+            }
+        }
+        visible: false
     }
 
     // Update button app name and icon
-    function updateAppButton(appVal)
-    {
-        if (appVal !== ""){
-            var launcher = logic.launcherData(appVal)
-            btnAddLauncher.text = launcher.applicationName + " - Tap to change"
-            btnAddLauncher.icon.name = launcher.iconName || "fork"
+    function updateAppButton(url) {
+        if (!quickLaunch.logic) {
+            return;
+        }
+        if (url !== "") {
+            var launcher = quickLaunch.launcherData(url);
+            btnAddLauncher.text = launcher.applicationName + " - Tap to change";
+            btnAddLauncher.icon.name = launcher.iconName || "fork";
         } else {
-            btnAddLauncher.text = "Choose an Application"
-            btnAddLauncher.icon.name = "application-default-symbolic"
+            btnAddLauncher.text = "Choose an Application";
+            btnAddLauncher.icon.name = "application-default-symbolic";
         }
     }
 
-    
-    RowLayout {
-        visible: modelData.get(actionCombo.currentIndex)["component"] == "launch_application"
+    ColumnLayout {
+        visible: actionCombo.componentValue == "launch_application"
+
+        Label {
+            text: i18n("C++ plugin not found, install it to launch applications on Plasma 6.5 or newer. <a href=\"https://github.com/luisbocanegra/plasma-panel-spacer-extended#build-from-source-with-c-plugin\">Install instructions</a>")
+            wrapMode: Label.Wrap
+            Layout.fillWidth: true
+            color: Kirigami.Theme.neutralTextColor
+            onLinkActivated: link => Qt.openUrlExternally(link)
+            HoverHandler {
+                cursorShape: Qt.PointingHandCursor
+            }
+            visible: !quickLaunch.pluginFound
+        }
 
         Button {
             id: btnAddLauncher
+            visible: quickLaunch.pluginFound
+            Layout.fillWidth: true
             property string applicationUrl: ""
 
             onClicked: {
-                logic.addLauncher()
+                quickLaunch.addLauncher();
             }
 
             Component.onCompleted: {
-                updateAppButton(applicationUrlValue)
-                hiddenAppText.text = applicationUrlValue
+                hiddenAppText.text = root.applicationUrlValue;
             }
         }
 
-        TextArea {
+        TextField {
             id: hiddenAppText
-            topPadding: 10
-            bottomPadding: 10
-            leftPadding: 10
-            rightPadding: 10
+            visible: quickLaunch.pluginFound
             placeholderText: qsTr("Enter URL or pick a file")
             Layout.fillWidth: true
             onTextChanged: {
-                updateAppButton(text)
-                btnAddLauncher.applicationUrl = hiddenAppText.text
+                root.updateAppButton(text);
+                btnAddLauncher.applicationUrl = hiddenAppText.text;
             }
         }
 
-        Button {
-            id:btnAppCopy
-            icon.name: "edit-copy"
-            onClicked: {
-                if (hiddenAppText.text.length > 0) {
-                    hiddenAppText.selectAll()
-                    hiddenAppText.copy()
+        RowLayout {
+            visible: quickLaunch.pluginFound
+            Item {
+                Layout.fillWidth: true
+            }
+            Button {
+                id: btnAppCopy
+                icon.name: "edit-copy"
+                onClicked: {
+                    if (hiddenAppText.text.length > 0) {
+                        hiddenAppText.selectAll();
+                        hiddenAppText.copy();
+                    }
                 }
             }
-        }
 
-        Button {
-            id:btnAppPaste
-            icon.name: "edit-paste"
-            onClicked: {
-                hiddenAppText.text=""
-                hiddenAppText.paste()
-                btnAddLauncher.applicationUrl = hiddenAppText.text
+            Button {
+                id: btnAppPaste
+                icon.name: "edit-paste"
+                onClicked: {
+                    hiddenAppText.text = "";
+                    hiddenAppText.paste();
+                    btnAddLauncher.applicationUrl = hiddenAppText.text;
+                }
             }
-        }
-        
-        Button {
-            id: btnUrl
-            icon.name: "document-open"
-            ToolTip.delay: 1000
-            ToolTip.visible: hovered
-            ToolTip.text: "Pick a file"
-            onClicked: {
-                fileDialogUrl.open()
-            }
-        }
 
-        Button {
-            id:btnUrlClean
-            icon.name: "document-cleanup"
-            onClicked: {
-                btnAddLauncher.applicationUrl = ""
-                btnAddLauncher.text = "Choose an Application"
-                hiddenAppText.text=""
+            Button {
+                id: btnUrl
+                icon.name: "document-open"
+                ToolTip.delay: 1000
+                ToolTip.visible: hovered
+                ToolTip.text: "Pick a file"
+                onClicked: {
+                    fileDialogUrl.open();
+                }
+            }
+
+            Button {
+                id: btnUrlClean
+                icon.name: "document-cleanup"
+                onClicked: {
+                    btnAddLauncher.applicationUrl = "";
+                    btnAddLauncher.text = "Choose an Application";
+                    hiddenAppText.text = "";
+                }
             }
         }
     }
 
     FileDialog {
         id: fileDialogExec
-        onAccepted: commandTextArea.text = fileDialogExec.fileUrl.toString().replace("file://","")
+        onAccepted: commandTextArea.text = fileDialogExec.selectedFile.toString().replace("file://", "")
     }
 
     FileDialog {
         id: fileDialogUrl
         onAccepted: {
-            // btnAddLauncher.applicationUrl = fileDialogExec.fileUrl.toString()
-            // updateAppButton(applicationUrlValue)
-            hiddenAppText.text = fileDialogUrl.fileUrl.toString()
+            hiddenAppText.text = fileDialogUrl.selectedFile.toString();
         }
     }
-    Item { implicitHeight: 4}
 
     // Separator
     Rectangle {
         Layout.fillWidth: true
         height: 1
         color: Kirigami.ColorUtils.linearInterpolation(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.15)
-        visible: showSeparator
+        visible: root.showSeparator
     }
 }

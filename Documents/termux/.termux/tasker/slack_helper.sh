@@ -1,4 +1,4 @@
-export SLACK_VACATION=1
+#export SLACK_VACATION=0a
 
 with_token() {
     if [ -z ${SLACK_VACATION+x} ]; then

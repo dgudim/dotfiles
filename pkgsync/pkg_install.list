@@ -376,6 +376,8 @@ zint-qt
 kweather
 piki-git
 lact
+# - Pronterface
+printrun
 
 # CLI APPS
 cpu_rec

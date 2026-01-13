@@ -2,7 +2,6 @@
 # SPDX-FileCopyrightText: 2013-2022 Campbell Barton
 # SPDX-FileCopyrightText: 2016-2025 Mikhail Rachinskiy
 
-import bmesh
 import bpy
 from bpy.app.translations import pgettext_tip as tip_
 from bpy.props import FloatProperty, IntProperty
@@ -58,6 +57,7 @@ class MESH_OT_clean_non_manifold(Operator):
 
     @staticmethod
     def elem_count(context):
+        import bmesh
         bm = bmesh.from_edit_mesh(context.edit_object.data)
         return len(bm.verts), len(bm.edges), len(bm.faces)
 
@@ -136,8 +136,8 @@ class MESH_OT_clean_non_manifold(Operator):
     @classmethod
     def count_non_manifold_verts(cls, context):
         """return a set of coordinates of non-manifold vertices"""
+        import bmesh
         cls.select_non_manifold_verts(use_wire=True, use_boundary=True, use_verts=True)
-
         bm = bmesh.from_edit_mesh(context.edit_object.data)
         return sum((1 for v in bm.verts if v.select))
 

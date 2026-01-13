@@ -11,8 +11,10 @@ import bmesh
 import bpy
 import mathutils
 from bmesh.types import BMesh, BMFace
-from bpy.types import Object
+from bpy.types import Modifier, Object
 from mathutils import Vector
+
+from . import var
 
 
 def clean_float(value: float, precision: int = 0) -> str:
@@ -215,3 +217,23 @@ def face_is_distorted(face: BMFace, angle: float) -> bool:
             return True
 
     return False
+
+
+# Asset
+# -------------------------------------
+
+
+def gn_setup(ng_name: str, ob: Object) -> Modifier:
+    if (ng := bpy.data.node_groups.get(ng_name)) is None:
+        with bpy.data.libraries.load(str(var.NODEGROUPS_ASSET_PATH)) as (data_from, data_to):
+            data_to.node_groups = [ng_name]
+        ng = data_to.node_groups[0]
+
+    md = ob.modifiers.new(ng_name, "NODES")
+    md.node_group = ng
+    md.show_group_selector = False
+    if hasattr(md, "show_manage_panel"):
+        # VER >= 5.0
+        md.show_manage_panel = False
+
+    return md
