@@ -16,10 +16,15 @@ UseHoverAccentInactive=true
 
 [ButtonSizing]
 ButtonCustomCornerRadius=1.6
-FullHeightButtonSpacingLeft=2
+ButtonSpacingLeft=3
+ButtonSpacingRight=5
 FullHeightButtonSpacingRight=2
-FullHeightButtonWidthMarginLeft=4
-FullHeightButtonWidthMarginRight=9
+FullHeightButtonWidthMarginLeft=10
+IntegratedRoundedRectangleBottomPadding=1
+LockFullHeightButtonSpacingLeftRight=true
+
+[Global]
+RefreshedConfig=6.5.git
 
 [ShadowStyle]
 ShadowColor=58,64,54
@@ -38,24 +43,30 @@ KlassyDarkIconThemeInherits=Gruvbox
 PercentMaximizedTopBottomMargins=80
 TitleBarBottomMargin=1.95
 TitleBarTopMargin=1.95
+TitleSidePadding=2
 
 [Windeco]
+AnimationsSpeedRelativeSystem=6
+BoldButtonIcons=BoldIconsHiDpiOnly
 ButtonIconStyle=StyleOxygen
 CornerRadius=2.5
 DrawBackgroundGradient=true
 DrawTitleBarSeparator=false
 IconSize=IconMedium
-WindowCornerRadius=5
+MatchTitleBarToApplicationColor=true
+RoundAllCornersWhenNoBorders=false
+WindowCornerRadius=6.999999999999993
 
 [Windeco Exception 0]
 BorderSize=0
 Enabled=true
 ExceptionBorder=false
+ExceptionMatchTitleBarToApplicationColor=false
 ExceptionPreset=Default-yellow
 ExceptionProgramNamePattern=
 ExceptionWindowPropertyPattern=klassy-settings
 ExceptionWindowPropertyType=0
-HideTitleBar=false
+HideTitleBar=0
 OpaqueTitleBar=false
 PreventApplyOpacityToHeader=false
 
@@ -63,11 +74,12 @@ PreventApplyOpacityToHeader=false
 BorderSize=0
 Enabled=true
 ExceptionBorder=false
+ExceptionMatchTitleBarToApplicationColor=false
 ExceptionPreset=Default-yellow
 ExceptionProgramNamePattern=
 ExceptionWindowPropertyPattern=.*System Settings
 ExceptionWindowPropertyType=1
-HideTitleBar=false
+HideTitleBar=0
 OpaqueTitleBar=false
 PreventApplyOpacityToHeader=false
 
@@ -80,5 +92,7 @@ WindowOutlineAccentColorOpacityActive=90
 WindowOutlineAccentWithContrastOpacityActive=100
 WindowOutlineAccentWithContrastOpacityInactive=30
 WindowOutlineCustomWithContrastOpacityInactive=40
+WindowOutlineOverlap=false
 WindowOutlineStyleActive=WindowOutlineAccentWithContrast
 WindowOutlineStyleInactive=WindowOutlineAccentWithContrast
+WindowOutlineThickness=2.000000000000001
