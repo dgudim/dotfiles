@@ -1010,6 +1010,7 @@ ngrep
 tailscale
 wrk
 httpie
+mtr
 
 ## GUIS
 proton-vpn-gtk-app
