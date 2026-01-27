@@ -66,6 +66,7 @@
     "showOnlyAddedEmojisAndStickers": false,
     "showPeerId": 1,
     "showReactionsPanelInContextMenu": 1,
+    "showRepeatMessageInContextMenu": 0,
     "showSReadToggleInDrawer": true,
     "showSavedMessagesInDrawer": true,
     "showStreamerToggleInDrawer": false,
