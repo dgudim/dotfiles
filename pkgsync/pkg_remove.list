@@ -105,6 +105,11 @@ linux-steam-integration
 steam-native-runtime
 kwin-effect-rounded-corners-git
 kwin-effects-forceblur
+gns3-server
+gns3-gui
+ubridge
+vpcs
+dynamips
 
 kmscon-patched-git
 

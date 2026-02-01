@@ -1024,11 +1024,11 @@ flying-carpet-bin
 opensnitch
 
 ## GNS3
-gns3-server
-gns3-gui
-ubridge
-vpcs
-dynamips
+# gns3-server
+# gns3-gui
+# ubridge
+# vpcs
+# dynamips
 
 
 
