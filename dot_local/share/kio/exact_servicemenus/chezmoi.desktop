@@ -1,6 +1,6 @@
 [Desktop Action chezmoi-add]
 
-Exec=notify-send "Added %U" "$(chezmoi_multiadd '%U' && chezmoi git status)"
+Exec=notify-send "Added %U" "$(chezmoi_modify_manager -s '%U' && chezmoi git status)"
 
 Name=Chezmoi add
 Icon=node-add
@@ -15,7 +15,7 @@ Icon=folder-locked-symbolic
 [Desktop Entry]
 Actions=chezmoi-add;chezmoi-add-encrypt
 
-MimeType=application/octet-stream;inode/directory;
+MimeType=application/octet-stream
 
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin
 Type=Service

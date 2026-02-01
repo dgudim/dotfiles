@@ -1,0 +1,23 @@
+[Desktop Action dwarfs-make-image]
+
+Exec=mount_dwarfs.py %U make-image
+
+Name=Dwarfs make image
+Icon=add-folder-to-archive
+
+[Desktop Action dwarfs-make-image-delete-source]
+
+Exec=mount_dwarfs.py %U make-image-delete-source
+
+Name=Dwarfs make image and delete source
+Icon=folder-move
+
+[Desktop Entry]
+Actions=dwarfs-make-image;dwarfs-make-image-delete-source
+
+MimeType=inode/directory;
+
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-Submenu=Dwarfs
