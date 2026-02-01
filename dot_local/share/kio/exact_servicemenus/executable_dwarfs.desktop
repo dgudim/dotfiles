@@ -1,68 +1,63 @@
-[Desktop Action dwarfs-mount-rw]
+[Desktop Action dwarfs-mount]
 
-Exec=mount_dwarfs.py %U mount-rw
+Exec=dwarfs_helper_launcher.sh '%U' mount-rw
 
-Name=Dwarfs mount RW
+Name=Dwarfs mount
 Icon=arrow-down
 
 [Desktop Action dwarfs-mount-ro]
 
-Exec=mount_dwarfs.py %U mount-ro
+Exec=dwarfs_helper_launcher.sh '%U' mount-ro
 
 Name=Dwarfs mount RO
-Icon=arrow-down
 
 [Desktop Action dwarfs-unmount]
 
-Exec=mount_dwarfs.py %U unmount-interactive
+Exec=dwarfs_helper_launcher.sh '%U' unmount-interactive
 
 Name=Dwarfs unmount
 Icon=udiskie-eject
 
 [Desktop Action dwarfs-unmount-discard]
 
-Exec=mount_dwarfs.py %U unmount-discard-changes
+Exec=dwarfs_helper_launcher.sh '%U' unmount-discard-changes
 
 Name=Dwarfs unmount discard changes
-Icon=udiskie-eject
 
 [Desktop Action dwarfs-unmount-keep]
 
-Exec=mount_dwarfs.py %U unmount-keep-changes
+Exec=dwarfs_helper_launcher.sh '%U' unmount-keep-changes
 
 Name=Dwarfs unmount keep changes
-Icon=udiskie-eject
 
 [Desktop Action dwarfs-extract-here]
 
-Exec=mount_dwarfs.py %U extract-cwd
+Exec=dwarfs_helper_launcher.sh '%U' extract-cwd
 
 Name=Dwarfs extract here
 Icon=archive-extract
 
 [Desktop Action dwarfs-extract-here-delete]
 
-Exec=mount_dwarfs.py %U extract-cwd-delete
+Exec=dwarfs_helper_launcher.sh '%U' extract-cwd-delete
 
 Name=Dwarfs extract here and delete image
-Icon=archive-remove
 
 [Desktop Action dwarfs-extract-to]
 
-Exec=mount_dwarfs.py %U extract-select
+Exec=dwarfs_helper_launcher.sh '%U' extract-select
 
 Name=Dwarfs extract to
 Icon=archive-extract
 
 [Desktop Action dwarfs-extract-to-delete]
 
-Exec=mount_dwarfs.py %U extract-select-delete
+Exec=dwarfs_helper_launcher.sh '%U' extract-select-delete
 
 Name=Dwarfs extract to and delete image
-Icon=archive-remove
 
 [Desktop Entry]
-Actions=dwarfs-mount-rw;dwarfs-mount-ro;_SEPARATOR_;dwarfs-unmount;dwarfs-unmount-discard;dwarfs-unmount-keep;_SEPARATOR_;dwarfs-extract-here;dwarfs-extract-here-delete;dwarfs-extract-to;dwarfs-extract-to-delete
+Actions=dwarfs-mount;dwarfs-mount-ro;_SEPARATOR_;dwarfs-unmount;dwarfs-unmount-discard;dwarfs-unmount-keep;_SEPARATOR_;dwarfs-extract-here;dwarfs-extract-here-delete;dwarfs-extract-to;dwarfs-extract-to-delete
 
 MimeType=application/x-dwarfs;
 

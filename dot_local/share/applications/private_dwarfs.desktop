@@ -1,0 +1,18 @@
+[Desktop Entry]
+Categories=Audio
+Comment=Dwarfs mounter
+Exec=dwarfs_helper_launcher.sh "%u" mount-rw
+GenericName=Music downloader
+Icon=disk-burner
+Keywords=dwarfs;archive;folder;file;compress;
+Name=Dwarfs mounter
+NoDisplay=false
+Path=
+StartupNotify=true
+StartupWMClass=Dwarfs
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+MimeType=application/x-dwarfs
