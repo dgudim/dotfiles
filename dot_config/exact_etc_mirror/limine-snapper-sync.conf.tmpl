@@ -1,9 +1,13 @@
 ### OS Entry Targeting
-### The tool does not automatically know the custom OS name used in $ESP_PATH/limine.conf, which can contain multiple OS names for multi-boot scenarios.
-### You need to specify the corresponding OS name here to match the name used in $ESP_PATH/limine.conf.
-### Alternatively, you can add "comment: machine-id=<machine-id>" to your OS entry block in $ESP_PATH/limine.conf.
-### The machine-ID helps the tool to automatically target the correct OS entry. Changing the OS name does not matter.
-TARGET_OS_NAME="Arch Linux"
+### This tool does not automatically know the custom OS name used in $ESP_PATH/limine.conf.
+### Set the OS name here to match the entry name in $ESP_PATH/limine.conf.
+###
+### Tips:
+### * Alternatively, add "comment: machine-id=<machine-id>" to your OS entry in $ESP_PATH/limine.conf.
+###   The machine-id allows the tool to automatically target the correct entry. Changing the OS name does not matter.
+### * If unset, it reads PRETTY_NAME or NAME from /etc/os-release, with a fallback to /etc/lsb-release.
+###
+#TARGET_OS_NAME="Arch Linux"
 
 
 ### Boot Partition Path
@@ -22,12 +26,24 @@ MAX_SNAPSHOT_ENTRIES=8
 
 
 ### Boot Partition Usage Limit
-### Sets a usage limit (in percent) for your FAT32 boot partition. Value must be between 1-99. Default: 85.
+### Sets the maximum usage (in percent) for your FAT32 boot partition. Value must be between 1 and 99. Default: 85.
 ### No new snapshot entries will be added to Limine if this limit is reached.
 ### A larger FAT32 boot partition allows for more snapshot entries.
 ###
-### Tip: Install "journalctl-desktop-notification" to get notified when the limit is exceeded.
+### Tips:
+### * You will be alerted when ENABLE_NOTIFICATION is set to "yes" and the limit is reached during snapshot creation.
+### * Do not increase the limit to 95% or higher on a small boot partition, as restoration will be blocked due to insufficient free space.
+###
 LIMIT_USAGE_PERCENT=90
+
+
+### Exclude Snapshot Types
+### If a snapshot has a matching type, it will not be added into Limine.
+###
+### Example:
+###   EXCLUDE_SNAPSHOT_TYPES="pre, post"
+###
+EXCLUDE_SNAPSHOT_TYPES="post"
 
 
 ### Snapshot Kernel Parameters
@@ -35,6 +51,7 @@ LIMIT_USAGE_PERCENT=90
 ###
 ### - SNAPSHOT_KERNEL_PARAMETERS+ : Add extra kernel parameters
 ### - SNAPSHOT_KERNEL_PARAMETERS- : Remove specific kernel parameters
+### - SNAPSHOT_KERNEL_PARAMETERS= : Replace the entire kernel command line (note: for multiple-profile UKIs only)
 ###
 ### Example:
 #SNAPSHOT_KERNEL_PARAMETERS-="quiet splash"
@@ -68,6 +85,7 @@ ROOT_SUBVOLUME_PATH="/"
 ROOT_SUBVOLUME_PATH="/@"
 {{- end }}
 
+
 ### Root Snapshot Path
 ### Specify the path to your root snapshots. The default is "/@/.snapshots", which is used for the default Snapper layout.
 ### Note: The tool supports Snapper with any custom layout within the same filesystem, but not random Btrfs layouts without Snapper.
@@ -77,21 +95,50 @@ ROOT_SNAPSHOTS_PATH="/.snapshots"
 ROOT_SNAPSHOTS_PATH="/@/.snapshots"
 {{- end }}
 
+
 ### Restore Method Selection
-### Choose whether to enable a prompt for selecting the restore method (rsync or Btrfs).
-### If enabled, the tool will ask during restore whether to use rsync or Btrfs.
+### Choose a restore method depending on your Btrfs layout and boot configuration.
+### Indicators: (+) Advantage, (-) Disadvantage, (o) Neutral/Special note
 ###
 ### rsync:
-### - Preserves the original subvolume ID
-### - Slower, since it copies files instead of creating a new subvolume
+### + Works on a system running on a root partition without a root subvolume.
+### + Supports multiple Linux installations on the same Btrfs filesystem.
+### + No issues with overlayfs used as a temporary writable layer on top of a read-only snapshot.
+### o Keeps the original subvolume ID after restore.
+### - Slower because all data is copied 1:1 from a selected snapshot to the root subvolume.
+### - Does not track which snapshot the restored data originally came from.
 ###
-### Btrfs:
-### - Faster, creates a new subvolume from the selected snapshot
-### - Changes subvolume ID
+### replace:
+### + Very fast, creates a new subvolume from a selected snapshot and replaces the old one.
+### + Supports multiple root subvolumes (e.g., multiple distros) on the same Btrfs filesystem.
+### + No issues with overlayfs used as a temporary writable layer on top of a read-only snapshot.
+### o Changes the subvolume ID after restore.
+### - Restored subvolumes lose tracking of their relationship to older snapshots in the Snapper list.
+### - Cannot restore when system runs on a root partition without a root subvolume.
 ###
-### "yes": Show prompt to choose between rsync and Btrfs during restore
-### "no" : Skip prompt and always use Btrfs
-ENABLE_RSYNC_ASK=no
+### opensuse (alias of "snapper"):
+### + Supports native snapper rollback.
+### + Fast (slightly slower than "replace" because 'snapper rollback' creates two snapshots).
+### + Tracks snapshot relationships in the Snapper list, unlike "rsync" and "replace".
+### o Requires an OpenSUSE-style layout compatible with snapper rollback.
+### o Keeps the original main subvolume unchanged as the oldest base.
+### - Does not support multiple Linux distros on the same Btrfs (only one default subvolume for booting).
+### - Refuses to work when overlayfs is used as a temporary writable layer for testing changes on an immutable system.
+### - Some init programs (e.g., display managers) require write access and may fail when booting into a read-only snapshot.
+### (Info: In major version 2, new 4th restore method would remove these last two disadvantages of "opensuse")
+###
+### Tip: Recommendation for a safe choice if unsure:
+### - If your system normally runs on a root subvolume, use "replace" or "rsync". (typical for most Arch-based installations)
+### - If your system normally runs on a root Btrfs partition without a root subvolume, use "rsync".
+### - If your system normally runs on a writable snapshot, use "opensuse". (For OpenSUSE or an OpenSUSE-like layout).
+###
+### Available restore methods: "replace", "rsync" or "opensuse" ("snapper")
+{{- if eq .chezmoi.hostname "black-bird" }}
+RESTORE_METHOD=rsync
+{{- else }}
+RESTORE_METHOD=snapper
+{{- end }}
+
 
 
 ### Set Snapshot as Default
@@ -118,7 +165,7 @@ SET_SNAPSHOT_AS_DEFAULT=no
 ### Specify the UUID of your Btrfs filesystem, used only during the restore process.
 ### If not set, the tool automatically determines the UUID during initialization and saves it in 'snapshots.json'.
 ### If the saved UUID becomes outdated, set it manually.
-#UUID=
+#FS_UUID=
 
 
 ### Authentication Method for Restore
@@ -149,7 +196,16 @@ SPACE_NUMBER=5
 ### 4. 2023-12-20 10:59:59 │ 111
 ### 5. 2023-12-20 10:59:59
 ### 6. 111
-SNAPSHOT_FORMAT_CHOICE=2
+### 7. 111│snapshot description
+### 8. 2023-12-20 10:59:59│snapshot description
+### 9. │snapshot description
+SNAPSHOT_FORMAT_CHOICE=7
+
+
+### Desktop Notifications
+### Enable desktop notifications for warnings and errors in limine-snapper-sync, e.g., hardware issues or boot partition usage limits.
+### Default: yes
+#ENABLE_NOTIFICATION=yes
 
 
 ### Hash Function for Deduplication and Checksum
@@ -177,12 +233,6 @@ NOTIFICATION_ICON="/usr/share/icons/hicolor/128x128/apps/LimineSnapperSync.png"
 ### This setting is unrelated to snapshot creation.
 ### Default: 6 hours if unset.
 CONFIG_BACKUP_THRESHOLD=6
-
-
-### Custom Java Binary Path
-### Set this to specify a custom Java binary path instead of using the system default.
-### If left unset, the default system Java will be used.
-#JAVA_BIN_PATH="/usr/lib/jvm/java-21-openjdk/bin"
 
 
 ### Quiet Mode
