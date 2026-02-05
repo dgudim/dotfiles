@@ -136,7 +136,7 @@ ROOT_SNAPSHOTS_PATH="/@/.snapshots"
 {{- if eq .chezmoi.hostname "black-bird" }}
 RESTORE_METHOD=rsync
 {{- else }}
-RESTORE_METHOD=snapper
+RESTORE_METHOD=replace
 {{- end }}
 
 
