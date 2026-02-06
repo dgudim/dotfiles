@@ -16,7 +16,7 @@ if len(args) != 3:
     print("Expected 2 arguments (image location and what to do)")
     sys.exit(1)
 
-input_path = Path(args[1]).absolute()
+input_path = Path(args[1]).resolve().absolute()
 action = args[2]
 
 MOUNT_PREFIX = Path("~/.local/share/dwarfs-mounts/").expanduser().absolute()
