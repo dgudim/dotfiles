@@ -1009,6 +1009,7 @@ tailscale
 wrk
 httpie
 mtr
+httptap-bin
 
 ## GUIS
 proton-vpn-gtk-app

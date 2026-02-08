@@ -276,8 +276,13 @@ ports() {
 	fi
 	sudo nmap -p- -sV -O "$@"
 }
+
 rdns() {
 	nmap -R -sn "$@" | grep for | cut -d " " -f 5-
+}
+
+httptap_r() {
+	/usr/local/bin/httptap "$@"
 }
 
 #######################################  PYTHON  ##############################################################
