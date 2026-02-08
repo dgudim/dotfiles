@@ -16,10 +16,10 @@ if len(args) != 3:
     print("Expected 2 arguments (image location and what to do)")
     sys.exit(1)
 
-input_path = Path(args[1]).absolute()
+input_path = Path(args[1]).resolve().absolute()
 action = args[2]
 
-MOUNT_PREFIX = Path("~/.local/share/drwafs-mounts/").expanduser().absolute()
+MOUNT_PREFIX = Path("~/.local/share/dwarfs-mounts/").expanduser().absolute()
 
 SUDO_APP = "sudo"
 
@@ -73,10 +73,12 @@ def err_exit(message: str) -> NoReturn:
     sys.exit(1)
 
 
-def checked_exec(command: str):
+def checked_exec(command: str, on_fail: Callable[...] | None = None):
     print(f"{L_CYAN}| {GRAY}exec _> {LIGHTER_GRAY}{command}{NC}")
     exit_code = os.system(command)
     if exit_code != 0:
+        if on_fail is not None:
+            on_fail()
         err_exit(f"Error executing command: '{RED}{command}{NC}'")
 
 
@@ -139,7 +141,7 @@ def unmount_image(image_path: Path, keep_changes: Callable[..., bool]):
                 err_exit("Couldn't recompress, target image already exists")
 
     if mount_info.overlay_mount_path.is_mount():
-        checked_exec(f"{SUDO_APP} umount '{mount_info.overlay_mount_path.as_posix()}'")
+        checked_exec(f"{SUDO_APP} umount '{mount_info.overlay_mount_path.as_posix()}'", lambda _: os.system(f"lsof '{mount_info.overlay_mount_path.as_posix()}'"))
         print(f"{BLUE}Cleaning RW remains{NC}")
         shutil.rmtree(mount_info.rw_mount_path)
         checked_exec(f"{SUDO_APP} rm -rf '{mount_info.work_mount_path.as_posix()}'")
@@ -155,7 +157,7 @@ def unmount_image(image_path: Path, keep_changes: Callable[..., bool]):
         print(f"{BLUE}Deleting old image{NC}")
         image_path.unlink()
         print(f"{BLUE}Moving {L_BLUE}new image {BLUE}to {L_BLUE}old location{NC}")
-        compressed_image.rename(image_path)
+        shutil.move(compressed_image, image_path)
 
     return mount_info
 

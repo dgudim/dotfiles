@@ -1,14 +1,29 @@
 ### Note: Editing this configuration file is not necessary. Instead, copy it to `/etc/default/limine` and configure it as needed.
 ### Settings in `/etc/default/limine` will override here.
 
-### OS Entry Targeting:
-### If TARGET_OS_NAME is not set, the tool will generate a new OS entry with the default distro name and machine-ID.
-### Alternatively, you can add "comment: machine-id=${machine_id}" to your OS entry block in '$ESP_PATH/limine.conf'.
-### The machine-ID helps the tool to automatically target the OS entry. Changing the OS name does not matter.
+### OS Entry Targeting
+### If TARGET_OS_NAME is not set, or if the default distro name is not found in $ESP_PATH/limine.conf,
+### the tool will create a new OS entry using the default distro name (PRETTY_NAME or NAME from /etc/os-release) and machine-ID.
+###
+### Tips:
+### If your custom OS entry already exists in $ESP_PATH/limine.conf, please add "comment: machine-id=<copy ID from /etc/machine-id>" to it.
+### The machine-ID helps the tool to automatically target the correct OS entry, so changing the OS name does not matter.
+###
 #TARGET_OS_NAME="Arch Linux"
 
+### Skip UEFI Check and Registration
+### Skip UEFI check and bootloader registration on certain non-compliant UEFI boards (e.g., some MSI boards) (yes|no)
+### If skipped, Limine will be used as the fallback bootloader on the standard UEFI path for all UEFI systems.
+### Note:
+### When set to yes, run 'limine-install' and manually set the BIOS boot order to make the standard UEFI path the default boot.
+{{- if eq .chezmoi.hostname "portable-heater" }}
+# Don't registed efi when booted from portable drive
+NO_EFI_REGISTER=1
+SKIP_UEFI=yes
+{{- end }}
 
-### Boot Partition Path:
+
+### Boot Partition Path
 ### Specify the mount path of your boot partition if you are running on legacy BIOS, ARM, or RISC-V.
 ### Note:
 ### If you are using systemd with UEFI, the path is detected automatically via 'bootctl --print-esp-path'.
@@ -37,6 +52,10 @@
 ### but ensure your system is not a live ISO, temporary environment, or snapshot.
 ###
 ### Examples:
+#KERNEL_CMDLINE[default]+="rw root=UUID=..."
+#KERNEL_CMDLINE[default]+="quiet splash"
+#KERNEL_CMDLINE[fallback]=
+#KERNEL_CMDLINE[linux-zen]=
 
 {{ if eq .chezmoi.hostname "black-bird" }}
 KERNEL_CMDLINE[default]="nvme_load=YES nowatchdog rw mitigations=off zswap.enabled=1 zswap.compressor=lz4 zswap.max_pool_percent=20 rd.luks.uuid=1c5c824f-40e6-49f6-918c-8e09f46f731c root=/dev/mapper/luks-1c5c824f-40e6-49f6-918c-8e09f46f731c rootflags=subvol=/ rd.luks.uuid=16b658ff-614b-4cfb-a576-f284e9368530 quiet splash"
@@ -48,76 +67,88 @@ KERNEL_CMDLINE[default]="nvme_load=YES nowatchdog rw mitigations=off zswap.enabl
 KERNEL_CMDLINE[default]="nvme_load=YES nowatchdog rw mitigations=off zswap.enabled=1 zswap.compressor=lz4 zswap.max_pool_percent=20 rd.luks.uuid=3a5f817f-a019-4bd6-80f7-f3c163477c14 root=/dev/mapper/luks-3a5f817f-a019-4bd6-80f7-f3c163477c14"
 {{ end }}
 
-#KERNEL_CMDLINE[default]+="rw root=UUID=..."
-#KERNEL_CMDLINE[default]+="quiet splash"
-#KERNEL_CMDLINE[fallback]=
-#KERNEL_CMDLINE[linux-zen]=
 
-
-### Formatting Boot Entry:
+### Formatting Boot Entry
 ### Define the number of spaces to indent each line of the boot entry in '$ESP_PATH/limine.conf'.
+### If not set, the default is 2.
 SPACE_NUMBER=2
 
 
-### Boot Integrity Check:
+### Boot Integrity Check
 ### Enable BLAKE2 checksum verification for bootable files. (yes|no)
 ENABLE_VERIFICATION=yes
 
 
-### Automatic Config Backup:
+### Automatic Config Backup
 ### Creates a backup of '$ESP_PATH/limine.conf' before saving any changes,
 ### but only if '$ESP_PATH/limine.conf.old' is older than the specified time (in hours).
 ### Default: 6 hours if unset.
-BACKUP_THRESHOLD=8
+CONFIG_BACKUP_THRESHOLD=8
 
 
-### Kernel Entries Order:
+### Kernel Entries Order
 ### Wildcard "*" matches any letter in kernel entry name
 ### If ENABLE_SORT is set to "yes", only wildcard "*" entries are sorted alphabetically.
 BOOT_ORDER="*lts, *, *fallback, Snapshots"
 ENABLE_SORT=no
 
 
-### Custom Java Binary Path:
-### Set this to specify a custom Java binary path instead of using the system default.
-### If left unset, the default system Java will be used.
-#JAVA_BIN_PATH="/usr/lib/jvm/java-21-openjdk/bin"
-
-
-### Default Boot Fallback:
-### Set Limine as the default boot fallback at '$ESP_PATH/EFI/BOOT/BOOTX64.EFI'. (yes|no)
+### Default Boot Fallback
+### Configure whether Limine should be installed as the default UEFI fallback loader. (yes|no|"")
+### This helps preserve bootability on UEFI systems where BIOS, firmware, or Windows updates may remove custom Linux UEFI entries.
+###
+### Options:
+### * "yes"               -> Always create, update, or overwrite the fallback on each limine-update.
+### * "no"                -> Do nothing.
+### * "" or commented out -> Create the fallback only if it is not present. If a fallback exists, leave it untouched.
+###
+### Note:
+### With Secure Boot enabled, the default fallback is not signed automatically by limine-update for some reason.
+### If you need to sign it, it is recommended to disable ENABLE_LIMINE_FALLBACK, run 'limine-install --fallback' once,
+### and then sign the fallback manually.
+###
+#ENABLE_LIMINE_FALLBACK=""
+{{- if eq .chezmoi.hostname "portable-heater" }}
+ENABLE_LIMINE_FALLBACK=no
+{{- else }}
 ENABLE_LIMINE_FALLBACK=yes
+{{- end }}
 
 
-### Find Bootloaders:
+### Find Bootloaders
 ### Automatically add systemd-boot, rEFInd, or the default EFI loader to Limine if they are found in the ESP. (yes|no)
 FIND_BOOTLOADERS=yes
+
 
 ### Quiet Mode
 ### Set to "yes" to hide all success messages and avoid log spam. (yes|no)
 QUIET_MODE=yes
 
+
 ### Enroll Limine Config
-### Automatically enrolls the Limine config into the Limine binary to protect it from modifications.
+### Automatically enrolls the Limine config '$ESP_PATH/limine.conf' into the Limine binary to protect it from modifications.
 ###
 ### WARNING and RISK:
 ### Enabling this will PREVENT booting if you modify limine.conf and forget to re-enroll it manually.
 ###
-### If you're unsure but want to try it, set 'ENABLE_LIMINE_FALLBACK=yes' and run 'limine-update'.
+### If you are unsure but want to try it, set 'ENABLE_LIMINE_FALLBACK=yes' and run 'limine-update'.
 ### This allows you to boot into the Limine fallback if booting is blocked due to a config mismatch.
 ###
 ### IMPORTANT REMINDER:
 ### After editing limine.conf, always run 'limine-enroll-config', otherwise Limine will refuse to boot due to a config mismatch.
+###
 ### Notes:
+### * Remove all other alternative Limine configs in different locations to avoid boot failure.
 ### * If using limine-snapper-sync, set 'COMMANDS_BEFORE_SAVE=limine-reset-enroll' and 'COMMANDS_AFTER_SAVE=limine-enroll-config' to automate config enrollment.
 ### * If multiple systems share the same limine.conf, ensure each one handles enrollment automatically.
-### * To enable, copy this option to /etc/default/limine and set it to (yes|no). This option is ignored in /etc/limine-entry-tool.conf
+### * To enable, copy this option to /etc/default/limine and set it to (yes|no).
+###
 #ENABLE_ENROLL_LIMINE_CONFIG=no
 
 
 ##############  Below options apply to Arch Linux when 'limine-dracut-support' is installed ##############
 
-### Dracut Fallback Configuration:
+### Dracut Fallback Configuration
 ### Automatically create a kernel fallback image using Dracut. (yes|no)
 ### If set to 'yes,' this will consume a lot of storage space, especially when taking multiple snapshots.
 {{- if eq .chezmoi.hostname "portable-heater" }}
@@ -127,7 +158,7 @@ DRACUT_FALLBACK=no
 {{- end }}
 
 
-### UKI (Unified Kernel Image):
+### UKI (Unified Kernel Image)
 ### Automatically create UKIs in '$ESP_PATH/EFI/Linux/' using Dracut for UEFI. (yes|no)
 ###
 ### Advantage:
@@ -141,9 +172,19 @@ DRACUT_FALLBACK=no
 ENABLE_UKI=no
 
 
-
-# Don't registed efi when booted from portable drive
-{{- if eq .chezmoi.hostname "portable-heater" }}
-NO_EFI_REGISTER=1
-SKIP_UEFI=yes
-{{- end }}
+### Custom UKI Name
+### Set a shorter, custom name for your UKI files instead of using the default machine-id.
+### This can help when booting UKIs directly via EFISTUB (without any bootloader),
+### since some buggy UEFI firmware (e.g. Asus AMI BIOS) may crash or freeze if UKI filenames are too long when registered in UEFI.
+###
+### Rules:
+### * Custom name must be unique (like an ID) to avoid conflicts with other installations, otherwise UKIs will be overwritten.
+### * Use only lowercase letters (a–z) and digits (0–9) for maximum compatibility with UEFI firmware and devices.
+###
+### Example: ${CUSTOM_UKI_NAME}_${kernel_version}.efi -> arch_linux-lts.efi (when CUSTOM_UKI_NAME="arch" is set)
+### Default: The machine-id is used if the custom name is invalid or not set.
+###
+### WARNING:
+### If you change the name, old UKI files with the previous prefix (name or ID) remain unused on the ESP;
+### remove them manually to free up ESP space if not needed: $ESP_PATH/EFI/Linux/{machine-id or old name}_{kernel_version}.efi
+#CUSTOM_UKI_NAME="arch"

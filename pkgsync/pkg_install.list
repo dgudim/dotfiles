@@ -1108,6 +1108,7 @@ gst-libav
 gst-plugins-bad
 gst-plugins-ugly
 vdpauinfo
+gst-plugin-va
 gst-plugin-pipewire
 gst-plugin-qmlgl
 gst-plugin-libcamera

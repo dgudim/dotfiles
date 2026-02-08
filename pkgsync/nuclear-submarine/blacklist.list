@@ -14,8 +14,6 @@ android-apktool-bin
 
 ## Other
 qtcreator
-gns3-gui
-gns3-server
 
 # Ignore some gui apps
 obsidian
