@@ -865,6 +865,7 @@ python-brotlicffi
 python-pystache
 python-pyasn
 python-aiosqlite
+python-google-re2
 uvicorn
 
 ## ANDROID AND JAVA
