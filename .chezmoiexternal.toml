@@ -8,7 +8,7 @@
     url = "https://gist.githubusercontent.com/mtekman/9769fa3eb28dd0dbdd1e8ce802157e95/raw"
     refreshPeriod = "168h"
 
-[".config/blesh/modules/forkrun.bash"]
-    type = "file"
-    url = "https://raw.githubusercontent.com/jkool702/forkrun/main/forkrun.bash"
-    refreshPeriod = "168h"
+# [".config/blesh/modules/forkrun.bash"]
+#     type = "file"
+#     url = "https://raw.githubusercontent.com/jkool702/forkrun/main/forkrun.bash"
+#     refreshPeriod = "168h"
