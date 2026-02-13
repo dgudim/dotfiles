@@ -490,23 +490,18 @@ alias mirrors='__rank_mirrors arch mirrorlist && __rank_mirrors chaotic-aur chao
 
 chzu() {
 
-	yay
+	sync_packages.sh
 
 	chezmoi git pull
 	chezmoi init
 
-	diff_len=$(chezmoi diff | wc | tr -d ' ')
-	if [ "$diff_len" = "000" ]; then
-		chezmoi apply
-	else
-		chezmoi diff
-		yn=l
-		while [[ ! "$yn" =~ ^[YyNn]$ ]]; do
-			read -p "Apply?" -n 1 yn
-			echo
-		done
-		[[ "$yn" =~ ^[Yy]$ ]] && chezmoi apply
-	fi
+	chezmoi diff
+	yn=l
+	while [[ ! "$yn" =~ ^[YyNn]$ ]]; do
+		read -p "Apply?" -n 1 yn
+		echo
+	done
+	[[ "$yn" =~ ^[Yy]$ ]] && chezmoi apply
 
 	yay -Ycss
 	sudo checkservices -i sddm.service

@@ -37,6 +37,7 @@ HOME = Path(getenv("HOME"))
 
 SYNC_DIR_POSTFIX = "_sync"
 
+VERBOSE = "VERBOSE_LOG" in os.environ
 
 @dataclass
 class ProgramConfig:
@@ -191,7 +192,8 @@ def process_versioned_dirs_cleanup_and_copy_sync_files(
             if (
                 isinstance(file_to_sync_pattern, re.Pattern) and file_to_sync_pattern.match(source_file_rel)
             ) or file_to_sync_pattern == source_file_rel:
-                print(f"{LIGHT_GRAY}    {source_file_rel} {YELLOW}matches {LIGHT_GRAY}{file_to_sync_pattern}", end="")
+                if VERBOSE:
+                    print(f"{LIGHT_GRAY}    {source_file_rel} {YELLOW}matches {LIGHT_GRAY}{file_to_sync_pattern}", end="")
                 matched_patterns.add(file_to_sync_pattern)
                 copied_files += 1
 
@@ -199,9 +201,10 @@ def process_versioned_dirs_cleanup_and_copy_sync_files(
                 os.makedirs(os.path.dirname(target_file), exist_ok=True)
                 target_file.write_bytes(source_file.read_bytes())
 
-                print(
-                    f"{GREEN} copied {GRAY}{str(source_file).replace(str(HOME), '~')} to {str(target_file).replace(str(HOME), '~')})"
-                )
+                if VERBOSE:
+                    print(
+                        f"{GREEN} copied {GRAY}{str(source_file).replace(str(HOME), '~')} to {str(target_file).replace(str(HOME), '~')})"
+                    )
 
     print(
         f"{NC}Matched {PURPLE}{len(matched_patterns)}{NC}/{PURPLE}{len(files_to_sync_patterns)} {NC}patterns, copied {L_YELLOW}{copied_files}{NC} files"
