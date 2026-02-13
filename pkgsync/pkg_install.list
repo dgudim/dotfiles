@@ -310,13 +310,10 @@ obsidian
 pinta
 remmina
 krdc
-freerdp
 syncthingtray-qt6
 okteta
 neochat
 okular
-cinny-desktop-bin
-schildichat-desktop-bin
 rclone-browser
 thunderbird
 plasma-systemmonitor
@@ -970,7 +967,6 @@ vpnc
 bind
 ldns
 ndisc6
-gnu-netcat
 iptables-nft
 nss-mdns
 inetutils
@@ -1014,13 +1010,11 @@ httptap-bin
 
 ## GUIS
 proton-vpn-gtk-app
-hoppscotch-bin
 wireshark-qt
 zenmap
 capnet-assist
 linux-wifi-hotspot
 httptoolkit-bin
-ktailctl
 localsend
 flying-carpet-bin
 opensnitch
@@ -1180,7 +1174,6 @@ plasma-camera-git
 webcamoid
 cameractrls
 jexiftoolgui
-vidcutter
 vipsdisp
 
 

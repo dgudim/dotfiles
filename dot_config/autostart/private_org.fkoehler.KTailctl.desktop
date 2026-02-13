@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Qt;KDE;System;
 Comment=GUI for tailscale on the KDE Plasma desktop
-Exec=ktailctl
+Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=ktailctl org.fkoehler.KTailctl
 Icon=org.fkoehler.KTailctl
 Name=KTailctl
 Terminal=false

@@ -5,7 +5,7 @@ bash pkgsync.sh
 bash pkg_build.sh
 
 install-flatpak() {
-    flatpak install "$1"
+    flatpak install "$1" --assumeyes
 }
 
 install-dotnet() {
@@ -56,8 +56,9 @@ go install github.com/docker/docker-language-server/cmd/docker-language-server@l
 install-flatpak org.easycoding.TunedSwitcher
 install-flatpak net.mkiol.Jupii
 install-flatpak org.kde.CrowTranslate
-flatpak update
-flatpak uninstall --unused --delete-data
+install-flatpak org.fkoehler.KTailctl
+flatpak update --assumeyes
+flatpak uninstall --unused --delete-data --assumeyes
 
 install-dotnet csharprepl
 install-dotnet dotnet-ef

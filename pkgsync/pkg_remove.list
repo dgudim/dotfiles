@@ -110,8 +110,11 @@ gns3-gui
 ubridge
 vpcs
 dynamips
-
+gnu-netcat
 kmscon-patched-git
+cinny-desktop-bin
+schildichat-desktop-bin
+hoppscotch-bin
 
 # Obsolete
 dbeaver-plugin-svg-format
@@ -130,12 +133,11 @@ lib32-sdl2-compat
 rp-pppoe
 kplotting5
 botan2
+fakeroot
 
 # Replaced with flatpak
 crow-translate-git
-
-# Only a dependency
-fakeroot
+ktailctl
 
 # Replaced with cargo binstall
 oxker
@@ -147,3 +149,4 @@ bun-bin
 python-js2py
 python-click-completion
 python-pyjsparser
+vidcutter
