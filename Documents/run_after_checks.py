@@ -178,7 +178,10 @@ grub = read_file("/etc/default/grub")
 bootline = cmdline if len(cmdline) > 0 else grub
 
 run_check(
-    len(bootline) > 0 and bootline.find("nvme_load=YES nowatchdog rw") == -1,
+    len(bootline) > 0
+    and "nowatchdog"    not in bootline
+    and "nvme_load=YES" not in bootline
+    and "rw"            not in bootline,
     f"{YELLOW}Add kernel boot defaults (nvme_load=YES nowatchdog rw){NC}",
 )
 
