@@ -1,0 +1,1 @@
+{"preferences":{"history":{"mode":"All"},"notifications":{"error":true,"startup":true},"reconnect":{"mode":"Number","numberValue":3,"timeoutMode":"Minutes","timeoutValue":2}},"sources":[{"domain":"ntfy.kloud.home.kg","name":"Docker notifications","protocol":"https","topic":"docker-notifs"}],"version":"1.6.0"}
