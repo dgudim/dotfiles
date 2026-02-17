@@ -375,6 +375,7 @@ lact
 printrun
 
 # CLI APPS
+diffoscope
 cpu_rec
 grex
 croc
@@ -863,6 +864,7 @@ python-pystache
 python-pyasn
 python-aiosqlite
 python-google-re2
+python-opengl
 uvicorn
 
 ## ANDROID AND JAVA
@@ -1131,6 +1133,7 @@ vlc
 mpv
 smplayer
 hugin
+losslesscut-bin
 obs-studio-tytan652
 obs-shaderfilter-git
 obs-3d-effect
