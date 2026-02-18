@@ -1,0 +1,84 @@
+toolbars:
+  wt:
+    items:
+    - {id: fetch}
+    - {id: sync}
+    - {id: push}
+    - {stretching: true}
+    - {id: stage}
+    - {id: indexEditor}
+    - {id: unstage}
+    - {stretching: false}
+    - {id: discard}
+    - {stretching: false}
+    - {id: stashSave}
+    - {id: stashApply}
+    - {stretching: true}
+    - {id: logRepository}
+    - {id: annotate}
+    - {id: investigate}
+    - {stretching: true}
+    - {id: flowContext}
+    - {stretching: false}
+    - {id: merge}
+    - {id: rebaseHeadTo}
+  log.main:
+    items:
+    - {id: fetch}
+    - {id: sync}
+    - {id: push}
+    - {stretching: true}
+    - {id: stage}
+    - {id: indexEditor}
+    - {id: unstage}
+    - {stretching: false}
+    - {id: discard}
+    - {stretching: false}
+    - {id: stashSave}
+    - {id: stashApply}
+    - {stretching: true}
+    - {id: annotate}
+    - {id: investigate}
+    - {stretching: true}
+    - {id: flowContext}
+    - {stretching: false}
+    - {id: merge}
+    - {id: rebaseHeadTo}
+  log.review:
+    items:
+    - {id: fetch}
+    - {id: sync}
+    - {id: push}
+    - {stretching: true}
+    - {id: stage}
+    - {id: indexEditor}
+    - {id: unstage}
+    - {stretching: false}
+    - {id: discard}
+    - {stretching: false}
+    - {id: stashSave}
+    - {id: stashApply}
+    - {stretching: true}
+    - {id: annotate}
+    - {id: investigate}
+    - {stretching: true}
+    - {id: flowContext}
+    - {stretching: false}
+    - {id: merge}
+    - {id: rebaseHeadTo}
+  log.file:
+    items:
+    - {stretching: true}
+    - {id: branchAdd}
+    - {id: branchAddTag}
+    - {stretching: false}
+    - {id: cherryPick}
+    - {id: revert}
+    - {stretching: true}
+    - {id: annotate}
+    - {id: investigate}
+  std:
+    wt: []
+    history: []
+    refs: []
+filterConfiguration: {regularExpressions: false}

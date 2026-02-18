@@ -1,0 +1,13 @@
+gitRootSettingsSet:
+  root/home/kloud/Documents/shared/obsidian_vault:
+    databaseCleanup: {}
+    log:
+      rootSettings: {}
+      fileFilterConfiguration: {regularExpressions: false}
+    merge:
+      logRootSettings: {}
+    push: {}
+    commitNotes: {}
+    journal: {}
+  roots: [~/Documents/shared/obsidian_vault]
+pushMultiRoot: {}

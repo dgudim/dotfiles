@@ -95,6 +95,24 @@ configs: list[ProgramConfig] = [
         data_files_to_sync={re.compile("classic-ui/.*"), re.compile("Gruvbox_Theme.*")},
     ),
     ProgramConfig(
+        name="Smartgit",
+        config_location=Path(HOME, ".config/smartgit"),
+        settings_dir_prefix="",
+        data_location=None,
+        config_files_to_sync={
+            "accelerators.yml",
+            "devops.yml",
+            "hosting-providers.yml",
+            "notifications.yml",
+            "preferences.yml",
+            "repositories.yml",
+            "repository-grouping.yml",
+            "tools.yml",
+            "ui-config.yml"
+        },
+        data_files_to_sync=set(),
+    ),
+    ProgramConfig(
         name="Blender",
         config_location=Path(HOME, ".config/blender"),
         settings_dir_prefix="",
@@ -126,7 +144,7 @@ def get_all_versioned_dirs(base_path: Path, dir_prefix: str):
     dirs: dict[float, VersionedDirectory] = {}
     max_version: float = 0
     for dir_ in base_path.glob(f"{dir_prefix}*"):
-        if str(dir_).endswith(SYNC_DIR_POSTFIX):
+        if dir_.is_file() or dir_.name.endswith(SYNC_DIR_POSTFIX):
             continue
         version = float(dir_.name.replace(dir_prefix, ""))
         print(f"{GRAY}    -> Found dir: {dir_}, {LIGHT_GRAY}version: {L_YELLOW}{version}{NC}")

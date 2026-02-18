@@ -1,0 +1,3 @@
+readNotifications: []
+dontPublishNotifications: [fileMonitor.directoriesExcluded-null]
+dontPublishUntil-fileMonitor.directoriesExcluded-null: 0

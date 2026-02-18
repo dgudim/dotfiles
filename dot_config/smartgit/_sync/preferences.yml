@@ -1,0 +1,122 @@
+showSetup: false
+actions:
+  cleanup: {}
+  commit: {preferStaged: false}
+  compare:
+    fileComparators:
+    - filePattern: '*'
+      compareType: 0
+      externalFileCompare: {}
+  conflictSolver:
+    conflictSolvers:
+    - filePattern: '*'
+      useExternal: false
+      externalTool: {}
+  stash: {}
+logSettings:
+  filterConfiguration: {regularExpressions: false}
+comparePreviewSettings: {}
+dateFormat: {}
+defaultViewSettings:
+  compareSettings:
+    textSettings: {whitespaces: 0}
+git:
+  maxCount: 3
+  alternatives: ['${smartgit.install}/git/bin/git', /bin/git, /usr/bin/git]
+  executable: /usr/bin/git
+ssh: {}
+deepGit2: {}
+globalTextComponentSettings:
+  font: {family: Ubuntu Mono, size: 11}
+  actions: {}
+  syntaxHighlightingSettings:
+    entries:
+    - {language: ANTLR4, pattern: '*.g4'}
+    - {language: ASM (x86), pattern: '*.asm'}
+    - {language: Basic, pattern: '*.basic, *.cbm, *.vb, *.vbs'}
+    - {language: C#, pattern: '*.cs'}
+    - {language: C(++), pattern: '*.c, *.cc, *.cpp, *.cxx, *.cyc, *.h, *.ino'}
+    - {language: CMake, pattern: '*.cmake'}
+    - {language: CSS, pattern: '*.css, *.css-kw, *.css-str'}
+    - {language: Clojure, pattern: '*.clj'}
+    - {language: Cmd, pattern: '*.bat, *.cmd'}
+    - {language: Crystal, pattern: '*.cr'}
+    - {language: Dart, pattern: '*.dart'}
+    - {language: Embedded Ruby Template, pattern: '*.erb'}
+    - {language: Forth, pattern: '*.forth, *.fs'}
+    - {language: Gettext, pattern: '*.po, *.pot'}
+    - {language: Git Config, pattern: '.gitconfig, config'}
+    - {language: Go, pattern: '*.go'}
+    - {language: Groovy, pattern: '*.gradle, *.groovy'}
+    - {language: HTML, pattern: '*.htm, *.html, *.xhtml'}
+    - {language: InnoSetup, pattern: '*.iss'}
+    - {language: JSON, pattern: '*.json'}
+    - {language: Java, pattern: '*.java'}
+    - {language: JavaScript/TypeScript, pattern: '*.javascript, *.js, *.ts, *.tsx'}
+    - {language: Kotlin, pattern: '*.kt, *.kts'}
+    - {language: Lua/Nelua, pattern: '*.lua'}
+    - {language: Markdown, pattern: '*.md'}
+    - {language: Mumps, pattern: '*.mumps'}
+    - {language: Nim, pattern: '*.nim'}
+    - {language: Nix, pattern: '*.nix'}
+    - {language: Objective-C, pattern: '*.m'}
+    - {language: Odin, pattern: '*.odin'}
+    - {language: PHP, pattern: '*.php, *.php3, *.php4, *.php5, *.phps, *.phtml'}
+    - {language: Pascal/Delphi, pattern: '*.pas, *.pascal'}
+    - {language: Perl, pattern: '*.perl, *.pl, *.pm'}
+    - {language: Powershell, pattern: '*.ps1'}
+    - {language: Properties, pattern: '*.properties'}
+    - {language: Python, pattern: '*.cv, *.py, *.python, *.pyw'}
+    - {language: Ruby, pattern: '*.rb, *.ruby'}
+    - {language: Rust, pattern: '*.rc, *.rs, *.rust'}
+    - {language: SQL, pattern: '*.sql'}
+    - {language: Scala, pattern: '*.scala'}
+    - {language: Shell Script, pattern: '*.bash, *.bsh, *.csh, *.sh'}
+    - {language: Swift, pattern: '*.swift'}
+    - {language: TCL, pattern: '*.tcl'}
+    - {language: TOML, pattern: '*.toml'}
+    - {language: V, pattern: '*.vlang'}
+    - {language: VHDL, pattern: '*.vhd, *.vhdl'}
+    - {language: Verilog, pattern: '*.sv, *.v, *.vh'}
+    - {language: XML, pattern: '*.csproj, *.fsproj, *.mxml, *.plist, *.storyboard,
+        *.svg, *.targets, *.thyme, *.vbproj, *.vcxproj, *.xib, *.xml'}
+    - {language: Yaml, pattern: '*.yaml, *.yml'}
+    - {language: Zig, pattern: '*.zig'}
+  colors.light: {color-comment: 8421504, color-keyword: 32768, color-string: 12583104,
+    color-identifier: 3158064, color-literal: 255, color-punctuation: 14755880, color-invalid: 16727871,
+    color-type: 4227200, color-annotation: 11564032, color-escape: 18048, color-interpolation: 128,
+    color-pragma: 8547840, color-parameter: 25728, color-variable: 4718847, color-tag: 128,
+    color-attrib-name: 255, color-attrib-value: 32768, color-plain-text: 2105376,
+    color-title: 33023, color-styled: 12583104, color-code: 32896, color-list: 16711790,
+    color-link: 32838, color-special: 14708736}
+  colors.dark: {color-comment: 9079434, color-keyword: 10733475, color-string: 14002901,
+    color-identifier: 12632256, color-literal: 11184853, color-punctuation: 15777984,
+    color-invalid: 16744319, color-type: 11513807, color-annotation: 13092749, color-escape: 9291719,
+    color-interpolation: 9211135, color-pragma: 13876905, color-parameter: 8441087,
+    color-variable: 11184895, color-tag: 10274701, color-attrib-name: 9291719, color-attrib-value: 12558303,
+    color-plain-text: 12566463, color-title: 6996223, color-styled: 16777184, color-code: 10543328,
+    color-list: 16744640, color-link: 12644544, color-special: 11184895}
+  colors.useDark: true
+listx: {uid: bilufkl0b901}
+project: {defaultWindowType: std}
+uiSettings: {}
+vcsRecords: {lastGitUsage: 1771446361792}
+updateCheck:
+  channels: []
+  prevCheckTime: 1771446227841
+  checkedBuild: 251110
+updateCheckDg:
+  channels: []
+proxy: {}
+spellCheck:
+  dictionaries:
+  - {name: en_US, file: '${smartgit.install}/dictionaries/en_US.dic', file.absolute: /opt/smartgit/dictionaries/en_US.dic}
+  deleted: false
+  activeDictionary: 0
+lastUsedVersion: '25.1'
+firstUsedTime: 1771445892984
+firstUsedOrUpgradeTime: 1771445892984
+machineId: 1cd2eeff
+warnForMissingMasterPassword: false
+sendStacktraces2: true
+sendUsageStats: true
