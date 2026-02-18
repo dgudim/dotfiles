@@ -122,6 +122,8 @@ glava
 # Obsolete
 dbeaver-plugin-svg-format
 kinit
+openssl-1.0
+openssl-1.1
 
 # Replaced with a different version
 translate-shell
