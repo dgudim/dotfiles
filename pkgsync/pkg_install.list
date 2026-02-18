@@ -269,7 +269,7 @@ plasma6-applets-kurve
 plasma5-wallpapers-dynamic
 kvantum
 kvantum-qt5
-
+plasma-login-manager
 
 
 # GUI APPS
@@ -559,7 +559,9 @@ journalctl-desktop-notification-git
 # syncthing-appmenu
 rlwrap
 yt-dlp-drop-in
+xf86-input-libinput
 xorg-xhost
+xorg-xauth
 awatcher-git
 aw-watcher-media-player-git
 slicer-udev
@@ -633,7 +635,6 @@ kdenetwork-filesharing
 
 ## SETTINGS
 # systemd-kcm
-sddm-kcm
 flatpak-kcm
 kup
 # kcm-polkit-kde-git
@@ -1157,7 +1158,6 @@ gpu-screen-recorder-notification-git
 gpu-screen-recorder-ui-git
 simplescreenrecorder
 gimagereader-qt
-glava
 darktable
 digikam
 kphotoalbum

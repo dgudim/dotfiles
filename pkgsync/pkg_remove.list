@@ -116,6 +116,8 @@ cinny-desktop-bin
 schildichat-desktop-bin
 hoppscotch-bin
 plasma6-runners-emojirunner
+xorg-server
+glava
 
 # Obsolete
 dbeaver-plugin-svg-format
@@ -135,6 +137,10 @@ rp-pppoe
 kplotting5
 botan2
 fakeroot
+
+# Replaced with plasma-login-manager
+sddm
+sddm-kcm
 
 # Replaced with flatpak
 crow-translate-git
