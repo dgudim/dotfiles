@@ -685,6 +685,7 @@ yabridgectl
 prettier
 git
 subversion
+smartgit
 git-delta
 git-filter-repo
 mergiraf
