@@ -84,6 +84,8 @@ echo -e "${L_PURPLE}Setting up services...$NC"
 
 reload_daemon
 
+enable_service plasmalogin.service
+
 # Activated by socket
 enable_service dbus-broker.service 0 1
 enable_service dbus-broker.service 1 1

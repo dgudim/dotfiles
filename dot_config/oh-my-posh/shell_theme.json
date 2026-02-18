@@ -6,9 +6,6 @@
       "alignment": "left",
       "segments": [
         {
-          "properties": {
-            "cache_duration": "none"
-          },
           "leading_diamond": "",
           "template": "{{ .Icon }} {{ .HostName }} ",
           "foreground": "#458588",
@@ -17,7 +14,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "leading_diamond": "",
@@ -29,8 +26,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
-            "cache_duration": "none",
+          "options": {
             "folder_icon": "",
             "folder_separator_icon": "/",
             "home_icon": "󰋜",
@@ -44,10 +40,8 @@
           "style": "powerline"
         },
         {
-          "properties": {
+          "options": {
             "branch_icon": " <#ebdbb2> </>",
-            "cache_duration": "none",
-            "fetch_stash_count": true,
             "fetch_status": true,
             "fetch_upstream_icon": true
           },
@@ -59,7 +53,7 @@
           "style": "powerline"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} ",
@@ -70,7 +64,7 @@
           "style": "powerline"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "template": "  {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
@@ -81,9 +75,8 @@
           "style": "powerline"
         },
         {
-          "properties": {
-            "always_enabled": true,
-            "cache_duration": "none"
+          "options": {
+            "always_enabled": true
           },
           "template": " 󰔟 {{ .FormattedMs }} ",
           "foreground": "#ebdbb2",
@@ -93,8 +86,7 @@
           "style": "powerline"
         },
         {
-          "properties": {
-            "cache_duration": "none",
+          "options": {
             "time_format": "15:04"
           },
           "template": "  {{ .CurrentDate | date .Format }}",
@@ -105,16 +97,15 @@
           "style": "powerline"
         },
         {
-          "properties": {
-            "always_enabled": true,
-            "cache_duration": "none"
+          "options": {
+            "always_enabled": true
           },
           "trailing_diamond": "",
           "template": " {{ if gt .Code 0 }}󰀦{{ else }}{{ end }} ",
           "foreground": "#ebdbb2",
           "powerline_symbol": "",
           "background": "#458588",
-          "type": "exit",
+          "type": "status",
           "style": "diamond",
           "background_templates": [
             "{{ if gt .Code 0 }}red{{ end }}"
@@ -127,7 +118,7 @@
       "alignment": "right",
       "segments": [
         {
-          "properties": {
+          "options": {
             "cache_duration": "none",
             "fetch_package_manager": true,
             "npm_icon": " <#cc241d></> ",
@@ -142,7 +133,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "leading_diamond": "",
@@ -154,7 +145,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "leading_diamond": "",
@@ -166,7 +157,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "leading_diamond": "",
@@ -178,7 +169,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "leading_diamond": "",
@@ -190,7 +181,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "leading_diamond": "",
@@ -202,7 +193,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "leading_diamond": " ",
@@ -214,7 +205,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "leading_diamond": " ",
@@ -226,7 +217,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "leading_diamond": " ",
@@ -238,7 +229,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "leading_diamond": "",
@@ -250,7 +241,7 @@
           "style": "diamond"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "leading_diamond": "",
@@ -262,9 +253,6 @@
           "style": "diamond"
         },
         {
-          "properties": {
-            "cache_duration": "none"
-          },
           "leading_diamond": "",
           "trailing_diamond": " ",
           "template": " {{.Profile}}{{if .Region}}@{{.Region}}{{end}}",
@@ -274,9 +262,6 @@
           "style": "diamond"
         },
         {
-          "properties": {
-            "cache_duration": "none"
-          },
           "leading_diamond": "",
           "trailing_diamond": "",
           "template": "󰠳 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}",
@@ -292,7 +277,7 @@
       "alignment": "left",
       "segments": [
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "template": "󰈸",
@@ -301,7 +286,7 @@
           "style": "plain"
         },
         {
-          "properties": {
+          "options": {
             "cache_duration": "none"
           },
           "template": " <#7caea2><b>󱐋</b></><b> {{ .UserName }}</b> <#e78a4d>❯</><#7caea2>❯</>",
