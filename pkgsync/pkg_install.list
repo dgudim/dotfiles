@@ -717,6 +717,7 @@ wild
 dockerfmt
 lemminx
 plasma-sdk
+amber-lang-bin
 
 ## DBs
 postgresql
