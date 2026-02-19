@@ -71,16 +71,22 @@ touchpad:
     - type: swipe
       fingers: 3
       direction: left
+      keyboard_modifiers: []
 
       actions:
-        - keyboard: [leftalt+left]
+        - on: begin
+          input:
+            - keyboard: [ back ]
 
     - type: swipe
       fingers: 3
       direction: right
+      keyboard_modifiers: []
 
       actions:
-        - keyboard: [leftalt+right]
+        - on: begin
+          input:
+          - mouse: [ forward ]
 
 
     - type: swipe
@@ -89,7 +95,9 @@ touchpad:
       keyboard_modifiers: [alt]
 
       actions:
-        - keyboard: [leftmeta+left]
+        - on: begin
+          input:
+          - keyboard: [leftmeta+left]
 
     - type: swipe
       fingers: 3
@@ -97,7 +105,9 @@ touchpad:
       keyboard_modifiers: [alt]
 
       actions:
-        - keyboard: [leftmeta+right]
+        - on: begin
+          input:
+          - keyboard: [leftmeta+right]
 
 
     - type: swipe
@@ -144,7 +154,6 @@ touchpad:
           interval: 10
           command: pactl set-sink-volume @DEFAULT_SINK@ -5%
 
-
     - type: swipe
       fingers: 3
       direction: up_down
@@ -174,7 +183,6 @@ touchpad:
           plasma_shortcut: org_kde_powerdevil,Decrease Screen Brightness Small
 
 
-    # Close window
     - type: swipe
       fingers: 3
       direction: up
@@ -228,3 +236,5 @@ touchpad:
           conditions:
             - negate: [window_state]
               window_state: [fullscreen, maximized]
+
+

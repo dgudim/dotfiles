@@ -153,6 +153,9 @@ oxker
 chezmoi_modify_manager
 ast-grep-bin
 
+# Replaced with inputactions-kwin
+input-actions
+
 # Not in the aur
 bun-bin
 python-js2py
