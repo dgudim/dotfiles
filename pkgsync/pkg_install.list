@@ -273,6 +273,9 @@ plasma-login-manager
 
 
 # GUI APPS
+wayscriber-bin
+wayscriber-configurator
+atuin-desktop-bin
 ntfydesktop
 alt-sendme-bin
 merkuro
@@ -376,6 +379,8 @@ lact
 printrun
 
 # CLI APPS
+ttyd
+tty-clock
 diffoscope
 cpu_rec
 grex
@@ -718,6 +723,7 @@ dockerfmt
 lemminx
 plasma-sdk
 amber-lang-bin
+openapi-tui
 
 ## DBs
 postgresql
@@ -1131,6 +1137,7 @@ perl-image-exiftool
 xcur2png
 autotrace
 jpeg2png-git
+oxipng
 
 ## GUIS
 vlc
