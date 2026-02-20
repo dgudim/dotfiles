@@ -189,23 +189,16 @@ touchpad:
       keyboard_modifiers: [alt]
 
       actions:
-        # Maximize window if not fullscreen and not maximized
         - on: begin
-          plasma_shortcut: kwin,Window Maximize
-          block_other: true # Prevent the fullscreen window action from triggering during the same gesture
+          one:
+            - plasma_shortcut: kwin,Window Maximize
+              conditions:
+                - $window_maximized == false
 
-          conditions:
-            - negate: [window_state]
-              window_state: [fullscreen, maximized]
+            - plasma_shortcut: kwin,Window Fullscreen
+              conditions:
+                - $window_fullscreen == false
 
-
-        # Fullscreen a window if not fullscreen
-        - on: begin
-          plasma_shortcut: kwin,Window Fullscreen
-
-          conditions:
-            - negate: [window_state]
-              window_state: [fullscreen]
 
     - type: swipe
       fingers: 3
@@ -213,28 +206,16 @@ touchpad:
       keyboard_modifiers: [alt]
 
       actions:
-        # Unfullscreen window if fullscreen
         - on: begin
-          plasma_shortcut: kwin,Window Fullscreen
-          block_other: true # Prevent the unmaximize window action from triggering during the same gesture
+          one:
+            - plasma_shortcut: kwin,Window Fullscreen
+              conditions:
+                - $window_fullscreen == true
 
-          conditions:
-            - window_state: [fullscreen]
+            - plasma_shortcut: kwin,Window Maximize
+              conditions:
+                - $window_maximized == true
 
-        # Unmaximize window if maximized
-        - on: begin
-          plasma_shortcut: kwin,Window Maximize
-          block_other: true # Prevent the minimize window action from triggering during the same gesture
-
-          conditions:
-            - window_state: [maximized]
-
-        # Minimize window if not fullscreen and not maximized
-        - on: begin
-          plasma_shortcut: kwin,Window Minimize
-
-          conditions:
-            - negate: [window_state]
-              window_state: [fullscreen, maximized]
+            - plasma_shortcut: kwin,Window Minimize
 
 
