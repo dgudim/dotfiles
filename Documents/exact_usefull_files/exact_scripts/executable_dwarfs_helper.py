@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+from re import sub
 import shutil
 from subprocess import Popen
 import subprocess
@@ -73,9 +74,9 @@ def err_exit(message: str) -> NoReturn:
     sys.exit(1)
 
 
-def checked_exec(command: str, on_fail: Callable[...] | None = None):
+def checked_exec(command: list[str], on_fail: Callable[[], int] | None = None):
     print(f"{L_CYAN}| {GRAY}exec _> {LIGHTER_GRAY}{command}{NC}")
-    exit_code = os.system(command)
+    exit_code = subprocess.call(command)
     if exit_code != 0:
         if on_fail is not None:
             on_fail()
@@ -100,7 +101,7 @@ def mount_base_image_ro(image_path: Path):
     print(f"{CYAN}Mounting {L_CYAN}{image_path} {L_YELLOW}RO{NC}")
     mount_info = get_base_mount_dir_from_image_path(image_path)
     if not mount_info.ro_mount_path.is_mount():
-        checked_exec(f"dwarfs '{image_path.as_posix()}' '{mount_info.ro_mount_path.as_posix()}' -o allow_root")
+        checked_exec(["dwarfs", image_path.as_posix(), mount_info.ro_mount_path.as_posix(), "-o", "allow_root"])
     else:
         print(f"{YELLOW}Image already mounted{NC}")
 
@@ -120,12 +121,21 @@ def mount_image_overlay(image_path: Path, is_rw: bool):
             mount_args += f":{mount_info.dummy_mount_path.as_posix()}"  # Overlayfs refuses to mount with only one dir
 
         checked_exec(
-            f"{SUDO_APP} mount -t overlay 'overlay_{mount_info.overlay_mount_path.stem.lower().strip().replace(' ', '_')}' -o {mount_args} '{mount_info.overlay_mount_path.as_posix()}'"
+            [
+                SUDO_APP,
+                "mount",
+                "-t",
+                "overlay",
+                f"overlay_{mount_info.overlay_mount_path.stem.lower().strip().replace(' ', '_')}",
+                "-o",
+                mount_args,
+                mount_info.overlay_mount_path.as_posix(),
+            ]
         )
     else:
         print(f"{YELLOW}Overlay already mounted{NC}")
 
-    checked_exec(f"xdg-open '{mount_info.overlay_mount_path.as_posix()}'")
+    checked_exec(["xdg-open", mount_info.overlay_mount_path.as_posix()])
 
 
 def unmount_image(image_path: Path, keep_changes: Callable[..., bool]):
@@ -141,15 +151,18 @@ def unmount_image(image_path: Path, keep_changes: Callable[..., bool]):
                 err_exit("Couldn't recompress, target image already exists")
 
     if mount_info.overlay_mount_path.is_mount():
-        checked_exec(f"{SUDO_APP} umount '{mount_info.overlay_mount_path.as_posix()}'", lambda _: os.system(f"lsof '{mount_info.overlay_mount_path.as_posix()}'"))
+        checked_exec(
+            [SUDO_APP, "umount", mount_info.overlay_mount_path.as_posix()],
+            lambda: subprocess.call(["lsof", mount_info.overlay_mount_path.as_posix()]),
+        )
         print(f"{BLUE}Cleaning RW remains{NC}")
         shutil.rmtree(mount_info.rw_mount_path)
-        checked_exec(f"{SUDO_APP} rm -rf '{mount_info.work_mount_path.as_posix()}'")
+        checked_exec([SUDO_APP, "rm", "-rf", mount_info.work_mount_path.as_posix()])
     else:
         print(f"{YELLOW}Overlay already unmounted{NC}")
 
     if mount_info.ro_mount_path.is_mount():
-        checked_exec(f"umount '{mount_info.ro_mount_path.as_posix()}'")
+        checked_exec(["umount", mount_info.ro_mount_path.as_posix()])
     else:
         print(f"{YELLOW}Image already unmounted{NC}")
 
@@ -172,7 +185,18 @@ def compress(source_dir_path: Path, delete_directory: bool):
 
     # maximum compression (l9), 4MiB (2^22) blocks, 5 blocks lookback (20 Need to be decompressed at worst)
     checked_exec(
-        f"mkdwarfs -l9 --force --block-size-bits=22 --max-lookback-blocks=5 --categorize -i '{source_dir_path.as_posix()}' -o '{output_image_path}'"
+        [
+            "mkdwarfs",
+            "-l9",
+            "--force",
+            "--block-size-bits=22",
+            "--max-lookback-blocks=5",
+            "--categorize",
+            "-i",
+            source_dir_path.as_posix(),
+            "-o",
+            output_image_path.as_posix(),
+        ]
     )
 
     if delete_directory:
