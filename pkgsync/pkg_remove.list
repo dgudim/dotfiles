@@ -116,10 +116,14 @@ cinny-desktop-bin
 schildichat-desktop-bin
 hoppscotch-bin
 plasma6-runners-emojirunner
+xorg-server
+glava
 
 # Obsolete
 dbeaver-plugin-svg-format
 kinit
+openssl-1.0
+openssl-1.1
 
 # Replaced with a different version
 translate-shell
@@ -136,6 +140,10 @@ kplotting5
 botan2
 fakeroot
 
+# Replaced with plasma-login-manager
+sddm
+sddm-kcm
+
 # Replaced with flatpak
 crow-translate-git
 ktailctl
@@ -144,6 +152,9 @@ ktailctl
 oxker
 chezmoi_modify_manager
 ast-grep-bin
+
+# Replaced with inputactions-kwin
+input-actions
 
 # Not in the aur
 bun-bin

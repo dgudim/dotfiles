@@ -3,7 +3,7 @@
 #    hiprt
 
 # Laptop stuff
-input-actions
+inputactions-kwin
 
 # Boot stuff
 limine
@@ -269,10 +269,13 @@ plasma6-applets-kurve
 plasma5-wallpapers-dynamic
 kvantum
 kvantum-qt5
-
+plasma-login-manager
 
 
 # GUI APPS
+wayscriber-bin
+wayscriber-configurator
+atuin-desktop-bin
 ntfydesktop
 alt-sendme-bin
 merkuro
@@ -361,6 +364,7 @@ mission-center
 goldendict-ng
 mousam
 prusa-slicer
+orca-slicer-unstable-bin
 serialplot-git
 textpieces
 kcolorchooser
@@ -375,6 +379,8 @@ lact
 printrun
 
 # CLI APPS
+ttyd
+tty-clock
 diffoscope
 cpu_rec
 grex
@@ -559,7 +565,9 @@ journalctl-desktop-notification-git
 # syncthing-appmenu
 rlwrap
 yt-dlp-drop-in
+xf86-input-libinput
 xorg-xhost
+xorg-xauth
 awatcher-git
 aw-watcher-media-player-git
 slicer-udev
@@ -633,7 +641,6 @@ kdenetwork-filesharing
 
 ## SETTINGS
 # systemd-kcm
-sddm-kcm
 flatpak-kcm
 kup
 # kcm-polkit-kde-git
@@ -684,6 +691,7 @@ yabridgectl
 prettier
 git
 subversion
+smartgit
 git-delta
 git-filter-repo
 mergiraf
@@ -714,6 +722,8 @@ wild
 dockerfmt
 lemminx
 plasma-sdk
+amber-lang-bin
+openapi-tui
 
 ## DBs
 postgresql
@@ -1127,11 +1137,13 @@ perl-image-exiftool
 xcur2png
 autotrace
 jpeg2png-git
+oxipng
 
 ## GUIS
 vlc
 mpv
 smplayer
+converseen
 hugin
 losslesscut-bin
 obs-studio-tytan652
@@ -1144,7 +1156,7 @@ obs-streamfx-unstable
 obs-stroke-glow-shadow
 droidcam-obs-plugin
 blender
-meshlab-appimage
+meshlab-bin
 krita
 imv
 gwenview
@@ -1156,7 +1168,6 @@ gpu-screen-recorder-notification-git
 gpu-screen-recorder-ui-git
 simplescreenrecorder
 gimagereader-qt
-glava
 darktable
 digikam
 kphotoalbum

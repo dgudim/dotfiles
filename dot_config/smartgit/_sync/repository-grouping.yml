@@ -1,0 +1,27 @@
+structure:
+- name: ~/Documents/shared
+  children:
+  - {name: obsidian_vault, path: ~/Documents/shared/obsidian_vault, path.absolute: /home/kloud/Documents/shared/obsidian_vault}
+  expanded: true
+- name: ~/Documents/projects
+  children:
+  - {name: arduino_projects, path: ~/Documents/projects/arduino_projects, path.absolute: /home/kloud/Documents/projects/arduino_projects}
+  - {name: dgudim.github.io, path: ~/Documents/projects/dgudim.github.io, path.absolute: /home/kloud/Documents/projects/dgudim.github.io}
+  - {name: themes, path: ~/Documents/projects/themes, path.absolute: /home/kloud/Documents/projects/themes}
+  - {name: udev-notify, path: ~/Documents/projects/udev-notify, path.absolute: /home/kloud/Documents/projects/udev-notify}
+  - {name: bs2.datacenter.dag, path: ~/Documents/projects/bs2.datacenter.dag, path.absolute: /home/kloud/Documents/projects/bs2.datacenter.dag}
+  - {name: payments-mono, path: ~/Documents/projects/payments-mono, path.absolute: /home/kloud/Documents/projects/payments-mono}
+  expanded: true
+- name: ~/Downloads
+  children:
+  - {name: proxzima-plymouth, path: ~/Downloads/proxzima-plymouth, path.absolute: /home/kloud/Downloads/proxzima-plymouth}
+  - name: mi_365_flashing
+    children:
+    - {name: shfw-walkthrough, path: ~/Downloads/mi_365_flashing/shfw-walkthrough,
+      path.absolute: /home/kloud/Downloads/mi_365_flashing/shfw-walkthrough}
+    - {name: firmware, path: ~/Downloads/mi_365_flashing/firmware, path.absolute: /home/kloud/Downloads/mi_365_flashing/firmware}
+  expanded: true
+recentlyUsed: [~/Documents/shared/obsidian_vault, ~/Documents/projects/payments-mono,
+  ~/Documents/projects/bs2.datacenter.dag, ~/Downloads/mi_365_flashing/firmware, ~/Downloads/mi_365_flashing/shfw-walkthrough,
+  ~/Downloads/proxzima-plymouth, ~/Documents/projects/udev-notify, ~/Documents/projects/themes,
+  ~/Documents/projects/dgudim.github.io, ~/Documents/projects/arduino_projects]
