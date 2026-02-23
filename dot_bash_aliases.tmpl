@@ -318,6 +318,10 @@ pvenv() {
 
 ###############################################################################################################
 
+docker_exec() {
+	docker exec -it $(docker container list -a | yank) sh
+}
+
 lsblk() {
 	/usr/bin/lsblk -o NAME,FSTYPE,UUID,PARTUUID,PARTTYPENAME,MOUNTPOINT,SIZE "$@"
 }
