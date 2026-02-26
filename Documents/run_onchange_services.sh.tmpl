@@ -170,12 +170,12 @@ enable_service gpu-screen-recorder-ui 1
 enable_service docker.socket 1
 
 {{ if eq .chezmoi.hostname "sauron" }}
+    enable_service psd 1
+    enable_service gopreload.service
+{{ else }}
     # Disable
     enable_service psd 1 1
     enable_service gopreload.service 0 1
-{{ else }}
-    enable_service psd 1
-    enable_service gopreload.service
 {{ end }}
 
 
