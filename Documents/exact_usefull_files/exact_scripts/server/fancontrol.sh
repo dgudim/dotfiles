@@ -45,29 +45,29 @@ echo 1 > enable || true
 echo "Enabled pwm control"
 
 off() {
-    echo 30000000 > period && sleep 0.1
     echo 0 > duty_cycle && sleep 0.1
 }
 
-full() {
-    off
-    sleep 7
+set_speed() {
+    echo "Set speed to $1"
+    if [ $(cat duty_cycle) -ne $1 ]; then
+        off
+        sleep 7
+    fi
     echo 30000000 > period && sleep 0.1
-    echo 30000000 > duty_cycle && sleep 0.1
+    echo $1 > duty_cycle && sleep 0.1
+}
+
+full() {
+    set_speed 30000000
 }
 
 normal() {
-    off
-    sleep 7
-    echo 30000000 > period && sleep 0.1
-    echo 23000000 > duty_cycle && sleep 0.1
+    set_speed 23000000
 }
 
 idle() {
-    off
-    sleep 7
-    echo 30000000 > period && sleep 0.1
-    echo 10150000 > duty_cycle && sleep 0.1
+    set_speed 10150000
 }
 
 
@@ -94,12 +94,6 @@ echo $F4 > duty_cycle && sleep $sleep1
 echo 0 > duty_cycle && sleep $sleep1
 echo $G4 > duty_cycle && sleep $sleep1
 echo 0 > duty_cycle && sleep $sleep1
-echo $C4_mid > duty_cycle && sleep $sleep1
-echo 0 > duty_cycle && sleep $sleep4
-echo $C4_mid > duty_cycle && sleep $sleep1
-echo 0 > duty_cycle && sleep $sleep4
-echo $C4_mid > duty_cycle && sleep $sleep1
-echo 0 > duty_cycle && sleep $sleep4
 echo $C4_mid > duty_cycle && sleep $sleep1
 echo 0 > duty_cycle && sleep 0.5
 
