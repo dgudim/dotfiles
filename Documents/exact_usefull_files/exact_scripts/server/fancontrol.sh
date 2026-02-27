@@ -1,15 +1,23 @@
-# 49000 - 3789
-# 49100 - 3337
-# 49200 - 2862
-# 49450 - 2281
-# 49400 - 1249
+set -e
 
-export ON_TEMP=57
-export OFF_TEMP=47
-export ON_HDD_TEMP=48
+export OFF_TEMP=45
+export ON_TEMP_IDLE=50
+export ON_TEMP_NORMAL=55
+export ON_TEMP_FULL=60
+
 export OFF_HDD_TEMP=40
-export MIN_COOLING_TIME=300 # 5 minutes
+export ON_HDD_TEMP_IDLE=45
+export ON_HDD_TEMP_NORMAL=50
+export ON_HDD_TEMP_FULL=60
 
+export DELAY_AFTER_ON_SEC=60
+
+# Music stuff
+# 49000 - 3789 Hz
+# 49100 - 3337 Hz
+# 49200 - 2862 Hz
+# 49450 - 2281 Hz
+# 49400 - 1249 Hz
 export D4=49400
 export D5=49000
 export A4=49100
@@ -29,30 +37,42 @@ modprobe drivetemp
 echo "Loaded/unloaded kernel modules"
 
 cd /sys/class/pwm/pwmchip1 || exit
-if [ ! -f unexport ]
-then
-    echo 0 > "export"
-    echo "Exported pwm control channel 0"
-else
-    echo "Pwm control already exported"
-fi
+echo 0 > "export" || true
+echo "Exported pwm control channel 0"
 cd pwm0 || exit
 
-echo 1 > enable
+echo 1 > enable || true
 echo "Enabled pwm control"
 
-on() {
-    echo 100 > period && sleep 0.1
-    echo 70 > duty_cycle && sleep 0.1
-}
-
 off() {
-    echo 100 > period && sleep 0.1
+    echo 30000000 > period && sleep 0.1
     echo 0 > duty_cycle && sleep 0.1
 }
 
-echo 50000 > period && sleep 3
+full() {
+    off
+    sleep 7
+    echo 30000000 > period && sleep 0.1
+    echo 30000000 > duty_cycle && sleep 0.1
+}
+
+normal() {
+    off
+    sleep 7
+    echo 30000000 > period && sleep 0.1
+    echo 23000000 > duty_cycle && sleep 0.1
+}
+
+idle() {
+    off
+    sleep 7
+    echo 30000000 > period && sleep 0.1
+    echo 10150000 > duty_cycle && sleep 0.1
+}
+
+
 echo 0 > duty_cycle && sleep 3
+echo 50000 > period && sleep 3
 
 echo $D4 > duty_cycle && sleep $sleep1
 echo 0 > duty_cycle && sleep $sleep1
@@ -83,11 +103,17 @@ echo 0 > duty_cycle && sleep $sleep4
 echo $C4_mid > duty_cycle && sleep $sleep1
 echo 0 > duty_cycle && sleep 0.5
 
-echo "Bootup sound complete, turning on the fan for 2.5 seconds"
+echo "Bootup sound complete, testing fan"
 
-on
-sleep 2.5
+full
+sleep 10
+normal
+sleep 10
+idle
+sleep 10
 off
+
+
 
 get_temp() {
     sensors $1 | grep temp1 | cut -d' ' -f9 | cut -d '.' -f1 | cut -d '+' -f2
@@ -113,17 +139,24 @@ do
 
   drive_temp=$(max $drive12_temp $drive34_temp)
 
-  if (( drive_temp >= ON_HDD_TEMP )); then
-    echo "Drives at $drive12_temp degrees (> $ON_HDD_TEMP), turning on"
-    on
-    sleep $MIN_COOLING_TIME
+  if [ $(( core_temp >= ON_TEMP_IDLE)) -eq 1 ] || [ $(( drive_temp >= ON_HDD_TEMP_IDLE )) -eq 1 ]; then
+    echo "Core at $core_temp degrees, drives at $drive_temp degrees, turning on (idle)"
+    idle
+    sleep $DELAY_AFTER_ON_SEC
     continue
   fi
 
-  if (( core_temp >= ON_TEMP )); then
-    echo "Core at $core_temp degrees (> $ON_TEMP), turning on"
-    on
-    sleep $MIN_COOLING_TIME
+  if [ $(( core_temp >= ON_TEMP_NORMAL )) -eq 1 ] || [ $(( drive_temp >= ON_HDD_TEMP_NORMAL )) -eq 1 ]; then
+    echo "Core at $core_temp degrees, drives at $drive_temp degrees, turning on (normal)"
+    normal
+    sleep $DELAY_AFTER_ON_SEC
+    continue
+  fi
+
+  if [ $(( core_temp >= ON_TEMP_FULL )) -eq 1 ] || [ $(( drive_temp >= ON_HDD_TEMP_FULL )) -eq 1 ]; then
+    echo "Core at $core_temp degrees, drives at $drive_temp degrees, turning on (FULL)"
+    full
+    sleep $DELAY_AFTER_ON_SEC
     continue
   fi
 
@@ -133,6 +166,8 @@ do
         off
     fi
   fi
+
+  echo "Core at $core_temp degrees, drives at $drive_temp degrees"
 
   sleep 5
 done
