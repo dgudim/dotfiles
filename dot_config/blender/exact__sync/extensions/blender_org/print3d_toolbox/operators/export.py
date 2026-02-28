@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2013-2023 Campbell Barton
-# SPDX-FileCopyrightText: 2016-2025 Mikhail Rachinskiy
+# SPDX-FileCopyrightText: 2016-2026 Mikhail Rachinskiy
 
 # Export wrappers and integration with external tools.
 

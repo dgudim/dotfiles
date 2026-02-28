@@ -1,13 +1,20 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2013-2024 Campbell Barton
-# SPDX-FileCopyrightText: 2016-2025 Mikhail Rachinskiy
+# SPDX-FileCopyrightText: 2016-2026 Mikhail Rachinskiy
 
 import math
 
+import bpy
 from bpy.props import BoolProperty, EnumProperty, FloatProperty, StringProperty
 from bpy.types import PropertyGroup
 
 from . import report
+
+
+def _path_options_versioning():
+    if bpy.app.version >= (4, 5, 0):
+        return {"PATH_SUPPORTS_BLEND_RELATIVE"}
+    return {"OUTPUT_PATH"}  # Doesn't do anything
 
 
 class SceneProperties(PropertyGroup):
@@ -66,6 +73,7 @@ class SceneProperties(PropertyGroup):
         default="//",
         maxlen=1024,
         subtype="DIR_PATH",
+        options=_path_options_versioning(),
     )
     export_format: EnumProperty(
         name="Format",

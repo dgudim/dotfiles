@@ -175,7 +175,7 @@
             "invertScroll": true,
             "nearestNeighbour": false,
             "square": false,
-            "zoom": 1.9423076923076925,
+            "zoom": 1,
             "size": 1000,
             "zoomSpeed": 2.361538461538462
         },
@@ -204,7 +204,8 @@
         "MemberCount": {
             "enabled": true,
             "memberList": true,
-            "toolTip": true
+            "toolTip": true,
+            "voiceActivity": true
         },
         "MessageClickActions": {
             "enabled": true,
@@ -383,7 +384,8 @@
             "enabled": true,
             "mode": "user-nick",
             "displayNames": false,
-            "inReplies": false
+            "inReplies": false,
+            "friendNicknames": "dms"
         },
         "SilentMessageToggle": {
             "enabled": false
@@ -444,7 +446,8 @@
         "TypingIndicator": {
             "enabled": true,
             "includeMutedChannels": false,
-            "includeCurrentChannel": true
+            "includeCurrentChannel": true,
+            "indicatorMode": 3
         },
         "TypingTweaks": {
             "enabled": true,
@@ -765,6 +768,15 @@
         },
         "ExpressionCloner": {
             "enabled": true
+        },
+        "CopyStickerLinks": {
+            "enabled": false
+        },
+        "ImageFilename": {
+            "enabled": false
+        },
+        "MoreQuickReactions": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -777,7 +789,11 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1751909124556
+        "settingsSyncVersion": 1769713288057
     },
-    "eagerPatches": false
+    "eagerPatches": false,
+    "uiElements": {
+        "chatBarButtons": {},
+        "messagePopoverButtons": {}
+    }
 }

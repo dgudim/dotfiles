@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2013-2022 Campbell Barton
-# SPDX-FileCopyrightText: 2016-2025 Mikhail Rachinskiy
+# SPDX-FileCopyrightText: 2016-2026 Mikhail Rachinskiy
 
 import array
 import random
@@ -39,9 +39,7 @@ def clean_float(value: float, precision: int = 0) -> str:
 def bmesh_copy_from_object(obj: Object, transform=True, triangulate=True, apply_modifiers=False) -> BMesh:
     """Returns a transformed, triangulated copy of the mesh"""
 
-    assert obj.type == "MESH"
-
-    if apply_modifiers and obj.modifiers:
+    if (apply_modifiers and obj.modifiers) or obj.type != "MESH":
         depsgraph = bpy.context.evaluated_depsgraph_get()
         obj_eval = obj.evaluated_get(depsgraph)
         me = obj_eval.to_mesh()

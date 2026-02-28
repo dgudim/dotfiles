@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2013-2022 Campbell Barton
-# SPDX-FileCopyrightText: 2016-2025 Mikhail Rachinskiy
+# SPDX-FileCopyrightText: 2016-2026 Mikhail Rachinskiy
 
 import bpy
 from bpy.app.translations import pgettext_tip as tip_
@@ -26,6 +26,10 @@ class MESH_OT_clean_non_manifold(Operator):
         name="Sides",
         description="Number of sides in hole required to fill (zero fills all holes)",
     )
+
+    @classmethod
+    def poll(cls, context):
+        return context.object is not None and context.object.type == "MESH"
 
     def execute(self, context):
         # TODO bow-tie quads

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2013-2024 Campbell Barton
-# SPDX-FileCopyrightText: 2016-2025 Mikhail Rachinskiy
+# SPDX-FileCopyrightText: 2016-2026 Mikhail Rachinskiy
 
 
 if "bpy" in locals():
@@ -22,6 +22,12 @@ def register():
 
     bpy.types.Scene.print3d_toolbox = PointerProperty(type=preferences.SceneProperties)
 
+    # Menu
+    # ---------------------------
+
+    bpy.types.VIEW3D_MT_object.append(ui.draw_print3d_menu)
+    bpy.types.VIEW3D_MT_edit_mesh.append(ui.draw_print3d_menu)
+
     # Translations
     # ---------------------------
 
@@ -33,6 +39,12 @@ def unregister():
         bpy.utils.unregister_class(cls)
 
     del bpy.types.Scene.print3d_toolbox
+
+    # Menu
+    # ---------------------------
+
+    bpy.types.VIEW3D_MT_object.remove(ui.draw_print3d_menu)
+    bpy.types.VIEW3D_MT_edit_mesh.remove(ui.draw_print3d_menu)
 
     # Translations
     # ---------------------------

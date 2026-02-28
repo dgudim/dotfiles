@@ -1,15 +1,49 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2013-2022 Campbell Barton
-# SPDX-FileCopyrightText: 2017-2025 Mikhail Rachinskiy
+# SPDX-FileCopyrightText: 2017-2026 Mikhail Rachinskiy
 
 import bpy
-from bpy.types import Object, Panel
+from bpy.types import Menu, Object, Panel
 
 from . import report
 
 
 def _is_mesh(ob: Object) -> bool:
     return ob is not None and ob.type == "MESH"
+
+
+# Menus
+# ---------------------------
+
+
+def draw_print3d_menu(self, context):
+    layout = self.layout
+    layout.separator()
+    layout.menu("VIEW3D_MT_print3d")
+
+
+class VIEW3D_MT_print3d(Menu):
+    bl_label = "3D Print Toolbox"
+
+    def draw(self, context):
+        layout = self.layout
+        layout.operator_context = "INVOKE_DEFAULT"
+        layout.operator("wm.call_panel", text="Analyze", text_ctxt="*", icon="WINDOW").name = "VIEW3D_PT_print3d_analyze"
+        layout.separator()
+        layout.operator("mesh.print3d_clean_non_manifold")
+        layout.separator()
+        layout.operator("mesh.print3d_hollow")
+        if bpy.app.version >= (4, 5, 0):
+            layout.operator("mesh.print3d_bisect")
+        layout.operator("object.print3d_align_xy")
+        layout.operator("mesh.print3d_scale_to_volume")
+        layout.operator("mesh.print3d_scale_to_bounds")
+        layout.separator()
+        layout.operator("wm.call_panel", text="Export", text_ctxt="*", icon="WINDOW").name = "VIEW3D_PT_print3d_export"
+
+
+# Panels
+# ---------------------------
 
 
 class Sidebar:
@@ -20,6 +54,14 @@ class Sidebar:
     @classmethod
     def poll(cls, context):
         return context.mode in {"OBJECT", "EDIT_MESH"}
+
+    def popover_header(self):
+        if self.is_popover:
+            layout = self.layout
+            layout.emboss = "NONE"  # Changes text color to white
+            layout.label(text=self.bl_label)
+            layout.emboss = "NORMAL"
+            layout.separator(type="LINE")
 
 
 class VIEW3D_PT_print3d_analyze(Sidebar, Panel):
@@ -51,6 +93,8 @@ class VIEW3D_PT_print3d_analyze(Sidebar, Panel):
     def draw(self, context):
         layout = self.layout
         layout.enabled = _is_mesh(context.object)
+
+        self.popover_header()
 
         props = context.scene.print3d_toolbox
 
@@ -94,7 +138,6 @@ class VIEW3D_PT_print3d_cleanup(Sidebar, Panel):
 
     def draw(self, context):
         layout = self.layout
-        layout.enabled = _is_mesh(context.object)
         layout.operator("mesh.print3d_clean_non_manifold")
 
 
@@ -104,20 +147,18 @@ class VIEW3D_PT_print3d_edit(Sidebar, Panel):
 
     def draw(self, context):
         layout = self.layout
-        is_mesh = _is_mesh(context.object)
+        layout.enabled = context.object is not None
 
-        layout.operator("mesh.print3d_hollow")
-
+        col = layout.column(align=True)
+        col.operator("mesh.print3d_hollow")
         if bpy.app.version >= (4, 5, 0):
-            layout.operator("mesh.print3d_bisect")
-
-        row = layout.row()
-        row.enabled = is_mesh
-        row.operator("object.print3d_align_xy")
+            col.operator("mesh.print3d_bisect")
+        sub = col.row(align=True)
+        sub.enabled = _is_mesh(context.object)
+        sub.operator("object.print3d_align_xy")
 
         layout.label(text="Scale To")
         row = layout.row(align=True)
-        row.enabled = is_mesh
         row.operator("mesh.print3d_scale_to_volume", text="Volume")
         row.operator("mesh.print3d_scale_to_bounds", text="Bounds")
 
@@ -130,6 +171,8 @@ class VIEW3D_PT_print3d_export(Sidebar, Panel):
         layout = self.layout
         layout.use_property_split = True
         layout.use_property_decorate = False
+
+        self.popover_header()
 
         props = context.scene.print3d_toolbox
 

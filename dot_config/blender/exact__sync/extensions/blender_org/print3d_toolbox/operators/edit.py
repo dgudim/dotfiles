@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2013-2022 Campbell Barton
-# SPDX-FileCopyrightText: 2016-2025 Mikhail Rachinskiy
+# SPDX-FileCopyrightText: 2016-2026 Mikhail Rachinskiy
 # SPDX-FileCopyrightText: 2022 Align XY by Jaggz H.
 # SPDX-FileCopyrightText: 2024-2025 Hollow, Bisect by Ubiratan Freitas
 
@@ -9,7 +9,7 @@ import math
 import bpy
 from bpy.app.translations import pgettext_tip as tip_
 from bpy.props import BoolProperty, EnumProperty, FloatProperty, IntProperty
-from bpy.types import Operator
+from bpy.types import Object, Operator
 
 
 class MESH_OT_bisect(Operator):
@@ -116,14 +116,17 @@ class MESH_OT_bisect(Operator):
 
         md = lib.gn_setup("Bisect", context.object)
 
+        md.panels[0].is_open = self.bisect_x
         md["Socket_12"] = self.bisect_x
         md["Socket_3"] = self.factor_x
         md["Socket_4"] = self.flip_x
 
+        md.panels[1].is_open = self.bisect_y
         md["Socket_16"] = self.bisect_y
         md["Socket_6"] = self.factor_y
         md["Socket_7"] = self.flip_y
 
+        md.panels[2].is_open = self.bisect_z
         md["Socket_14"] = self.bisect_z
         md["Socket_9"] = self.factor_z
         md["Socket_10"] = self.flip_z
@@ -317,16 +320,15 @@ class OBJECT_OT_align_xy(Operator):
         import bmesh
         from mathutils import Vector
 
-        self.context = context
-        mode_orig = context.mode
+        is_edit_mesh = context.mode == "EDIT_MESH"
         skip_invalid = []
 
-        for obj in context.selected_objects:
+        for obj in (ob for ob in context.selected_objects if ob.type == "MESH"):
             orig_loc = obj.location.copy()
             orig_scale = obj.scale.copy()
 
             # When in edit mode, do as the edit mode does.
-            if mode_orig == "EDIT_MESH":
+            if is_edit_mesh:
                 bm = bmesh.from_edit_mesh(obj.data)
                 faces = [f for f in bm.faces if f.select]
             else:
@@ -340,7 +342,7 @@ class OBJECT_OT_align_xy(Operator):
             normal = Vector((0.0, 0.0, 0.0))
             if self.use_face_area:
                 for face in faces:
-                    if mode_orig == "EDIT_MESH":
+                    if is_edit_mesh:
                         normal += (face.normal * face.calc_area())
                     else:
                         normal += (face.normal * face.area)
@@ -355,18 +357,22 @@ class OBJECT_OT_align_xy(Operator):
             obj.scale = orig_scale
             obj.location = orig_loc
 
-        if len(skip_invalid) > 0:
-            for name in skip_invalid:
-                print(tip_("Align to XY: Skipping object {}. No faces selected").format(name))
+        if skip_invalid:
             if len(skip_invalid) == 1:
                 self.report({"WARNING"}, tip_("Skipping object {}. No faces selected").format(skip_invalid[0]))
             else:
                 self.report({"WARNING"}, "Skipping some objects. No faces selected. See terminal")
+
+                for name in skip_invalid:
+                    print(tip_("Align to XY: Skipping object {}. No faces selected").format(name))
+
         return {"FINISHED"}
 
     def invoke(self, context, event):
-        if context.mode not in {"EDIT_MESH", "OBJECT"}:
+        if not [ob for ob in context.selected_objects if ob.type == "MESH"]:
+            self.report({"ERROR"}, "At least one mesh object must be selected")
             return {"CANCELLED"}
+
         return self.execute(context)
 
 
@@ -408,22 +414,25 @@ class MESH_OT_scale_to_volume(Operator):
 
     def invoke(self, context, event):
 
-        def calc_volume(obj):
+        def calc_volume(obj: Object) -> float:
             from .. import lib
-
             bm = lib.bmesh_copy_from_object(obj, apply_modifiers=True)
             volume = bm.calc_volume(signed=True)
             bm.free()
             return volume
 
-        if not context.selectable_objects:
+        if not context.selected_objects:
             self.report({"ERROR"}, "At least one mesh object must be selected")
             return {"CANCELLED"}
 
         if context.mode == "EDIT_MESH":
             volume = calc_volume(context.edit_object)
         else:
-            volume = sum(calc_volume(obj) for obj in context.selected_editable_objects if obj.type == "MESH")
+            volume = sum(
+                calc_volume(obj)
+                for obj in context.selected_editable_objects
+                if obj.type in {"MESH", "CURVE", "SURFACE", "FONT", "META"}
+            )
 
         if volume == 0.0:
             self.report({"WARNING"}, "Object has zero volume")
@@ -464,25 +473,25 @@ class MESH_OT_scale_to_bounds(Operator):
     def invoke(self, context, event):
         from mathutils import Vector
 
-        def calc_length(vecs):
-            return max(((max(v[i] for v in vecs) - min(v[i] for v in vecs)), i) for i in range(3))
+        def calc_length(vecs: list[Vector]) -> tuple[float, int]:
+            return max(
+                ((max(v[i] for v in vecs) - min(v[i] for v in vecs)), i)
+                for i in range(3)
+            )
 
-        if not context.selectable_objects:
+        if not context.selected_objects:
             self.report({"ERROR"}, "At least one mesh object must be selected")
             return {"CANCELLED"}
 
         if context.mode == "EDIT_MESH":
-            length, axis = calc_length(
-                [Vector(v) @ obj.matrix_world for obj in [context.edit_object] for v in obj.bound_box]
-            )
+            obj = context.edit_object
+            length, axis = calc_length([Vector(v) @ obj.matrix_world for v in obj.bound_box])
         else:
-            length, axis = calc_length(
-                [
-                    Vector(v) @ obj.matrix_world for obj in context.selected_editable_objects
-                    if obj.type == "MESH"
-                    for v in obj.bound_box
-                ]
-            )
+            length, axis = calc_length([
+                Vector(v) @ obj.matrix_world
+                for obj in context.selected_editable_objects
+                for v in obj.bound_box
+            ])
 
         if length == 0.0:
             self.report({"WARNING"}, "Object has zero bounds")

@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2021-2025 Mikhail Rachinskiy
+# SPDX-FileCopyrightText: 2021-2026 Mikhail Rachinskiy
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import pickle

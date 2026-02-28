@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2014-2025 Mikhail Rachinskiy
+# SPDX-FileCopyrightText: 2014-2026 Mikhail Rachinskiy
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from collections.abc import Iterator
@@ -112,12 +112,12 @@ class ModGN:
             in_geo = weld.outputs["Geometry"]
 
         out = nodes.new("NodeGroupOutput")
-        out.location.x = 400
+        out.location.x = 600
         out.select = False
         out_geo = out.inputs[sock_geo_out.identifier]
 
         bake = nodes.new("GeometryNodeBake")
-        bake.location.x = 200
+        bake.location.x = 400
         bake.select = False
         bake.bake_items.clear()  # VER < 5.0
         bake.bake_items.new("GEOMETRY", "Geometry")
@@ -134,7 +134,40 @@ class ModGN:
         primary.select = False
 
         ng.links.new(in_geo, primary.inputs["Mesh 1" if self.mode == "DIFFERENCE" else "Mesh 2"])
-        ng.links.new(primary.outputs["Mesh"], bake.inputs["Geometry"])
+
+        if bpy.app.version >= (4, 3, 0):  # VER
+            panel_attr = ng.interface.new_panel("Attributes", default_closed=True)
+            sock_attr_name = ng.interface.new_socket("Intersecting Edges", description="Mark intersecting edges", in_out="INPUT", socket_type="NodeSocketString", parent=panel_attr)
+
+            if self.solver == "FLOAT":
+                str_len = nodes.new("FunctionNodeStringLength")
+                str_len.location.y = 130
+                str_len.select = False
+
+                warn = nodes.new("GeometryNodeWarning")
+                warn.warning_type = "WARNING"
+                warn.inputs["Message"].default_value = "Float solver does not support attributes"
+                warn.location = 200, 130
+                warn.select = False
+
+                ng.links.new(primary.outputs["Mesh"], bake.inputs["Geometry"])
+                ng.links.new(str_len.outputs["Length"], warn.inputs["Show"])
+                ng.links.new(in_.outputs[sock_attr_name.identifier], str_len.inputs["String"])
+            else:
+                attr = nodes.new("GeometryNodeStoreNamedAttribute")
+                attr.data_type = "BOOLEAN"
+                attr.domain = "EDGE"
+                attr.inputs["Value"].default_value = True
+                attr.location.x = 200
+                attr.select = False
+
+                ng.links.new(primary.outputs["Mesh"], attr.inputs["Geometry"])
+                ng.links.new(primary.outputs["Intersecting Edges"], attr.inputs["Selection"])
+                ng.links.new(in_.outputs[sock_attr_name.identifier], attr.inputs["Name"])
+                ng.links.new(attr.outputs["Geometry"], bake.inputs["Geometry"])
+        else:
+            sock_attr_name = None
+            ng.links.new(primary.outputs["Mesh"], bake.inputs["Geometry"])
 
         secondary = nodes.new("GeometryNodeMeshBoolean")
         secondary.name = "SECONDARY"
@@ -156,13 +189,20 @@ class ModGN:
 
         if not md:
             md = ob1.modifiers.new(self.mode.title(), "NODES")
+            md.show_viewport = show_viewport
+            md.show_in_editmode = False
+            md.show_expanded = False
+
+            if sock_attr_name is not None:  # VER < Blender 4.3
+                prefs = bpy.context.preferences.addons[var.ADDON_ID].preferences
+                md[sock_attr_name.identifier] = prefs.attribute_edge_intersect
+
+        md.show_group_selector = False
+
         if self.use_loc_rnd:
             md[sock_ofst.identifier] = self.loc_offset
             md[sock_seed.identifier] = self.seed
-        md.show_viewport = show_viewport
-        md.show_expanded = False
-        md.show_in_editmode = False
-        md.show_group_selector = False
+
         md.node_group = ng
         if hasattr(md, "bake_target"):  # VER < Blender 4.3
             md.bake_target = "DISK"
@@ -183,6 +223,7 @@ class ModGN:
                 bpy.data.meshes.remove(ob.data)
 
     def extend(self, md: Modifier, obs: list[Object]) -> None:
+        show_viewport = md.show_viewport
         md.show_viewport = False
 
         ng = md.node_group
@@ -197,7 +238,7 @@ class ModGN:
         bpy.data.node_groups.remove(ng)
         self.add(md.id_data, ng_obs, md=md)
 
-        md.show_viewport = True
+        md.show_viewport = show_viewport
 
     def _ob_add(self, ng: NodeGroup, ob: Object, in_ofst: NodeSocket, in_seed: NodeSocket, seed: int = 0) -> NodeSocketGeometry:
         nodes = ng.nodes
@@ -245,6 +286,7 @@ class ModGN:
 
     @staticmethod
     def remove(md: Modifier, obs: set[Object]) -> bool:
+        show_viewport = md.show_viewport
         md.show_viewport = False
         nodes = md.node_group.nodes
         has_obs = False
@@ -263,7 +305,7 @@ class ModGN:
                 nodes.remove(node)
 
         if has_obs:
-            md.show_viewport = True
+            md.show_viewport = show_viewport
             return False
 
         ob = md.id_data

@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2014-2025 Mikhail Rachinskiy
+# SPDX-FileCopyrightText: 2014-2026 Mikhail Rachinskiy
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from typing import Optional
@@ -171,6 +171,12 @@ def prefs_ui(self, context):
     col.prop(self, "solver")
     col.prop(self, "use_self")
     col.prop(self, "use_hole_tolerant")
+
+    split = col.split(factor=0.4)
+    split.alignment = "RIGHT"
+    split.label(text="Attributes")
+    split.row()
+    col.prop(self, "attribute_edge_intersect")
 
     main.separator()
 

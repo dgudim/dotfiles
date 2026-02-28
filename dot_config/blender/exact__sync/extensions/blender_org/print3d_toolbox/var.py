@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# SPDX-FileCopyrightText: 2025 Mikhail Rachinskiy
+# SPDX-FileCopyrightText: 2026 Mikhail Rachinskiy
 
 from pathlib import Path
 

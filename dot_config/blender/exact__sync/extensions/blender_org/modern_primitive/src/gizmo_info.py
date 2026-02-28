@@ -1,0 +1,109 @@
+from typing import NamedTuple, TypeAlias, Any, TypeVar
+from collections.abc import Callable
+from mathutils import Vector, Color
+from bpy.types import Mesh
+from .exception import DGException
+from enum import Enum
+from .color import HUDColor
+
+
+class GizmoType(Enum):
+    Linear = 0
+    Dial = 1
+
+
+class GizmoColor(Enum):
+    Primary = 0
+    Secondary = 1
+    X = 2
+    Y = 3
+    Z = 4
+
+
+# Failsafe value used when attribute does not exist in older primitive versions (<0020)
+FAILSAFE_ACTUAL_VALUE = 0.0
+
+
+class GizmoInfo(NamedTuple):
+    position: Vector
+    normal: Vector
+    type: GizmoType
+    color_type: GizmoColor
+    # If primitive version is older (<0020) and attribute value does not exist,
+    # actual_value will be set to FAILSAFE_ACTUAL_VALUE
+    actual_value: float
+
+    def get_color(self, hud_color: HUDColor) -> Color:
+        match self.color_type:
+            case GizmoColor.Primary:
+                return hud_color.primary
+            case GizmoColor.Secondary:
+                return hud_color.secondary
+            case GizmoColor.X:
+                return hud_color.x
+            case GizmoColor.Y:
+                return hud_color.y
+            case GizmoColor.Z:
+                return hud_color.z
+        return hud_color.white
+
+
+T = TypeVar("T")
+GizmoInfoAr: TypeAlias = list[GizmoInfo]
+
+
+class DGGizmoInfoCantLoaded(DGException):
+    pass
+
+
+def get_gizmo_info(mesh: Mesh) -> GizmoInfoAr | None:
+    MAX_ATTRIBUTES = 20
+    try:
+        # Generic attribute loader function.
+        # Retrieves Mesh attribute by name and converts values using reader function.
+        # Returns Empty-List if attribute does not exist or domain is not POINT.
+        # Reads sequentially up to MAX_ATTRIBUTES items.
+        def load(name: str, reader: Callable) -> list[Any]:
+            ret: list[T] = []
+            try:
+                attr = mesh.attributes[name]
+            except KeyError:
+                # The "Actual Value" attribute does not exist in older versions of primitive,
+                # so return empty
+                return ret
+            if attr.domain != "POINT":
+                return ret
+
+            # Read attribute data sequentially and append to list.
+            # Stop processing once MAX_ATTRIBUTES is reached.
+            for i, data in enumerate(attr.data):
+                ret.append(reader(data))
+                if i == MAX_ATTRIBUTES - 1:
+                    break
+            return ret
+
+        def get_vec(x):
+            return x.vector.copy()
+
+        giz_pos = load("Gizmo Position", get_vec)
+        giz_type = load("Gizmo Type", lambda x: GizmoType(x.value))
+        giz_normal = load("Gizmo Normal", get_vec)
+        giz_color = load("Gizmo Color", lambda x: GizmoColor(x.value))
+        giz_actual = load("Actual Value", lambda v: v.value)
+
+        # Ensure all required attributes have equal length
+        if len(giz_pos) == len(giz_type) == len(giz_normal) == len(giz_color):
+            ret: GizmoInfoAr = []
+            for i in range(len(giz_pos)):
+                actual_val: float = (
+                    giz_actual[i] if i < len(giz_actual) else FAILSAFE_ACTUAL_VALUE
+                )
+                ret.append(
+                    GizmoInfo(giz_pos[i], giz_normal[i], giz_type[i], giz_color[i], actual_val)
+                )
+            return ret
+        raise DGGizmoInfoCantLoaded("invalid attribute length")
+    except KeyError as e:
+        print(e)
+        raise DGGizmoInfoCantLoaded("no key") from e
+    raise DGGizmoInfoCantLoaded("unknown error")
