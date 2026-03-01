@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -e
 
 export OFF_TEMP=45
@@ -12,24 +14,6 @@ export ON_HDD_TEMP_FULL=60
 
 export DELAY_AFTER_ON_SEC=60
 
-# Music stuff
-# 49000 - 3789 Hz
-# 49100 - 3337 Hz
-# 49200 - 2862 Hz
-# 49450 - 2281 Hz
-# 49400 - 1249 Hz
-export D4=49400
-export D5=49000
-export A4=49100
-export Ab4=49200
-export G4=49200
-export F4=49400
-export C4_mid=49450
-
-export sleep1=0.0625
-export sleep2=0.125
-export sleep3=0.1875
-export sleep4=0.31
 
 modprobe -r pwm_fan
 modprobe drivetemp
@@ -52,7 +36,7 @@ set_speed() {
     echo "Set speed to $1"
     if [ $(cat duty_cycle) -ne $1 ]; then
         off
-        sleep 7
+        sleep 3
     fi
     echo 30000000 > period && sleep 0.1
     echo $1 > duty_cycle && sleep 0.1
@@ -63,51 +47,20 @@ full() {
 }
 
 normal() {
-    set_speed 23000000
+    set_speed 17000000
 }
 
 idle() {
-    set_speed 10150000
+    set_speed 7840000
 }
 
-
-echo 0 > duty_cycle && sleep 3
-echo 50000 > period && sleep 3
-
-echo $D4 > duty_cycle && sleep $sleep1
-echo 0 > duty_cycle && sleep $sleep1
-echo $D4 > duty_cycle && sleep $sleep1
-echo 0 > duty_cycle && sleep $sleep1
-echo $D5 > duty_cycle && sleep $sleep2
-echo 0 > duty_cycle && sleep $sleep2
-echo $A4 > duty_cycle && sleep $sleep2
-echo 0 > duty_cycle && sleep $sleep3
-echo $Ab4 > duty_cycle && sleep $sleep1
-echo 0 > duty_cycle && sleep $sleep2
-echo $G4 > duty_cycle && sleep $sleep2
-echo 0 > duty_cycle && sleep $sleep2
-echo $F4 > duty_cycle && sleep $sleep2
-echo 0 > duty_cycle && sleep $sleep2
-echo $D4 > duty_cycle && sleep $sleep1
-echo 0 > duty_cycle && sleep $sleep1
-echo $F4 > duty_cycle && sleep $sleep1
-echo 0 > duty_cycle && sleep $sleep1
-echo $G4 > duty_cycle && sleep $sleep1
-echo 0 > duty_cycle && sleep $sleep1
-echo $C4_mid > duty_cycle && sleep $sleep1
-echo 0 > duty_cycle && sleep 0.5
-
-echo "Bootup sound complete, testing fan"
-
 full
-sleep 10
+sleep 5
 normal
-sleep 10
+sleep 5
 idle
-sleep 10
+sleep 5
 off
-
-
 
 get_temp() {
     sensors $1 | grep temp1 | cut -d' ' -f9 | cut -d '.' -f1 | cut -d '+' -f2
