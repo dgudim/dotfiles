@@ -139,6 +139,7 @@ rp-pppoe
 kplotting5
 botan2
 fakeroot
+gcc14-libs
 
 # Replaced with plasma-login-manager
 sddm
