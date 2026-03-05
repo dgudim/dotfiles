@@ -77,65 +77,30 @@ try {
   });
 
   if (!existsSync(saved_holidays_file)) {
-    fetch(`https://www.b1.lt/darbo-dienu-kalendorius/${current_year}`, {
+    fetch(`https://openholidaysapi.org/PublicHolidays?countryIsoCode=LT&languageIsoCode=EN&validFrom=${current_year}-01-01&validTo=${current_year+1}-01-01`, {
       credentials: "omit",
       headers: {
         "User-Agent":
           "Mozilla/5.0 (X11; Linux x86_64; rv:130.0) Gecko/20100101 Firefox/130.0",
         Accept:
-          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
-        "Sec-GPC": "1",
-        "Upgrade-Insecure-Requests": "1",
-        "Sec-Fetch-Dest": "document",
-        "Sec-Fetch-Mode": "navigate",
-        "Sec-Fetch-Site": "none",
-        "Sec-Fetch-User": "?1",
-        Priority: "u=0, i",
+          "application/json",
       },
       method: "GET",
       mode: "cors",
     }).then((response) => {
-      const cookies_arr = response.headers.getSetCookie();
-      const cookies = cookies_arr.join("; ");
-      const csrf_token = decodeURIComponent(
-        cookies_arr.find((el) => el.includes("YII_CSRF_TOKEN")),
-      ).split('"')[1];
-
-      fetch("https://www.b1.lt/custom-page/calendars/fetch-all-by-year", {
-        credentials: "include",
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (X11; Linux x86_64; rv:130.0) Gecko/20100101 Firefox/130.0",
-          Accept: "application/json, text/plain, */*",
-          "Accept-Language": "en-US,en;q=0.5",
-          "Content-Type": "application/json;charset=utf-8",
-          "X-B1-Company-ID": "null",
-          "X-B1-Language": "lt",
-          "X-Requested-With": "XMLHttpRequest",
-          "X-CSRF-Token": csrf_token,
-          "X-Timezone-Offset": "180",
-          "Sec-GPC": "1",
-          "Sec-Fetch-Dest": "empty",
-          "Sec-Fetch-Mode": "cors",
-          "Sec-Fetch-Site": "same-origin",
-          Cookie: cookies,
-        },
-        referrer: "https://www.b1.lt/darbo-dienu-kalendorius/2024",
-        body: `{"year":"${current_year}"}`,
-        method: "POST",
-        mode: "cors",
-      }).then((response) => {
-        response.json().then((response) => {
-          const holidays = response.data.holidays;
-          writeFile(
-            saved_holidays_file,
-            JSON.stringify(holidays),
-            "utf8",
-            () => {},
-          );
-          compare_hours(transform_data(holidays, current_mon));
-        });
+      response.json().then((response) => {
+        let holidays_converted = {}
+        for (const holiday of response) {
+          const holiday_date = holiday["startDate"]
+          holidays_converted[holiday_date] = holiday_date
+        }
+        writeFile(
+          saved_holidays_file,
+          JSON.stringify(holidays_converted),
+          "utf8",
+          () => {},
+        );
+        compare_hours(transform_data(holidays_converted, current_mon));
       });
     });
   }
@@ -143,3 +108,4 @@ try {
   // Ignore
   process.exit(1);
 }
+
