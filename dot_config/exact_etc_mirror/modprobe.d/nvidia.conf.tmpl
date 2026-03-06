@@ -1,6 +1,6 @@
 {{- if eq .chezmoi.hostname "sauron" -}}
 # https://github.com/ventureoo/nvidia-tweaks
-options nvidia NVreg_UsePageAttributeTable=1 NVreg_InitializeSystemMemoryAllocations=0
+options nvidia NVreg_UsePageAttributeTable=1 NVreg_InitializeSystemMemoryAllocations=0 NVreg_PreserveVideoMemoryAllocations=1 NVreg_TemporaryFilePath=/var/tmp NVreg_UseKernelSuspendNotifiers=1
 {{- else -}}
 # Only enabled on sauron
 {{- end }}

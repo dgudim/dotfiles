@@ -163,3 +163,7 @@ python-js2py
 python-click-completion
 python-pyjsparser
 vidcutter
+
+# Replaced with chrony and regular shairport
+nqptp-git
+shairport-sync-mpris-git

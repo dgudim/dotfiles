@@ -186,15 +186,19 @@ enable_service awake.target 1
 enable_service openrgb.service 1
 enable_service openrgb_keyboard.service 1
 
-enable_service nvidia-hibernate.service
-enable_service nvidia-resume.service
-enable_service nvidia-suspend.service
-enable_service nvidia-persistenced.service
+# Replaced with NVreg_UseKernelSuspendNotifiers=1
+enable_service nvidia-hibernate.service 0 1
+enable_service nvidia-resume.service 0 1
+enable_service nvidia-suspend.service 0 1
+enable_service nvidia-persistenced.service 0 1
+
 enable_service nvidia-tdp.timer
 
 enable_service shairport-sync.service 0 1
 enable_service shairport-sync.service 1
-enable_service nqptp
+
+enable_service nqptp 0 1
+enable_service chronyd
 
 enable_service sunshine.service 1
 {{ end }}

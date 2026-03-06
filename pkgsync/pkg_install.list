@@ -131,6 +131,7 @@ dos2unix
 tree
 kmscon
 gtk3
+chrony
 
 ## PACMAN HOOKS AND SCRIPTS
 pacmanlogviewer
