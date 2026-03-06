@@ -118,6 +118,7 @@ hoppscotch-bin
 plasma6-runners-emojirunner
 xorg-server
 glava
+libwnck3
 
 # Obsolete
 dbeaver-plugin-svg-format

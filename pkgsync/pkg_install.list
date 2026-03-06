@@ -1220,7 +1220,6 @@ libopenraw
 libotr
 libtool
 libvncserver
-libwnck3
 qt6-charts
 ncurses5-compat-libs
 freerdp
