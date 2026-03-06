@@ -84,11 +84,6 @@ minq-ananicy-git
 # Replaced with my local version
 udev-notify-git
 
-# Not used
-perl-uuid-tiny
-
-gcc13
-
 # Replaced with iotop-c
 iotop
 
@@ -119,6 +114,9 @@ plasma6-runners-emojirunner
 xorg-server
 glava
 libwnck3
+perl-uuid-tiny
+soundux-git
+gcc13
 
 # Obsolete
 dbeaver-plugin-svg-format
