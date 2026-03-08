@@ -879,6 +879,7 @@ python-pyasn
 python-aiosqlite
 python-google-re2
 python-opengl
+python-curl_cffi
 uvicorn
 
 ## ANDROID AND JAVA
@@ -1124,6 +1125,7 @@ gst-plugin-pipewire
 gst-plugin-qmlgl
 gst-plugin-libcamera
 pipewire-libcamera
+pipewire-onnx
 colord
 libuvc
 brightnessctl
