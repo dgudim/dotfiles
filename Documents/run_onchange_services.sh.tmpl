@@ -200,7 +200,8 @@ enable_service shairport-sync.service 1
 enable_service nqptp 0 1
 enable_service chronyd
 
-enable_service sunshine.service 1
+# Steals drm before kwin, only start manually
+enable_service sunshine.service 0 1
 {{ end }}
 
 enable_service polkit.service
