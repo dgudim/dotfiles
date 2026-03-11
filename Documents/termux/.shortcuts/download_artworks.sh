@@ -5,7 +5,7 @@ export BASE_PERSONAL_DIR="/storage/3538-3530/Documents/personal"
 
 export TTRSS_URL="https://tt-rss.kloud.home.kg/tt-rss/api/"
 export TTRSS_USER="kloud"
-source ~/dotfiles/Documents/termux/.termux/tasker/ttrss_token.sh
+source ~/.termux/tasker/ttrss_token.sh
 
 mkdir -pv ~/.temp_artwork_downloader
 cp -fv ~/dotfiles/Documents/exact_usefull_files/exact_scripts/artwork_downloader/download_and_sort.py ~/.temp_artwork_downloader/download_and_sort.py

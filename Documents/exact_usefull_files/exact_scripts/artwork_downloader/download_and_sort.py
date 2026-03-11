@@ -850,13 +850,13 @@ print(f"├╼ {GREEN}TT-RSS url is {TTRSS_URL}{NC}")
 
 
 def mk_req(data: str) -> dict[str, Any]:
-    print(f"├╼ {LIGHT_GRAY}--> {data} (TTRSS_URL) {NC}")
+    print(f"├╼ {LIGHT_GRAY}--> {data} ({TTRSS_URL}) {NC}")
     resp = requests.get(
         TTRSS_URL,
         headers={"Content-Type": "application/json"},
         data=data
     ).json()
-    print(f"├╼ {LIGHTER_GRAY}<-- {resp}{NC}")
+    print(f"├╼ {LIGHTER_GRAY}<-- {str(resp)[:100]}{NC}")
     return resp
 
 login_resp = mk_req(f'{{"op":"login","user":"{TTRSS_USER}","password":"{TTRSS_PASSWORD}"}}')
