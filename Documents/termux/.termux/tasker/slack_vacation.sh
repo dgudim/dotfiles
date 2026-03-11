@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-source ./slack_token.sh
+source ./slack_helper.sh
 
 curl -X POST 'https://slack.com/api/users.profile.set' \
 -H "$SLACK_TOKEN" \
