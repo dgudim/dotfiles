@@ -849,25 +849,25 @@ def get_artstation_rss_url(a_info: AuthorInfo):
 print(f"├╼ {GREEN}TT-RSS url is {TTRSS_URL}{NC}")
 
 
-headers = {
-    "Content-Type": "application/json",
-}
+def mk_req(data: str) -> dict[str, Any]:
+    print(f"├╼ {LIGHT_GRAY}--> {data} (TTRSS_URL) {NC}")
+    resp = requests.get(
+        TTRSS_URL,
+        headers={"Content-Type": "application/json"},
+        data=data
+    ).json()
+    print(f"├╼ {LIGHTER_GRAY}<-- {resp}{NC}")
+    return resp
 
-login_resp = requests.get(
-    TTRSS_URL, headers=headers, data=f'{{"op":"login","user":"{TTRSS_USER}","password":"{TTRSS_PASSWORD}"}}'
-).json()
+login_resp = mk_req(f'{{"op":"login","user":"{TTRSS_USER}","password":"{TTRSS_PASSWORD}"}}')
 session_id = login_resp["content"]["session_id"]
 print(f"├╼ {GREEN}Logged in, session id: {session_id}{NC}")
 
-categories = requests.get(
-    TTRSS_URL, headers=headers, data=f'{{"op":"getCategories","enable_nested":true,"sid":"{session_id}"}}'
-).json()
+categories = mk_req(f'{{"op":"getCategories","enable_nested":true,"sid":"{session_id}"}}')
 artstation_category_id = next(cat for cat in categories["content"] if cat["title"] == "Artstation")["id"]
 print(f"├╼ {GREEN}Found artstation category id: {artstation_category_id}{NC}")
 
-feeds = requests.get(
-    TTRSS_URL, headers=headers, data=f'{{"op":"getFeeds","cat_id":{artstation_category_id},"sid":"{session_id}"}}'
-).json()
+feeds = mk_req(f'{{"op":"getFeeds","cat_id":{artstation_category_id},"sid":"{session_id}"}}')
 print(f"├╼ {GREEN}Got {len(feeds)} artstation feeds{NC}")
 
 ttrss_feed_urls = [feed["feed_url"] for feed in feeds["content"]]
@@ -889,11 +889,8 @@ print(f"├╼ {CYAN}Importing {len(feeds_urls_to_import)} feeds {NC}")
 
 for feed_url in feeds_urls_to_import:
     print(f"├╼ {CYAN}Subscribing to {feed_url}{NC}")
-    subscription_response = requests.get(
-        TTRSS_URL,
-        headers=headers,
+    subscription_response = mk_req(
         data=f'{{"op":"subscribeToFeed","sid":"{session_id}","feed_url":"{feed_url}","category_id":{artstation_category_id}}}',
-    ).json()
-    print(f"├╼ {LIGHT_GRAY}{subscription_response}{NC}")
+    )
 
 print(f"╰─{L_GREEN}OK{NC}")
