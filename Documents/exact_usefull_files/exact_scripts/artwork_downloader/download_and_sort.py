@@ -17,7 +17,6 @@ import re
 import shutil
 import os
 import subprocess
-import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any, NoReturn, TypedDict, cast
 
@@ -69,9 +68,12 @@ class ImageInfo(TypedDict):
     image_width: int
     image_height: int
 
+
 BASE_DIR = Path(__file__).parent
 
-PENDING_ARTSTATION_IMAGES_FILE_LOCATION = Path(os.environ.get("PENDING_ARTSTATION_IMAGES_FILE_LOCATION", "./pending.txt"))
+PENDING_ARTSTATION_IMAGES_FILE_LOCATION = Path(
+    os.environ.get("PENDING_ARTSTATION_IMAGES_FILE_LOCATION", "./pending.txt")
+)
 PIXIV_IMAGES_SOURCE_DIR = Path(os.environ.get("PIXIV_IMAGES_SOURCE_DIR", "./pixiv"))
 
 BASE_PERSONAL_DIR = Path(os.environ.get("BASE_PERSONAL_DIR", "/home/kloud/Documents/shared/_Personal"))
@@ -93,8 +95,9 @@ MTIME_CACHE_FILE = Path(BASE_DIR, "dt_cache.json")
 TEMPORARY_DIRECTORY_PATH = Path(BASE_DIR, "./temp")
 AUTHOR_INFO_FILENAME = "author_info.json"
 
-FEEDER_EXPORTS_PATH = Path(BASE_PERSONAL_DIR, "exports/feeder")
-ARTSTATION_OPML_EXPORT_FILENAME = "artstation-export.opml"
+TTRSS_URL = os.environ.get("TTRSS_URL", "")
+TTRSS_USER = os.environ.get("TTRSS_USER", "")
+TTRSS_PASSWORD = os.environ.get("TTRSS_PASSWORD", "")
 
 AUTHOR_INFOS: list[AuthorInfo] = []
 
@@ -108,6 +111,7 @@ directory_update_time_cache: dict[
 ] = {}  # Last recorded time a certain directory was updated, used for skipping changing modification datetime
 
 TEMPORARY_DIRECTORY_PATH.mkdir(exist_ok=True, parents=True)
+
 
 def err_exit(msg: str) -> NoReturn:
     print(f"{L_RED}ERROR: {msg}{NC}")
@@ -835,64 +839,61 @@ for file_or_dir in TARGET_DIRECTORY_PATH.rglob("*"):
 print(f"\n{L_GREEN}============ Conversion DONE!{NC}")
 
 
-print(f"\n╭─{L_PURPLE}Generating OPML feed{NC}")
-
-latest_exported_opml_path: Path | None = None
-latest_exported_opml_date: datetime.datetime = datetime.datetime(year=1, month=1, day=1)
-
-for exported_opml_path in FEEDER_EXPORTS_PATH.iterdir():
-    if exported_opml_path.name == ARTSTATION_OPML_EXPORT_FILENAME:
-        continue
-
-    export_date = datetime.datetime.strptime(exported_opml_path.stem.replace("feeder-export-", ""), "%Y-%m-%d-%f")
-    if export_date > latest_exported_opml_date:
-        latest_exported_opml_date = export_date
-        latest_exported_opml_path = exported_opml_path
-
-if latest_exported_opml_path is None:
-    err_exit("Couldn't find latest feeder export path")
+print(f"\n╭─{L_PURPLE}Importing into tt-rss{NC}")
 
 
 def get_artstation_rss_url(a_info: AuthorInfo):
     return f"https://{a_info['artstation_username']}.artstation.com/rss"
 
 
-print(f"├╼ {GREEN}Using {latest_exported_opml_path} as opml source {NC}")
+print(f"├╼ {GREEN}TT-RSS url is {TTRSS_URL}{NC}")
 
-loaded_opml = ET.parse(latest_exported_opml_path)
 
-existing_artstation_section = [
-    section for section in loaded_opml.getroot().findall("./body/outline") if section.get("text") == "Artstation"
-][0]
+headers = {
+    "Content-Type": "application/json",
+}
 
-existing_author_rss_feeds: set[str | None] = {elem.get("xmlUrl") for elem in existing_artstation_section.iter()}
-authors_to_export_filtered = [
-    author_info
-    for author_info in AUTHOR_INFOS
-    if len(author_info["artstation_username"]) > 0
-    and get_artstation_rss_url(author_info) not in existing_author_rss_feeds
+login_resp = requests.get(
+    TTRSS_URL, headers=headers, data=f'{{"op":"login","user":"{TTRSS_USER}","password":"{TTRSS_PASSWORD}"}}'
+).json()
+session_id = login_resp["content"]["session_id"]
+print(f"├╼ {GREEN}Logged in, session id: {session_id}{NC}")
+
+categories = requests.get(
+    TTRSS_URL, headers=headers, data=f'{{"op":"getCategories","enable_nested":true,"sid":"{session_id}"}}'
+).json()
+artstation_category_id = next(cat for cat in categories["content"] if cat["title"] == "Artstation")["id"]
+print(f"├╼ {GREEN}Found artstation category id: {artstation_category_id}{NC}")
+
+feeds = requests.get(
+    TTRSS_URL, headers=headers, data=f'{{"op":"getFeeds","cat_id":{artstation_category_id},"sid":"{session_id}"}}'
+).json()
+print(f"├╼ {GREEN}Got {len(feeds)} artstation feeds{NC}")
+
+ttrss_feed_urls = [feed["feed_url"] for feed in feeds["content"]]
+
+feeds_urls_to_import = [
+    feed_url
+    for feed_url in (
+        get_artstation_rss_url(author_info)
+        for author_info in AUTHOR_INFOS
+        if len(author_info["artstation_username"]) > 0
+    )
+    if feed_url not in ttrss_feed_urls
 ]
 
-if len(authors_to_export_filtered) == 0:
-    print(f"╰─{L_GREEN}Nothing to export{NC}")
+if len(feeds_urls_to_import) == 0:
+    print(f"╰─{L_GREEN}Nothing to import{NC}")
 
-print(f"├╼ {CYAN}Exporting {len(authors_to_export_filtered)} authors {NC}")
+print(f"├╼ {CYAN}Importing {len(feeds_urls_to_import)} feeds {NC}")
 
-exported_opml_contents = f"""
-<?xml version="1.0" encoding="UTF-8"?>
-<opml version="1.1" xmlns:feeder="https://nononsenseapps.com/feeder">
-  <head>
-    <title>
-      Feeder
-    </title>
-  </head>
-  <body>
-    <outline title="Artstation" text="Artstation">
-    {"\n".join(f'    <outline feeder:notify="false" feeder:fullTextByDefault="false" feeder:openArticlesWith="" feeder:alternateId="false" title="{author_info["artstation_username"]} on artstation" text="{author_info["artstation_username"]} on artstation" type="rss" xmlUrl="{get_artstation_rss_url(author_info)}"/>' for author_info in authors_to_export_filtered)}
-    </outline>
-  </body>
-</opml>
-""".strip()
+for feed_url in feeds_urls_to_import:
+    print(f"├╼ {CYAN}Subscribing to {feed_url}{NC}")
+    subscription_response = requests.get(
+        TTRSS_URL,
+        headers=headers,
+        data=f'{{"op":"subscribeToFeed","sid":"{session_id}","feed_url":"{feed_url}","category_id":{artstation_category_id}}}',
+    ).json()
+    print(f"├╼ {LIGHT_GRAY}{subscription_response}{NC}")
 
-Path(FEEDER_EXPORTS_PATH, ARTSTATION_OPML_EXPORT_FILENAME).write_text(exported_opml_contents, encoding="utf-8")
 print(f"╰─{L_GREEN}OK{NC}")
