@@ -104,7 +104,7 @@ class AppEntry:
 app_map: list[AppEntry] = [
     AppEntry(activity_name="YouTube", matching_names=["UwUTube", "YouTube"]),
     AppEntry(activity_name="Browsing", matching_names=["Chrome", "Cromite", "Firefox", "chromium"]),
-    AppEntry(activity_name="News", matching_names=["Feeder"]),
+    AppEntry(activity_name="News", matching_names=["Feeder", "FeedFlow"]),
     AppEntry(activity_name="IM", matching_names=["Nagram", "Discord", "Aliucord", "UwUCord"]),
 ]
 
