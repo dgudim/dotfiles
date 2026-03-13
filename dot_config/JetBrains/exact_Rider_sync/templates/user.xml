@@ -1,5 +1,5 @@
 <templateSet group="user">
-  <template name="sta" value="public interface I$NAME$&#10;{&#10;    Task&lt;IState&gt; New();&#10;}&#10;&#10;public class $NAME$: BaseUserEntryCodeState&#10;{&#10;    public record Factory : I$NAME$&#10;    {&#10;        public Task&lt;IState&gt; New()&#10;        {&#10;            return Task.FromResult&lt;IState&gt;(new $NAME$());&#10;        }&#10;    }&#10;&#10;    private $NAME$()&#10;    {&#10;    }&#10;}" toReformat="true" toShortenFQNames="true">
+  <template name="sta" value="public interface I$NAME$&#10;{&#10;    Task&lt;IState&gt; New();&#10;}&#10;&#10;public class $NAME$: BaseUserEntryCodeState&#10;{&#10;    public record Factory : I$NAME$&#10;    {&#10;        public Task&lt;IState&gt; New()&#10;        {&#10;            return Task.FromResult&lt;IState&gt;(new $NAME$());&#10;        }&#10;    }&#10;&#10;    private $NAME$()&#10;    {&#10;    }&#10;}" description="" toReformat="true" toShortenFQNames="true">
     <variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="ANY_OPENAPI_JSON_FILE" value="false" />

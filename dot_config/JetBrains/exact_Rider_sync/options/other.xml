@@ -1,0 +1,109 @@
+<application>
+  <component name="FileEditorProviderManager">{}</component>
+  <component name="LangManager">
+    <option name="languageName" value="C#" />
+  </component>
+  <component name="NotRoamableUiSettings">
+    <option name="fontSize" value="13.0" />
+    <option name="ideScale" value="1.05" />
+    <option name="presentationModeIdeScale" value="1.75" />
+    <option name="overrideLafFonts" value="true" />
+  </component>
+  <component name="PropertyService"><![CDATA[{
+  "keyToString": {
+    "Debug.Allow.Typing": "true",
+    "LAST_CALCULATED_COLOR_INDEX_KEY": "8",
+    "PluginConfigurable.selectionTab": "1",
+    "RD.Init.Cfg.2": "true",
+    "RD.Init.DialogShown.Ide": "true",
+    "Rider.Current.Build.Use.Start": "2026-03-13T09:13:56.146361790Z",
+    "Rider.Last.Started.IDE.Build": "RD-253.31033.136",
+    "RiderProblemsViewApplicationState.ContextShortcutLearnedName": "true",
+    "RunOnceActivity.TerminalFontSettingsService.fixStoredNonMonospacedFonts": "true",
+    "RunOnceActivity.TerminalOptionsProvider.migration.2025.1.1": "true",
+    "RunOnceActivity.VFSInitializationConditionsToFusReporter": "true",
+    "RunOnceActivity.git.modal.commit.toggle": "true",
+    "RunOnceActivity.reset.auto.reparse.settings.to.default": "true",
+    "SettingsSearchHistory": "Tree Views",
+    "ask.about.ctrl.y.shortcut.v2": "true",
+    "com.xliic.openapi.settings.audit.runtime": "platform",
+    "com.xliic.openapi.settings.cli.ast.directory.override": "",
+    "com.xliic.openapi.settings.cli.ast.repository": "https://repo.42crunch.com/downloads",
+    "com.xliic.openapi.settings.internal.disable.log.redaction": "false",
+    "com.xliic.openapi.settings.internal.features": "false",
+    "com.xliic.openapi.settings.internal.use.dev.endpoints": "false",
+    "com.xliic.openapi.settings.network.settings.connection.timeout": "10",
+    "com.xliic.openapi.settings.platform.auth-type": "anond-token",
+    "com.xliic.openapi.settings.platform.collection.naming.convention": "",
+    "com.xliic.openapi.settings.platform.dictionary.pre-audit": "Ask",
+    "com.xliic.openapi.settings.platform.mandatory.tags": "",
+    "com.xliic.openapi.settings.platform.scan.docker.replace.localhost": "true",
+    "com.xliic.openapi.settings.platform.scan.docker.use.host.network": "true",
+    "com.xliic.openapi.settings.platform.scan.image": "42crunch/scand-agent:v2",
+    "com.xliic.openapi.settings.platform.scan.runtime": "cli",
+    "com.xliic.openapi.settings.platform.scan.scand.auth": "none",
+    "com.xliic.openapi.settings.platform.scan.scand.timeout": "300",
+    "com.xliic.openapi.settings.platform.scan.scand.url": "",
+    "com.xliic.openapi.settings.platform.scan.services": "",
+    "com.xliic.openapi.settings.platform.temp.collection.name": "IDE Temp Collection",
+    "com.xliic.openapi.settings.platform.url": "https://platform.42crunch.com",
+    "com.xliic.openapi.settings.plugin.version": "5.2",
+    "com.xliic.openapi.settings.preview.port": "61112",
+    "com.xliic.openapi.settings.preview.renderer": "Swagger UI",
+    "com.xliic.openapi.settings.snake.yaml.settings.code.point.limit": "20",
+    "com.xliic.openapi.settings.sort.abc": "true",
+    "enter_selection_count": "5",
+    "evlsprt.243": "195632c4300",
+    "evlsprt3.243": "4",
+    "evlsprt3.253": "6",
+    "experimental.ui.first.promotion.localdate": "2025-03-05",
+    "experimental.ui.on.first.startup": "false",
+    "experimental.ui.onboarding.proposed.version": "253.31033.136",
+    "experimental.ui.used.version": "253.31033.136",
+    "fileTypeChangedCounter": "3",
+    "fontSizeToResetConsole": "13.0",
+    "fontSizeToResetEditor": "13.0",
+    "got.it.tooltip.Plugins Auto-Update": "1",
+    "got.it.tooltip.settings.sync.in.settings": "1",
+    "got.it.tooltip.trial.state.widget.trial.started.got.it.id": "1",
+    "ide.islands.ab3": "true",
+    "input.method.disabler.muted": "true",
+    "last_selected_project_template": "Project Type_Console",
+    "llm.installer.last.toolwindow.state": "LLM_INSTALLER_HIDDEN",
+    "migrated.non.roamable.values.from.general.settings": "true",
+    "openapi.generate.token.base64.key": "",
+    "openapi.show.key": "false",
+    "previousColorScheme": "_@user_Gruvbox Dark Medium",
+    "promo.ignore.ultimate.edition": "true",
+    "registry.to.advanced.settings.migration.build": "RD-253.31033.136",
+    "rider.color.scheme.updated": "true",
+    "settings.code.style.selected.tab.C#": "Naming",
+    "terminal.gen.one.option.visible": "false",
+    "toolwindow.stripes.buttons.info.shown": "true",
+    "trial.state.free.trial.expiration.date": "1776200400000",
+    "trial.state.last.state": "ACTIVE",
+    "ts.lib.d.ts.version": "5.9.3",
+    "whats.new.last.shown.version": "2025-3.3-31033-d7bd2bd4f1f373d82114502479a62ab0c475d17d"
+  },
+  "keyToStringList": {
+    "fileTypeDetectors": [
+      "com.intellij.ide.scratch.ScratchFileServiceImpl$Detector",
+      "com.jetbrains.rider.cpp.fileType.CppHeaderFileTypeDetector",
+      "com.intellij.database.vfs.DbStorageFileType$Detector",
+      "com.intellij.docker.dockerFile.DockerFileTypeDetector",
+      "com.intellij.javascript.debugger.sourcemap.SourceMapFileType$MyFileTypeDetector",
+      "com.jetbrains.nodejs.util.NodeFileTypeDetector$JavaScriptFileTypeDetector",
+      "com.jetbrains.nodejs.util.NodeFileTypeDetector$TypeScriptFileTypeDetector",
+      "org.jetbrains.plugins.textmate.TextMateFileType$TextMateFileDetector"
+    ],
+    "project_template_sources": [
+      "/opt/rider/plugins/sqlproj-plugin/Rider.Sqlproj.Worker/Templates/microsoft.build.sql.templates.2.0.0-preview.1.nupkg"
+    ]
+  }
+}]]></component>
+  <component name="TerminalCommandHistoryManager">
+    <command-history-files>
+      <command-history-file filename="PaymentsNG.Manager-history1" project-path="/home/kloud/Documents/Projects/payments-mono-crypto-cashout/services/paymentsng/PaymentsNG.Manager" last-access-time="1773393927108" />
+    </command-history-files>
+  </component>
+</application>

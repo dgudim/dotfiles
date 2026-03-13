@@ -20,8 +20,8 @@
     <option name="onboardingFinished" value="true" />
   </component>
   <component name="TodoConfiguration">
+    <pattern icon="default" case-sensitive="true" pattern="(?&lt;=\W|^)(?&lt;TAG&gt;BUG)(\W|$)(.*)" />
     <pattern pattern="\bNotImplementedException\b" />
-    <pattern icon="default" case-sensitive="true" pattern="(?&lt;=\W|^)(?&lt;TAG&gt;BUG:)(\W|$)(.*)" />
     <pattern pattern="(?&lt;=\W|^)(?&lt;TAG&gt;TODO)(\W|$)(.*)" />
   </component>
 </application>
