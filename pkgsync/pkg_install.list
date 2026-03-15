@@ -171,7 +171,6 @@ dosfstools
 btrfs-progs
 f2fs-tools
 device-mapper
-reiserfsprogs
 nilfs-utils
 lsscsi
 mdadm

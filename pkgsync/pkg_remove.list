@@ -117,6 +117,7 @@ libwnck3
 perl-uuid-tiny
 soundux-git
 gcc13
+reiserfsprogs
 
 # Obsolete
 dbeaver-plugin-svg-format
