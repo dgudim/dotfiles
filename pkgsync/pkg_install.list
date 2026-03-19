@@ -880,6 +880,8 @@ python-aiosqlite
 python-google-re2
 python-opengl
 python-curl_cffi
+python-orjson
+python-msgpack
 uvicorn
 
 ## ANDROID AND JAVA
