@@ -70,5 +70,9 @@ sudo rm -rfv /boot/initramfs-linux-*
 
 # https://wiki.archlinux.org/title/Limine#Configurations
 sudo ln -fv /etc/limine-entry-tool.conf /etc/default/limine
+sudo rm /etc/kernel-install-for-dracut.conf
+
+# Replaced with hmcl
+rm ~/.local/share/applications/tlauncher.desktop
 
 echo -e "${L_GREEN}Done!$NC\n"
