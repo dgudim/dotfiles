@@ -1,0 +1,17 @@
+[Desktop Entry]
+Categories=Game;
+Comment=Hello Minecraft! Launcher, a powerful Minecraft launcher.
+Exec=env '_JAVA_OPTIONS=-Dhmcl.offline.auth.restricted='\\''false'\\''' hmcl-bin
+Icon=hmcl-bin
+Name=HMCL
+NoDisplay=false
+Path=
+PrefersNonDefaultGPU=false
+StartupNotify=false
+StartupWMClass=org.jackhuang.hmcl.Launcher
+Terminal=false
+TerminalOptions=
+Type=Application
+Version=1.0
+X-KDE-SubstituteUID=false
+X-KDE-Username=
