@@ -118,6 +118,8 @@ perl-uuid-tiny
 soundux-git
 gcc13
 reiserfsprogs
+postgrestools-bin
+cavalier
 
 # Obsolete
 dbeaver-plugin-svg-format

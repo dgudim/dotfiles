@@ -541,7 +541,6 @@ glances
 kdepim-addons
 nano-syntax-highlighting-git
 docker-color-output-git
-postgrestools-bin
 pgcli
 postgresql-old-upgrade
 lssecret-git
@@ -1102,7 +1101,6 @@ nicotine+
 pavucontrol-qt
 kmidimon
 carla
-cavalier
 tageditor-qt6
 spotube-bin
 plugdata-bin
