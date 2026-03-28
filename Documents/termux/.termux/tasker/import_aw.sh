@@ -1,3 +1,3 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-uv run import_activitywatch.py
+python import_activitywatch.py
