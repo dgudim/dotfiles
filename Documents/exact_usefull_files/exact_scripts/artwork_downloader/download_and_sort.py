@@ -523,6 +523,15 @@ def post_process_image(
         stderr=subprocess.STDOUT,
     )
 
+    print("├╼ Jpegoptim")
+    subprocess.check_call(
+        [
+            "jpegoptim",
+            target_image_path.absolute().as_posix(),
+        ],
+        stderr=subprocess.STDOUT,
+    )
+
     return target_image_path
 
 
