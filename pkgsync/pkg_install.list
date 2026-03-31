@@ -636,6 +636,7 @@ kio-admin
 kio-fuse
 kio-gdrive
 kio-zeroconf
+#kio-s3
 ffmpegthumbnailer
 ffmpegthumbs
 dolphin-plugins
