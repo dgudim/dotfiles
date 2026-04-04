@@ -151,6 +151,10 @@ def unmount_image(image_path: Path, keep_changes: Callable[..., bool]):
                 err_exit("Couldn't recompress, target image already exists")
 
     if mount_info.overlay_mount_path.is_mount():
+        print(f"{BLUE}Killing processes using the folder{NC}")
+        checked_exec(
+            [SUDO_APP, "bash", "-c", f"kill $(lsof -t '{mount_info.overlay_mount_path.as_posix()}' || true)"]
+        )
         checked_exec(
             [SUDO_APP, "umount", mount_info.overlay_mount_path.as_posix()],
             lambda: subprocess.call(["lsof", mount_info.overlay_mount_path.as_posix()]),
