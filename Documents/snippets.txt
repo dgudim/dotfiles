@@ -94,6 +94,10 @@ def raise_nofile(nofile_atleast=4096):
 
 
 
+def classname(obj: Any):                                                                                             │
+    return type(obj).__name__
+
+
 def ex_to_str(ex: Exception):
     exceptions: list[BaseException] = []
     current_ex: BaseException | None = ex
