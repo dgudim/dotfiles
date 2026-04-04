@@ -10,3 +10,8 @@ source auto
 
 ignore "ImageSave" "lastImageSaveAsLocation"
 ignore "ImageSave" "lastImageSaveLocation"
+
+ignore "Annotations" "annotationToolType"
+ignore "Annotations" "rectangleFillColor"
+ignore "Annotations" "rectangleStrokeColor"
+ignore "GuiConfig" "selectionRect"
