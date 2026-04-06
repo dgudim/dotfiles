@@ -1,0 +1,7 @@
+{
+  "Listeners" : ["UDP:9"],
+  "AvoidDualUDPSending" : {
+    "Active": true,
+    "Delay": "100ms"
+  }
+}

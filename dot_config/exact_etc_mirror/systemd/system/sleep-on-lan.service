@@ -1,0 +1,11 @@
+[Unit]
+Description=Sleep-On-LAN daemon
+
+[Service]
+User=root
+WorkingDirectory=/
+ExecStart=/usr/bin/sleep-on-lan
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

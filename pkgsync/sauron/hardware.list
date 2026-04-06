@@ -57,12 +57,14 @@ rider
 
 # Stuff
 openbox
+sleep-on-lan
 
 # For work repos
 encfs
 
 # 3D
 orca-slicer-bin
+
 
 # HAKK
 john
