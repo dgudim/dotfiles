@@ -75,4 +75,7 @@ sudo rm -fv  /etc/kernel-install-for-dracut.conf
 # Replaced with hmcl
 rm -fv ~/.local/share/applications/tlauncher.desktop
 
+# Irrelevant
+rm -fv ~/Documents/TODO.txt
+
 echo -e "${L_GREEN}Done!$NC\n"
