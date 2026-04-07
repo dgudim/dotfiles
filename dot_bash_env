@@ -32,6 +32,8 @@ export GOPATH="$XDG_DATA_HOME"/go
 export BAT_CONFIG_PATH="/home/kloud/.config/bat/bat.conf"
 export RIPGREP_CONFIG_PATH=/home/kloud/.config/ripgrep/rg.conf
 
+export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
+
 # GUM
 export GUM_INPUT_CURSOR_FOREGROUND="#FAB92D"
 export GUM_INPUT_PROMPT_FOREGROUND="#B16286"
@@ -41,6 +43,11 @@ export GUM_FILE_PERMISSIONS_FOREGROUND="#928374"
 export GUM_FILE_SELECTED_FOREGROUND="#B2A527"
 export GUM_FILE_SYMLINK_FOREGROUND="#5F9368"
 export GUM_FILE_FILE_SIZE_FOREGROUND="#478487"
+
+# NPM
+export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME"/npm/config/npm-init.js
+export NPM_CONFIG_CACHE="$XDG_CACHE_HOME"/npm
+export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR"/npm
 
 # Clipboard
 export CLIPBOARD_NOAUDIO=1
@@ -59,13 +66,14 @@ if [[ "$(whoami)" != "root" ]]; then
     # Add user stuff to PATH
     # Escape home variable for proper sed substitution
     HOME_ESC=$(echo "$HOME" | sed 's/\//\\\//g')
+    XDG_DATA_HOME_ESC=$(echo "$XDG_DATA_HOME" | sed 's/\//\\\//g')
     CLEAN_PATH=$(echo "$PATH" |
-        sed "s/$HOME_ESC\/.local\/share\/cargo\/bin://g" |
+        sed "s/$XDG_DATA_HOME_ESC\/cargo\/bin://g" |
         sed "s/$HOME_ESC\/.local\/bin://g" |
-        sed "s/$HOME_ESC\/.local\/share\/go\/bin://g" |
-        sed "s/$HOME_ESC\/Documents\/usefull_files\/scripts\/://g" |
-        sed "s/:$HOME_ESC\/.dotnet\/tools\///g")
-    export PATH=~/.local/bin:~/.local/share/cargo/bin:~/.local/share/go/bin:~/Documents/usefull_files/scripts/:$CLEAN_PATH:~/.dotnet/tools/
+        sed "s/$XDG_DATA_HOME_ESC\/go\/bin://g" |
+        sed "s/$HOME_ESC\/Documents\/usefull_files\/scripts://g" |
+        sed "s/:$XDG_DATA_HOME_ESC\/dotnet\/tools//g")
+    echo "~/.local/bin:$XDG_DATA_HOME/cargo/bin:$XDG_DATA_HOME/go/bin:$HOME/Documents/usefull_files/scripts:$CLEAN_PATH:$XDG_DATA_HOME/dotnet/tools/"
 
     # Rootless docker
     export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
@@ -76,5 +84,6 @@ else
     unset GPG_TTY
     unset SSH_AUTH_SOCK
 fi
+
 
 
