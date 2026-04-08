@@ -120,6 +120,7 @@ gcc13
 reiserfsprogs
 postgrestools-bin
 cavalier
+gvfs-google
 
 # Obsolete
 dbeaver-plugin-svg-format
