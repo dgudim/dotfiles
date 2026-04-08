@@ -986,7 +986,7 @@ vpnc
 bind
 ldns
 ndisc6
-iptables-nft
+iptables
 nss-mdns
 inetutils
 xl2tpd
