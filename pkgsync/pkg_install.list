@@ -1054,6 +1054,7 @@ pipewire-jack
 pipewire-pulse
 pipewire-v4l2
 pipewire-zeroconf
+wireplumber
 lsp-plugins
 zam-plugins
 amb-plugins
@@ -1105,7 +1106,7 @@ carla
 tageditor-qt6
 spotube-bin
 plugdata-bin
-wireplumber
+soundux
 
 # GRAPHICS, VIDEO
 mesa-utils
