@@ -226,9 +226,10 @@ alias fastfetch='fastfetch --logo-width 60 --logo-padding-top 2 --logo /home/klo
 
 ################################################ Pacman aliases ################################################
 
-alias package_sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | moor'
+alias package-sizes='expac -HM "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | column -t -s " " -R 1 | moor'
 alias orphans='pacman -Qtdq'
 alias broken='sudo pacman -Qkk | grep warning'
+alias repopulate-keys='sudo rm -r /etc/pacman.d/gnupg/ && sudo pacman-key --init && sudo pacman-key --populate'
 
 ################################################ Colorize stuff ################################################
 
