@@ -29,5 +29,6 @@ ignore regex "com/github/tenderowl/frog.*" ".*"
 ignore regex "com/uploadedlobster/peek.*" ".*"
 ignore regex "com/github/tchx84/Flatseal.*" ".*"
 ignore regex "org/gnome/liferea.*" ".*"
+ignore regex "me/iepure/devtoolbox.*" ".*"
 
 ignore regex "org/virt-manager/virt-manager/.*" ".*"
