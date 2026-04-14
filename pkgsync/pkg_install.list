@@ -887,6 +887,7 @@ uvicorn
 ## ANDROID AND JAVA
 jdk-openjdk
 jdk8-openjdk
+archlinux-java-run
 android-sdk-platform-tools
 android-studio
 android-tools
@@ -1079,7 +1080,7 @@ playerctl
 noise-suppression-for-voice
 audio-share-bin
 rescrobbled-git
-shairport-sync-mpris-git
+shairport-sync
 snapcast-gui-git
 opus-tools
 
