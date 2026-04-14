@@ -61,8 +61,8 @@ rm -fv ~/.config/autostart/libinput-gestures.desktop
 rm -fv ~/.config/policykit1-kde.notifyrc
 
 # Follow XDG spec
-mv -fvr ~/.ipython "$XDG_CONFIG_HOME"/ipython 2>/dev/null || true
-mv -fvr ~/.dotnet  "$XDG_DATA_HOME"/dotnet    2>/dev/null || true
+cp -frv --no-target-directory ~/.ipython "$XDG_CONFIG_HOME"/ipython 2>/dev/null && rm -rfv ~/.ipython || true
+cp -frv --no-target-directory ~/.dotnet  "$XDG_DATA_HOME"/dotnet    2>/dev/null && rm -rfv ~/.dotnet  || true
 
 if [[ "$(hostname)" == *"sauron"* ]]; then sudo chown -R kloud:kloud /usr/share/gopreload; fi
 
