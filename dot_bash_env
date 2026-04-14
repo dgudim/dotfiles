@@ -74,7 +74,7 @@ if [[ "$(whoami)" != "root" ]]; then
         sed "s/$HOME_ESC\/Documents\/usefull_files\/scripts://g" |
         sed "s/:$XDG_DATA_HOME_ESC\/dotnet\/tools//g")
 
-    export HOME="~/.local/bin:$XDG_DATA_HOME/cargo/bin:$XDG_DATA_HOME/go/bin:$HOME/Documents/usefull_files/scripts:$CLEAN_PATH:$XDG_DATA_HOME/dotnet/tools/"
+    export PATH="~/.local/bin:$XDG_DATA_HOME/cargo/bin:$XDG_DATA_HOME/go/bin:$HOME/Documents/usefull_files/scripts:$CLEAN_PATH:$XDG_DATA_HOME/dotnet/tools/"
 
     # Rootless docker
     export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
