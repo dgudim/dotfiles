@@ -165,7 +165,8 @@ enable_service open-fprintd-suspend 0 1
     enable_service ModemManager 0 1
 {{ end }}
 
-enable_service gpu-screen-recorder-ui 1
+enable_service gpu-screen-recorder 1 1
+enable_service gpu-screen-recorder-ui 1 1
 
 enable_service docker.socket 1
 
