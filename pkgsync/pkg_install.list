@@ -728,6 +728,7 @@ lemminx
 plasma-sdk
 amber-lang-bin
 openapi-tui
+git-tools-git
 
 ## DBs
 postgresql
