@@ -580,7 +580,7 @@ nawk
 open-in-native-client
 waypipe
 # For media downloader in the browser
-vdhcoapp
+vdhcoapp-bin
 # For limine snapper sync
 b3sum
 vlc-plugins-all
