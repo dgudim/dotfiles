@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="gwenview" version="70">
+<gui name="gwenview" version="71">
  <MenuBar>
   <Menu name="file">
    <Action name="file_save"/>
@@ -82,6 +82,10 @@
    <Action name="go_up"/>
    <Separator/>
    <Action name="go_start_page"/>
+  </Menu>
+  <Menu name="settings">
+   <text>Settings</text>
+   <Action group="show_merge" name="window-colorscheme-menu"/>
   </Menu>
  </MenuBar>
  <ToolBar alreadyVisited="1" name="mainToolBar" noMerge="1">
