@@ -1028,6 +1028,7 @@ wrk
 httpie
 mtr
 httptap-bin
+quien-bin
 
 ## GUIS
 proton-vpn-gtk-app
