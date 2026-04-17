@@ -153,7 +153,7 @@ def unmount_image(image_path: Path, keep_changes: Callable[..., bool]):
     if mount_info.overlay_mount_path.is_mount():
         print(f"{BLUE}Killing processes using the folder{NC}")
         checked_exec(
-            [SUDO_APP, "bash", "-c", f"kill $(lsof -t '{mount_info.overlay_mount_path.as_posix()}' || true)"]
+            [SUDO_APP, "bash", "-c", f"kill $(lsof -t '{mount_info.overlay_mount_path.as_posix()}' || true) || true"]
         )
         checked_exec(
             [SUDO_APP, "umount", mount_info.overlay_mount_path.as_posix()],
