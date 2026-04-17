@@ -171,3 +171,11 @@ vidcutter
 # Replaced with chrony and regular shairport
 nqptp-git
 shairport-sync-mpris-git
+
+# Replaced with uv
+python38
+python39
+python310
+python311
+python312
+python313

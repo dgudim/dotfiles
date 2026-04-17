@@ -22,8 +22,6 @@ openrazer-driver-dkms
 openrgb
 
 # Misc
-python39
-python310
 noisetorch-git
 upscayl-bin
 ollama-cuda
