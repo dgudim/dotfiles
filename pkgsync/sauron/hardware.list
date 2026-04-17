@@ -13,8 +13,7 @@ libva-nvidia-driver
 lib32-opencl-nvidia
 lib32-nvidia-utils
 nvidia-container-toolkit
-opencv-cuda
-cuda
+cudnn9.3-cuda12.5
 nvidia-patch-git
 
 # Rgb stuff
