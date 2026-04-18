@@ -64,6 +64,9 @@ qt5-tools
 kimageformats5
 poppler-qt5
 kplotting5
+quazip-qt5
+qt5-sensors
+qt5-location
 
 # Replace by kwin-gestures
 gestures
@@ -127,7 +130,7 @@ dbeaver-plugin-svg-format
 kinit
 openssl-1.0
 openssl-1.1
-quazip-qt5
+libkolabxml
 
 # Replaced with a different version
 translate-shell
