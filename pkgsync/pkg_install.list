@@ -715,6 +715,7 @@ perl-string-crc32
 perl-file-basedir
 perl-path-class
 visual-studio-code-bin
+zed
 imhex
 strace
 pax-utils
@@ -771,6 +772,8 @@ pyupgrade
 autopep8
 python-flake8
 ruff
+basedpyright-bin
+ty
 twine
 yapf
 mypy

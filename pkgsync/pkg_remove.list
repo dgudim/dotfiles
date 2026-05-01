@@ -131,6 +131,7 @@ kinit
 openssl-1.0
 openssl-1.1
 libkolabxml
+libkcompactdisc
 
 # Replaced with a different version
 translate-shell

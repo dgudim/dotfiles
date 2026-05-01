@@ -1,0 +1,96 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "lsp_highlight_debounce": 175,
+  "languages": {
+    "Python": {
+      "format_on_save": "off",
+      "language_servers": ["basedpyright", "ruff", "ty", "pyrefly", "!pyright", "!pylsp", "..."],
+    }
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
+  "document_folding_ranges": "off",
+  "title_bar": {
+    "show_branch_status_icon": true
+  },
+  "status_bar": {
+    "show_active_file": true,
+    "active_encoding_button": "enabled"
+  },
+  "git_panel": {
+    "show_count_badge": true,
+    "file_icons": true,
+    "tree_view": true
+  },
+  "project_panel": {
+    "git_status_indicator": true,
+    "diagnostic_badges": true
+  },
+  "disable_ai": true,
+  "edit_predictions": {
+    "provider": "zed"
+  },
+  "terminal": {
+    "show_count_badge": true,
+    "font_size": 12.0,
+    "font_family": "FiraCode Nerd Font",
+    "cursor_shape": "underline",
+    "blinking": "on"
+  },
+  "telemetry": {
+    "diagnostics": true,
+    "metrics": true
+  },
+  "agent": {
+    "enabled": false,
+    "button": false,
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "preview_tabs": {
+    "enable_keep_preview_on_code_navigation": true
+  },
+  "tabs": {
+    "show_close_button": "hidden"
+  },
+  "sticky_scroll": {
+    "enabled": true
+  },
+  "max_tabs": 15,
+  "buffer_font_fallbacks": [
+    "monospace"
+  ],
+  "buffer_font_family": "Consolas",
+  "file_types": {
+    "markdown": [
+      "*.rmd"
+    ]
+  },
+  "linked_edits": true,
+  "show_edit_predictions": true,
+  "semantic_tokens": "combined",
+  "preferred_line_length": 120,
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "base_keymap": "VSCode",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "dark",
+    "light": "Gruvbox Light",
+    "dark": "Gruvbox Dark",
+  },
+}
