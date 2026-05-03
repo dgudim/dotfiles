@@ -136,7 +136,6 @@ chrony
 ## PACMAN HOOKS AND SCRIPTS
 pacmanlogviewer
 octopi
-pacman-systemd-inhibit
 # informant
 # pacman-pstatus
 pacman-log-orphans-hook

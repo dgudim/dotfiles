@@ -124,6 +124,7 @@ reiserfsprogs
 postgrestools-bin
 cavalier
 gvfs-google
+pacman-systemd-inhibit
 
 # Obsolete
 dbeaver-plugin-svg-format
