@@ -229,9 +229,6 @@
             "logDeletes": true,
             "collapseDeleted": false
         },
-        "MessageTags": {
-            "enabled": false
-        },
         "MoreCommands": {
             "enabled": false
         },
@@ -777,6 +774,9 @@
         },
         "MoreQuickReactions": {
             "enabled": false
+        },
+        "CustomCommands": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -789,7 +789,7 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1769713288057
+        "settingsSyncVersion": 1777752847976
     },
     "eagerPatches": false,
     "uiElements": {

@@ -28,7 +28,8 @@
             "sendReadStoriesLocked": false,
             "sendUploadProgress": true,
             "sendUploadProgressLocked": false,
-            "sendWithoutSound": false,
+            "sendWithoutSound": 0,
+            "suggestGhostModeBeforeViewingStory": true,
             "useScheduledMessages": false
         }
     },
@@ -57,6 +58,7 @@
         "showBackground": true,
         "showColorfulReplies": false,
         "showDate": false,
+        "showHeaderDecorations": true,
         "showReactions": false
     },
     "monoFont": "",
