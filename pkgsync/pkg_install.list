@@ -375,7 +375,6 @@ evtest-qt-git
 # - qr/barcode generation
 zint-qt
 kweather
-piki-git
 lact
 # - Pronterface
 printrun
