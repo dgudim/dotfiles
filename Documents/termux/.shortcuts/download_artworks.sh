@@ -8,7 +8,7 @@ export TTRSS_USER="kloud"
 source ~/.termux/tasker/ttrss_token.sh
 
 mkdir -pv ~/.temp_artwork_downloader
-cp -fv ~/dotfiles/Documents/exact_usefull_files/exact_scripts/artwork_downloader/download_and_sort.py ~/.temp_artwork_downloader/download_and_sort.py
+cp -fv ~/dotfiles/Documents/usefull_files/exact_scripts/artwork_downloader/download_and_sort.py ~/.temp_artwork_downloader/download_and_sort.py
 
 cd ~/.temp_artwork_downloader
 uv run download_and_sort.py
