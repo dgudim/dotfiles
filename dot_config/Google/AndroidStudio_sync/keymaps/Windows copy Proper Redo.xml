@@ -1,0 +1,54 @@
+<keymap version="1" name="Windows copy Proper Redo" parent="$default">
+  <action id="$Redo">
+    <keyboard-shortcut first-keystroke="shift ctrl z" />
+    <keyboard-shortcut first-keystroke="shift alt back_space" />
+    <keyboard-shortcut first-keystroke="ctrl y" />
+  </action>
+  <action id="ActivateCommitToolWindow">
+    <keyboard-shortcut first-keystroke="alt c" />
+  </action>
+  <action id="ActivateLogcatToolWindow">
+    <keyboard-shortcut first-keystroke="alt 6" />
+  </action>
+  <action id="ActivateTODOToolWindow" />
+  <action id="Android.BuildApk">
+    <keyboard-shortcut first-keystroke="shift q" />
+  </action>
+  <action id="Debug">
+    <keyboard-shortcut first-keystroke="shift f9" />
+    <keyboard-shortcut first-keystroke="alt d" />
+  </action>
+  <action id="EditorDeleteLine" />
+  <action id="Git.Commit.And.Push.Executor">
+    <keyboard-shortcut first-keystroke="ctrl alt k" />
+    <keyboard-shortcut first-keystroke="alt c" />
+  </action>
+  <action id="GotoNextError" />
+  <action id="ReformatCode">
+    <keyboard-shortcut first-keystroke="ctrl alt l" />
+    <keyboard-shortcut first-keystroke="alt f" />
+  </action>
+  <action id="RenameElement">
+    <mouse-shortcut keystroke="shift button1" />
+    <keyboard-shortcut first-keystroke="f2" />
+  </action>
+  <action id="RenameFile">
+    <keyboard-shortcut first-keystroke="f2" />
+  </action>
+  <action id="Run">
+    <keyboard-shortcut first-keystroke="shift f10" />
+    <keyboard-shortcut first-keystroke="alt r" />
+  </action>
+  <action id="Stop">
+    <keyboard-shortcut first-keystroke="ctrl f2" />
+    <keyboard-shortcut first-keystroke="alt s" />
+  </action>
+  <action id="UpdateRunningApplication" />
+  <action id="android.deploy.ApplyChanges">
+    <keyboard-shortcut first-keystroke="ctrl f10" />
+  </action>
+  <action id="android.deploy.CodeSwap">
+    <keyboard-shortcut first-keystroke="ctrl alt f10" />
+    <keyboard-shortcut first-keystroke="alt a" />
+  </action>
+</keymap>

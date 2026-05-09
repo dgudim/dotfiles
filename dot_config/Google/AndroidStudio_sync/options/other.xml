@@ -1,0 +1,931 @@
+<application>
+  <component name="ActionHistoryManager">
+    <ids>
+      <option value="NewPlantUMLFile" />
+    </ids>
+  </component>
+  <component name="DynamicPluginEnabler">
+    <trackers>
+      <map>
+        <entry key="27an2Is8JijKqCieQgMSXAgSEBd">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="27cCdonXMZIGHZzQwGIHygQq61z">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="29NKo8gvh88KjbyIPsSU9UyQE0R">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2G4s3rsIRAphQrEg1bkyvdRMM9p">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2GGuH8PfmzICPbKYAZ6r9uRjEjU">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2Glvo5vMZwxWFiuf2BbAGjerIWc">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2Glw1aW6AhLwY3mTzyIpw1CDhdl">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2Gm43EabXyZn18JE2rl6hybaQzq">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2H4zlD1h0h9yD3g64tje45pAeB1">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2HAFW9FXvD48SUAe1s7MmSdJVDp">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2LxoN5vHsSTiQbv2tDicBcbITKf">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2PNxXx88QUkVQ0iQgCY0aOnOXth">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2Pvpsnd3dSrdYloBAwJkAZdZRuI">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2RvbzjUFfZt2KPqMn6I3JsoSAEB">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2RvcuPWSgi9qyrpauxV7uaDhCnG">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="Default (Template) Project">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+      </map>
+    </trackers>
+  </component>
+  <component name="FileEditorProviderManager">{
+  &quot;selectedProviders&quot;: {
+    &quot;text-editor,android-manifest&quot;: &quot;text-editor&quot;,
+    &quot;text-editor,android-designer2&quot;: &quot;text-editor&quot;
+  }
+}</component>
+  <component name="GradleJvmSupportMatrix">
+    <option name="compatibility">
+      <list>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="INF-5.0" />
+          <option name="javaVersionInfo" value="6-8" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="INF-INF" />
+          <option name="javaVersionInfo" value="8-9" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="4.3-INF" />
+          <option name="javaVersionInfo" value="9-10" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="4.7-INF" />
+          <option name="javaVersionInfo" value="10-11" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="5.0-INF" />
+          <option name="javaVersionInfo" value="11-12" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="5.4-INF" />
+          <option name="javaVersionInfo" value="12-13" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="6.0-INF" />
+          <option name="javaVersionInfo" value="13-14" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="6.3-INF" />
+          <option name="javaVersionInfo" value="14-15" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="6.7-INF" />
+          <option name="javaVersionInfo" value="15-16" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="7.0-INF" />
+          <option name="javaVersionInfo" value="16-17" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="7.2-INF" />
+          <option name="javaVersionInfo" value="17-18" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="7.5-INF" />
+          <option name="javaVersionInfo" value="18-19" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="7.6-INF" />
+          <option name="javaVersionInfo" value="19-20" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="8.3-INF" />
+          <option name="javaVersionInfo" value="20-21" />
+        </VersionMapping>
+        <VersionMapping>
+          <option name="gradleVersionInfo" value="8.5-INF" />
+          <option name="javaVersionInfo" value="21-22" />
+        </VersionMapping>
+      </list>
+    </option>
+    <option name="default" value="false" />
+    <option name="ideVersion" value="Jellyfish | 2023.3.1 Patch 1" />
+    <option name="lastUpdateTime" value="1718030458208" />
+    <option name="supportedGradleVersions">
+      <list>
+        <option value="4.5" />
+        <option value="4.5.1" />
+        <option value="4.6" />
+        <option value="4.7" />
+        <option value="4.8" />
+        <option value="4.9" />
+        <option value="4.10" />
+        <option value="4.10.3" />
+        <option value="5.0" />
+        <option value="5.1" />
+        <option value="5.2" />
+        <option value="5.3" />
+        <option value="5.3.1" />
+        <option value="5.4" />
+        <option value="5.4.1" />
+        <option value="5.5" />
+        <option value="5.5.1" />
+        <option value="5.6" />
+        <option value="5.6.2" />
+        <option value="6.0" />
+        <option value="6.0.1" />
+        <option value="6.1" />
+        <option value="6.2" />
+        <option value="6.3" />
+        <option value="6.4" />
+        <option value="6.5" />
+        <option value="6.6" />
+        <option value="6.7" />
+        <option value="6.8" />
+        <option value="6.8.3" />
+        <option value="6.9" />
+        <option value="7.0" />
+        <option value="7.1" />
+        <option value="7.2" />
+        <option value="7.3" />
+        <option value="7.4" />
+        <option value="7.5" />
+        <option value="7.5.1" />
+        <option value="7.6" />
+        <option value="8.0" />
+        <option value="8.1" />
+        <option value="8.2" />
+        <option value="8.3" />
+        <option value="8.4" />
+        <option value="8.5" />
+        <option value="8.6" />
+        <option value="8.7" />
+      </list>
+    </option>
+    <option name="supportedJavaVersions">
+      <list>
+        <option value="8" />
+        <option value="9" />
+        <option value="10" />
+        <option value="11" />
+        <option value="12" />
+        <option value="13" />
+        <option value="14" />
+        <option value="15" />
+        <option value="16" />
+        <option value="17" />
+        <option value="18" />
+        <option value="19" />
+        <option value="20" />
+        <option value="21" />
+      </list>
+    </option>
+  </component>
+  <component name="JdkInstallerHistory">
+    <option name="installedItems">
+      <installed-jdk>
+        <option name="fullText" value="Amazon Corretto 1.8.0_362" />
+        <option name="installDir" value="$USER_HOME$/.jdks/corretto-1.8.0_362" />
+        <option name="sha256" value="649dad358d51a631b68e7223433f5ad2360bcf40b0ba4cf021e4305b87d0f9ec" />
+        <option name="url" value="https://corretto.aws/downloads/resources/8.362.08.1/amazon-corretto-8.362.08.1-linux-x64.tar.gz" />
+        <option name="versionText" value="1.8.0_362" />
+      </installed-jdk>
+    </option>
+  </component>
+  <component name="NotRoamableUiSettings">
+    <option name="fontFace" value="SF UI  Text" />
+    <option name="fontSize" value="13.0" />
+    <option name="presentationModeIdeScale" value="1.75" />
+    <option name="overrideLafFonts" value="true" />
+    <option name="overrideLafFontsWasMigrated" value="true" />
+  </component>
+  <component name="ProjectPluginTrackerManager">
+    <trackers>
+      <map>
+        <entry key="26yYizFNfvmvKMudlrbhtDpjJfk">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="27Qe0tJsIXbn6IPIoAGoobKIxs4">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="27an2Is8JijKqCieQgMSXAgSEBd">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="27cCdonXMZIGHZzQwGIHygQq61z">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="28dkSmQxEaDAdXuBINRoS7OYQ9C">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="28dkvzP4LlKZW74u7byQ8h28Gg3">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="29NKo8gvh88KjbyIPsSU9UyQE0R">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="2AfjWvh3Z3iAPk6SG3Gv3D0p6ZW">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+        <entry key="Default (Template) Project">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+      </map>
+    </trackers>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ATTACHED_TOOL_WINDOW.Compose Preview.TOOL_ORDER" value="" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Compose Preview.TOOL_ORDER" value="" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.DESIGN_FILES_PREVIEW_EDITOR.TOOL_ORDER" value="" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Database Inspector.DATABASES.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Database Inspector.DATABASES.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Database Inspector.DATABASES.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Database Inspector.DATABASES.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Database Inspector.TOOL_ORDER" value="DATABASES" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.PROPERTIES.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.PROPERTIES.LEFT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.PROPERTIES.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.PROPERTIES.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.TOOL_ORDER" value="TREE,PROPERTIES" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.TREE.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.TREE.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.TREE.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.TREE.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.Main Preview.TOOL_ORDER" value="" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.DEACTIVATED.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.DEACTIVATED.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.DEACTIVATED.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.DEACTIVATED.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.FULL.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.FULL.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.FULL.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.FULL.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.SPLIT.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.SPLIT.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.SPLIT.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.DEACTIVATED.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.DEACTIVATED.LEFT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.DEACTIVATED.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.DEACTIVATED.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.FULL.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.FULL.LEFT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.FULL.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.FULL.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.SPLIT.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.SPLIT.LEFT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.SPLIT.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TOOL_ORDER" value="PROPERTIES,TREE,HOSTS" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.DEACTIVATED.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.DEACTIVATED.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.DEACTIVATED.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.DEACTIVATED.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.FULL.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.FULL.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.FULL.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.FULL.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.SPLIT.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.SPLIT.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.SPLIT.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.FULL.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.FULL.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.FULL.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.FULL.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.SPLIT.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.SPLIT.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.SPLIT.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.DEACTIVATED.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.DEACTIVATED.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.DEACTIVATED.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.DEACTIVATED.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.FULL.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.FULL.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.FULL.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.FULL.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.SPLIT.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.SPLIT.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.SPLIT.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.DEACTIVATED.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.DEACTIVATED.LEFT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.DEACTIVATED.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.DEACTIVATED.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.FULL.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.FULL.LEFT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.FULL.MINIMIZED" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.FULL.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.SPLIT.AUTO_HIDE" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.SPLIT.LEFT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.SPLIT.SPLIT" value="false" />
+    <property name="ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.TOOL_ORDER" value="PALETTE,PROPERTIES,COMPONENT_TREE" />
+    <property name="ATTACHED_TOOL_WINDOW.DESIGN_FILES_PREVIEW_EDITOR.TOOL_ORDER" value="" />
+    <property name="ATTACHED_TOOL_WINDOW.Database Inspector.DATABASES.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.Database Inspector.TOOL_ORDER" value="DATABASES" />
+    <property name="ATTACHED_TOOL_WINDOW.Layout Inspector.LEFT.UNSCALED.WIDTH" value="486" />
+    <property name="ATTACHED_TOOL_WINDOW.Layout Inspector.RIGHT.UNSCALED.WIDTH" value="421" />
+    <property name="ATTACHED_TOOL_WINDOW.Layout Inspector.TOOL_ORDER" value="TREE,PROPERTIES" />
+    <property name="ATTACHED_TOOL_WINDOW.Layout Inspector.TREE.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.Main Preview.TOOL_ORDER" value="" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.HOSTS.DEACTIVATED.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.HOSTS.FULL.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.HOSTS.SPLIT.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.HOSTS.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.LEFT.UNSCALED.WIDTH" value="308" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.PROPERTIES.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.RIGHT.UNSCALED.WIDTH" value="225" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.TOOL_ORDER" value="PROPERTIES,TREE,HOSTS" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.TREE.DEACTIVATED.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.TREE.DEACTIVATED.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.TREE.FULL.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.TREE.FULL.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.TREE.SPLIT.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.TREE.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NAV_EDITOR.TREE.SPLIT.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.FULL.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.FULL.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.SPLIT.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.SPLIT.SPLIT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.LEFT.UNSCALED.WIDTH" value="269" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.PALETTE.DEACTIVATED.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.PALETTE.FULL.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.PALETTE.SPLIT.LEFT" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.PALETTE.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.PROPERTIES.SPLIT.MINIMIZED" value="true" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.RIGHT.UNSCALED.WIDTH" value="385" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.TEXT_SEARCH_HISTORY" value="style&#10;sca&#10;styl&#10;sty&#10;back" />
+    <property name="ATTACHED_TOOL_WINDOW.NELE_EDITOR.TOOL_ORDER" value="PALETTE,PROPERTIES,COMPONENT_TREE" />
+    <property name="AndroidInitConfigurator.V1" value="true" />
+    <property name="AndroidInitConfigurator.V3" value="true" />
+    <property name="AndroidInitConfigurator.V5" value="true" />
+    <property name="BuildView.Splitter.Proportion" value="0.24147266" />
+    <property name="ColorChooser.RecentColors" value="255-255-255-255,,,0-0-0-255" />
+    <property name="CommitToolWindow.COMMIT_SPLITTER_PROPORTION" value="0.6603139" />
+    <property name="ExpandBeforeRunStepsPanel" value="true" />
+    <property name="ExpandRunDashboardTypesPanel" value="false" />
+    <property name="IdeErrorsDialog.LAST_OK_ACTION" value="REPORT_AND_CLEAR_ALL" />
+    <property name="InstalledPluginsSearchHistory" value="show dismiss&#10;show dismi&#10;show dis&#10;show d&#10;show" />
+    <property name="MarketplacePluginsSearchHistory" value="deploy&#10;deploy apk&#10;deploy apk to gi&#10;deploy apk to git&#10;deplo" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="NextRunPlatformUpdateBuild" value="AI-221.6008.13.2211.9477386/Electric Eel | 2022.1.1" />
+    <property name="NextRunPlatformUpdateVersion" value="Electric Eel | 2022.1.1" />
+    <property name="NlScreenModeProvider" value="RENDER" />
+    <property name="NonModalCommitCustomization.IsApplied" value="true" />
+    <property name="Palette.Favorite.items" value="TextView&#10;Button&#10;ImageView&#10;android.support.v7.widget.RecyclerView&#10;androidx.recyclerview.widget.RecyclerView&#10;androidx.fragment.app.FragmentContainerView&#10;ScrollView&#10;Switch&#10;CheckBoxPreference&#10;EditTextPreference&#10;SwitchPreference&#10;PreferenceCategory&#10;HorizontalGuideline" />
+    <property name="PluginConfigurable.selectionTab" value="1" />
+    <property name="SAVED_ANDROID_NPW_ASKED_LANGUAGE" value="true" />
+    <property name="SAVED_ANDROID_NPW_LANGUAGE" value="Kotlin" />
+    <property name="SAVED_ANDROID_PACKAGE" value="com.example" />
+    <property name="SHELLCHECK.PATH" value="$APPLICATION_PLUGINS_DIR$/Shell Script/shellcheck" />
+    <property name="SONARLINT_ISSUES_SPLIT_PROPORTION" value="0.3838657" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/.gradle/caches/transforms-3/459731560744495d36c7572f4eaf1462/transformed/material-1.7.0/res/layout/m3_alert_dialog.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Android/Sdk/platforms/android-33/data/res/layout/simple_spinner_item.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/drawable/ic_today.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/account_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/activity_main.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/background_image_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/background_images_grid_selection_view.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/calendar_color_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/calendar_day_layout.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/calendar_day_title.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/calendar_day_titles_container.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/calendar_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/calendar_header.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/content_main.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/edit_text_dialogue.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/edit_text_spinner_dialogue.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/entry_settings.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/fragment_home.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/fragment_settings.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/list_selection.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/list_selection_calendar.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/permissions_request_screen.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/service_keep_alive_screen.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/settings_adaptive_background_settings_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/settings_app_theme_selector_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/settings_compound_customization_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/settings_discrete_seekbar_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/settings_reset_button_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/settings_seekbar_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/settings_switch_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/settings_title_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/three_buttons.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layout/you_have_a_xiaomi_phone_screen.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/calendar/layout/calendar_day_layout.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/calendar/layout/test.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/add_entry_dialog.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/add_or_edit_entry_dialog.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/add_or_edit_group_dialog.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/background_images_grid_selection_view.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/bg_grid_selection_view.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/edit_group_dialog.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/edit_text_dialog.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/edit_text_dialogue.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/edit_text_spinner_dialog.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/entry_settings.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/grid_selection_view.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/todo_item_view_selection_dialog.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/activity_main.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/content_main.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/content_wrapper.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/fragment_home.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/fragment_permissions_request.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/fragment_settings.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/home_fragment.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/home_fragment_content.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/home_fragment_wrapper.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/intro_starting_fragment.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/intro_xiaomi_fragment.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/intro_xiaomi_screen.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/permissions_request_fragment.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/settings_fragment.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/sorting_settings_fragment.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/toolbar_wrapper.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/basic.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/basic_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/entry_basic.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/entry_rounded.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/glass_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/lockscreen_root_container.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/rounded_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/sleek_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/background_image_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/calendar_color_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/draggable_list_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/list_selection_calendar.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/list_selection_todo.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/navigation_view.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/sort_list_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/theme_selector.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/three_buttons.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/two_buttons.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/adaptive_background_settings_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/calendar_account_settings_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/calendar_settings_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/compound_customization_settings_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/double_seekbar_settings_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/double_slider_settings_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/dropdown_settings_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/settings_app_theme_selector_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/settings_compound_customization_entry.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/slider_settings_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/switch_settings_entry.xml" value="FULL" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/menu/nav_drawer.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/menu/nav_header.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/menu/nav_menu.xml" value="DEACTIVATED" />
+    <property name="SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/navigation/nav_graph.xml" value="FULL" />
+    <property name="SettingsSearchHistory" value="show dismiss&#10;language editor&#10;plugins&#10;suggestio&#10;foreach" />
+    <property name="SonarLint.analyzeAllFiles.hideWarning" value="false" />
+    <property name="Source Code Editor With PreviewLayout" value="Editor only" />
+    <property name="TextEditorWithPreview.SplitterProportionKey" value="0.54077595" />
+    <property name="appcds.runOnSecondStart" value="AI-213.7172.25.2113.9123335-2da922e065160b08a904c6939214321b3de501b9a2851f545148a181a11a1f65" />
+    <property name="ask.about.ctrl.y.shortcut.v2" value="true" />
+    <property name="build.toolwindow.Build Output.selection.state" value="com.intellij.build.BuildTreeConsoleView" />
+    <property name="build.toolwindow.Sync.selection.state" value="com.intellij.build.BuildTreeConsoleView" />
+    <property name="build.toolwindow.run.selection.state" value="com.intellij.build.BuildTreeConsoleView" />
+    <property name="bundled.plugins.list.saved.version" value="AI-213.7172.25.2113.9123335" />
+    <property name="codota_token" value="r+l3ydyWhZpM4OEJ771rr+iSnAmVrmB/H20x0iy0WsXirqP6Tkl2ZahLxt1l492lJzCrY8MMtbYbhnZVXjuRnWYYp7DMFx9x" />
+    <property name="colorPickerCategoryProperty" value="MATERIAL_300" />
+    <property name="com.gmail.blueboxware.libgdxplugin.time.com.badlogicgames.box2dlights_box2dlights" value="1673254761275" />
+    <property name="com.gmail.blueboxware.libgdxplugin.time.com.badlogicgames.gdx_gdx" value="1673254761276" />
+    <property name="com.gmail.blueboxware.libgdxplugin.time.de.tomgrill.gdxdialogs_gdx-dialogs-core" value="1664710350838" />
+    <property name="com.gmail.blueboxware.libgdxplugin.versions.com.badlogicgames.box2dlights_box2dlights" value="1.5" />
+    <property name="com.gmail.blueboxware.libgdxplugin.versions.com.badlogicgames.gdx_gdx" value="1.11.0" />
+    <property name="com.gmail.blueboxware.libgdxplugin.versions.de.tomgrill.gdxdialogs_gdx-dialogs-core" value="1.3.0" />
+    <property name="com.intellij.history.integration.ui.views.FileHistoryDialog.0" value="300" />
+    <property name="com.intellij.history.integration.ui.views.FileHistoryDialog.1" value="800" />
+    <property name="com.intellij.history.integration.ui.views.SelectionHistoryDialog.0" value="300" />
+    <property name="com.intellij.history.integration.ui.views.SelectionHistoryDialog.1" value="800" />
+    <property name="completion.ml.enabled.notification.shown" value="true" />
+    <property name="decompiler.legal.notice.accepted" value="true" />
+    <property name="defaultJdkConfigured" value="true" />
+    <property name="delete.locally.added.files" value="true" />
+    <property name="file.chooser.recent.files" value="$USER_HOME$/Documents/projects_on_ssd/StudioProjects/Scheduler&#10;/home/kloud/Documents/projects_on_ssd/StudioProjects/AttractorSimulator&#10;/home/kloud/Downloads/Untitled Diagram.drawio(1).svg&#10;/home/kloud/Downloads/Untitled Diagram.drawio.svg&#10;/home/kloud/Downloads/Untitled Diagram.drawio(2).svg&#10;/home/kloud/Downloads/lombok-plugin-0.34.1-2019.1.zip&#10;/home/kloud/Documents/shared/_projects/StudioProjects/Scheduler&#10;/home/kloud/Downloads/Exchange_64x.svg&#10;/home/kloud/Downloads/c8750f0d.0&#10;/home/kloud/Downloads&#10;/home/kloud/Downloads/Mano VGTU v2.3.0(98)_antisplit_mod.apk&#10;/mnt/personal_misc/!Danila/_projects/StudioProjects/Scheduler&#10;/mnt/personal_misc/!Danila/_projects/StudioProjects/Mvis&#10;/mnt/personal_misc/!Danila/_projects/StudioProjects/AttractorSimulator&#10;/home/kloud/Documents/projects_on_ssd/StudioProjects/Disk_deduper&#10;/home/kloud/StudioProjects/Disk_deduper&#10;/mnt/personal_misc/!Danila/Pictures/Icons and fonts/icon_monochrome.svg&#10;/home/kloud/AndroidStudioProjects/MyApplication&#10;/home/kloud/StudioProjects/ColorMusicController" />
+    <property name="file.gist.reindex.count" value="2247" />
+    <property name="fileTypeChangedCounter" value="8" />
+    <property name="fileTypeDetectors" value="com.android.tools.idea.profilers.capture.MemoryCaptureFileType$Detector:com.android.tools.idea.sqlite.fileType.SqliteFileTypeDetector:com.intellij.ide.scratch.ScratchFileServiceImpl$Detector:com.jetbrains.cidr.lang.OCHeaderFileTypeDetector:org.jetbrains.plugins.textmate.TextMateFileType$TextMateFileDetector" />
+    <property name="got.it.tooltip.reader.mode.got.it" value="1" />
+    <property name="got.it.tooltip.terminal.smart_command_execution" value="1" />
+    <property name="ide.updates.previous.build.number" value="AI-212.5712.43.2112.8815526" />
+    <property name="input.method.disabler.muted" value="true" />
+    <property name="inspector.open.All Attributes" value="true" />
+    <property name="inspector.open.Declared Attributes" value="true" />
+    <property name="inspector.open.textAppearance" value="true" />
+    <property name="installed.kotlin.plugin.version" value="213-1.7.20-release-for-android-studio-AS6777.52" />
+    <property name="kotlin-gradle-user-dirs" value="$USER_HOME$/.gradle" />
+    <property name="kotlin.lastUpdateCheck" value="1667842057605" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/projects_on_ssd/StudioProjects/AttractorSimulator" />
+    <property name="plugins.preselection.path" value="$USER_HOME$/Downloads" />
+    <property name="psd.dependencies.main.vertical.splitter.proportion" value="0.5721785" />
+    <property name="registry.to.advanced.settings.migration.build" value="AI-213.7172.25.2113.9123335" />
+    <property name="selected.color.option.type" value="INJECTED_LANGUAGE_FRAGMENT" />
+    <property name="settings.code.style.selected.tab.JAVA" value="Spaces" />
+    <property name="studio.profilerhide.network.profiler.migration.messaging" value="true" />
+    <property name="tasks.pass.word.conversion.enforced" value="true" />
+    <property name="vcs.branch.view.splitter.proportion" value="0.30465367" />
+    <property name="vcs.history.diff.splitter.proportion" value="0.40191898" />
+    <property name="vcs.log.changes.splitter.proportion" value="0.5482866" />
+    <property name="zielu.gittoolbox.app.config.selected.tab.id" value="zielu.gittoolbox.config.app.general" />
+  </component>
+  <component name="PropertyService"><![CDATA[{
+  "keyToString": {
+    "ATTACHED_TOOL_WINDOW.Compose Preview.TOOL_ORDER": "",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Compose Preview.TOOL_ORDER": "",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.DESIGN_FILES_PREVIEW_EDITOR.TOOL_ORDER": "",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Database Inspector.DATABASES.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Database Inspector.DATABASES.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Database Inspector.DATABASES.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Database Inspector.DATABASES.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Database Inspector.TOOL_ORDER": "DATABASES",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.PROPERTIES.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.PROPERTIES.LEFT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.PROPERTIES.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.PROPERTIES.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.TOOL_ORDER": "TREE,PROPERTIES",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.TREE.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.TREE.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.TREE.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Layout Inspector.TREE.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Main Preview.TOOL_ORDER": "",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.DEACTIVATED.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.DEACTIVATED.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.DEACTIVATED.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.DEACTIVATED.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.FULL.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.FULL.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.FULL.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.HOSTS.FULL.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.DEACTIVATED.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.DEACTIVATED.LEFT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.DEACTIVATED.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.DEACTIVATED.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.FULL.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.FULL.LEFT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.FULL.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.PROPERTIES.FULL.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TOOL_ORDER": "PROPERTIES,TREE,HOSTS",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.DEACTIVATED.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.DEACTIVATED.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.DEACTIVATED.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.DEACTIVATED.SPLIT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.FULL.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.FULL.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.FULL.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NAV_EDITOR.TREE.FULL.SPLIT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.SPLIT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.FULL.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.FULL.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.FULL.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.FULL.SPLIT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.SPLIT.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.SPLIT.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.SPLIT.MINIMIZED": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.COMPONENT_TREE.SPLIT.SPLIT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.DEACTIVATED.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.DEACTIVATED.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.DEACTIVATED.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.DEACTIVATED.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.FULL.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.FULL.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.FULL.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.FULL.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.SPLIT.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.SPLIT.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.SPLIT.MINIMIZED": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PALETTE.SPLIT.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.DEACTIVATED.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.DEACTIVATED.LEFT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.DEACTIVATED.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.DEACTIVATED.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.FULL.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.FULL.LEFT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.FULL.MINIMIZED": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.FULL.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.SPLIT.AUTO_HIDE": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.SPLIT.LEFT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.SPLIT.MINIMIZED": "true",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.PROPERTIES.SPLIT.SPLIT": "false",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.NELE_EDITOR.TOOL_ORDER": "PALETTE,PROPERTIES,COMPONENT_TREE",
+    "ATTACHED_TOOL_WINDOW.DEFAULT.Visualization.TOOL_ORDER": "",
+    "ATTACHED_TOOL_WINDOW.DESIGN_FILES_PREVIEW_EDITOR.TOOL_ORDER": "",
+    "ATTACHED_TOOL_WINDOW.Database Inspector.DATABASES.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.Database Inspector.TOOL_ORDER": "DATABASES",
+    "ATTACHED_TOOL_WINDOW.Layout Inspector.TOOL_ORDER": "TREE,PROPERTIES",
+    "ATTACHED_TOOL_WINDOW.Layout Inspector.TREE.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.Main Preview.TOOL_ORDER": "",
+    "ATTACHED_TOOL_WINDOW.NAV_EDITOR.HOSTS.DEACTIVATED.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.NAV_EDITOR.HOSTS.FULL.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.NAV_EDITOR.TOOL_ORDER": "PROPERTIES,TREE,HOSTS",
+    "ATTACHED_TOOL_WINDOW.NAV_EDITOR.TREE.DEACTIVATED.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.NAV_EDITOR.TREE.DEACTIVATED.SPLIT": "true",
+    "ATTACHED_TOOL_WINDOW.NAV_EDITOR.TREE.FULL.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.NAV_EDITOR.TREE.FULL.SPLIT": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.DEACTIVATED.SPLIT": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.FULL.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.FULL.SPLIT": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.SPLIT.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.SPLIT.MINIMIZED": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.COMPONENT_TREE.SPLIT.SPLIT": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.LEFT.UNSCALED.WIDTH": "296",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.PALETTE.DEACTIVATED.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.PALETTE.FULL.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.PALETTE.SPLIT.LEFT": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.PALETTE.SPLIT.MINIMIZED": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.PROPERTIES.SPLIT.MINIMIZED": "true",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.RIGHT.UNSCALED.WIDTH": "314",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.TEXT_SEARCH_HISTORY": "list\nsrc\nhei\nele\ncorner",
+    "ATTACHED_TOOL_WINDOW.NELE_EDITOR.TOOL_ORDER": "PALETTE,PROPERTIES,COMPONENT_TREE",
+    "ATTACHED_TOOL_WINDOW.Visualization.TOOL_ORDER": "",
+    "AndroidInitConfigurator.V1": "true",
+    "AndroidInitConfigurator.V3": "true",
+    "AndroidInitConfigurator.V5": "true",
+    "BuildView.Splitter.Proportion": "0.38428184",
+    "CHARACTER_FILTER_HISTORY": "jah",
+    "ChangesViewManager.DETAILS_SPLITTER_PROPORTION": "0.38215858",
+    "ColorChooser.RecentColors": "255-216-57-255,,,52-32-10-255,,,86-52-16-255,,,217-163-67-255,,,104-151-187-255,,,255-218-77-255,,,255-157-59-255,,,255-80-80-255,,,214-255-255-255,,,176-41-255-255,,,77-137-255-255,,,255-153-47-255,,,255-59-59-255,,,166-166-255-255,,,157-221-255-255,,,150-171-245-255,,,255-110-110-255,,,133-192-133-255,,,229-60-57-255,,,150-185-222-255",
+    "CommitChangeListDialog.DETAILS_SPLITTER_PROPORTION_2": "0.6007752",
+    "CommitToolWindow.COMMIT_SPLITTER_PROPORTION": "0.55381167",
+    "ExpandBeforeRunStepsPanel": "true",
+    "INSPECTION_FILTER_HISTORY": "17\nblocking\ncontexts blocking\nlambda\nautoclo\nclos\nauto closable\ntry with resources\nstatic\ninitial capa",
+    "IdeErrorsDialog.LAST_OK_ACTION": "REPORT_AND_CLEAR_ALL",
+    "InstalledPluginsSearchHistory": "emul\nplantuml\nplantu\nplant\nplan",
+    "KEYMAP": "set value\nrename\nnext highlighted\nnext pro\nedit",
+    "LAST_CALCULATED_COLOR_INDEX_KEY": "8",
+    "MarketplacePluginsSearchHistory": "plantuml\nplauml\npluml\numl\nul",
+    "MemberChooser.copyJavadoc": "false",
+    "MemberChooser.showClasses": "true",
+    "MobileminApi": "26",
+    "MoveFile.OpenInEditor": "true",
+    "NextRunPlatformUpdateBuild": "AI-253.32098.37.2534.15336583",
+    "NextRunPlatformUpdateSelfBuild": "AI-253.32098.37.2534.15232325",
+    "NextRunPlatformUpdateVersion": "Panda 4 | 2025.3.4 Patch 1",
+    "NlScreenModeProvider": "RENDER",
+    "NonModalCommitPromotionState": "ACCEPTED",
+    "PROJECT_STRUCTURE_NOTIFICATION_LAST_HIDDEN_TIMESTAMP": "1773601669489",
+    "PluginConfigurable.selectionTab": "1",
+    "RunOnceActivity.TerminalFontSettingsService.fixStoredNonMonospacedFonts": "true",
+    "RunOnceActivity.TerminalOptionsProvider.migration.2025.1.1": "true",
+    "RunOnceActivity.VFSInitializationConditionsToFusReporter": "true",
+    "RunOnceActivity.cache.folding.model.on.disk.true": "true",
+    "RunOnceActivity.cidr.test.framework.showIndexingAsTask": "true",
+    "RunOnceActivity.cidr.test.roots.only": "true",
+    "RunOnceActivity.git.modal.commit.deprecation.notification": "true",
+    "RunOnceActivity.git.modal.commit.toggle": "true",
+    "RunOnceActivity.reset.auto.reparse.settings.to.default": "true",
+    "RunOnceActivity.se.text.search": "true",
+    "RunOnceActivity.set.chat.model.provider.canary4": "true",
+    "RunOnceActivity.zielu.gittoolbox.worktree.promo.1": "true",
+    "SAVED_ANDROID_NPW_ASKED_LANGUAGE": "true",
+    "SAVED_ANDROID_NPW_LANGUAGE": "Kotlin",
+    "SAVED_ANDROID_PACKAGE": "noorg.kloud",
+    "SHELLCHECK.PATH": "",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/debug_menu_dialog.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/entry_settings.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/activity_main.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/content_wrapper.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/home_fragment_content.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/home_fragment_wrapper.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/permissions_request_fragment.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/basic_entry.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/rounded_entry.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/sleek_entry.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/calendar_color_entry.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/calendar_account_settings_entry.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/calendar_settings_entry.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/title_settings_entry.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/navigation/nav_graph.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/home/kloud/Documents/projects_on_ssd/StudioProjects/Scheduler/app/src/main/res/xml/provider_paths.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/home/kloud/Downloads/savertuner/app/src/main/res/layout/preference_widget_material_switch.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/home/kloud/Downloads/savertuner/app/src/main/res/xml/main.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Bloodmonitorbridge/app/src/main/res/layout/fragment_first.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/drawable/round_bg_18dp_surfaceBright.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/calendar/layout/calendar_day_layout.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/add_edit_entry_dialog_fragment.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/add_or_edit_entry_dialog.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/bg_grid_selection_view.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/calendar_entry_info.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/debug_menu_dialog.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/entry_effects_dialog.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/entry_settings.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/extended_entry_bg_settings.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/grid_selection_view.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/list_view.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/dialogs/layout/lockcreen_entry_effects_dialog_fragment.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/activity_main.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/content_wrapper.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/home_fragment_content.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/home_fragment_wrapper.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/settings_fragment.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/sorting_settings_dialog_fragment.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/full_views/layout/sorting_settings_fragment.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/lockscreen_views/layout/sleek_entry.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/background_image_entry.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/calendar_color_entry.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/draggable_list_entry.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/list_selection_calendar.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/list_selection_event.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/list_selection_todo.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/partials/layout/navigation_view.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/adaptive_background_settings_entry.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/calendar_settings_entry.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/compound_customization_settings_entry.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/double_slider_settings_entry.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/layouts/settings/layout/reset_button_settings_entry.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/Scheduler/app/src/main/res/navigation/nav_graph.xml": "DEACTIVATED",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/VTHelper/composeApp/src/androidMain/res/drawable/ic_launcher_background.xml": "FULL",
+    "SPLIT_EDITOR_MODE_/mnt/fast_storage/projects/StudioProjects/VTHelper/composeApp/src/androidMain/res/mipmap-anydpi-v26/ic_launcher.xml": "DEACTIVATED",
+    "SettingsSearchHistory": "images\nemul\npreview\ngenerate\ndict",
+    "SonarLint.analyzeAllFiles.hideWarning": "true",
+    "SonarLint.firstAutoAnalysisDate": "1704108964216",
+    "SonarLint.lastPromotionNotificationDate": "1777923953449",
+    "SonarLint.wasReportEverUsed": "true",
+    "Source Code Editor With PreviewLayout": "Editor only",
+    "TextEditorWithPreview.SplitterProportionKey": "0.63451445",
+    "android.property.left.fraction": "0.35446686",
+    "appcds.runOnSecondStart": "AI-232.10300.40.2321.11668458-8224b5fcba0f879c90469ccfe9e3d7070aebc62ff8a52c34d0510600035e5ac0",
+    "build.toolwindow.Build Output.selection.state": "com.intellij.build.BuildTreeConsoleView",
+    "build.toolwindow.Sync.selection.state": "com.intellij.build.BuildTreeConsoleView",
+    "build.toolwindow.run.selection.state": "com.intellij.build.BuildTreeConsoleView",
+    "bundled.plugins.list.saved.version": "AI-233.14808.21.2331.11842104",
+    "colorPickerCategoryProperty": "MATERIAL_500",
+    "colorValuePanel_colorFormat": "HSB",
+    "com.gmail.blueboxware.libgdxplugin.time.com.badlogicgames.box2dlights_box2dlights": "1711441824823",
+    "com.gmail.blueboxware.libgdxplugin.time.com.badlogicgames.gdx_gdx": "1711441824822",
+    "com.gmail.blueboxware.libgdxplugin.versions.com.badlogicgames.box2dlights_box2dlights": "1.5",
+    "com.gmail.blueboxware.libgdxplugin.versions.com.badlogicgames.gdx_gdx": "1.12.1",
+    "com.google.aiplugin.rag.indexer.implementation": "com.google.aiplugin.rag.bm25.CrawlerBm25Indexer/v3",
+    "com.intellij.history.integration.ui.views.FileHistoryDialog.0": "300",
+    "com.intellij.history.integration.ui.views.FileHistoryDialog.1": "800",
+    "com.intellij.history.integration.ui.views.SelectionHistoryDialog.0": "300",
+    "com.intellij.history.integration.ui.views.SelectionHistoryDialog.1": "800",
+    "decompiler.legal.notice.accepted": "true",
+    "defaultJdkConfigured": "true",
+    "enter_selection_count": "5",
+    "experimental.ui.first.promotion.localdate": "2023-12-06",
+    "experimental.ui.promo.banner.disabled": "true",
+    "experimental.ui.used.version": "242.21829.142.2421.12409432",
+    "file.gist.reindex.count": "578",
+    "fileTypeChangedCounter": "11",
+    "find.popup.splitter": "0.65595466",
+    "fontSizeToResetConsole": "13.0",
+    "fontSizeToResetEditor": "13.0",
+    "got.it.tooltip.Plugins Auto-Update": "1",
+    "got.it.tooltip.changes.view.toolwindow": "1",
+    "got.it.tooltip.filter.tip": "1",
+    "got.it.tooltip.reader.mode.got.it": "1",
+    "got.it.tooltip.sonarlint.clean.code.tooltip": "1",
+    "got.it.tooltip.sonarlint.focus.new.code.tooltip": "1",
+    "got.it.tooltip.sonarlint.traffic.light.tooltip": "1",
+    "gotit.previous.run": "AI-223.8836.35.2231.10671973",
+    "hasWalkthroughRunOnce": "true",
+    "ide.islands.ab3": "true",
+    "idea.islands.enabled": "true",
+    "ignore.essential-highlighting.mode": "true",
+    "input.method.disabler.muted": "true",
+    "inspector.open.Declared Attributes": "true",
+    "installed.kotlin.plugin.version": "253.32098.37.2534.15232325-AS",
+    "is-getting-started-opened": "true",
+    "kotlin.lastUpdateCheck": "1778101047261",
+    "kotlin.updates.whats.new.shown.for": "2.2.20",
+    "last_opened_file_path": "/opt/android-studio/plugins/android/resources/images/asset_studio/ic_launcher_foreground.xml",
+    "llm.installer.last.toolwindow.state": "AI_ASSISTANT",
+    "migrate.android.sdk.path.to.roamable.storage": "false",
+    "migrated.non.roamable.values.from.general.settings": "true",
+    "newly.installed.api.level": "34",
+    "org.intellij.images.editor.actions.BackgroundImageDialog#recent": "",
+    "previousColorScheme": "_@user_Gruvbox Dark Medium",
+    "rainbow.selected.color.option.name": "Round Brackets",
+    "registry.to.advanced.settings.migration.build": "AI-253.32098.37.2534.15232325",
+    "selected.color.option.type": "KOTLIN_SEMICOLON",
+    "settings.code.style.selected.tab.JAVA": "Spaces",
+    "sonarlint_rule_filter": "try with re\ngeneric\nswitch\nstatic\nchild\njava:S1158",
+    "studio.bot.shown": "true",
+    "studio.ml.bot.history.legacySessionRestored": "true",
+    "studio.profilerSESSION_EXPANDED_WIDTH": "200",
+    "tasks.pass.word.conversion.enforced": "true",
+    "terminal.gen.one.option.visible": "false",
+    "updater.configure.platform.details.checkbox.selected": "true",
+    "zielu.gittoolbox.app.config.selected.tab.id": "zielu.gittoolbox.config.app.blame"
+  },
+  "keyToStringList": {
+    "file.chooser.recent.files": [
+      "/opt/android-studio/plugins/android/resources/images/asset_studio/ic_launcher_foreground.xml",
+      "/home",
+      "/home/kloud",
+      "/home/kloud/Downloads/export2.zip",
+      "/home/kloud/.local/share/android/Sdk",
+      "/home/kloud/Downloads/InnerTune"
+    ],
+    "fileTypeDetectors": [
+      "com.intellij.ide.scratch.ScratchFileServiceImpl$Detector",
+      "com.jetbrains.cidr.lang.OCHeaderFileTypeDetector",
+      "com.android.tools.idea.profilers.capture.MemoryCaptureFileType$Detector",
+      "org.jetbrains.plugins.textmate.TextMateFileType$TextMateFileDetector"
+    ],
+    "kotlin-gradle-user-dirs": [
+      "/home/kloud/.local/share/gradle"
+    ]
+  }
+}]]></component>
+  <component name="ShownTips">{
+  &quot;shownTips&quot;: {
+    &quot;Kotlin&quot;: 1693153884331,
+    &quot;InjectSQLLanguage&quot;: 1692341587396,
+    &quot;Kotlin_mix&quot;: 1691687476451,
+    &quot;Kotlin_Java_convert&quot;: 1690902416912
+  }
+}</component>
+  <component name="TerminalCommandHistoryManager">
+    <command-history-files>
+      <command-history-file filename="VTHelper-history" project-path="/mnt/fast_storage/projects/StudioProjects/VTHelper" last-access-time="1778101480513" />
+    </command-history-files>
+  </component>
+  <component name="TerminalUiSettingsManager">
+    <option name="cursorShape" value="UNDERLINE" />
+  </component>
+</application>

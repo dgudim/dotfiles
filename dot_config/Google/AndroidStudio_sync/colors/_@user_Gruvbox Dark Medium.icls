@@ -1,0 +1,31 @@
+<scheme name="_@user_Gruvbox Dark Medium" version="142" parent_scheme="Darcula">
+  <metaInfo>
+    <property name="created">2024-05-01T20:15:28</property>
+    <property name="ide">AndroidStudio</property>
+    <property name="ideVersion">2023.2.1.25</property>
+    <property name="modified">2024-05-01T20:29:36</property>
+    <property name="originalScheme">Gruvbox Dark Medium</property>
+    <property name="partialSave">true</property>
+    <property name="pluginId">com.vincentp.gruvbox-theme</property>
+  </metaInfo>
+  <attributes>
+    <option name="CONSTRUCTOR_DECLARATION_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="fabd2f" />
+      </value>
+    </option>
+    <option name="DEFAULT_FUNCTION_CALL">
+      <value>
+        <option name="FOREGROUND" value="b8bb26" />
+      </value>
+    </option>
+    <option name="INTERFACE_NAME_ATTRIBUTES" baseAttributes="DEFAULT_INTERFACE_NAME" />
+    <option name="METHOD_DECLARATION_ATTRIBUTES" baseAttributes="DEFAULT_FUNCTION_DECLARATION" />
+    <option name="TYPE_PARAMETER_NAME_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="fabd2f" />
+        <option name="EFFECT_TYPE" value="2" />
+      </value>
+    </option>
+  </attributes>
+</scheme>

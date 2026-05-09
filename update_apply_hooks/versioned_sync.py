@@ -51,6 +51,28 @@ class ProgramConfig:
 
 configs: list[ProgramConfig] = [
     ProgramConfig(
+        name="Android studio",
+        config_location=Path(HOME, ".config/Google"),
+        settings_dir_prefix="AndroidStudio",
+        data_location=Path(HOME, ".local/share/Google/"),
+        config_files_to_sync={
+            "options/other.xml",
+            "options/advancedSettings.xml",
+            "options/colors.scheme.xml",
+            "options/console-font.xml",
+            "options/editor.xml",
+            "options/editor-font.xml",
+            "options/ui.lnf.xml",
+            "options/projectView.xml",
+            "templates/user.xml",
+            re.compile("options/linux/.*"),
+            re.compile("keymaps/.*"),
+            re.compile("colors/.*"),
+            re.compile("codestyles/.*"),
+        },
+        data_files_to_sync={re.compile("classic-ui/.*"), re.compile("Gruvbox.Theme.*")},
+    ),
+    ProgramConfig(
         name="Intellij idea",
         config_location=Path(HOME, ".config/JetBrains"),
         settings_dir_prefix="IntelliJIdea",
@@ -70,7 +92,7 @@ configs: list[ProgramConfig] = [
             re.compile("colors/.*"),
             re.compile("codestyles/.*"),
         },
-        data_files_to_sync={re.compile("classic-ui/.*"), re.compile("Gruvbox_Theme.*")},
+        data_files_to_sync={re.compile("classic-ui/.*"), re.compile("Gruvbox.Theme.*")},
     ),
     ProgramConfig(
         name="Rider",
@@ -92,7 +114,7 @@ configs: list[ProgramConfig] = [
             re.compile("colors/.*"),
             re.compile("codestyles/.*"),
         },
-        data_files_to_sync={re.compile("classic-ui/.*"), re.compile("Gruvbox_Theme.*")},
+        data_files_to_sync={re.compile("classic-ui/.*"), re.compile("Gruvbox.Theme.*")},
     ),
     ProgramConfig(
         name="Smartgit",
@@ -132,7 +154,7 @@ ignore_patterns = ["__pycache__"]
 @dataclass
 class VersionedDirectory:
     is_latest: bool
-    version: float
+    version: int
     path_: Path
 
 
@@ -141,12 +163,12 @@ def get_all_versioned_dirs(base_path: Path, dir_prefix: str):
         f"{LIGHTER_GRAY}  >> Getting versioned dirs from {CYAN}{base_path}{LIGHTER_GRAY} with prefix: {L_GREEN}{dir_prefix}{NC}"
     )
 
-    dirs: dict[float, VersionedDirectory] = {}
-    max_version: float = 0
+    dirs: dict[int, VersionedDirectory] = {}
+    max_version: int = 0
     for dir_ in base_path.glob(f"{dir_prefix}*"):
         if dir_.is_file() or dir_.name.endswith(SYNC_DIR_POSTFIX):
             continue
-        version = float(dir_.name.replace(dir_prefix, ""))
+        version = int(dir_.name.replace(dir_prefix, "").replace(".", ""))
         print(f"{GRAY}    -> Found dir: {dir_}, {LIGHT_GRAY}version: {L_YELLOW}{version}{NC}")
 
         dirs[version] = VersionedDirectory(is_latest=False, version=version, path_=dir_)
