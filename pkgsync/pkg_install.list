@@ -1030,6 +1030,8 @@ httpie
 mtr
 httptap-bin
 quien-bin
+prettyping
+bettercap
 
 ## GUIS
 proton-vpn-gtk-app
