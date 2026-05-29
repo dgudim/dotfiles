@@ -366,7 +366,6 @@ mission-center
 goldendict-ng
 mousam
 prusa-slicer
-orca-slicer-unstable-bin
 serialplot-git
 textpieces
 kcolorchooser
@@ -378,6 +377,8 @@ kweather
 lact
 # - Pronterface
 printrun
+# - RDP
+krfb
 
 # CLI APPS
 ttyd
@@ -470,6 +471,7 @@ fbgrab
 wikiman
 binwalk
 landdown-git
+fselect-bin
 
 ## BTRFS
 compsize
@@ -577,8 +579,6 @@ gjs
 nawk
 open-in-native-client
 waypipe
-# For media downloader in the browser
-vdhcoapp-bin
 # For limine snapper sync
 b3sum
 vlc-plugins-all
@@ -712,6 +712,8 @@ perl-json
 perl-string-crc32
 perl-file-basedir
 perl-path-class
+perl-json-xs
+perl-yaml-libyaml
 visual-studio-code-bin
 zed
 imhex
@@ -942,7 +944,7 @@ openocd
 delve
 
 ## JS
-nodejs-lts-jod
+nodejs-lts-krypton
 yarn
 npm
 npm-check-updates
@@ -1143,6 +1145,7 @@ atomicparsley
 avisynthplus
 akvcam-dkms
 opentimelineio
+media-downloader-git
 
 ## CLIS
 mplayer
@@ -1291,7 +1294,7 @@ bluez-tools
 usbip
 bindfs
 libinput-tools
-
+gperf
 
 
 
@@ -1362,6 +1365,9 @@ scour
 typst
 mupdf
 mupdf-tools
+mermaid-cli
+doxygen
+gi-docgen
 
 ## Ascii
 ditaa

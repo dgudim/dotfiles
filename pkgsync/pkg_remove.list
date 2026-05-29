@@ -125,6 +125,7 @@ postgrestools-bin
 cavalier
 gvfs-google
 pacman-systemd-inhibit
+vdhcoapp-bin
 
 # Obsolete
 dbeaver-plugin-svg-format
@@ -133,6 +134,7 @@ openssl-1.0
 openssl-1.1
 libkolabxml
 libkcompactdisc
+nodejs-lts-jod
 
 # Replaced with a different version
 translate-shell
