@@ -719,6 +719,7 @@ visual-studio-code-bin
 zed
 imhex
 strace
+strace-tui
 pax-utils
 vscode-json-languageserver
 yamlfmt
