@@ -127,6 +127,7 @@ gvfs-google
 pacman-systemd-inhibit
 vdhcoapp-bin
 watchman-bin
+atuin-desktop-bin
 
 # Obsolete
 dbeaver-plugin-svg-format
