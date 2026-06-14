@@ -262,7 +262,7 @@ def pre():
     for config in configs:
         print(f"{LIGHTER_GRAY}==== Processing: {L_CYAN}{config.name}{NC}")
 
-        if config.data_location is not None:
+        if config.data_location is not None and config.data_location.exists():
             process_versioned_dirs_cleanup_and_copy_sync_files(
                 config.data_location,
                 config.settings_dir_prefix,
@@ -271,7 +271,7 @@ def pre():
                 CopyDirection.TO_SYNC_DIR_FROM_LATEST_PROGRAM_DIR,
             )
 
-        if config.config_location is not None:
+        if config.config_location is not None and config.config_location.exists():
             process_versioned_dirs_cleanup_and_copy_sync_files(
                 config.config_location,
                 config.settings_dir_prefix,
@@ -287,7 +287,7 @@ def post():
     for config in configs:
         print(f"{LIGHTER_GRAY}==== Processing: {L_CYAN}{config.name}{NC}")
 
-        if config.data_location is not None:
+        if config.data_location is not None and config.data_location.exists():
             process_versioned_dirs_cleanup_and_copy_sync_files(
                 config.data_location,
                 config.settings_dir_prefix,
@@ -296,7 +296,7 @@ def post():
                 CopyDirection.TO_LATEST_PROGRAM_DIR_FROM_SYNC_DIR,
             )
 
-        if config.config_location is not None:
+        if config.config_location is not None and config.config_location.exists():
             process_versioned_dirs_cleanup_and_copy_sync_files(
                 config.config_location,
                 config.settings_dir_prefix,

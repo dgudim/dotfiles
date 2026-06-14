@@ -126,6 +126,7 @@ cavalier
 gvfs-google
 pacman-systemd-inhibit
 vdhcoapp-bin
+watchman-bin
 
 # Obsolete
 dbeaver-plugin-svg-format

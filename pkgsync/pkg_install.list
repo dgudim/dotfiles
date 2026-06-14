@@ -180,7 +180,6 @@ cryfs
 gocryptfs
 ntfs-3g
 fsarchiver
-watchman-bin
 
 ### GUIs
 gparted

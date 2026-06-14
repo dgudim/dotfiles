@@ -19,7 +19,7 @@ LEADING_INDEX_RE = re.compile(r"^\s*\d{1,3}\s*[.):\-]\s*")
 # Wrapping brackets [0:00], (0:00).
 BRACKETED_TS_RE = re.compile(r"[\[(]\s*(?:\d{1,2}:)?\d{1,2}:\d{2}\s*[\])]")
 
-EXCLUDED_RESULT_PHRASES = ("chill mix", "432 hz")
+EXCLUDED_RESULT_PHRASES = ("chill mix", "432 hz", "432hz")
 
 # A YouTube search result is only accepted when its title is at least this
 # similar to the track title; below this it is treated as "not found" rather
