@@ -1,3 +1,4 @@
+from collections.abc import Callable
 from typing import Any
 
 import blf
@@ -29,11 +30,17 @@ class TextDrawer:
     __text: str
     __handle: Any | None
     __color: Color
+    __draw_func: Callable[[Context, int, str, Color], None]
 
-    def __init__(self, msg: str):
+    def __init__(
+        self,
+        msg: str,
+        draw_func: Callable[[Context, int, str, Color], None],
+    ):
         self.__text = msg
         self.__handle = None
         self.__color = Color((1, 1, 1))
+        self.__draw_func = draw_func
 
     def is_running(self) -> bool:
         return self.__handle is not None
@@ -66,19 +73,5 @@ class TextDrawer:
             self.show(context)
 
     def _draw(self, context: Context) -> None:
-        region = get_region(context, "VIEW_3D", "WINDOW")
-        if region is not None:
-            font_id: int = 0
-            blf.enable(font_id, blf.WORD_WRAP)
-            blf.word_wrap(font_id, 1024)
-            blf.enable(font_id, blf.SHADOW)
-            blf.shadow_offset(font_id, 1, -1)
-
-            set_color_g(blf, self.__color)
-            blf.size(font_id, 20)
-            w, h = blf.dimensions(font_id, self.__text)
-            blf.position(font_id, region.width / 2 - w / 2, region.height - 120, 0)
-            blf.draw(font_id, self.__text)
-
-            blf.disable(font_id, blf.WORD_WRAP)
-            blf.disable(font_id, blf.SHADOW)
+        font_id: int = 0
+        self.__draw_func(context, font_id, self.__text, self.__color)

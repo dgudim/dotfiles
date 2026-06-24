@@ -13,7 +13,13 @@ Seen=true
 [Applications][firefox]
 Seen=true
 
+[Applications][fr.handbrake.ghb]
+Seen=true
+
 [Applications][google-chrome]
+Seen=true
+
+[Applications][im.dino.Dino]
 Seen=true
 
 [Applications][kando]
@@ -23,6 +29,9 @@ Seen=true
 Seen=true
 
 [Applications][org.easycoding.TunedSwitcher]
+Seen=true
+
+[Applications][org.gajim.Gajim]
 Seen=true
 
 [Applications][org.nicotine_plus.Nicotine]

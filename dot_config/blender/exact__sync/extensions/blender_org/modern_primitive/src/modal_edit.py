@@ -1,0 +1,558 @@
+from typing import Any, ClassVar
+import math
+
+import bpy
+from bpy.types import Context, Event, Operator
+from idprop.types import IDPropertyArray
+from mathutils import Vector
+
+from . import primitive_prop as P
+from .primitive import TYPE_TO_PRIMITIVE
+from .text import TextDrawer
+from .hud.modal_edit_hud import ModalEditHUD
+from .util.aux_func import (
+    get_active_and_selected_primitive,
+    get_mpr_modifier,
+    is_modern_primitive,
+    type_from_modifier_name,
+)
+from .util.aux_node import (
+    find_interface_name,
+    get_interface_value,
+    get_interface_values,
+    set_interface_value,
+    update_node_interface,
+)
+
+
+PROP_TO_SNAP_NAME: dict[str, str] = {
+    P.Size.name: P.SnapSize.name,
+    P.SizeX.name: P.SnapSize.name,
+    P.SizeY.name: P.SnapSize.name,
+    P.SizeZ.name: P.SnapSize.name,
+    P.MinX.name: P.SnapSize.name,
+    P.MinY.name: P.SnapSize.name,
+    P.MinZ.name: P.SnapSize.name,
+    P.MaxX.name: P.SnapSize.name,
+    P.MaxY.name: P.SnapSize.name,
+    P.MaxZ.name: P.SnapSize.name,
+    P.DivisionX.name: P.SnapDivision.name,
+    P.DivisionY.name: P.SnapDivision.name,
+    P.DivisionZ.name: P.SnapDivision.name,
+    P.GlobalDivision.name: P.SnapDivision.name,
+    P.Height.name: P.SnapHeight.name,
+    P.Radius.name: P.SnapRadius.name,
+    P.TopRadius.name: P.SnapTopRadius.name,
+    P.BottomRadius.name: P.SnapBottomRadius.name,
+    P.RingRadius.name: P.SnapRingRadius.name,
+    P.OuterRadius.name: P.SnapOuterRadius.name,
+    P.InnerRadius.name: P.SnapInnerRadius.name,
+    P.DivisionCircle.name: P.SnapCircleDivision.name,
+    P.DivisionSide.name: P.SnapSideDivision.name,
+    P.DivisionFill.name: P.SnapFillDivision.name,
+    P.DivisionRing.name: P.SnapRingDivision.name,
+    P.DivisionCap.name: P.SnapCapDivision.name,
+    P.NumBlades.name: P.SnapNumBlades.name,
+    P.Twist.name: P.SnapTwist.name,
+    P.InnerCircleDivision.name: P.SnapInnerCircleDivision.name,
+    P.InnerCircleRadius.name: P.SnapInnerCircleRadius.name,
+    P.FilletCount.name: P.SnapFilletCount.name,
+    P.FilletRadius.name: P.SnapFilletRadius.name,
+    P.Rotations.name: P.SnapRotations.name,
+}
+
+
+SEPARATOR_WIDTH = 50
+INDEX_X = 0
+INDEX_Y = 1
+INDEX_Z = 2
+
+
+def expand_idarray(val: Any) -> Any:
+    if isinstance(val, IDPropertyArray):
+        return val.to_list()
+    return val
+
+
+def get_prop_shortcuts(prop_name: str) -> list[str]:
+    name = prop_name.upper()
+    keys = []
+
+    # Map of keywords contained in property names and corresponding shortcut keys
+    SHORTCUT_MAP: dict[str, str] = {
+        "GLOBAL": "G",
+        P.PT.Size.name.upper(): "S",
+        P.PT.Height.name.upper(): "H",
+        P.PT.Width.name.upper(): "W",
+        P.Smooth.name.upper(): "W",
+        " X": "X",
+        " Y": "Y",
+        " Z": "Z",
+    }
+
+    # Keyword search
+    keys.extend([key for kw, key in SHORTCUT_MAP.items() if kw in name])
+
+    # Radius logic: evaluated exclusively
+    if "RADIUS" in name:
+        radius_map: dict[str, str] = {
+            "TOP": "T",
+            "BOTTOM": "B",
+            "RING": "R",
+            "OUTER": "O",
+            "INNER": "I",
+        }
+        # Find first matching radius specific key, default to 'R'
+        radius_key: str = next((key for kw, key in radius_map.items() if kw in name), "R")
+        keys.append(radius_key)
+
+    # Division logic: multiple entries allowed
+    if "DIV" in name:
+        div_map: dict[str, str] = {
+            "SIDE": "S",
+            "FILL": "F",
+            "CIRCLE": "C",
+            "RING": "R",
+            "CAP": "P",
+        }
+        keys.extend([key for kw, key in div_map.items() if kw in name])
+
+    # Fallback to the first character if no shortcut is found
+    if not keys and name:
+        keys.append(name[0])
+    return keys
+
+
+class MPR_OT_modal_edit(Operator):
+    """Modal operator to edit Modern Primitive properties"""
+
+    _obj: bpy.types.Object | None
+    _mod: bpy.types.Modifier | None
+    _params: set[str] | None
+    _snap_params: list[str] | None
+    _initial_values: dict[str, any] | None
+    _input_str: str
+    _mode: str
+    _text_drawer: TextDrawer | None
+
+    _modes: list[str]
+    """List of all available editing modes."""
+    _mode_to_prop: dict[str, tuple[P.Prop, int | None]]
+    """Mapping from mode name to (Property, ComponentIndex)."""
+    _key_to_modes: dict[str, list[str]]
+    """Mapping from keyboard key to a list of modes to cycle through."""
+    _primitive_name: str
+    """Name of the primitive being edited (for display)."""
+
+    bl_idname = "object.mpr_modal_edit"
+    bl_label = "Modal Edit Modern Primitive"
+    bl_options: ClassVar[set[str]] = {"REGISTER", "UNDO"}
+
+    @classmethod
+    def poll(cls, context: Context | None) -> bool:
+        if context is None:
+            return False
+        obj = get_active_and_selected_primitive(context)
+        return obj is not None and is_modern_primitive(obj)
+
+    def _init_modes(self, primitive_class: type):
+        self._modes = []
+        self._mode_to_prop = {}
+        self._key_to_modes = {}
+
+        params = list(primitive_class.get_params())
+        # Add Smooth and Smooth Angle if they exist in GN but not in class params
+        for p in [P.Smooth, P.SmoothAngle]:
+            if p.name not in [pr.name for pr in params]:
+                try:
+                    find_interface_name(self._mod.node_group, p.name)
+                    params.append(p)
+                except KeyError:
+                    pass
+
+        for prop in params:
+            prop_modes = []
+            if prop.type is Vector:
+                # All components
+                name_all = prop.name
+                prop_modes.append(name_all)
+                self._mode_to_prop[name_all] = (prop, None)
+
+                # Individual components
+                for i, axis in enumerate(["X", "Y", "Z"]):
+                    name_comp = f"{prop.name} {axis}"
+                    prop_modes.append(name_comp)
+                    self._mode_to_prop[name_comp] = (prop, i)
+            else:
+                prop_modes.append(prop.name)
+                self._mode_to_prop[prop.name] = (prop, None)
+
+            self._modes.extend(prop_modes)
+
+            # Assign keys
+            keys = get_prop_shortcuts(prop.name)
+            for k in keys:
+                if k not in self._key_to_modes:
+                    self._key_to_modes[k] = []
+                self._key_to_modes[k].extend(prop_modes)
+
+        if self._modes:
+            self._mode = self._modes[0]
+
+    def modal(self, context: Context, event: Event) -> set[str]:
+        context.area.tag_redraw()
+
+        # Confirm with Enter key or left click
+        if event.type in {"RET", "NUMPAD_ENTER"} or (
+            event.type == "LEFTMOUSE" and event.value == "PRESS"
+        ):
+            self.finish(context)
+            return {"FINISHED"}
+
+        # Cancel with Escape key or right click
+        if event.type in {"ESC"} or (event.type == "RIGHTMOUSE" and event.value == "PRESS"):
+            self.cancel(context)
+            return {"CANCELLED"}
+
+        # Mouse wheel handling
+        if event.type in {"WHEELUPMOUSE", "WHEELDOWNMOUSE"}:
+            if event.shift:
+                if event.type == "WHEELDOWNMOUSE":
+                    current_idx = self._modes.index(self._mode)
+                    self._mode = self._modes[(current_idx + 1) % len(self._modes)]
+                elif event.type == "WHEELUPMOUSE":
+                    current_idx = self._modes.index(self._mode)
+                    self._mode = self._modes[(current_idx - 1) % len(self._modes)]
+
+                self._input_str = ""
+                self._update_text()
+                return {"RUNNING_MODAL"}
+            return {"PASS_THROUGH"}
+
+        # Switch items with Tab key (reverse order with Shift+Tab)
+        if event.type == "TAB" and event.value == "PRESS":
+            current_idx = self._modes.index(self._mode)
+            if event.shift:
+                self._mode = self._modes[(current_idx - 1) % len(self._modes)]
+            else:
+                self._mode = self._modes[(current_idx + 1) % len(self._modes)]
+
+            self._input_str = ""
+            self._update_text()
+            return {"RUNNING_MODAL"}
+
+        if event.type in {"MIDDLEMOUSE", "TRACKPADPAN", "TRACKPADZOOM"}:
+            return {"PASS_THROUGH"}
+
+        if event.value == "PRESS":
+            # Handle numeric input
+            if event.ascii.isdigit() or event.ascii in {".", "-"}:
+                self._input_str += event.ascii
+                self._update_value(context)
+
+            # Backspace behavior
+            elif event.type == "BACK_SPACE":
+                if len(self._input_str) > 0:
+                    self._input_str = self._input_str[:-1]
+                    self._update_value(context)
+                else:
+                    # If Backspace is pressed with no text input,
+                    # reset to default (value at start of editing)
+                    self._reset_current_property(context)
+
+            # Handle snapping toggle
+            elif event.type == "S" and event.shift:
+                if self._toggle_snapping(context):
+                    self._update_text()
+                    return {"RUNNING_MODAL"}
+
+            # Handle Smooth toggle
+            elif event.type == "W":
+                if self._toggle_smooth(context):
+                    self._update_text()
+                    return {"RUNNING_MODAL"}
+
+            # Handle mode switching via keyboard
+            else:
+                key = event.type
+                if key in self._key_to_modes:
+                    target_modes = self._key_to_modes[key]
+                    if self._mode in target_modes:
+                        idx = target_modes.index(self._mode)
+                        self._mode = target_modes[(idx + 1) % len(target_modes)]
+                    else:
+                        self._mode = target_modes[0]
+                    self._input_str = ""
+
+        self._update_text()
+        return {"RUNNING_MODAL"}
+
+    def invoke(self, context: Context, event: Event) -> set[str]:
+        self._obj = get_active_and_selected_primitive(context)
+        self._mod = get_mpr_modifier(self._obj.modifiers)
+
+        type_c = type_from_modifier_name(self._mod.name)
+        primitive_class = TYPE_TO_PRIMITIVE[type_c]
+        self._primitive_name = primitive_class.type_name
+        self._params = primitive_class.get_param_names()
+        self._snap_params = primitive_class.get_snap_param_names()
+
+        # Add Smooth and Smooth Angle if they exist in the geometry node group
+        for name in [P.Smooth.name, P.SmoothAngle.name]:
+            try:
+                find_interface_name(self._mod.node_group, name)
+                self._params.add(name)
+            except KeyError:
+                pass
+
+        # Initialize modes dynamically from primitive parameters
+        self._init_modes(primitive_class)
+
+        # Save initial values for cancellation
+        all_params = list(self._params) + self._snap_params
+        self._initial_values = get_interface_values(self._mod, all_params)
+        for val in self._initial_values:
+            self._initial_values[val] = expand_idarray(self._initial_values[val])
+
+        self._input_str = ""
+
+        self._text_drawer = TextDrawer("", draw_func=ModalEditHUD())
+        self._text_drawer.show(context)
+        self._update_text()
+
+        context.window_manager.modal_handler_add(self)
+        return {"RUNNING_MODAL"}
+
+    def finish(self, context: Context) -> None:
+        if self._text_drawer:
+            self._text_drawer.hide(context)
+
+    def cancel(self, context: Context) -> None:
+        if self._initial_values:
+            for name, val in self._initial_values.items():
+                set_interface_value(self._mod, (name, val))
+            update_node_interface(self._mod, context)
+            context.view_layer.update()
+
+        if self._text_drawer:
+            self._text_drawer.hide(context)
+
+    def _reset_current_property(self, context: Context) -> None:
+        """Reset the currently selected property to its value at the start of editing"""
+        if not self._initial_values:
+            return
+
+        prop, idx = self._mode_to_prop[self._mode]
+        initial_val = self._initial_values.get(prop.name)
+
+        if initial_val is None:
+            return
+
+        if prop.type is Vector:
+            if idx is None:
+                # Reset all axes
+                set_interface_value(self._mod, (prop.name, tuple(initial_val)))
+            else:
+                # Reset only the selected single axis
+                current_val = list(expand_idarray(get_interface_value(self._mod, prop.name)))
+                current_val[idx] = initial_val[idx]
+                set_interface_value(self._mod, (prop.name, tuple(current_val)))
+        else:
+            # Reset int or float
+            set_interface_value(self._mod, (prop.name, initial_val))
+
+        update_node_interface(self._mod, context)
+
+    def _toggle_snapping(self, context: Context) -> bool:
+        """Toggle the snapping flag for the current property"""
+        prop, _ = self._mode_to_prop[self._mode]
+        snap_name = PROP_TO_SNAP_NAME.get(prop.name)
+
+        if snap_name and snap_name in self._snap_params:
+            current_val = get_interface_value(self._mod, snap_name)
+            set_interface_value(self._mod, (snap_name, not current_val))
+            update_node_interface(self._mod, context)
+            return True
+        return False
+
+    def _toggle_smooth(self, context: Context) -> bool:
+        """Toggle the smooth shading flag"""
+        try:
+            current_val = get_interface_value(self._mod, P.Smooth.name)
+            set_interface_value(self._mod, (P.Smooth.name, not current_val))
+            update_node_interface(self._mod, context)
+
+            # Switch mode to Smooth if it's available
+            if P.Smooth.name in self._modes:
+                self._mode = P.Smooth.name
+            return True
+        except KeyError:
+            return False
+
+    def _update_value(self, context: Context) -> None:
+        if not self._input_str or self._input_str in {"-", "."}:
+            return
+
+        try:
+            val = float(self._input_str)
+        except ValueError:
+            return
+
+        prop, idx = self._mode_to_prop[self._mode]
+
+        if prop.type is Vector:
+            current_val = list(expand_idarray(get_interface_value(self._mod, prop.name)))
+            if idx is None:
+                new_val = [max(0.001, val)] * 3
+            else:
+                current_val[idx] = max(0.001, val)
+                new_val = current_val
+            set_interface_value(self._mod, (prop.name, tuple(new_val)))
+
+        elif prop.type is int:
+            val_int = int(val)
+            val_int = max(1, min(100, val_int))
+            set_interface_value(self._mod, (prop.name, val_int))
+
+        elif prop.type is float:
+            if prop.has_tag(P.PT.Smooth):
+                # Convert degree input to radians for the engine
+                val = math.radians(val)
+            else:
+                val = (
+                    max(0.001, min(100.0, val))
+                    if prop.has_tag(P.PT.Division)
+                    else max(0.001, val)
+                )
+            set_interface_value(self._mod, (prop.name, val))
+
+        elif prop.type is bool:
+            set_interface_value(self._mod, (prop.name, val > 0))
+
+        update_node_interface(self._mod, context)
+
+    def _update_text(self) -> None:
+        vals = get_interface_values(self._mod, self._params)
+        msg = f"MPR Modal Edit ({self._primitive_name})\n"
+        current_input = self._input_str if self._input_str else "-"
+        msg += f"Mode: {self._mode} | Input: {current_input}\n"
+        msg += "-" * SEPARATOR_WIDTH + "\n"
+        msg += f"{'Property':<32} | {'Value':<26} | {'Initial':>40}\n"
+        msg += "-" * SEPARATOR_WIDTH + "\n"
+
+        # Dynamically build property list for display
+        displayed_props = set()
+        for mode_name in self._modes:
+            prop, idx = self._mode_to_prop[mode_name]
+            if prop.name in displayed_props and idx is None:
+                continue
+
+            prefix = "▶ " if self._mode == mode_name else "  "
+            val = vals[prop.name]
+
+            # Get initial value
+            init_val = self._initial_values.get(prop.name) if self._initial_values else None
+
+            # Snapping status
+            snap_name = PROP_TO_SNAP_NAME.get(prop.name)
+            snap_status = ""
+            if snap_name and snap_name in self._snap_params:
+                is_snap = get_interface_value(self._mod, snap_name)
+                snap_status = " [S]" if is_snap else " [ ]"
+
+            label = ""
+            curr_val_str = ""
+            init_val_str = ""
+
+            if prop.type is Vector:
+                vec = expand_idarray(val)
+                init_vec = expand_idarray(init_val) if init_val is not None else vec
+
+                if idx is None:
+                    label = f"{prefix}{prop.name}{snap_status} (All)"
+                    curr_val_str = f"{vec[INDEX_X]:.3f}, {vec[INDEX_Y]:.3f}, {vec[INDEX_Z]:.3f}"
+                    init_val_str = (
+                        f"({init_vec[INDEX_X]:.3f}, "
+                        f"{init_vec[INDEX_Y]:.3f}, "
+                        f"{init_vec[INDEX_Z]:.3f})"
+                    )
+                else:
+                    axis_name = ["X", "Y", "Z"][idx]
+                    label = f"{prefix}  {prop.name} {axis_name}{snap_status}"
+                    curr_val_str = f"{vec[idx]:.3f}"
+                    init_val_str = f"({init_vec[idx]:.3f})"
+            elif prop.type is int:
+                init_i = init_val if init_val is not None else val
+                label = f"{prefix}{prop.name}{snap_status}"
+                curr_val_str = f"{val}"
+                init_val_str = f"({init_i})"
+            elif prop.type is float:
+                init_f = init_val if init_val is not None else val
+                label = f"{prefix}{prop.name}{snap_status}"
+
+                if prop.has_tag(P.PT.Smooth):
+                    # Display as Degrees
+                    curr_val_str = f"{math.degrees(val):.2f}°"
+                    init_val_str = f"({math.degrees(init_f):.2f}°)"
+                else:
+                    curr_val_str = f"{val:.3f}"
+                    init_val_str = f"({init_f:.3f})"
+
+            elif prop.type is bool:
+                init_b = init_val if init_val is not None else val
+                label = f"{prefix}{prop.name}{snap_status}"
+                curr_val_str = f"{'On' if val else 'Off'}"
+                init_val_str = f"({'On' if init_b else 'Off'})"
+
+            # Aligned formatting:
+            # Label(32) | Current Value(26) | Initial Value(26, Right-aligned)
+            msg += f"{label:<32} | {curr_val_str:<26} | {init_val_str:>40}\n"
+            if idx is None or idx == INDEX_Z:
+                displayed_props.add(prop.name)
+
+        msg += "-" * SEPARATOR_WIDTH + "\n"
+        shortcut_info = " ".join([f"[{k}]" for k in sorted(self._key_to_modes.keys())])
+        msg += f"{shortcut_info} [Tab:Next] [Shift+S:Snap] [W:{P.Smooth.name}]\n"
+        msg += "[L-Click/Enter:Confirm] [R-Click/Esc:Cancel] [BS:Reset]"
+        self._text_drawer.set_text(msg)
+
+
+def draw_menu(self, context):
+    layout = self.layout
+    layout.operator(MPR_OT_modal_edit.bl_idname, text="Modal Edit (MPR)")
+
+
+addon_keymaps = []
+
+
+def _register_keymap() -> None:
+    wm = bpy.context.window_manager
+    kc = wm.keyconfigs.addon
+    if kc:
+        km = kc.keymaps.new(name="3D View", space_type="VIEW_3D")
+        kmi = km.keymap_items.new(
+            MPR_OT_modal_edit.bl_idname,
+            type="C",
+            value="PRESS",
+            ctrl=True,
+            shift=True,
+        )
+        addon_keymaps.append((km, kmi))
+
+
+def _unregister_keymap() -> None:
+    for km, kmi in addon_keymaps:
+        km.keymap_items.remove(kmi)
+    addon_keymaps.clear()
+
+
+def register() -> None:
+    bpy.utils.register_class(MPR_OT_modal_edit)
+    bpy.types.VIEW3D_MT_mesh_add.append(draw_menu)
+    _register_keymap()
+
+
+def unregister() -> None:
+    bpy.utils.unregister_class(MPR_OT_modal_edit)
+    bpy.types.VIEW3D_MT_mesh_add.remove(draw_menu)
+    _unregister_keymap()

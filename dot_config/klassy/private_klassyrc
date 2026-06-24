@@ -55,7 +55,7 @@ DrawTitleBarSeparator=false
 IconSize=IconMedium
 MatchTitleBarToApplicationColor=true
 RoundAllCornersWhenNoBorders=false
-WindowCornerRadius=6.999999999999993
+WindowCornerRadius=7
 
 [Windeco Exception 0]
 BorderSize=0
@@ -83,6 +83,19 @@ HideTitleBar=0
 OpaqueTitleBar=false
 PreventApplyOpacityToHeader=false
 
+[Windeco Exception 2]
+BorderSize=0
+Enabled=true
+ExceptionBorder=false
+ExceptionMatchTitleBarToApplicationColor=false
+ExceptionPreset=Default-blue
+ExceptionProgramNamePattern=
+ExceptionWindowPropertyPattern=.*Close.*
+ExceptionWindowPropertyType=1
+HideTitleBar=0
+OpaqueTitleBar=false
+PreventApplyOpacityToHeader=false
+
 [WindowOutlineStyle]
 ThinWindowOutlineCustomColorActive=206,66,71
 ThinWindowOutlineCustomColorInactive=206,66,71
@@ -95,4 +108,4 @@ WindowOutlineCustomWithContrastOpacityInactive=40
 WindowOutlineOverlap=false
 WindowOutlineStyleActive=WindowOutlineAccentWithContrast
 WindowOutlineStyleInactive=WindowOutlineAccentWithContrast
-WindowOutlineThickness=2.000000000000001
+WindowOutlineThickness=2

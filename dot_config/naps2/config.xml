@@ -67,6 +67,54 @@
       <Maximized>false</Maximized>
     </FormState>
     <FormState>
+      <Name>BrightContForm</Name>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+      <Size>
+        <Width>0</Width>
+        <Height>0</Height>
+      </Size>
+      <Maximized>false</Maximized>
+    </FormState>
+    <FormState>
+      <Name>HueSatForm</Name>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+      <Size>
+        <Width>0</Width>
+        <Height>0</Height>
+      </Size>
+      <Maximized>false</Maximized>
+    </FormState>
+    <FormState>
+      <Name>BlackWhiteForm</Name>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+      <Size>
+        <Width>1658</Width>
+        <Height>2336</Height>
+      </Size>
+      <Maximized>false</Maximized>
+    </FormState>
+    <FormState>
+      <Name>CropForm</Name>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+      <Size>
+        <Width>0</Width>
+        <Height>0</Height>
+      </Size>
+      <Maximized>true</Maximized>
+    </FormState>
+    <FormState>
       <Name>GtkDesktopForm</Name>
       <Location>
         <X>0</X>
@@ -84,4 +132,6 @@
   <ThumbnailSize>1024</ThumbnailSize>
   <BatchSettings />
   <DeviceListAsTextOnly>false</DeviceListAsTextOnly>
+  <ImageSettings />
+  <LastImageExt>jpg</LastImageExt>
 </UserConfig>
