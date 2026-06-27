@@ -1,0 +1,1 @@
+SUBSYSTEM=="powercap", KERNEL=="intel-rapl*", RUN+="/usr/bin/find /sys/class/powercap/intel-rapl/ -type f -exec chgrp -h kloud {} +", RUN+="/usr/bin/find /sys/class/powercap/intel-rapl/ -type f -exec chmod -h g+r {} +"
