@@ -28,7 +28,6 @@ zenergy-dkms-git
 amdsmi
 
 # Not hardware, but work stuff instead
-realvnc-vnc-viewer
 aspnet-runtime
 aspnet-targeting-pack
 aspnet-runtime-8.0

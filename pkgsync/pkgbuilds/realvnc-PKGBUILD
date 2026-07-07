@@ -1,0 +1,31 @@
+# Maintainer: ava1ar <mail(at)ava1ar(dot)me>
+# Maintainer: Kewl <xrjy@nygb.rh.bet(rot13)>
+# Contributor: Star Brilliant <echo bTEzMjUzQGhvdG1haWwuY29tCg== | base64 -d>
+pkgname=realvnc-vnc-viewer
+pkgver=7.15.1
+pkgrel=2
+pkgdesc='VNC remote desktop client software by RealVNC'
+arch=('x86_64')
+url='https://www.realvnc.com/'
+license=('custom')
+depends=('libsm' 'libxext')
+
+source_x86_64=("VNC-Viewer-${pkgver}-Linux-x64.deb")
+
+sha256sums_x86_64=('05e3c75e053507492f7b9a3f2d75925ac6b5dc9249af73ae6c1ac51bc5d6aabb')
+
+
+package() {
+    bsdtar -xf "${srcdir}/data.tar.xz" -C "${pkgdir}"
+
+    mv "${pkgdir}/usr/bin/vncviewer" "${pkgdir}/usr/bin/realvnc-vnc-viewer"
+    mv "${pkgdir}/usr/share/man/man1/vncviewer.1.gz" "${pkgdir}/usr/share/man/man1/realvnc-vnc-viewer.1.gz"
+
+    find "${pkgdir}/usr/share/applications" -name '*.desktop' -exec sed -i \
+        -e 's/^Exec=vncviewer %f$/Exec=realvnc-vnc-viewer %f/' \
+        -e 's/^Exec=vncviewer$/Exec=realvnc-vnc-viewer/' \
+        {} +
+
+    install -dm755 "${pkgdir}/usr/share/licenses/${pkgname}"
+    ln -s "/usr/share/doc/${pkgname}/copyright" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
