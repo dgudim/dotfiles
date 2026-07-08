@@ -1,7 +1,7 @@
 # Maintainer: ava1ar <mail(at)ava1ar(dot)me>
 # Maintainer: Kewl <xrjy@nygb.rh.bet(rot13)>
 # Contributor: Star Brilliant <echo bTEzMjUzQGhvdG1haWwuY29tCg== | base64 -d>
-pkgname=realvnc-vnc-viewer
+pkgname=realvnc-vnc-viewer-715
 pkgver=7.15.1
 pkgrel=2
 pkgdesc='VNC remote desktop client software by RealVNC'
