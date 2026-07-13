@@ -188,3 +188,7 @@ python310
 python311
 python312
 python313
+
+# Was needed for akonadi, replaced with sqlite
+mariadb
+mariadb-clients

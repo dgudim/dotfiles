@@ -39,3 +39,7 @@ TryExec=/usr/bin/stl2thumbnail
 Exec=/usr/bin/stl2thumbnail --r=0.98 --g=0.541 --b=0.184 --width=%s --height=%s --if=%i --of=%o
 MimeType=model/stl;application/sla;model/x.stl-ascii;model/x.stl-binary;
 EOF
+
+## Migrate akonadi to sqlite from mariadb
+
+akonadi-db-migrator --newengine sqlite
