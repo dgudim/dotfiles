@@ -1,0 +1,6 @@
+{
+    "ha_url": "http://127.0.0.1:8123",
+    "api_key": "",
+    "sensor_id": "",
+    "shutdown_delay_minutes": 30
+}

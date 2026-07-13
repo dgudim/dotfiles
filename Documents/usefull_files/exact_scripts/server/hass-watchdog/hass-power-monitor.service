@@ -1,0 +1,14 @@
+[Unit]
+Description=Hass UPS Monitor watchdog Daemon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 hass-power-monitor.py
+Restart=always
+RestartSec=10
+User=root
+
+[Install]
+WantedBy=multi-user.target
