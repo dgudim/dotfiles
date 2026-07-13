@@ -517,7 +517,7 @@ chzu() {
 	[[ "$yn" =~ ^[Yy]$ ]] && chezmoi apply
 
 	yay -Ycss
-	sudo checkservices -i sddm.service
+	sudo checkservices -i plasmalogin.service
 	yay -Ps
 
 	atuin stats

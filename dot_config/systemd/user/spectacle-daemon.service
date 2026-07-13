@@ -1,6 +1,6 @@
 [Unit]
 Description=Spectacle background daemon
-After=multi-user.target sddm.service
+After=multi-user.target plasmalogin.service
 
 [Service]
 Type=simple

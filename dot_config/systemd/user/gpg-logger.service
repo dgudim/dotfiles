@@ -1,6 +1,6 @@
 [Unit]
 Description=Log gpg events
-After=syslog.target network.target multi-user.target sddm.service
+After=syslog.target network.target multi-user.target plasmalogin.service
 
 [Service]
 Type=simple
