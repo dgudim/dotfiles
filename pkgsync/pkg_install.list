@@ -585,7 +585,6 @@ vlc-plugins-all
 vlc-gui-ncurses
 arch-wiki-docs
 lsfg-vk-git
-xsane-gimp
 yt-dlp-ejs
 dblatex
 
@@ -681,7 +680,6 @@ wine
 wineasio
 winetricks-git
 vkd3d
-bottles
 yabridge
 yabridgectl
 
@@ -1035,6 +1033,7 @@ httptap-bin
 quien-bin
 prettyping
 bettercap
+bettercap-caplets
 
 ## GUIS
 proton-vpn-gtk-app
@@ -1091,6 +1090,7 @@ rescrobbled-git
 shairport-sync
 snapcast-gui-git
 opus-tools
+liboggz
 
 ## GUIS
 ambix
@@ -1314,7 +1314,6 @@ splix
 hplip
 print-manager
 system-config-printer
-xsane
 colord-sane
 scangearmp2-sane-git
 sane-airscan
