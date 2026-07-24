@@ -885,6 +885,8 @@ python-opengl
 python-curl_cffi
 python-orjson
 python-msgpack
+python-rsa
+python-httplib2
 uvicorn
 
 ## ANDROID AND JAVA
