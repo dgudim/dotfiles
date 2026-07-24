@@ -131,6 +131,7 @@ atuin-desktop-bin
 xsane-gimp
 xsane
 bottles
+anilibria-winmaclinux
 
 # Obsolete
 dbeaver-plugin-svg-format
@@ -140,6 +141,7 @@ openssl-1.1
 libkolabxml
 libkcompactdisc
 nodejs-lts-jod
+qt5-location
 
 # Replaced with a different version
 translate-shell
