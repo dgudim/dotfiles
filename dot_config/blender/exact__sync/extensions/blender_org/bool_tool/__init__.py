@@ -1,42 +1,36 @@
 if "bpy" in locals():
     import importlib
-    for mod in [icons,
-                operators,
+    for mod in [operators,
                 tools,
+                ui,
                 manual,
                 preferences,
                 properties,
-                ui,
-                versioning,
                 ]:
         importlib.reload(mod)
     print("Add-on Reloaded: Bool Tool")
 else:
     import bpy
     from . import (
-        icons,
         operators,
         tools,
+        ui,
         manual,
         preferences,
         properties,
-        ui,
-        versioning,
     )
 
 
 #### ------------------------------ REGISTRATION ------------------------------ ####
 
-modules = [
-    icons,
+modules = (
     operators,
     tools,
+    ui,
     manual,
     preferences,
     properties,
-    ui,
-    versioning,
-]
+)
 
 def register():
     for module in modules:

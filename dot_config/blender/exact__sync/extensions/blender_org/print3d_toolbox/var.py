@@ -5,4 +5,4 @@ from pathlib import Path
 
 
 ADDON_DIR = Path(__file__).parent
-NODEGROUPS_ASSET_PATH = ADDON_DIR / "assets" / "nodegroups_5_0.blend"
+NODEGROUPS_FILE = ADDON_DIR / "assets" / "nodegroups_5_0.blend"

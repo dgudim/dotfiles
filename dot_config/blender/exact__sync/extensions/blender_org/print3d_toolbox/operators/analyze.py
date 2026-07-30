@@ -48,7 +48,7 @@ class MESH_OT_info_volume(Operator):
         scene = context.scene
         unit = scene.unit_settings
         scale = 1.0 if unit.system == "NONE" else unit.scale_length
-        obj = context.active_object
+        obj = context.object
 
         bm = lib.bmesh_copy_from_object(obj, apply_modifiers=True)
         volume = bm.calc_volume()
@@ -79,7 +79,7 @@ class MESH_OT_info_area(Operator):
         scene = context.scene
         unit = scene.unit_settings
         scale = 1.0 if unit.system == "NONE" else unit.scale_length
-        obj = context.active_object
+        obj = context.object
 
         bm = lib.bmesh_copy_from_object(obj, apply_modifiers=True)
         area = lib.bmesh_calc_area(bm)
@@ -104,7 +104,7 @@ class MESH_OT_info_area(Operator):
 
 
 def execute_check(self, context):
-    obj = context.active_object
+    obj = context.object
 
     data = []
     self.main_check(obj, data)
@@ -240,11 +240,12 @@ class MESH_OT_check_degenerate(Operator):
         import array
         from .. import lib
 
-        threshold = bpy.context.scene.print3d_toolbox.threshold_zero
+        thr_length = bpy.context.scene.print3d_toolbox.threshold_zero
+        thr_area = thr_length ** 2.0
 
         bm = lib.bmesh_copy_from_object(obj, transform=False, triangulate=False)
-        faces_zero = array.array("i", (i for i, ele in enumerate(bm.faces) if ele.calc_area() <= threshold))
-        edges_zero = array.array("i", (i for i, ele in enumerate(bm.edges) if ele.calc_length() <= threshold))
+        faces_zero = array.array("i", (i for i, ele in enumerate(bm.faces) if ele.calc_area() <= thr_area))
+        edges_zero = array.array("i", (i for i, ele in enumerate(bm.edges) if ele.calc_length() <= thr_length))
         bm.free()
 
         data.append(report.face("Zero Faces", len(faces_zero), faces_zero))
@@ -375,7 +376,7 @@ class MESH_OT_check_all(Operator):
     )
 
     def execute(self, context):
-        obj = context.active_object
+        obj = context.object
 
         data = []
         for cls in self.check_cls:

@@ -23,10 +23,15 @@ class EXPORT_SCENE_OT_export(Operator):
     )
 
     def execute(self, context):
+        from bpy.utils import units as unit_utils
+
         unit = context.scene.unit_settings
         props = context.scene.print3d_toolbox
 
-        global_scale = unit.scale_length if (unit.system != "NONE" and props.use_scene_scale) else 1.0
+        export_scale = unit_utils.to_value(unit_utils.systems.METRIC, unit_utils.categories.LENGTH, "1", str_ref_unit=props.export_unit_scale)
+        scale_factor = unit.scale_length / export_scale
+
+        global_scale = scale_factor if (unit.system != "NONE" and props.export_unit_scale != "m") else 1.0
         path_mode = "COPY" if props.use_copy_textures else "AUTO"
         filepath = bpy.path.ensure_ext(self.filepath, f".{props.export_format.lower()}")
 

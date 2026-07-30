@@ -9,13 +9,14 @@ from ...functions.mesh import (
 )
 from ...functions.modifier import (
     add_modifier_asset,
+    update_modifier_input,
 )
 
 
 #### ------------------------------ CLASSES ------------------------------ ####
 
 class Selection:
-    """Storage of viable selected and active object(s) throughout the modal."""
+    """Storage of viable cannvas objects and their Boolean modifiers."""
 
     def __init__(self, selected, active):
         self.selected: list = selected
@@ -24,10 +25,7 @@ class Selection:
 
 
 class Mouse:
-    """
-    Mouse positions throughout different phases of the modal operator.
-    Each class variable is a 2D vector in screen space (x, y).
-    """
+    """Mouse positions throughout different phases of the modal operator."""
 
     def __init__(self):
         self.initial = Vector()
@@ -99,17 +97,17 @@ class Effects:
         return self
 
     def update(self, cls, effect):
-        """Update bevel modifier during modal."""
+        """Update cutter modifiers during modal."""
 
         # Update array count.
-        if effect == 'ARRAY_COUNT':
+        if effect == "ARRAY_COUNT":
             if self.array is None:
                 self.add_array_modifier(cls)
 
             else:
                 if cls.columns > 1 or cls.rows > 1:
-                    self.array["Socket_2"] = cls.columns
-                    self.array["Socket_3"] = cls.rows
+                    update_modifier_input(self.array, "Socket_2", cls.columns)
+                    update_modifier_input(self.array, "Socket_3", cls.rows)
 
                 # Remove modifier if it's no longer needed.
                 if cls.columns == 1 and cls.rows == 1:
@@ -117,12 +115,12 @@ class Effects:
                     self.array = None
 
         # Update array gap.
-        if effect == 'ARRAY_GAP':
-            if cls.columns > 1 or cls.row > 1:
+        if effect == "ARRAY_GAP":
+            if cls.columns > 1 or cls.rows > 1:
                 if self.array is not None:
-                    self.array["Socket_4"] = cls.gap
+                    update_modifier_input(self.array, "Socket_4", cls.gap)
 
-                    # Force the modifier to update in viewport.
+                    # NOTE: Force the modifier to update in viewport when key is pressed.
                     self.array.show_viewport = False
                     self.array.show_viewport = True
 
@@ -150,15 +148,16 @@ class Effects:
 
         # Columns
         if cls.columns > 1:
-            mod["Socket_2"] = cls.columns
+            update_modifier_input(mod, "Socket_2", cls.columns)
 
         # Rows
         if cls.rows > 1:
-            mod["Socket_3"] = cls.rows
+            update_modifier_input(mod, "Socket_3", cls.rows)
 
         # Gap
-        mod["Socket_4"] = cls.gap
+        update_modifier_input(mod, "Socket_4", cls.gap)
 
+        mod.use_pin_to_last = True
         self.array = mod
 
 
@@ -233,7 +232,7 @@ class Effects:
 
     # Smooth by Angle
     def add_auto_smooth_modifier(self, cls, context):
-        """Adds a 'Smooth by Angle' modifier on cutter object, a.k.a. Auto Smooth."""
+        """Adds a 'Smooth by Angle' modifier on the cutter object (a.k.a. Auto Smooth)."""
 
         obj = cls.cutter.obj
         mesh = cls.cutter.mesh
@@ -262,7 +261,7 @@ class Effects:
 
         mod = obj.modifiers.active
 
-        # Try loading the node group manually if `bpy.ops` operators fail.
+        # Try loading the node group manually if `bpy.ops` operators failed.
         if mod is None:
             dir = os.path.join(os.path.dirname(bpy.app.binary_path), "5.0", "datafiles", "assets")
             assets_path = os.path.join(dir, modifier_asset_file)
@@ -274,13 +273,13 @@ class Effects:
             print("Destructively marking sharp edges and smooth faces in the mesh")
             shade_smooth_by_angle(bm, mesh, angle=math.degrees(cls.sharp_angle))
         else:
-            # Set smoothing angle.
+            # Set smoothing angle (necessary for all methods except `shade_auto_smooth()`).
             for face in bm.faces:
                 face.smooth = True
             bm.to_mesh(mesh)
 
             mod.use_pin_to_last = True
-            mod["Input_1"] = cls.sharp_angle
+            update_modifier_input(mod, "Input_1", cls.sharp_angle)
 
             self.smooth = mod
 

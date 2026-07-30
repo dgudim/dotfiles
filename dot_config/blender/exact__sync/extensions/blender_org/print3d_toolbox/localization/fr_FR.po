@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: 3D Print Toolbox 1.3.0\n"
-"POT-Creation-Date: 2025-12-29\n"
-"PO-Revision-Date: 2025-05-08\n"
+"Project-Id-Version: 3D Print Toolbox 1.4.0\n"
+"POT-Creation-Date: 2026-07-23\n"
+"PO-Revision-Date: 2026-07-23\n"
 "Last-Translator: Mathieu Moutarde @Mathieu-14\n"
 "Language-Team: Mikhail Rachinskiy\n"
 "Language: fr_FR\n"
@@ -18,9 +18,6 @@ msgstr "Vérifier"
 
 msgid "Scale To"
 msgstr "Étirer jusqu’à"
-
-msgid "Scene Scale"
-msgstr "Étirement de la scène"
 
 msgid "Copy Textures"
 msgstr "Copier les textures"
@@ -71,7 +68,7 @@ msgid "Check for self intersections"
 msgstr "Vérifiez les intersections automatiques"
 
 msgid "Count mesh islands"
-msgstr ""
+msgstr "Compter les Îlots de maillage"
 
 msgid "Check for zero area faces and zero length edges"
 msgstr "Vérifiez les faces de surface nulle et les arêtes de longueur nulle"
@@ -106,11 +103,11 @@ msgstr "Épaisseur minimale"
 msgid "Export Directory"
 msgstr "Exporter le dossier"
 
+msgid "Export at specified unit scale (most slicers assume millimeters)"
+msgstr "Exporter à l'échelle unitaire spécifiée (la plupart des logiciels de découpe utilisent les millimètres)"
+
 msgid "Export file in ASCII format"
 msgstr "Exporter le fichier en format ASCII"
-
-msgid "Apply scene scale on export"
-msgstr "Appliquer un agrandissement de la scène sur l’export"
 
 msgid "Copy textures on export to the output path"
 msgstr "Copier les textures lors de l'exportation vers le chemin de sortie"
@@ -137,19 +134,19 @@ msgid "Create hollowed out copy of the object"
 msgstr "Créer une copie évidée de l'objet"
 
 msgid "Offset Surface Only"
-msgstr ""
+msgstr "Décaler uniquement la surface"
 
 msgid "Remove original and keep offset surface"
-msgstr ""
+msgstr "Retirer l'original et garder le décalage de la surface"
 
 msgid "Cut geometry along a plane"
-msgstr ""
+msgstr "Couper la géométrie le long du plan"
 
 msgid "Slice on axis"
-msgstr ""
+msgstr "Trancher sur l'axe"
 
 msgid "Cutting plane position"
-msgstr ""
+msgstr "Couper la position du plan"
 
 msgid "Rotate object so the selected faces lie, on average, parallel to the XY plane"
 msgstr "Faire pivoter l'objet de sorte que les faces sélectionnées soient, en moyenne, parallèles au plan XY"
@@ -173,7 +170,7 @@ msgid "Make sure target mesh has closed surface and offset value is less than ha
 msgstr "Assurez-vous que le maillage cible a une surface fermée et que la valeur de décalage est inférieure à la moitié de l'épaisseur de la cible"
 
 msgid "Target must have closed surface and offset value less than half of target thickness"
-msgstr ""
+msgstr "La cible doit avoir une surface fermée et une valeur de décalage inférieure à la moitié de l'épaisseur de la cible"
 
 msgid "Scaled by {}"
 msgstr "Mis à l'échelle par {}"
@@ -214,7 +211,7 @@ msgstr "Intersections"
 
 msgctxt "Operator"
 msgid "Shells"
-msgstr ""
+msgstr "Coque"
 
 msgctxt "Operator"
 msgid "Degenerate"

@@ -116,20 +116,23 @@ class MESH_OT_bisect(Operator):
 
         md = lib.gn_setup("Bisect", context.object)
 
-        md.panels[0].is_open = self.bisect_x
-        md["Socket_12"] = self.bisect_x
-        md["Socket_3"] = self.factor_x
-        md["Socket_4"] = self.flip_x
+        lib.md_input_set(md, "Socket_12", self.bisect_x)
+        lib.md_input_set(md, "Socket_3", self.factor_x)
+        lib.md_input_set(md, "Socket_4", self.flip_x)
 
-        md.panels[1].is_open = self.bisect_y
-        md["Socket_16"] = self.bisect_y
-        md["Socket_6"] = self.factor_y
-        md["Socket_7"] = self.flip_y
+        lib.md_input_set(md, "Socket_16", self.bisect_y)
+        lib.md_input_set(md, "Socket_6", self.factor_y)
+        lib.md_input_set(md, "Socket_7", self.flip_y)
 
-        md.panels[2].is_open = self.bisect_z
-        md["Socket_14"] = self.bisect_z
-        md["Socket_9"] = self.factor_z
-        md["Socket_10"] = self.flip_z
+        lib.md_input_set(md, "Socket_14", self.bisect_z)
+        lib.md_input_set(md, "Socket_9", self.factor_z)
+        lib.md_input_set(md, "Socket_10", self.flip_z)
+
+        panels = lib.md_get_panels(md)
+
+        lib.md_panel_set(md, panels["X"], self.bisect_x)
+        lib.md_panel_set(md, panels["Y"], self.bisect_y)
+        lib.md_panel_set(md, panels["Z"], self.bisect_z)
 
         return {"FINISHED"}
 
@@ -223,11 +226,13 @@ class MESH_OT_hollow(Operator):
     def hollow_gn(self, context):
         from .. import lib
 
+        enum_items = [x[1] for x in self.__annotations__["offset_direction"].keywords["items"]]
+
         md = lib.gn_setup("Hollow", context.object)
-        md["Socket_5"] = ["INSIDE", "OUTSIDE"].index(self.offset_direction)
-        md["Socket_3"] = self.offset
-        md["Socket_2"] = self.voxel_size
-        md["Socket_4"] = self.offset_surface_only
+        lib.md_input_set(md, "Socket_5", self.offset_direction.title(), enum_items)
+        lib.md_input_set(md, "Socket_3", self.offset)
+        lib.md_input_set(md, "Socket_2", self.voxel_size)
+        lib.md_input_set(md, "Socket_4", self.offset_surface_only)
 
         context.view_layer.update()
         if md.node_warnings:

@@ -1,6 +1,9 @@
 import bpy
 import os
-from .. import __file__ as base_file
+
+from ..constants import (
+    ICONS_PATH,
+)
 
 from .common.ui import (
     carver_ui_common,
@@ -20,7 +23,7 @@ class OBJECT_WT_carve_circle(bpy.types.WorkSpaceTool):
     bl_space_type = 'VIEW_3D'
     bl_context_mode = 'OBJECT'
 
-    bl_icon = os.path.join(os.path.dirname(base_file), "icons", "tool_icons", "ops.object.carver_circle")
+    bl_icon = os.path.join(ICONS_PATH, "dat", "ops.object.carver_circle")
     bl_keymap = (
         ("object.carve_circle", {"type": 'LEFTMOUSE', "value": 'CLICK_DRAG'}, {"properties": None}),
         ("object.carve_circle", {"type": 'LEFTMOUSE', "value": 'CLICK_DRAG', "shift": True}, {"properties": None}),
@@ -51,6 +54,7 @@ class OBJECT_OT_carve_circle(OBJECT_OT_carve_box):
     # SHAPE-properties
     shape = 'CIRCLE'
 
+    # NOTE: There are registered on operator level because they need to be overriden or hidden per-tool.
     subdivision: bpy.props.IntProperty(
         name = "Circle Subdivisions",
         description = "Number of vertices that will make up the circular shape that will be extruded into a cylinder",
@@ -76,9 +80,9 @@ class OBJECT_OT_carve_circle(OBJECT_OT_carve_box):
 
 #### ------------------------------ REGISTRATION ------------------------------ ####
 
-classes = [
+classes = (
     OBJECT_OT_carve_circle,
-]
+)
 
 def register():
     for cls in classes:

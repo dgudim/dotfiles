@@ -1,33 +1,22 @@
 import bpy
 import bmesh
 import math
+import mathutils
 from bpy_extras import view3d_utils
 from mathutils import Vector, Matrix
 
-from .types import (
-    Effects,
+from ...functions.cutter import (
+    make_cutter,
 )
-from .properties import (
-    CarverPropsOperator,
-    CarverPropsShape,
-    CarverPropsModifier,
-    CarverPropsCutter,
-)
-
 from ...functions.draw import (
     draw_shader,
     draw_bmesh_faces,
-    draw_circle_around_point,
-)
-from ...functions.math import (
-    distance_from_point_to_segment,
-    region_2d_to_plane_3d,
-    region_2d_to_line_3d,
+    draw_circle_billboard,
 )
 from ...functions.mesh import (
+    is_instanced_mesh,
     extrude_face,
     are_intersecting,
-    raycast,
 )
 from ...functions.modifier import (
     add_boolean_modifier,
@@ -35,300 +24,44 @@ from ...functions.modifier import (
     get_modifiers_to_apply,
 )
 from ...functions.object import (
-    set_cutter_properties,
-    delete_empty_collection,
-    delete_cutter,
-    set_object_origin,
-)
-from ...functions.poll import (
     is_linked,
-    is_instanced_data,
+    set_object_origin,
+    delete_object,
+)
+from ...functions.scene import (
+    delete_empty_collection,
+    raycast,
+)
+from ...functions.view import (
+    distance_from_point_to_segment,
+    region_2d_to_ray_3d,
+    region_2d_to_plane_3d,
+)
+
+from .events import (
+    CarverEvents,
+)
+from .properties import (
+    CarverPropsOperator,
+    CarverPropsShape,
+    CarverPropsModifier,
+    CarverPropsCutter,
+    CarverPropsArray,
 )
 
 
-#### ------------------------------ /base/ ------------------------------ ####
-
-class CarverEvents():
-
-    def _custom_modifier_event(self, context, event, modifier,
-                               cursor='NONE', store_values=False, restore_mouse=True,
-                               postprocess=None):
-        """Creates custom modifier event when key is held and hides cursor until it's released"""
-
-        # Initialize Modifier Phase
-        if event.value == 'PRESS':
-            if self.phase in ("DRAW", "EXTRUDE"):
-                self._stored_phase = self.phase
-                self.phase = modifier
-                self.mouse.cached = self.mouse.current
-                context.window.cursor_set(cursor)
-
-                if store_values:
-                    # Store center of the geometry as a Vector.
-                    verts = [v.co for v in self.cutter.bm.verts]
-                    center = sum(verts, Vector()) / len(verts)
-                    self.cutter.center = self.cutter.obj.matrix_world @ center
-
-        # End Modifier Phase
-        elif event.value == 'RELEASE':
-            if self.phase == modifier:
-                context.window.cursor_set('MUTE')
-                if restore_mouse:
-                    context.window.cursor_warp(int(self.mouse.cached[0]), int(self.mouse.cached[1]) + 100)
-                self.mouse.current = self.mouse.cached
-                self.phase = self._stored_phase
-
-                if postprocess is not None:
-                    postprocess(self)
-
-        return self._stored_phase
-
-
-    # Individual Events
-    def event_aspect(self, context, event):
-        """Modifier keys for changing aspect of the shape"""
-
-        if event.shift and self.phase == "DRAW":
-            if self.initial_aspect == 'FREE':
-                self.aspect = 'FIXED'
-            elif self.initial_aspect == 'FIXED':
-                self.aspect = 'FREE'
-        else:
-            self.aspect = self.initial_aspect
-
-
-    def event_origin(self, context, event):
-        """Modifier keys for changing the origin of the shape"""
-
-        if event.alt and self.phase == "DRAW":
-            if self.initial_origin == 'EDGE':
-                self.origin = 'CENTER'
-            elif self.initial_origin == 'CENTER':
-                self.origin = 'EDGE'
-        else:
-            self.origin = self.initial_origin
-
-
-    def event_rotate(self, context, event):
-        """Modifier keys for rotating the shape"""
-
-        def _remove_rotate_phase_properties(self):
-            del self._stored_mouse_pos_3d
-            del self._stored_rotation
-            del self._stored_cutter_center
-            del self._stored_cutter_euler
-
-            # Restore origin at edge (first vertex).
-            if self.origin == 'EDGE':
-                point = self.cutter.bm.verts[0].co
-                set_object_origin(self.cutter.obj, self.cutter.bm, point='CUSTOM', custom=point)
-
-
-        # Set correct phase.
-        if event.type == 'R':
-            stored_phase = self._custom_modifier_event(context, event, "ROTATE",
-                                                       cursor='MOVE_X', store_values=True, restore_mouse=False,
-                                                       postprocess=_remove_rotate_phase_properties)
-
-        if self.phase == "ROTATE":
-            region = context.region
-            rv3d = context.region_data
-
-            # Project current mouse position onto the workplane.
-            current_mouse_pos_3d = region_2d_to_plane_3d(region, rv3d,
-                                                         self.mouse.current,
-                                                         (self.workplane.location, self.workplane.normal))
-            if current_mouse_pos_3d is not None:
-                # Store values.
-                obj = self.cutter.obj
-                if not hasattr(self, '_stored_mouse_pos_3d'):
-                    self._stored_mouse_pos_3d = current_mouse_pos_3d.copy()
-                    self._stored_rotation = self.rotation
-                    self._stored_cutter_center = self.cutter.center
-                    self._stored_cutter_euler = obj.rotation_euler.copy()
-
-                # Calculate angle and direction.
-                to_start = (self._stored_mouse_pos_3d - self._stored_cutter_center).normalized()
-                to_current = (current_mouse_pos_3d - self._stored_cutter_center).normalized()
-
-                angle = to_start.angle(to_current)
-                cross = to_start.cross(to_current)
-                if cross.dot(self.workplane.normal) < 0:
-                    angle = -angle
-
-                if abs(angle) > 0.0001:
-                    self.rotation = self._stored_rotation + angle
-
-                    # Offset the object location when drawing from edge to move rotation pivot to center.
-                    if self.origin == 'EDGE':
-                        set_object_origin(obj, self.cutter.bm, point='CENTER_OBJ')
-
-                    # Calculate rotation amount.
-                    rotation_total = Matrix.Rotation(self.rotation, 4, self.workplane.normal)
-                    rotation_stored = Matrix.Rotation(self._stored_rotation, 4, self.workplane.normal)
-                    rotation_matrix = rotation_total @ rotation_stored.inverted()
-                    new_rot = rotation_matrix @ self._stored_cutter_euler.to_matrix().to_4x4()
-
-                    # Rotate.
-                    obj.rotation_euler = new_rot.to_euler()
-
-
-    def event_bevel(self, context, event):
-        """Modifier keys for beveling the shape"""
-
-        def _remove_empty_bevel_modifier(self):
-            bevel = self.effects.bevel
-            if bevel.width == 0:
-                self.cutter.obj.modifiers.remove(bevel)
-                self.effects.bevel = None
-
-                if self.effects.weld is not None:
-                    self.cutter.obj.modifiers.remove(self.effects.weld)
-                    self.effects.weld = None
-
-
-        if self.shape != 'BOX':
-            return
-
-        # Set correct phase.
-        if event.type == 'B':
-            stored_phase = self._custom_modifier_event(context, event, "BEVEL",
-                                                       cursor='PICK_AREA', store_values=True,
-                                                       postprocess=_remove_empty_bevel_modifier)
-
-        if self.phase == "BEVEL":
-            self.use_bevel = True
-
-            # Initialize bevel effect if it doesn't exist.
-            if self.effects.bevel is None:
-                self.bevel_width = 0
-                affect = 'VERTICES' if stored_phase == "DRAW" else 'EDGES'
-                self.effects.add_bevel_modifier(self, affect=affect)
-
-                # Force the geometry to update.
-                if stored_phase == "DRAW":
-                    self.update_cutter_shape(context)
-                elif stored_phase == "EXTRUDE":
-                    self.set_extrusion_depth(context)
-
-            # Calculate bevel width.
-            region = context.region
-            rv3d = context.region_data
-
-            self.mouse.cached_3d = view3d_utils.region_2d_to_location_3d(region, rv3d, self.mouse.cached, self.cutter.center)
-            self.mouse.current_3d = view3d_utils.region_2d_to_location_3d(region, rv3d, self.mouse.current, self.cutter.center)
-            d = (self.cutter.center - self.mouse.current_3d).length - (self.cutter.center - self.mouse.cached_3d).length
-            self.bevel_width = d * 0.2
-
-            # Adjust bevel segments.
-            if event.type == 'WHEELUPMOUSE':
-                self.bevel_segments += 1
-            elif event.type == 'WHEELDOWNMOUSE':
-                self.bevel_segments -= 1
-
-            # Update modifier.
-            self.effects.update(self, 'BEVEL')
-
-
-    def event_array(self, context, event):
-        """Modifier keys for creating the array of the shape"""
-
-        # Add duplicates.
-        if event.type == 'LEFT_ARROW' and event.value == 'PRESS':
-            self.columns -= 1
-        if event.type == 'RIGHT_ARROW' and event.value == 'PRESS':
-            self.columns += 1
-        if event.type == 'DOWN_ARROW' and event.value == 'PRESS':
-            self.rows -= 1
-        if event.type == 'UP_ARROW' and event.value == 'PRESS':
-            self.rows += 1
-
-        if event.type in ['LEFT_ARROW',
-                          'RIGHT_ARROW',
-                          'DOWN_ARROW',
-                          'UP_ARROW',] and event.value == 'PRESS':
-            self.effects.update(self, 'ARRAY_COUNT')
-
-            # Force the geometry to update.
-            if self.phase == "DRAW":
-                self.update_cutter_shape(context)
-            elif self.phase == "EXTRUDE":
-                self.set_extrusion_depth(context)
-
-        # Adjust gap.
-        if (self.rows > 1 or self.columns > 1) and (event.type == 'A'):
-            stored_phase = self._custom_modifier_event(context, event, "ARRAY", cursor='MUTE',
-                                                       store_values=True, restore_mouse=True)
-
-        if self.phase == "ARRAY":
-            region = context.region
-            rv3d = context.region_data
-
-            self.mouse.cached_3d = view3d_utils.region_2d_to_location_3d(region, rv3d, self.mouse.cached, self.cutter.center)
-            self.mouse.current_3d = view3d_utils.region_2d_to_location_3d(region, rv3d, self.mouse.current, self.cutter.center)
-            d = (self.cutter.center - self.mouse.current_3d).length - (self.cutter.center - self.mouse.cached_3d).length
-            self.gap = 1 + (d * 0.2)
-
-            self.effects.update(self, 'ARRAY_GAP')
-
-
-    def event_flip(self, context, event):
-        """Modifier keys for flipping the direction of extrusion."""
-
-        if event.type == 'F' and event.value == 'PRESS':
-            if self.phase == 'EXTRUDE':
-                self.flip_direction = not self.flip_direction
-
-
-    def event_move(self, context, event):
-        """Modifier keys for moving the cutter shape."""
-
-        def _remove_move_phase_properties(self):
-            del self._stored_cutter_location
-            self.mouse.cached_3d = None
-
-
-        if event.type == 'SPACE':
-            stored_phase = self._custom_modifier_event(context, event, "MOVE",
-                                                       cursor='SCROLL_XY', restore_mouse=False,
-                                                       postprocess=_remove_move_phase_properties)
-
-        if self.phase == "MOVE":
-            region = context.region
-            rv3d = context.region_data
-
-            # Project current mouse position onto the workplane.
-            current_mouse_pos_3d = region_2d_to_plane_3d(region, rv3d,
-                                                         self.mouse.current,
-                                                         (self.workplane.location, self.workplane.normal))
-            if current_mouse_pos_3d is not None:
-                if not hasattr(self, '_stored_cutter_location'):
-                    self.mouse.cached_3d = current_mouse_pos_3d.copy()
-                    self._stored_cutter_location = self.cutter.obj.location.copy()
-
-                offset = current_mouse_pos_3d - self.mouse.cached_3d
-                self.cutter.obj.location = self._stored_cutter_location + offset
-
+#### ------------------------------ CLASSES ------------------------------ ####
 
 class CarverBase(bpy.types.Operator,
                  CarverEvents,
                  CarverPropsOperator,
                  CarverPropsShape,
                  CarverPropsModifier,
-                 CarverPropsCutter):
+                 CarverPropsCutter,
+                 CarverPropsArray):
     """Base class for Carver operators."""
 
-    def redraw_region(self, context):
-        """Redraw the region to find the limits of the 3D viewport."""
-
-        region_types = {'WINDOW', 'UI'}
-        for area in context.window.screen.areas:
-            if area.type == 'VIEW_3D':
-                for region in area.regions:
-                    if not region_types or region.type in region_types:
-                        region.tag_redraw()
-
-
+    # Core Methods
     def validate_selection(self, context):
         """Filter out selection to get the list of viable canvases."""
 
@@ -349,8 +82,12 @@ class CarverBase(bpy.types.Operator,
                 continue
 
             if self.mode == 'DESTRUCTIVE':
-                if is_instanced_data(obj):
+                if is_instanced_mesh(obj.data):
                     self.report({'WARNING'}, f"Modifiers cannot be applied to {obj.name} because it has instanced object data")
+                    continue
+
+                if obj.data.shape_keys:
+                    self.report({'WARNING'}, f"Modifiers cannot be applied to {obj.name} because it has shape keys")
                     continue
 
             selected.append(obj)
@@ -367,11 +104,10 @@ class CarverBase(bpy.types.Operator,
         return selected, active
 
 
-    # Core Methods
     def calculate_workplane(self, context):
         """
         Calculates matrix, location (origin point), and normal (direction)
-        of the workplane based on the active alignment method.
+        of the workplane based on the chosen alignment method.
         """
 
         if self.alignment == 'SURFACE':
@@ -393,7 +129,7 @@ class CarverBase(bpy.types.Operator,
 
 
     def create_cutter(self, context):
-        """Creates a cutter object with correct properties & initializes `bmesh` geometry."""
+        """Creates a cutter object with correct properties & initializes `bmesh`."""
 
         # Create the Mesh & bmesh
         mesh = bpy.data.meshes.new(name="boolean_cutter")
@@ -402,15 +138,15 @@ class CarverBase(bpy.types.Operator,
         # Create the Object
         obj = bpy.data.objects.new("boolean_cutter", mesh)
         obj.matrix_world = self.workplane.matrix
-        set_cutter_properties(context, obj, "Difference", collection=True,
-                              display='WIRE' if self.shape == 'POLYLINE' else self.display)
+        make_cutter(context, obj, "Difference", collection=True,
+                    display='WIRE' if self.shape == 'POLYLINE' else self.display)
         obj.booleans.carver = True
 
         # Initial Rotation
         if self.rotation != 0:
             rotation_matrix = Matrix.Rotation(self.rotation, 4, self.workplane.normal)
-            temp_matrix_world = rotation_matrix @ obj.matrix_world
-            obj.rotation_euler = temp_matrix_world.to_euler()
+            rotation_matrix = rotation_matrix @ obj.matrix_world
+            obj.rotation_euler = rotation_matrix.to_euler()
 
         # Create Verts
         if self.shape == 'BOX':
@@ -471,18 +207,21 @@ class CarverBase(bpy.types.Operator,
         # Draw Line
         if self.phase in ("BEVEL", "ROTATE", "ARRAY"):
             current_mouse_pos_3d = region_2d_to_plane_3d(context.region, context.region_data,
-                                                     self.mouse.current,
-                                                     (self.workplane.location, self.workplane.normal))
+                                                         self.mouse.current,
+                                                         (self.workplane.location, self.workplane.normal))
             if current_mouse_pos_3d is not None:
                 vertices = [self.cutter.center, current_mouse_pos_3d]
                 if vertices is not None:
                     draw_shader('LINES', (0.00, 0.00, 0.00), 1.0, vertices)
 
-        # Draw Circle around First Vertex
+        # Draw circle around first vertex.
         if self.shape == 'POLYLINE' and self.phase == 'DRAW':
             verts = self.cutter.verts
             if len(verts) > 3:
-                vertices = draw_circle_around_point(context, obj, verts[0], self._distance_from_first, 4)
+                vertices = draw_circle_billboard(context,
+                                                 obj.matrix_world @ verts[0].co,
+                                                 radius=self._distance_from_first,
+                                                 segments=4)
                 if len(vertices) > 0:
                     draw_shader('LINE_LOOP', (0, 0, 0), 1.0, vertices)
 
@@ -497,7 +236,7 @@ class CarverBase(bpy.types.Operator,
         bm = self.cutter.bm
         face = self.cutter.faces[0]
 
-        # Get the mouse positon on the workplane.
+        # Get the mouse positon x, y on the workplane.
         current_mouse_pos_3d = region_2d_to_plane_3d(region, rv3d,
                                                      self.mouse.current,
                                                      (self.workplane.location, self.workplane.normal))
@@ -582,7 +321,6 @@ class CarverBase(bpy.types.Operator,
             if self.alignment == 'CURSOR' and self.depth == 'CURSOR':
                 self.depth = 'AUTO'
 
-
             # Push the extruded face towards the furthest point of the collective bounding box.
             if self.depth == 'AUTO':
                 corners = []
@@ -599,10 +337,9 @@ class CarverBase(bpy.types.Operator,
                 offset = self.offset if self.alignment == 'SURFACE' else 0.1
 
                 for v in face.verts:
-                    if self.depth == 'AUTO':
-                        v.co += normal * (furthest_corner - offset)
+                    v.co += normal * (furthest_corner - offset)
 
-            # Push the extruded face towards the plane of 3D cursor.
+            # Push the extruded face towards the plane of the 3D cursor.
             elif self.depth == 'CURSOR':
                 local_cursor = self.cutter.obj.matrix_world.inverted() @ context.scene.cursor.location
                 for v in extruded_verts:
@@ -647,20 +384,24 @@ class CarverBase(bpy.types.Operator,
 
         region = context.region
         rv3d = context.region_data
-        normal = self.cutter.obj.matrix_world.to_3x3().inverted() @ self.workplane.normal
 
-        # Find the point on 3D line (along the normal) closest to the cursor.
-        # and calculate the distance between that and the extrude origin.
-        closest_points = region_2d_to_line_3d(region, rv3d,
-                                              self.mouse.current,
-                                              self._extrude_origin, self.workplane.normal)
+        # Convert the mouse position into a 3D ray and find closest points between...
+        # that ray and the line coming from the extrude origin along the workplane normal.
+        ray_origin, ray_direction = region_2d_to_ray_3d(region, rv3d, self.mouse.current)
+        closest_points = mathutils.geometry.intersect_line_line(ray_origin,
+                                                                ray_origin + ray_direction,
+                                                                self._extrude_origin,
+                                                                self._extrude_origin + self.workplane.normal)
+
         if closest_points is None:
             return
 
+        # Calculate the distance between the extrude origin and mouse position.
         offset_vector = closest_points[1] - self._extrude_origin
         distance = offset_vector.dot(self.workplane.normal)
 
         # Offset vertices of the extruded face from their their original coordinates.
+        normal = self.cutter.obj.matrix_world.to_3x3().inverted() @ self.workplane.normal
         if distance is not None:
             for v, vert_co in zip(self._extrude_faces[-1].verts, self._extrude_verts_co):
                 offset = normal * distance
@@ -695,68 +436,71 @@ class CarverBase(bpy.types.Operator,
         ray_obj_matrix = ray.obj.matrix_world
         mesh = ray.obj.evaluated_get(context.view_layer.depsgraph).to_mesh()
 
-        if mesh is not None:
-            # create_temporary_bmesh
-            temp_bm = bmesh.new()
-            temp_bm.from_mesh(mesh)
-            temp_bm.faces.ensure_lookup_table()
+        if mesh is None:
+            self.alignment = 'VIEW'
+            return None, None, None
 
-            face = temp_bm.faces[ray.index]
+        # Create temporary `bmesh`.
+        temp_bm = bmesh.new()
+        temp_bm.from_mesh(mesh)
+        temp_bm.faces.ensure_lookup_table()
 
-            if self.orientation == 'FACE':
-                # Get the tangent, normal, and bitangent from the face normal.
-                tangent = face.calc_tangent_edge()
-                normal = face.normal
-                bitangent = normal.cross(tangent)
+        face = temp_bm.faces[ray.index]
 
-            elif self.orientation in ('CLOSEST_EDGE', 'LONGEST_EDGE'):
-                # Get the tangent, normal, and bitangent from the longest or the closest edge of the face.
+        if self.orientation == 'FACE':
+            # Get the tangent, normal, and bitangent from the face normal.
+            tangent = face.calc_tangent_edge()
+            normal = face.normal
+            bitangent = normal.cross(tangent)
 
-                if self.orientation == 'LONGEST_EDGE':
-                    lengths = [
-                        (ray_obj_matrix @ edge.verts[0].co - ray_obj_matrix @ edge.verts[1].co).length
-                        for edge in face.edges
-                    ]
-                    longest_edge = sorted(zip(lengths, face.edges), key=lambda x: x[0], reverse=True)[0][1]
-                    edge = longest_edge
+        elif self.orientation in ('CLOSEST_EDGE', 'LONGEST_EDGE'):
+            # Get the tangent, normal, and bitangent from the longest or the closest edge of the face.
 
-                elif self.orientation == 'CLOSEST_EDGE':
-                    distances = [
-                        distance_from_point_to_segment(
-                            ray.location,
-                            ray_obj_matrix @ edge.verts[0].co,
-                            ray_obj_matrix @ edge.verts[1].co,
-                        )
-                        for edge in face.edges
-                    ]
-                    closest_edge = sorted(zip(distances, face.edges), key=lambda x: x[0])[0][1]
-                    edge = closest_edge
+            if self.orientation == 'LONGEST_EDGE':
+                lengths = [
+                    (ray_obj_matrix @ edge.verts[0].co - ray_obj_matrix @ edge.verts[1].co).length
+                    for edge in face.edges
+                ]
+                longest_edge = sorted(zip(lengths, face.edges), key=lambda x: x[0], reverse=True)[0][1]
+                edge = longest_edge
 
-                # Get the loop (face corner) for the edge that is also in the face.
-                face_corner = next(loop for loop in edge.link_loops if loop.face == face)
+            elif self.orientation == 'CLOSEST_EDGE':
+                distances = [
+                    distance_from_point_to_segment(
+                        ray.location,
+                        ray_obj_matrix @ edge.verts[0].co,
+                        ray_obj_matrix @ edge.verts[1].co,
+                    )
+                    for edge in face.edges
+                ]
+                closest_edge = sorted(zip(distances, face.edges), key=lambda x: x[0])[0][1]
+                edge = closest_edge
 
-                start = face_corner.vert
-                end = face_corner.link_loop_next.vert
-                direction = (end.co - start.co)
+            # Get the loop (face corner) for the edge that is also in the face.
+            face_corner = next(loop for loop in edge.link_loops if loop.face == face)
 
-                tangent = edge.calc_tangent(face_corner)
-                normal = direction.cross(tangent)
-                bitangent = normal.cross(tangent)
+            start = face_corner.vert
+            end = face_corner.link_loop_next.vert
+            direction = (end.co - start.co)
 
-            # Construct Matrix
-            matrix = Matrix.Identity(4)
-            matrix[0].xyz = (ray_obj_matrix.to_3x3() @ tangent).normalized()
-            matrix[1].xyz = (ray_obj_matrix.to_3x3() @ bitangent).normalized()
-            matrix[2].xyz = (ray_obj_matrix.to_3x3() @ normal).normalized()
-            matrix[3].xyz = ray.location + (ray.normal * self.offset)
+            tangent = edge.calc_tangent(face_corner)
+            normal = direction.cross(tangent)
+            bitangent = normal.cross(tangent)
 
-            # destroy_temporary_bmesh
-            temp_bm.free()
-            del mesh
+        # Construct Matrix
+        matrix = Matrix.Identity(4)
+        matrix[0].xyz = (ray_obj_matrix.to_3x3() @ tangent).normalized()
+        matrix[1].xyz = (ray_obj_matrix.to_3x3() @ bitangent).normalized()
+        matrix[2].xyz = (ray_obj_matrix.to_3x3() @ normal).normalized()
+        matrix[3].xyz = ray.location + (ray.normal * self.offset)
 
-            matrix = matrix.transposed()
-            location = ray.location + (ray.normal * self.offset)
-            normal = ray.normal
+        # destroy_temporary_bmesh
+        temp_bm.free()
+        del mesh
+
+        matrix = matrix.transposed()
+        location = ray.location + (ray.normal * self.offset)
+        normal = ray.normal
 
         return matrix, location, normal
 
@@ -776,8 +520,7 @@ class CarverBase(bpy.types.Operator,
                                                              context.scene.cursor.location)
         else:
             # Put the location at the closest point of the bounding box of all selected objects.
-            ray_origin = view3d_utils.region_2d_to_origin_3d(region, rv3d, self.mouse.initial)
-            ray_direction = view3d_utils.region_2d_to_vector_3d(region, rv3d, self.mouse.initial)
+            ray_origin, ray_direction = region_2d_to_ray_3d(region, rv3d, self.mouse.initial)
 
             corners = []
             for obj in self.objects.selected:
@@ -803,8 +546,7 @@ class CarverBase(bpy.types.Operator,
         matrix = Matrix.Identity(4)
         normal = matrix.col[2].xyz
 
-        ray_origin = view3d_utils.region_2d_to_origin_3d(region, rv3d, self.mouse.initial)
-        ray_direction = view3d_utils.region_2d_to_vector_3d(region, rv3d, self.mouse.initial)
+        ray_origin, ray_direction = region_2d_to_ray_3d(region, rv3d, self.mouse.initial)
         t = (matrix.translation.z - ray_origin.z) / ray_direction.z
         location = ray_origin + ray_direction * t
         matrix.translation = location
@@ -851,7 +593,6 @@ class CarverBase(bpy.types.Operator,
 
         cutter = self.cutter.obj
 
-        # Add Modifier(s)
         for obj in self.objects.selected:
             mod = add_boolean_modifier(self, context, obj,
                                        cutter, "DIFFERENCE",
@@ -877,7 +618,7 @@ class CarverBase(bpy.types.Operator,
                 obj.modifiers.remove(mod)
 
         if not intersecting_canvases:
-            self.finalize(context, clean_up=True)
+            self.finalize(context)
             return
 
         # Select all faces of the cutter so that newly created faces in canvas
@@ -920,7 +661,7 @@ class CarverBase(bpy.types.Operator,
             for obj in intersecting_canvases:
                 obj.booleans.canvas = True
 
-            self.finalize(context)
+            self.finalize(context, clean_up=False)
             return
 
         elif self.mode == 'DESTRUCTIVE':
@@ -930,11 +671,11 @@ class CarverBase(bpy.types.Operator,
                     modifiers = get_modifiers_to_apply(context, obj, [modifiers])
                     apply_modifiers(context, obj, modifiers, force_clean=True)
 
-            self.finalize(context, clean_up=True)
+            self.finalize(context)
             return
 
 
-    def finalize(self, context, clean_up=False, abort=False):
+    def finalize(self, context, clean_up=True, abort=False):
         """
         Finalize and clean-up after the operation ends.
         Regardless of whether it was confirmed or cancelled.
@@ -943,14 +684,18 @@ class CarverBase(bpy.types.Operator,
         # Operation was aborted, or successfully finished in the Destructive mode.
         # Delete everything created by the operator (i.e. cutter).
         if clean_up:
-            delete_cutter(self.cutter.obj)
+            delete_object(self.cutter.obj)
             self.cutter.bm.free()
-            delete_empty_collection()
+            delete_empty_collection(context)
 
             # Remove modifiers added by the operator.
             if abort:
                 for obj, mod in self.objects.modifiers.items():
                     obj.modifiers.remove(mod)
+
+        # Clean-up temporary changes made by operator.
+        if self.effects.array:
+            self.effects.array.use_pin_to_last = False
 
         bpy.types.SpaceView3D.draw_handler_remove(self._handler, 'WINDOW')
         context.workspace.status_text_set(None)

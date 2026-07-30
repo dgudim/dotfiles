@@ -184,11 +184,13 @@ class VIEW3D_PT_print3d_export(Sidebar, Panel):
         header, panel = layout.panel("options", default_closed=True)
         header.label(text="Options")
         if panel:
+            col = panel.column()
+            col.active = context.scene.unit_settings.system != "NONE"
+            col.prop(props, "export_unit_scale")
+
             col = panel.column(heading="General")
-            sub = col.column()
-            sub.active = props.export_format != "OBJ"
-            sub.prop(props, "use_ascii_format")
-            col.prop(props, "use_scene_scale")
+            col.active = props.export_format != "OBJ"
+            col.prop(props, "use_ascii_format")
 
             col = panel.column(heading="Geometry")
             col.active = props.export_format != "STL"

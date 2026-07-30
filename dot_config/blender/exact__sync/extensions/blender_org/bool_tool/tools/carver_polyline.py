@@ -1,15 +1,17 @@
 import bpy
-import math
 import os
 from mathutils import Vector
 from bpy_extras import view3d_utils
-from .. import __file__ as base_file
+
+from ..constants import (
+    ICONS_PATH,
+)
+from ..functions.view import (
+    redraw_regions,
+)
 
 from .common.base import (
     CarverBase,
-)
-from .common.properties import (
-    CarverPropsArray,
 )
 from .common.types import (
     Selection,
@@ -35,7 +37,7 @@ class OBJECT_WT_carve_polyline(bpy.types.WorkSpaceTool):
     bl_space_type = 'VIEW_3D'
     bl_context_mode = 'OBJECT'
 
-    bl_icon = os.path.join(os.path.dirname(base_file), "icons", "tool_icons", "ops.object.carver_polyline")
+    bl_icon = os.path.join(ICONS_PATH, "dat", "ops.object.carver_polyline")
     bl_keymap = (
         ("object.carve_polyline", {"type": 'LEFTMOUSE', "value": 'CLICK'}, None),
         ("object.carve_polyline", {"type": 'LEFTMOUSE', "value": 'CLICK', "ctrl": True}, None),
@@ -57,8 +59,7 @@ class MESH_WT_carve_polyline(OBJECT_WT_carve_polyline):
 
 #### ------------------------------ OPERATORS ------------------------------ ####
 
-class OBJECT_OT_carve_polyline(CarverBase,
-                               CarverPropsArray):
+class OBJECT_OT_carve_polyline(CarverBase):
     bl_idname = "object.carve_polyline"
     bl_label = "Polyline Carve"
     bl_description = description
@@ -108,11 +109,10 @@ class OBJECT_OT_carve_polyline(CarverBase,
 
 
     def modal(self, context, event):
+        redraw_regions(context)
+
         # Status Bar Text
         self.status(context)
-
-        # find_the_limit_of_the_3d_viewport_region
-        self.redraw_region(context)
 
         # Modifier Keys
         self.event_array(context, event)
@@ -123,7 +123,6 @@ class OBJECT_OT_carve_polyline(CarverBase,
         if event.type in {'WHEELUPMOUSE', 'WHEELDOWNMOUSE'}:
             if self.phase != "BEVEL":
                 return {'PASS_THROUGH'}
-
 
         # Mouse Move
         if event.type == 'MOUSEMOVE':
@@ -146,12 +145,15 @@ class OBJECT_OT_carve_polyline(CarverBase,
             elif self.phase == "EXTRUDE":
                 self.set_extrusion_depth(context)
 
-
         # Add Points & Confirm
         elif event.type == 'LEFTMOUSE' and event.value == 'PRESS':
             if self.phase == "DRAW":
-                # Confirm Shape (if clicked on the first vert)
-                if self._distance_from_first > 75:
+                # Add Point
+                if self._distance_from_first < 75:
+                    self._insert_polyline_point()
+
+                # Confirm Shape (if clicked near the first vert).
+                else:
                     verts = self.cutter.verts
                     if len(verts) > 3:
                         self._remove_polyline_point(context, jump_mouse=False)
@@ -165,17 +167,12 @@ class OBJECT_OT_carve_polyline(CarverBase,
                         else:
                             return {'RUNNING_MODAL'}
 
-                # Add Point
-                else:
-                    self._insert_polyline_point()
-
             # Confirm Depth
             if self.phase == "EXTRUDE":
                 self.confirm(context)
                 return {'FINISHED'}
 
-
-        # Confirm
+        # Enter (Confirm)
         elif event.type == 'RET':
             verts = self.cutter.verts
             if len(verts) > 2:
@@ -195,18 +192,14 @@ class OBJECT_OT_carve_polyline(CarverBase,
                 if self.phase == "EXTRUDE" and event.value == 'PRESS':
                     self.confirm(context)
                     return {'FINISHED'}
-            else:
-                self.report({'WARNING'}, "At least three points are required to make a polygonal shape")
-
 
         # Remove Last Point
         if event.type == 'BACK_SPACE' and event.value == 'PRESS':
             self._remove_polyline_point(context)
 
-
         # Cancel
         elif event.type in {'RIGHTMOUSE', 'ESC'}:
-            self.finalize(context, clean_up=True, abort=True)
+            self.finalize(context, abort=True)
             return {'FINISHED'}
 
         return {'RUNNING_MODAL'}
@@ -301,7 +294,7 @@ class OBJECT_OT_carve_polyline(CarverBase,
             context.workspace.status_text_set(modal_keys_extrude)
 
 
-    # Polyline-specific features.
+    # Polyline-specific methods.
     def _insert_polyline_point(self):
         """Inserts a new vertex in the cutter geometry and connects it to the previous last one."""
 
@@ -383,15 +376,16 @@ class OBJECT_OT_carve_polyline(CarverBase,
                                                                context.region_data,
                                                                vert_world)
             if screen_pos:
-                context.window.cursor_warp(int(screen_pos.x), int(screen_pos.y))
+                x, y = int(screen_pos.x), int(screen_pos.y)
+                context.window.cursor_warp(x, y)
 
 
 
 #### ------------------------------ REGISTRATION ------------------------------ ####
 
-classes = [
+classes = (
     OBJECT_OT_carve_polyline,
-]
+)
 
 def register():
     for cls in classes:

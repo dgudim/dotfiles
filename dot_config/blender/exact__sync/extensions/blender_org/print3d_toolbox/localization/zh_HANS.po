@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: 3D Print Toolbox 1.3.0\n"
-"POT-Creation-Date: 2025-12-29\n"
-"PO-Revision-Date: 2026-03-21\n"
-"Last-Translator: Zhang Chenming (张宸铭) @zcm\n"
+"Project-Id-Version: 3D Print Toolbox 1.4.0\n"
+"POT-Creation-Date: 2026-07-23\n"
+"PO-Revision-Date: 2026-07-23\n"
+"Last-Translator: Ye Gui @ziweidao\n"
 "Language-Team: Mikhail Rachinskiy\n"
 "Language: zh_HANS\n"
 "MIME-Version: 1.0\n"
@@ -18,9 +18,6 @@ msgstr "检查"
 
 msgid "Scale To"
 msgstr "缩放到"
-
-msgid "Scene Scale"
-msgstr "场景缩放"
 
 msgid "Copy Textures"
 msgstr "复制材质"
@@ -106,11 +103,11 @@ msgstr "最小厚度"
 msgid "Export Directory"
 msgstr "导出路径"
 
+msgid "Export at specified unit scale (most slicers assume millimeters)"
+msgstr "按指定单位比例导出（大多数切片软件默认单位为毫米）"
+
 msgid "Export file in ASCII format"
 msgstr "用ASCII格式导出文件"
-
-msgid "Apply scene scale on export"
-msgstr "导出时应用场景缩放"
 
 msgid "Copy textures on export to the output path"
 msgstr "将材质贴图复制到导出路径"

@@ -85,13 +85,20 @@ class SceneProperties(PropertyGroup):
         ),
         default="STL",
     )
+    export_unit_scale: EnumProperty(
+        name="Units",
+        description="Export at specified unit scale (most slicers assume millimeters)",
+        items=(
+            ("m", "None", ""),
+            ("cm", "Centimeters", ""),
+            ("mm", "Millimeters", ""),
+            ("um", "Micrometers", ""),
+        ),
+        default="m",
+    )
     use_ascii_format: BoolProperty(
         name="ASCII",
         description="Export file in ASCII format",
-    )
-    use_scene_scale: BoolProperty(
-        name="Scene Scale",
-        description="Apply scene scale on export",
     )
     use_copy_textures: BoolProperty(
         name="Copy Textures",

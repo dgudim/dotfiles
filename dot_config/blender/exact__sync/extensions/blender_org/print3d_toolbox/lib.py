@@ -6,6 +6,7 @@ import array
 import random
 from collections.abc import Iterator, MutableSequence
 from random import uniform
+from typing import Any
 
 import bmesh
 import bpy
@@ -223,7 +224,7 @@ def face_is_distorted(face: BMFace, angle: float) -> bool:
 
 def gn_setup(ng_name: str, ob: Object) -> Modifier:
     if (ng := bpy.data.node_groups.get(ng_name)) is None:
-        with bpy.data.libraries.load(str(var.NODEGROUPS_ASSET_PATH)) as (data_from, data_to):
+        with bpy.data.libraries.load(str(var.NODEGROUPS_FILE)) as (data_from, data_to):
             data_to.node_groups = [ng_name]
         ng = data_to.node_groups[0]
 
@@ -235,3 +236,37 @@ def gn_setup(ng_name: str, ob: Object) -> Modifier:
         md.show_manage_panel = False
 
     return md
+
+
+def md_input_set(md: Modifier, id: str, value: Any, enum_items: list[str] | None = None) -> None:
+    if hasattr(md, "properties"):  # VER >= 5.2
+        getattr(md.properties.inputs, id).value = value
+    else:
+        if enum_items is None:
+            md[id] = value
+        else:
+            md[id] = enum_items.index(value)
+
+
+def md_panel_set(md: Modifier, id: int, value: bool) -> None:
+    if hasattr(md, "properties"):  # VER >= 5.2
+        setattr(md.properties.panels, f"open_{id}", value)
+    else:
+        md.panels[id].is_open = value
+
+
+def md_get_panels(md: Modifier) -> dict[str, int]:
+    if hasattr(md, "properties"):  # VER >= 5.2
+        return {
+            p.name: p.identifier
+            for p in md.node_group.interface.items_tree
+            if p.item_type == "PANEL"
+        }
+
+    return {
+        p.name: i
+        for i, p in enumerate(
+            p for p in md.node_group.interface.items_tree
+            if p.item_type == "PANEL"
+        )
+    }

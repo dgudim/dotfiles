@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: 3D Print Toolbox 1.3.0\n"
-"POT-Creation-Date: 2025-12-29\n"
-"PO-Revision-Date: 2025-12-29\n"
+"Project-Id-Version: 3D Print Toolbox 1.4.0\n"
+"POT-Creation-Date: 2026-07-23\n"
+"PO-Revision-Date: 2026-07-23\n"
 "Last-Translator: Mikhail Rachinskiy\n"
 "Language-Team: Mikhail Rachinskiy\n"
 "Language: ru_RU\n"
@@ -18,9 +18,6 @@ msgstr "Проверки"
 
 msgid "Scale To"
 msgstr "Масштабировать"
-
-msgid "Scene Scale"
-msgstr "Масштаб сцены"
 
 msgid "Copy Textures"
 msgstr "Копировать текстуры"
@@ -106,11 +103,11 @@ msgstr "Минимальная Толщина"
 msgid "Export Directory"
 msgstr "Каталог экспорта"
 
+msgid "Export at specified unit scale (most slicers assume millimeters)"
+msgstr "Экспорт в заданном масштабе единиц измерения (большинство слайсеров используют миллиметры)"
+
 msgid "Export file in ASCII format"
 msgstr "Экспортировать файл в формате ASCII"
-
-msgid "Apply scene scale on export"
-msgstr "Применить масштаб сцены при экспорте"
 
 msgid "Copy textures on export to the output path"
 msgstr "Копировать текстуры при экспорте в экспортный каталог"
