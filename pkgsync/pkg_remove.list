@@ -163,6 +163,10 @@ gcc14-libs
 sddm
 sddm-kcm
 
+# Replaced with packet
+r-quick-share
+r-quick-share-bin
+
 # Replaced with flatpak
 crow-translate-git
 ktailctl

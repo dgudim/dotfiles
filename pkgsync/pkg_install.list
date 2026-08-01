@@ -358,7 +358,6 @@ gtk3-demos
 gtk4-demos
 espanso-wayland-git
 espanso-gui
-r-quick-share
 packet
 waycheck
 mission-center
@@ -588,6 +587,8 @@ arch-wiki-docs
 lsfg-vk-git
 yt-dlp-ejs
 dblatex
+mpv-modernz
+mpv-thumbfast-git
 
 ## Browser sync to RAM
 profile-sync-daemon
