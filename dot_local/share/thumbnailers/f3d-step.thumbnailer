@@ -1,0 +1,6 @@
+[Thumbnailer Entry]
+Type=X-Thumbnailer
+Name=f3d Thumbnailer (step)
+TryExec=f3d
+Exec=f3d --config=thumbnail --color=1,0.241,0.184 --scalar-coloring=false --roughness=0.3 --metallic=1 --hdri-ambient=false --light-intensity=100 --input=%i --output=%o --resolution=%s,%s
+MimeType=application/step;application/x-step;model/step;

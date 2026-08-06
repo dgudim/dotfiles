@@ -275,6 +275,7 @@ plasma-keyboard
 
 # GUI APPS
 rssguard
+gajim
 wayscriber-bin
 wayscriber-configurator
 drawy
@@ -364,6 +365,7 @@ mission-center
 goldendict-ng
 mousam
 prusa-slicer
+f3d
 serialplot-git
 textpieces
 kcolorchooser
