@@ -90,6 +90,9 @@ DATETIME_UPDATE_DIRS = [
     Path(BASE_PICTURES_DIR, "neko_ark"),
     Path(BASE_PICTURES_DIR, "avatars"),
 ]
+DATETIME_UPDATE_EXCLUDE_DIRS = [
+    Path(BASE_PICTURES_DIR, "Icons and fonts", "fonts"),
+]
 MTIME_CACHE_FILE = Path(BASE_DIR, "dt_cache.json")
 
 TEMPORARY_DIRECTORY_PATH = Path(BASE_DIR, "./temp")
@@ -786,7 +789,7 @@ print(f"\n{L_GREEN}============ Pixiv DONE!{NC}")
 print(f"\n╭─{L_PURPLE}Setting creation date tags{NC}")
 
 dirs_to_check_nested = [list(dir_.rglob("*")) for dir_ in DATETIME_UPDATE_DIRS]
-dirs_to_check = [dir__ for dirlist in dirs_to_check_nested for dir__ in dirlist if dir__.is_dir()]
+dirs_to_check = [dir__ for dirlist in dirs_to_check_nested for dir__ in dirlist if dir__.is_dir() and dir__ not in DATETIME_UPDATE_EXCLUDE_DIRS]
 
 
 directory_update_time_cache = json.loads(
