@@ -19,6 +19,7 @@ snapper
 snapper-gui-git
 fprintd
 displaylink
+kio-snapshot
 
 # Thinkpad + AMD
 thinkfan-ui
