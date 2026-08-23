@@ -453,6 +453,22 @@ if is_root_btrfs(fstab):
                 f"{YELLOW}Disable timeline snapshots in '{filename}' snapper config{NC}",
             )
 
+            # https://invent.kde.org/system/kio-snapshot
+            run_check(
+                'ALLOW_USERS="kloud"' not in config_content,
+                f"{YELLOW}Set ALLOW_USERS=\"kloud\" in '{filename}' snapper config{NC}",
+            )
+
+            run_check(
+                'ALLOW_GROUPS="kloud"' not in config_content,
+                f"{YELLOW}Set ALLOW_GROUPS=\"kloud\" in '{filename}' snapper config{NC}",
+            )
+
+            run_check(
+                'SYNC_ACL="yes"' not in config_content,
+                f"{YELLOW}Set SYNC_ACL=\"yes\" in '{filename}' snapper config{NC}",
+            )
+
 
 print(
     f"{L_GREEN}Finished running checks, {L_CYAN}{warn} / {checks}{L_GREEN} warning(s){NC}\n"
