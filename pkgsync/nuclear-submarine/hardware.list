@@ -50,6 +50,7 @@ timescaledb-old-upgrade
 maven
 mongodb
 mongodb-compass
+bruno
 
 ## Kubernetes
 google-cloud-cli
