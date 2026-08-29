@@ -12,9 +12,15 @@ need_root() {
     fi
 }
 
+install_deps() {
+    echo "Installing python3 and python3-requests with zypper..."
+    zypper --non-interactive install --no-recommends python3 python3-requests
+}
+
 install_files() {
     echo "Installing files to ${INSTALL_DIR}..."
     mkdir -p "${INSTALL_DIR}"
+    rm -rf "${INSTALL_DIR}/venv"
     install -m 755 "${SCRIPT_DIR}/hass-power-monitor.py" "${INSTALL_DIR}/hass-power-monitor.py"
 
     local dest_config="${INSTALL_DIR}/hass-power-monitor-config.json"
@@ -50,6 +56,7 @@ PY
 
 main() {
     need_root
+    install_deps
     install_files
     install_unit
     warn_if_unconfigured
