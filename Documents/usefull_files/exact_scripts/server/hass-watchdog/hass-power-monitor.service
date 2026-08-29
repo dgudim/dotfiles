@@ -5,7 +5,8 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 hass-power-monitor.py
+WorkingDirectory=/opt/hass-power-monitor
+ExecStart=/usr/bin/python3 /opt/hass-power-monitor/hass-power-monitor.py
 Restart=always
 RestartSec=10
 User=root

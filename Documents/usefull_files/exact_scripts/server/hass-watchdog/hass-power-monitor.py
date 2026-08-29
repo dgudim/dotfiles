@@ -4,7 +4,7 @@ import time
 import json
 import requests
 
-CONFIG_PATH = "hass-power-monitor-config.json"
+CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "hass-power-monitor-config.json")
 
 def load_config():
     try:
