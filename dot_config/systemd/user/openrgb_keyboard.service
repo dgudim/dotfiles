@@ -1,5 +1,5 @@
 [Unit]
-Description=OpenRGB control
+Description=Keyboard notification manager
 After=openrgb.service
 Requires=openrgb.service
 Conflicts=sleep.target
@@ -12,4 +12,3 @@ RestartSec=5
 
 [Install]
 WantedBy=awake.target
-
