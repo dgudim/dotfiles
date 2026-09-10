@@ -1,0 +1,8 @@
+UUID=d968ac94-ac43-4dfa-a1d5-09437b9d46dc  swap                                               swap        defaults                    0  0
+UUID=2ba10908-0214-4293-b8a2-48fc916ca943  /                                                  ext4        defaults,commit=60,noatime  0  1
+UUID=48CE-11A0                             /boot/efi                                          vfat        utf8                        0  2
+UUID=c3eec8cd-e0d8-4dae-bbb4-bf85c9af73df  /mnt/sata_500                                      ext4        defaults,commit=60,noatime  0  2
+
+# Bind mounts for nextcloud 
+/mnt/sata_500/booklore/bookdrop            /mnt/sata_500/nextcloud_external_mounts/books/drop    fuse.bindfs force-user=33,force-group=root,perms=750,create-for-user=kloud,create-for-group=users 0 0
+/mnt/sata_500/booklore/books               /mnt/sata_500/nextcloud_external_mounts/books/library fuse.bindfs force-user=33,force-group=root,perms=750,create-for-user=kloud,create-for-group=users 0 0
