@@ -211,7 +211,7 @@ def compress(source_dir_path: Path, delete_directory: bool):
 
 
 def extract_image(image_path: Path, target_path: Path | None, delete_image: bool):
-    print(f"{CYAN}Compressing {L_CYAN}{image_path}{NC}")
+    print(f"{CYAN}Extracting {L_CYAN}{image_path}{NC}")
 
     if target_path is None:
         target_path = Path(image_path.parent, image_path.stem)
