@@ -43,3 +43,6 @@ EOF
 ## Migrate akonadi to sqlite from mariadb
 
 akonadi-db-migrator --newengine sqlite
+
+## Enable ksm
+sudo install -Dm644 /usr/lib/systemd/system/sddm.service.d/10-ksm.conf /usr/lib/systemd/system/plasmalogin.service.d/10-ksm.conf
