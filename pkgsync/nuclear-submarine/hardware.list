@@ -52,6 +52,10 @@ mongodb
 mongodb-compass
 bruno
 
+# Cross-compilation
+mingw-w64-gcc
+rustup
+
 ## Kubernetes
 google-cloud-cli
 google-cloud-cli-gke-gcloud-auth-plugin
