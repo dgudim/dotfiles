@@ -1144,8 +1144,6 @@ vdpauinfo
 gst-plugin-va
 gst-plugin-pipewire
 gst-plugin-qmlgl
-gst-plugin-libcamera
-pipewire-libcamera
 pipewire-onnx
 colord
 libuvc

@@ -204,3 +204,7 @@ mariadb-clients
 
 # Replaced with krokiet
 czkawka-gui-bin
+
+# Crashes pipewire
+gst-plugin-libcamera
+pipewire-libcamera
