@@ -201,3 +201,6 @@ python313
 # Was needed for akonadi, replaced with sqlite
 mariadb
 mariadb-clients
+
+# Replaced with krokiet
+czkawka-gui-bin
