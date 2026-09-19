@@ -17,7 +17,7 @@ import sys
 from aw_client import ActivityWatchClient
 from aw_core import Event
 
-TARGET_BUCKET = "aw-watcher-android-test"
+TARGET_BUCKET = "aw-watcher-android"
 CHUNK_MERGE_THRESHOLD = datetime.timedelta(minutes=11)
 CHUNK_MERGE_THRESHOLD_SEC = CHUNK_MERGE_THRESHOLD.total_seconds()
 
