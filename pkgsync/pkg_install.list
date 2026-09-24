@@ -676,6 +676,7 @@ lib32-v4l-utils
 lib32-vkd3d
 lib32-fluidsynth
 lib32-alsa-plugins
+lib32-libpulse
 lib32-giflib
 lib32-gperftools
 lib32-libdecor
