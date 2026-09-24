@@ -2,7 +2,12 @@ from pathlib import Path
 import shutil
 
 USER_DIR = Path("/home/kloud")
-BACKUP_DIR = Path(USER_DIR, "dotfiles/Documents/usefull_files/exact_scripts/server/the-rock/system-configs")
+BACKUP_DIR = Path(USER_DIR, "dotfiles/Documents/usefull_files/exact_scripts/server/the-rock")
+
+home_folders_to_ignore = [
+    "album",
+    "dotfiles"
+]
 
 BACKUP_DIR.mkdir(exist_ok=True)
 
@@ -17,6 +22,6 @@ configs_to_copy = [
 
 for config in configs_to_copy:
     print(f"Copying {config}")
-    config_full_path = Path(BACKUP_DIR, config.as_posix().partition('/')[2])
+    config_full_path = Path(BACKUP_DIR, "system-configs", config.as_posix().partition('/')[2])
     config_full_path.parent.mkdir(exist_ok=True, parents=True)
     shutil.copy(config, config_full_path)

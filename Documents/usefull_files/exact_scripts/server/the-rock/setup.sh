@@ -37,7 +37,7 @@ jq yq usbip tcpdump \
 intel-media-driver intel-gpu-tools \
 waypipe ripgrep fd duf \
 atuin rsync \
-bindfs
+bindfs age
 
 # Bindfs is for nextcloud
 
