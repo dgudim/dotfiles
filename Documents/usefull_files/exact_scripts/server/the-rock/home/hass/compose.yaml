@@ -1,0 +1,100 @@
+name: hass
+services:
+    home-assistant:
+        image: ghcr.io/home-assistant/home-assistant:stable
+        container_name: homeassistant
+        restart: unless-stopped
+        network_mode: host
+        environment:
+            - TZ=Europe/Vilnius
+        devices:
+            - /dev/ttyACM0
+            - /dev/ttyUSB0
+        cap_add:
+            - NET_ADMIN
+            - NET_RAW # For bluetooth
+        volumes:
+            - /mnt/sata_500/hass_config:/config
+            - /run/dbus:/run/dbus:ro
+            - /dev/bus/usb:/dev/bus/usb
+
+    esphome:
+        image: ghcr.io/esphome/esphome
+        container_name: esphome
+        user: 1000:100
+        restart: unless-stopped
+        network_mode: host
+        environment:
+            - PLATFORMIO_CORE_DIR=.platformio
+            - PLATFORMIO_GLOBALLIB_DIR=.platformioLibs
+            - TZ=Europe/Vilnius
+        volumes:
+            - /mnt/sata_500/hass_config/esphome:/config
+            - /mnt/sata_500/hass_config/esphome/.cache:/.cache
+
+    piper:
+        image: rhasspy/wyoming-piper
+        container_name: piper
+        user: 1000:100
+        restart: unless-stopped
+        command: --voice en_US-glados-medium
+        environment:
+            - TZ=Europe/Vilnius
+        ports:
+            - 10200:10200
+        volumes:
+            - /mnt/sata_500/piper:/data
+    
+    whisper:
+      container_name: whisper
+      image: rhasspy/wyoming-whisper
+      user: 1000:100
+      restart: unless-stopped
+      command: --model base-int8 --language en
+      environment:
+        - TZ=Europe/Vilnius
+      ports:
+        - 10300:10300
+      volumes:
+        - /mnt/sata_500/whisper/data:/data
+        - /mnt/sata_500/whisper/cache:/.cache
+    
+    openwakeword:
+      image: rhasspy/wyoming-openwakeword:latest
+      container_name: openwakeword
+      user: 1000:100
+      restart: unless-stopped
+      # set that threshold to higher than 0.5 (ex 0.75) for more accurate but less sensitive wake word detection
+      command: --custom-model-dir /custom --preload-model 'glados' --threshold 0.75
+      environment:
+        - TZ=Europe/Vilnius
+      ports:
+        - 10400:10400
+      volumes:
+        - /mnt/sata_500/openwakeword/data:/data
+        - /mnt/sata_500/openwakeword/custom:/custom
+
+    llamacpp:
+        image: ghcr.io/mostlygeek/llama-swap:cpu
+        # image: ghcr.io/ikawrakow/ik-llama-cpp:cpu-swap
+        container_name: llamacpp
+        restart: unless-stopped
+        user: 1000:100
+        ports:
+            - 9292:8080
+        volumes:
+            - /mnt/sata_500/llama.cpp:/models:ro
+            - /mnt/sata_500/llama.cpp/config.yaml:/app/config.yaml:ro
+
+    mosquitto:
+      image: eclipse-mosquitto
+      container_name: mosquitto
+      restart: unless-stopped
+      user: 1000:100
+      volumes:
+        - /mnt/sata_500/mosquitto:/mosquitto
+        - /mnt/sata_500/mosquitto/data:/mosquitto/data # Don't remove these, shadow declared anon mounts in the image
+        - /mnt/sata_500/mosquitto/log:/mosquitto/log
+      ports:
+        - 1883:1883
+        - 9001:9001    

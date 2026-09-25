@@ -1,0 +1,165 @@
+name: utilities
+services:
+    
+    bentopdf:
+        image: ghcr.io/alam00000/bentopdf-simple:latest
+        container_name: bentopdf
+        restart: unless-stopped
+        ports:
+          - 1344:8080
+
+    homepage:
+        image: ghcr.io/gethomepage/homepage:latest
+        container_name: homepage
+        restart: unless-stopped
+        user: 1000:100
+        environment:
+            - TZ=Europe/Vilnius
+            - HOMEPAGE_ALLOWED_HOSTS=192.168.50.180:3333,microcehlik.local:3333,kloud.home
+            - PUID=1000
+            - PGID=100
+        ports:
+            - 3333:3000
+        volumes:
+            - /mnt/sata_500/homepage:/app/config
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+
+    languagetool:
+        image: erikvl87/languagetool:latest
+        container_name: languagetool
+        restart: unless-stopped
+        user: 1000:100
+        environment:
+            - TZ=Europe/Vilnius
+            - Java_Xms=512m
+            - Java_Xmx=2g
+            - langTool_abTest=
+            - langTool_abTestClients=
+            - langtool_pipelinePrewarming=true
+            - langtool_languageModel=/ngrams
+        ports:
+            - 8010:8010
+        volumes:
+            - /mnt/sata_500/languagetool/ngrams:/ngrams:ro
+            - /mnt/sata_500/languagetool/logback.xml:/LanguageTool/logback.xml
+
+
+    ntfy:
+        image: binwiederhier/ntfy
+        container_name: ntfy
+        command: serve
+        restart: unless-stopped
+        environment:
+            - TZ=Europe/Vilnius
+        user: 1000:100
+        ports:
+            - 12301:81
+            - 12300:80
+        volumes:
+            - /mnt/sata_500/ntfy/cache:/var/cache/ntfy
+            - /mnt/sata_500/ntfy/config:/etc/ntfy
+
+    mailrise:
+        image: yoryan/mailrise:latest
+        container_name: mailrise
+        restart: unless-stopped
+        volumes:
+            - /mnt/sata_500/mailrise/mailrise.conf:/etc/mailrise.conf:ro
+        environment:
+            - PUID=1000
+            - PGID=100
+        ports:
+            - 8025:8025
+
+    syncthing:
+        image: syncthing/syncthing:latest
+        container_name: syncthing
+        restart: unless-stopped
+        hostname: microchelik
+        environment:
+            - PUID=1000
+            - PGID=100
+            - PCAP=cap_chown,cap_fowner+ep
+            - STGUIADDRESS=
+            - UMASK=027 # https://wintelguy.com/umask-calc.pl
+            - TZ=Europe/Vilnius
+        network_mode: host # 22000, 22001, 22027, 8384
+        volumes:
+            - /mnt/sata_500/syncthing:/var/syncthing
+            - /mnt/sata_500/syncthing/config:/var/syncthing/config
+        healthcheck:
+            test: curl -fkLsS -m 2 127.0.0.1:8384/rest/noauth/health | grep -o --color=never OK || exit 1
+            interval: 5m
+            timeout: 10s
+            retries: 3
+
+    syncthing-relay:
+        image: syncthing/relaysrv
+        container_name: syncthing-relay
+        hostname: microchelik-relay
+        environment:
+          - PUID=1000
+          - PGID=100
+        network_mode: host # 22067, 22070 for stats
+        restart: unless-stopped
+        entrypoint: ["/bin/entrypoint.sh", "/bin/strelaysrv", "-pools", "", "-provided-by=", "kloud's homelab"]
+        volumes:
+          - /mnt/sata_500/syncthing/relay:/var/strelaysrv
+
+    voux:
+        image: ghcr.io/quintixlabs/voux/voux:latest
+        container_name: voux
+        restart: unless-stopped
+        user: 1000:100
+        ports:
+            - 8787:8787
+        environment:
+            - ADMIN_USERNAME=admin
+            - ADMIN_PASSWORD=${VOUX_ADMIN_PASSWORD}
+        volumes:
+            - /mnt/sata_500/voux:/app/data
+
+
+    spoolman:
+      image: ghcr.io/donkie/spoolman:latest
+      container_name: spoolman
+      restart: unless-stopped
+      volumes:
+        - type: bind
+          source: /mnt/sata_500/spoolman
+          target: /home/app/.local/share/spoolman
+      ports:
+        - 7999:8000
+      environment:
+        - TZ=Europe/Vilnius
+        - PUID=1000
+        - PGID=100
+
+    atuin:
+        image: ghcr.io/atuinsh/atuin:18.13.5
+        container_name: atuin
+        restart: unless-stopped
+        command: start
+        user: 1000:100
+        volumes:
+          - "/mnt/sata_500/atuin:/config"
+        ports:
+          - 8889:8888
+        environment:
+          ATUIN_HOST: "0.0.0.0"
+          ATUIN_OPEN_REGISTRATION: "true"
+          ATUIN_DB_URI: ${ATUIN_DB_URI}
+          RUST_LOG: info
+
+    plik:
+        image: rootgg/plik:latest
+        container_name: plik
+        restart: "unless-stopped"
+        user: 1000:100
+        volumes:
+          - /mnt/sata_500/plik/plikd.cfg:/home/plik/server/plikd.cfg
+          - /mnt/sata_500/plik/data:/data
+        ports:
+          - 17005:8080
+          - 17006:8081
+   

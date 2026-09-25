@@ -1,0 +1,51 @@
+name: media
+services:
+    mpd-alsa:
+        image: giof71/mpd-alsa
+        container_name: mpd-alsa
+        restart: unless-stopped
+        environment:
+            - TZ=Europe/Vilnius
+            - ALSA_OUTPUT_CREATE=yes
+        devices:
+            - /dev/snd
+        ports:
+            - 6600:6600
+        volumes:
+            - /mnt/media/music:/music:ro
+            - /mnt/sata_500/mpd/playlists:/playlists
+            - /mnt/sata_500/mpd/db:/db
+            - /mnt/sata_500/mpd/log:/log
+            - /mnt/sata_500/mpd/userconf:/user/config
+
+    minidlna:
+        image: vladgh/minidlna
+        container_name: minidlna
+        restart: unless-stopped
+        network_mode: host
+        environment:
+            - PUID=1000
+            - PGID=100
+            - TZ=Europe/Vilnius
+            - MINIDLNA_MEDIA_DIR=/music
+            - MINIDLNA_FRIENDLY_NAME=MikrochelikDl
+            - MINIDLNA_NOTIFY_INTERVAL=30
+        volumes:
+            - /mnt/media/music:/music:ro
+
+
+    navidrome:
+        image: deluan/navidrome:latest
+        container_name: navidrome
+        user: 1000:100
+        restart: unless-stopped
+        environment:
+            - TZ=Europe/Vilnius
+        ports:
+            - 4533:4533
+        volumes:
+            - /mnt/sata_500/navidrome:/data
+            - /mnt/media/music:/music:ro
+
+
+

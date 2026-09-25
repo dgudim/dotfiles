@@ -1,0 +1,89 @@
+services:
+  caddy:
+    build:
+      context: .
+      dockerfile: CaddyL4.Dockerfile
+    container_name: caddy
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Vilnius
+    cap_add:
+      - NET_ADMIN
+    network_mode: host
+    volumes:
+      - /mnt/sata_500/caddy/conf:/etc/caddy
+      - /mnt/sata_500/caddy/data:/data/caddy
+      - /mnt/sata_500/caddy/temp_conf:/config/caddy
+  
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: tailscale
+    hostname: microchelik
+    restart: unless-stopped
+    network_mode: host
+    environment:
+#      - TS_AUTHKEY=tskey-auth-kZVQv3xk2N11CNTRL-sjC2pzxExmCzmAseRtQPnC67PHo88b7ZL
+      - TS_EXTRA_ARGS=--accept-dns=true --operator=root
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TZ=Europe/Vilnius
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /mnt/sata_500/tailscale:/var/lib/tailscale
+      - /run/dbus:/run/dbus
+      - /etc/resolv.conf:/etc/resolv.conf
+    devices:
+      - /dev/net/tun
+
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    restart: unless-stopped
+    network_mode: host # listens to dns on 530 and http on 800
+    environment:
+      TZ: 'Europe/Vilnius'
+      FTLCONF_webserver_api_password: ${PIHOLE_FTLCONF_webserver_api_password}
+      PIHOLE_UID: '1000'
+      PIHOLE_GID: '100'
+    volumes:
+      - /mnt/sata_500/pihole:/etc/pihole
+    cap_add:
+      # See https://docs.pi-hole.net/docker/#note-on-capabilities
+      # Required if you are using Pi-hole as your DHCP server, else not needed
+      - NET_ADMIN
+      # Required if you are using Pi-hole as your NTP client to be able to set the host's system time
+      - SYS_TIME
+      # Optional, if Pi-hole should get some more processing time
+      - SYS_NICE
+
+  postgres:
+    image: postgres:18
+    container_name: postgres
+    restart: unless-stopped
+    shm_size: '4gb'
+    ports:
+      - 5432:5432
+    environment:
+      - TZ=Europe/Vilnius
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=postgres
+    volumes:
+      - /mnt/sata_500/dbs/postgres/data:/var/lib/postgresql      
+      - /mnt/sata_500/dbs/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
+    command: -c config_file=/etc/postgresql/postgresql.conf
+
+
+  valkey:
+    image: valkey/valkey
+    container_name: valkey
+    restart: unless-stopped
+    command: valkey-server --save 240 5 --loglevel warning
+    shm_size: '4gb'
+    ports:
+      - 6379:6379
+    environment:
+      - TZ=Europe/Vilnius
+    volumes:
+      - /mnt/sata_500/dbs/valkey:/data

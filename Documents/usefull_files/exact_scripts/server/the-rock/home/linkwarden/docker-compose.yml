@@ -1,0 +1,21 @@
+services:
+  linkwarden:
+    container_name: linkwarden
+    image: ghcr.io/linkwarden/linkwarden:latest
+    restart: unless-stopped
+    user: 1000:100
+    env_file: .env
+    ports:
+      - 3030:3000
+    volumes:
+      - /mnt/sata_500/linkwarden/data:/data/data
+    depends_on:
+      - meilisearch
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.12.8
+    restart: unless-stopped
+    user: 1000:100
+    env_file: .env
+    volumes:
+      - /mnt/sata_500/linkwarden/meili_data:/meili_data

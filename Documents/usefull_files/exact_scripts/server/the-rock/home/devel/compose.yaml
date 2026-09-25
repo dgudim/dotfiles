@@ -1,0 +1,17 @@
+services:
+  code-server:
+    # image: lscr.io/linuxserver/code-server:latest
+    build: .
+    container_name: code-server
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=Europe/Vilnius
+      - DEFAULT_WORKSPACE=/config/workspace
+      - PASSWORD=${CODE_SERVER_PASSWORD}
+      - SUDO_PASSWORD=${CODE_SERVER_SUDO_PASSWORD}
+      - PWA_APPNAME=code-server
+    volumes:
+      - /mnt/sata_500/code-server:/config

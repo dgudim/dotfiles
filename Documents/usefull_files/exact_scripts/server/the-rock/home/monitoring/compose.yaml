@@ -1,0 +1,118 @@
+name: monitoring
+services:
+    grafana:
+        image: grafana/grafana
+        container_name: grafana
+        user: 1000:100
+        restart: unless-stopped
+        network_mode: host
+        environment:
+            - GF_SERVER_HTTP_PORT=3003
+            - TZ=Europe/Vilnius
+        volumes:
+            - /mnt/sata_500/grafana:/var/lib/grafana
+
+    victoria-logs:
+        image: docker.io/victoriametrics/victoria-logs:latest
+        container_name: victoria-logs
+        command: -storageDataPath=/victoria-logs-data -retentionPeriod=5y
+        user: 1000:100
+        restart: unless-stopped
+        environment:
+            - TZ=Europe/Vilnius
+        ports:
+            - 9428:9428
+        volumes:
+            - /mnt/sata_500/victoria/logs:/victoria-logs-data
+
+    victoria-metrics:
+        image: victoriametrics/victoria-metrics:latest
+        container_name: victoria-metrics
+        command: -storageDataPath=/victoria-metrics-data -retentionPeriod=5y
+        user: 1000:100
+        restart: unless-stopped
+        environment:
+            - TZ=Europe/Vilnius
+        ports:
+            - 8428:8428
+        volumes:
+            - /mnt/sata_500/victoria/metrics:/victoria-metrics-data
+    netdata:
+        image: netdata/netdata:stable
+        container_name: netdata
+        pid: host
+        network_mode: host
+        restart: unless-stopped
+        environment:
+            - TZ=Europe/Vilnius
+        cap_add:
+            - SYS_PTRACE
+            - SYS_ADMIN
+        security_opt:
+            - apparmor:unconfined
+        volumes:
+            - /mnt/sata_500/netdata/config:/etc/netdata
+            - /mnt/sata_500/netdata/lib:/var/lib/netdata
+            - /mnt/sata_500/netdata/cache:/var/cache/netdata
+            - /:/host/root:ro,rslave
+            - /etc/passwd:/host/etc/passwd:ro
+            - /etc/group:/host/etc/group:ro
+            - /etc/localtime:/etc/localtime:ro
+            - /proc:/host/proc:ro
+            - /sys:/host/sys:ro
+            - /etc/os-release:/host/etc/os-release:ro
+            - /var/log:/host/var/log:ro
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+
+    scrutiny-web:
+        image: ghcr.io/starosdev/scrutiny:latest-web
+        container_name: scrutiny-web
+        restart: unless-stopped
+        ports:
+            - 4040:8080
+        volumes:
+            - /mnt/sata_500/scrutiny:/opt/scrutiny/config
+        environment:
+            - SCRUTINY_WEB_INFLUXDB_HOST=172.17.0.1
+            - SCRUTINY_WEB_INFLUXDB_PORT=8428
+            - SCRUTINY_WEB_INFLUXDB_TOKEN=
+            - SCRUTINY_WEB_INFLUXDB_ORG=homelab
+            - SCRUTINY_WEB_INFLUXDB_BUCKET=scrutiny 
+            - TZ=Europe/Vilnius
+    
+#    scrutiny-collector:
+#                
+#        environment:
+#            - TZ=Europe/Vilnius
+#            - COLLECTOR_CRON_SCHEDULE=*/30 * * * *
+#        cap_add:
+#            - SYS_RAWIO
+#        ports:
+#            - 4040:8080
+#            - 4041:8086
+#        devices:
+#            - /dev/sda
+#            - /dev/sdb
+#        volumes:
+#            - /mnt/sata_500/scrutiny:/opt/scrutiny/config
+#            - /mnt/sata_500/scrutiny_influxdb2:/opt/scrutiny/influxdb
+#            - /run/udev:/run/udev:ro
+
+    dockhand:
+        image: fnsys/dockhand:latest
+        container_name: dockhand
+        restart: unless-stopped
+        user: 1000:100
+        ports:
+            - 3040:3000
+        environment:
+            - TZ=Europe/Vilnius
+        group_add:
+            - 468 # Docker group for socket access
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /mnt/sata_500/dockhand:/app/data
+            - /home/kloud:/home/kloud
+            - /mnt/sata_500:/mnt/sata_500
+
+

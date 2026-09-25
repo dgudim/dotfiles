@@ -1,0 +1,45 @@
+services:
+  neko:
+    image: "ghcr.io/m1k1o/neko/firefox"
+    container_name: neko
+    restart: "no"
+    shm_size: "6gb"
+    ports:
+      - "8888:8080"
+      - "59001:59001/udp"
+      - "59001:59001/tcp"
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
+    environment:
+      # https://github.com/m1k1o/neko/issues/573
+      NNEKO_CAPTURE_VIDEO_PIPELINE: |
+        ximagesrc display-name={display} show-pointer=true use-damage=false
+          ! video/x-raw,framerate=25/1
+          ! videoconvert ! queue
+          ! video/x-raw,format=NV12
+          ! vaapih264enc
+            name=encoder
+            preset=2
+            gop-size=25
+            spatial-aq=true
+            temporal-aq=true
+            bitrate=4096
+            vbv-buffer-size=4096
+            rc-mode=6
+          ! h264parse config-interval=-1
+          ! video/x-h264,stream-format=byte-stream
+          ! appsink name=appsink
+      NEKO_DESKTOP_SCREEN: '1920x1080@30'
+      NEKO_CAPTURE_VIDEO_CODEC: h264
+      NEKO_MEMBER_MULTIUSER_USER_PASSWORD: ${NEKO_MEMBER_MULTIUSER_USER_PASSWORD}
+      NEKO_MEMBER_MULTIUSER_ADMIN_PASSWORD: ${NEKO_MEMBER_MULTIUSER_ADMIN_PASSWORD}
+      NEKO_MEMBER_PROVIDER: multiuser
+      NEKO_SESSION_IMPLICIT_HOSTING: true
+      NEKO_SESSION_LOCKED_CONTROLS: false
+      NEKO_SESSION_LOCKED_LOGINS: false
+      NEKO_WEBRTC_UDPMUX: 59001
+      NEKO_WEBRTC_TCPMUX: 59001
+      NEKO_WEBRTC_ICELITE: true
+      NEKO_WEBRTC_NAT1TO1: 78.62.132.3
+      NEKO_SERVER_PROXY: true

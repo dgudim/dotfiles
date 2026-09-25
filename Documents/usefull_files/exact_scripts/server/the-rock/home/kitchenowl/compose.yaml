@@ -1,0 +1,16 @@
+services:
+  kitchenowl:
+    image: tombursch/kitchenowl:latest
+    restart: unless-stopped
+    container_name: kitchenowl
+    user: 1000:100
+    environment:
+      - COLLECT_METRICS=true
+      - METRICS_USER=kitchenowl
+      - METRICS_PASSWORD=${KITCHENOWL_METRICS_PASSWORD}
+      - JWT_SECRET_KEY=${KITCHENOWL_JWT_SECRET_KEY}
+    ports:
+      - "3322:8080"
+      - "3323:9100"
+    volumes:
+      - /mnt/sata_500/kitchenowl:/data
