@@ -1,0 +1,7 @@
+[user]
+	email = dgudim@gmail.com
+	name = kloud
+[credential]
+	helper = store
+[pull]
+	rebase = true

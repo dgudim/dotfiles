@@ -20,6 +20,7 @@ configs_to_copy = [
     Path("/etc/nsswitch.conf"),
     Path("/etc/avahi/avahi-daemon.conf"),
     Path("/etc/default/grub"),
+	Path("/home/kloud/.gitconfig")
 ]
 
 
