@@ -208,3 +208,6 @@ czkawka-gui-bin
 # Crashes pipewire
 gst-plugin-libcamera
 pipewire-libcamera
+
+# Replaced with tailspin
+logalize-bin
