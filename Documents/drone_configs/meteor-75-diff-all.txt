@@ -1,3 +1,5 @@
+#
+
 # diff all
 
 # version
@@ -20,6 +22,9 @@ signature
 # feature
 feature TELEMETRY
 feature OSD
+
+# serial
+serial 2 0 115200 57600 0 115200
 
 # beacon
 beacon RX_LOST
@@ -55,6 +60,7 @@ set dyn_notch_max_hz = 300
 set gyro_lpf1_dyn_min_hz = 0
 set acc_calibration = 28,-8,0,1
 set baro_hardware = NONE
+set rc_smoothing_auto_factor = 52
 set fpv_mix_degrees = 15
 set dshot_idle_value = 500
 set dshot_bidir = ON
@@ -68,7 +74,10 @@ set yaw_motors_reversed = ON
 set small_angle = 180
 set pid_process_denom = 2
 set simplified_gyro_filter_multiplier = 115
+set report_cell_voltage = ON
 set osd_rssi_dbm_alarm = -99
+set osd_tim1 = 1538
+set osd_tim2 = 1283
 set osd_vbat_pos = 2369
 set osd_rssi_pos = 226
 set osd_link_quality_pos = 2337
@@ -77,16 +86,18 @@ set osd_tim_1_pos = 386
 set osd_tim_2_pos = 2455
 set osd_remaining_time_estimate_pos = 33
 set osd_flymode_pos = 2423
-set osd_g_force_pos = 2137
+set osd_g_force_pos = 2169
 set osd_throttle_pos = 2391
 set osd_vtx_channel_pos = 2081
 set osd_crosshairs_pos = 2253
+set osd_ah_sbar_pos = 2254
+set osd_ah_pos = 2126
 set osd_current_pos = 2400
 set osd_mah_drawn_pos = 2434
 set osd_craft_name_pos = 2441
 set osd_home_dist_pos = 98
 set osd_flight_dist_pos = 130
-set osd_warnings_pos = 2378
+set osd_warnings_pos = 2409
 set osd_avg_cell_voltage_pos = 44
 set osd_pit_ang_pos = 97
 set osd_rol_ang_pos = 65
@@ -132,6 +143,8 @@ set d_min_roll = 48
 set d_min_pitch = 66
 set auto_profile_cell_count = 1
 set feedforward_averaging = 2_POINT
+set feedforward_smooth_factor = 45
+set feedforward_jitter_factor = 8
 set dyn_idle_min_rpm = 35
 set simplified_master_multiplier = 130
 set simplified_d_gain = 125
@@ -176,3 +189,4 @@ rateprofile 0
 
 # save configuration
 save
+#
