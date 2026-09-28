@@ -1,3 +1,5 @@
+#
+
 # diff all
 
 # version
@@ -13,7 +15,7 @@ defaults nosave
 board_name OMNIBUSF4
 manufacturer_id AIRB
 mcu_id 003f00453436510136343532
-signature 
+signature
 
 # name: RED BARON
 
@@ -38,9 +40,6 @@ mmix 3  1.000  1.000 -0.772 -1.000
 # beacon
 beacon RX_LOST
 beacon RX_SET
-
-# map
-map RETA1234
 
 # aux
 aux 0 0 0 1900 2100 0 0
@@ -84,6 +83,9 @@ profile 1
 
 profile 2
 
+# profile 2
+set feedforward_smooth_factor = 45
+
 profile 3
 
 # restore original profile selection
@@ -113,3 +115,4 @@ rateprofile 0
 
 # save configuration
 save
+#
