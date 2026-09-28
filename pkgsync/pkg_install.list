@@ -409,7 +409,7 @@ dwarfs-bin
 tldr
 tokei
 ccze
-logalize-bin
+tailspin
 hl
 yt-dlp
 lesspipe
@@ -629,6 +629,8 @@ ocs-url
 kamera
 appimagelauncher
 iio-sensor-proxy
+syncthingtray-dolphin
+syncthingtray-plasma
 
 ## KATE
 markdownpart
@@ -670,6 +672,7 @@ lib32-libappindicator
 lib32-libavtp
 lib32-libsamplerate
 lib32-pipewire-jack
+lib32-pipewire-netjack2
 lib32-pipewire-v4l2
 lib32-speexdsp
 lib32-v4l-utils
@@ -1069,6 +1072,7 @@ opensnitch
 # AUDIO
 pipewire-alsa
 pipewire-jack
+pipewire-netjack2
 pipewire-pulse
 pipewire-v4l2
 pipewire-zeroconf

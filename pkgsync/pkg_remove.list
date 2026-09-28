@@ -211,3 +211,6 @@ pipewire-libcamera
 
 # Replaced with the bare version
 tageditor-qt6
+
+# Replaced with tailspin
+logalize-bin
