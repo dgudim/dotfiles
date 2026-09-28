@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Syncthing Tray
-Exec="/usr/bin/syncthingtray-qt6" qt-widgets-gui --single-instance --wait
+Exec="/usr/bin/syncthingtray" qt-widgets-gui --single-instance --wait
 Comment=Tray application for Syncthing
 Icon=syncthingtray
 Type=Application
