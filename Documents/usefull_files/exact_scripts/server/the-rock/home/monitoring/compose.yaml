@@ -67,6 +67,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock:ro
         tmpfs:
             - /var/cache/netdata:uid=201,gid=201,mode=0770,size=268435456
+            - /usr/share/netdata/web:mode=0555,size=65536
 
     # Scrutiny's web UI queries InfluxDB with Flux. Can't use Victoria Metrics :(
     scrutiny-influxdb:
