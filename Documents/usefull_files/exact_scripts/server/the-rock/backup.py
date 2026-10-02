@@ -94,6 +94,7 @@ def copy_home_directories() -> None:
             [
                 "rsync",
                 "-a",
+                "--chown=1000:100",
                 "--delete",
                 "--filter",
                 "protect *.age",
@@ -114,14 +115,13 @@ def copy_home_directories() -> None:
             existing.unlink()
 
 
-for source, dest_relative in system_configs_to_copy:
-    if not source.is_file():
-        print(f"Skipping {source}")
-        continue
-    destination = BACKUP_DIR / "system-configs" / dest_relative
-    print(f"Copying {source}")
-    destination.parent.mkdir(exist_ok=True, parents=True)
-    shutil.copy(source, destination)
+def give_to_user(root: Path) -> None:
+    if not root.exists():
+        return
+    for path in [root, *root.rglob("*")]:
+        os.chown(path, 1000, 100, follow_symlinks=False)
+
+
 for source, dest_relative in system_configs_to_copy:
     if not source.is_file():
         print(f"Skipping {source}")
@@ -131,8 +131,6 @@ for source, dest_relative in system_configs_to_copy:
     destination.parent.mkdir(exist_ok=True, parents=True)
     shutil.copy(source, destination)
 
-system_configs = BACKUP_DIR / "system-configs"
-for path in [system_configs, *system_configs.rglob("*")]:
-    shutil.chown(path, user=1000, group=100)
-
+give_to_user(BACKUP_DIR / "system-configs")
 copy_home_directories()
+give_to_user(HOME_BACKUP_DIR)
