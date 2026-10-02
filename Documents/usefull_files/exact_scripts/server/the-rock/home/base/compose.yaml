@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     network_mode: host
     environment:
-#      - TS_AUTHKEY=tskey-auth-kZVQv3xk2N11CNTRL-sjC2pzxExmCzmAseRtQPnC67PHo88b7ZL
+#      - TS_AUTHKEY=
       - TS_EXTRA_ARGS=--accept-dns=true --operator=root
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_USERSPACE=false
@@ -91,7 +91,7 @@ services:
   cronicle:
     image: cronicle/edge:latest
     container_name: cronicle
-    hostname: manager1
+    hostname: microchelik
     restart: unless-stopped
     command: ["manager"]
     ports:
