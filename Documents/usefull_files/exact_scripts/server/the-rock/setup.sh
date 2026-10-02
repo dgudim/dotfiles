@@ -14,8 +14,7 @@ zypper modifyrepo --refresh packman
 # Deps
 sudo zypper install \
 chrony dbus-broker docker docker-compose \
-NetworkManager systemd-resolved nss-mdns openssh-sftp-server \
-cron
+NetworkManager systemd-resolved nss-mdns openssh-sftp-server
 
 # Network setup
 sudo ln -sfv /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
@@ -23,7 +22,14 @@ sudo ln -sfv /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo systemctl enable dbus-broker
 sudo systemctl enable --now \
 NetworkManager systemd-resolved avahi-daemon sshd \
-bluetooth chronyd docker cron
+bluetooth chronyd docker
+
+sudo hostnamectl set-hostname microchelik
+sudo loginctl enable-linger kloud
+
+# Unneeded + replaced with scrutiny
+sudo systemctl mask firewalld apparmor smartd
+sudo systemctl disable --now btrfs-balance.timer btrfsmaintenance-refresh.path btrfs-scrub.timer
 
 # Audio deps
 sudo zypper install \
@@ -37,9 +43,27 @@ jq yq usbip tcpdump \
 intel-media-driver intel-gpu-tools \
 waypipe ripgrep fd duf \
 atuin rsync \
-bindfs age
+bindfs age \
+python313-uv python313-pip tmux ouch strace \
+libva-utils libvulkan_intel \
+libhidapi-hidraw0 pkgconf hunspell
 
 # Bindfs is for nextcloud
 
 # Handled by scrutiny
 sudo zypper remove smartmontools
+
+# Headless: desktop, browser, office, and unused services
+sudo zypper remove \
+MozillaFirefox MozillaThunderbird libreoffice\* \
+xfce4-session xfce4-taskmanager xfce4-panel xfce4-power-manager xfce4-settings \
+xfce4-notifyd xfce4-screensaver xfce4-panel-branding-openSUSE xfce4-terminal \
+xfce4-whiskermenu-plugin xfce4-dict xfce4-appfinder \
+xfce4-panel-restore-defaults xfce4-session-branding-openSUSE xfce4-settings-branding-openSUSE \
+xfce4-notifyd-branding-openSUSE xfce4-power-manager-branding-openSUSE \
+xfce4-screenshooter xfce4-screenshooter-lang \
+xorg-x11-server xorg-x11-essentials xorg-x11-server-extra x11-tools xorg-x11-fonts \
+cockpit cockpit-packages cockpit-bridge \
+snapper firewalld cups cronie
+
+sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../hass-watchdog/install.sh"
