@@ -7,6 +7,8 @@ USER_DIR = Path("/home/kloud")
 BACKUP_DIR = Path(USER_DIR, "dotfiles/Documents/usefull_files/exact_scripts/server/the-rock")
 # On the server this is /etc. The scheduled job mounts host /etc at /host-etc.
 ETC_DIR = Path(os.environ.get("BACKUP_ETC", "/etc"))
+# On the server this is /etc. The scheduled job mounts host /etc at /host-etc.
+ETC_DIR = Path(os.environ.get("BACKUP_ETC", "/etc"))
 AGE_RECIPIENT = USER_DIR / ".ssh" / "id_ed25519.pub"
 AGE_IDENTITY = USER_DIR / ".ssh" / "id_ed25519"
 
@@ -112,6 +114,14 @@ def copy_home_directories() -> None:
             existing.unlink()
 
 
+for source, dest_relative in system_configs_to_copy:
+    if not source.is_file():
+        print(f"Skipping {source}")
+        continue
+    destination = BACKUP_DIR / "system-configs" / dest_relative
+    print(f"Copying {source}")
+    destination.parent.mkdir(exist_ok=True, parents=True)
+    shutil.copy(source, destination)
 for source, dest_relative in system_configs_to_copy:
     if not source.is_file():
         print(f"Skipping {source}")
