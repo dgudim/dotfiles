@@ -1,9 +1,12 @@
+import os
 from pathlib import Path
 import shutil
 import subprocess
 
 USER_DIR = Path("/home/kloud")
 BACKUP_DIR = Path(USER_DIR, "dotfiles/Documents/usefull_files/exact_scripts/server/the-rock")
+# On the server this is /etc. The scheduled job mounts host /etc at /host-etc.
+ETC_DIR = Path(os.environ.get("BACKUP_ETC", "/etc"))
 AGE_RECIPIENT = USER_DIR / ".ssh" / "id_ed25519.pub"
 AGE_IDENTITY = USER_DIR / ".ssh" / "id_ed25519"
 
@@ -14,14 +17,15 @@ home_folders_to_ignore = [
 
 BACKUP_DIR.mkdir(exist_ok=True)
 
-configs_to_copy = [
-    Path("/etc/systemd/resolved.conf"),
-    Path("/etc/ssh/sshd_config"),
-    Path("/etc/fstab"),
-    Path("/etc/nsswitch.conf"),
-    Path("/etc/avahi/avahi-daemon.conf"),
-    Path("/etc/default/grub"),
-	Path("/home/kloud/.gitconfig")
+# Source path, and where it lands under system-configs/.
+system_configs_to_copy = [
+    (ETC_DIR / "systemd/resolved.conf", Path("etc/systemd/resolved.conf")),
+    (ETC_DIR / "ssh/sshd_config", Path("etc/ssh/sshd_config")),
+    (ETC_DIR / "fstab", Path("etc/fstab")),
+    (ETC_DIR / "nsswitch.conf", Path("etc/nsswitch.conf")),
+    (ETC_DIR / "avahi/avahi-daemon.conf", Path("etc/avahi/avahi-daemon.conf")),
+    (ETC_DIR / "default/grub", Path("etc/default/grub")),
+    (USER_DIR / ".gitconfig", Path("home/kloud/.gitconfig")),
 ]
 
 
@@ -106,14 +110,14 @@ def copy_home_directories() -> None:
             existing.unlink()
 
 
-for config in configs_to_copy:
-    if not config.is_file():
-        print(f"Skipping {config}")
+for source, dest_relative in system_configs_to_copy:
+    if not source.is_file():
+        print(f"Skipping {source}")
         continue
-    print(f"Copying {config}")
-    config_full_path = Path(BACKUP_DIR, "system-configs", config.as_posix().partition("/")[2])
-    config_full_path.parent.mkdir(exist_ok=True, parents=True)
-    shutil.copy(config, config_full_path)
+    destination = BACKUP_DIR / "system-configs" / dest_relative
+    print(f"Copying {source}")
+    destination.parent.mkdir(exist_ok=True, parents=True)
+    shutil.copy(source, destination)
 
 system_configs = BACKUP_DIR / "system-configs"
 for path in [system_configs, *system_configs.rglob("*")]:
