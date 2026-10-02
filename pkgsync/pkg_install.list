@@ -274,6 +274,8 @@ plasma-keyboard
 
 
 # GUI APPS
+nextcloud
+qownnotes
 rssguard
 gajim
 wayscriber-bin
@@ -740,6 +742,7 @@ plasma-sdk
 amber-lang-bin
 openapi-tui
 git-tools-git
+marksman
 
 ## DBs
 postgresql
