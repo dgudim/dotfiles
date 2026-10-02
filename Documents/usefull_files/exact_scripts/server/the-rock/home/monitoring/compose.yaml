@@ -28,15 +28,18 @@ services:
     victoria-metrics:
         image: victoriametrics/victoria-metrics:latest
         container_name: victoria-metrics
-        command: -storageDataPath=/victoria-metrics-data -retentionPeriod=5y
+        command: -storageDataPath=/victoria-metrics-data -retentionPeriod=5y -promscrape.config=/etc/vm/scrape-config.yml
         user: 1000:100
         restart: unless-stopped
         environment:
             - TZ=Europe/Vilnius
         ports:
             - 8428:8428
+        extra_hosts:
+            - host.docker.internal:host-gateway
         volumes:
             - /mnt/sata_500/victoria/metrics:/victoria-metrics-data
+            - /mnt/sata_500/victoria/scrape-config.yml:/etc/vm/scrape-config.yml:ro
     netdata:
         image: netdata/netdata:stable
         container_name: netdata
@@ -53,7 +56,6 @@ services:
         volumes:
             - /mnt/sata_500/netdata/config:/etc/netdata
             - /mnt/sata_500/netdata/lib:/var/lib/netdata
-            - /mnt/sata_500/netdata/cache:/var/cache/netdata
             - /:/host/root:ro,rslave
             - /etc/passwd:/host/etc/passwd:ro
             - /etc/group:/host/etc/group:ro
@@ -63,6 +65,25 @@ services:
             - /etc/os-release:/host/etc/os-release:ro
             - /var/log:/host/var/log:ro
             - /var/run/docker.sock:/var/run/docker.sock:ro
+        tmpfs:
+            - /var/cache/netdata:uid=201,gid=201,mode=0770,size=268435456
+
+    # Scrutiny's web UI queries InfluxDB with Flux. Can't use Victoria Metrics :(
+    scrutiny-influxdb:
+        image: influxdb:2.9        
+        container_name: scrutiny-influxdb
+        restart: unless-stopped
+        environment:
+            - TZ=Europe/Vilnius
+            - INFLUXD_USE_HASHED_TOKENS=false
+        volumes:
+            - /mnt/sata_500/scrutiny_influxdb2:/var/lib/influxdb2
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8086/health"]
+            interval: 10s
+            timeout: 5s
+            retries: 12
+            start_period: 20s
 
     scrutiny-web:
         image: ghcr.io/starosdev/scrutiny:latest-web
@@ -73,30 +94,40 @@ services:
         volumes:
             - /mnt/sata_500/scrutiny:/opt/scrutiny/config
         environment:
-            - SCRUTINY_WEB_INFLUXDB_HOST=172.17.0.1
-            - SCRUTINY_WEB_INFLUXDB_PORT=8428
-            - SCRUTINY_WEB_INFLUXDB_TOKEN=
-            - SCRUTINY_WEB_INFLUXDB_ORG=homelab
-            - SCRUTINY_WEB_INFLUXDB_BUCKET=scrutiny 
             - TZ=Europe/Vilnius
-    
-#    scrutiny-collector:
-#                
-#        environment:
-#            - TZ=Europe/Vilnius
-#            - COLLECTOR_CRON_SCHEDULE=*/30 * * * *
-#        cap_add:
-#            - SYS_RAWIO
-#        ports:
-#            - 4040:8080
-#            - 4041:8086
-#        devices:
-#            - /dev/sda
-#            - /dev/sdb
-#        volumes:
-#            - /mnt/sata_500/scrutiny:/opt/scrutiny/config
-#            - /mnt/sata_500/scrutiny_influxdb2:/opt/scrutiny/influxdb
-#            - /run/udev:/run/udev:ro
+            - SCRUTINY_WEB_INFLUXDB_HOST=scrutiny-influxdb
+            - SCRUTINY_WEB_INFLUXDB_PORT=8086
+        depends_on:
+            scrutiny-influxdb:
+                condition: service_healthy
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+            interval: 15s
+            timeout: 5s
+            retries: 8
+            start_period: 20s
+
+    scrutiny-collector:
+        image: ghcr.io/starosdev/scrutiny:latest-collector
+        container_name: scrutiny-collector
+        restart: unless-stopped
+        cap_add:
+            - SYS_RAWIO
+            - SYS_ADMIN
+        devices:
+            - /dev/sda
+            - /dev/sdb
+        volumes:
+            - /run/udev:/run/udev:ro
+        environment:
+            - TZ=Europe/Vilnius
+            - COLLECTOR_API_ENDPOINT=http://scrutiny-web:8080
+            - COLLECTOR_HOST_ID=microchelik
+            - COLLECTOR_RUN_STARTUP=true
+            - COLLECTOR_CRON_SCHEDULE=*/30 * * * *
+        depends_on:
+            scrutiny-web:
+                condition: service_healthy
 
     dockhand:
         image: fnsys/dockhand:latest
