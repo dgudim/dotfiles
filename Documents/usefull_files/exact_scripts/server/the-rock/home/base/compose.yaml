@@ -87,3 +87,21 @@ services:
       - TZ=Europe/Vilnius
     volumes:
       - /mnt/sata_500/dbs/valkey:/data
+
+  cronicle:
+    image: cronicle/edge:latest
+    container_name: cronicle
+    hostname: manager1
+    restart: unless-stopped
+    command: ["manager"]
+    ports:
+      - 3012:3012
+    environment:
+      - TZ=Europe/Vilnius
+      - CRONICLE_manager=1
+      - CRONICLE_secret_key=${CRONICLE_SECRET_KEY}
+    volumes:
+      - /mnt/sata_500/cronicle/data:/opt/cronicle/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/kloud:/home/kloud
+      - /mnt/sata_500:/mnt/sata_500
