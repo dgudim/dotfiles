@@ -107,6 +107,9 @@ def copy_home_directories() -> None:
 
 
 for config in configs_to_copy:
+    if not config.is_file():
+        print(f"Skipping {config}")
+        continue
     print(f"Copying {config}")
     config_full_path = Path(BACKUP_DIR, "system-configs", config.as_posix().partition("/")[2])
     config_full_path.parent.mkdir(exist_ok=True, parents=True)
@@ -114,6 +117,6 @@ for config in configs_to_copy:
 
 system_configs = BACKUP_DIR / "system-configs"
 for path in [system_configs, *system_configs.rglob("*")]:
-    shutil.chown(path, user="kloud", group="users")
+    shutil.chown(path, user=1000, group=100)
 
 copy_home_directories()
