@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     network_mode: host
     environment:
-#      - TS_AUTHKEY=tskey-auth-kZVQv3xk2N11CNTRL-sjC2pzxExmCzmAseRtQPnC67PHo88b7ZL
+#      - TS_AUTHKEY=
       - TS_EXTRA_ARGS=--accept-dns=true --operator=root
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_USERSPACE=false
@@ -87,3 +87,21 @@ services:
       - TZ=Europe/Vilnius
     volumes:
       - /mnt/sata_500/dbs/valkey:/data
+
+  cronicle:
+    image: cronicle/edge:latest
+    container_name: cronicle
+    hostname: microchelik
+    restart: unless-stopped
+    command: ["manager"]
+    ports:
+      - 3012:3012
+    environment:
+      - TZ=Europe/Vilnius
+      - CRONICLE_manager=1
+      - CRONICLE_secret_key=${CRONICLE_SECRET_KEY}
+    volumes:
+      - /mnt/sata_500/cronicle/data:/opt/cronicle/data
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/kloud:/home/kloud
+      - /mnt/sata_500:/mnt/sata_500

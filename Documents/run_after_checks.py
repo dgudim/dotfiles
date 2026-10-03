@@ -307,6 +307,7 @@ firefox_settings = [
     "browser.urlbar.suggest.trending",
     "apz.overscroll.enabled",
     "userchrome.toolbars-below-content.tabs-at-bottom.enabled",
+    "browser.nova.enabled"
 ]
 
 if len(firefox_profiles) == 0:
