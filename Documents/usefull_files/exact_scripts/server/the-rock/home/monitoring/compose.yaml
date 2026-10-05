@@ -8,6 +8,13 @@ services:
         network_mode: host
         environment:
             - GF_SERVER_HTTP_PORT=3003
+            - GF_SECURITY_ALLOW_EMBEDDING=true 
+            - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/api/ingress/grafana/
+            - GF_SERVER_SERVE_FROM_SUB_PATH=true
+            - GF_SECURITY_ALLOW_EMBEDDING=true
+            - GF_AUTH_PROXY_ENABLED=true
+            - GF_AUTH_PROXY_HEADER_NAME=X-WEBAUTH-USER
+            - GF_AUTH_PROXY_HEADER_PROPERTY=username
             - TZ=Europe/Vilnius
         volumes:
             - /mnt/sata_500/grafana:/var/lib/grafana
@@ -122,6 +129,7 @@ services:
             - /run/udev:/run/udev:ro
         environment:
             - TZ=Europe/Vilnius
+            - COLLECTOR_COMMANDS_METRICS_SMART_ARGS=--xall --json -n standby
             - COLLECTOR_API_ENDPOINT=http://scrutiny-web:8080
             - COLLECTOR_HOST_ID=microchelik
             - COLLECTOR_RUN_STARTUP=true
