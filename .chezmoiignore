@@ -2,6 +2,7 @@
 ./pkgsync
 ./Documents/termux
 ./Documents/drone_configs
+./Documents/usefull_files/scripts/server
 **/*.src.ini
 {{- if ne .chezmoi.hostname "nuclear-submarine" }}
     ./.bash_aliases_work

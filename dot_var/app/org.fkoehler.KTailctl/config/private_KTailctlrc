@@ -1,3 +1,6 @@
+[Icons]
+Theme=breeze-dark
+
 [Interface]
 peerFilter=
 startMinimized=true

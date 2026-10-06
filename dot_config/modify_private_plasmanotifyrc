@@ -8,5 +8,4 @@ source auto
 #ignore regex "section.*" "key_prefix_.*"
 #transform "section" "key" transform_name read="the docs" for="more detail on transforms"
 
-ignore "General" "GlobalMuteSources"
-ignore "General" "GlobalMuteSourcesMutedDevices"
+ignore regex ".*" "Seen"
