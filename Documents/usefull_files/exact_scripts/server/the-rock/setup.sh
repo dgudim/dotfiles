@@ -67,3 +67,5 @@ cockpit cockpit-packages cockpit-bridge \
 snapper firewalld cups cronie
 
 sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../hass-watchdog/install.sh"
+
+curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh

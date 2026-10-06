@@ -30,6 +30,7 @@ system_configs_to_copy = [
     (ETC_DIR / "nanorc", Path("etc/nanorc")),
     (ETC_DIR / "hosts", Path("etc/hosts")),
     (USER_DIR / ".gitconfig", Path("home/kloud/.gitconfig")),
+    (USER_DIR / ".bashrc", Path("home/kloud/.bashrc")),
 ]
 
 
