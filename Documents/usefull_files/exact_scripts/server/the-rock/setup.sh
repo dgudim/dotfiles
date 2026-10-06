@@ -66,6 +66,8 @@ xorg-x11-server xorg-x11-essentials xorg-x11-server-extra x11-tools xorg-x11-fon
 cockpit cockpit-packages cockpit-bridge \
 snapper firewalld cups cronie
 
+[ -L /etc/resolv.conf ] || sudo ln -fvs /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
 sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../hass-watchdog/install.sh"
 
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
