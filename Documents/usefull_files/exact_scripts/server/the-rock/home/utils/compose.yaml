@@ -4,13 +4,22 @@ services:
     bentopdf:
         image: ghcr.io/alam00000/bentopdf-simple:latest
         container_name: bentopdf
+        labels:
+          caddy: "http://pdf.kloud.home, http://pdf.kloud.vpn"
+          caddy.reverse_proxy: "{{upstreams 8080}}"
+          caddy_ingress_network: "proxy"
         restart: unless-stopped
-        ports:
-          - 1344:8080
+        networks:
+          - default
+          - proxy
 
     homepage:
         image: ghcr.io/gethomepage/homepage:latest
         container_name: homepage
+        labels:
+          caddy: "http://kloud.home, http://kloud.vpn"
+          caddy.reverse_proxy: "{{upstreams 3000}}"
+          caddy_ingress_network: "proxy"
         restart: unless-stopped
         user: 1000:100
         environment:
@@ -18,8 +27,6 @@ services:
             - HOMEPAGE_ALLOWED_HOSTS=kloud.home,kloud.vpn,192.168.50.180:3333,100.108.149.90:3333,microcehlik.local:3333
             - PUID=1000
             - PGID=100
-        ports:
-            - 3333:3000
         volumes:
             - /mnt/sata_500/homepage:/app/config
             - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -35,10 +42,15 @@ services:
             - monitoring
             - neko
             - rss
+            - proxy
 
     languagetool:
         image: erikvl87/languagetool:latest
         container_name: languagetool
+        labels:
+          caddy: "https://sceakbiryzigvgdfrjbumjvivedwzchd.kloud.home.kg"
+          caddy.reverse_proxy: "{{upstreams 8010}}"
+          caddy_ingress_network: "proxy"
         restart: unless-stopped
         user: 1000:100
         environment:
@@ -49,27 +61,32 @@ services:
             - langTool_abTestClients=
             - langtool_pipelinePrewarming=true
             - langtool_languageModel=/ngrams
-        ports:
-            - 8010:8010
         volumes:
             - /mnt/sata_500/languagetool/ngrams:/ngrams:ro
             - /mnt/sata_500/languagetool/logback.xml:/LanguageTool/logback.xml
+        networks:
+          - default
+          - proxy
 
 
     ntfy:
         image: binwiederhier/ntfy
         container_name: ntfy
+        labels:
+          caddy: "https://ntfy.kloud.home.kg"
+          caddy.reverse_proxy: "{{upstreams 81}}"
+          caddy_ingress_network: "proxy"
         command: serve
         restart: unless-stopped
         environment:
             - TZ=Europe/Vilnius
         user: 1000:100
-        ports:
-            - 12301:81
-            - 12300:80
         volumes:
             - /mnt/sata_500/ntfy/cache:/var/cache/ntfy
             - /mnt/sata_500/ntfy/config:/etc/ntfy
+        networks:
+          - default
+          - proxy
 
     mailrise:
         image: yoryan/mailrise:latest
@@ -86,6 +103,9 @@ services:
     syncthing:
         image: syncthing/syncthing:latest
         container_name: syncthing
+        labels:
+          caddy: "http://sync.kloud.home, http://sync.kloud.vpn"
+          caddy.reverse_proxy: "127.0.0.1:8384"
         restart: unless-stopped
         hostname: microchelik
         environment:
@@ -121,45 +141,58 @@ services:
     voux:
         image: ghcr.io/quintixlabs/voux/voux:latest
         container_name: voux
+        labels:
+          caddy: "https://voux.kloud.home.kg"
+          caddy.reverse_proxy: "{{upstreams 8787}}"
+          caddy_ingress_network: "proxy"
         restart: unless-stopped
         user: 1000:100
-        ports:
-            - 8787:8787
         environment:
             - ADMIN_USERNAME=admin
             - ADMIN_PASSWORD=${VOUX_ADMIN_PASSWORD}
         volumes:
             - /mnt/sata_500/voux:/app/data
+        networks:
+          - default
+          - proxy
 
 
     spoolman:
       image: ghcr.io/donkie/spoolman:latest
       container_name: spoolman
+      labels:
+        caddy: "http://spoolman.kloud.home, http://spoolman.kloud.vpn"
+        caddy.reverse_proxy: "{{upstreams 8000}}"
+        caddy_ingress_network: "proxy"
       restart: unless-stopped
       volumes:
         - type: bind
           source: /mnt/sata_500/spoolman
           target: /home/app/.local/share/spoolman
-      ports:
-        - 7999:8000
       environment:
         - TZ=Europe/Vilnius
         - PUID=1000
         - PGID=100
+      networks:
+        - default
+        - proxy
 
     atuin:
         image: ghcr.io/atuinsh/atuin:18.13.5
         container_name: atuin
+        labels:
+          caddy: "https://atuin.kloud.home.kg"
+          caddy.reverse_proxy: "{{upstreams 8888}}"
+          caddy_ingress_network: "proxy"
         restart: unless-stopped
         networks:
             - default
             - backend
+            - proxy
         command: start
         user: 1000:100
         volumes:
           - "/mnt/sata_500/atuin:/config"
-        ports:
-          - 8889:8888
         environment:
           ATUIN_HOST: "0.0.0.0"
           ATUIN_OPEN_REGISTRATION: "true"
@@ -169,17 +202,24 @@ services:
     plik:
         image: rootgg/plik:latest
         container_name: plik
+        labels:
+          caddy: "https://plik.kloud.home.kg"
+          caddy.reverse_proxy: "{{upstreams 8080}}"
+          caddy_ingress_network: "proxy"
         restart: "unless-stopped"
         user: 1000:100
         volumes:
           - /mnt/sata_500/plik/plikd.cfg:/home/plik/server/plikd.cfg
           - /mnt/sata_500/plik/data:/data
-        ports:
-          - 17005:8080
-          - 17006:8081
+        networks:
+          - default
+          - proxy
    
 
 networks:
+  proxy:
+    external: true
+    name: proxy
   backend:
     external: true
     name: backend

@@ -7,6 +7,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Europe/Vilnius
+      - CADDY_INGRESS_NETWORKS=proxy
     cap_add:
       - NET_ADMIN
     network_mode: host
@@ -14,6 +15,7 @@ services:
       - /mnt/sata_500/caddy/conf:/etc/caddy
       - /mnt/sata_500/caddy/data:/data/caddy
       - /mnt/sata_500/caddy/temp_conf:/config/caddy
+      - /var/run/docker.sock:/var/run/docker.sock:ro
   
   tailscale:
     image: tailscale/tailscale:latest
@@ -38,6 +40,9 @@ services:
 
   pihole:
     container_name: pihole
+    labels:
+      caddy: "http://pihole.kloud.home, http://pihole.kloud.vpn"
+      caddy.reverse_proxy: "127.0.0.1:800"
     image: pihole/pihole:latest
     restart: unless-stopped
     network_mode: host # listens to dns on 530 and http on 800
@@ -48,6 +53,7 @@ services:
       PIHOLE_GID: '100'
     volumes:
       - /mnt/sata_500/pihole:/etc/pihole
+      - /mnt/sata_500/pihole/dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       # See https://docs.pi-hole.net/docker/#note-on-capabilities
       # Required if you are using Pi-hole as your DHCP server, else not needed
@@ -97,11 +103,13 @@ services:
   cronicle:
     image: cronicle/edge:latest
     container_name: cronicle
+    labels:
+      caddy: "http://cron.kloud.home, http://cron.kloud.vpn"
+      caddy.reverse_proxy: "{{upstreams 3012}}"
+      caddy_ingress_network: "proxy"
     hostname: manager1
     restart: unless-stopped
     command: ["manager"]
-    ports:
-      - 3012:3012
     environment:
       - TZ=Europe/Vilnius
       - CRONICLE_manager=1
@@ -111,7 +119,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/kloud:/home/kloud
       - /mnt/sata_500:/mnt/sata_500
+    networks:
+      - default
+      - proxy
 
 networks:
+  proxy:
+    name: proxy
   backend:
     name: backend

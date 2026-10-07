@@ -1,6 +1,10 @@
 services:
   linkwarden:
     container_name: linkwarden
+    labels:
+      caddy: "https://links.kloud.home.kg"
+      caddy.reverse_proxy: "{{upstreams 3000}}"
+      caddy_ingress_network: "proxy"
     image: ghcr.io/linkwarden/linkwarden:latest
     restart: unless-stopped
     extra_hosts:
@@ -8,10 +12,9 @@ services:
     networks:
       - default
       - backend
+      - proxy
     user: 1000:100
     env_file: .env
-    ports:
-      - 3030:3000
     volumes:
       - /mnt/sata_500/linkwarden/data:/data/data
     depends_on:
@@ -26,6 +29,9 @@ services:
       - /mnt/sata_500/linkwarden/meili_data:/meili_data
 
 networks:
+  proxy:
+    external: true
+    name: proxy
   backend:
     external: true
     name: backend
