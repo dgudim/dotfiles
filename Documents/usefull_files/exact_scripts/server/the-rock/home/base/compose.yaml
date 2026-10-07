@@ -64,7 +64,9 @@ services:
       - SYS_NICE
 
   postgres:
-    image: postgres:18
+    build:
+      context: .
+      dockerfile: Postgres18-atlas.Dockerfile
     container_name: postgres
     restart: unless-stopped
     shm_size: '4gb'
@@ -122,6 +124,28 @@ services:
     networks:
       - default
       - proxy
+
+  authelia:
+    image: authelia/authelia:4
+    user: "1000:100"
+    command: ["--config", "/etc/authelia/configuration.yml"]
+    labels:
+        caddy: "https://${AUTH_DOMAIN}:443"
+        caddy.reverse_proxy: "{{upstreams 9091}}"
+        caddy_ingress_network: "proxy"
+    restart: unless-stopped
+    environment:
+      X_AUTHELIA_CONFIG_FILTERS: template
+      AUTH_DOMAIN: ${AUTH_DOMAIN}
+      AUTH_URL: https://${AUTH_DOMAIN}
+      ATLAS_PUBLIC_URL: https://atlas.kloud.home.kg
+      AUTH_POLICY: ${AUTH_POLICY:-one_factor}
+    networks:
+      - default
+      - proxy
+    volumes:
+      - /mnt/sata_500/authelia/configuration.yml:/etc/authelia/configuration.yml:ro
+      - /mnt/sata_500/authelia/config:/config
 
 networks:
   proxy:
