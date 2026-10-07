@@ -15,7 +15,7 @@ services:
         user: 1000:100
         environment:
             - TZ=Europe/Vilnius
-            - HOMEPAGE_ALLOWED_HOSTS=192.168.50.180:3333,microcehlik.local:3333,kloud.home
+            - HOMEPAGE_ALLOWED_HOSTS=kloud.home,kloud.vpn,192.168.50.180:3333,100.108.149.90:3333,microcehlik.local:3333
             - PUID=1000
             - PGID=100
         ports:
@@ -23,6 +23,18 @@ services:
         volumes:
             - /mnt/sata_500/homepage:/app/config
             - /var/run/docker.sock:/var/run/docker.sock:ro
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        networks:
+            - default
+            - base
+            - booklore
+            - kitchenowl
+            - linkwarden
+            - media
+            - monitoring
+            - neko
+            - rss
 
     languagetool:
         image: erikvl87/languagetool:latest
@@ -139,6 +151,9 @@ services:
         image: ghcr.io/atuinsh/atuin:18.13.5
         container_name: atuin
         restart: unless-stopped
+        networks:
+            - default
+            - backend
         command: start
         user: 1000:100
         volumes:
@@ -163,3 +178,32 @@ services:
           - 17005:8080
           - 17006:8081
    
+
+networks:
+  backend:
+    external: true
+    name: backend
+  base:
+    external: true
+    name: base_default
+  booklore:
+    external: true
+    name: booklore_default
+  kitchenowl:
+    external: true
+    name: kitchenowl_default
+  linkwarden:
+    external: true
+    name: linkwarden_default
+  media:
+    external: true
+    name: media_default
+  monitoring:
+    external: true
+    name: monitoring_default
+  neko:
+    external: true
+    name: neko_default
+  rss:
+    external: true
+    name: rss_default

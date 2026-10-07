@@ -3,6 +3,9 @@ services:
     image: supahgreg/tt-rss:latest
     container_name: tt-rss-app
     restart: unless-stopped
+    networks:
+      - default
+      - backend
     env_file:
       - .env
     volumes:
@@ -13,6 +16,9 @@ services:
     image: supahgreg/tt-rss:latest
     container_name: tt-rss-updater
     restart: unless-stopped
+    networks:
+      - default
+      - backend
     env_file:
       - .env
     volumes:
@@ -40,12 +46,15 @@ services:
     image: diygod/rsshub:chromium-bundled
     container_name: rsshub
     restart: unless-stopped
+    networks:
+      - default
+      - backend
     ports:
       - '1200:80'
     environment:
       - NODE_ENV=production
       - CACHE_TYPE=redis
-      - REDIS_URL=redis://172.17.0.1:6379/
+      - REDIS_URL=redis://valkey:6379/
       - PORT=80
       - CACHE_EXPIRE=3600          # 1 Hour
       - CACHE_CONTENT_EXPIRE=18000 # 5 hours
@@ -59,3 +68,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+
+networks:
+  backend:
+    external: true
+    name: backend

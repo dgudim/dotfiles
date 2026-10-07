@@ -3,6 +3,11 @@ services:
     container_name: linkwarden
     image: ghcr.io/linkwarden/linkwarden:latest
     restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - default
+      - backend
     user: 1000:100
     env_file: .env
     ports:
@@ -19,3 +24,8 @@ services:
     env_file: .env
     volumes:
       - /mnt/sata_500/linkwarden/meili_data:/meili_data
+
+networks:
+  backend:
+    external: true
+    name: backend

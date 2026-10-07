@@ -73,6 +73,9 @@ services:
       - /mnt/sata_500/dbs/postgres/data:/var/lib/postgresql      
       - /mnt/sata_500/dbs/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
     command: -c config_file=/etc/postgresql/postgresql.conf
+    networks:
+      - default
+      - backend
 
 
   valkey:
@@ -87,11 +90,14 @@ services:
       - TZ=Europe/Vilnius
     volumes:
       - /mnt/sata_500/dbs/valkey:/data
+    networks:
+      - default
+      - backend
 
   cronicle:
     image: cronicle/edge:latest
     container_name: cronicle
-    hostname: microchelik
+    hostname: manager1
     restart: unless-stopped
     command: ["manager"]
     ports:
@@ -105,3 +111,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/kloud:/home/kloud
       - /mnt/sata_500:/mnt/sata_500
+
+networks:
+  backend:
+    name: backend
