@@ -20,6 +20,9 @@ services:
       - PWA_APPNAME=code-server
     volumes:
       - /mnt/sata_500/code-server:/config
+    tmpfs:
+      - /config/.local/share/code-server/coder-logs:uid=1000,gid=100,mode=0755
+      - /config/data/logs:uid=1000,gid=100,mode=0755
 
 networks:
   proxy:

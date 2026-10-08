@@ -10,6 +10,7 @@ services:
         network_mode: host
         environment:
             - TZ=Europe/Vilnius
+            - HA_DISABLE_LOG_FILE=1
         devices:
             - /dev/ttyACM0
             - /dev/ttyUSB0
@@ -100,7 +101,6 @@ services:
       volumes:
         - /mnt/sata_500/mosquitto:/mosquitto
         - /mnt/sata_500/mosquitto/data:/mosquitto/data # Don't remove these, shadow declared anon mounts in the image
-        - /mnt/sata_500/mosquitto/log:/mosquitto/log
       ports:
         - 1883:1883
         - 9001:9001    

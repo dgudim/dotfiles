@@ -15,8 +15,9 @@ services:
             - /mnt/media/music:/music:ro
             - /mnt/sata_500/mpd/playlists:/playlists
             - /mnt/sata_500/mpd/db:/db
-            - /mnt/sata_500/mpd/log:/log
             - /mnt/sata_500/mpd/userconf:/user/config
+        tmpfs:
+            - /log
 
     minidlna:
         image: vladgh/minidlna

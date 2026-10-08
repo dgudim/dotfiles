@@ -27,6 +27,7 @@ services:
             - HOMEPAGE_ALLOWED_HOSTS=kloud.home,kloud.vpn,192.168.50.180:3333,100.108.149.90:3333,microcehlik.local:3333
             - PUID=1000
             - PGID=100
+            - LOG_TARGETS=stdout
         volumes:
             - /mnt/sata_500/homepage:/app/config
             - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -173,6 +174,9 @@ services:
         - TZ=Europe/Vilnius
         - PUID=1000
         - PGID=100
+        - SPOOLMAN_DIR_LOGS=/tmp/spoolman-logs
+      tmpfs:
+        - /tmp/spoolman-logs:uid=1000,gid=100,mode=0755
       networks:
         - default
         - proxy
