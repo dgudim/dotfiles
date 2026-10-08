@@ -84,9 +84,6 @@ services:
             - /proc:/host/proc:ro
             - /sys:/host/sys:ro
             - /etc/os-release:/host/etc/os-release:ro
-            - /var/log:/host/var/log:ro
-            - /run/log/journal:/run/log/journal:ro
-            - /etc/machine-id:/etc/machine-id:ro
             - /var/run/docker.sock:/var/run/docker.sock:ro
             # - /home/kloud/netdata/web:/usr/share/netdata/web:ro
         tmpfs:
