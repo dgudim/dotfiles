@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="okular_part" version="55">
+<gui name="okular_part" version="56">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -23,6 +23,8 @@
    <Action name="edit_redo"/>
    <Separator/>
    <Action name="edit_copy"/>
+   <Action name="edit_copy_without_line_breaks"/>
+   <Action name="annotation_paste"/>
    <Separator/>
    <Action name="edit_select_all"/>
    <Action name="edit_select_all_current_page"/>
@@ -108,9 +110,24 @@
    <Action group="about_merge" name="help_about_backend"/>
   </Menu>
  </MenuBar>
- <ToolBar hidden="true" iconSize="32" iconText="icononly" name="quickAnnotationToolBar" newline="true" position="right">
-  <text translationDomain="okular">Quick Annotation Toolbar</text>
-  <Action name="quick_annotation_action_bar"/>
+ <ToolBar name="mainToolBar" noMerge="1">
+  <text translationDomain="okular">Main Toolbar</text>
+  <Action name="show_leftpanel"/>
+  <Separator name="separator_0"/>
+  <Action name="view_zoom_in"/>
+  <Action name="view_zoom_out"/>
+  <Action name="zoom_to"/>
+  <Action name="view_render_mode"/>
+  <Action name="color_mode_recolor"/>
+  <Action name="color_mode_inverted"/>
+  <Spacer name="spacer_0"/>
+  <Action name="page_number"/>
+  <Spacer name="spacer_1"/>
+  <Action name="mouse_drag"/>
+  <Action name="mouse_selecttools"/>
+  <Action name="annotation_favorites"/>
+  <Separator name="separator_1"/>
+  <Action name="hamburger_menu"/>
  </ToolBar>
  <ToolBar hidden="true" iconText="icononly" name="annotationToolBar" newline="true" noMerge="1">
   <text translationDomain="okular">Annotation Toolbar</text>
@@ -137,24 +154,9 @@
   <Spacer name="spacer_0"/>
   <Action name="hide_annotation_toolbar"/>
  </ToolBar>
- <ToolBar name="mainToolBar" noMerge="1">
-  <text translationDomain="okular">Main Toolbar</text>
-  <Action name="show_leftpanel"/>
-  <Separator name="separator_0"/>
-  <Action name="view_zoom_in"/>
-  <Action name="view_zoom_out"/>
-  <Action name="zoom_to"/>
-  <Action name="view_render_mode"/>
-  <Action name="color_mode_recolor"/>
-  <Action name="color_mode_inverted"/>
-  <Spacer name="spacer_0"/>
-  <Action name="page_number"/>
-  <Spacer name="spacer_1"/>
-  <Action name="mouse_drag"/>
-  <Action name="mouse_selecttools"/>
-  <Action name="annotation_favorites"/>
-  <Separator name="separator_1"/>
-  <Action name="hamburger_menu"/>
+ <ToolBar hidden="true" iconSize="32" iconText="icononly" name="quickAnnotationToolBar" newline="true" position="right">
+  <text translationDomain="okular">Quick Annotation Toolbar</text>
+  <Action name="quick_annotation_action_bar"/>
  </ToolBar>
  <ActionProperties scheme="Default">
   <Action name="show_leftpanel" priority="0"/>
