@@ -28,9 +28,11 @@ services:
     victoria-logs:
         image: docker.io/victoriametrics/victoria-logs:latest
         container_name: victoria-logs
-        command: -storageDataPath=/victoria-logs-data -retentionPeriod=5y
+        command: -storageDataPath=/victoria-logs-data -retentionPeriod=1y
         user: 1000:100
         restart: unless-stopped
+        ports:
+            - 9428:9428
         environment:
             - TZ=Europe/Vilnius
         volumes:
@@ -44,6 +46,10 @@ services:
         restart: unless-stopped
         environment:
             - TZ=Europe/Vilnius
+        # For hass
+        ports:
+            - 8428:8428
+        # For scraping
         extra_hosts:
             - host.docker.internal:host-gateway
         volumes:
@@ -79,6 +85,8 @@ services:
             - /sys:/host/sys:ro
             - /etc/os-release:/host/etc/os-release:ro
             - /var/log:/host/var/log:ro
+            - /run/log/journal:/run/log/journal:ro
+            - /etc/machine-id:/etc/machine-id:ro
             - /var/run/docker.sock:/var/run/docker.sock:ro
             # - /home/kloud/netdata/web:/usr/share/netdata/web:ro
         tmpfs:

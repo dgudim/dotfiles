@@ -5,9 +5,11 @@ services:
     container_name: code-server
     labels:
       caddy: "https://code.kloud.home.kg"
-      caddy.reverse_proxy: "127.0.0.1:8443"
+      caddy.reverse_proxy: "{{upstreams 8443}}"
+      caddy_ingress_network: "proxy"
     restart: unless-stopped
-    network_mode: host
+    networks:
+      - proxy
     environment:
       - PUID=1000
       - PGID=100
@@ -18,3 +20,8 @@ services:
       - PWA_APPNAME=code-server
     volumes:
       - /mnt/sata_500/code-server:/config
+
+networks:
+  proxy:
+    external: true
+    name: proxy

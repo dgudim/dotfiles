@@ -21,6 +21,9 @@ BACKUP_DIR.mkdir(exist_ok=True)
 # Source path, and where it lands under system-configs/.
 system_configs_to_copy = [
     (ETC_DIR / "systemd/resolved.conf", Path("etc/systemd/resolved.conf")),
+    (ETC_DIR / "systemd/journald.conf.d/volatile.conf", Path("etc/systemd/journald.conf.d/volatile.conf")),
+    (ETC_DIR / "systemd/journal-upload.conf", Path("etc/systemd/journal-upload.conf")),
+    (ETC_DIR / "docker/daemon.json", Path("etc/docker/daemon.json")),
     (ETC_DIR / "ssh/sshd_config", Path("etc/ssh/sshd_config")),
     (ETC_DIR / "fstab", Path("etc/fstab")),
     (ETC_DIR / "nsswitch.conf", Path("etc/nsswitch.conf")),

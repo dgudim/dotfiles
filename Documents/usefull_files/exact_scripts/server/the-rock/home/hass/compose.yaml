@@ -47,7 +47,7 @@ services:
         environment:
             - TZ=Europe/Vilnius
         ports:
-            - 10200:10200
+            - 127.0.0.1:10200:10200
         volumes:
             - /mnt/sata_500/piper:/data
     
@@ -60,7 +60,7 @@ services:
       environment:
         - TZ=Europe/Vilnius
       ports:
-        - 10300:10300
+        - 127.0.0.1:10300:10300
       volumes:
         - /mnt/sata_500/whisper/data:/data
         - /mnt/sata_500/whisper/cache:/.cache
@@ -75,7 +75,7 @@ services:
       environment:
         - TZ=Europe/Vilnius
       ports:
-        - 10400:10400
+        - 127.0.0.1:10400:10400
       volumes:
         - /mnt/sata_500/openwakeword/data:/data
         - /mnt/sata_500/openwakeword/custom:/custom
@@ -87,7 +87,7 @@ services:
         restart: unless-stopped
         user: 1000:100
         ports:
-            - 9292:8080
+            - 127.0.0.1:9292:8080
         volumes:
             - /mnt/sata_500/llama.cpp:/models:ro
             - /mnt/sata_500/llama.cpp/config.yaml:/app/config.yaml:ro

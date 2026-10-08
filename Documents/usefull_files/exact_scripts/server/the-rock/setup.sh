@@ -14,7 +14,8 @@ zypper modifyrepo --refresh packman
 # Deps
 sudo zypper install \
 chrony dbus-broker docker docker-compose \
-NetworkManager systemd-resolved nss-mdns openssh-sftp-server
+NetworkManager systemd-resolved nss-mdns openssh-sftp-server \
+systemd-journal-remote
 
 # Network setup
 sudo ln -sfv /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
@@ -74,3 +75,9 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
 # Saved system configs, home directories, and decrypted env files
 python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/backup.py" restore
+
+# Journal in RAM, uploaded to VictoriaLogs. rsyslog would write it to /var/log again.
+sudo systemctl restart systemd-journald
+sudo systemctl disable --now rsyslog.service
+sudo systemctl enable --now systemd-journal-upload.service
+sudo systemctl restart docker

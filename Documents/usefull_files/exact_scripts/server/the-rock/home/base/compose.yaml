@@ -66,7 +66,7 @@ services:
   postgres:
     build:
       context: .
-      dockerfile: Postgres18-atlas.Dockerfile
+      dockerfile: Postgres_pgvector_ru.Dockerfile
     container_name: postgres
     restart: unless-stopped
     shm_size: '4gb'
