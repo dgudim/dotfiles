@@ -7,6 +7,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Europe/Vilnius
+      - CADDY_INGRESS_NETWORKS=proxy
     cap_add:
       - NET_ADMIN
     network_mode: host
@@ -14,6 +15,7 @@ services:
       - /mnt/sata_500/caddy/conf:/etc/caddy
       - /mnt/sata_500/caddy/data:/data/caddy
       - /mnt/sata_500/caddy/temp_conf:/config/caddy
+      - /var/run/docker.sock:/var/run/docker.sock:ro
   
   tailscale:
     image: tailscale/tailscale:latest
@@ -38,6 +40,9 @@ services:
 
   pihole:
     container_name: pihole
+    labels:
+      caddy: "http://pihole.kloud.home, http://pihole.kloud.vpn"
+      caddy.reverse_proxy: "127.0.0.1:800"
     image: pihole/pihole:latest
     restart: unless-stopped
     network_mode: host # listens to dns on 530 and http on 800
@@ -48,6 +53,7 @@ services:
       PIHOLE_GID: '100'
     volumes:
       - /mnt/sata_500/pihole:/etc/pihole
+      - /mnt/sata_500/pihole/dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       # See https://docs.pi-hole.net/docker/#note-on-capabilities
       # Required if you are using Pi-hole as your DHCP server, else not needed
@@ -58,7 +64,9 @@ services:
       - SYS_NICE
 
   postgres:
-    image: postgres:18
+    build:
+      context: .
+      dockerfile: Postgres18-atlas.Dockerfile
     container_name: postgres
     restart: unless-stopped
     shm_size: '4gb'
@@ -73,6 +81,9 @@ services:
       - /mnt/sata_500/dbs/postgres/data:/var/lib/postgresql      
       - /mnt/sata_500/dbs/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
     command: -c config_file=/etc/postgresql/postgresql.conf
+    networks:
+      - default
+      - backend
 
 
   valkey:
@@ -87,15 +98,20 @@ services:
       - TZ=Europe/Vilnius
     volumes:
       - /mnt/sata_500/dbs/valkey:/data
+    networks:
+      - default
+      - backend
 
   cronicle:
     image: cronicle/edge:latest
     container_name: cronicle
-    hostname: microchelik
+    labels:
+      caddy: "http://cron.kloud.home, http://cron.kloud.vpn"
+      caddy.reverse_proxy: "{{upstreams 3012}}"
+      caddy_ingress_network: "proxy"
+    hostname: manager1
     restart: unless-stopped
     command: ["manager"]
-    ports:
-      - 3012:3012
     environment:
       - TZ=Europe/Vilnius
       - CRONICLE_manager=1
@@ -105,3 +121,34 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/kloud:/home/kloud
       - /mnt/sata_500:/mnt/sata_500
+    networks:
+      - default
+      - proxy
+
+  authelia:
+    image: authelia/authelia:4
+    user: "1000:100"
+    command: ["--config", "/etc/authelia/configuration.yml"]
+    labels:
+        caddy: "https://${AUTH_DOMAIN}:443"
+        caddy.reverse_proxy: "{{upstreams 9091}}"
+        caddy_ingress_network: "proxy"
+    restart: unless-stopped
+    environment:
+      X_AUTHELIA_CONFIG_FILTERS: template
+      AUTH_DOMAIN: ${AUTH_DOMAIN}
+      AUTH_URL: https://${AUTH_DOMAIN}
+      ATLAS_PUBLIC_URL: https://atlas.kloud.home.kg
+      AUTH_POLICY: ${AUTH_POLICY:-one_factor}
+    networks:
+      - default
+      - proxy
+    volumes:
+      - /mnt/sata_500/authelia/configuration.yml:/etc/authelia/configuration.yml:ro
+      - /mnt/sata_500/authelia/config:/config
+
+networks:
+  proxy:
+    name: proxy
+  backend:
+    name: backend

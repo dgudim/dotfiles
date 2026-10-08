@@ -37,15 +37,25 @@ services:
     navidrome:
         image: deluan/navidrome:latest
         container_name: navidrome
+        labels:
+          caddy: "http://navidrome.kloud.home, http://navidrome.kloud.vpn"
+          caddy.reverse_proxy: "{{upstreams 4533}}"
+          caddy_ingress_network: "proxy"
         user: 1000:100
         restart: unless-stopped
         environment:
             - TZ=Europe/Vilnius
-        ports:
-            - 4533:4533
         volumes:
             - /mnt/sata_500/navidrome:/data
             - /mnt/media/music:/music:ro
+        networks:
+          - default
+          - proxy
 
 
 
+
+networks:
+  proxy:
+    external: true
+    name: proxy

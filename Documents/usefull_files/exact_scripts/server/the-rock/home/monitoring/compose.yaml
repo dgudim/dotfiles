@@ -3,11 +3,17 @@ services:
     grafana:
         image: grafana/grafana
         container_name: grafana
+        labels:
+          caddy: "http://grafana.kloud.home, http://grafana.kloud.vpn"
+          caddy.reverse_proxy: "{{upstreams 3000}}"
+          caddy_ingress_network: "proxy"
         user: 1000:100
         restart: unless-stopped
-        network_mode: host
+        networks:
+            - default
+            - proxy
         environment:
-            - GF_SERVER_HTTP_PORT=3003
+            - GF_SERVER_DOMAIN=grafana.kloud.home
             - GF_SECURITY_ALLOW_EMBEDDING=true 
             - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/api/ingress/grafana/
             - GF_SERVER_SERVE_FROM_SUB_PATH=true
@@ -27,8 +33,6 @@ services:
         restart: unless-stopped
         environment:
             - TZ=Europe/Vilnius
-        ports:
-            - 9428:9428
         volumes:
             - /mnt/sata_500/victoria/logs:/victoria-logs-data
 
@@ -40,8 +44,6 @@ services:
         restart: unless-stopped
         environment:
             - TZ=Europe/Vilnius
-        ports:
-            - 8428:8428
         extra_hosts:
             - host.docker.internal:host-gateway
         volumes:
@@ -50,6 +52,12 @@ services:
     netdata:
         image: netdata/netdata:stable
         container_name: netdata
+        labels:
+          caddy: "http://metrics.kloud.home, http://metrics.kloud.vpn"
+          caddy.@head.method: "HEAD"
+          caddy.1_handle: "@head"
+          caddy.1_handle.respond: "405"
+          caddy.2_handle.reverse_proxy: "127.0.0.1:19999"
         pid: host
         network_mode: host
         restart: unless-stopped
@@ -72,9 +80,9 @@ services:
             - /etc/os-release:/host/etc/os-release:ro
             - /var/log:/host/var/log:ro
             - /var/run/docker.sock:/var/run/docker.sock:ro
+            # - /home/kloud/netdata/web:/usr/share/netdata/web:ro
         tmpfs:
             - /var/cache/netdata:uid=201,gid=201,mode=0770,size=268435456
-            - /usr/share/netdata/web:mode=0555,size=65536
 
     # Scrutiny's web UI queries InfluxDB with Flux. Can't use Victoria Metrics :(
     scrutiny-influxdb:
@@ -96,9 +104,11 @@ services:
     scrutiny-web:
         image: ghcr.io/starosdev/scrutiny:latest-web
         container_name: scrutiny-web
+        labels:
+          caddy: "http://smart.kloud.home, http://smart.kloud.vpn"
+          caddy.reverse_proxy: "{{upstreams 8080}}"
+          caddy_ingress_network: "proxy"
         restart: unless-stopped
-        ports:
-            - 4040:8080
         volumes:
             - /mnt/sata_500/scrutiny:/opt/scrutiny/config
         environment:
@@ -114,6 +124,9 @@ services:
             timeout: 5s
             retries: 8
             start_period: 20s
+        networks:
+          - default
+          - proxy
 
     scrutiny-collector:
         image: ghcr.io/starosdev/scrutiny:latest-collector
@@ -141,10 +154,12 @@ services:
     dockhand:
         image: fnsys/dockhand:latest
         container_name: dockhand
+        labels:
+          caddy: "http://docker.kloud.home, http://docker.kloud.vpn"
+          caddy.reverse_proxy: "{{upstreams 3000}}"
+          caddy_ingress_network: "proxy"
         restart: unless-stopped
         user: 1000:100
-        ports:
-            - 3040:3000
         environment:
             - TZ=Europe/Vilnius
         group_add:
@@ -154,5 +169,13 @@ services:
             - /mnt/sata_500/dockhand:/app/data
             - /home/kloud:/home/kloud
             - /mnt/sata_500:/mnt/sata_500
+        networks:
+          - default
+          - proxy
 
 
+
+networks:
+  proxy:
+    external: true
+    name: proxy

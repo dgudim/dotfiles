@@ -141,6 +141,7 @@ configs: list[ProgramConfig] = [
         data_location=None,
         config_files_to_sync={
             "config/userpref.blend",
+            "config/startup.blend",
             re.compile("extensions/blender_org/.*"),
             re.compile("scripts/.*"),
         },

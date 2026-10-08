@@ -71,3 +71,6 @@ snapper firewalld cups cronie
 sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../hass-watchdog/install.sh"
 
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+
+# Saved system configs, home directories, and decrypted env files
+python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/backup.py" restore

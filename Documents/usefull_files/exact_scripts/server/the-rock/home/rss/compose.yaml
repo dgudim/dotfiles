@@ -3,6 +3,9 @@ services:
     image: supahgreg/tt-rss:latest
     container_name: tt-rss-app
     restart: unless-stopped
+    networks:
+      - default
+      - backend
     env_file:
       - .env
     volumes:
@@ -13,6 +16,9 @@ services:
     image: supahgreg/tt-rss:latest
     container_name: tt-rss-updater
     restart: unless-stopped
+    networks:
+      - default
+      - backend
     env_file:
       - .env
     volumes:
@@ -26,26 +32,32 @@ services:
   web-nginx:
     image: supahgreg/tt-rss-web-nginx:latest
     container_name: tt-rss-nginx
+    labels:
+      caddy: "https://tt-rss.kloud.home.kg"
+      caddy.reverse_proxy: "{{upstreams 80}}"
+      caddy_ingress_network: "proxy"
     restart: unless-stopped
     env_file:
       - .env
-    ports:
-      - ${HTTP_PORT}:80
     volumes:
       - /mnt/sata_500/rss/tt-rss/app:/var/www/html:ro
     depends_on:
       - app
+    networks:
+      - default
+      - proxy
 
   rsshub:
     image: diygod/rsshub:chromium-bundled
     container_name: rsshub
     restart: unless-stopped
-    ports:
-      - '1200:80'
+    networks:
+      - default
+      - backend
     environment:
       - NODE_ENV=production
       - CACHE_TYPE=redis
-      - REDIS_URL=redis://172.17.0.1:6379/
+      - REDIS_URL=redis://valkey:6379/
       - PORT=80
       - CACHE_EXPIRE=3600          # 1 Hour
       - CACHE_CONTENT_EXPIRE=18000 # 5 hours
@@ -59,3 +71,11 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+
+networks:
+  proxy:
+    external: true
+    name: proxy
+  backend:
+    external: true
+    name: backend

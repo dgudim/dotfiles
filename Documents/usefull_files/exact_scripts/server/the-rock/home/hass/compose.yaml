@@ -3,6 +3,9 @@ services:
     home-assistant:
         image: ghcr.io/home-assistant/home-assistant:stable
         container_name: homeassistant
+        labels:
+          caddy: "http://hass.kloud.home, http://hass.kloud.vpn"
+          caddy.reverse_proxy: "127.0.0.1:8123"
         restart: unless-stopped
         network_mode: host
         environment:
@@ -21,6 +24,9 @@ services:
     esphome:
         image: ghcr.io/esphome/esphome
         container_name: esphome
+        labels:
+          caddy: "http://hass-esphome.kloud.home, http://hass-esphome.kloud.vpn"
+          caddy.reverse_proxy: "127.0.0.1:6052"
         user: 1000:100
         restart: unless-stopped
         network_mode: host
