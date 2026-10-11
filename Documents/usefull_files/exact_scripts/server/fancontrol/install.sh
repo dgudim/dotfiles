@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Installs fancontrol.py into /opt/fancontrol and runs it as a systemd service.
+# Usage: sudo ./install.sh   (run with fancontrol.py and fancontrol.service in the same directory)
 set -euo pipefail
 
 DEST=/opt/fancontrol
@@ -9,6 +11,7 @@ for f in fancontrol.py fancontrol.service; do
     [ -f "$SRC_DIR/$f" ] || { echo "$f not found next to install.sh" >&2; exit 1; }
 done
 command -v python3 >/dev/null || { echo "python3 is not installed" >&2; exit 1; }
+command -v hdparm >/dev/null || { echo "hdparm is not installed" >&2; exit 1; }
 
 install -d "$DEST"
 install -m 755 "$SRC_DIR/fancontrol.py" "$DEST/fancontrol.py"
