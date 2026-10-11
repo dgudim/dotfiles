@@ -64,7 +64,7 @@ xfce4-notifyd-branding-openSUSE xfce4-power-manager-branding-openSUSE \
 xfce4-screenshooter xfce4-screenshooter-lang \
 xorg-x11-server xorg-x11-essentials xorg-x11-server-extra x11-tools xorg-x11-fonts \
 cockpit cockpit-packages cockpit-bridge \
-snapper firewalld cups cronie
+snapper firewalld cups cronie dnsmasq
 
 [ -L /etc/resolv.conf ] || sudo ln -fvs /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
