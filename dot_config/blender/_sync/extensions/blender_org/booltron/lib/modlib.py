@@ -50,7 +50,7 @@ def secondary_visibility_set(ob: Object, display_type="TEXTURED") -> None:
 
 
 class ModGN:
-    __slots__ = (
+    __slots__ = (  # noqa: RUF023, order important later
         "mode",
         "solver",
         "use_self",
@@ -172,11 +172,9 @@ class ModGN:
 
         ng.links.new(secondary.outputs["Mesh"], primary.inputs["Mesh 2"])
 
-        seed = 0
-        for ob in obs:
-            _out = self._ob_add(ng, ob, in_ofst, in_seed, seed)
+        for seed_ofst, ob in enumerate(obs):
+            _out = self._ob_add(ng, ob, in_ofst, in_seed, seed_ofst)
             ng.links.new(_out, secondary.inputs["Mesh 2"])
-            seed += 1
 
         if (is_md_new := not md):
             md = ob1.modifiers.new(self.mode.title(), "NODES")
@@ -186,12 +184,12 @@ class ModGN:
 
         md.show_group_selector = False
 
-        if self.use_loc_rnd:
-            md[sock_ofst.identifier] = self.loc_offset
-            md[sock_seed.identifier] = self.seed
-
         md.node_group = ng
         md.bake_target = "DISK"
+
+        if self.use_loc_rnd:
+            self.md_input_set(md, sock_ofst.identifier, self.loc_offset)
+            self.md_input_set(md, sock_seed.identifier, self.seed)
 
         if is_md_new:
             prefs = bpy.context.preferences.addons[var.ADDON_ID].preferences
@@ -230,7 +228,7 @@ class ModGN:
 
         md.show_viewport = show_viewport
 
-    def _ob_add(self, ng: NodeGroup, ob: Object, in_ofst: NodeSocket, in_seed: NodeSocket, seed: int = 0) -> NodeSocketGeometry:
+    def _ob_add(self, ng: NodeGroup, ob: Object, in_ofst: NodeSocket, in_seed: NodeSocket, seed_ofst: int = 0) -> NodeSocketGeometry:
         nodes = ng.nodes
 
         node = nodes.new("GeometryNodeObjectInfo")
@@ -256,7 +254,7 @@ class ModGN:
         rnd.select = False
 
         node_add = nodes.new("FunctionNodeIntegerMath")
-        node_add.inputs["Value_001"].default_value = seed
+        node_add.inputs["Value_001"].default_value = seed_ofst
         node_add.location = -200, node.location.y - 155
         node_add.hide = True
         node_add.select = False

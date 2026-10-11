@@ -226,10 +226,8 @@ class MESH_OT_hollow(Operator):
     def hollow_gn(self, context):
         from .. import lib
 
-        enum_items = [x[1] for x in self.__annotations__["offset_direction"].keywords["items"]]
-
         md = lib.gn_setup("Hollow", context.object)
-        lib.md_input_set(md, "Socket_5", self.offset_direction.title(), enum_items)
+        lib.md_input_set(md, "Socket_5", self.offset_direction.title(), lib.EnumProp(self, "offset_direction"))
         lib.md_input_set(md, "Socket_3", self.offset)
         lib.md_input_set(md, "Socket_2", self.voxel_size)
         lib.md_input_set(md, "Socket_4", self.offset_surface_only)

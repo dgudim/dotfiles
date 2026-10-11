@@ -6,16 +6,21 @@ import array
 import random
 from collections.abc import Iterator, MutableSequence
 from random import uniform
-from typing import Any
+from typing import Any, NamedTuple
 
 import bmesh
 import bpy
 import mathutils
 from bmesh.types import BMesh, BMFace
-from bpy.types import Modifier, Object
+from bpy.types import Modifier, Object, Operator
 from mathutils import Vector
 
 from . import var
+
+
+class EnumProp(NamedTuple):
+    op: Operator
+    prop: str
 
 
 def clean_float(value: float, precision: int = 0) -> str:
@@ -238,14 +243,15 @@ def gn_setup(ng_name: str, ob: Object) -> Modifier:
     return md
 
 
-def md_input_set(md: Modifier, id: str, value: Any, enum_items: list[str] | None = None) -> None:
+def md_input_set(md: Modifier, id: str, value: Any, enum_prop: EnumProp = ()) -> None:
     if hasattr(md, "properties"):  # VER >= 5.2
         getattr(md.properties.inputs, id).value = value
     else:
-        if enum_items is None:
-            md[id] = value
-        else:
+        if enum_prop:
+            enum_items = [x[1] for x in enum_prop.op.__class__.__annotations__[enum_prop.prop].keywords["items"]]
             md[id] = enum_items.index(value)
+        else:
+            md[id] = value
 
 
 def md_panel_set(md: Modifier, id: int, value: bool) -> None:

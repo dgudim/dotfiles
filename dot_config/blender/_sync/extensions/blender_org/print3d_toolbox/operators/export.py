@@ -4,6 +4,8 @@
 
 # Export wrappers and integration with external tools.
 
+from pathlib import Path
+
 import bpy
 from bpy.app.translations import pgettext_data as data_
 from bpy.app.translations import pgettext_tip as tip_
@@ -34,48 +36,39 @@ class EXPORT_SCENE_OT_export(Operator):
         global_scale = scale_factor if (unit.system != "NONE" and props.export_unit_scale != "m") else 1.0
         path_mode = "COPY" if props.use_copy_textures else "AUTO"
         filepath = bpy.path.ensure_ext(self.filepath, f".{props.export_format.lower()}")
+        Path(filepath).parent.mkdir(parents=True, exist_ok=True)
 
-        # this can fail with strange errors,
-        # if the dir can't be made then we get an error later.
-        try:
-            from pathlib import Path
-            Path(filepath).parent.mkdir(parents=True, exist_ok=True)
-        except:
-            import traceback
-            traceback.print_exc()
+        options = {
+            "filepath": filepath,
+            "global_scale": global_scale,
+            "apply_modifiers": True,
+            "export_selected_objects": True,
+        }
 
         if props.export_format == "STL":
-            ret = bpy.ops.wm.stl_export(
-                filepath=filepath,
-                ascii_format=props.use_ascii_format,
-                global_scale=global_scale,
-                apply_modifiers=True,
-                export_selected_objects=True,
-            )
+            options["ascii_format"] = props.use_ascii_format
+            if bpy.app.version >= (5, 2, 0):  # VER
+                options["evaluation_mode"] = "DAG_EVAL_VIEWPORT"
+            ret = bpy.ops.wm.stl_export(**options)
         elif props.export_format == "PLY":
-            ret = bpy.ops.wm.ply_export(
-                filepath=filepath,
-                ascii_format=props.use_ascii_format,
-                global_scale=global_scale,
-                export_uv=props.use_uv,
-                export_normals=props.use_normals,
-                export_colors="SRGB" if props.use_colors else "NONE",
-                apply_modifiers=True,
-                export_selected_objects=True,
-                export_attributes=False,
-            )
+            options |= {
+                "ascii_format": props.use_ascii_format,
+                "export_uv": props.use_uv,
+                "export_normals": props.use_normals,
+                "export_colors": "SRGB" if props.use_colors else "NONE",
+                "export_attributes": False,
+            }
+            ret = bpy.ops.wm.ply_export(**options)
         elif props.export_format == "OBJ":
-            ret = bpy.ops.wm.obj_export(
-                filepath=filepath,
-                global_scale=global_scale,
-                export_uv=props.use_uv,
-                export_normals=props.use_normals,
-                export_colors=props.use_colors,
-                export_materials=props.use_copy_textures,
-                path_mode=path_mode,
-                apply_modifiers=True,
-                export_selected_objects=True,
-            )
+            options |= {
+                "export_uv": props.use_uv,
+                "export_normals": props.use_normals,
+                "export_colors": props.use_colors,
+                "export_materials": props.use_copy_textures,
+                "path_mode": path_mode,
+                "export_eval_mode": "DAG_EVAL_VIEWPORT",
+            }
+            ret = bpy.ops.wm.obj_export(**options)
         else:
             assert 0
 
@@ -137,7 +130,6 @@ def _image_get(mat: Material) -> Image | None:
 
 
 def _image_copy_guess(filepath: str, objects: list[Object]) -> None:
-    # 'filepath' is the path we are writing to.
     image = None
     mats = set()
 
@@ -162,9 +154,4 @@ def _image_copy_guess(filepath: str, objects: list[Object]) -> None:
 
             imagepath_dst = filepath_noext + ext
             print(f"copying texture: {imagepath!r} -> {imagepath_dst!r}")
-
-            try:
-                shutil.copy(imagepath, imagepath_dst)
-            except:
-                import traceback
-                traceback.print_exc()
+            shutil.copy(imagepath, imagepath_dst)
