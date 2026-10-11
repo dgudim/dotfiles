@@ -4,6 +4,7 @@ services:
     container_name: booklore
     labels:
       caddy: "https://books.kloud.home.kg"
+      caddy.log: access
       caddy.reverse_proxy: "{{upstreams 6060}}"
       caddy_ingress_network: "proxy"
     environment:
@@ -49,9 +50,10 @@ services:
     restart: unless-stopped
     healthcheck:
       test: [ "CMD", "mariadb-admin", "ping", "-h", "localhost" ]
-      interval: 5s
-      timeout: 5s
-      retries: 10
+      interval: 60s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
 
 networks:
   proxy:

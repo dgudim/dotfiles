@@ -4,43 +4,49 @@
 import fcntl
 import os
 import subprocess
-import sys
 import time
-import urllib.request
+from pathlib import Path
 
-MOUNT = "/mnt/sata_500"
+import requests
+
+MOUNT = Path("/mnt/sata_500")
 IMPORT_URL = "http://127.0.0.1:8428/api/v1/import/prometheus"
-LOCK_PATH = "/tmp/sata-folder-sizes.lock"
+LOCK_PATH = Path("/tmp/sata-folder-sizes.lock")
 
 
 def esc(value):
     return value.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "")
 
 
-def parse_du(stdout, stderr):
-    denied_folders = set()
-    prefix = MOUNT + "/"
+def denied_folders(stderr, mount):
+    folders = set()
     for line in stderr.splitlines():
         if "Permission denied" not in line or "'" not in line:
             continue
-        path = line.split("'", 2)[1]
-        if not path.startswith(prefix):
+        try:
+            relative = Path(line.split("'", 2)[1]).relative_to(mount)
+        except ValueError:
             continue
-        denied_folders.add(path[len(prefix) :].split("/", 1)[0])
+        if relative.parts:
+            folders.add(relative.parts[0])
+    return folders
 
+
+def collect(mount, stdout, stderr):
+    denied = denied_folders(stderr, mount)
     samples = []
     for line in stdout.splitlines():
-        if "\t" in line:
-            size, path = line.split("\t", 1)
-        else:
-            size, path = line.split(None, 1)
-        if not path.startswith(prefix):
+        size, raw = line.split("\t", 1) if "\t" in line else line.split(None, 1)
+        path = Path(raw)
+        try:
+            relative = path.relative_to(mount)
+        except ValueError:
             continue
-        folder = path[len(prefix) :]
-        if "/" in folder:
+        if len(relative.parts) != 1:
             continue
-        label = f'mount="{esc(MOUNT)}",folder="{esc(folder)}"'
-        if folder in denied_folders or not os.access(path, os.R_OK | os.X_OK):
+        folder = relative.parts[0]
+        label = f'mount="{esc(str(mount))}",folder="{esc(folder)}"'
+        if folder in denied or not os.access(path, os.R_OK | os.X_OK):
             samples.append(f"disk_directory_unreadable{{{label}}} 1")
             continue
         samples.append(f"disk_directory_bytes{{{label}}} {int(size)}")
@@ -48,37 +54,27 @@ def parse_du(stdout, stderr):
     return samples
 
 
-def measure():
+def measure(mount=MOUNT):
     proc = subprocess.run(
-        ["du", "-x", "-d", "1", "-B1", MOUNT],
+        ["du", "-x", "-d", "1", "-B1", os.fspath(mount)],
         capture_output=True,
         text=True,
     )
-    return parse_du(proc.stdout, proc.stderr)
+    return collect(mount, proc.stdout, proc.stderr)
 
 
 def push(samples):
-    body = ("\n".join(samples) + "\n").encode()
-    req = urllib.request.Request(IMPORT_URL, data=body, method="POST")
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        resp.read()
+    response = requests.post(IMPORT_URL, data=("\n".join(samples) + "\n").encode(), timeout=30)
+    response.raise_for_status()
 
 
 def main():
-    lock = open(LOCK_PATH, "w")
+    lock = LOCK_PATH.open("w")
     try:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
         return
-    if len(sys.argv) == 3:
-        with open(sys.argv[1], encoding="utf-8", errors="replace") as handle:
-            stdout = handle.read()
-        with open(sys.argv[2], encoding="utf-8", errors="replace") as handle:
-            stderr = handle.read()
-        samples = parse_du(stdout, stderr)
-    else:
-        samples = measure()
-    push(samples)
+    push(measure())
 
 
 if __name__ == "__main__":

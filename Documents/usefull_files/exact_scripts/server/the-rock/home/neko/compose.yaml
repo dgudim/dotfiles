@@ -4,6 +4,7 @@ services:
     container_name: neko
     labels:
       caddy: "https://neko.kloud.home.kg"
+      caddy.log: access
       caddy.reverse_proxy: "{{upstreams 8080}}"
       caddy_ingress_network: "proxy"
     restart: "no"

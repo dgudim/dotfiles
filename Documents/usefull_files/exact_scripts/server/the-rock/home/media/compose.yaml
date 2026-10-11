@@ -40,6 +40,7 @@ services:
         container_name: navidrome
         labels:
           caddy: "http://navidrome.kloud.home, http://navidrome.kloud.vpn"
+          caddy.log: access
           caddy.reverse_proxy: "{{upstreams 4533}}"
           caddy_ingress_network: "proxy"
         user: 1000:100
@@ -52,8 +53,6 @@ services:
         networks:
           - default
           - proxy
-
-
 
 
 networks:

@@ -15,6 +15,7 @@ services:
       - /mnt/sata_500/caddy/conf:/etc/caddy
       - /mnt/sata_500/caddy/data:/data/caddy
       - /mnt/sata_500/caddy/temp_conf:/config/caddy
+      - /tmp/caddy-access:/var/log/caddy
       - /var/run/docker.sock:/var/run/docker.sock:ro
   
   tailscale:
@@ -42,6 +43,7 @@ services:
     container_name: pihole
     labels:
       caddy: "http://pihole.kloud.home, http://pihole.kloud.vpn"
+      caddy.log: access
       caddy.reverse_proxy: "127.0.0.1:800"
     image: pihole/pihole:latest
     restart: unless-stopped
@@ -107,6 +109,7 @@ services:
     container_name: cronicle
     labels:
       caddy: "http://cron.kloud.home, http://cron.kloud.vpn"
+      caddy.log: access
       caddy.reverse_proxy: "{{upstreams 3012}}"
       caddy_ingress_network: "proxy"
     hostname: manager1
@@ -128,9 +131,11 @@ services:
   authelia:
     image: authelia/authelia:4
     user: "1000:100"
+    container_name: authelia
     command: ["--config", "/etc/authelia/configuration.yml"]
     labels:
         caddy: "https://${AUTH_DOMAIN}:443"
+        caddy.log: access
         caddy.reverse_proxy: "{{upstreams 9091}}"
         caddy_ingress_network: "proxy"
     restart: unless-stopped

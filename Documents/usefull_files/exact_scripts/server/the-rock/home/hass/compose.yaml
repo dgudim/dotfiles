@@ -5,6 +5,7 @@ services:
         container_name: homeassistant
         labels:
           caddy: "http://hass.kloud.home, http://hass.kloud.vpn"
+          caddy.log: access
           caddy.reverse_proxy: "127.0.0.1:8123"
         restart: unless-stopped
         network_mode: host
@@ -27,6 +28,7 @@ services:
         container_name: esphome
         labels:
           caddy: "http://hass-esphome.kloud.home, http://hass-esphome.kloud.vpn"
+          caddy.log: access
           caddy.reverse_proxy: "127.0.0.1:6052"
         user: 1000:100
         restart: unless-stopped
@@ -101,6 +103,8 @@ services:
       volumes:
         - /mnt/sata_500/mosquitto:/mosquitto
         - /mnt/sata_500/mosquitto/data:/mosquitto/data # Don't remove these, shadow declared anon mounts in the image
+      tmpfs:
+        - /mosquitto/log
       ports:
         - 1883:1883
         - 9001:9001    

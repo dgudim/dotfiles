@@ -6,6 +6,7 @@ services:
         container_name: bentopdf
         labels:
           caddy: "http://pdf.kloud.home, http://pdf.kloud.vpn"
+          caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8080}}"
           caddy_ingress_network: "proxy"
         restart: unless-stopped
@@ -18,6 +19,7 @@ services:
         container_name: homepage
         labels:
           caddy: "http://kloud.home, http://kloud.vpn"
+          caddy.log: access
           caddy.reverse_proxy: "{{upstreams 3000}}"
           caddy_ingress_network: "proxy"
         restart: unless-stopped
@@ -50,6 +52,7 @@ services:
         container_name: languagetool
         labels:
           caddy: "https://sceakbiryzigvgdfrjbumjvivedwzchd.kloud.home.kg"
+          caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8010}}"
           caddy_ingress_network: "proxy"
         restart: unless-stopped
@@ -75,6 +78,7 @@ services:
         container_name: ntfy
         labels:
           caddy: "https://ntfy.kloud.home.kg"
+          caddy.log: access
           caddy.reverse_proxy: "{{upstreams 81}}"
           caddy_ingress_network: "proxy"
         command: serve
@@ -106,6 +110,7 @@ services:
         container_name: syncthing
         labels:
           caddy: "http://sync.kloud.home, http://sync.kloud.vpn"
+          caddy.log: access
           caddy.reverse_proxy: "127.0.0.1:8384"
         restart: unless-stopped
         hostname: microchelik
@@ -125,6 +130,7 @@ services:
             interval: 5m
             timeout: 10s
             retries: 3
+            start_period: 60s
 
     syncthing-relay:
         image: syncthing/relaysrv
@@ -144,6 +150,7 @@ services:
         container_name: voux
         labels:
           caddy: "https://voux.kloud.home.kg"
+          caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8787}}"
           caddy_ingress_network: "proxy"
         restart: unless-stopped
@@ -163,6 +170,7 @@ services:
       container_name: spoolman
       labels:
         caddy: "http://spoolman.kloud.home, http://spoolman.kloud.vpn"
+        caddy.log: access
         caddy.reverse_proxy: "{{upstreams 8000}}"
         caddy_ingress_network: "proxy"
       restart: unless-stopped
@@ -186,6 +194,7 @@ services:
         container_name: atuin
         labels:
           caddy: "https://atuin.kloud.home.kg"
+          caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8888}}"
           caddy_ingress_network: "proxy"
         restart: unless-stopped
@@ -208,6 +217,7 @@ services:
         container_name: plik
         labels:
           caddy: "https://plik.kloud.home.kg"
+          caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8080}}"
           caddy_ingress_network: "proxy"
         restart: "unless-stopped"
