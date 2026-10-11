@@ -1,0 +1,10 @@
+[Unit]
+Description=RockPro64 fan control
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/fancontrol/fancontrol.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
