@@ -3,14 +3,23 @@ services:
     image: tombursch/kitchenowl:latest
     restart: unless-stopped
     container_name: kitchenowl
+    labels:
+      caddy: "https://kitchenowl.kloud.home.kg"
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+      caddy_ingress_network: "proxy"
     user: 1000:100
     environment:
       - COLLECT_METRICS=true
       - METRICS_USER=kitchenowl
       - METRICS_PASSWORD=${KITCHENOWL_METRICS_PASSWORD}
       - JWT_SECRET_KEY=${KITCHENOWL_JWT_SECRET_KEY}
-    ports:
-      - "3322:8080"
-      - "3323:9100"
     volumes:
       - /mnt/sata_500/kitchenowl:/data
+    networks:
+      - default
+      - proxy
+
+networks:
+  proxy:
+    external: true
+    name: proxy

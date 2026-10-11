@@ -2,11 +2,10 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 
 USER_DIR = Path("/home/kloud")
 BACKUP_DIR = Path(USER_DIR, "dotfiles/Documents/usefull_files/exact_scripts/server/the-rock")
-# On the server this is /etc. The scheduled job mounts host /etc at /host-etc.
-ETC_DIR = Path(os.environ.get("BACKUP_ETC", "/etc"))
 # On the server this is /etc. The scheduled job mounts host /etc at /host-etc.
 ETC_DIR = Path(os.environ.get("BACKUP_ETC", "/etc"))
 AGE_RECIPIENT = USER_DIR / ".ssh" / "id_ed25519.pub"
@@ -22,6 +21,9 @@ BACKUP_DIR.mkdir(exist_ok=True)
 # Source path, and where it lands under system-configs/.
 system_configs_to_copy = [
     (ETC_DIR / "systemd/resolved.conf", Path("etc/systemd/resolved.conf")),
+    (ETC_DIR / "systemd/journald.conf.d/volatile.conf", Path("etc/systemd/journald.conf.d/volatile.conf")),
+    (ETC_DIR / "systemd/journal-upload.conf", Path("etc/systemd/journal-upload.conf")),
+    (ETC_DIR / "docker/daemon.json", Path("etc/docker/daemon.json")),
     (ETC_DIR / "ssh/sshd_config", Path("etc/ssh/sshd_config")),
     (ETC_DIR / "fstab", Path("etc/fstab")),
     (ETC_DIR / "nsswitch.conf", Path("etc/nsswitch.conf")),
@@ -77,7 +79,9 @@ def encrypt_copied_env_files(destination: Path) -> None:
         )
         env_file.unlink()
 
+
 HOME_BACKUP_DIR = BACKUP_DIR / "home"
+
 
 def copy_home_directories() -> None:
     HOME_BACKUP_DIR.mkdir(exist_ok=True)
@@ -123,15 +127,84 @@ def give_to_user(root: Path) -> None:
         os.chown(path, 1000, 100, follow_symlinks=False)
 
 
-for source, dest_relative in system_configs_to_copy:
-    if not source.is_file():
-        print(f"Skipping {source}")
-        continue
-    destination = BACKUP_DIR / "system-configs" / dest_relative
-    print(f"Copying {source}")
-    destination.parent.mkdir(exist_ok=True, parents=True)
-    shutil.copy(source, destination)
+def backup() -> None:
+    for source, dest_relative in system_configs_to_copy:
+        if not source.is_file():
+            print(f"Skipping {source}")
+            continue
+        destination = BACKUP_DIR / "system-configs" / dest_relative
+        print(f"Copying {source}")
+        destination.parent.mkdir(exist_ok=True, parents=True)
+        shutil.copy(source, destination)
 
-give_to_user(BACKUP_DIR / "system-configs")
-copy_home_directories()
-give_to_user(HOME_BACKUP_DIR)
+    give_to_user(BACKUP_DIR / "system-configs")
+    copy_home_directories()
+    give_to_user(HOME_BACKUP_DIR)
+
+
+def restore_file(saved: Path, destination: Path) -> None:
+    print(f"Restoring {saved} -> {destination}")
+    if destination.is_relative_to("/etc"):
+        subprocess.run(["sudo", "mkdir", "-p", str(destination.parent)], check=True)
+        subprocess.run(["sudo", "cp", "-a", str(saved), str(destination)], check=True)
+        return
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(saved, destination)
+
+
+def decrypt_env_files(root: Path) -> None:
+    for encrypted in root.rglob("*.age"):
+        if not encrypted.is_file():
+            continue
+        plain = encrypted.with_name(encrypted.name.removesuffix(".age"))
+        if not is_env_file(plain):
+            continue
+        print(f"Decrypting {encrypted} -> {plain}")
+        subprocess.run(
+            ["age", "-d", "-i", str(AGE_IDENTITY), "-o", str(plain), str(encrypted)],
+            check=True,
+        )
+        encrypted.unlink()
+
+
+def restore_home_directories() -> None:
+    if not HOME_BACKUP_DIR.is_dir():
+        print(f"Skipping {HOME_BACKUP_DIR}")
+        return
+    for entry in HOME_BACKUP_DIR.iterdir():
+        if not entry.is_dir() or entry.is_symlink():
+            continue
+        destination = USER_DIR / entry.name
+        destination.mkdir(exist_ok=True)
+        print(f"Restoring {entry} -> {destination}")
+        subprocess.run(
+            ["rsync", "-a", "--no-owner", "--no-group", f"{entry}/", f"{destination}/"],
+            check=True,
+        )
+        decrypt_env_files(destination)
+
+
+def restore() -> None:
+    for _source, dest_relative in system_configs_to_copy:
+        saved = BACKUP_DIR / "system-configs" / dest_relative
+        if not saved.is_file():
+            print(f"Skipping {saved}")
+            continue
+        restore_file(saved, _source)
+    restore_home_directories()
+
+
+def main() -> None:
+    action = "backup"
+    if len(sys.argv) > 1:
+        action = sys.argv[1].removeprefix("--")
+    if action == "backup":
+        backup()
+    elif action == "restore":
+        restore()
+    else:
+        raise SystemExit(f"Unknown action {sys.argv[1]!r}. Use backup or restore.")
+
+
+if __name__ == "__main__":
+    main()

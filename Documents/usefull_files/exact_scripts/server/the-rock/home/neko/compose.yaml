@@ -2,10 +2,13 @@ services:
   neko:
     image: "ghcr.io/m1k1o/neko/firefox"
     container_name: neko
+    labels:
+      caddy: "https://neko.kloud.home.kg"
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+      caddy_ingress_network: "proxy"
     restart: "no"
     shm_size: "6gb"
     ports:
-      - "8888:8080"
       - "59001:59001/udp"
       - "59001:59001/tcp"
     devices:
@@ -43,3 +46,11 @@ services:
       NEKO_WEBRTC_ICELITE: true
       NEKO_WEBRTC_NAT1TO1: 78.62.132.3
       NEKO_SERVER_PROXY: true
+    networks:
+      - default
+      - proxy
+
+networks:
+  proxy:
+    external: true
+    name: proxy

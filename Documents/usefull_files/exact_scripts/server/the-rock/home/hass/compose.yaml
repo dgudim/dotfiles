@@ -3,10 +3,14 @@ services:
     home-assistant:
         image: ghcr.io/home-assistant/home-assistant:stable
         container_name: homeassistant
+        labels:
+          caddy: "http://hass.kloud.home, http://hass.kloud.vpn"
+          caddy.reverse_proxy: "127.0.0.1:8123"
         restart: unless-stopped
         network_mode: host
         environment:
             - TZ=Europe/Vilnius
+            - HA_DISABLE_LOG_FILE=1
         devices:
             - /dev/ttyACM0
             - /dev/ttyUSB0
@@ -21,6 +25,9 @@ services:
     esphome:
         image: ghcr.io/esphome/esphome
         container_name: esphome
+        labels:
+          caddy: "http://hass-esphome.kloud.home, http://hass-esphome.kloud.vpn"
+          caddy.reverse_proxy: "127.0.0.1:6052"
         user: 1000:100
         restart: unless-stopped
         network_mode: host
@@ -41,7 +48,7 @@ services:
         environment:
             - TZ=Europe/Vilnius
         ports:
-            - 10200:10200
+            - 127.0.0.1:10200:10200
         volumes:
             - /mnt/sata_500/piper:/data
     
@@ -54,7 +61,7 @@ services:
       environment:
         - TZ=Europe/Vilnius
       ports:
-        - 10300:10300
+        - 127.0.0.1:10300:10300
       volumes:
         - /mnt/sata_500/whisper/data:/data
         - /mnt/sata_500/whisper/cache:/.cache
@@ -69,7 +76,7 @@ services:
       environment:
         - TZ=Europe/Vilnius
       ports:
-        - 10400:10400
+        - 127.0.0.1:10400:10400
       volumes:
         - /mnt/sata_500/openwakeword/data:/data
         - /mnt/sata_500/openwakeword/custom:/custom
@@ -81,7 +88,7 @@ services:
         restart: unless-stopped
         user: 1000:100
         ports:
-            - 9292:8080
+            - 127.0.0.1:9292:8080
         volumes:
             - /mnt/sata_500/llama.cpp:/models:ro
             - /mnt/sata_500/llama.cpp/config.yaml:/app/config.yaml:ro
@@ -94,7 +101,6 @@ services:
       volumes:
         - /mnt/sata_500/mosquitto:/mosquitto
         - /mnt/sata_500/mosquitto/data:/mosquitto/data # Don't remove these, shadow declared anon mounts in the image
-        - /mnt/sata_500/mosquitto/log:/mosquitto/log
       ports:
         - 1883:1883
         - 9001:9001    

@@ -3,8 +3,13 @@ services:
     # image: lscr.io/linuxserver/code-server:latest
     build: .
     container_name: code-server
+    labels:
+      caddy: "https://code.kloud.home.kg"
+      caddy.reverse_proxy: "{{upstreams 8443}}"
+      caddy_ingress_network: "proxy"
     restart: unless-stopped
-    network_mode: host
+    networks:
+      - proxy
     environment:
       - PUID=1000
       - PGID=100
@@ -15,3 +20,11 @@ services:
       - PWA_APPNAME=code-server
     volumes:
       - /mnt/sata_500/code-server:/config
+    tmpfs:
+      - /config/.local/share/code-server/coder-logs:uid=1000,gid=100,mode=0755
+      - /config/data/logs:uid=1000,gid=100,mode=0755
+
+networks:
+  proxy:
+    external: true
+    name: proxy
