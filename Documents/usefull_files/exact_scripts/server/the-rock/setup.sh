@@ -79,8 +79,8 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 # Saved system configs, home directories, and decrypted env files
 python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/backup.py" restore
 
-# Journal in RAM, uploaded to VictoriaLogs. rsyslog would write it to /var/log again.
+# Journal in RAM, uploaded to VictoriaLogs through vector
 sudo systemctl restart systemd-journald
 sudo systemctl disable --now rsyslog.service
-sudo systemctl enable --now systemd-journal-upload.service
+sudo systemctl disable --now systemd-journal-upload.service # Vector reads logs itself
 sudo systemctl restart docker
