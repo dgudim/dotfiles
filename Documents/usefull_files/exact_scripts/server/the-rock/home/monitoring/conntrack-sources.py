@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Push conntrack traffic to VictoriaMetrics.
+"""Push conntrack traffic to VictoriaMetrics and VictoriaLogs.
 
 Every flow is rolled up by country and protocol as the bytes seen since the previous run.
+Remote addresses are written to VictoriaLogs, with a reverse DNS name when one exists.
 """
 
 import fcntl
 import ipaddress
 import json
 import re
+import socket
 import time
 import urllib.request
 from collections import defaultdict
@@ -17,6 +19,10 @@ import maxminddb
 STATE_PATH = "/tmp/conntrack-sources.state"
 LOCK_PATH = "/tmp/conntrack-sources.lock"
 IMPORT_URL = "http://127.0.0.1:8428/api/v1/import/prometheus"
+LOG_URL = (
+    "http://127.0.0.1:9428/insert/jsonline"
+    "?_stream_fields=src&_time_field=ts&_msg_field=message"
+)
 GEOIP_PATH = "/mnt/sata_500/vector/geoip/GeoLite2-Country.mmdb"
 FLOW_RE = re.compile(
     r"src=(\S+) dst=(\S+)(?: sport=(\d+) dport=(\d+))? packets=\d+ bytes=(\d+)"
@@ -148,7 +154,14 @@ def add_country(buckets, cache, reader, addr, proto, direction, nbytes):
     buckets[(country_of(addr, cache, reader), proto, direction)] += nbytes
 
 
-def attribute(origin_src, origin_bytes, reply_src, reply_bytes, proto, local, received, sent, countries, cache, reader):
+def note_ip(ip_bytes, cache, reader, addr, proto, nbytes):
+    if nbytes <= 0:
+        return
+    country_of(addr, cache, reader)
+    ip_bytes[(addr, proto)] += nbytes
+
+
+def attribute(origin_src, origin_bytes, reply_src, reply_bytes, proto, local, received, sent, countries, cache, reader, ip_bytes):
     try:
         origin = ipaddress.ip_address(origin_src)
         reply = ipaddress.ip_address(reply_src)
@@ -161,18 +174,41 @@ def attribute(origin_src, origin_bytes, reply_src, reply_bytes, proto, local, re
         received[reply_src] += reply_bytes
         add_country(countries, cache, reader, reply_src, proto, "tx", origin_bytes)
         add_country(countries, cache, reader, reply_src, proto, "rx", reply_bytes)
+        note_ip(ip_bytes, cache, reader, reply_src, proto, origin_bytes + reply_bytes)
     elif reply_local and not origin_local and not is_skipped(origin):
         received[origin_src] += origin_bytes
         sent[origin_src] += reply_bytes
         add_country(countries, cache, reader, origin_src, proto, "rx", origin_bytes)
         add_country(countries, cache, reader, origin_src, proto, "tx", reply_bytes)
+        note_ip(ip_bytes, cache, reader, origin_src, proto, origin_bytes + reply_bytes)
     elif not origin_local and not reply_local:
         if not is_skipped(origin):
             received[origin_src] += origin_bytes
             add_country(countries, cache, reader, origin_src, proto, "rx", origin_bytes)
+            note_ip(ip_bytes, cache, reader, origin_src, proto, origin_bytes)
         if not is_skipped(reply):
             received[reply_src] += reply_bytes
             add_country(countries, cache, reader, reply_src, proto, "rx", reply_bytes)
+            note_ip(ip_bytes, cache, reader, reply_src, proto, reply_bytes)
+
+
+
+def lookup_domain(addr, cache):
+    cached = cache.get(addr)
+    if cached is not None:
+        return cached
+    previous = socket.getdefaulttimeout()
+    socket.setdefaulttimeout(1)
+    try:
+        host = socket.gethostbyaddr(addr)[0].rstrip(".")
+    except OSError:
+        host = ""
+    finally:
+        socket.setdefaulttimeout(previous)
+    if host == addr:
+        host = ""
+    cache[addr] = host
+    return host
 
 
 def push(samples):
@@ -180,6 +216,16 @@ def push(samples):
         return
     body = ("\n".join(samples) + "\n").encode()
     request = urllib.request.Request(IMPORT_URL, data=body, method="POST")
+    with urllib.request.urlopen(request, timeout=20) as response:
+        response.read()
+
+
+def push_logs(rows):
+    if not rows:
+        return
+    body = "".join(json.dumps(row, separators=(",", ":")) + "\n" for row in rows).encode()
+    request = urllib.request.Request(LOG_URL, data=body, method="POST")
+    request.add_header("Content-Type", "application/stream+json")
     with urllib.request.urlopen(request, timeout=20) as response:
         response.read()
 
@@ -199,7 +245,11 @@ def main():
     received = defaultdict(int)
     sent = defaultdict(int)
     countries = defaultdict(int)
+    ip_bytes = defaultdict(int)
     cache = {}
+    domains = state.get("domains")
+    if not isinstance(domains, dict):
+        domains = {}
     reader = load_geoip()
     try:
         if previous_ts:
@@ -219,6 +269,7 @@ def main():
                     countries,
                     cache,
                     reader,
+                    ip_bytes,
                 )
     finally:
         if reader is not None:
@@ -231,11 +282,34 @@ def main():
             f'conntrack_bytes{{src="{src}",proto="{proto}",direction="{direction}"}} {amount}'
         )
     push(samples)
+    logged_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(now))
+    logs = []
+    for (addr, proto), amount in sorted(ip_bytes.items()):
+        src = cache.get(addr, "unknown")
+        if src == "local" or amount <= 0:
+            continue
+        row = {
+            "client_ip": addr,
+            "src": src,
+            "proto": proto,
+            "bytes": amount,
+            "ts": logged_at,
+            "message": "conntrack",
+        }
+        host = lookup_domain(addr, domains)
+        if host:
+            row["domain"] = host
+        logs.append(row)
+    push_logs(logs)
     save_state({
         "ts": now,
         "flows": {key: [value[2], value[4]] for key, value in flows.items()},
+        "domains": domains,
     })
-    print(f"flows {len(flows)} local {len(local)} countries {len(countries)} samples {len(samples)}")
+    print(
+        f"flows {len(flows)} local {len(local)} countries {len(countries)} "
+        f"samples {len(samples)} logs {len(logs)}"
+    )
 
 
 if __name__ == "__main__":

@@ -6,3 +6,6 @@ UUID=c3eec8cd-e0d8-4dae-bbb4-bf85c9af73df  /mnt/sata_500                        
 # Bind mounts for nextcloud 
 /mnt/sata_500/booklore/bookdrop            /mnt/sata_500/nextcloud_external_mounts/books/drop    fuse.bindfs force-user=33,force-group=root,perms=750,create-for-user=kloud,create-for-group=users 0 0
 /mnt/sata_500/booklore/books               /mnt/sata_500/nextcloud_external_mounts/books/library fuse.bindfs force-user=33,force-group=root,perms=750,create-for-user=kloud,create-for-group=users 0 0
+
+# NFS
+192.168.50.137:/mnt/chonker /mnt/chonker nfs defaults,async,rw,hard,intr,noatime,timeo=60,retrans=60 0 0

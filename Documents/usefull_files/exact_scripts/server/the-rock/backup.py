@@ -92,7 +92,7 @@ def copy_home_directories() -> None:
     ignored = set(home_folders_to_ignore)
     mirrored = set()
     for entry in USER_DIR.iterdir():
-        if not entry.is_dir() or entry.name.startswith(".") or entry.name in ignored:
+        if not entry.is_dir() or entry.name.startswith(".") or "__pycache__" in str(entry) or entry.name in ignored:
             continue
         destination = HOME_BACKUP_DIR / entry.name
         mirrored.add(entry.name)
