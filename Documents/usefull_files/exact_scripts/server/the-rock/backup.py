@@ -34,6 +34,7 @@ system_configs_to_copy = [
     (ETC_DIR / "sysctl.d/99-conntrack-acct.conf", Path("etc/sysctl.d/99-conntrack-acct.conf")),
     (ETC_DIR / "sysctl.d/91-ulimit.conf", Path("etc/sysctl.d/91-ulimit.conf")),
     (ETC_DIR / "security/limits.d/90-nproc.conf", Path("etc/security/limits.d/90-nproc.conf")),
+    (ETC_DIR / "systemd/system/disable-wifi-card.service", Path("etc/systemd/system/disable-wifi-card.service")),
     (USER_DIR / ".gitconfig", Path("home/kloud/.gitconfig")),
     (USER_DIR / ".bashrc", Path("home/kloud/.bashrc")),
 ]

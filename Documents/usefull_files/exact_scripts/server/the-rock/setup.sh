@@ -79,6 +79,9 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 # Saved system configs, home directories, and decrypted env files
 python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/backup.py" restore
 
+sudo systemctl daemon-reload
+sudo systemctl enable --now disable-wifi-card.service
+
 # Journal in RAM, uploaded to VictoriaLogs through vector
 sudo systemctl restart systemd-journald
 sudo systemctl disable --now rsyslog.service
