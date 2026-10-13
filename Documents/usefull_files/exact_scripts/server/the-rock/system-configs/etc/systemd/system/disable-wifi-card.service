@@ -1,0 +1,9 @@
+[Unit]
+Description=Detach unused Wi-Fi card
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'echo 1 > /sys/bus/pci/devices/0000:01:00.0/remove; /usr/sbin/setpci -s 00:1c.0 CAP_EXP+10.w=0010:0010'
+
+[Install]
+WantedBy=multi-user.target
