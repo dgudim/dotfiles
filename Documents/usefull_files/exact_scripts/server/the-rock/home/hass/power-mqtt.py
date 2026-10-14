@@ -18,7 +18,7 @@ MQTT_HOST = os.environ.get("MQTT_HOST", "127.0.0.1")
 MQTT_PORT = int(os.environ.get("MQTT_PORT", "1883"))
 MQTT_USER = os.environ.get("MQTT_USER") or None
 MQTT_PASSWORD = os.environ.get("MQTT_PASSWORD") or None
-INTERVAL = int(os.environ.get("INTERVAL", "15"))
+INTERVAL = int(os.environ.get("INTERVAL", "30"))
 NODE = os.environ.get("NODE_ID", "microchelik")
 DISCOVERY_PREFIX = os.environ.get("DISCOVERY_PREFIX", "homeassistant")
 

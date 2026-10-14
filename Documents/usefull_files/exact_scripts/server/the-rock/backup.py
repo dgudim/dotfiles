@@ -37,6 +37,7 @@ system_configs_to_copy = [
     (ETC_DIR / "security/limits.d/90-nproc.conf", Path("etc/security/limits.d/90-nproc.conf")),
     (ETC_DIR / "systemd/system/disable-wifi-card.service", Path("etc/systemd/system/disable-wifi-card.service")),
     (ETC_DIR / "systemd/zram-generator.conf", Path("etc/systemd/zram-generator.conf")),
+    (ETC_DIR / "nfs.conf.d/99-rahead.conf", Path("etc/nfs.conf.d/99-rahead.conf")),
     (USER_DIR / ".gitconfig", Path("home/kloud/.gitconfig")),
     (USER_DIR / ".bashrc", Path("home/kloud/.bashrc")),
 ]

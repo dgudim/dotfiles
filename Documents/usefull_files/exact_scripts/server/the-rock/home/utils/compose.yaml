@@ -125,7 +125,7 @@ services:
         volumes:
             - /mnt/sata_500/syncthing:/var/syncthing
             - /mnt/sata_500/syncthing/config:/var/syncthing/config
-            - chonker-media:/var/syncthing/data/music
+            - chonker-music:/var/syncthing/data/music
         healthcheck:
             test: curl -fkLsS -m 2 127.0.0.1:8384/rest/noauth/health | grep -o --color=never OK || exit 1
             interval: 5m
@@ -231,12 +231,13 @@ services:
           - proxy
 
 volumes:
-  chonker-media:
+  chonker-music:
     driver: local
+    name: chonker-music
     driver_opts:
       type: nfs
-      o: addr=192.168.50.137,rw,vers=4.1
-      device: ":/mnt/chonker/media"
+      o: addr=192.168.50.137,rw,hard,noatime,nconnect=8,vers=4.1,fsc
+      device: ":/mnt/chonker/music"
    
 
 networks:

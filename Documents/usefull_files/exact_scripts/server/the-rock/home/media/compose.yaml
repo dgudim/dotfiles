@@ -12,7 +12,7 @@ services:
         ports:
             - 6600:6600
         volumes:
-            - /mnt/media/music:/music:ro
+            - chonker-music:/music:ro
             - /mnt/sata_500/mpd/playlists:/playlists
             - /mnt/sata_500/mpd/db:/db
             - /mnt/sata_500/mpd/userconf:/user/config
@@ -31,8 +31,9 @@ services:
             - MINIDLNA_MEDIA_DIR=/music
             - MINIDLNA_FRIENDLY_NAME=MikrochelikDl
             - MINIDLNA_NOTIFY_INTERVAL=30
+            - MINIDLNA_INOTIFY=no
         volumes:
-            - /mnt/media/music:/music:ro
+            - chonker-music:/music:ro
 
 
     navidrome:
@@ -46,10 +47,14 @@ services:
         user: 1000:100
         restart: unless-stopped
         environment:
+            - ND_SCANNER_WATCHERWAIT=0            # disable the file watcher (useless over NFS)
+            - ND_SCANNER_SCHEDULE=0 4 * * *       # nightly scan at 04:00
+            - ND_SCANNER_SCANONSTARTUP=false      # no scan on container restart
+            - ND_IMAGECACHESIZE=2GB               # keep more resized covers locally
             - TZ=Europe/Vilnius
         volumes:
             - /mnt/sata_500/navidrome:/data
-            - /mnt/media/music:/music:ro
+            - chonker-music:/music:ro
         networks:
           - default
           - proxy
@@ -59,3 +64,8 @@ networks:
   proxy:
     external: true
     name: proxy
+
+volumes:
+  chonker-music:
+    external: true
+    name: chonker-music
