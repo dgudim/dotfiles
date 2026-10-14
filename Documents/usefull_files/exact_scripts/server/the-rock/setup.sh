@@ -23,7 +23,7 @@ sudo ln -sfv /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo systemctl enable dbus-broker
 sudo systemctl enable --now \
 NetworkManager systemd-resolved avahi-daemon sshd \
-bluetooth chronyd docker
+bluetooth chronyd docker fstrim.timer
 
 sudo hostnamectl set-hostname microchelik
 sudo loginctl enable-linger kloud
