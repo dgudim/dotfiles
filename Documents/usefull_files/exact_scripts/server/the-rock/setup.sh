@@ -87,3 +87,8 @@ sudo systemctl restart systemd-journald
 sudo systemctl disable --now rsyslog.service
 sudo systemctl disable --now systemd-journal-upload.service # Vector reads logs itself
 sudo systemctl restart docker
+
+# Zram
+sudo zypper install zram-generator
+# sudo systemctl daemon-reload
+# sudo systemctl start systemd-zram-setup@zram0.service
