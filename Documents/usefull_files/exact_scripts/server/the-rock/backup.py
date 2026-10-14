@@ -32,6 +32,7 @@ system_configs_to_copy = [
     (ETC_DIR / "nanorc", Path("etc/nanorc")),
     (ETC_DIR / "hosts", Path("etc/hosts")),
     (ETC_DIR / "sysctl.d/99-conntrack-acct.conf", Path("etc/sysctl.d/99-conntrack-acct.conf")),
+    (ETC_DIR / "modules-load.d/nf_conntrack.conf", Path("etc/modules-load.d/nf_conntrack.conf")),
     (ETC_DIR / "sysctl.d/91-ulimit.conf", Path("etc/sysctl.d/91-ulimit.conf")),
     (ETC_DIR / "sysctl.d/99-zram.conf", Path("etc/sysctl.d/99-zram.conf")),
     (ETC_DIR / "security/limits.d/90-nproc.conf", Path("etc/security/limits.d/90-nproc.conf")),
