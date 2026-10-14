@@ -65,7 +65,7 @@ xfce4-notifyd-branding-openSUSE xfce4-power-manager-branding-openSUSE \
 xfce4-screenshooter xfce4-screenshooter-lang \
 xorg-x11-server xorg-x11-essentials xorg-x11-server-extra x11-tools xorg-x11-fonts \
 cockpit cockpit-packages cockpit-bridge \
-snapper firewalld cups cronie dnsmasq
+snapper firewalld cups cronie dnsmasq file-roller
 
 sudo systemctl disable --now cron auditd
 sudo systemctl mask cron auditd
