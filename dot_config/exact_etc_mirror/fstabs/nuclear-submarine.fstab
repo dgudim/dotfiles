@@ -1,0 +1,27 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a device; this may
+# be used with UUID= as a more robust way to name devices that works even if
+# disks are added and removed. See fstab(5).
+#
+# <file system>             <mount point>  <type>          <options>  <dump>  <pass>
+UUID=4896-E50E                            /boot              vfat    defaults,noatime,umask=0077                                     0 2
+UUID=e53e5317-0e09-42f1-8c1f-e64dfb96437e /                  btrfs   subvol=/@,defaults,noatime,compress=zstd:3,X-fstrim.notrim      0 0
+UUID=e53e5317-0e09-42f1-8c1f-e64dfb96437e /home              btrfs   subvol=/@home,defaults,noatime,compress=zstd:3,X-fstrim.notrim  0 0
+UUID=e53e5317-0e09-42f1-8c1f-e64dfb96437e /var/cache         btrfs   subvol=/@cache,defaults,noatime,compress=zstd:3,X-fstrim.notrim 0 0
+UUID=e53e5317-0e09-42f1-8c1f-e64dfb96437e /var/log           btrfs   subvol=/@log,defaults,noatime,compress=zstd:3,X-fstrim.notrim   0 0
+UUID=a62147d1-4d18-4f2b-b8d3-b40ce19d490f /mnt/sink          ext4    defaults,commit=60,noatime                                      0 2
+UUID=b420a1cd-888a-4f91-a7ac-0ed3a4f4fdbe swap               swap    defaults
+/mnt/sink/.cache                          /home/kloud/.cache                      none           defaults,bind 0 0
+/mnt/sink/shared                          /home/kloud/Documents/shared            none           defaults,bind 0 0
+/mnt/sink/projects                        /home/kloud/Documents/Projects          none           defaults,bind 0 0
+/mnt/sink/.local/share/docker             /home/kloud/.local/share/docker         none           defaults,bind 0 0
+/mnt/sink/.local/share/NuGet              /home/kloud/.local/share/NuGet          none           defaults,bind 0 0
+/mnt/sink/.local/share/cargo              /home/kloud/.local/share/cargo          none           defaults,bind 0 0
+/mnt/sink/.nuget                          /home/kloud/.nuget                      none           defaults,bind 0 0
+/mnt/sink/.vscode                         /home/kloud/.vscode                     none           defaults,bind 0 0
+/mnt/sink/.config/Code                    /home/kloud/.config/Code                none           defaults,bind 0 0
+/mnt/sink/.config/google-chrome           /home/kloud/.config/google-chrome       none           defaults,bind 0 0
+/mnt/sink/var/lib/libvirt                 /var/lib/libvirt                        none           defaults,bind 0 0
+/mnt/sink/postgres                        /var/lib/postgres                       none           defaults,bind 0 0
+none                                      /tmp                                    tmpfs          defaults,noatime,nosuid,nodev,inode64,size=18G  0 0
