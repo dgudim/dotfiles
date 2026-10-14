@@ -38,8 +38,14 @@ system_configs_to_copy = [
     (ETC_DIR / "systemd/system/disable-wifi-card.service", Path("etc/systemd/system/disable-wifi-card.service")),
     (ETC_DIR / "systemd/zram-generator.conf", Path("etc/systemd/zram-generator.conf")),
     (ETC_DIR / "nfs.conf.d/99-rahead.conf", Path("etc/nfs.conf.d/99-rahead.conf")),
-    (USER_DIR / ".gitconfig", Path("home/kloud/.gitconfig")),
-    (USER_DIR / ".bashrc", Path("home/kloud/.bashrc")),
+]
+
+# Dotfiles in the home directory (paths relative to USER_DIR). They are mirrored into
+# home/ next to the home folders, so they are owned by the user, .env files among them
+# are encrypted, and they are removed from the backup when removed from this list.
+home_files_to_copy = [
+    Path(".gitconfig"),
+    Path(".bashrc"),
 ]
 
 
@@ -117,6 +123,19 @@ def copy_home_directories() -> None:
         )
         encrypt_copied_env_files(destination)
 
+    for relative in home_files_to_copy:
+        source = USER_DIR / relative
+        if not source.is_file():
+            print(f"Skipping {source}")
+            continue
+        destination = HOME_BACKUP_DIR / relative
+        mirrored.add(relative.parts[0])
+        print(f"Copying {source} -> {destination}")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, destination)
+        if is_env_file(destination):
+            encrypt_copied_env_files(destination.parent)
+
     for existing in HOME_BACKUP_DIR.iterdir():
         if existing.name in mirrored:
             continue
@@ -179,9 +198,22 @@ def restore_home_directories() -> None:
         print(f"Skipping {HOME_BACKUP_DIR}")
         return
     for entry in HOME_BACKUP_DIR.iterdir():
-        if not entry.is_dir() or entry.is_symlink():
+        if entry.is_symlink():
             continue
         destination = USER_DIR / entry.name
+        if entry.is_file():
+            if entry.name.endswith(".age") and is_env_file(Path(entry.name.removesuffix(".age"))):
+                destination = destination.with_name(entry.name.removesuffix(".age"))
+                print(f"Decrypting {entry} -> {destination}")
+                subprocess.run(
+                    ["age", "-d", "-i", str(AGE_IDENTITY), "-o", str(destination), str(entry)],
+                    check=True,
+                )
+            else:
+                restore_file(entry, destination)
+            continue
+        if not entry.is_dir():
+            continue
         destination.mkdir(exist_ok=True)
         print(f"Restoring {entry} -> {destination}")
         subprocess.run(
