@@ -23,7 +23,7 @@ sudo ln -sfv /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo systemctl enable dbus-broker
 sudo systemctl enable --now \
 NetworkManager systemd-resolved avahi-daemon sshd \
-bluetooth chronyd docker
+bluetooth chronyd docker fstrim.timer
 
 sudo hostnamectl set-hostname microchelik
 sudo loginctl enable-linger kloud
@@ -65,7 +65,10 @@ xfce4-notifyd-branding-openSUSE xfce4-power-manager-branding-openSUSE \
 xfce4-screenshooter xfce4-screenshooter-lang \
 xorg-x11-server xorg-x11-essentials xorg-x11-server-extra x11-tools xorg-x11-fonts \
 cockpit cockpit-packages cockpit-bridge \
-snapper firewalld cups cronie dnsmasq
+snapper firewalld cups cronie dnsmasq file-roller
+
+sudo systemctl disable --now cron auditd
+sudo systemctl mask cron auditd
 
 [ -L /etc/resolv.conf ] || sudo ln -fvs /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
@@ -76,8 +79,16 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 # Saved system configs, home directories, and decrypted env files
 python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/backup.py" restore
 
-# Journal in RAM, uploaded to VictoriaLogs. rsyslog would write it to /var/log again.
+sudo systemctl daemon-reload
+sudo systemctl enable --now disable-wifi-card.service
+
+# Journal in RAM, uploaded to VictoriaLogs through vector
 sudo systemctl restart systemd-journald
 sudo systemctl disable --now rsyslog.service
-sudo systemctl enable --now systemd-journal-upload.service
+sudo systemctl disable --now systemd-journal-upload.service # Vector reads logs itself
 sudo systemctl restart docker
+
+# Zram
+sudo zypper install zram-generator
+# sudo systemctl daemon-reload
+# sudo systemctl start systemd-zram-setup@zram0.service

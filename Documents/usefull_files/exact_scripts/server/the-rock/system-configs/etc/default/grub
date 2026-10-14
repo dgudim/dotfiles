@@ -8,7 +8,7 @@ GRUB_DEFAULT=saved
 GRUB_HIDDEN_TIMEOUT=0
 GRUB_HIDDEN_TIMEOUT_QUIET=true
 GRUB_TIMEOUT=8
-GRUB_CMDLINE_LINUX_DEFAULT="splash=silent resume=/dev/disk/by-uuid/d968ac94-ac43-4dfa-a1d5-09437b9d46dc preempt=full mitigations=off quiet security=apparmor"
+GRUB_CMDLINE_LINUX_DEFAULT="splash=silent preempt=full mitigations=off quiet security=apparmor"
 GRUB_CMDLINE_LINUX=""
 
 # Uncomment to automatically save last booted menu entry in GRUB2 environment
