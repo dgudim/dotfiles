@@ -83,4 +83,7 @@ rm -fv ~/Documents/TODO.txt
 # Extra file, forgot to chezmoiignore, oops
 rm -fv /home/kloud/.config/wireplumber/wireplumber.conf.d/portable-heater-00-plasma-pa.conf
 
+# Typo
+sudo rm -fv /etc/nanor
+
 echo -e "${L_GREEN}Done!$NC\n"
