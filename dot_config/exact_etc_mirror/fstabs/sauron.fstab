@@ -1,0 +1,18 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a device; this may
+# be used with UUID= as a more robust way to name devices that works even if
+# disks are added and removed. See fstab(5).
+#
+# <file system>                           <mount point>       <type>  <options>                                                       <dump> <pass>
+UUID=ABE2-30BC                            /boot               vfat    defaults,noatime,umask=0077                                             0 2
+UUID=aedf61ca-76c1-4522-bfac-9f534304292b /                   ext4    defaults,commit=60,noatime                                              0 1
+UUID=26e4aed3-c93d-43a9-8adb-b6e23801e812 /mnt/fast_storage   ext4    defaults,commit=60,noatime                                              0 2
+UUID=7032E53D32E50944                     /mnt/personal_misc  ntfs    windows_names,rw,uid=1000,gid=1000,async,nofail,prealloc,users,exec,noatime  0 2
+#UUID=E41A73321A73013A                     /mnt/windows10      ntfs    windows_names,rw,uid=1000,gid=1000,async,nofail,prealloc,users,exec,noatime  0 0
+UUID=ec851086-4c72-42c4-a605-a6d1a8774413 swap                swap    defaults,pri=10                                                         0 0
+/mnt/fast_storage/FAST_CONFIG/  /home/kloud/.config/          none    defaults,bind   0 0
+/mnt/fast_storage/FAST_CACHE/   /home/kloud/.cache/           none    defaults,bind   0 0
+
+# NFS
+192.168.50.137:/mnt/chonker/media   /mnt/chonker-media        nfs   defaults,_netdev,vers=4.2,nconnect=8,async,rw,hard,noatime 0 0
