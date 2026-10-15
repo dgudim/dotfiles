@@ -37,7 +37,7 @@ sudo zypper install \
 pipewire wireplumber pipewire-pulseaudio pulseaudio-utils dfu-util pipewire-alsa \
 alsa-firmware alsa-plugins bluez bluez-firmware bluez-auto-enable-devices
 
-# Different utils
+# Different utils (Bindfs is for nextcloud)
 sudo zypper install \
 fwupd fastfetch btop htop eza \
 jq yq usbip tcpdump \
@@ -47,9 +47,9 @@ atuin rsync \
 bindfs age \
 python313-uv python313-pip tmux ouch strace \
 libva-utils libvulkan_intel \
-libhidapi-hidraw0 pkgconf hunspell
+libhidapi-hidraw0 pkgconf hunspell cronie
 
-# Bindfs is for nextcloud
+sudo systemctl enable --now cron
 
 # Handled by scrutiny
 sudo zypper remove smartmontools
@@ -65,10 +65,10 @@ xfce4-notifyd-branding-openSUSE xfce4-power-manager-branding-openSUSE \
 xfce4-screenshooter xfce4-screenshooter-lang \
 xorg-x11-server xorg-x11-essentials xorg-x11-server-extra x11-tools xorg-x11-fonts \
 cockpit cockpit-packages cockpit-bridge \
-snapper firewalld cups cronie dnsmasq file-roller
+snapper firewalld cups dnsmasq file-roller
 
-sudo systemctl disable --now cron auditd
-sudo systemctl mask cron auditd
+sudo systemctl disable --now auditd
+sudo systemctl mask auditd
 
 [ -L /etc/resolv.conf ] || sudo ln -fvs /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
