@@ -79,8 +79,25 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 # Saved system configs, home directories, and decrypted env files
 python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/backup.py" restore
 
+sudo systemctl daemon-reload
+
 # Journal in RAM, uploaded to VictoriaLogs. rsyslog would write it to /var/log again.
 sudo systemctl restart systemd-journald
 sudo systemctl disable --now rsyslog.service
 sudo systemctl enable --now systemd-journal-upload.service
 sudo systemctl restart docker
+
+# Setup nfs caching
+sudo zypper install cachefilesd
+sudo systemctl stop cachefilesd
+
+sudo touch /mnt/sata_500/fscache.img
+sudo fallocate -l 100G /mnt/sata_500/fscache.img
+sudo mkfs.ext4 /mnt/sata_500/fscache.img
+
+sudo mkdir -p /var/cache/fscache
+
+sudo systemctl daemon-reload
+sudo systemctl enable cachefilesd
+
+
