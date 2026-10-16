@@ -23,7 +23,7 @@ sudo ln -sfv /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo systemctl enable dbus-broker
 sudo systemctl enable --now \
 NetworkManager systemd-resolved avahi-daemon sshd \
-bluetooth chronyd docker
+bluetooth chronyd docker fstrim.timer
 
 sudo hostnamectl set-hostname microchelik
 sudo loginctl enable-linger kloud
@@ -37,7 +37,7 @@ sudo zypper install \
 pipewire wireplumber pipewire-pulseaudio pulseaudio-utils dfu-util pipewire-alsa \
 alsa-firmware alsa-plugins bluez bluez-firmware bluez-auto-enable-devices
 
-# Different utils
+# Different utils (Bindfs is for nextcloud)
 sudo zypper install \
 fwupd fastfetch btop htop eza \
 jq yq usbip tcpdump \
@@ -47,9 +47,9 @@ atuin rsync \
 bindfs age \
 python313-uv python313-pip tmux ouch strace \
 libva-utils libvulkan_intel \
-libhidapi-hidraw0 pkgconf hunspell
+libhidapi-hidraw0 pkgconf hunspell cronie
 
-# Bindfs is for nextcloud
+sudo systemctl enable --now cron
 
 # Handled by scrutiny
 sudo zypper remove smartmontools
@@ -65,10 +65,10 @@ xfce4-notifyd-branding-openSUSE xfce4-power-manager-branding-openSUSE \
 xfce4-screenshooter xfce4-screenshooter-lang \
 xorg-x11-server xorg-x11-essentials xorg-x11-server-extra x11-tools xorg-x11-fonts \
 cockpit cockpit-packages cockpit-bridge \
-snapper firewalld cups cronie dnsmasq
+snapper firewalld cups dnsmasq file-roller
 
-sudo systemctl disable --now cron auditd
-sudo systemctl mask cron auditd
+sudo systemctl disable --now auditd
+sudo systemctl mask auditd
 
 [ -L /etc/resolv.conf ] || sudo ln -fvs /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
@@ -80,11 +80,12 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/backup.py" restore
 
 sudo systemctl daemon-reload
+sudo systemctl enable --now disable-wifi-card.service
 
-# Journal in RAM, uploaded to VictoriaLogs. rsyslog would write it to /var/log again.
+# Journal in RAM, uploaded to VictoriaLogs through vector
 sudo systemctl restart systemd-journald
 sudo systemctl disable --now rsyslog.service
-sudo systemctl enable --now systemd-journal-upload.service
+sudo systemctl disable --now systemd-journal-upload.service # Vector reads logs itself
 sudo systemctl restart docker
 
 # Setup nfs caching
@@ -100,4 +101,7 @@ sudo mkdir -p /var/cache/fscache
 sudo systemctl daemon-reload
 sudo systemctl enable cachefilesd
 
-
+# Zram
+sudo zypper install zram-generator
+# sudo systemctl daemon-reload
+# sudo systemctl start systemd-zram-setup@zram0.service

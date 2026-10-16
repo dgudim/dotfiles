@@ -12,7 +12,7 @@ services:
         ports:
             - 6600:6600
         volumes:
-            - /mnt/media/music:/music:ro
+            - chonker-music:/music:ro
             - /mnt/sata_500/mpd/playlists:/playlists
             - /mnt/sata_500/mpd/db:/db
             - /mnt/sata_500/mpd/userconf:/user/config
@@ -31,8 +31,9 @@ services:
             - MINIDLNA_MEDIA_DIR=/music
             - MINIDLNA_FRIENDLY_NAME=MikrochelikDl
             - MINIDLNA_NOTIFY_INTERVAL=30
+            - MINIDLNA_INOTIFY=no
         volumes:
-            - /mnt/media/music:/music:ro
+            - chonker-music:/music:ro
 
 
     navidrome:
@@ -45,17 +46,117 @@ services:
           caddy_ingress_network: "proxy"
         user: 1000:100
         restart: unless-stopped
+        ports:
+            - 4533:4533 # For external audiomuse worker
         environment:
+            - ND_SCANNER_WATCHERWAIT=0            # disable the file watcher (useless over NFS)
+            - ND_SCANNER_SCHEDULE=0 4 * * *       # nightly scan at 04:00
+            - ND_SCANNER_SCANONSTARTUP=false      # no scan on container restart
+            - ND_IMAGECACHESIZE=2GB               # keep more resized covers locally
+            - ND_PLUGINS_ENABLED=true
+            - ND_PLUGINS_AUTORELOAD=true
+            - ND_AGENTS=audiomuseai,lastfm,deezer,listenbrainz
             - TZ=Europe/Vilnius
         volumes:
             - /mnt/sata_500/navidrome:/data
-            - /mnt/media/music:/music:ro
+            - chonker-music:/music:ro
         networks:
           - default
           - proxy
+
+    audiomuse-ai-flask:
+        image: ghcr.io/neptunehub/audiomuse-ai:latest
+        container_name: audiomuse-ai-flask
+        restart: unless-stopped
+        user: "1000:100"
+        labels:
+            caddy: "http://audiomuse.kloud.home, http://audiomuse.kloud.vpn"
+            caddy.reverse_proxy: "{{upstreams 8000}}"
+            caddy_ingress_network: proxy
+        environment:
+            - SERVICE_TYPE=flask
+            - TZ=Europe/Vilnius
+            - POSTGRES_HOST=postgres
+            - POSTGRES_PORT=5432
+            - POSTGRES_DB=audiomuse
+            - POSTGRES_USER=audiomuse
+            - POSTGRES_PASSWORD=${AUDIOMUSE_DB_PASSWORD}
+            - TEMP_DIR=/app/temp_audio
+            - IVF_DISK_CACHE_DIR=/cache/ivf
+            - FLASK_HTTPS_CERT_DIR=/cache/tls
+        volumes:
+            - /mnt/sata_500/audiomuse/plugins-flask:/app/plugin/installed
+            - /mnt/sata_500/audiomuse/tls:/cache/tls
+        tmpfs:
+            - /app/temp_audio:uid=1000,gid=100,mode=0755,size=2147483648
+            - /cache/ivf:uid=1000,gid=100,mode=0755,size=134217728
+        networks:
+            - default
+            - backend
+            - proxy
+
+    audiomuse-ai-worker:
+        image: ghcr.io/neptunehub/audiomuse-ai:latest
+        container_name: audiomuse-ai-worker
+        restart: unless-stopped
+        user: "1000:100"
+        environment:
+            - SERVICE_TYPE=worker
+            - TZ=Europe/Vilnius
+            - POSTGRES_HOST=postgres
+            - POSTGRES_PORT=5432
+            - POSTGRES_DB=audiomuse
+            - POSTGRES_USER=audiomuse
+            - POSTGRES_PASSWORD=${AUDIOMUSE_DB_PASSWORD}
+            - TEMP_DIR=/app/temp_audio
+            - IVF_DISK_CACHE_DIR=/cache/ivf
+            - CLAP_OTHER_FEATURES_CACHE_DIR=/tmp/clap
+        volumes:
+            - /mnt/sata_500/audiomuse/plugins-worker:/app/plugin/installed
+        tmpfs:
+            - /app/temp_audio:uid=1000,gid=100,mode=0755,size=2147483648
+            - /tmp/clap:uid=1000,gid=100,mode=0755,size=134217728
+            - /cache/ivf:uid=1000,gid=100,mode=0755,size=134217728
+        networks:
+            - default
+            - backend
+
+    audiomuse-ai-worker-2:
+        image: ghcr.io/neptunehub/audiomuse-ai:latest
+        container_name: audiomuse-ai-worker-2
+        restart: unless-stopped
+        user: "1000:100"
+        environment:
+            - SERVICE_TYPE=worker
+            - TZ=Europe/Vilnius
+            - POSTGRES_HOST=postgres
+            - POSTGRES_PORT=5432
+            - POSTGRES_DB=audiomuse
+            - POSTGRES_USER=audiomuse
+            - POSTGRES_PASSWORD=${AUDIOMUSE_DB_PASSWORD}
+            - TEMP_DIR=/app/temp_audio
+            - IVF_DISK_CACHE_DIR=/cache/ivf
+            - CLAP_OTHER_FEATURES_CACHE_DIR=/tmp/clap
+        volumes:
+            - /mnt/sata_500/audiomuse/plugins-worker-2:/app/plugin/installed
+        tmpfs:
+            - /app/temp_audio:uid=1000,gid=100,mode=0755,size=2147483648
+            - /tmp/clap:uid=1000,gid=100,mode=0755,size=134217728
+            - /cache/ivf:uid=1000,gid=100,mode=0755,size=134217728
+        networks:
+            - default
+            - backend
 
 
 networks:
   proxy:
     external: true
     name: proxy
+  backend:
+    external: true
+    name: backend
+
+volumes:
+  chonker-music:
+    external: true
+    name: chonker-music

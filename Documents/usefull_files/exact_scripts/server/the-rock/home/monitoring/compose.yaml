@@ -72,6 +72,7 @@ services:
         environment:
             - TZ=Europe/Vilnius
         cap_add:
+            - DAC_READ_SEARCH
             - SYS_PTRACE
             - SYS_ADMIN
         security_opt:
@@ -117,6 +118,8 @@ services:
           caddy.reverse_proxy: "{{upstreams 8080}}"
           caddy_ingress_network: "proxy"
         restart: unless-stopped
+        ports:
+            - 4040:8080 # For external collectors (the-rock)
         volumes:
             - /mnt/sata_500/scrutiny:/opt/scrutiny/config
         environment:
@@ -142,7 +145,6 @@ services:
         restart: unless-stopped
         cap_add:
             - SYS_RAWIO
-            - SYS_ADMIN
         devices:
             - /dev/sda
             - /dev/sdb
@@ -183,7 +185,7 @@ services:
           - proxy
 
     vector:
-        image: timberio/vector:latest-alpine
+        image: timberio/vector:latest-debian
         container_name: vector
         user: "1000:100"
         restart: unless-stopped
@@ -194,9 +196,27 @@ services:
             - /mnt/sata_500/vector/vector.yaml:/etc/vector/vector.yaml:ro
             - /mnt/sata_500/vector/geoip:/etc/vector/geoip:ro
             - /mnt/sata_500/vector/data:/var/lib/vector
+            - /run/log/journal:/run/log/journal:ro
+            - /etc/machine-id:/etc/machine-id:ro
             - /tmp/caddy-access:/var/log/caddy:ro
+        group_add:
+            - "474"   # GID of systemd-journal (getent group systemd-journal)
         depends_on:
             - victoria-metrics
+
+    conntrack-sources:
+        image: python:3.13-slim
+        container_name: conntrack-sources
+        network_mode: host
+        restart: unless-stopped
+        environment:
+            - TZ=Europe/Vilnius
+        volumes:
+            - /home/kloud/monitoring:/home/kloud/monitoring
+            - /mnt/sata_500/vector/geoip:/mnt/sata_500/vector/geoip:ro
+            - /tmp:/tmp
+        command: ["sh", "-c", "pip install --no-cache-dir maxminddb >/dev/null && exec sleep infinity"]
+
 
 networks:
   proxy:

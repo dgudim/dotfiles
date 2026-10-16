@@ -574,7 +574,7 @@ yt-dlp-drop-in
 xf86-input-libinput
 xorg-xhost
 xorg-xauth
-awatcher-git
+aw-awatcher
 aw-watcher-media-player-git
 slicer-udev
 android-udev
@@ -587,7 +587,6 @@ b3sum
 vlc-plugins-all
 vlc-gui-ncurses
 arch-wiki-docs
-lsfg-vk-git
 yt-dlp-ejs
 dblatex
 mpv-modernz

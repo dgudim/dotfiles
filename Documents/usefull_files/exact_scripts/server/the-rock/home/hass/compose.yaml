@@ -108,3 +108,23 @@ services:
       ports:
         - 1883:1883
         - 9001:9001    
+
+    power-mqtt:
+      build:
+        context: .
+        dockerfile_inline: |
+          FROM python:3.13-slim
+          RUN pip install --no-cache-dir paho-mqtt
+      container_name: power-mqtt
+      network_mode: host
+      restart: unless-stopped
+      user: '1000:100'
+      environment:
+        - TZ=Europe/Vilnius
+        - MQTT_HOST=127.0.0.1
+        - MQTT_PORT=1883
+        - MQTT_USER=${MQTT_USER}
+        - MQTT_PASSWORD=${MQTT_PASSWORD}
+      volumes:
+        - /home/kloud/hass/power-mqtt.py:/app/power-mqtt.py:ro
+      command: ["python", "-u", "/app/power-mqtt.py"]
