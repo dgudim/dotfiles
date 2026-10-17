@@ -212,7 +212,7 @@ volumes:
     name: chonker-music
     driver_opts:
       type: nfs
-      o: addr=192.168.50.137,rw,hard,noatime,nconnect=2,vers=4.1,_netdev,fsc
+      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1,_netdev,fsc
       device: ":/mnt/chonker/music"
 
   chonker-photos:
@@ -220,7 +220,7 @@ volumes:
     name: chonker-photos
     driver_opts:
       type: nfs
-      o: addr=192.168.50.137,rw,hard,noatime,nconnect=2,vers=4.1,_netdev,fsc
+      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1,_netdev,fsc
       device: ":/mnt/chonker/photos"
 
   chonker-media:
@@ -228,5 +228,5 @@ volumes:
     name: chonker-media
     driver_opts:
       type: nfs
-      o: addr=192.168.50.137,rw,hard,noatime,nconnect=2,vers=4.1,_netdev
+      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1,_netdev
       device: ":/mnt/chonker/media"
