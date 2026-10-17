@@ -2,7 +2,8 @@ FROM caddy:2-builder AS builder
 
 RUN xcaddy build \
     --with github.com/mholt/caddy-l4=github.com/vnxme/caddy-l4@packet-conn-wrapper \
-    --with github.com/lucaslorentz/caddy-docker-proxy/v2
+    --with github.com/lucaslorentz/caddy-docker-proxy/v2 \
+    --with github.com/dmarcwise/caddy-shield
 
 FROM caddy:2
 

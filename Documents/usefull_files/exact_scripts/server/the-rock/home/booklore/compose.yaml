@@ -4,6 +4,7 @@ services:
     container_name: booklore
     labels:
       caddy: "https://books.kloud.home.kg"
+      caddy.shield: ""
       caddy.log: access
       caddy.reverse_proxy: "{{upstreams 6060}}"
       caddy_ingress_network: "proxy"

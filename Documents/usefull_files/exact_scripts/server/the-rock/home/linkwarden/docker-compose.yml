@@ -3,12 +3,12 @@ services:
     container_name: linkwarden
     labels:
       caddy: "https://links.kloud.home.kg"
+      caddy.shield: ""
+      caddy.log: access
       caddy.reverse_proxy: "{{upstreams 3000}}"
       caddy_ingress_network: "proxy"
     image: ghcr.io/linkwarden/linkwarden:latest
     restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     networks:
       - default
       - backend

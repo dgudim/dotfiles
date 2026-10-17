@@ -1,6 +1,6 @@
 name: utilities
 services:
-    
+
     bentopdf:
         image: ghcr.io/alam00000/bentopdf-simple:latest
         container_name: bentopdf
@@ -52,6 +52,7 @@ services:
         container_name: languagetool
         labels:
           caddy: "https://sceakbiryzigvgdfrjbumjvivedwzchd.kloud.home.kg"
+          caddy.shield: ""
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8010}}"
           caddy_ingress_network: "proxy"
@@ -78,6 +79,7 @@ services:
         container_name: ntfy
         labels:
           caddy: "https://ntfy.kloud.home.kg"
+          caddy.shield: ""
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 81}}"
           caddy_ingress_network: "proxy"
@@ -151,6 +153,7 @@ services:
         container_name: voux
         labels:
           caddy: "https://voux.kloud.home.kg"
+          caddy.shield: ""
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8787}}"
           caddy_ingress_network: "proxy"
@@ -195,6 +198,7 @@ services:
         container_name: atuin
         labels:
           caddy: "https://atuin.kloud.home.kg"
+          caddy.shield: ""
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8888}}"
           caddy_ingress_network: "proxy"
@@ -218,6 +222,7 @@ services:
         container_name: plik
         labels:
           caddy: "https://plik.kloud.home.kg"
+          caddy.shield: ""
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8080}}"
           caddy_ingress_network: "proxy"
@@ -232,13 +237,9 @@ services:
 
 volumes:
   chonker-music:
-    driver: local
+    external: true
     name: chonker-music
-    driver_opts:
-      type: nfs
-      o: addr=192.168.50.137,rw,hard,noatime,nconnect=8,vers=4.1,fsc
-      device: ":/mnt/chonker/music"
-   
+
 
 networks:
   proxy:

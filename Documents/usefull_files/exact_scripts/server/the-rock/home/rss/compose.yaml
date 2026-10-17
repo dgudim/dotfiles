@@ -1,5 +1,5 @@
 services:
-  app:
+  tt-rss-app:
     image: supahgreg/tt-rss:latest
     container_name: tt-rss-app
     restart: unless-stopped
@@ -12,7 +12,7 @@ services:
       - /mnt/sata_500/rss/tt-rss/app:/var/www/html
       - /mnt/sata_500/rss/tt-rss/config.d:/opt/tt-rss/config.d:ro
 
-  updater:
+  tt-rss-updater:
     image: supahgreg/tt-rss:latest
     container_name: tt-rss-updater
     restart: unless-stopped
@@ -25,15 +25,16 @@ services:
       - /mnt/sata_500/rss/tt-rss/app:/var/www/html
       - /mnt/sata_500/rss/tt-rss/config.d:/opt/tt-rss/config.d:ro
     depends_on:
-      - app
+      - tt-rss-app
     command: /opt/tt-rss/updater.sh
 
 
-  web-nginx:
+  tt-rss-nginx:
     image: supahgreg/tt-rss-web-nginx:latest
     container_name: tt-rss-nginx
     labels:
       caddy: "https://tt-rss.kloud.home.kg"
+      caddy.shield: ""
       caddy.log: access
       caddy.reverse_proxy: "{{upstreams 80}}"
       caddy_ingress_network: "proxy"
@@ -43,7 +44,7 @@ services:
     volumes:
       - /mnt/sata_500/rss/tt-rss/app:/var/www/html:ro
     depends_on:
-      - app
+      - tt-rss-app
     networks:
       - default
       - proxy
@@ -62,11 +63,8 @@ services:
       - PORT=80
       - CACHE_EXPIRE=3600          # 1 Hour
       - CACHE_CONTENT_EXPIRE=18000 # 5 hours
-      # - TWITTER_USERNAME=gduwer76840
-      # - TWITTER_PASSWORD=ktI5HeTtNEHLzrm43JjtN9CGb7mfg1
-      # - TWITTER_PHONE_OR_EMAIL=x.cheek958@aleeas.com
       - TWITTER_AUTH_TOKEN=${RSSHUB_TWITTER_AUTH_TOKEN}
-      
+
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://127.0.0.1:80/healthz']
       interval: 60s

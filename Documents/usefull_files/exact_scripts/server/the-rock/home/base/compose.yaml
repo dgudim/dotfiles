@@ -17,7 +17,7 @@ services:
       - /mnt/sata_500/caddy/temp_conf:/config/caddy
       - /tmp/caddy-access:/var/log/caddy
       - /var/run/docker.sock:/var/run/docker.sock:ro
-  
+
   tailscale:
     image: tailscale/tailscale:latest
     container_name: tailscale
@@ -80,7 +80,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=postgres
     volumes:
-      - /mnt/sata_500/dbs/postgres/data:/var/lib/postgresql      
+      - /mnt/sata_500/dbs/postgres/data:/var/lib/postgresql
       - /mnt/sata_500/dbs/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
     command: -c config_file=/etc/postgresql/postgresql.conf
     networks:
@@ -89,7 +89,7 @@ services:
 
 
   valkey:
-    image: valkey/valkey
+    image: valkey/valkey:9
     container_name: valkey
     restart: unless-stopped
     command: valkey-server --save 240 5 --loglevel warning
@@ -151,6 +151,21 @@ services:
     volumes:
       - /mnt/sata_500/authelia/configuration.yml:/etc/authelia/configuration.yml:ro
       - /mnt/sata_500/authelia/config:/config
+
+  llamacpp:
+    image: ghcr.io/mostlygeek/llama-swap:cpu
+    # image: ghcr.io/ikawrakow/ik-llama-cpp:cpu-swap
+    container_name: llamacpp
+    restart: unless-stopped
+    user: 1000:100
+    ports:
+      - 127.0.0.1:9292:8080
+    volumes:
+      - /mnt/sata_500/llama.cpp:/models:ro
+      - /mnt/sata_500/llama.cpp/config.yaml:/app/config.yaml:ro
+    networks:
+      - default
+      - backend
 
 networks:
   proxy:

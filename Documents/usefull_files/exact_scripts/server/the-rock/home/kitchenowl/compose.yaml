@@ -5,6 +5,7 @@ services:
     container_name: kitchenowl
     labels:
       caddy: "https://kitchenowl.kloud.home.kg"
+      caddy.shield: ""
       caddy.log: access
       caddy.reverse_proxy: "{{upstreams 8080}}"
       caddy_ingress_network: "proxy"

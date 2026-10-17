@@ -5,6 +5,7 @@ services:
     container_name: code-server
     labels:
       caddy: "https://code.kloud.home.kg"
+      caddy.shield: ""
       caddy.log: access
       caddy.reverse_proxy: "{{upstreams 8443}}"
       caddy_ingress_network: "proxy"
