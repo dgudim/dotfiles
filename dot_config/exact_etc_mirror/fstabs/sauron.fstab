@@ -15,4 +15,5 @@ UUID=ec851086-4c72-42c4-a605-a6d1a8774413 swap                swap    defaults,p
 /mnt/fast_storage/FAST_CACHE/   /home/kloud/.cache/           none    defaults,bind   0 0
 
 # NFS
-192.168.50.137:/mnt/chonker/media   /mnt/chonker-media        nfs   defaults,_netdev,vers=4.2,nconnect=8,async,rw,hard,noatime 0 0
+192.168.50.137:/mnt/chonker/media   /mnt/chonker-media        nfs     defaults,noauto,x-systemd.automount,x-systemd.idle-timeout=10min,x-systemd.mount-timeout=10,_netdev,vers=4.2,nconnect=2,async,rw,hard,noatime 0 0
+192.168.50.137:/mnt/chonker/photos  /mnt/chonker-photos       nfs     defaults,noauto,x-systemd.automount,x-systemd.idle-timeout=10min,x-systemd.mount-timeout=10,_netdev,vers=4.2,nconnect=2,async,rw,hard,noatime 0 0
