@@ -380,6 +380,7 @@ kweather
 lact
 # - RDP
 krfb
+activitywatch-bin
 
 # CLI APPS
 ttyd
