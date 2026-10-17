@@ -1,5 +1,5 @@
 [aw-qt]
-autostart_modules = ["aw-server-rust", "aw-watcher-afk", "aw-awatcher", "aw-watcher-media-player", "aw-sync"]
+autostart_modules = ["aw-server-rust", "aw-awatcher", "aw-sync"]
 # "aw-watcher-lastfm", "aw-importer-lastfm", "aw-watcher-netstatus",
 
 [aw-qt-testing]

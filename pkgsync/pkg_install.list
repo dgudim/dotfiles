@@ -576,7 +576,6 @@ xf86-input-libinput
 xorg-xhost
 xorg-xauth
 aw-awatcher
-aw-watcher-media-player-git
 slicer-udev
 android-udev
 gjs
