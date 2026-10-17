@@ -1015,25 +1015,29 @@ setup_ssh_fileshare() {
 
 }
 
-ssh() {
+ssh_norc() {
 
 	export local_shared_dir_path="$(setup_local_shared_directory "$@")"
 	setup_ssh_fileshare "$@"
 
-	systemctl is-active squid.service || systemctl start squid.service
-	/usr/bin/ssh -t -R 3129:localhost:3128 "$@" "$(get_ssh_init_str false)"
+	#systemctl is-active squid.service || systemctl start squid.service
+	#-R 3129:localhost:3128
+
+	/usr/bin/ssh -t "$@" "$(get_ssh_init_str false)"
 
 	umount "$local_shared_dir_path"
 	echo "Unmounted $local_shared_dir_path"
 }
 
-ssh_rc() {
+ssh() {
 
 	export local_shared_dir_path="$(setup_local_shared_directory "$@")"
 	setup_ssh_fileshare "$@"
 
-	systemctl is-active squid.service || systemctl start squid.service
-	/usr/bin/ssh -t -R 3129:localhost:3128 "$@" "$(get_ssh_init_str true)"
+	# systemctl is-active squid.service || systemctl start squid.service
+	# -R 3129:localhost:3128
+
+	/usr/bin/ssh -t "$@" "$(get_ssh_init_str true)"
 
 	umount "$local_shared_dir_path"
 	echo "Unmounted $local_shared_dir_path"

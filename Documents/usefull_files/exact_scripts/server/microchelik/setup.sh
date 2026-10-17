@@ -47,7 +47,7 @@ atuin rsync \
 bindfs age \
 python313-uv python313-pip tmux ouch strace \
 libva-utils libvulkan_intel \
-libhidapi-hidraw0 pkgconf hunspell cronie
+libhidapi-hidraw0 pkgconf hunspell cronie cronie-anacron
 
 sudo systemctl enable --now cron
 

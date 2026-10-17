@@ -39,6 +39,7 @@ system_configs_to_copy = [
     (ETC_DIR / "systemd/system/disable-wifi-card.service", Path("etc/systemd/system/disable-wifi-card.service")),
     (ETC_DIR / "systemd/zram-generator.conf", Path("etc/systemd/zram-generator.conf")),
     (ETC_DIR / "nfs.conf.d/99-rahead.conf", Path("etc/nfs.conf.d/99-rahead.conf")),
+    (ETC_DIR / "locale.conf", Path("etc/locale.conf")),
 ]
 
 # Dotfiles in the home directory (paths relative to USER_DIR). They are mirrored into

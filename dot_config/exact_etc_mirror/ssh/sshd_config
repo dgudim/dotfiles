@@ -107,6 +107,11 @@ PrintMotd no
 # no default banner path
 #Banner none
 
+# This enables accepting locale enviroment variables LC_* LANG, see sshd_config(5).
+# AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+# AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+# AcceptEnv LC_IDENTIFICATION LC_ALL
+
 # override default of no subsystems
 Subsystem	sftp	/usr/lib/ssh/sftp-server
 
