@@ -4,7 +4,7 @@
 
 'use strict';
 
-const blacklist = [
+const classBlacklist = [
   // The logout screen has to be animated only by the logout effect.
   'ksmserver ksmserver', 'ksmserver-logout-greeter ksmserver-logout-greeter',
 
@@ -20,7 +20,16 @@ const blacklist = [
   'jetbrains-idea jetbrains-idea', 'jetbrains-idea-ce jetbrains-idea-ce',
   'jetbrains-phpstorm jetbrains-phpstorm', 'jetbrains-pycharm jetbrains-pycharm',
   'jetbrains-pycharm-ce jetbrains-pycharm-ce', 'jetbrains-rider jetbrains-rider',
-  'jetbrains-rubymine jetbrains-rubymine', 'jetbrains-webstorm jetbrains-webstorm'
+  'jetbrains-rubymine jetbrains-rubymine', 'jetbrains-webstorm jetbrains-webstorm',
+
+  // Spectacle (KDE screenshot tool) should not be animated.
+  'spectacle org.kde.spectacle'
+];
+
+const nameBlacklist = [
+  // Kando uses a normal window, but it should look like a popup menu. We do not
+  // blacklist it by class as this would also affect the settings window.
+  'Kando Menu'
 ];
 
 class BurnMyWindowsTvEffect {
@@ -93,7 +102,11 @@ class BurnMyWindowsTvEffect {
       return false
     }
 
-    if (blacklist.indexOf(window.windowClass) != -1) {
+    if (classBlacklist.indexOf(window.windowClass) != -1) {
+      return false;
+    }
+
+    if (nameBlacklist.indexOf(window.caption) != -1) {
       return false;
     }
 

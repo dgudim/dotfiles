@@ -2,6 +2,6 @@
 EnableMagicMimeActions=true
 
 [General]
-IgnoreImages=false
 MaxClipItems=100
+SaveImages=true
 Version=6.4.4

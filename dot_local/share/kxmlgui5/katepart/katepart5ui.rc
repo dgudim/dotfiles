@@ -1,5 +1,5 @@
 <!DOCTYPE gui SYSTEM 'kpartgui.dtd'>
-<gui name="KatePartView" translationDomain="ktexteditor6" version="111">
+<gui name="KatePartView" translationDomain="ktexteditor6" version="112">
  <MenuBar>
   <Menu name="file" noMerge="1">
    <text>&amp;File</text>
@@ -79,6 +79,7 @@
    <Action group="view_operations" name="view_dec_font_sizes"/>
    <Action group="view_operations" name="view_reset_font_sizes"/>
    <Separator group="view_operations"/>
+   <Action group="view_operations" name="view_schemas"/>
    <Menu group="view_operations" name="view_menu_word_wrap">
     <text>Word Wrap</text>
     <Action group="view_operations" name="view_dynamic_word_wrap"/>
@@ -169,7 +170,6 @@
   </Menu>
   <Menu name="settings" noMerge="1">
    <text>&amp;Settings</text>
-   <Action group="color" name="view_schemas"/>
    <Action group="configure_merge" name="set_confdlg"/>
   </Menu>
  </MenuBar>

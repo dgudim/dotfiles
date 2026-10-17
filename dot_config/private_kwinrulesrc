@@ -9,8 +9,7 @@ wmclass=realvnc-vncviewer
 wmclassmatch=1
 
 [General]
-count=3
-rules=2,e2941418-3813-40c3-b24b-73d47592112d,f41f8744-fcd2-4df7-a5cd-2feb78fad1a4
+Order=steam,2,e2941418-3813-40c3-b24b-73d47592112d,f41f8744-fcd2-4df7-a5cd-2feb78fad1a4
 
 [e2941418-3813-40c3-b24b-73d47592112d]
 Description=Life is strange rules

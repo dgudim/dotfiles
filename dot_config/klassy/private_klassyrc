@@ -47,12 +47,9 @@ TitleSidePadding=2
 
 [Windeco]
 AnimationsSpeedRelativeSystem=6
-BoldButtonIcons=BoldIconsHiDpiOnly
-ButtonIconStyle=StyleOxygen
 CornerRadius=2.5
 DrawBackgroundGradient=true
 DrawTitleBarSeparator=false
-IconSize=IconMedium
 MatchTitleBarToApplicationColor=true
 RoundAllCornersWhenNoBorders=false
 WindowCornerRadius=7
@@ -67,6 +64,7 @@ ExceptionProgramNamePattern=
 ExceptionWindowPropertyPattern=klassy-settings
 ExceptionWindowPropertyType=0
 HideTitleBar=0
+HideTitleBarChecked=false
 OpaqueTitleBar=false
 PreventApplyOpacityToHeader=false
 
@@ -80,6 +78,7 @@ ExceptionProgramNamePattern=
 ExceptionWindowPropertyPattern=.*System Settings
 ExceptionWindowPropertyType=1
 HideTitleBar=0
+HideTitleBarChecked=false
 OpaqueTitleBar=false
 PreventApplyOpacityToHeader=false
 
@@ -93,6 +92,7 @@ ExceptionProgramNamePattern=
 ExceptionWindowPropertyPattern=.*Close.*
 ExceptionWindowPropertyType=1
 HideTitleBar=0
+HideTitleBarChecked=false
 OpaqueTitleBar=false
 PreventApplyOpacityToHeader=false
 
@@ -102,10 +102,11 @@ ThinWindowOutlineCustomColorInactive=206,66,71
 ThinWindowOutlineStyleActive=WindowOutlineAccentWithContrast
 ThinWindowOutlineStyleInactive=WindowOutlineCustomWithContrast
 WindowOutlineAccentColorOpacityActive=90
+WindowOutlineAccentColorOpacityInactive=50
 WindowOutlineAccentWithContrastOpacityActive=100
 WindowOutlineAccentWithContrastOpacityInactive=30
 WindowOutlineCustomWithContrastOpacityInactive=40
 WindowOutlineOverlap=false
-WindowOutlineStyleActive=WindowOutlineAccentWithContrast
-WindowOutlineStyleInactive=WindowOutlineAccentWithContrast
+WindowOutlineStyleActive=AccentColor
+WindowOutlineStyleInactive=AccentColor
 WindowOutlineThickness=2
