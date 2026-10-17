@@ -5,7 +5,7 @@ import subprocess
 import sys
 
 USER_DIR = Path("/home/kloud")
-BACKUP_DIR = Path(USER_DIR, "dotfiles/Documents/usefull_files/exact_scripts/server/the-rock")
+BACKUP_DIR = Path(USER_DIR, "dotfiles/Documents/usefull_files/exact_scripts/server/microchelik")
 # On the server this is /etc. The scheduled job mounts host /etc at /host-etc.
 ETC_DIR = Path(os.environ.get("BACKUP_ETC", "/etc"))
 AGE_RECIPIENT = USER_DIR / ".ssh" / "id_ed25519.pub"
