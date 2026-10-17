@@ -1,7 +1,7 @@
-# diff all 
+# diff all
 
 # version
-# INAV/SPEEDYBEEF405V3 9.1.0 Jul  8 2026 / 02:13:21 (15317503) 
+# INAV/SPEEDYBEEF405V3 9.1.0 Jul  8 2026 / 02:13:21 (15317503)
 # GCC-13.2.1 20231009
 
 # start the command batch
@@ -36,6 +36,7 @@ servo 6 940 1940 1440 35
 # features
 feature -TX_PROF_SEL
 feature -CURRENT_METER
+feature -BLACKBOX
 feature THR_VBAT_COMP
 feature PWM_OUTPUT_ENABLE
 
@@ -102,6 +103,7 @@ osd_layout 0 32 12 2 V
 osd_layout 0 86 23 4 V
 osd_layout 0 87 23 5 V
 osd_layout 0 100 24 8 V
+osd_layout 0 103 23 7 V
 osd_layout 0 105 6 5 V
 
 # Programming: logic
@@ -117,9 +119,8 @@ set looptime = 1000
 set gyro_main_lpf_hz = 25
 set dynamic_gyro_notch_q = 250
 set dynamic_gyro_notch_min_hz = 30
-set gyro_zero_x = 1
-set gyro_zero_y = 3
-set ins_gravity_cmss =  978.485
+set gyro_zero_x = 4
+set ins_gravity_cmss =  974.276
 set gyro_adaptive_filter_min_hz = 20
 set acc_hardware = BMI270
 set acczero_x = -30
@@ -133,7 +134,7 @@ set mag_hardware = NONE
 set baro_hardware = SPL06
 set rc_filter_smoothing_factor = 45
 set serialrx_provider = CRSF
-set blackbox_rate_denom = 4
+set blackbox_rate_denom = 32
 set motor_pwm_protocol = STANDARD
 set failsafe_min_distance = 100
 set align_board_roll = -6
@@ -264,12 +265,14 @@ smix reset
 
 smix 0 3 0 100 0 -1
 smix 1 4 0 100 0 -1
-smix 2 1 1 50 0 -1
-smix 3 1 2 50 0 -1
-smix 4 2 1 -50 0 -1
-smix 5 2 2 50 0 -1
+smix 2 1 1 40 0 -1
+smix 3 1 2 40 0 -1
+smix 4 2 1 -40 0 -1
+smix 5 2 2 40 0 -1
 smix 6 3 11 60 0 -1
 smix 7 4 11 -60 0 -1
+smix 8 1 0 25 0 -1
+smix 9 2 0 25 0 -1
 
 # mixer_profile
 mixer_profile 2
