@@ -540,6 +540,7 @@ glances
 
 
 # COMPLEMENTARY PACKAGES
+offload
 kdepim-addons
 nano-syntax-highlighting-git
 docker-color-output-git
