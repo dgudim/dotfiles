@@ -11,7 +11,7 @@ hsa-rocr
 
 # Hardware
 amd-ucode
-libfprint-2-tod1-goodix
+# libfprint-2-tod1-goodix
 btrfs-assistant
 btrfsmaintenance
 bees
