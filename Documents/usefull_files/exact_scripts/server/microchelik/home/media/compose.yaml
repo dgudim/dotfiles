@@ -149,7 +149,7 @@ services:
             - backend
 
     immich-server:
-        image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION}
+        image: ghcr.io/open-noodle/gallery-server:${IMMICH_VERSION}
         container_name: immich-server
         user: "1000:100"
         restart: unless-stopped
@@ -171,11 +171,11 @@ services:
            - /etc/localtime:/etc/localtime:ro
         environment:
            - TZ=Europe/Vilnius
-           - DB_HOSTNAME=postgres
-           - DB_USERNAME=immich
+           - DB_HOSTNAME=${DB_HOSTNAME}
+           - DB_USERNAME=${IMMICH_DB_USERNAME}
            - DB_PASSWORD=${IMMICH_DB_PASSWORD}
-           - DB_DATABASE_NAME=immich
-           - REDIS_HOSTNAME=valkey
+           - DB_DATABASE_NAME=${IMMICH_DB_DATABASE_NAME}
+           - REDIS_HOSTNAME=${REDIS_HOSTNAME}
            - REDIS_DBINDEX=${IMMICH_REDIS_DBINDEX}
         networks:
            - default
@@ -183,7 +183,7 @@ services:
            - proxy
 
     immich-machine-learning:
-        image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION}
+        image: ghcr.io/open-noodle/gallery-ml:${IMMICH_VERSION}
         container_name: immich-machine-learning
         user: "1000:100"
         restart: unless-stopped
@@ -197,6 +197,32 @@ services:
             - /mnt/sata_500/immich/models:/cache
         networks:
             - default
+
+    immich-power-tools-kloud:
+        container_name: immich-power-tools-kloud
+        image: ghcr.io/immich-power-tools/immich-power-tools:latest
+        user: "1000:100"
+        labels:
+            caddy: "http://photo-tools-kloud.kloud.home, http://photo-tools-kloud.kloud.vpn"
+            caddy.reverse_proxy: "{{upstreams 3000}}"
+            caddy_ingress_network: proxy
+        volumes:
+            - /mnt/sata_500/immich/powertools-kloud:/app/data
+        environment:
+            - DB_HOST=${DB_HOSTNAME}
+            - DB_PORT=${DB_PORT}
+            - DB_USERNAME=${IMMICH_DB_USERNAME}
+            - DB_PASSWORD=${IMMICH_DB_PASSWORD}
+            - DB_DATABASE_NAME=${IMMICH_DB_DATABASE_NAME}
+            - IMMICH_API_KEY=${KLOUD_IMMICH_API_KEY}
+            - IMMICH_URL=${IMMICH_URL}
+            - EXTERNAL_IMMICH_URL=${EXTERNAL_IMMICH_URL}
+        networks:
+            - default
+            - backend
+            - proxy
+
+
 
 networks:
   proxy:
@@ -212,7 +238,7 @@ volumes:
     name: chonker-music
     driver_opts:
       type: nfs
-      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1,_netdev,fsc
+      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1,fsc
       device: ":/mnt/chonker/music"
 
   chonker-photos:
@@ -220,7 +246,7 @@ volumes:
     name: chonker-photos
     driver_opts:
       type: nfs
-      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1,_netdev,fsc
+      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1,fsc
       device: ":/mnt/chonker/photos"
 
   chonker-media:
@@ -228,5 +254,5 @@ volumes:
     name: chonker-media
     driver_opts:
       type: nfs
-      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1,_netdev
+      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1
       device: ":/mnt/chonker/media"

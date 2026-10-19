@@ -1,15 +1,15 @@
 #!/bin/env /bin/bash
 
-sudo mkdir -pv /mnt/sata_500/nextcloud_data
-
 sudo docker run --detach \
 --init \
 --env NEXTCLOUD_DATADIR="/mnt/sata_500/nextcloud_data" \
 --env NEXTCLOUD_MOUNT="/mnt/sata_500/nextcloud_external_mounts" \
 --sig-proxy=false \
 --name nextcloud-aio-mastercontainer \
+--no-healthcheck \
 --network proxy \
 --restart always \
+-p 8080:8080 \
 --env APACHE_PORT=11000 \
 --env APACHE_IP_BINDING=0.0.0.0 \
 --env APACHE_ADDITIONAL_NETWORK="" \
