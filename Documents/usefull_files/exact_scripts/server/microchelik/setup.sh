@@ -87,6 +87,7 @@ sudo systemctl enable --now disable-wifi-card.service
 sudo systemctl restart systemd-journald
 sudo systemctl disable --now rsyslog.service
 sudo systemctl disable --now systemd-journal-upload.service # Vector reads logs itself
+sudo systemctl enable  --now systemd-journal-remote.socket  # Upload from other machines
 sudo systemctl restart docker
 
 # Setup nfs caching
