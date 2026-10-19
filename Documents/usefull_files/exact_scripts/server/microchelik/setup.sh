@@ -3,6 +3,7 @@ source /etc/os-release
 
 sudo zypper addrepo https://download.opensuse.org/repositories/devel:tools/$VERSION/devel:tools.repo
 sudo zypper addrepo -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/' packman
+sudo zypper addrepo -f https://download.opensuse.org/repositories/Kernel:/stable:/Backport/$VERSION/ kernel-backport
 
 sudo zypper refresh
 sudo zypper dist-upgrade --from packman --allow-vendor-change
