@@ -94,12 +94,6 @@ sudo systemctl restart docker
 sudo zypper install cachefilesd
 sudo systemctl stop cachefilesd
 
-sudo touch /mnt/sata_500/fscache.img
-sudo fallocate -l 100G /mnt/sata_500/fscache.img
-sudo mkfs.ext4 /mnt/sata_500/fscache.img
-
-sudo mkdir -p /var/cache/fscache
-
 sudo systemctl daemon-reload
 sudo systemctl enable cachefilesd
 
