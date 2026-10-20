@@ -136,6 +136,7 @@ services:
     labels:
         caddy: "https://${AUTH_DOMAIN}:443"
         caddy.log: access
+        caddy.shield: ""
         caddy.reverse_proxy: "{{upstreams 9091}}"
         caddy_ingress_network: "proxy"
     restart: unless-stopped
