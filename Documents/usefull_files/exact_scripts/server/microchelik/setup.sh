@@ -43,8 +43,7 @@ sudo zypper install \
 fwupd fastfetch btop htop eza \
 jq yq usbip tcpdump \
 intel-media-driver intel-gpu-tools \
-waypipe ripgrep fd duf \
-atuin rsync \
+waypipe ripgrep fd duf rsync fatrace \
 bindfs age \
 python313-uv python313-pip tmux ouch strace \
 libva-utils libvulkan_intel \

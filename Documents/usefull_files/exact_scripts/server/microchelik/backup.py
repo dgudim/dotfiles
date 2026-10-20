@@ -51,6 +51,7 @@ system_configs_to_copy = [
 home_files_to_copy = [
     Path(".gitconfig"),
     Path(".bashrc"),
+    Path(".config/atuin/config.toml"),
     Path("run_nextcloud.sh")
 ]
 

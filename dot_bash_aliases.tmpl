@@ -824,8 +824,8 @@ proxy_on() {
 }
 
 proxy_off() {
-	export http_proxy
-	export https_proxy
+	unset http_proxy
+	unset https_proxy
 }
 
 setup_ssh_shell_utils() {
@@ -866,7 +866,7 @@ setup_ssh_shell_utils() {
 		fi
 	}
 
-	proxy_on
+	# proxy_on
 
 	echo -e "${L_YELLOW}Setting up environment...${NC}"
 
@@ -907,9 +907,9 @@ setup_ssh_shell_utils() {
 	echo -e "${GRAY}Writing atuin config${NC}"
 
 	mkdir -pv ~/.config/atuin
-	echo "$1" > ~/.config/atuin/config.toml
+	echo "$1" | base64 -d > ~/.config/atuin/config.toml
 
-	proxy_off
+	# proxy_off
 }
 
 launch_shell() {
@@ -954,11 +954,11 @@ launch_shell() {
 		echo "unset -f dialog" >>"$shellrc_path"
 	fi
 
+	echo "source '$my_init_file'" >>"$shellrc_path"
+
 	if [ "$load_rc" = "true" ]; then
 		echo 'source ~/.bashrc' >>"$shellrc_path"
 	fi
-
-	echo "source '$my_init_file'" >>"$shellrc_path"
 
 	# Copy over needed functions to login shell rc
 	echo "$(typeset -f gen_ssh_prompt); $(typeset -f set_ssh_prompt);" >>"$shellrc_path"
@@ -1020,10 +1020,10 @@ ssh_norc() {
 	export local_shared_dir_path="$(setup_local_shared_directory "$@")"
 	setup_ssh_fileshare "$@"
 
-	#systemctl is-active squid.service || systemctl start squid.service
-	#-R 3129:localhost:3128
+	# systemctl is-active squid.service || systemctl start squid.service
+	# -R 3129:localhost:3128
 
-	/usr/bin/ssh -t "$@" "$(get_ssh_init_str false)"
+	/usr/bin/ssh -t "$@" "$(get_ssh_init_str false "$(base64 -w0 ~/.config/atuin/config.toml)")"
 
 	umount "$local_shared_dir_path"
 	echo "Unmounted $local_shared_dir_path"
@@ -1037,7 +1037,7 @@ ssh() {
 	# systemctl is-active squid.service || systemctl start squid.service
 	# -R 3129:localhost:3128
 
-	/usr/bin/ssh -t "$@" "$(get_ssh_init_str true)"
+	/usr/bin/ssh -t "$@" "$(get_ssh_init_str true "$(base64 -w0 ~/.config/atuin/config.toml)")"
 
 	umount "$local_shared_dir_path"
 	echo "Unmounted $local_shared_dir_path"
