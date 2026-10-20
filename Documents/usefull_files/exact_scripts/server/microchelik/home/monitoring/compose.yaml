@@ -185,7 +185,9 @@ services:
           - proxy
 
     vector:
-        image: timberio/vector:latest-debian
+        build:
+          context: .
+          dockerfile: vector.Dockerfile
         container_name: vector
         user: "1000:100"
         restart: unless-stopped
@@ -197,10 +199,12 @@ services:
             - /mnt/sata_500/vector/geoip:/etc/vector/geoip:ro
             - /mnt/sata_500/vector/data:/var/lib/vector
             - /run/log/journal:/run/log/journal:ro
+            - /run/journal-remote:/run/journal-remote:ro
             - /etc/machine-id:/etc/machine-id:ro
             - /tmp/caddy-access:/var/log/caddy:ro
         group_add:
             - "474"   # GID of systemd-journal (getent group systemd-journal)
+            - "448"   # Same for systemd-journal-remote
         depends_on:
             - victoria-metrics
 

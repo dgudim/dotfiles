@@ -74,6 +74,9 @@ services:
             caddy: "http://audiomuse.kloud.home, http://audiomuse.kloud.vpn"
             caddy.reverse_proxy: "{{upstreams 8000}}"
             caddy_ingress_network: proxy
+        ports:
+            # Temp, remove later
+            - 11122:8000
         environment:
             - SERVICE_TYPE=flask
             - TZ=Europe/Vilnius
