@@ -64,4 +64,4 @@ enabled = true
 autostart = true
 
 [logs]
-enabled = true
+enabled = false

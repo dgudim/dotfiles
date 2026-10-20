@@ -30,6 +30,7 @@ sudo hostnamectl set-hostname microchelik
 sudo loginctl enable-linger kloud
 
 # Unneeded + replaced with scrutiny
+sudo systemctl disable --now firewalld apparmor smartd
 sudo systemctl mask firewalld apparmor smartd
 sudo systemctl disable --now btrfs-balance.timer btrfsmaintenance-refresh.path btrfs-scrub.timer
 
