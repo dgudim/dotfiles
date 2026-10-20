@@ -383,6 +383,7 @@ krfb
 activitywatch-bin
 
 # CLI APPS
+fatrace
 ttyd
 tty-clock
 diffoscope
