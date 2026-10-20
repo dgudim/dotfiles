@@ -92,8 +92,6 @@ sudo systemctl restart docker
 
 # Setup nfs caching
 sudo zypper install cachefilesd
-sudo systemctl stop cachefilesd
-
 sudo systemctl daemon-reload
 sudo systemctl enable cachefilesd
 
