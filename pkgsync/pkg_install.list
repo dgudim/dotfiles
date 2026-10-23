@@ -842,6 +842,7 @@ python-ipykernel
 python-email-validator
 python-fastapi
 python-httpx
+python-httpx2
 python-pendulum
 python-phonenumbers
 python-pycountry
