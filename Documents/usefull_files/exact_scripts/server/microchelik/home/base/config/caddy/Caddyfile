@@ -1,0 +1,93 @@
+{
+	auto_https disable_redirects
+
+    shield {
+		source ipsum_3
+		source firehol_level1
+		source borestad_abuseipdb_7d
+		allow 100.64.0.0/10 
+        #     ^ Tailscale
+        allow {$ROUTER_IP}
+        #     ^ Router hairpin back, request from LAN
+        response {
+            header X-Blocked-By "{shield.sources}" 
+            header X-Client-IP "{shield.client_ip}"
+        } 
+	}
+
+    metrics {
+        per_host
+    }
+
+	# Keep request logs out of stderr.
+	log default {
+		exclude http.log.access
+	}
+
+	# `log access` on a site writes to logger http.log.access.access.
+	log accessfile {
+		output file /var/log/caddy/access.log {
+			mode 0644
+			roll_size 64MiB
+			roll_keep 1
+		}
+		format json
+		include http.log.access.access
+	}
+
+	# https://zhul.in/en/2025/12/10/caddy-traffic-proxy-on-layer-4/
+
+	# https://github.com/mholt/caddy-l4/blob/master/docs/examples/dns-over-tls.md
+	layer4 {
+		:853 {
+			@dot tls sni {$DNS_HOST}
+			route @dot {
+				tls {
+					connection_policy {
+						alpn dot
+					}
+				}
+				proxy tcp/127.0.0.1:53
+			}
+		}
+	}
+}
+
+# NOTE!! Container sites come from Docker labels.
+# Those sites need the label `caddy.log: access` to land in the access log.
+
+:80 {
+	respond "" 404
+}
+
+https://{$DNS_HOST}:443 {
+    shield
+	log access
+	respond "OK" 200
+}
+
+{$ROUTER_SITES} {
+	log access
+	tls internal
+	reverse_proxy https://{$ROUTER_IP}:8443 {
+		header_up Host {$ROUTER_IP}:8443
+		header_up Referer https://{$ROUTER_IP}:8443/
+		header_up -X-Forwarded-*
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+{$NEXTCLOUD_URL} {
+    shield
+	log access
+	reverse_proxy 127.0.0.1:11000
+}
+
+{$ATLAS_URL} {
+    shield
+	log access
+	reverse_proxy 127.0.0.1:1199
+}

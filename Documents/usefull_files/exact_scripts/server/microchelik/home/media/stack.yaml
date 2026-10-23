@@ -252,7 +252,7 @@ volumes:
     name: chonker-music
     driver_opts:
       type: nfs
-      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1,fsc
+      o: addr=${THE_ROCK_IP},rw,hard,async,noatime,nconnect=2,vers=4.1,fsc
       device: ":/mnt/chonker/music"
 
   chonker-photos:
@@ -260,7 +260,7 @@ volumes:
     name: chonker-photos
     driver_opts:
       type: nfs
-      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1,fsc
+      o: addr=${THE_ROCK_IP},rw,hard,async,noatime,nconnect=2,vers=4.1,fsc
       device: ":/mnt/chonker/photos"
 
   chonker-media:
@@ -268,5 +268,5 @@ volumes:
     name: chonker-media
     driver_opts:
       type: nfs
-      o: addr=192.168.50.137,rw,hard,async,noatime,nconnect=2,vers=4.1
+      o: addr=${THE_ROCK_IP},rw,hard,async,noatime,nconnect=2,vers=4.1
       device: ":/mnt/chonker/media"

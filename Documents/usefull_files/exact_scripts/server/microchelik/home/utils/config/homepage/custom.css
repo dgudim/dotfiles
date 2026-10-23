@@ -1,0 +1,35 @@
+/* Gruvbox dark. The theme class sits on <html>, and this file loads before Homepage CSS, so the variables are forced. */
+html.theme-zinc {
+  --color-50: 251 241 199 !important;
+  --color-100: 235 219 178 !important;
+  --color-200: 213 196 161 !important;
+  --color-300: 189 174 147 !important;
+  --color-400: 168 153 132 !important;
+  --color-500: 102 92 84 !important;
+  --color-600: 80 73 69 !important;
+  --color-700: 60 56 54 !important;
+  --color-800: 40 40 40 !important;
+  --color-900: 29 32 33 !important;
+  --color-logo-start: 254 128 25 !important;
+  --color-logo-stop: 250 189 47 !important;
+  --bg-color: 40 40 40 !important;
+}
+
+html.dark,
+html.dark body,
+html.dark #__next,
+html.dark #page_wrapper {
+  background-color: #282828 !important;
+  color: #ebdbb2 !important;
+}
+
+html.dark .service-card {
+  background-color: #3c3836 !important;
+  color: #ebdbb2 !important;
+}
+
+html.dark .service-card:hover {
+  background-color: #504945 !important;
+}
+
+

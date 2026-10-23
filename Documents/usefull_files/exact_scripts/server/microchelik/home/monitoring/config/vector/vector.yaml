@@ -1,0 +1,282 @@
+data_dir: /var/lib/vector   # must be a persistent volume: it holds the journald read position
+
+enrichment_tables:
+  geoip:
+    type: mmdb
+    path: /etc/vector/geoip/GeoLite2-Country.mmdb
+
+sources:
+  caddy_access:
+    type: file
+    include:
+      - /var/log/caddy/access.log
+    read_from: end
+    ignore_older_secs: 3600
+    max_line_bytes: 262144
+    fingerprint:
+      strategy: device_and_inode
+
+  # Host journal (systemd services, kernel, and Docker containers via the journald log driver).
+  journal:
+    type: journald
+
+  remote_journal:
+    type: journald
+    journal_directory: /run/journal-remote
+    current_boot_only: false
+
+transforms:
+  classify:
+    type: remap
+    inputs:
+      - caddy_access
+    drop_on_error: true
+    source: |
+      . = parse_json!(string!(.message))
+      client, client_err = get(.request, ["client_ip"])
+      ip = ""
+      if client_err == null && client != null && client != "" {
+        ip = string!(client)
+      } else {
+        ip = string!(.request.remote_ip)
+      }
+      local = (ip_cidr_contains("10.0.0.0/8", ip) ?? false) || (ip_cidr_contains("127.0.0.0/8", ip) ?? false) || (ip_cidr_contains("172.16.0.0/12", ip) ?? false) || (ip_cidr_contains("192.168.0.0/16", ip) ?? false) || (ip_cidr_contains("100.64.0.0/10", ip) ?? false) || (ip_cidr_contains("::1/128", ip) ?? false) || (ip_cidr_contains("fc00::/7", ip) ?? false) || (ip_cidr_contains("fe80::/10",ip) ?? false)
+      if local {
+        .src = "local"
+      } else {
+        geo, geo_err = get_enrichment_table_record("geoip", { "ip": ip })
+        code = ""
+        if geo_err == null && geo != null {
+          nested, nested_err = get(geo, ["country", "iso_code"])
+          if nested_err == null && nested != null && nested != "" {
+            code = string!(nested)
+          } else {
+            registered, registered_err = get(geo, ["registered_country", "iso_code"])
+            if registered_err == null && registered != null && registered != "" {
+              code = string!(registered)
+            }
+          }
+        }
+        if code == "" {
+          .src = "unknown"
+        } else {
+          .src = code
+        }
+      }
+      host = downcase(string!(.request.host))
+      if contains(host, ":") {
+        host = string!(split(host, ":")[0])
+      }
+      if match(host, r'(^|\.)kloud\.(home|vpn)$') || match(host, r'(^|\.)kloud\.home\.kg$') {
+        .site = host
+      } else {
+        .site = "other"
+      }
+      domain = ""
+      if ip != "" && !local {
+        resolved, resolved_err = reverse_dns(ip)
+        if resolved_err == null && is_string(resolved) {
+          host = resolved
+          if ends_with(host, ".") {
+            host = slice!(host, 0, length(host) - 1)
+          }
+          if host != "" && host != ip {
+            domain = host
+          }
+        }
+      }
+      if domain != "" {
+        .domain = domain
+      }
+
+      # Requests blocked by caddy-shield: it sets the X-Blocked-By response header
+      # (comma-separated matching lists; empty for static denies)
+      blocked_hdr, blocked_err = get(., ["resp_headers", "X-Blocked-By"])
+      if blocked_err == null && blocked_hdr != null {
+        values = array(blocked_hdr) ?? [blocked_hdr]
+        list = ""
+        if length(values) > 0 {
+          list = string(values[0]) ?? ""
+        }
+        if list == "" {
+          list = "static"
+        }
+        .blocked = true
+        .blocked_list = list
+      }
+
+      .hits = 1
+      .client_ip = ip
+
+  access_logs:
+    type: remap
+    inputs:
+      - classify
+    source: |
+      domain = ""
+      if exists(.domain) {
+        domain = string!(.domain)
+      }
+      blocked_list = string(.blocked_list) ?? ""
+      . = {
+        "client_ip": .client_ip,
+        "src": .src,
+        "site": .site,
+        "ts": .ts,
+        "message": "request"
+      }
+      if domain != "" {
+        .domain = domain
+      }
+      if blocked_list != "" {
+        .blocked = true
+        .blocked_list = blocked_list
+      }
+
+  access_metrics:
+    type: log_to_metric
+    inputs:
+      - classify
+    metrics:
+      - type: counter
+        field: .hits
+        name: caddy_access_requests_total
+        kind: incremental
+        tags:
+          src: "{{ src }}"
+          site: "{{ site }}"
+
+  blocked_only:
+    type: filter
+    inputs:
+      - classify
+    condition: .blocked == true
+
+  blocked_metrics:
+    type: log_to_metric
+    inputs:
+      - blocked_only
+    metrics:
+      - type: counter
+        field: .hits
+        name: caddy_access_blocked_total
+        kind: incremental
+        tags:
+          src: "{{ src }}"
+          site: "{{ site }}"
+          list: "{{ blocked_list }}"
+
+  journal_level:
+    type: remap
+    inputs:
+      - journal
+      - remote_journal
+    source: |
+      # Same field names VictoriaLogs' journald endpoint produced, so queries and dashboards keep working
+      ."_HOSTNAME" = del(.host)
+      del(.source_type)
+      . = filter(.) -> |key, _value| { !starts_with(key, "__") }
+
+      # Default: journald PRIORITY (what programs logging to the journal set deliberately)
+      prio = to_int(string(.PRIORITY) ?? "6") ?? 6
+      lvl = to_syslog_level(prio) ?? "info"
+
+      # Docker containers (PRIORITY is just stdout=6 / stderr=3) and services writing plain
+      # stdout/stderr: read the level the program put in the message itself
+      is_container = exists(.CONTAINER_NAME)
+      if is_container || ."_TRANSPORT" == "stdout" {
+        msg = strip_ansi_escape_codes(string(.message) ?? "")
+        found = ""
+
+        # 1) JSON: {"level":"error"} / {"severity":"warn"}
+        if starts_with(msg, "{") {
+          j = object(parse_json(msg) ?? {}) ?? {}
+          found = string(j.level) ?? string(j.severity) ?? string(j.lvl) ?? ""
+        }
+        # 2) logfmt / key-value: level=info, lvl=warn, "level":"error", severity: error
+        if found == "" {
+          m1 = parse_regex(msg, r'(?i)\b(?:level|lvl|severity)"?\s*[=:]\s*"?(?P<l>[a-z]+)') ?? {}
+          found = string(m1.l) ?? ""
+        }
+        # 3) Bracketed: [debug], [ERROR]  (Cronicle and others)
+        if found == "" {
+          m2 = parse_regex(msg, r'(?i)\[(?P<l>trace|debug|info|notice|warn|warning|error|err|fatal|crit|critical)\]') ?? {}
+          found = string(m2.l) ?? ""
+        }
+        # 4) Uppercase words: INFO, WARN, ERROR:, FATAL, postgres LOG:
+        if found == "" {
+          m3 = parse_regex(msg, r'\b(?P<l>TRACE|DEBUG|INFO|NOTICE|WARN|WARNING|ERROR|ERR|FATAL|CRIT|CRITICAL|PANIC|LOG)\b') ?? {}
+          found = string(m3.l) ?? ""
+        }
+        # 5) Unlabelled stack traces
+        if found == "" && (starts_with(msg, "Traceback") || starts_with(msg, "panic:") || contains(msg, "Exception:")) {
+          found = "error"
+        }
+
+        if found != "" {
+          lvl = found
+        } else if is_container {
+          lvl = "info"   # nothing in the message; stderr alone doesn't mean error
+        }
+      }
+
+      l = downcase(lvl)
+      .level = if includes(["emerg", "alert", "crit", "critical", "fatal", "panic"], l) {
+        "critical"
+      } else if includes(["err", "error"], l) {
+        "error"
+      } else if includes(["warn", "warning"], l) {
+        "warning"
+      } else if l == "notice" {
+        "notice"
+      } else if includes(["debug", "dbg"], l) {
+        "debug"
+      } else if l == "trace" {
+        "trace"
+      } else {
+        "info"
+      }
+
+      # Cronicle runs every job in a container with a random name (cronicle-jmv14ca1x0b, ...).
+      # Merge them so they form one stream; CONTAINER_NAME keeps the real name.
+      if match(string(.SYSLOG_IDENTIFIER) ?? "", r'^cronicle-j[0-9a-z]{8,}$') {
+        .SYSLOG_IDENTIFIER = "cronicle-job"
+      }
+
+sinks:
+  victoria:
+    type: prometheus_remote_write
+    inputs:
+      - access_metrics
+      - blocked_metrics
+    endpoint: http://victoria-metrics:8428/api/v1/write
+    healthcheck:
+      enabled: false
+
+  vlogs:
+    type: http
+    inputs:
+      - access_logs
+    uri: http://victoria-logs:9428/insert/jsonline?_stream_fields=src&_time_field=ts&_msg_field=message
+    compression: gzip
+    encoding:
+      codec: json
+    framing:
+      method: newline_delimited
+    healthcheck:
+      enabled: false
+
+  vlogs_journal:
+    type: http
+    inputs:
+      - journal_level
+    uri: http://victoria-logs:9428/insert/jsonline?_stream_fields=_HOSTNAME,SYSLOG_IDENTIFIER&_time_field=timestamp&_msg_field=message
+    compression: gzip
+    encoding:
+      codec: json
+    framing:
+      method: newline_delimited
+    healthcheck:
+      enabled: false
+    acknowledgements:
+      enabled: true

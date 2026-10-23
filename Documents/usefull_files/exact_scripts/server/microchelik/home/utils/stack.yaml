@@ -31,7 +31,7 @@ services:
         user: ${PUID}:${PGID}
         environment:
             - TZ=${TZ}
-            - HOMEPAGE_ALLOWED_HOSTS=${DOMAIN_LAN},${DOMAIN_VPN},${SERVER_LAN_IP}:3333,${SERVER_VPN_IP}:3333,microcehlik.local:3333
+            - HOMEPAGE_ALLOWED_HOSTS=${DOMAIN_LAN},${DOMAIN_VPN},${SERVER_LAN_IP}:3333,${SERVER_VPN_IP}:3333
             - PUID=${PUID}
             - PGID=${PGID}
             - LOG_TARGETS=stdout
@@ -41,7 +41,7 @@ services:
             - HOMEPAGE_VAR_NEXTCLOUD_URL=${NEXTCLOUD_URL}
             - HOMEPAGE_VAR_ATLAS_URL=${ATLAS_URL}
         volumes:
-            - /mnt/sata_500/homepage:/app/config
+            - ./config/homepage:/app/config
             - /var/run/docker.sock:/var/run/docker.sock:ro
         extra_hosts:
             - "host.docker.internal:host-gateway"
@@ -78,7 +78,7 @@ services:
             - langtool_languageModel=/ngrams
         volumes:
             - /mnt/sata_500/languagetool/ngrams:/ngrams:ro
-            - /mnt/sata_500/languagetool/logback.xml:/LanguageTool/logback.xml
+            - ./config/languagetool/logback.xml:/LanguageTool/logback.xml
         networks:
           - default
           - proxy
@@ -134,7 +134,7 @@ services:
             NTFY_ATTACHMENT_TOTAL_SIZE_LIMIT: 5G
             NTFY_ATTACHMENT_FILE_SIZE_LIMIT: 100M
             NTFY_ATTACHMENT_EXPIRY_DURATION: 12h
-            NTFY_TEMPLATE_DIR: /etc/ntfy/templates
+            NTFY_TEMPLATE_DIR: /etc/ntfy-templates
             # Incoming e-mail
             NTFY_SMTP_SERVER_LISTEN: ":8025"
             NTFY_SMTP_SERVER_DOMAIN: ${DOMAIN_LAN}
@@ -143,8 +143,9 @@ services:
             - 8025:8025
         volumes:
             - /mnt/sata_500/ntfy/cache:/var/cache/ntfy
-            # user.db + templates
+            # user.db
             - /mnt/sata_500/ntfy/config:/etc/ntfy
+            - ./config/ntfy/templates:/etc/ntfy-templates:ro
         networks:
           - default
           - proxy
@@ -270,7 +271,7 @@ services:
         command: start
         user: ${PUID}:${PGID}
         volumes:
-          - "/mnt/sata_500/atuin:/config"
+          - ./config/atuin:/config
         environment:
           ATUIN_HOST: "0.0.0.0"
           ATUIN_OPEN_REGISTRATION: "true"
@@ -294,8 +295,25 @@ services:
           caddy_ingress_network: "proxy"
         restart: "unless-stopped"
         user: ${PUID}:${PGID}
+        environment:
+          PLIKD_LISTEN_PORT: "8080"
+          PLIKD_METRICS_PORT: "8081"
+          PLIKD_PLIK_DOMAIN: ${PLIK_URL}
+          PLIKD_SOURCE_IP_HEADER: X-Forwarded-For
+          PLIKD_MAX_FILE_SIZE_STR: 25GB
+          PLIKD_MAX_FILE_PER_UPLOAD: "10000"
+          PLIKD_DEFAULT_TTL_STR: 15d
+          PLIKD_MAX_TTL_STR: 30d
+          PLIKD_FEATURE_EXTEND_TTL: default
+          PLIKD_FEATURE_AUTHENTICATION: enabled
+          PLIKD_FEATURE_COMMENTS: default
+          PLIKD_FEATURE_GITHUB: disabled
+          PLIKD_DEFAULT_ADMIN_LOGIN: kloud-admin
+          PLIKD_DEFAULT_ADMIN_PASSWORD: ${PLIK_ADMIN_PASSWORD}
+          PLIKD_DATA_BACKEND: file
+          PLIKD_DATA_BACKEND_CONFIG: '{"Directory":"/data/files"}'
+          PLIKD_METADATA_BACKEND_CONFIG: '{"Driver":"sqlite3","ConnectionString":"/data/plik.db","Debug":false}'
         volumes:
-          - /mnt/sata_500/plik/plikd.cfg:/home/plik/server/plikd.cfg
           - /mnt/sata_500/plik/data:/data
         networks:
           - default

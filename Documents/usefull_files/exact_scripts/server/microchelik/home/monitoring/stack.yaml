@@ -59,7 +59,7 @@ services:
             - host.docker.internal:host-gateway
         volumes:
             - /mnt/sata_500/victoria/metrics:/victoria-metrics-data
-            - /mnt/sata_500/victoria/scrape-config.yml:/etc/vm/scrape-config.yml:ro
+            - ./config/victoria-metrics:/etc/vm:ro
     netdata:
         image: netdata/netdata:stable
         container_name: netdata
@@ -86,6 +86,8 @@ services:
             # For go.d collectors
             - NETDATA_PIHOLE_PASSWORD=${NETDATA_PIHOLE_PASSWORD}
             - NETDATA_PG_DSN=${NETDATA_PG_DSN}
+            # For health_alarm_notify.conf
+            - NTFY_URL=${NTFY_URL}
         cap_add:
             - DAC_READ_SEARCH
             - SYS_PTRACE
@@ -93,7 +95,7 @@ services:
         security_opt:
             - apparmor:unconfined
         volumes:
-            - /mnt/sata_500/netdata/config:/etc/netdata
+            - ./config/netdata:/etc/netdata
             - /mnt/sata_500/netdata/lib:/var/lib/netdata
             - /:/host/root:ro,rslave
             - /etc/passwd:/host/etc/passwd:ro
@@ -222,13 +224,13 @@ services:
         environment:
             - TZ=${TZ}
         volumes:
-            - /mnt/sata_500/vector/vector.yaml:/etc/vector/vector.yaml:ro
+            - ./config/vector:/etc/vector:ro
             - /mnt/sata_500/vector/geoip:/etc/vector/geoip:ro
             - /mnt/sata_500/vector/data:/var/lib/vector
             - /run/log/journal:/run/log/journal:ro
             - /run/journal-remote:/run/journal-remote:ro
             - /etc/machine-id:/etc/machine-id:ro
-            - /tmp/caddy-access:/var/log/caddy:ro
+            - caddy-access:/var/log/caddy:ro
         group_add:
             - "474"   # GID of systemd-journal (getent group systemd-journal)
             - "448"   # Same for systemd-journal-remote
@@ -253,3 +255,8 @@ networks:
   proxy:
     external: true
     name: proxy
+
+volumes:
+  caddy-access:
+    external: true
+    name: caddy-access

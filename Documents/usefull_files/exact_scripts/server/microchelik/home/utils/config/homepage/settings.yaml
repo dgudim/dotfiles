@@ -1,0 +1,14 @@
+---
+title: kloud
+theme: dark
+color: zinc
+headerStyle: clean
+statusStyle: dot
+hideVersion: true
+useEqualHeights: true
+target: _self
+layout:
+  - Home:
+  - Infra:
+  - Public:
+  - Internal apps:

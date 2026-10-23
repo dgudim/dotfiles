@@ -13,14 +13,15 @@ services:
       - NEXTCLOUD_URL=${NEXTCLOUD_URL}
       - ROUTER_SITES=${ROUTER_SITES}
       - ATLAS_URL=${ATLAS_URL}
+      - ROUTER_IP=${ROUTER_IP}
     cap_add:
       - NET_ADMIN
     network_mode: host
     volumes:
-      - /mnt/sata_500/caddy/conf:/etc/caddy
+      - ./config/caddy:/etc/caddy
       - /mnt/sata_500/caddy/data:/data/caddy
       - /mnt/sata_500/caddy/temp_conf:/config/caddy
-      - /tmp/caddy-access:/var/log/caddy
+      - caddy-access:/var/log/caddy
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   tailscale:
@@ -71,9 +72,24 @@ services:
         listen-address=${SERVER_VPN_IP}
         address=/${DOMAIN_LAN}/${SERVER_LAN_IP}
         address=/${DOMAIN_VPN}/${SERVER_VPN_IP}
+      FTLCONF_dns_upstreams: |-
+        8.8.8.8
+        8.8.4.4
+        1.1.1.1
+        1.0.0.1
+        4.2.2.1
+        9.9.9.11
+      FTLCONF_dns_listeningMode: ALL
+      FTLCONF_dns_domainNeeded: "true"
+      FTLCONF_dns_piholePTR: HOSTNAME
+      FTLCONF_webserver_port: "800"
+      FTLCONF_ntp_ipv4_active: "false"
+      FTLCONF_ntp_ipv6_active: "false"
+      FTLCONF_ntp_sync_active: "false"
+      FTLCONF_misc_nice: "-15"
+      FTLCONF_misc_check_load: "false"
     volumes:
       - /mnt/sata_500/pihole:/etc/pihole
-      - /mnt/sata_500/pihole/dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       # See https://docs.pi-hole.net/docker/#note-on-capabilities
       # Required if you are using Pi-hole as your DHCP server, else not needed
@@ -99,7 +115,7 @@ services:
       - POSTGRES_DB=postgres
     volumes:
       - /mnt/sata_500/dbs/postgres/data:/var/lib/postgresql
-      - /mnt/sata_500/dbs/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./config/postgres:/etc/postgresql:ro
     command: -c config_file=/etc/postgresql/postgresql.conf
     networks:
       - default
@@ -187,7 +203,7 @@ services:
       - 127.0.0.1:9292:8080
     volumes:
       - /mnt/sata_500/llama.cpp:/models:ro
-      - /mnt/sata_500/llama.cpp/config.yaml:/app/config.yaml:ro
+      - ./config/llamacpp/config.yaml:/app/config.yaml:ro
     networks:
       - default
       - backend
@@ -197,3 +213,12 @@ networks:
     name: proxy
   backend:
     name: backend
+
+volumes:
+  # Caddy access log, read by vector in the monitoring stack
+  caddy-access:
+    name: caddy-access
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=192m

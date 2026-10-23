@@ -1,0 +1,30 @@
+global:
+  scrape_interval: 15m
+
+scrape_configs:
+  - job_name: scrutiny
+    metrics_path: /api/metrics
+    static_configs:
+      - targets: ["scrutiny-web:8080"]
+
+  - job_name: victoria-logs
+    static_configs:
+      - targets: ["victoria-logs:9428"]
+
+  - job_name: victoria-metrics
+    static_configs:
+      - targets: ["localhost:8428"]
+
+  - job_name: netdata
+    metrics_path: /api/v1/allmetrics
+    params:
+      format: [prometheus_all_hosts]
+    relabel_configs:
+      - target_label: instance
+        replacement: microchelik
+    # Keep the 'instance' label, don't override with localhost
+    honor_labels: true
+    scrape_interval: 60s
+    scrape_timeout: 30s
+    static_configs:
+      - targets: ["host.docker.internal:19999"]

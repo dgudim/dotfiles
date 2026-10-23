@@ -100,8 +100,8 @@ services:
       restart: unless-stopped
       user: ${PUID}:${PGID}
       volumes:
-        - /mnt/sata_500/mosquitto:/mosquitto
-        - /mnt/sata_500/mosquitto/data:/mosquitto/data # Don't remove these, shadow declared anon mounts in the image
+        - ./config/mosquitto:/mosquitto/config:ro
+        - /mnt/sata_500/mosquitto/data:/mosquitto/data # Don't remove, shadows the anon volume declared in the image
       tmpfs:
         - /mosquitto/log
       ports:

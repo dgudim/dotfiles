@@ -1,0 +1,21 @@
+title: |
+  {{- if eq .type "info" }}
+    🟦 {{ .title }}
+  {{- else if eq .type "warning" }}
+    🟨 {{ .title }}
+  {{- else if eq .type "error" }}
+    🟥 {{ .title }}
+  {{- else if eq .type "success" }}
+    🟩 {{ .title }}
+  {{- else }}
+    {{ .title }}
+  {{- end }}
+message: |
+  {{ .message }}
+priority: |
+  {{ if eq .type "info" }}2
+  {{ else if eq .type "warning" }}3
+  {{ else if eq .type "error" }}4
+  {{ else if eq .type "success" }}2
+  {{ else }}3
+  {{ end }}

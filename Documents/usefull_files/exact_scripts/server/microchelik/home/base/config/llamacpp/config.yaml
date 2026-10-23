@@ -1,0 +1,89 @@
+healthCheckTimeout: 1800
+logLevel: info
+metricsMaxInMemory: 1000
+sendLoadingState: true
+includeAliasesInList: true
+
+# https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md
+# https://www.mintlify.com/ggml-org/llama.cpp/inference/server
+
+models:
+    "Qwen3.5-4B Q5":
+        proxy: "http://127.0.0.1:9999"
+        aliases:
+            - qwen3.5-4b
+        cmd: >
+            /app/llama-server
+            --model /models/Qwen3.5-4B-Q5_K_M.gguf
+            --port 9999
+            --parallel 1
+            --ctx-size 16384
+            --threads 4
+            --threads-batch 4
+            --cache-prompt
+            --no-webui
+            --jinja
+            --chat-template-kwargs '{"enable_thinking": false}'
+
+    "LFM2.5-1.2B Q4 M":
+        proxy: "http://127.0.0.1:9999"
+        aliases:
+            - lfm2.5-1.2b-q4_k_m
+        cmd: >
+            /app/llama-server
+            --model /models/LFM2.5-1.2B-Instruct-Q4_K_M.gguf
+            --alias lfm2.5-1.2b-q4_k_m
+            --port 9999
+            --parallel 2
+            --ctx-size 32768
+            --batch-size 512
+            --ubatch-size 256
+            --cache-prompt
+            --cache-reuse 1
+            --flash-attn off
+            --threads 2
+            --threads-batch 2
+            --no-webui
+            --jinja
+
+    "LFM2.5-1.2B Q6":
+        proxy: "http://127.0.0.1:9999"
+        aliases:
+            - lfm2.5-1.2b-q6_k
+        cmd: >
+            /app/llama-server
+            --model /models/LFM2.5-1.2B-Instruct-Q6_K.gguf
+            --alias lfm2.5-1.2b-q6_k
+            --port 9999
+            --parallel 2
+            --ctx-size 32768
+            --batch-size 512
+            --ubatch-size 256
+            --cache-prompt
+            --cache-reuse 1
+            --flash-attn off
+            --threads 2
+            --threads-batch 2
+            --no-webui
+            --jinja
+
+    "Home-3B-v3.q5_k_m":
+        proxy: "http://127.0.0.1:9999"
+        aliases:
+            - Home-3b-v3.q5_k_m
+        cmd: >
+            /app/llama-server
+            --model /models/Home-3B-v3.q5_k_m.gguf
+            --alias Home-3b-v3.q5_k_m
+            --port 9999
+            --parallel 2
+            --ctx-size 32768
+            --batch-size 512
+            --ubatch-size 256
+            --cache-prompt
+            --cache-reuse 1
+            --flash-attn off
+            --threads 2
+            --threads-batch 2
+            --no-webui
+            --jinja

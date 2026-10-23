@@ -1,0 +1,29 @@
+---
+# Services without a container, the rest come from docker labels
+- Home:
+    - Nextcloud AIO:
+        icon: nextcloud.png
+        href: "{{HOMEPAGE_VAR_NEXTCLOUD_AIO_URL}}"
+        description: All-in-One admin
+        weight: 30
+
+- Infra:
+    - Router:
+        icon: mdi-router-wireless
+        href: "{{HOMEPAGE_VAR_ROUTER_URL}}"
+        description: Gateway
+        weight: 80
+
+- Public:
+    - Nextcloud:
+        icon: nextcloud.png
+        href: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}"
+        description: Files
+        siteMonitor: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}/login"
+        weight: 10
+    - Trip Atlas:
+        icon: mdi-map-marker-path
+        href: "{{HOMEPAGE_VAR_ATLAS_URL}}"
+        description: Trips
+        siteMonitor: "{{HOMEPAGE_VAR_ATLAS_URL}}/"
+        weight: 90
