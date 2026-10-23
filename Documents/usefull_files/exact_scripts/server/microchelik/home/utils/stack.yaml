@@ -195,32 +195,33 @@ services:
         volumes:
           - /mnt/sata_500/syncthing/relay:/var/strelaysrv
 
-    voux:
-        image: ghcr.io/quintixlabs/voux/voux:latest
-        container_name: voux
+    goatcounter:
+        image: arp242/goatcounter:2.7
+        container_name: goatcounter
         labels:
           homepage.group: "Public"
-          homepage.name: "Voux"
-          homepage.icon: "mdi-movie-open"
-          homepage.href: "${VOUX_URL}"
-          homepage.description: "View counter"
+          homepage.name: "GoatCounter"
+          homepage.icon: "mdi-chart-bar"
+          homepage.href: "${GOATCOUNTER_URL}"
+          homepage.description: "Page views"
           homepage.weight: "100"
-          caddy: "${VOUX_URL}"
+          caddy: "${GOATCOUNTER_URL}"
           caddy.shield: ""
           caddy.log: access
-          caddy.reverse_proxy: "{{upstreams 8787}}"
+          caddy.reverse_proxy: "{{upstreams 8080}}"
           caddy_ingress_network: "proxy"
         restart: unless-stopped
         user: ${PUID}:${PGID}
         environment:
-            - ADMIN_USERNAME=admin
-            - ADMIN_PASSWORD=${VOUX_ADMIN_PASSWORD}
+            - TZ=${TZ}
+            - GOATCOUNTER_DB=postgresql+postgresql://goatcounter:${GOATCOUNTER_DB_PASS}@postgres:5432/goatcounter?sslmode=disable
         volumes:
-            - /mnt/sata_500/voux:/app/data
+            # GeoIP database and export temp files only, the data is in Postgres
+            - /mnt/sata_500/goatcounter:/home/goatcounter/goatcounter-data
         networks:
           - default
+          - backend
           - proxy
-
 
     spoolman:
       image: ghcr.io/donkie/spoolman:latest
@@ -295,7 +296,6 @@ services:
         user: ${PUID}:${PGID}
         environment:
           PLIKD_LISTEN_PORT: "8080"
-          PLIKD_METRICS_PORT: "8081"
           PLIKD_PLIK_DOMAIN: ${PLIK_URL}
           PLIKD_SOURCE_IP_HEADER: X-Forwarded-For
           PLIKD_MAX_FILE_SIZE_STR: 25GB
@@ -377,9 +377,6 @@ services:
         caddy_ingress_network: "proxy"
       user: ${PUID}:${PGID}
       environment:
-        - COLLECT_METRICS=true
-        - METRICS_USER=kitchenowl
-        - METRICS_PASSWORD=${KITCHENOWL_METRICS_PASSWORD}
         - JWT_SECRET_KEY=${KITCHENOWL_JWT_SECRET_KEY}
       volumes:
         - /mnt/sata_500/kitchenowl:/data

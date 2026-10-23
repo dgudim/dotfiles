@@ -26,6 +26,7 @@ services:
             - GF_AUTH_PROXY_ENABLED=true
             - GF_AUTH_PROXY_HEADER_NAME=X-WEBAUTH-USER
             - GF_AUTH_PROXY_HEADER_PROPERTY=username
+            - GF_METRICS_ENABLED=false
             - TZ=${TZ}
         volumes:
             - /mnt/sata_500/grafana:/var/lib/grafana
@@ -116,6 +117,7 @@ services:
         restart: unless-stopped
         environment:
             - TZ=${TZ}
+            - INFLUXD_METRICS_DISABLED=true
             - INFLUXD_USE_HASHED_TOKENS=false
         volumes:
             - /mnt/sata_500/scrutiny_influxdb2:/var/lib/influxdb2
