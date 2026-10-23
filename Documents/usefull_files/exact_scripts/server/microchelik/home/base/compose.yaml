@@ -42,6 +42,12 @@ services:
   pihole:
     container_name: pihole
     labels:
+      homepage.group: "Infra"
+      homepage.name: "Pi-hole"
+      homepage.icon: "pi-hole.png"
+      homepage.href: "http://pihole.kloud.home"
+      homepage.description: "DNS"
+      homepage.weight: "60"
       caddy: "http://pihole.kloud.home, http://pihole.kloud.vpn"
       caddy.log: access
       caddy.reverse_proxy: "127.0.0.1:800"
@@ -108,6 +114,12 @@ services:
     image: cronicle/edge:latest
     container_name: cronicle
     labels:
+      homepage.group: "Infra"
+      homepage.name: "Cronicle"
+      homepage.icon: "mdi-calendar-clock"
+      homepage.href: "http://cron.kloud.home"
+      homepage.description: "Scheduled jobs"
+      homepage.weight: "40"
       caddy: "http://cron.kloud.home, http://cron.kloud.vpn"
       caddy.log: access
       caddy.reverse_proxy: "{{upstreams 3012}}"

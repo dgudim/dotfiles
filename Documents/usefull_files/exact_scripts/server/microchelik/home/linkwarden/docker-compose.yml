@@ -2,6 +2,12 @@ services:
   linkwarden:
     container_name: linkwarden
     labels:
+      homepage.group: "Public"
+      homepage.name: "Linkwarden"
+      homepage.icon: "linkwarden.png"
+      homepage.href: "https://links.kloud.home.kg"
+      homepage.description: "Bookmarks"
+      homepage.weight: "20"
       caddy: "https://links.kloud.home.kg"
       caddy.shield: ""
       caddy.log: access

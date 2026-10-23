@@ -4,6 +4,12 @@ services:
         image: ghcr.io/home-assistant/home-assistant:stable
         container_name: homeassistant
         labels:
+          homepage.group: "Home"
+          homepage.name: "Home Assistant"
+          homepage.icon: "home-assistant.png"
+          homepage.href: "http://hass.kloud.home"
+          homepage.description: "House controls"
+          homepage.weight: "10"
           caddy: "http://hass.kloud.home, http://hass.kloud.vpn"
           caddy.log: access
           caddy.reverse_proxy: "127.0.0.1:8123"
@@ -27,6 +33,12 @@ services:
         image: ghcr.io/esphome/esphome
         container_name: esphome
         labels:
+          homepage.group: "Home"
+          homepage.name: "ESPHome"
+          homepage.icon: "esphome.png"
+          homepage.href: "http://hass-esphome.kloud.home"
+          homepage.description: "Device builder"
+          homepage.weight: "20"
           caddy: "http://hass-esphome.kloud.home, http://hass-esphome.kloud.vpn"
           caddy.log: access
           caddy.reverse_proxy: "127.0.0.1:6052"

@@ -3,6 +3,12 @@ services:
     image: "ghcr.io/m1k1o/neko/firefox"
     container_name: neko
     labels:
+      homepage.group: "Public"
+      homepage.name: "Neko"
+      homepage.icon: "firefox.png"
+      homepage.href: "https://neko.kloud.home.kg"
+      homepage.description: "Shared browser"
+      homepage.weight: "110"
       caddy: "https://neko.kloud.home.kg"
       caddy.shield: ""
       caddy.log: access

@@ -3,6 +3,12 @@ services:
     image: grimmory/grimmory:latest
     container_name: booklore
     labels:
+      homepage.group: "Public"
+      homepage.name: "Booklore"
+      homepage.icon: "mdi-book-open-variant"
+      homepage.href: "https://books.kloud.home.kg"
+      homepage.description: "Library"
+      homepage.weight: "30"
       caddy: "https://books.kloud.home.kg"
       caddy.shield: ""
       caddy.log: access

@@ -4,6 +4,12 @@ services:
         image: grafana/grafana
         container_name: grafana
         labels:
+          homepage.group: "Infra"
+          homepage.name: "Grafana"
+          homepage.icon: "grafana.png"
+          homepage.href: "http://grafana.kloud.home/api/ingress/grafana/dashboards"
+          homepage.description: "Dashboards"
+          homepage.weight: "10"
           caddy: "http://grafana.kloud.home, http://grafana.kloud.vpn"
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 3000}}"
@@ -18,7 +24,6 @@ services:
             - GF_SECURITY_ALLOW_EMBEDDING=true
             - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/api/ingress/grafana/
             - GF_SERVER_SERVE_FROM_SUB_PATH=true
-            - GF_SECURITY_ALLOW_EMBEDDING=true
             - GF_AUTH_PROXY_ENABLED=true
             - GF_AUTH_PROXY_HEADER_NAME=X-WEBAUTH-USER
             - GF_AUTH_PROXY_HEADER_PROPERTY=username
@@ -60,6 +65,14 @@ services:
         image: netdata/netdata:stable
         container_name: netdata
         labels:
+          homepage.group: "Infra"
+          homepage.name: "Netdata"
+          homepage.icon: "netdata.png"
+          homepage.href: "http://metrics.kloud.home"
+          homepage.description: "Host metrics"
+          homepage.weight: "20"
+          homepage.widget.type: "netdata"
+          homepage.widget.url: "http://host.docker.internal:19999"
           caddy: "http://metrics.kloud.home, http://metrics.kloud.vpn"
           caddy.log: access
           caddy.@head.method: "HEAD"
@@ -113,6 +126,12 @@ services:
         image: ghcr.io/starosdev/scrutiny:latest-web
         container_name: scrutiny-web
         labels:
+          homepage.group: "Infra"
+          homepage.name: "Scrutiny"
+          homepage.icon: "scrutiny.png"
+          homepage.href: "http://smart.kloud.home"
+          homepage.description: "Disk health"
+          homepage.weight: "30"
           caddy: "http://smart.kloud.home, http://smart.kloud.vpn"
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8080}}"
@@ -165,6 +184,12 @@ services:
         image: fnsys/dockhand:latest
         container_name: dockhand
         labels:
+          homepage.group: "Infra"
+          homepage.name: "Dockhand"
+          homepage.icon: "mdi-docker"
+          homepage.href: "http://docker.kloud.home"
+          homepage.description: "Containers"
+          homepage.weight: "50"
           caddy: "http://docker.kloud.home, http://docker.kloud.vpn"
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 3000}}"

@@ -33,6 +33,12 @@ services:
     image: supahgreg/tt-rss-web-nginx:latest
     container_name: tt-rss-nginx
     labels:
+      homepage.group: "Public"
+      homepage.name: "Tiny Tiny RSS"
+      homepage.icon: "tinytinyrss.png"
+      homepage.href: "https://tt-rss.kloud.home.kg"
+      homepage.description: "Feeds"
+      homepage.weight: "50"
       caddy: "https://tt-rss.kloud.home.kg"
       caddy.shield: ""
       caddy.log: access

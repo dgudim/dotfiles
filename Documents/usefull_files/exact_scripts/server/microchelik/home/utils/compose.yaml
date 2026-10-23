@@ -5,6 +5,12 @@ services:
         image: ghcr.io/alam00000/bentopdf-simple:latest
         container_name: bentopdf
         labels:
+          homepage.group: "Internal apps"
+          homepage.name: "BentoPDF"
+          homepage.icon: "mdi-file-pdf-box"
+          homepage.href: "http://pdf.kloud.home"
+          homepage.description: "PDF tools"
+          homepage.weight: "10"
           caddy: "http://pdf.kloud.home, http://pdf.kloud.vpn"
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8080}}"
@@ -77,7 +83,14 @@ services:
     ntfy:
         image: binwiederhier/ntfy
         container_name: ntfy
+        user: 1000:100
         labels:
+          homepage.group: "Public"
+          homepage.name: "ntfy"
+          homepage.icon: "ntfy.png"
+          homepage.href: "https://ntfy.kloud.home.kg"
+          homepage.description: "Notifications"
+          homepage.weight: "60"
           caddy: "https://ntfy.kloud.home.kg"
           caddy.shield: ""
           caddy.log: access
@@ -87,7 +100,9 @@ services:
         restart: unless-stopped
         environment:
             - TZ=Europe/Vilnius
-        user: 1000:100
+        ports:
+            # SMTP
+            - 8025:8025
         volumes:
             - /mnt/sata_500/ntfy/cache:/var/cache/ntfy
             - /mnt/sata_500/ntfy/config:/etc/ntfy
@@ -95,22 +110,16 @@ services:
           - default
           - proxy
 
-    mailrise:
-        image: yoryan/mailrise:latest
-        container_name: mailrise
-        restart: unless-stopped
-        volumes:
-            - /mnt/sata_500/mailrise/mailrise.conf:/etc/mailrise.conf:ro
-        environment:
-            - PUID=1000
-            - PGID=100
-        ports:
-            - 8025:8025
-
     syncthing:
         image: syncthing/syncthing:latest
         container_name: syncthing
         labels:
+          homepage.group: "Infra"
+          homepage.name: "Syncthing"
+          homepage.icon: "syncthing.png"
+          homepage.href: "http://sync.kloud.home"
+          homepage.description: "File sync"
+          homepage.weight: "70"
           caddy: "http://sync.kloud.home, http://sync.kloud.vpn"
           caddy.log: access
           caddy.reverse_proxy: "127.0.0.1:8384"
@@ -152,6 +161,12 @@ services:
         image: ghcr.io/quintixlabs/voux/voux:latest
         container_name: voux
         labels:
+          homepage.group: "Public"
+          homepage.name: "Voux"
+          homepage.icon: "mdi-movie-open"
+          homepage.href: "https://voux.kloud.home.kg"
+          homepage.description: "View counter"
+          homepage.weight: "100"
           caddy: "https://voux.kloud.home.kg"
           caddy.shield: ""
           caddy.log: access
@@ -173,6 +188,12 @@ services:
       image: ghcr.io/donkie/spoolman:latest
       container_name: spoolman
       labels:
+        homepage.group: "Home"
+        homepage.name: "Spoolman"
+        homepage.icon: "spoolman.png"
+        homepage.href: "http://spoolman.kloud.home"
+        homepage.description: "Filament management"
+        homepage.weight: "40"
         caddy: "http://spoolman.kloud.home, http://spoolman.kloud.vpn"
         caddy.log: access
         caddy.reverse_proxy: "{{upstreams 8000}}"
@@ -194,7 +215,7 @@ services:
         - proxy
 
     atuin:
-        image: ghcr.io/atuinsh/atuin:18.13.5
+        image: ghcr.io/atuinsh/atuin:18.23.0
         container_name: atuin
         labels:
           caddy: "https://atuin.kloud.home.kg"
@@ -221,6 +242,12 @@ services:
         image: rootgg/plik:latest
         container_name: plik
         labels:
+          homepage.group: "Public"
+          homepage.name: "Plik"
+          homepage.icon: "mdi-cloud-upload"
+          homepage.href: "https://plik.kloud.home.kg"
+          homepage.description: "File drop"
+          homepage.weight: "80"
           caddy: "https://plik.kloud.home.kg"
           caddy.shield: ""
           caddy.log: access

@@ -4,6 +4,12 @@ services:
     restart: unless-stopped
     container_name: kitchenowl
     labels:
+      homepage.group: "Public"
+      homepage.name: "KitchenOwl"
+      homepage.icon: "kitchenowl.png"
+      homepage.href: "https://kitchenowl.kloud.home.kg"
+      homepage.description: "Groceries"
+      homepage.weight: "40"
       caddy: "https://kitchenowl.kloud.home.kg"
       caddy.shield: ""
       caddy.log: access

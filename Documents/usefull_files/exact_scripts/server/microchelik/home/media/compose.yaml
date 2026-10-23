@@ -41,6 +41,12 @@ services:
         image: deluan/navidrome:latest
         container_name: navidrome
         labels:
+          homepage.group: "Internal apps"
+          homepage.name: "Navidrome"
+          homepage.icon: "navidrome.png"
+          homepage.href: "http://navidrome.kloud.home"
+          homepage.description: "Music"
+          homepage.weight: "20"
           caddy: "http://navidrome.kloud.home, http://navidrome.kloud.vpn"
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 4533}}"
@@ -71,6 +77,12 @@ services:
         restart: unless-stopped
         user: "1000:100"
         labels:
+            homepage.group: "Internal apps"
+            homepage.name: "AudioMuse"
+            homepage.icon: "mdi-music"
+            homepage.href: "http://audiomuse.kloud.home"
+            homepage.description: "Music analyser"
+            homepage.weight: "30"
             caddy: "http://audiomuse.kloud.home, http://audiomuse.kloud.vpn"
             caddy.reverse_proxy: "{{upstreams 8000}}"
             caddy_ingress_network: proxy
