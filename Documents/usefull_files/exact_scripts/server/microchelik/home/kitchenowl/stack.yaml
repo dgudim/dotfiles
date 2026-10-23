@@ -1,0 +1,33 @@
+services:
+  kitchenowl:
+    image: tombursch/kitchenowl:latest
+    restart: unless-stopped
+    container_name: kitchenowl
+    labels:
+      homepage.group: "Public"
+      homepage.name: "KitchenOwl"
+      homepage.icon: "kitchenowl.png"
+      homepage.href: "${KITCHENOWL_URL}"
+      homepage.description: "Groceries"
+      homepage.weight: "40"
+      caddy: "${KITCHENOWL_URL}"
+      caddy.shield: ""
+      caddy.log: access
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+      caddy_ingress_network: "proxy"
+    user: ${PUID}:${PGID}
+    environment:
+      - COLLECT_METRICS=true
+      - METRICS_USER=kitchenowl
+      - METRICS_PASSWORD=${KITCHENOWL_METRICS_PASSWORD}
+      - JWT_SECRET_KEY=${KITCHENOWL_JWT_SECRET_KEY}
+    volumes:
+      - /mnt/sata_500/kitchenowl:/data
+    networks:
+      - default
+      - proxy
+
+networks:
+  proxy:
+    external: true
+    name: proxy

@@ -1,0 +1,68 @@
+services:
+  booklore:
+    image: grimmory/grimmory:latest
+    container_name: booklore
+    labels:
+      homepage.group: "Public"
+      homepage.name: "Booklore"
+      homepage.icon: "mdi-book-open-variant"
+      homepage.href: "${BOOKLORE_URL}"
+      homepage.description: "Library"
+      homepage.weight: "30"
+      caddy: "${BOOKLORE_URL}"
+      caddy.shield: ""
+      caddy.log: access
+      caddy.reverse_proxy: "{{upstreams 6060}}"
+      caddy_ingress_network: "proxy"
+    environment:
+      - USER_ID=${PUID}
+      - GROUP_ID=${PGID}
+      - TZ=${TZ}
+      - DATABASE_URL=jdbc:mariadb://mariadb:3306/booklore
+      - DATABASE_USERNAME=${DB_USER}
+      - DATABASE_PASSWORD=${DB_PASSWORD}
+      - DISK_TYPE=LOCAL
+      - API_DOCS_ENABLED=false
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    volumes:
+      - /mnt/sata_500/booklore/data:/app/data
+      - /mnt/sata_500/booklore/books:/books
+      - /mnt/sata_500/booklore/bookdrop:/bookdrop
+    healthcheck:
+      test: wget -q -O - http://localhost:6060/api/v1/healthcheck
+      interval: 60s
+      retries: 5
+      start_period: 60s
+      timeout: 10s
+    restart: unless-stopped
+    networks:
+      - default
+      - proxy
+
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:11.4.5
+    container_name: mariadb
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=booklore
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - /mnt/sata_500/booklore/mariadb:/config
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "mariadb-admin", "ping", "-h", "localhost" ]
+      interval: 60s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+networks:
+  proxy:
+    external: true
+    name: proxy

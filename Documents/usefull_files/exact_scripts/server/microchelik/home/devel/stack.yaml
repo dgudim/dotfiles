@@ -1,0 +1,38 @@
+services:
+  code-server:
+    # image: lscr.io/linuxserver/code-server:latest
+    build: .
+    container_name: code-server
+    labels:
+      homepage.group: "Public"
+      homepage.name: "code-server"
+      homepage.icon: "code-server.png"
+      homepage.href: "${CODE_SERVER_URL}"
+      homepage.description: "Editor"
+      homepage.weight: "70"
+      caddy: "${CODE_SERVER_URL}"
+      caddy.shield: ""
+      caddy.log: access
+      caddy.reverse_proxy: "{{upstreams 8443}}"
+      caddy_ingress_network: "proxy"
+    restart: no
+    networks:
+      - proxy
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - DEFAULT_WORKSPACE=/config/workspace
+      - PASSWORD=${CODE_SERVER_PASSWORD}
+      - SUDO_PASSWORD=${CODE_SERVER_SUDO_PASSWORD}
+      - PWA_APPNAME=code-server
+    volumes:
+      - /mnt/sata_500/code-server:/config
+    tmpfs:
+      - /config/.local/share/code-server/coder-logs:uid=${PUID},gid=${PGID},mode=0755
+      - /config/data/logs:uid=${PUID},gid=${PGID},mode=0755
+
+networks:
+  proxy:
+    external: true
+    name: proxy

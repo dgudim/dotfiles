@@ -1,38 +1,5 @@
-services:
-  code-server:
-    # image: lscr.io/linuxserver/code-server:latest
-    build: .
-    container_name: code-server
-    labels:
-      homepage.group: "Public"
-      homepage.name: "code-server"
-      homepage.icon: "code-server.png"
-      homepage.href: "https://code.kloud.home.kg"
-      homepage.description: "Editor"
-      homepage.weight: "70"
-      caddy: "https://code.kloud.home.kg"
-      caddy.shield: ""
-      caddy.log: access
-      caddy.reverse_proxy: "{{upstreams 8443}}"
-      caddy_ingress_network: "proxy"
-    restart: no
-    networks:
-      - proxy
-    environment:
-      - PUID=1000
-      - PGID=100
-      - TZ=Europe/Vilnius
-      - DEFAULT_WORKSPACE=/config/workspace
-      - PASSWORD=${CODE_SERVER_PASSWORD}
-      - SUDO_PASSWORD=${CODE_SERVER_SUDO_PASSWORD}
-      - PWA_APPNAME=code-server
-    volumes:
-      - /mnt/sata_500/code-server:/config
-    tmpfs:
-      - /config/.local/share/code-server/coder-logs:uid=1000,gid=100,mode=0755
-      - /config/data/logs:uid=1000,gid=100,mode=0755
-
-networks:
-  proxy:
-    external: true
-    name: proxy
+include:
+  - path: stack.yaml
+    env_file:
+      - ../base_env_definitions
+      - .env

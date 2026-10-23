@@ -1,0 +1,255 @@
+services:
+    grafana:
+        image: grafana/grafana
+        container_name: grafana
+        labels:
+          homepage.group: "Infra"
+          homepage.name: "Grafana"
+          homepage.icon: "grafana.png"
+          homepage.href: "${GRAFANA_URL}/api/ingress/grafana/dashboards"
+          homepage.description: "Dashboards"
+          homepage.weight: "10"
+          caddy: "${GRAFANA_SITES}"
+          caddy.log: access
+          caddy.reverse_proxy: "{{upstreams 3000}}"
+          caddy_ingress_network: "proxy"
+        user: ${PUID}:${PGID}
+        restart: unless-stopped
+        networks:
+            - default
+            - proxy
+        environment:
+            - GF_SERVER_DOMAIN=grafana.${DOMAIN_LAN}
+            - GF_SECURITY_ALLOW_EMBEDDING=true
+            - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/api/ingress/grafana/
+            - GF_SERVER_SERVE_FROM_SUB_PATH=true
+            - GF_AUTH_PROXY_ENABLED=true
+            - GF_AUTH_PROXY_HEADER_NAME=X-WEBAUTH-USER
+            - GF_AUTH_PROXY_HEADER_PROPERTY=username
+            - TZ=${TZ}
+        volumes:
+            - /mnt/sata_500/grafana:/var/lib/grafana
+
+    victoria-logs:
+        image: docker.io/victoriametrics/victoria-logs:latest
+        container_name: victoria-logs
+        command: -storageDataPath=/victoria-logs-data -retentionPeriod=1y
+        user: ${PUID}:${PGID}
+        restart: unless-stopped
+        ports:
+            - 9428:9428
+        environment:
+            - TZ=${TZ}
+        volumes:
+            - /mnt/sata_500/victoria/logs:/victoria-logs-data
+
+    victoria-metrics:
+        image: victoriametrics/victoria-metrics:latest
+        container_name: victoria-metrics
+        command: -storageDataPath=/victoria-metrics-data -retentionPeriod=5y -dedup.minScrapeInterval=10s -promscrape.config=/etc/vm/scrape-config.yml
+        user: ${PUID}:${PGID}
+        restart: unless-stopped
+        environment:
+            - TZ=${TZ}
+        # For hass
+        ports:
+            - 8428:8428
+        # For scraping
+        extra_hosts:
+            - host.docker.internal:host-gateway
+        volumes:
+            - /mnt/sata_500/victoria/metrics:/victoria-metrics-data
+            - /mnt/sata_500/victoria/scrape-config.yml:/etc/vm/scrape-config.yml:ro
+    netdata:
+        image: netdata/netdata:stable
+        container_name: netdata
+        labels:
+          homepage.group: "Infra"
+          homepage.name: "Netdata"
+          homepage.icon: "netdata.png"
+          homepage.href: "${NETDATA_URL}"
+          homepage.description: "Host metrics"
+          homepage.weight: "20"
+          homepage.widget.type: "netdata"
+          homepage.widget.url: "http://host.docker.internal:19999"
+          caddy: "${NETDATA_SITES}"
+          caddy.log: access
+          caddy.@head.method: "HEAD"
+          caddy.1_handle: "@head"
+          caddy.1_handle.respond: "405"
+          caddy.2_handle.reverse_proxy: "127.0.0.1:19999"
+        pid: host
+        network_mode: host
+        restart: unless-stopped
+        environment:
+            - TZ=${TZ}
+            # For go.d collectors
+            - NETDATA_PIHOLE_PASSWORD=${NETDATA_PIHOLE_PASSWORD}
+            - NETDATA_PG_DSN=${NETDATA_PG_DSN}
+        cap_add:
+            - DAC_READ_SEARCH
+            - SYS_PTRACE
+            - SYS_ADMIN
+        security_opt:
+            - apparmor:unconfined
+        volumes:
+            - /mnt/sata_500/netdata/config:/etc/netdata
+            - /mnt/sata_500/netdata/lib:/var/lib/netdata
+            - /:/host/root:ro,rslave
+            - /etc/passwd:/host/etc/passwd:ro
+            - /etc/group:/host/etc/group:ro
+            - /etc/localtime:/etc/localtime:ro
+            - /proc:/host/proc:ro
+            - /sys:/host/sys:ro
+            - /etc/os-release:/host/etc/os-release:ro
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            # - /home/kloud/netdata/web:/usr/share/netdata/web:ro
+        tmpfs:
+            - /var/cache/netdata:uid=201,gid=201,mode=0770,size=268435456
+
+    # Scrutiny's web UI queries InfluxDB with Flux. Can't use Victoria Metrics :(
+    scrutiny-influxdb:
+        image: influxdb:2.9
+        container_name: scrutiny-influxdb
+        restart: unless-stopped
+        environment:
+            - TZ=${TZ}
+            - INFLUXD_USE_HASHED_TOKENS=false
+        volumes:
+            - /mnt/sata_500/scrutiny_influxdb2:/var/lib/influxdb2
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8086/health"]
+            interval: 60s
+            timeout: 10s
+            retries: 5
+            start_period: 60s
+
+    scrutiny-web:
+        image: ghcr.io/starosdev/scrutiny:latest-web
+        container_name: scrutiny-web
+        labels:
+          homepage.group: "Infra"
+          homepage.name: "Scrutiny"
+          homepage.icon: "scrutiny.png"
+          homepage.href: "${SCRUTINY_URL}"
+          homepage.description: "Disk health"
+          homepage.weight: "30"
+          caddy: "${SCRUTINY_SITES}"
+          caddy.log: access
+          caddy.reverse_proxy: "{{upstreams 8080}}"
+          caddy_ingress_network: "proxy"
+        restart: unless-stopped
+        ports:
+            - 4040:8080 # For external collectors (the-rock)
+        volumes:
+            - /mnt/sata_500/scrutiny:/opt/scrutiny/config
+        environment:
+            - TZ=${TZ}
+            - SCRUTINY_WEB_INFLUXDB_HOST=scrutiny-influxdb
+            - SCRUTINY_WEB_INFLUXDB_PORT=8086
+        depends_on:
+            scrutiny-influxdb:
+                condition: service_healthy
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+            interval: 60s
+            timeout: 10s
+            retries: 5
+            start_period: 60s
+        networks:
+          - default
+          - proxy
+
+    scrutiny-collector:
+        image: ghcr.io/starosdev/scrutiny:latest-collector
+        container_name: scrutiny-collector
+        restart: unless-stopped
+        cap_add:
+            - SYS_RAWIO
+        devices:
+            - /dev/sda
+            - /dev/sdb
+        volumes:
+            - /run/udev:/run/udev:ro
+        environment:
+            - TZ=${TZ}
+            - COLLECTOR_COMMANDS_METRICS_SMART_ARGS=--xall --json -n standby
+            - COLLECTOR_API_ENDPOINT=http://scrutiny-web:8080
+            - COLLECTOR_HOST_ID=microchelik
+            - COLLECTOR_RUN_STARTUP=true
+            - COLLECTOR_CRON_SCHEDULE=*/30 * * * *
+        depends_on:
+            scrutiny-web:
+                condition: service_healthy
+
+    dockhand:
+        image: fnsys/dockhand:latest
+        container_name: dockhand
+        labels:
+          homepage.group: "Infra"
+          homepage.name: "Dockhand"
+          homepage.icon: "mdi-docker"
+          homepage.href: "${DOCKHAND_URL}"
+          homepage.description: "Containers"
+          homepage.weight: "50"
+          caddy: "${DOCKHAND_SITES}"
+          caddy.log: access
+          caddy.reverse_proxy: "{{upstreams 3000}}"
+          caddy_ingress_network: "proxy"
+        restart: unless-stopped
+        user: ${PUID}:${PGID}
+        environment:
+            - TZ=${TZ}
+        group_add:
+            - 468 # Docker group for socket access
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /mnt/sata_500/dockhand:/app/data
+            - /home/kloud:/home/kloud
+            - /mnt/sata_500:/mnt/sata_500
+        networks:
+          - default
+          - proxy
+
+    vector:
+        build:
+          context: .
+          dockerfile: vector.Dockerfile
+        container_name: vector
+        user: "${PUID}:${PGID}"
+        restart: unless-stopped
+        command: ["--config", "/etc/vector/vector.yaml"]
+        environment:
+            - TZ=${TZ}
+        volumes:
+            - /mnt/sata_500/vector/vector.yaml:/etc/vector/vector.yaml:ro
+            - /mnt/sata_500/vector/geoip:/etc/vector/geoip:ro
+            - /mnt/sata_500/vector/data:/var/lib/vector
+            - /run/log/journal:/run/log/journal:ro
+            - /run/journal-remote:/run/journal-remote:ro
+            - /etc/machine-id:/etc/machine-id:ro
+            - /tmp/caddy-access:/var/log/caddy:ro
+        group_add:
+            - "474"   # GID of systemd-journal (getent group systemd-journal)
+            - "448"   # Same for systemd-journal-remote
+        depends_on:
+            - victoria-metrics
+
+    conntrack-sources:
+        image: python:3.13-slim
+        container_name: conntrack-sources
+        network_mode: host
+        restart: unless-stopped
+        environment:
+            - TZ=${TZ}
+        volumes:
+            - /home/kloud/monitoring:/home/kloud/monitoring
+            - /mnt/sata_500/vector/geoip:/mnt/sata_500/vector/geoip:ro
+            - /tmp:/tmp
+        command: ["sh", "-c", "pip install --no-cache-dir maxminddb >/dev/null && exec sleep infinity"]
+
+
+networks:
+  proxy:
+    external: true
+    name: proxy

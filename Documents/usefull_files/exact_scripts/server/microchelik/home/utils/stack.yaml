@@ -1,0 +1,340 @@
+services:
+
+    bentopdf:
+        image: ghcr.io/alam00000/bentopdf-simple:latest
+        container_name: bentopdf
+        labels:
+          homepage.group: "Internal apps"
+          homepage.name: "BentoPDF"
+          homepage.icon: "mdi-file-pdf-box"
+          homepage.href: "${BENTOPDF_URL}"
+          homepage.description: "PDF tools"
+          homepage.weight: "10"
+          caddy: "${BENTOPDF_SITES}"
+          caddy.log: access
+          caddy.reverse_proxy: "{{upstreams 8080}}"
+          caddy_ingress_network: "proxy"
+        restart: unless-stopped
+        networks:
+          - default
+          - proxy
+
+    homepage:
+        image: ghcr.io/gethomepage/homepage:latest
+        container_name: homepage
+        labels:
+          caddy: "${HOMEPAGE_SITES}"
+          caddy.log: access
+          caddy.reverse_proxy: "{{upstreams 3000}}"
+          caddy_ingress_network: "proxy"
+        restart: unless-stopped
+        user: ${PUID}:${PGID}
+        environment:
+            - TZ=${TZ}
+            - HOMEPAGE_ALLOWED_HOSTS=${DOMAIN_LAN},${DOMAIN_VPN},${SERVER_LAN_IP}:3333,${SERVER_VPN_IP}:3333,microcehlik.local:3333
+            - PUID=${PUID}
+            - PGID=${PGID}
+            - LOG_TARGETS=stdout
+            # For {{HOMEPAGE_VAR_...}} in services.yaml
+            - HOMEPAGE_VAR_NEXTCLOUD_AIO_URL=${NEXTCLOUD_AIO_TLS_URL}
+            - HOMEPAGE_VAR_ROUTER_URL=${ROUTER_URL}
+            - HOMEPAGE_VAR_NEXTCLOUD_URL=${NEXTCLOUD_URL}
+            - HOMEPAGE_VAR_ATLAS_URL=${ATLAS_URL}
+        volumes:
+            - /mnt/sata_500/homepage:/app/config
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        networks:
+            - default
+            - base
+            - booklore
+            - kitchenowl
+            - linkwarden
+            - media
+            - monitoring
+            - neko
+            - rss
+            - proxy
+
+    languagetool:
+        image: erikvl87/languagetool:latest
+        container_name: languagetool
+        labels:
+          caddy: "${LANGUAGETOOL_URL}"
+          caddy.shield: ""
+          caddy.log: access
+          caddy.reverse_proxy: "{{upstreams 8010}}"
+          caddy_ingress_network: "proxy"
+        restart: unless-stopped
+        user: ${PUID}:${PGID}
+        environment:
+            - TZ=${TZ}
+            - Java_Xms=512m
+            - Java_Xmx=2g
+            - langTool_abTest=
+            - langTool_abTestClients=
+            - langtool_pipelinePrewarming=true
+            - langtool_languageModel=/ngrams
+        volumes:
+            - /mnt/sata_500/languagetool/ngrams:/ngrams:ro
+            - /mnt/sata_500/languagetool/logback.xml:/LanguageTool/logback.xml
+        networks:
+          - default
+          - proxy
+
+
+    ntfy:
+        image: binwiederhier/ntfy
+        container_name: ntfy
+        user: ${PUID}:${PGID}
+        labels:
+          homepage.group: "Public"
+          homepage.name: "ntfy"
+          homepage.icon: "ntfy.png"
+          homepage.href: "${NTFY_URL}"
+          homepage.description: "Notifications"
+          homepage.weight: "60"
+          caddy: "${NTFY_URL}"
+          caddy.shield: ""
+          caddy.log: access
+          caddy.reverse_proxy: "{{upstreams 81}}"
+          caddy_ingress_network: "proxy"
+        command: serve
+        restart: unless-stopped
+        environment:
+            TZ: ${TZ}
+            NTFY_BASE_URL: ${NTFY_URL}
+            NTFY_LISTEN_HTTP: ":81"
+            NTFY_BEHIND_PROXY: "true"
+            NTFY_PROXY_FORWARDED_HEADER: X-Forwarded-For
+            NTFY_WEB_ROOT: /
+            NTFY_KEEPALIVE_INTERVAL: 45s
+            NTFY_MANAGER_INTERVAL: 5m
+            NTFY_ENABLE_METRICS: "false"
+            # Message cache
+            NTFY_CACHE_FILE: /var/cache/ntfy/cache.db
+            NTFY_CACHE_DURATION: 24h
+            NTFY_CACHE_STARTUP_QUERIES: |
+                pragma journal_mode = WAL;
+                pragma synchronous = normal;
+                pragma temp_store = memory;
+                pragma busy_timeout = 15000;
+                vacuum;
+            # Auth
+            NTFY_AUTH_FILE: /etc/ntfy/user.db
+            NTFY_AUTH_DEFAULT_ACCESS: write-only
+            NTFY_AUTH_USERS: ${NTFY_AUTH_USERS}
+            NTFY_ENABLE_SIGNUP: "false"
+            NTFY_REQUIRE_LOGIN: "true"
+            NTFY_ENABLE_LOGIN: "true"
+            NTFY_ENABLE_RESERVATIONS: "true"
+            # Attachments
+            NTFY_ATTACHMENT_CACHE_DIR: /var/cache/ntfy/attachments
+            NTFY_ATTACHMENT_TOTAL_SIZE_LIMIT: 5G
+            NTFY_ATTACHMENT_FILE_SIZE_LIMIT: 100M
+            NTFY_ATTACHMENT_EXPIRY_DURATION: 12h
+            NTFY_TEMPLATE_DIR: /etc/ntfy/templates
+            # Incoming e-mail
+            NTFY_SMTP_SERVER_LISTEN: ":8025"
+            NTFY_SMTP_SERVER_DOMAIN: ${DOMAIN_LAN}
+        ports:
+            # SMTP
+            - 8025:8025
+        volumes:
+            - /mnt/sata_500/ntfy/cache:/var/cache/ntfy
+            # user.db + templates
+            - /mnt/sata_500/ntfy/config:/etc/ntfy
+        networks:
+          - default
+          - proxy
+
+    syncthing:
+        image: syncthing/syncthing:latest
+        container_name: syncthing
+        labels:
+          homepage.group: "Infra"
+          homepage.name: "Syncthing"
+          homepage.icon: "syncthing.png"
+          homepage.href: "${SYNCTHING_URL}"
+          homepage.description: "File sync"
+          homepage.weight: "70"
+          caddy: "${SYNCTHING_SITES}"
+          caddy.log: access
+          caddy.reverse_proxy: "127.0.0.1:8384"
+        restart: unless-stopped
+        hostname: microchelik
+        environment:
+            - PUID=${PUID}
+            - PGID=${PGID}
+            - PCAP=cap_chown,cap_fowner+ep
+            - STGUIADDRESS=
+            - UMASK=027 # https://wintelguy.com/umask-calc.pl
+            - TZ=${TZ}
+        network_mode: host # 22000, 22001, 22027, 8384
+        volumes:
+            - /mnt/sata_500/syncthing:/var/syncthing
+            - /mnt/sata_500/syncthing/config:/var/syncthing/config
+            - chonker-music:/var/syncthing/data/music
+        healthcheck:
+            test: curl -fkLsS -m 2 127.0.0.1:8384/rest/noauth/health | grep -o --color=never OK || exit 1
+            interval: 5m
+            timeout: 10s
+            retries: 3
+            start_period: 60s
+
+    syncthing-relay:
+        image: syncthing/relaysrv
+        container_name: syncthing-relay
+        hostname: microchelik-relay
+        environment:
+          - PUID=${PUID}
+          - PGID=${PGID}
+        network_mode: host # 22067, 22070 for stats
+        restart: unless-stopped
+        entrypoint: ["/bin/entrypoint.sh", "/bin/strelaysrv", "-pools", "", "-provided-by=", "kloud's homelab"]
+        volumes:
+          - /mnt/sata_500/syncthing/relay:/var/strelaysrv
+
+    voux:
+        image: ghcr.io/quintixlabs/voux/voux:latest
+        container_name: voux
+        labels:
+          homepage.group: "Public"
+          homepage.name: "Voux"
+          homepage.icon: "mdi-movie-open"
+          homepage.href: "${VOUX_URL}"
+          homepage.description: "View counter"
+          homepage.weight: "100"
+          caddy: "${VOUX_URL}"
+          caddy.shield: ""
+          caddy.log: access
+          caddy.reverse_proxy: "{{upstreams 8787}}"
+          caddy_ingress_network: "proxy"
+        restart: unless-stopped
+        user: ${PUID}:${PGID}
+        environment:
+            - ADMIN_USERNAME=admin
+            - ADMIN_PASSWORD=${VOUX_ADMIN_PASSWORD}
+        volumes:
+            - /mnt/sata_500/voux:/app/data
+        networks:
+          - default
+          - proxy
+
+
+    spoolman:
+      image: ghcr.io/donkie/spoolman:latest
+      container_name: spoolman
+      labels:
+        homepage.group: "Home"
+        homepage.name: "Spoolman"
+        homepage.icon: "spoolman.png"
+        homepage.href: "${SPOOLMAN_URL}"
+        homepage.description: "Filament management"
+        homepage.weight: "40"
+        caddy: "${SPOOLMAN_SITES}"
+        caddy.log: access
+        caddy.reverse_proxy: "{{upstreams 8000}}"
+        caddy_ingress_network: "proxy"
+      restart: unless-stopped
+      volumes:
+        - type: bind
+          source: /mnt/sata_500/spoolman
+          target: /home/app/.local/share/spoolman
+      environment:
+        - TZ=${TZ}
+        - PUID=${PUID}
+        - PGID=${PGID}
+        - SPOOLMAN_DIR_LOGS=/tmp/spoolman-logs
+      tmpfs:
+        - /tmp/spoolman-logs:uid=${PUID},gid=${PGID},mode=0755
+      networks:
+        - default
+        - proxy
+
+    atuin:
+        image: ghcr.io/atuinsh/atuin:18.23.0
+        container_name: atuin
+        labels:
+          caddy: "${ATUIN_URL}"
+          caddy.shield: ""
+          caddy.log: access
+          caddy.reverse_proxy: "{{upstreams 8888}}"
+          caddy_ingress_network: "proxy"
+        restart: unless-stopped
+        networks:
+            - default
+            - backend
+            - proxy
+        command: start
+        user: ${PUID}:${PGID}
+        volumes:
+          - "/mnt/sata_500/atuin:/config"
+        environment:
+          ATUIN_HOST: "0.0.0.0"
+          ATUIN_OPEN_REGISTRATION: "true"
+          ATUIN_DB_URI: ${ATUIN_DB_URI}
+          RUST_LOG: info
+
+    plik:
+        image: rootgg/plik:latest
+        container_name: plik
+        labels:
+          homepage.group: "Public"
+          homepage.name: "Plik"
+          homepage.icon: "mdi-cloud-upload"
+          homepage.href: "${PLIK_URL}"
+          homepage.description: "File drop"
+          homepage.weight: "80"
+          caddy: "${PLIK_URL}"
+          caddy.shield: ""
+          caddy.log: access
+          caddy.reverse_proxy: "{{upstreams 8080}}"
+          caddy_ingress_network: "proxy"
+        restart: "unless-stopped"
+        user: ${PUID}:${PGID}
+        volumes:
+          - /mnt/sata_500/plik/plikd.cfg:/home/plik/server/plikd.cfg
+          - /mnt/sata_500/plik/data:/data
+        networks:
+          - default
+          - proxy
+
+volumes:
+  chonker-music:
+    external: true
+    name: chonker-music
+
+
+networks:
+  proxy:
+    external: true
+    name: proxy
+  backend:
+    external: true
+    name: backend
+  base:
+    external: true
+    name: base_default
+  booklore:
+    external: true
+    name: booklore_default
+  kitchenowl:
+    external: true
+    name: kitchenowl_default
+  linkwarden:
+    external: true
+    name: linkwarden_default
+  media:
+    external: true
+    name: media_default
+  monitoring:
+    external: true
+    name: monitoring_default
+  neko:
+    external: true
+    name: neko_default
+  rss:
+    external: true
+    name: rss_default

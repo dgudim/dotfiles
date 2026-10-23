@@ -1,0 +1,5 @@
+include:
+  - path: stack.yaml
+    env_file:
+      - ../base_env_definitions
+      - .env
