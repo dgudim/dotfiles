@@ -49,8 +49,6 @@ services:
             - default
             - base
             - booklore
-            - kitchenowl
-            - linkwarden
             - media
             - monitoring
             - neko
@@ -319,6 +317,76 @@ services:
           - default
           - proxy
 
+    linkwarden:
+      container_name: linkwarden
+      labels:
+        homepage.group: "Public"
+        homepage.name: "Linkwarden"
+        homepage.icon: "linkwarden.png"
+        homepage.href: "${LINKWARDEN_URL}"
+        homepage.description: "Bookmarks"
+        homepage.weight: "20"
+        caddy: "${LINKWARDEN_URL}"
+        caddy.shield: ""
+        caddy.log: access
+        caddy.reverse_proxy: "{{upstreams 3000}}"
+        caddy_ingress_network: "proxy"
+      image: ghcr.io/linkwarden/linkwarden:latest
+      restart: unless-stopped
+      networks:
+        - default
+        - backend
+        - proxy
+      user: ${PUID}:${PGID}
+      environment:
+        NEXTAUTH_URL: "${LINKWARDEN_URL}/api/v1/auth"
+        NEXTAUTH_SECRET: ${LINKWARDEN_NEXTAUTH_SECRET}
+        DATABASE_URL: ${LINKWARDEN_DATABASE_URL}
+        MEILI_MASTER_KEY: ${LINKWARDEN_MEILI_MASTER_KEY}
+        NEXT_PUBLIC_OLLAMA_ENDPOINT_URL: "http://host.docker.internal:11434"
+        OLLAMA_MODEL: "phi3:mini-4k"
+      volumes:
+        - /mnt/sata_500/linkwarden/data:/data/data
+      depends_on:
+        - meilisearch
+
+    meilisearch:
+      image: getmeili/meilisearch:v1.12.8
+      restart: unless-stopped
+      user: ${PUID}:${PGID}
+      environment:
+        MEILI_MASTER_KEY: ${LINKWARDEN_MEILI_MASTER_KEY}
+      volumes:
+        - /mnt/sata_500/linkwarden/meili_data:/meili_data
+
+    kitchenowl:
+      image: tombursch/kitchenowl:latest
+      restart: unless-stopped
+      container_name: kitchenowl
+      labels:
+        homepage.group: "Public"
+        homepage.name: "KitchenOwl"
+        homepage.icon: "kitchenowl.png"
+        homepage.href: "${KITCHENOWL_URL}"
+        homepage.description: "Groceries"
+        homepage.weight: "40"
+        caddy: "${KITCHENOWL_URL}"
+        caddy.shield: ""
+        caddy.log: access
+        caddy.reverse_proxy: "{{upstreams 8080}}"
+        caddy_ingress_network: "proxy"
+      user: ${PUID}:${PGID}
+      environment:
+        - COLLECT_METRICS=true
+        - METRICS_USER=kitchenowl
+        - METRICS_PASSWORD=${KITCHENOWL_METRICS_PASSWORD}
+        - JWT_SECRET_KEY=${KITCHENOWL_JWT_SECRET_KEY}
+      volumes:
+        - /mnt/sata_500/kitchenowl:/data
+      networks:
+        - default
+        - proxy
+
 volumes:
   chonker-music:
     external: true
@@ -338,12 +406,6 @@ networks:
   booklore:
     external: true
     name: booklore_default
-  kitchenowl:
-    external: true
-    name: kitchenowl_default
-  linkwarden:
-    external: true
-    name: linkwarden_default
   media:
     external: true
     name: media_default
