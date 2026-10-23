@@ -99,12 +99,47 @@ services:
         command: serve
         restart: unless-stopped
         environment:
-            - TZ=Europe/Vilnius
+            TZ: Europe/Vilnius
+            NTFY_BASE_URL: https://ntfy.kloud.home.kg
+            NTFY_LISTEN_HTTP: ":81"
+            NTFY_BEHIND_PROXY: "true"
+            NTFY_PROXY_FORWARDED_HEADER: X-Forwarded-For
+            NTFY_WEB_ROOT: /
+            NTFY_KEEPALIVE_INTERVAL: 45s
+            NTFY_MANAGER_INTERVAL: 5m
+            NTFY_ENABLE_METRICS: "false"
+            # Message cache
+            NTFY_CACHE_FILE: /var/cache/ntfy/cache.db
+            NTFY_CACHE_DURATION: 24h
+            NTFY_CACHE_STARTUP_QUERIES: |
+                pragma journal_mode = WAL;
+                pragma synchronous = normal;
+                pragma temp_store = memory;
+                pragma busy_timeout = 15000;
+                vacuum;
+            # Auth
+            NTFY_AUTH_FILE: /etc/ntfy/user.db
+            NTFY_AUTH_DEFAULT_ACCESS: write-only
+            NTFY_AUTH_USERS: ${NTFY_AUTH_USERS}
+            NTFY_ENABLE_SIGNUP: "false"
+            NTFY_REQUIRE_LOGIN: "true"
+            NTFY_ENABLE_LOGIN: "true"
+            NTFY_ENABLE_RESERVATIONS: "true"
+            # Attachments
+            NTFY_ATTACHMENT_CACHE_DIR: /var/cache/ntfy/attachments
+            NTFY_ATTACHMENT_TOTAL_SIZE_LIMIT: 5G
+            NTFY_ATTACHMENT_FILE_SIZE_LIMIT: 100M
+            NTFY_ATTACHMENT_EXPIRY_DURATION: 12h
+            NTFY_TEMPLATE_DIR: /etc/ntfy/templates
+            # Incoming e-mail
+            NTFY_SMTP_SERVER_LISTEN: ":8025"
+            NTFY_SMTP_SERVER_DOMAIN: kloud.home
         ports:
             # SMTP
             - 8025:8025
         volumes:
             - /mnt/sata_500/ntfy/cache:/var/cache/ntfy
+            # user.db + templates
             - /mnt/sata_500/ntfy/config:/etc/ntfy
         networks:
           - default
