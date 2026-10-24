@@ -1,6 +1,9 @@
 #Add repos
 source /etc/os-release
 
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SERVER_DIR="$(dirname "$HERE")"
+
 sudo zypper addrepo https://download.opensuse.org/repositories/devel:tools/$VERSION/devel:tools.repo
 sudo zypper addrepo -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/' packman
 sudo zypper addrepo -f https://download.opensuse.org/repositories/Kernel:/stable:/Backport/$VERSION/ kernel-backport
@@ -78,7 +81,7 @@ sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../hass-watchdog/instal
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
 # Saved system configs, home directories, and decrypted env files
-python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/backup.py" restore
+python3 "$SERVER_DIR/backup.py" restore
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now disable-wifi-card.service
