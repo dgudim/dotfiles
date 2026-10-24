@@ -10,3 +10,5 @@ source auto
 
 ignore "General" "GlobalMuteSources"
 ignore "General" "GlobalMuteSourcesMutedDevices"
+ignore "General" "GlobalMuteSinks"
+ignore "General" "GlobalMuteSinksMutedDevices"
