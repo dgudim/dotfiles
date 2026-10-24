@@ -41,7 +41,6 @@ services:
             - HOMEPAGE_VAR_NEXTCLOUD_AIO_URL=${NEXTCLOUD_AIO_TLS_URL}
             - HOMEPAGE_VAR_ROUTER_URL=${ROUTER_URL}
             - HOMEPAGE_VAR_NEXTCLOUD_URL=${NEXTCLOUD_URL}
-            - HOMEPAGE_VAR_ATLAS_URL=${ATLAS_URL}
         volumes:
             - ./config/homepage:/app/config
             - /var/run/docker.sock:/var/run/docker.sock:ro

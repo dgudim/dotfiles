@@ -68,6 +68,7 @@ services:
         volumes:
             - /mnt/sata_500/victoria/metrics:/victoria-metrics-data
             - ./config/victoria-metrics:/etc/vm:ro
+
     netdata:
         image: netdata/netdata:stable
         container_name: netdata
@@ -101,7 +102,7 @@ services:
             - SYS_PTRACE
             - SYS_ADMIN
         security_opt:
-            - apparmor:unconfined
+            - apparmor=unconfined
         volumes:
             - ./config/netdata:/etc/netdata
             - /mnt/sata_500/netdata/lib:/var/lib/netdata

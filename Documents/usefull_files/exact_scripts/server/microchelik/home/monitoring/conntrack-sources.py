@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
 """Push conntrack traffic to VictoriaMetrics and VictoriaLogs.
 
-Every flow is rolled up by country and protocol as the bytes seen since the previous run.
-Remote addresses are written to VictoriaLogs, with a reverse DNS name when one exists.
+Every flow between this server and a peer outside it is rolled up by country and protocol as
+the bytes seen since the previous run. Remote addresses are written to VictoriaLogs, with a
+reverse DNS name when one exists.
+
+A flow that opens and closes between two runs is only counted if conntrack still lists it
+(closed TCP connections stay in TIME_WAIT for 2 minutes), so run this every minute or so.
 """
 
 import fcntl
 import ipaddress
 import json
+import os
 import re
 import socket
+import struct
 import time
 import urllib.request
 from collections import defaultdict
@@ -60,6 +66,30 @@ def local_ips():
                 continue
             found.add(ipaddress.IPv6Address(int(parts[0], 16)))
     except FileNotFoundError:
+        pass
+    return found
+
+
+def docker_networks():
+    """Subnets of the Docker bridges (docker0, br-*), from the host routing table."""
+    found = []
+    try:
+        for line in open("/proc/net/route", encoding="utf-8").read().splitlines()[1:]:
+            parts = line.split()
+            if len(parts) > 7 and (parts[0] == "docker0" or parts[0].startswith("br-")):
+                dest = socket.inet_ntoa(struct.pack("<I", int(parts[1], 16)))
+                mask = socket.inet_ntoa(struct.pack("<I", int(parts[7], 16)))
+                found.append(ipaddress.ip_network(f"{dest}/{mask}", strict=False))
+    except OSError:
+        pass
+    try:
+        for line in open("/proc/net/ipv6_route", encoding="utf-8"):
+            parts = line.split()
+            if len(parts) == 10 and (parts[9] == "docker0" or parts[9].startswith("br-")):
+                net = ipaddress.ip_network((ipaddress.IPv6Address(int(parts[0], 16)), int(parts[1], 16)), strict=False)
+                if net.prefixlen > 0 and not net.is_link_local and not net.is_multicast:
+                    found.append(net)
+    except OSError:
         pass
     return found
 
@@ -125,6 +155,7 @@ def read_flows():
             flows[key] = (
                 proto,
                 original[0],
+                original[1],
                 int(original[4]),
                 reply[0],
                 int(reply[4]),
@@ -141,7 +172,6 @@ def load_state():
 
 
 def save_state(state):
-    import os
     temporary = STATE_PATH + ".tmp"
     with open(temporary, "w", encoding="utf-8") as handle:
         json.dump(state, handle, separators=(",", ":"))
@@ -161,36 +191,46 @@ def note_ip(ip_bytes, cache, reader, addr, proto, nbytes):
     ip_bytes[(addr, proto)] += nbytes
 
 
-def attribute(origin_src, origin_bytes, reply_src, reply_bytes, proto, local, received, sent, countries, cache, reader, ip_bytes):
+def is_server(addr, local, docker_nets):
+    return addr in local or any(addr in net for net in docker_nets)
+
+
+def flow_peer(orig_src, orig_dst, reply_src, local, docker_nets):
+    """The peer outside this server, and whether the server opened the flow.
+
+    The server is its own addresses plus its Docker networks, so the hops between Caddy, the
+    containers and their databases are left out. A connection to a published port is DNATed
+    to a container, so its reply comes from the container instead of the dialled address.
+    None for internal and forwarded flows.
+    """
+    if is_server(orig_src, local, docker_nets):
+        if is_server(orig_dst, local, docker_nets):
+            return None
+        peer, outbound = orig_dst, True
+    elif is_server(reply_src, local, docker_nets):
+        peer, outbound = orig_src, False
+    else:
+        return None
+    if is_skipped(peer):
+        return None
+    return peer, outbound
+
+
+def attribute(flow, orig_bytes, reply_bytes, local, docker_nets, countries, cache, reader, ip_bytes):
+    proto, orig_src, orig_dst, _, reply_src, _ = flow
     try:
-        origin = ipaddress.ip_address(origin_src)
-        reply = ipaddress.ip_address(reply_src)
+        addrs = [ipaddress.ip_address(addr) for addr in (orig_src, orig_dst, reply_src)]
     except ValueError:
         return
-    origin_local = origin in local
-    reply_local = reply in local
-    if origin_local and not reply_local and not is_skipped(reply):
-        sent[reply_src] += origin_bytes
-        received[reply_src] += reply_bytes
-        add_country(countries, cache, reader, reply_src, proto, "tx", origin_bytes)
-        add_country(countries, cache, reader, reply_src, proto, "rx", reply_bytes)
-        note_ip(ip_bytes, cache, reader, reply_src, proto, origin_bytes + reply_bytes)
-    elif reply_local and not origin_local and not is_skipped(origin):
-        received[origin_src] += origin_bytes
-        sent[origin_src] += reply_bytes
-        add_country(countries, cache, reader, origin_src, proto, "rx", origin_bytes)
-        add_country(countries, cache, reader, origin_src, proto, "tx", reply_bytes)
-        note_ip(ip_bytes, cache, reader, origin_src, proto, origin_bytes + reply_bytes)
-    elif not origin_local and not reply_local:
-        if not is_skipped(origin):
-            received[origin_src] += origin_bytes
-            add_country(countries, cache, reader, origin_src, proto, "rx", origin_bytes)
-            note_ip(ip_bytes, cache, reader, origin_src, proto, origin_bytes)
-        if not is_skipped(reply):
-            received[reply_src] += reply_bytes
-            add_country(countries, cache, reader, reply_src, proto, "rx", reply_bytes)
-            note_ip(ip_bytes, cache, reader, reply_src, proto, reply_bytes)
-
+    found = flow_peer(*addrs, local, docker_nets)
+    if found is None:
+        return
+    peer, outbound = found
+    sent, received = (orig_bytes, reply_bytes) if outbound else (reply_bytes, orig_bytes)
+    peer = str(peer)
+    add_country(countries, cache, reader, peer, proto, "tx", sent)
+    add_country(countries, cache, reader, peer, proto, "rx", received)
+    note_ip(ip_bytes, cache, reader, peer, proto, sent + received)
 
 
 def lookup_domain(addr, cache):
@@ -238,12 +278,11 @@ def main():
         return
     now = time.time()
     local = local_ips()
+    docker_nets = docker_networks()
     flows = read_flows()
     state = load_state()
     previous = state.get("flows") or {}
     previous_ts = state.get("ts")
-    received = defaultdict(int)
-    sent = defaultdict(int)
     countries = defaultdict(int)
     ip_bytes = defaultdict(int)
     cache = {}
@@ -253,24 +292,15 @@ def main():
     reader = load_geoip()
     try:
         if previous_ts:
-            for _key, (proto, origin_src, origin_bytes, reply_src, reply_bytes) in flows.items():
-                old = previous.get(_key)
-                if not old:
-                    continue
-                attribute(
-                    origin_src,
-                    max(0, origin_bytes - old[0]),
-                    reply_src,
-                    max(0, reply_bytes - old[1]),
-                    proto,
-                    local,
-                    received,
-                    sent,
-                    countries,
-                    cache,
-                    reader,
-                    ip_bytes,
-                )
+            for key, flow in flows.items():
+                orig_bytes, reply_bytes = flow[3], flow[5]
+                old = previous.get(key)
+                if old and orig_bytes >= old[0] and reply_bytes >= old[1]:
+                    orig_bytes -= old[0]
+                    reply_bytes -= old[1]
+                # otherwise the flow is new since the last run (or a new connection reused the
+                # same addresses and ports), so all of it counts
+                attribute(flow, orig_bytes, reply_bytes, local, docker_nets, countries, cache, reader, ip_bytes)
     finally:
         if reader is not None:
             reader.close()
@@ -286,7 +316,7 @@ def main():
     logs = []
     for (addr, proto), amount in sorted(ip_bytes.items()):
         src = cache.get(addr, "unknown")
-        if src == "local" or amount <= 0:
+        if amount <= 0:
             continue
         row = {
             "client_ip": addr,
@@ -303,7 +333,7 @@ def main():
     push_logs(logs)
     save_state({
         "ts": now,
-        "flows": {key: [value[2], value[4]] for key, value in flows.items()},
+        "flows": {key: [value[3], value[5]] for key, value in flows.items()},
         "domains": domains,
     })
     print(

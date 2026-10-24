@@ -21,9 +21,3 @@
         description: Files
         siteMonitor: "{{HOMEPAGE_VAR_NEXTCLOUD_URL}}/login"
         weight: 10
-    - Trip Atlas:
-        icon: mdi-map-marker-path
-        href: "{{HOMEPAGE_VAR_ATLAS_URL}}"
-        description: Trips
-        siteMonitor: "{{HOMEPAGE_VAR_ATLAS_URL}}/"
-        weight: 90

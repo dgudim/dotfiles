@@ -17,11 +17,13 @@ sudo docker run --detach \
 --env APACHE_ADDITIONAL_NETWORK="" \
 --env SKIP_DOMAIN_VALIDATION=false \
 --label caddy_0="${NEXTCLOUD_AIO_SITES}" \
+--label caddy_0.log=access \
 --label caddy_0.reverse_proxy="{{upstreams https 8080}}" \
 --label caddy_0.reverse_proxy.transport=http \
 --label caddy_0.reverse_proxy.transport.tls= \
 --label caddy_0.reverse_proxy.transport.tls_insecure_skip_verify= \
 --label caddy_1="${NEXTCLOUD_AIO_TLS_SITES}" \
+--label caddy_1.log=access \
 --label caddy_1.tls=internal \
 --label caddy_1.reverse_proxy="{{upstreams https 8080}}" \
 --label caddy_1.reverse_proxy.transport=http \

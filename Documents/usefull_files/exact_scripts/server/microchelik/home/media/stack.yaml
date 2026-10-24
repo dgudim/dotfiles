@@ -85,6 +85,7 @@ services:
             homepage.description: "Music analyser"
             homepage.weight: "30"
             caddy: "${AUDIOMUSE_SITES}"
+            caddy.log: access
             caddy.reverse_proxy: "{{upstreams 8000}}"
             caddy_ingress_network: proxy
         ports:
@@ -210,7 +211,7 @@ services:
         environment:
             - TZ=${TZ}
         security_opt:
-            - no-new-privileges:true
+            - no-new-privileges=true
         cap_drop:
             - NET_RAW
         volumes:
@@ -226,6 +227,7 @@ services:
         user: "${PUID}:${PGID}"
         labels:
             caddy: "${GALLERY_TOOLS_SITES}"
+            caddy.log: access
             caddy.reverse_proxy: "{{upstreams 3000}}"
             caddy_ingress_network: proxy
         volumes:
@@ -239,6 +241,9 @@ services:
             - IMMICH_API_KEY=${KLOUD_IMMICH_API_KEY}
             - IMMICH_URL=http://immich-server:2283
             - EXTERNAL_IMMICH_URL=${GALLERY_URL}
+            - AI_BASE_URL=http://llamacpp:8080/v1
+            - AI_MODEL=qwen3.5-4b
+            - AI_API_KEY=none # required, llama-swap has no auth
         networks:
             - default
             - backend

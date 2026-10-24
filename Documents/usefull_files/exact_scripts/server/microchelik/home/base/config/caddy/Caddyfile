@@ -85,9 +85,3 @@ https://{$DNS_HOST}:443 {
 	log access
 	reverse_proxy 127.0.0.1:11000
 }
-
-{$ATLAS_URL} {
-    shield
-	log access
-	reverse_proxy 127.0.0.1:1199
-}

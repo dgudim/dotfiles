@@ -12,7 +12,6 @@ services:
       - DNS_HOST=${DNS_HOST}
       - NEXTCLOUD_URL=${NEXTCLOUD_URL}
       - ROUTER_SITES=${ROUTER_SITES}
-      - ATLAS_URL=${ATLAS_URL}
       - ROUTER_IP=${ROUTER_IP}
     cap_add:
       - NET_ADMIN
@@ -141,7 +140,7 @@ services:
       - backend
 
   cronicle:
-    image: cronicle/edge:latest
+    image: cronicle/edge
     container_name: cronicle
     labels:
       homepage.group: "Infra"
