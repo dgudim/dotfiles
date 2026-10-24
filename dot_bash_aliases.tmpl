@@ -1005,7 +1005,7 @@ setup_ssh_fileshare() {
 
 	echo -e "${GREEN}Made local directory for sharing with the remote${NC}: $local_shared_dir_path"
 
-	/usr/bin/sshfs -o compression=yes -o reconnect -o idmap=user $1:$remote_shared_dir_path "$local_shared_dir_path"
+	/usr/bin/sshfs -o compression=yes -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 -o idmap=user $1:$remote_shared_dir_path "$local_shared_dir_path"
 
 	if [ $? -eq 0 ]; then
 		echo -e "${GREEN}Mounted! [remote]: $remote_shared_dir_path <-> [local]: $local_shared_dir_path${NC}"
