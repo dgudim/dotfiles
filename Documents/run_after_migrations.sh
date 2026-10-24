@@ -79,11 +79,15 @@ rm -fv ~/.local/share/applications/tlauncher.desktop
 
 # Irrelevant
 rm -fv ~/Documents/TODO.txt
+rm -rfv ~/Documents/usefull_files/scripts/server
 
 # Extra file, forgot to chezmoiignore, oops
 rm -fv /home/kloud/.config/wireplumber/wireplumber.conf.d/portable-heater-00-plasma-pa.conf
 
 # Typo
 sudo rm -fv /etc/nanor
+
+# Workaround for chezmoi execute-template (server symlink does not evaluate)
+sudo mkdir -pv /usr/lib/netdata/conf.d
 
 echo -e "${L_GREEN}Done!$NC\n"
