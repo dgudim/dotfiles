@@ -1,0 +1,16 @@
+[Desktop Entry]
+Categories=Utility;
+Comment=Configurator for the open source flight controller software INAV.
+Exec=inav-configurator %U --ozone-platform=x11
+GenericName=INAV Configurator
+Icon=inav-configurator
+Name=INAV Configurator
+NoDisplay=false
+Path=
+PrefersNonDefaultGPU=false
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
