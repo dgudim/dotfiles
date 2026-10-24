@@ -59,6 +59,8 @@ services:
       caddy.reverse_proxy: "127.0.0.1:800"
     image: pihole/pihole:latest
     restart: unless-stopped
+    healthcheck:
+      interval: 60s
     network_mode: host # listens to dns on 530 and http on 800
     environment:
       TZ: ${TZ}
@@ -180,6 +182,8 @@ services:
         caddy.reverse_proxy: "{{upstreams 9091}}"
         caddy_ingress_network: "proxy"
     restart: unless-stopped
+    healthcheck:
+      interval: 60s
     environment:
       X_AUTHELIA_CONFIG_FILTERS: template
       AUTH_DOMAIN: ${AUTH_DOMAIN}
@@ -198,6 +202,8 @@ services:
     # image: ghcr.io/ikawrakow/ik-llama-cpp:cpu-swap
     container_name: llamacpp
     restart: unless-stopped
+    healthcheck:
+      interval: 60s
     user: ${PUID}:${PGID}
     ports:
       - 127.0.0.1:9292:8080

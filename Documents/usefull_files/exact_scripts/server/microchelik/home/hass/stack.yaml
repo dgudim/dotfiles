@@ -13,10 +13,14 @@ services:
           caddy.log: access
           caddy.reverse_proxy: "127.0.0.1:8123"
         restart: unless-stopped
+        # the recorder needs time to flush to the database on shutdown
+        stop_grace_period: 2m
         network_mode: host
         environment:
             - TZ=${TZ}
             - HA_DISABLE_LOG_FILE=1
+            # recorder, read by db_url: !env_var RECORDER_DB_URL in configuration.yaml
+            - RECORDER_DB_URL=postgresql://homeassistant:${HASS_DB_PASS}@127.0.0.1:5432/homeassistant
         devices:
             - /dev/ttyACM0
             - /dev/ttyUSB0
@@ -43,6 +47,8 @@ services:
           caddy.reverse_proxy: "127.0.0.1:6052"
         user: ${PUID}:${PGID}
         restart: unless-stopped
+        healthcheck:
+            interval: 60s
         network_mode: host
         environment:
             - PLATFORMIO_CORE_DIR=.platformio
@@ -57,6 +63,8 @@ services:
         container_name: piper
         user: ${PUID}:${PGID}
         restart: unless-stopped
+        healthcheck:
+            interval: 60s
         command: --voice en_US-glados-medium
         environment:
             - TZ=${TZ}
@@ -70,6 +78,8 @@ services:
       image: rhasspy/wyoming-whisper
       user: ${PUID}:${PGID}
       restart: unless-stopped
+      healthcheck:
+          interval: 60s
       command: --model base-int8 --language en
       environment:
         - TZ=${TZ}

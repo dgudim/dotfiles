@@ -22,6 +22,8 @@ services:
         image: vladgh/minidlna
         container_name: minidlna
         restart: unless-stopped
+        healthcheck:
+            interval: 60s
         network_mode: host
         environment:
             - PUID=${PUID}
@@ -167,6 +169,8 @@ services:
         container_name: immich-server
         user: "${PUID}:${PGID}"
         restart: unless-stopped
+        healthcheck:
+            interval: 60s
         labels:
           caddy: "${GALLERY_URL}"
           caddy.shield: ""
@@ -201,6 +205,8 @@ services:
         container_name: immich-machine-learning
         user: "${PUID}:${PGID}"
         restart: unless-stopped
+        healthcheck:
+            interval: 60s
         environment:
             - TZ=${TZ}
         security_opt:
@@ -214,6 +220,8 @@ services:
 
     immich-power-tools-kloud:
         container_name: immich-power-tools-kloud
+        healthcheck:
+            interval: 60s
         image: ghcr.io/immich-power-tools/immich-power-tools:latest
         user: "${PUID}:${PGID}"
         labels:

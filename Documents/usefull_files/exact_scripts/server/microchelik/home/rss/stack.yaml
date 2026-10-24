@@ -1,7 +1,8 @@
 # Secrets come from .env
 x-ttrss-env: &ttrss-env
   OWNER_UID: ${PUID}
-  OWNER_GID: ${PGID}
+  # not ${PGID}: 100 is the users group in the Alpine 
+  OWNER_GID: "1000"
   TTRSS_DB_HOST: "postgres"
   TTRSS_DB_USER: "ttrss"
   TTRSS_DB_NAME: "ttrss"

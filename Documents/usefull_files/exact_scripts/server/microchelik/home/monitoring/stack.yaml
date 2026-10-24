@@ -17,6 +17,7 @@ services:
         restart: unless-stopped
         networks:
             - default
+            - backend
             - proxy
         environment:
             - GF_SERVER_DOMAIN=grafana.${DOMAIN_LAN}
@@ -28,6 +29,12 @@ services:
             - GF_AUTH_PROXY_HEADER_PROPERTY=username
             - GF_METRICS_ENABLED=false
             - TZ=${TZ}
+            - GF_DATABASE_TYPE=postgres
+            - GF_DATABASE_HOST=postgres:5432
+            - GF_DATABASE_NAME=grafana
+            - GF_DATABASE_USER=grafana
+            - GF_DATABASE_PASSWORD=${GRAFANA_DB_PASS}
+            - GF_DATABASE_SSL_MODE=disable
         volumes:
             - /mnt/sata_500/grafana:/var/lib/grafana
 
@@ -145,23 +152,20 @@ services:
         restart: unless-stopped
         ports:
             - 4040:8080 # For external collectors (the-rock)
-        volumes:
-            - /mnt/sata_500/scrutiny:/opt/scrutiny/config
         environment:
             - TZ=${TZ}
             - SCRUTINY_WEB_INFLUXDB_HOST=scrutiny-influxdb
             - SCRUTINY_WEB_INFLUXDB_PORT=8086
+            - SCRUTINY_WEB_DATABASE_TYPE=postgres
+            - SCRUTINY_WEB_DATABASE_DSN=postgres://scrutiny:${SCRUTINY_DB_PASS}@postgres:5432/scrutiny?sslmode=disable
         depends_on:
             scrutiny-influxdb:
                 condition: service_healthy
         healthcheck:
-            test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
             interval: 60s
-            timeout: 10s
-            retries: 5
-            start_period: 60s
         networks:
           - default
+          - backend
           - proxy
 
     scrutiny-collector:
@@ -201,9 +205,12 @@ services:
           caddy.reverse_proxy: "{{upstreams 3000}}"
           caddy_ingress_network: "proxy"
         restart: unless-stopped
+        healthcheck:
+            interval: 60s
         user: ${PUID}:${PGID}
         environment:
             - TZ=${TZ}
+            - DATABASE_URL=postgres://dockhand:${DOCKHAND_DB_PASS}@postgres:5432/dockhand?sslmode=disable
         group_add:
             - 468 # Docker group for socket access
         volumes:
@@ -213,6 +220,7 @@ services:
             - /mnt/sata_500:/mnt/sata_500
         networks:
           - default
+          - backend
           - proxy
 
     vector:
@@ -257,6 +265,9 @@ networks:
   proxy:
     external: true
     name: proxy
+  backend:
+    external: true
+    name: backend
 
 volumes:
   caddy-access:

@@ -30,12 +30,6 @@ services:
       - /mnt/sata_500/booklore/data:/app/data
       - /mnt/sata_500/booklore/books:/books
       - /mnt/sata_500/booklore/bookdrop:/bookdrop
-    healthcheck:
-      test: wget -q -O - http://localhost:6060/api/v1/healthcheck
-      interval: 60s
-      retries: 5
-      start_period: 60s
-      timeout: 10s
     restart: unless-stopped
     networks:
       - default

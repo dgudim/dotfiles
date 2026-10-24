@@ -28,6 +28,8 @@ services:
           caddy.reverse_proxy: "{{upstreams 3000}}"
           caddy_ingress_network: "proxy"
         restart: unless-stopped
+        healthcheck:
+            interval: 60s
         user: ${PUID}:${PGID}
         environment:
             - TZ=${TZ}
@@ -65,6 +67,8 @@ services:
           caddy.reverse_proxy: "{{upstreams 8010}}"
           caddy_ingress_network: "proxy"
         restart: unless-stopped
+        healthcheck:
+            interval: 60s
         user: ${PUID}:${PGID}
         environment:
             - TZ=${TZ}
@@ -110,19 +114,13 @@ services:
             NTFY_KEEPALIVE_INTERVAL: 45s
             NTFY_MANAGER_INTERVAL: 5m
             NTFY_ENABLE_METRICS: "false"
-            # Message cache
-            NTFY_CACHE_FILE: /var/cache/ntfy/cache.db
+            # Users, tokens, access and message cache
+            NTFY_DATABASE_URL: postgres://ntfy:${NTFY_DB_PASS}@postgres:5432/ntfy?sslmode=disable
             NTFY_CACHE_DURATION: 24h
-            NTFY_CACHE_STARTUP_QUERIES: |
-                pragma journal_mode = WAL;
-                pragma synchronous = normal;
-                pragma temp_store = memory;
-                pragma busy_timeout = 15000;
-                vacuum;
             # Auth
-            NTFY_AUTH_FILE: /etc/ntfy/user.db
             NTFY_AUTH_DEFAULT_ACCESS: write-only
             NTFY_AUTH_USERS: ${NTFY_AUTH_USERS}
+            NTFY_AUTH_TOKENS: ${NTFY_AUTH_TOKENS}
             NTFY_ENABLE_SIGNUP: "false"
             NTFY_REQUIRE_LOGIN: "true"
             NTFY_ENABLE_LOGIN: "true"
@@ -141,11 +139,10 @@ services:
             - 8025:8025
         volumes:
             - /mnt/sata_500/ntfy/cache:/var/cache/ntfy
-            # user.db
-            - /mnt/sata_500/ntfy/config:/etc/ntfy
             - ./config/ntfy/templates:/etc/ntfy-templates:ro
         networks:
           - default
+          - backend
           - proxy
 
     syncthing:
@@ -176,11 +173,7 @@ services:
             - /mnt/sata_500/syncthing/config:/var/syncthing/config
             - chonker-music:/var/syncthing/data/music
         healthcheck:
-            test: curl -fkLsS -m 2 127.0.0.1:8384/rest/noauth/health | grep -o --color=never OK || exit 1
             interval: 5m
-            timeout: 10s
-            retries: 3
-            start_period: 60s
 
     syncthing-relay:
         image: syncthing/relaysrv
@@ -196,7 +189,7 @@ services:
           - /mnt/sata_500/syncthing/relay:/var/strelaysrv
 
     goatcounter:
-        image: arp242/goatcounter:2.7
+        image: arp242/goatcounter
         container_name: goatcounter
         labels:
           homepage.group: "Public"
@@ -247,10 +240,17 @@ services:
         - PUID=${PUID}
         - PGID=${PGID}
         - SPOOLMAN_DIR_LOGS=/tmp/spoolman-logs
+        - SPOOLMAN_DB_TYPE=postgres
+        - SPOOLMAN_DB_HOST=postgres
+        - SPOOLMAN_DB_PORT=5432
+        - SPOOLMAN_DB_NAME=spoolman
+        - SPOOLMAN_DB_USERNAME=spoolman
+        - SPOOLMAN_DB_PASSWORD=${SPOOLMAN_DB_PASS}
       tmpfs:
         - /tmp/spoolman-logs:uid=${PUID},gid=${PGID},mode=0755
       networks:
         - default
+        - backend
         - proxy
 
     atuin:
@@ -263,6 +263,8 @@ services:
           caddy.reverse_proxy: "{{upstreams 8888}}"
           caddy_ingress_network: "proxy"
         restart: unless-stopped
+        healthcheck:
+            interval: 60s
         networks:
             - default
             - backend
@@ -310,11 +312,12 @@ services:
           PLIKD_DEFAULT_ADMIN_PASSWORD: ${PLIK_ADMIN_PASSWORD}
           PLIKD_DATA_BACKEND: file
           PLIKD_DATA_BACKEND_CONFIG: '{"Directory":"/data/files"}'
-          PLIKD_METADATA_BACKEND_CONFIG: '{"Driver":"sqlite3","ConnectionString":"/data/plik.db","Debug":false}'
+          PLIKD_METADATA_BACKEND_CONFIG: '{"Driver":"postgres","ConnectionString":"postgres://plik:${PLIK_DB_PASS}@postgres:5432/plik?sslmode=disable","Debug":false}'
         volumes:
           - /mnt/sata_500/plik/data:/data
         networks:
           - default
+          - backend
           - proxy
 
     linkwarden:
@@ -333,6 +336,8 @@ services:
         caddy_ingress_network: "proxy"
       image: ghcr.io/linkwarden/linkwarden:latest
       restart: unless-stopped
+      healthcheck:
+          interval: 60s
       networks:
         - default
         - backend
@@ -378,10 +383,17 @@ services:
       user: ${PUID}:${PGID}
       environment:
         - JWT_SECRET_KEY=${KITCHENOWL_JWT_SECRET_KEY}
+        - DB_DRIVER=postgresql
+        - DB_HOST=postgres
+        - DB_PORT=5432
+        - DB_NAME=kitchenowl
+        - DB_USER=kitchenowl
+        - DB_PASSWORD=${KITCHENOWL_DB_PASS}
       volumes:
         - /mnt/sata_500/kitchenowl:/data
       networks:
         - default
+        - backend
         - proxy
 
 volumes:
