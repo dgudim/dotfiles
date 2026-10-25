@@ -169,6 +169,43 @@ services:
       - default
       - proxy
 
+  backrest:
+    image: garethgeorge/backrest:latest
+    container_name: backrest
+    hostname: microchelik # restic records it as the snapshots' host
+    labels:
+      homepage.group: "Infra"
+      homepage.name: "Backrest"
+      homepage.icon: "backrest.png"
+      homepage.href: "${BACKREST_URL}"
+      homepage.description: "Backups"
+      homepage.weight: "90"
+      caddy: "${BACKREST_SITES}"
+      caddy.log: access
+      caddy.reverse_proxy: "{{upstreams 9898}}"
+      caddy_ingress_network: "proxy"
+    # Runs as root to read every app's files
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+      - BACKREST_DATA=/data
+      - BACKREST_CONFIG=/config/config.json
+      - XDG_CACHE_HOME=/cache
+      - TMPDIR=/tmp
+    volumes:
+      - /mnt/sata_500/backrest/data:/data
+      - /mnt/sata_500/backrest/config:/config
+      - /mnt/sata_500/backrest/cache:/cache
+      - /mnt/sata_500/backrest/ssh:/root/.ssh # keys for SFTP repos
+      - /mnt/sata_500/backrest/restore:/restore
+      # Same path as on the host, so snapshots show the real paths
+      - /mnt/sata_500:/mnt/sata_500:ro
+    tmpfs:
+      - /tmp:size=1g
+    networks:
+      - default
+      - proxy
+
   authelia:
     image: authelia/authelia:4
     user: "${PUID}:${PGID}"

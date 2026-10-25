@@ -15,9 +15,7 @@
         } 
 	}
 
-    metrics {
-        per_host
-    }
+    metrics
 
 	# Keep request logs out of stderr.
 	log default {

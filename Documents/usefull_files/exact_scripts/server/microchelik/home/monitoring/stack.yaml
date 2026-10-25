@@ -83,10 +83,7 @@ services:
           homepage.widget.url: "http://host.docker.internal:19999"
           caddy: "${NETDATA_SITES}"
           caddy.log: access
-          caddy.@head.method: "HEAD"
-          caddy.1_handle: "@head"
-          caddy.1_handle.respond: "405"
-          caddy.2_handle.reverse_proxy: "127.0.0.1:19999"
+          caddy.reverse_proxy: "127.0.0.1:19999"
         pid: host
         network_mode: host
         restart: unless-stopped

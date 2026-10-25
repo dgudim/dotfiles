@@ -41,6 +41,8 @@ services:
             - HOMEPAGE_VAR_NEXTCLOUD_AIO_URL=${NEXTCLOUD_AIO_TLS_URL}
             - HOMEPAGE_VAR_ROUTER_URL=${ROUTER_URL}
             - HOMEPAGE_VAR_NEXTCLOUD_URL=${NEXTCLOUD_URL}
+        group_add:
+            - 468 # Docker group for socket access
         volumes:
             - ./config/homepage:/app/config
             - /var/run/docker.sock:/var/run/docker.sock:ro
