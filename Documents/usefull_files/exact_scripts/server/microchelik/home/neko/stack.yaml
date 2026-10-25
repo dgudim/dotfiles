@@ -10,7 +10,7 @@ services:
       homepage.description: "Shared browser"
       homepage.weight: "110"
       caddy: "${NEKO_URL}"
-      caddy.shield: ""
+      caddy.import: protect
       caddy.log: access
       caddy.reverse_proxy: "{{upstreams 8080}}"
       caddy_ingress_network: "proxy"

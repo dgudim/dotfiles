@@ -10,7 +10,7 @@ services:
       homepage.description: "Library"
       homepage.weight: "30"
       caddy: "${BOOKLORE_URL}"
-      caddy.shield: ""
+      caddy.import: protect
       caddy.log: access
       caddy.reverse_proxy: "{{upstreams 6060}}"
       caddy_ingress_network: "proxy"

@@ -63,7 +63,7 @@ services:
         container_name: languagetool
         labels:
           caddy: "${LANGUAGETOOL_URL}"
-          caddy.shield: ""
+          caddy.import: protect
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8010}}"
           caddy_ingress_network: "proxy"
@@ -99,7 +99,7 @@ services:
           homepage.description: "Notifications"
           homepage.weight: "60"
           caddy: "${NTFY_URL}"
-          caddy.shield: ""
+          caddy.import: protect
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 81}}"
           caddy_ingress_network: "proxy"
@@ -200,7 +200,7 @@ services:
           homepage.description: "Page views"
           homepage.weight: "100"
           caddy: "${GOATCOUNTER_URL}"
-          caddy.shield: ""
+          caddy.import: protect
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8080}}"
           caddy_ingress_network: "proxy"
@@ -259,7 +259,7 @@ services:
         container_name: atuin
         labels:
           caddy: "${ATUIN_URL}"
-          caddy.shield: ""
+          caddy.import: protect
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8888}}"
           caddy_ingress_network: "proxy"
@@ -291,7 +291,7 @@ services:
           homepage.description: "File drop"
           homepage.weight: "80"
           caddy: "${PLIK_URL}"
-          caddy.shield: ""
+          caddy.import: protect
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8080}}"
           caddy_ingress_network: "proxy"
@@ -331,7 +331,7 @@ services:
         homepage.description: "Bookmarks"
         homepage.weight: "20"
         caddy: "${LINKWARDEN_URL}"
-        caddy.shield: ""
+        caddy.import: protect
         caddy.log: access
         caddy.reverse_proxy: "{{upstreams 3000}}"
         caddy_ingress_network: "proxy"
@@ -377,7 +377,7 @@ services:
         homepage.description: "Groceries"
         homepage.weight: "40"
         caddy: "${KITCHENOWL_URL}"
-        caddy.shield: ""
+        caddy.import: protect
         caddy.log: access
         caddy.reverse_proxy: "{{upstreams 8080}}"
         caddy_ingress_network: "proxy"

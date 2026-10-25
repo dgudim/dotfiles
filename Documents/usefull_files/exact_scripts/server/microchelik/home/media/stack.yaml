@@ -174,7 +174,7 @@ services:
             interval: 60s
         labels:
           caddy: "${GALLERY_URL}"
-          caddy.shield: ""
+          caddy.import: protect
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 2283}}"
           caddy_ingress_network: "proxy"

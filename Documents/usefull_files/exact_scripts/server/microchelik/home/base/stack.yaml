@@ -13,6 +13,7 @@ services:
       - NEXTCLOUD_URL=${NEXTCLOUD_URL}
       - ROUTER_SITES=${ROUTER_SITES}
       - ROUTER_IP=${ROUTER_IP}
+      - CROWDSEC_BOUNCER_KEY=${CROWDSEC_BOUNCER_KEY}
     cap_add:
       - NET_ADMIN
     network_mode: host
@@ -22,6 +23,7 @@ services:
       - /mnt/sata_500/caddy/temp_conf:/config/caddy
       - caddy-access:/var/log/caddy
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/sata_500/vector/geoip:/geoip:ro # GeoLite2 for geoblocking
 
   tailscale:
     image: tailscale/tailscale:latest
@@ -169,6 +171,25 @@ services:
       - default
       - proxy
 
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+      - COLLECTIONS=crowdsecurity/caddy crowdsecurity/http-cve crowdsecurity/base-http-scenarios crowdsecurity/whitelist-good-actors
+      - BOUNCER_KEY_caddy=${CROWDSEC_BOUNCER_KEY}
+      - USE_WAL=true
+    # Local API for Caddy's bouncer
+    ports:
+      - 127.0.0.1:8090:8080
+    volumes:
+      - /mnt/sata_500/crowdsec/data:/var/lib/crowdsec/data
+      - /mnt/sata_500/crowdsec/config:/etc/crowdsec
+      - ./config/crowdsec/acquis.yaml:/etc/crowdsec/acquis.d/caddy.yaml:ro
+      - ./config/crowdsec/whitelist.yaml:/etc/crowdsec/parsers/s02-enrich/kloud-whitelist.yaml:ro
+      - caddy-access:/var/log/caddy:ro
+
   backrest:
     image: garethgeorge/backrest:latest
     container_name: backrest
@@ -214,7 +235,7 @@ services:
     labels:
         caddy: "${AUTHELIA_URL}:443"
         caddy.log: access
-        caddy.shield: ""
+        caddy.import: protect
         caddy.reverse_proxy: "{{upstreams 9091}}"
         caddy_ingress_network: "proxy"
     restart: unless-stopped

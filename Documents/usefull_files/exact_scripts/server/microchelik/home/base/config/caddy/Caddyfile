@@ -2,13 +2,20 @@
 	auto_https disable_redirects
 
     shield {
-		source ipsum_3
+		source ipsum_2
 		source firehol_level1
-		source borestad_abuseipdb_7d
+		source firehol_level2
+		source borestad_abuseipdb_30d
+        
+        allow 10.0.0.0/8
+        allow 172.16.0.0/12
+        #     ^ Docker n stuff
+        allow 127.0.0.0/8
 		allow 100.64.0.0/10 
         #     ^ Tailscale
-        allow {$ROUTER_IP}
+        allow 192.168.0.0/16
         #     ^ Router hairpin back, request from LAN
+
         response {
             header X-Blocked-By "{shield.sources}" 
             header X-Client-IP "{shield.client_ip}"
@@ -17,12 +24,22 @@
 
     metrics
 
+	# Opt in through the (protect) snippet
+	order crowdsec first
+	crowdsec {
+		api_url http://127.0.0.1:8090
+		api_key {$CROWDSEC_BOUNCER_KEY}
+		ticker_interval 15s
+		# Thi is here so (protect) can add blocked headers
+		enable_caddy_error
+	}
+
 	# Keep request logs out of stderr.
 	log default {
 		exclude http.log.access
 	}
 
-	# `log access` on a site writes to logger http.log.access.access.
+	# `log access` on a site writes to logger http.log.access.access
 	log accessfile {
 		output file /var/log/caddy/access.log {
 			mode 0644
@@ -34,7 +51,6 @@
 	}
 
 	# https://zhul.in/en/2025/12/10/caddy-traffic-proxy-on-layer-4/
-
 	# https://github.com/mholt/caddy-l4/blob/master/docs/examples/dns-over-tls.md
 	layer4 {
 		:853 {
@@ -51,6 +67,30 @@
 	}
 }
 
+# Blocklists, CrowdSec and geoblocking for public sites; `caddy.import: protect`
+(protect) {
+	shield
+	crowdsec
+
+	@geoblocked {
+		not client_ip private_ranges 100.64.0.0/10
+		not maxmind_geolocation {
+			db_path /geoip/GeoLite2-Country.mmdb
+			deny_countries CN RU KP IR US FR DE UNK
+		}
+	}
+	header @geoblocked X-Blocked-By "geoblock"
+	header @geoblocked X-Client-IP "{client_ip}"
+	respond @geoblocked 403
+
+	handle_errors 403 {
+		@crowdsec expression `{http.vars.crowdsec.remediation} != ""`
+		header @crowdsec X-Blocked-By "crowdsec-{http.vars.crowdsec.origin}"
+		header @crowdsec X-Client-IP "{client_ip}"
+		respond @crowdsec 403
+	}
+}
+
 # NOTE!! Container sites come from Docker labels.
 # Those sites need the label `caddy.log: access` to land in the access log.
 
@@ -59,7 +99,7 @@
 }
 
 https://{$DNS_HOST}:443 {
-    shield
+	import protect
 	log access
 	respond "OK" 200
 }
@@ -79,7 +119,7 @@ https://{$DNS_HOST}:443 {
 }
 
 {$NEXTCLOUD_URL} {
-    shield
+	import protect
 	log access
 	reverse_proxy 127.0.0.1:11000
 }

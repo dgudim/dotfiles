@@ -11,7 +11,7 @@ services:
       homepage.description: "Editor"
       homepage.weight: "70"
       caddy: "${CODE_SERVER_URL}"
-      caddy.shield: ""
+      caddy.import: protect
       caddy.log: access
       caddy.reverse_proxy: "{{upstreams 8443}}"
       caddy_ingress_network: "proxy"

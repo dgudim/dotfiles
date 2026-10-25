@@ -119,15 +119,10 @@ services:
         - 9001:9001
 
     power-mqtt:
-      build:
-        context: .
-        dockerfile_inline: |
-          FROM python:3.13-slim
-          RUN pip install --no-cache-dir paho-mqtt
+      image: python:3.13-slim
       container_name: power-mqtt
       network_mode: host
       restart: unless-stopped
-      user: '${PUID}:${PGID}'
       environment:
         - TZ=${TZ}
         - MQTT_HOST=127.0.0.1
@@ -136,5 +131,5 @@ services:
         - MQTT_PASSWORD=${MQTT_PASSWORD}
       volumes:
         - /home/kloud/hass/power-mqtt.py:/app/power-mqtt.py:ro
-      command: ["python", "-u", "/app/power-mqtt.py"]
+      command: ["sh", "-c", "pip install --no-cache-dir paho-mqtt >/dev/null && python -u /app/power-mqtt.py"]
 

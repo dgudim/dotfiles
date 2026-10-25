@@ -55,7 +55,7 @@ services:
       homepage.description: "Feeds"
       homepage.weight: "50"
       caddy: "${TTRSS_URL}"
-      caddy.shield: ""
+      caddy.import: protect
       caddy.log: access
       caddy.reverse_proxy: "{{upstreams 80}}"
       caddy_ingress_network: "proxy"
