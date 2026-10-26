@@ -12,36 +12,47 @@ HOME_FILES = [
 ]
 
 SYSTEM_FILES = [
-    backup_only("/etc/fstab"),
 
-    "/etc/nanorc",
-
-    # Board: device-tree overlays (pwm fan).
-    backup_only("/boot/armbianEnv.txt"),
-    "/etc/default/cpufrequtils",
-    "/etc/udev/rules.d/*.rules",
-
-    "/etc/modprobe.d/zfs.conf",
-    secret("/etc/zfs/zed.d/zed.rc"), # Has ntfy token
-
-    # NFS server
-    "/etc/exports",
-    "/etc/nfs.conf",
+    # Journal in-ram
+    "/etc/systemd/journald.conf",
+    "/etc/systemd/journald.conf.d/volatile.conf",
+    "/etc/systemd/journal-remote.conf",
+    # Logs: journal in RAM, upload to microchelik
+    "/etc/systemd/journal-upload.conf",
+    "/etc/systemd/system/systemd-journal-upload.service.d/override.conf",
 
     # Docker
     "/etc/docker/daemon.json",
 
-    # Logs: journal in RAM, upload to microchelik; disable armbian-ramlog
-    "/etc/systemd/journald.conf",
-    "/etc/systemd/journald.conf.d/volatile.conf",
-    "/etc/systemd/journal-upload.conf",
-    "/etc/systemd/system/systemd-journal-upload.service.d/override.conf",
+    # Base system
+    "/etc/fstab",
+    "/etc/nanorc",
+    "/etc/udev/rules.d/*.rules",
+    "/etc/default/cpufrequtils",
+    "/etc/locale.gen",
+    "/etc/default/locale",
+    # Board: device-tree overlays (pwm fan).
+    backup_only("/boot/armbianEnv.txt"),
+
+    # Storage
+    "/etc/modprobe.d/zfs.conf",
+    secret("/etc/zfs/zed.d/zed.rc"), # Has ntfy token
+    # NFS server
+    "/etc/exports",
+    "/etc/nfs.conf",
+
+    # disable armbian-ramlog + zram
     "/etc/default/armbian-ramlog",
     "/etc/default/armbian-zram-config",
 
-    # System
+    # Networking
+    "/etc/hosts",
+    "/etc/hostname",
     "/etc/ssh/sshd_config",
-    "/etc/locale.gen",
-    "/etc/default/locale",
     "/etc/systemd/resolved.conf",
+    "/etc/nsswitch.conf",
+    "/etc/avahi/avahi-daemon.conf",
+
+    # Hass UPS
+    secret("/opt/hass-power-monitor/hass-power-monitor-config.json")
 ]

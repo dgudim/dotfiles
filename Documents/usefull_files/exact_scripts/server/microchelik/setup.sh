@@ -1,12 +1,15 @@
-#Add repos
+set -euo pipefail
 source /etc/os-release
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SERVER_DIR="$(dirname "$HERE")"
 
+sudo hostnamectl set-hostname microchelik
+sudo loginctl enable-linger kloud
+
 sudo zypper addrepo https://download.opensuse.org/repositories/devel:tools/$VERSION/devel:tools.repo
 sudo zypper addrepo -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_$releasever/' packman
-sudo zypper addrepo -f https://download.opensuse.org/repositories/Kernel:/stable:/Backport/$VERSION/ kernel-backport
+# sudo zypper addrepo -f https://download.opensuse.org/repositories/Kernel:/stable:/Backport/$VERSION/ kernel-backport
 
 sudo zypper refresh
 sudo zypper dist-upgrade --from packman --allow-vendor-change
@@ -19,28 +22,7 @@ zypper modifyrepo --refresh packman
 sudo zypper install \
 chrony dbus-broker docker docker-compose \
 NetworkManager systemd-resolved nss-mdns openssh-sftp-server \
-systemd-journal-remote
-
-# Network setup
-sudo ln -sfv /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-
-sudo systemctl enable dbus-broker
-sudo systemctl enable --now \
-NetworkManager systemd-resolved avahi-daemon sshd \
-bluetooth chronyd docker fstrim.timer
-
-sudo hostnamectl set-hostname microchelik
-sudo loginctl enable-linger kloud
-
-# Unneeded + replaced with scrutiny
-sudo systemctl disable --now firewalld apparmor smartd
-sudo systemctl mask firewalld apparmor smartd
-sudo systemctl disable --now btrfs-balance.timer btrfsmaintenance-refresh.path btrfs-scrub.timer
-
-# Audio deps
-sudo zypper install \
-pipewire wireplumber pipewire-pulseaudio pulseaudio-utils dfu-util pipewire-alsa \
-alsa-firmware alsa-plugins bluez bluez-firmware bluez-auto-enable-devices
+systemd-journal-remote \
 
 # Different utils (Bindfs is for nextcloud)
 sudo zypper install \
@@ -53,10 +35,10 @@ python313-uv python313-pip tmux ouch strace \
 libva-utils libvulkan_intel \
 libhidapi-hidraw0 pkgconf hunspell cronie cronie-anacron
 
-sudo systemctl enable --now cron
-
-# Handled by scrutiny
-sudo zypper remove smartmontools
+# Audio deps
+sudo zypper install \
+pipewire wireplumber pipewire-pulseaudio pulseaudio-utils dfu-util pipewire-alsa \
+alsa-firmware alsa-plugins bluez bluez-firmware bluez-auto-enable-devices
 
 # Headless: desktop, browser, office, and unused services
 sudo zypper remove \
@@ -71,17 +53,32 @@ xorg-x11-server xorg-x11-essentials xorg-x11-server-extra x11-tools xorg-x11-fon
 cockpit cockpit-packages cockpit-bridge \
 snapper firewalld cups dnsmasq file-roller
 
+# Handled by scrutiny
+sudo zypper remove smartmontools
+
+# Network setup
+sudo ln -sfv /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+sudo systemctl enable dbus-broker
+sudo systemctl enable --now \
+NetworkManager systemd-resolved avahi-daemon sshd \
+bluetooth chronyd docker fstrim.timer
+
+# Unneeded + replaced with scrutiny
+sudo systemctl disable --now firewalld apparmor smartd
+sudo systemctl mask firewalld apparmor smartd
+sudo systemctl disable --now btrfs-balance.timer btrfsmaintenance-refresh.path btrfs-scrub.timer
+sudo systemctl enable --now cron
+
 sudo systemctl disable --now auditd
 sudo systemctl mask auditd
-
-[ -L /etc/resolv.conf ] || sudo ln -fvs /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../hass-watchdog/install.sh"
 
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
 # Saved system configs, home directories, and decrypted env files
-python3 "$SERVER_DIR/backup.py" restore
+sudo python3 "$SERVER_DIR/backup.py" restore
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now disable-wifi-card.service

@@ -1,7 +1,7 @@
 OWNER = (1000, 100)  # owner of the files written into this repo
 
 HOME_FOLDERS_TO_IGNORE = [
-    "album",
+    "album/travel-album-v2",
     "dotfiles",
 ]
 
@@ -12,43 +12,56 @@ HOME_FILES = [
     ".bashrc",
     ".config/atuin/config.toml",
     "run_nextcloud.sh",
+    "base_env_definitions",
+    "relabel-containers.py"
 ]
 
 SYSTEM_FILES = [
-
-    # Journal in-ram + dir for vector
+    # Journal in-ram
     "/etc/systemd/journald.conf.d/volatile.conf",
     "/etc/systemd/journal-upload.conf",
-    "/etc/systemd/journal-remote.conf",
+    # Dir for vector
     "/etc/tmpfiles.d/journal-remote.conf",
+    # log upload config (from the-rock)
+    "/etc/systemd/journal-remote.conf",
     "/etc/systemd/system/systemd-journal-remote.service.d/override.conf",
 
+    # Docker
     "/etc/docker/daemon.json",
 
+    # Base system
     "/etc/fstab",
-
-    "/etc/default/grub",
     "/etc/nanorc",
+    "/etc/udev/rules.d/*.rules",
+    "/etc/default/grub",
+    "/etc/locale.conf",
+
+    # Settings for monitoring
     "/etc/sysctl.d/99-conntrack-acct.conf",
     "/etc/modules-load.d/nf_conntrack.conf",
     "/etc/sysctl.d/91-ulimit.conf",
-
     "/etc/security/limits.d/90-nproc.conf",
+
+    # Useless wifi
     "/etc/systemd/system/disable-wifi-card.service",
+
+    # Storage, NFS
+    "/etc/nfs.conf.d/99-rahead.conf",
+    "/etc/cachefilesd.conf",
 
     # Zram
     "/etc/sysctl.d/99-zram.conf",
     "/etc/systemd/zram-generator.conf",
 
-    # NFS
-    "/etc/nfs.conf.d/99-rahead.conf",
-    "/etc/cachefilesd.conf"
-
-    # System
+    # Networking
     "/etc/hosts",
+    "/etc/hostname",
+    "/etc/ssh/sshd_config",
     "/etc/systemd/resolved.conf",
     "/etc/nsswitch.conf",
     "/etc/avahi/avahi-daemon.conf",
-    "/etc/locale.conf",
-    "/etc/ssh/sshd_config",
+    "/etc/NetworkManager/system-connections/eth0.nmconnection",
+
+    # Hass UPS
+    secret("/opt/hass-power-monitor/hass-power-monitor-config.json")
 ]
