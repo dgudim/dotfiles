@@ -54,7 +54,11 @@
 	# https://github.com/mholt/caddy-l4/blob/master/docs/examples/dns-over-tls.md
 	layer4 {
 		:853 {
-			@dot tls sni {$DNS_HOST}
+			# Only the DoT hostname, and only from IPs CrowdSec hasn't banned
+			@dot {
+				tls sni {$DNS_HOST}
+				crowdsec
+			}
 			route @dot {
 				tls {
 					connection_policy {
@@ -70,7 +74,22 @@
 # Blocklists, CrowdSec and geoblocking for public sites; `caddy.import: protect`
 (protect) {
 	shield
-	crowdsec
+
+	# LAN, Docker, localhost and Tailscale skip the CrowdSec check
+	@untrusted not client_ip private_ranges 100.64.0.0/10
+	crowdsec @untrusted
+
+	# Per client and site ratelimit
+	rate_limit {
+		zone per_client {
+			match {
+				not client_ip private_ranges 100.64.0.0/10
+			}
+			key {client_ip}
+			events 3500
+			window 1m
+		}
+	}
 
 	@geoblocked {
 		not client_ip private_ranges 100.64.0.0/10
@@ -82,6 +101,12 @@
 	header @geoblocked X-Blocked-By "geoblock"
 	header @geoblocked X-Client-IP "{client_ip}"
 	respond @geoblocked 403
+
+	handle_errors 429 {
+		header X-Blocked-By "ratelimit"
+		header X-Client-IP "{client_ip}"
+		respond 429
+	}
 
 	handle_errors 403 {
 		@crowdsec expression `{http.vars.crowdsec.remediation} != ""`

@@ -2,12 +2,14 @@ services:
   caddy:
     build:
       context: .
-      dockerfile: CaddyL4.Dockerfile
+      dockerfile: Caddy.Dockerfile
     container_name: caddy
     restart: unless-stopped
     environment:
       - TZ=${TZ}
       - CADDY_INGRESS_NETWORKS=proxy
+      # Reject an invalid Caddyfile as a whole instead of dropping blocks
+      - CADDY_DOCKER_PROCESS_CADDYFILE=false
       # For {$...} in the Caddyfile
       - DNS_HOST=${DNS_HOST}
       - NEXTCLOUD_URL=${NEXTCLOUD_URL}
@@ -205,7 +207,6 @@ services:
       caddy.log: access
       caddy.reverse_proxy: "{{upstreams 9898}}"
       caddy_ingress_network: "proxy"
-    # Runs as root to read every app's files
     restart: unless-stopped
     environment:
       - TZ=${TZ}
@@ -221,6 +222,7 @@ services:
       - /mnt/sata_500/backrest/restore:/restore
       # Same path as on the host, so snapshots show the real paths
       - /mnt/sata_500:/mnt/sata_500:ro
+      - nfs-ssd:/the-rock-ssd
     tmpfs:
       - /tmp:size=1g
     networks:
@@ -278,10 +280,18 @@ networks:
     name: backend
 
 volumes:
-  # Caddy access log, read by vector in the monitoring stack
+  # Caddy access log, read by vector and crowdsec, written by caddy obv
   caddy-access:
     name: caddy-access
     driver_opts:
       type: tmpfs
       device: tmpfs
       o: size=192m
+
+  nfs-ssd:
+    driver: local
+    name: chonker-ssd
+    driver_opts:
+      type: nfs
+      o: addr=${THE_ROCK_IP},rw,hard,async,noatime,nconnect=2,vers=4.1
+      device: ":/mnt/ssd1"

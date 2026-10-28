@@ -1,0 +1,12 @@
+# Applied to everything VictoriaMetrics ingests (-relabelConfig).
+# Home Assistant pushes InfluxDB line protocol: metric names are "<domain>.<object_id>_<field>",
+# the only metric names here that contain a dot.
+
+# Keep only the value and state fields, not the attributes
+- action: drop
+  if: '{__name__=~"[a-z_]+[.].+", __name__!~".+_(value|state)"}'
+
+# Keep only the entity, its name, unit and domain as labels
+- action: labelkeep
+  if: '{__name__=~"[a-z_]+[.].+"}'
+  regex: "__name__|entity_id|friendly_name|unit_of_measurement|domain"

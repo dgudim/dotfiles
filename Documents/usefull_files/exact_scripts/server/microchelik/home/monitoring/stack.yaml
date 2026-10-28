@@ -54,7 +54,7 @@ services:
     victoria-metrics:
         image: victoriametrics/victoria-metrics:latest
         container_name: victoria-metrics
-        command: -storageDataPath=/victoria-metrics-data -retentionPeriod=5y -dedup.minScrapeInterval=10s -promscrape.config=/etc/vm/scrape-config.yml
+        command: -storageDataPath=/victoria-metrics-data -retentionPeriod=5y -dedup.minScrapeInterval=10s -promscrape.config=/etc/vm/scrape-config.yml -relabelConfig=/etc/vm/relabel.yml
         user: ${PUID}:${PGID}
         restart: unless-stopped
         environment:
