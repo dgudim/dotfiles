@@ -709,8 +709,8 @@ git-filter-repo
 mergiraf
 difftastic
 github-cli
-rust
-rust-src
+mingw-w64-gcc
+rustup
 cargo-cache
 cargo-binstall
 cargo-run-bin

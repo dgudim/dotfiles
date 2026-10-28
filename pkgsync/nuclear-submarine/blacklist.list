@@ -105,7 +105,3 @@ pstoedit
 img2pdf
 dot2tex
 scour
-
-
-# Replaced with rustup + crosscompile
-rust
