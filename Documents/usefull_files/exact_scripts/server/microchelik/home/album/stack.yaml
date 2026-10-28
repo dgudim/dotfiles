@@ -1,0 +1,49 @@
+services:
+    atlas:
+        build: ./travel-album-v2
+        container_name: atlas
+        user: ${PUID}:${PGID}
+        labels:
+            homepage.group: "Public"
+            homepage.name: "Trip Atlas"
+            homepage.icon: "mdi-map-marker-path"
+            homepage.href: "${ATLAS_URL}"
+            homepage.description: "Trips"
+            homepage.weight: "90"
+            caddy: "${ATLAS_URL}"
+            caddy.import: protect
+            caddy.log: access
+            caddy.reverse_proxy: "{{upstreams 8080}}"
+            caddy_ingress_network: "proxy"
+        restart: unless-stopped
+        healthcheck:
+            interval: 60s
+        environment:
+            - TZ=${TZ}
+            - ATLAS_PUBLIC_URL=${ATLAS_URL}
+            - ATLAS_OIDC_ISSUER=${AUTHELIA_URL}
+            - ATLAS_OIDC_CLIENT_SECRET=${ATLAS_OIDC_CLIENT_SECRET}
+            - ATLAS_DB_URL=postgresql+psycopg://atlas:${ATLAS_DB_PASSWORD}@postgres:5432/atlas
+            - ATLAS_VAAPI_DEVICE=/dev/dri/renderD128
+        volumes:
+            - /mnt/sata_500/trip_atlas_media/data:/data
+            - /mnt/sata_500/trip_atlas_media/import:/import:ro
+            - /mnt/sata_500/trip_atlas_media/backups:/backups
+        devices:
+            - /dev/dri:/dev/dri
+        group_add:
+            - "481" # video group
+            - "484" # render group
+        stop_grace_period: 60s
+        networks:
+            - default
+            - backend
+            - proxy
+
+networks:
+  proxy:
+    external: true
+    name: proxy
+  backend:
+    external: true
+    name: backend

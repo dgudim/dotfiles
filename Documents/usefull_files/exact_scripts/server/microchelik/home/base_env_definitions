@@ -1,0 +1,73 @@
+# Shared by every stack
+TZ=Europe/Vilnius
+PUID=1000
+PGID=100
+
+DOMAIN_LAN=kloud.home
+DOMAIN_VPN=kloud.vpn
+DOMAIN_PUBLIC=kloud.home.kg
+
+SERVER_LAN_IP=192.168.50.180
+SERVER_VPN_IP=100.108.149.90
+ROUTER_IP=192.168.50.1
+THE_ROCK_IP=192.168.50.137
+PUBLIC_IP=78.62.132.3
+
+# LAN + VPN services
+HOMEPAGE_URL=http://${DOMAIN_LAN}
+HOMEPAGE_SITES="${HOMEPAGE_URL}, http://${DOMAIN_VPN}"
+HASS_URL=http://hass.${DOMAIN_LAN}
+HASS_SITES="${HASS_URL}, http://hass.${DOMAIN_VPN}"
+ESPHOME_URL=http://hass-esphome.${DOMAIN_LAN}
+ESPHOME_SITES="${ESPHOME_URL}, http://hass-esphome.${DOMAIN_VPN}"
+SPOOLMAN_URL=http://spoolman.${DOMAIN_LAN}
+SPOOLMAN_SITES="${SPOOLMAN_URL}, http://spoolman.${DOMAIN_VPN}"
+GRAFANA_URL=http://grafana.${DOMAIN_LAN}
+GRAFANA_SITES="${GRAFANA_URL}, http://grafana.${DOMAIN_VPN}"
+NETDATA_URL=http://metrics.${DOMAIN_LAN}
+NETDATA_SITES="${NETDATA_URL}, http://metrics.${DOMAIN_VPN}"
+SCRUTINY_URL=http://smart.${DOMAIN_LAN}
+SCRUTINY_SITES="${SCRUTINY_URL}, http://smart.${DOMAIN_VPN}"
+CRONICLE_URL=http://cron.${DOMAIN_LAN}
+CRONICLE_SITES="${CRONICLE_URL}, http://cron.${DOMAIN_VPN}"
+DOCKHAND_URL=http://docker.${DOMAIN_LAN}
+DOCKHAND_SITES="${DOCKHAND_URL}, http://docker.${DOMAIN_VPN}"
+BACKREST_URL=http://backup.${DOMAIN_LAN}
+BACKREST_SITES="${BACKREST_URL}, http://backup.${DOMAIN_VPN}"
+PIHOLE_URL=http://pihole.${DOMAIN_LAN}
+PIHOLE_SITES="${PIHOLE_URL}, http://pihole.${DOMAIN_VPN}"
+SYNCTHING_URL=http://sync.${DOMAIN_LAN}
+SYNCTHING_SITES="${SYNCTHING_URL}, http://sync.${DOMAIN_VPN}"
+BENTOPDF_URL=http://pdf.${DOMAIN_LAN}
+BENTOPDF_SITES="${BENTOPDF_URL}, http://pdf.${DOMAIN_VPN}"
+NAVIDROME_URL=http://navidrome.${DOMAIN_LAN}
+NAVIDROME_SITES="${NAVIDROME_URL}, http://navidrome.${DOMAIN_VPN}"
+AUDIOMUSE_URL=http://audiomuse.${DOMAIN_LAN}
+AUDIOMUSE_SITES="${AUDIOMUSE_URL}, http://audiomuse.${DOMAIN_VPN}"
+GALLERY_TOOLS_URL=http://photo-tools-kloud.${DOMAIN_LAN}
+GALLERY_TOOLS_SITES="${GALLERY_TOOLS_URL}, http://photo-tools-kloud.${DOMAIN_VPN}"
+NEXTCLOUD_AIO_URL=http://aio.${DOMAIN_LAN}
+NEXTCLOUD_AIO_SITES="${NEXTCLOUD_AIO_URL}, http://aio.${DOMAIN_VPN}"
+NEXTCLOUD_AIO_TLS_URL=https://aio.${DOMAIN_LAN}
+NEXTCLOUD_AIO_TLS_SITES="${NEXTCLOUD_AIO_TLS_URL}, https://aio.${DOMAIN_VPN}"
+ROUTER_URL=https://netw.${DOMAIN_LAN}
+ROUTER_SITES="${ROUTER_URL}, https://netw.${DOMAIN_VPN}"
+
+# Public services
+AUTH_DOMAIN=auth.${DOMAIN_PUBLIC}
+AUTHELIA_URL=https://${AUTH_DOMAIN}
+DNS_HOST=dns.${DOMAIN_PUBLIC}
+ATLAS_URL=https://atlas.${DOMAIN_PUBLIC}
+NEXTCLOUD_URL=https://next.${DOMAIN_PUBLIC}
+NTFY_URL=https://ntfy.${DOMAIN_PUBLIC}
+LINKWARDEN_URL=https://links.${DOMAIN_PUBLIC}
+BOOKLORE_URL=https://books.${DOMAIN_PUBLIC}
+KITCHENOWL_URL=https://kitchenowl.${DOMAIN_PUBLIC}
+TTRSS_URL=https://tt-rss.${DOMAIN_PUBLIC}
+CODE_SERVER_URL=https://code.${DOMAIN_PUBLIC}
+PLIK_URL=https://plik.${DOMAIN_PUBLIC}
+GOATCOUNTER_URL=https://stats.${DOMAIN_PUBLIC}
+ATUIN_URL=https://atuin.${DOMAIN_PUBLIC}
+NEKO_URL=https://neko.${DOMAIN_PUBLIC}
+GALLERY_URL=https://photos.${DOMAIN_PUBLIC}
+LANGUAGETOOL_URL=https://sceakbiryzigvgdfrjbumjvivedwzchd.${DOMAIN_PUBLIC}
