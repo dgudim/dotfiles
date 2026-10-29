@@ -25,7 +25,7 @@ sudo apt full-upgrade
 
 sudo apt install \
 chrony dbus-broker docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
-network-manager systemd-resolved libnss-resolve libnss-mdns libnss-systemd openssh-server openssh-sftp-server \
+systemd-resolved libnss-resolve libnss-mdns libnss-systemd openssh-server openssh-sftp-server \
 systemd-journal-remote \
 avahi-daemon
 
@@ -39,14 +39,14 @@ cron anacron
 
 
 
-# For cu scaling and fan control script
+# For cpu scaling and fan control script
 sudo apt install cpufrequtils hdparm sdparm lm-sensors
 
 # Not needed: nothing reads local mail (ZED posts to ntfy)
 sudo apt remove exim4-base exim4-config exim4-daemon-light plymouth
 
 # Unused services
-sudo apt remove firewalld cups cups-client dnsmasq samba folder2ram unattended-upgrades quota plocate
+sudo apt remove firewalld cups cups-client dnsmasq network-manager samba folder2ram unattended-upgrades quota plocate
 sudo systemctl mask firewalld apparmor auditd rsyslog.service armbian-ramlog.service
 
 # Handled by scrutiny
@@ -63,9 +63,9 @@ sudo ln -sfv /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo systemctl daemon-reload
 
 sudo systemctl enable dbus-broker
-sudo systemctl disable systemd-networkd
+sudo systemctl disable NetworkManager
 sudo systemctl enable --now \
-NetworkManager systemd-resolved avahi-daemon sshd \
+systemd-networkd systemd-resolved avahi-daemon sshd \
 chronyd docker fstrim.timer cron.service anacron.service
 
 sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../hass-watchdog/install.sh"
