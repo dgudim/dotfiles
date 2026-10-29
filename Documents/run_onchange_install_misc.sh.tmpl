@@ -46,3 +46,10 @@ akonadi-db-migrator --newengine sqlite
 
 ## Enable ksm
 sudo install -Dm644 /usr/lib/systemd/system/sddm.service.d/10-ksm.conf /usr/lib/systemd/system/plasmalogin.service.d/10-ksm.conf
+
+## Disable DOT for local connections
+sudo nmcli connection modify BS2Lab_2G connection.dns-over-tls 0 || true
+sudo nmcli connection modify BS2Lab_5G connection.dns-over-tls 0 || true
+sudo nmcli connection modify IDDQD     connection.dns-over-tls 0 || true
+sudo nmcli connection modify IDDQD5G   connection.dns-over-tls 0 || true
+sudo nmcli connection modify eth0      connection.dns-over-tls 0 || true
