@@ -10,6 +10,7 @@ timestamp=1792952533
 [ipv4]
 dns=127.0.0.1;
 dns-search=~kloud.home;
+dns-over-tls=0
 ignore-auto-dns=true
 method=auto
 
