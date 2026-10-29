@@ -20,11 +20,10 @@ from fnmatch import fnmatch
 from glob import has_magic
 from pathlib import Path
 
-USER_DIR = Path(os.environ.get("BACKUP_USER_DIR", "/home/kloud"))
-HOST_ROOT = Path(os.environ.get("BACKUP_HOST_ROOT", "/"))
-DEFAULT_REPO = USER_DIR / "dotfiles/Documents/usefull_files/exact_scripts/server"
-AGE_RECIPIENT = USER_DIR / ".ssh/id_ed25519.pub"
-AGE_IDENTITY = USER_DIR / ".ssh/id_ed25519"
+HOME = Path(os.environ.get("HOME", ""))
+HOST_ROOT = Path(os.environ.get("HOST_ROOT", "/"))
+AGE_RECIPIENT = HOME / ".ssh/id_ed25519.pub"
+AGE_IDENTITY = HOME / ".ssh/id_ed25519"
 
 
 @dataclass(frozen=True)
@@ -247,7 +246,7 @@ class Backup:
         ignored = self.config.home_folders_to_ignore | {"__pycache__"}
         return [
             folder
-            for folder in sorted(USER_DIR.iterdir())
+            for folder in sorted(HOME.iterdir())
             if folder.is_dir() and not folder.name.startswith(".") and folder.name not in ignored
         ]
 
@@ -260,7 +259,7 @@ class Backup:
             backed_up.add(folder.name)
 
         for relative in self.config.home_files:
-            source = USER_DIR / relative
+            source = HOME / relative
             saved = self.home_dir / relative
             if not source.is_file():
                 print(f"Skipping {source}")
@@ -304,9 +303,9 @@ class Backup:
         if not self.home_dir.is_dir():
             print(f"Skipping {self.home_dir}")
             return
-        home_owner = USER_DIR.stat()
+        home_owner = HOME.stat()
         for saved in sorted(self.home_dir.iterdir()):
-            destination = USER_DIR / saved.name
+            destination = HOME / saved.name
             if saved.is_symlink():
                 continue
             if saved.is_dir():
@@ -331,13 +330,10 @@ def detect_host() -> str:
 
 
 def find_host_dir(host: str) -> Path:
-    repos = [Path(os.environ["BACKUP_ROOT"])] if os.environ.get("BACKUP_ROOT") else []
-    repos += [Path(__file__).resolve().parent, DEFAULT_REPO]
-    for repo in repos:
-        if (repo / host / "backup_config.py").is_file():
-            return repo / host
-    searched = ", ".join(str(repo / host / "backup_config.py") for repo in repos)
-    raise SystemExit(f"No backup config for host {host!r} (looked for {searched}). Use --host.")
+    repo = Path(__file__).resolve().parent
+    if (repo / host / "backup_config.py").is_file():
+        return repo / host
+    raise SystemExit(f"No backup config for host {host!r} (looked in {repo}). Use --host.")
 
 
 def main() -> None:
