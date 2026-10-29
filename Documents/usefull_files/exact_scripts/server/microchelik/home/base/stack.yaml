@@ -161,7 +161,7 @@ services:
     restart: unless-stopped
     command: ["manager"]
     extra_hosts:
-      - "the-rock:192.168.50.137" # cronicle worker
+      - "the-rock:${THE_ROCK_IP}" # cronicle worker
     environment:
       - TZ=${TZ}
       - CRONICLE_manager=1
