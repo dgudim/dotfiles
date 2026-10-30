@@ -1,0 +1,99 @@
+services:
+  nextcloud-aio-mastercontainer:
+    image: ghcr.io/nextcloud-releases/all-in-one:latest
+    container_name: nextcloud-aio-mastercontainer
+    init: true
+    restart: unless-stopped
+    healthcheck:
+      disable: true
+    ports:
+      - 8080:8080
+    environment:
+      - NEXTCLOUD_DATADIR=/mnt/sata_500/nextcloud_aio/data
+      - NEXTCLOUD_MOUNT=/mnt/sata_500/nextcloud_external_mounts
+      - APACHE_PORT=11000
+      - APACHE_IP_BINDING=0.0.0.0
+      - APACHE_ADDITIONAL_NETWORK=
+      - SKIP_DOMAIN_VALIDATION=false
+    labels:
+      caddy: "${NEXTCLOUD_AIO_SITES}"
+      caddy.log: access
+      caddy.reverse_proxy: "{{upstreams https 8080}}"
+      caddy.reverse_proxy.transport: http
+      caddy.reverse_proxy.transport.tls: ""
+      caddy.reverse_proxy.transport.tls_insecure_skip_verify: ""
+      caddy_1: "${NEXTCLOUD_AIO_TLS_SITES}"
+      caddy_1.log: access
+      caddy_1.tls: internal
+      caddy_1.reverse_proxy: "{{upstreams https 8080}}"
+      caddy_1.reverse_proxy.transport: http
+      caddy_1.reverse_proxy.transport.tls: ""
+      caddy_1.reverse_proxy.transport.tls_insecure_skip_verify: ""
+      caddy_ingress_network: proxy
+    volumes:
+      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
+      - nextcloud_aio_apache:/aio-volumes/apache:ro
+      - nextcloud_aio_database:/aio-volumes/database:ro
+      - nextcloud_aio_database_dump:/aio-volumes/database_dump:ro
+      - nextcloud_aio_elasticsearch:/aio-volumes/elasticsearch:ro
+      - nextcloud_aio_nextcloud:/aio-volumes/nextcloud:ro
+      - nextcloud_aio_redis:/aio-volumes/redis:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - proxy
+
+volumes:
+  nextcloud_aio_mastercontainer:
+    name: nextcloud_aio_mastercontainer
+    driver: local
+    driver_opts:
+      type: auto
+      o: bind
+      device: /mnt/sata_500/nextcloud_aio/mastercontainer
+  nextcloud_aio_apache:
+    name: nextcloud_aio_apache
+    driver: local
+    driver_opts:
+      type: auto
+      o: bind
+      device: /mnt/sata_500/nextcloud_aio/apache
+  nextcloud_aio_database:
+    name: nextcloud_aio_database
+    driver: local
+    driver_opts:
+      type: auto
+      o: bind
+      device: /mnt/sata_500/nextcloud_aio/database
+  nextcloud_aio_database_dump:
+    name: nextcloud_aio_database_dump
+    driver: local
+    driver_opts:
+      type: auto
+      o: bind
+      device: /mnt/sata_500/nextcloud_aio/database_dump
+  nextcloud_aio_elasticsearch:
+    name: nextcloud_aio_elasticsearch
+    driver: local
+    driver_opts:
+      type: auto
+      o: bind
+      device: /mnt/sata_500/nextcloud_aio/elasticsearch
+  nextcloud_aio_nextcloud:
+    name: nextcloud_aio_nextcloud
+    driver: local
+    driver_opts:
+      type: auto
+      o: bind
+      device: /mnt/sata_500/nextcloud_aio/nextcloud
+  nextcloud_aio_redis:
+    name: nextcloud_aio_redis
+    driver: local
+    driver_opts:
+      type: auto
+      o: bind
+      device: /mnt/sata_500/nextcloud_aio/redis
+
+networks:
+  proxy:
+    external: true
+    name: proxy

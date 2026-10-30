@@ -224,7 +224,8 @@ services:
       - /mnt/sata_500/backrest/restore:/restore
       # Same path as on the host, so snapshots show the real paths
       - /mnt/sata_500:/mnt/sata_500:ro
-      - nfs-ssd:/the-rock-ssd
+      - the-rock-ssd:/the-rock-ssd
+      - /mnt/usb_2t:/mnt/usb_2t
     tmpfs:
       - /tmp:size=1g
     networks:
@@ -290,9 +291,9 @@ volumes:
       device: tmpfs
       o: size=192m
 
-  nfs-ssd:
+  the-rock-ssd:
     driver: local
-    name: chonker-ssd
+    name: the-rock-ssd
     driver_opts:
       type: nfs
       o: addr=${THE_ROCK_IP},rw,hard,async,noatime,nconnect=2,vers=4.1

@@ -11,7 +11,6 @@ HOME_FILES = [
     ".gitconfig",
     ".bashrc",
     ".config/atuin/config.toml",
-    "run_nextcloud.sh",
     "base_env_definitions",
     "relabel-containers.py"
 ]

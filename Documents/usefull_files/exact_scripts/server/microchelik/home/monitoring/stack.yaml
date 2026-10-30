@@ -173,9 +173,9 @@ services:
         cap_add:
             - SYS_RAWIO
         devices:
-            - /dev/sda
-            - /dev/sdb
-            - /dev/sdc
+            - /dev/disk/by-id/ata-Samsung_SSD_870_EVO_500GB_S6PYNL0Y121803M:/dev/sda
+            - /dev/disk/by-id/ata-SAMSUNG_SSD_PM851_M.2_2280_256GB_S1D3NSAG621072:/dev/sdb
+            - /dev/disk/by-id/ata-WDC_WD20EARS-00MVWB0_WD-WCAZA1981826:/dev/sdc
         volumes:
             - /run/udev:/run/udev:ro
         environment:
