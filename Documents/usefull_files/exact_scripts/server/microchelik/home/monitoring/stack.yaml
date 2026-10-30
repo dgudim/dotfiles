@@ -175,6 +175,7 @@ services:
         devices:
             - /dev/sda
             - /dev/sdb
+            - /dev/sdc
         volumes:
             - /run/udev:/run/udev:ro
         environment:

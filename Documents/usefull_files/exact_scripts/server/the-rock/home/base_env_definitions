@@ -1,7 +1,10 @@
-# Shared by every stack on the-rock
+# Shared by every stack
 TZ=Europe/Vilnius
 PUID=1000
 PGID=100
 
 # microchelik (Scrutiny API, Cronicle manager)
 SERVER_LAN_IP=192.168.50.180
+
+DOMAIN_PUBLIC=kloud.home.kg
+NTFY_URL=https://ntfy.${DOMAIN_PUBLIC}

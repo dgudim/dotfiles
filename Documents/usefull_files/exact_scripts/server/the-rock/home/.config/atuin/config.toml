@@ -1,1 +1,6 @@
+search_mode = "daemon-fuzzy"
+
+[daemon]
+enabled = true
+autostart = true
 
