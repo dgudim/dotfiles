@@ -1,0 +1,113 @@
+services:
+  collector-zfs:
+    restart: unless-stopped
+    image: ghcr.io/starosdev/scrutiny:latest-collector-zfs
+    container_name: collector-zfs
+    cap_add:
+      - SYS_RAWIO
+    environment:
+      COLLECTOR_ZFS_CRON_SCHEDULE: '*/30 * * * *'
+      COLLECTOR_ZFS_API_ENDPOINT: 'http://${SERVER_LAN_IP}:4040'
+      COLLECTOR_ZFS_HOST_ID: 'the-rock'
+      COLLECTOR_ZFS_RUN_STARTUP: 'true'
+    devices:
+      - "/dev/zfs"
+
+  collector-hdd:
+    restart: unless-stopped
+    image: ghcr.io/starosdev/scrutiny:latest-collector
+    container_name: collector-hdd
+    cap_add:
+      - SYS_RAWIO
+    volumes:
+      - '/run/udev:/run/udev:ro'
+    environment:
+      TZ: ${TZ}
+      COLLECTOR_COMMANDS_METRICS_SMART_ARGS: --xall --json -n standby
+      COLLECTOR_CRON_SCHEDULE: '*/30 * * * *'
+      COLLECTOR_API_ENDPOINT: 'http://${SERVER_LAN_IP}:4040'
+      COLLECTOR_HOST_ID: 'the-rock'
+      COLLECTOR_RUN_STARTUP: 'true'
+    devices:
+      - "/dev/sda"
+      - "/dev/sdb"
+      - "/dev/sdc"
+      - "/dev/sdd"
+      - "/dev/mmcblk1"
+      - "/dev/mmcblk2"
+
+  hawser:
+    image: ghcr.io/finsys/hawser:latest
+    container_name: hawser
+    restart: unless-stopped
+    user: ${PUID}:${PGID}
+    ports:
+      - 2376:2376
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/kloud:/home/kloud:ro
+    group_add:
+      - 116 # Docker group for socket access
+
+  cronicle:
+    image: cronicle/edge
+    container_name: cronicle
+    hostname: the-rock # manager addresses workers by hostname
+    restart: unless-stopped
+    command: ["worker"]
+    ports:
+      - 3012:3012 # For the master node
+    environment:
+      - TZ=${TZ}
+      - CRONICLE_secret_key=${CRONICLE_SECRET_KEY}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: tailscale
+    hostname: the-rock
+    restart: unless-stopped
+    network_mode: host
+    environment:
+#      - TS_AUTHKEY=
+      - TS_EXTRA_ARGS=--accept-dns=true --operator=root
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TZ=${TZ}
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /mnt/emmc/tailscale:/var/lib/tailscale
+      - /run/dbus:/run/dbus
+      - /etc/resolv.conf:/etc/resolv.conf
+    devices:
+      - /dev/net/tun
+
+  netdata:
+    image: netdata/netdata:stable
+    container_name: netdata
+    pid: host
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+    cap_add:
+      - DAC_READ_SEARCH
+      - SYS_PTRACE
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - ./config/netdata:/etc/netdata
+      - /mnt/emmc/netdata/lib:/var/lib/netdata
+      - /:/host/root:ro,rslave
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc/os-release:/host/etc/os-release:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    tmpfs:
+      - /var/cache/netdata:uid=201,gid=201,mode=0770,size=268435456

@@ -1,0 +1,10 @@
+UUID=5cc7f07d-9fdb-4dbf-a061-5c4664fb958f			/		ext4	noatime,defaults,commit=600,errors=remount-ro	0 1
+
+tmpfs /tmp     tmpfs defaults,nosuid 0 0 
+
+/dev/disk/by-uuid/df12c23d-e171-4738-9a80-c2d601601696		/mnt/emmc	ext4	noatime,defaults,commit=240,errors=remount-ro	0 2
+/dev/disk/by-uuid/6afe3229-0457-431a-8f3f-1b009eebc445		/mnt/ssd1	ext4	noatime,defaults,commit=240,nofail	        0 2
+
+/mnt/emmc/var_cache           /var/cache       none           defaults,bind,nofail 0 0
+/mnt/emmc/var_log             /var/log         none           defaults,bind,nofail 0 0
+/mnt/emmc/var_tmp             /var/tmp         none           defaults,bind,nofail 0 0

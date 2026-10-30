@@ -9,6 +9,7 @@ HOME_FILES = [
     ".bashrc",
     ".gitconfig",
     ".config/atuin/config.toml",
+    "base_env_definitions",
 ]
 
 SYSTEM_FILES = [
