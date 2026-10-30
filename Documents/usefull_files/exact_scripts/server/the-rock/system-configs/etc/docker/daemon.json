@@ -1,0 +1,9 @@
+{
+  "data-root": "/mnt/emmc/docker",
+  "log-level": "warn",
+  "log-driver": "journald",
+  "log-opts": {
+    "tag": "{{.Name}}"
+  },
+  "selinux-enabled": true
+}

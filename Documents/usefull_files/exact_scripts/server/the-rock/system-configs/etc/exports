@@ -1,0 +1,2 @@
+/mnt/chonker 192.168.50.0/24(rw,async,crossmnt,no_root_squash,no_subtree_check)
+/mnt/ssd1    192.168.50.0/24(rw,async,no_root_squash,no_subtree_check)
