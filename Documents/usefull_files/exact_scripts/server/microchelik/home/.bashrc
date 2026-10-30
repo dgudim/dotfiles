@@ -25,6 +25,8 @@
 #export PILOTPORT=/dev/pilot
 #export PILOTRATE=115200
 
+export HISTCONTROL=ignorespace:erasedups
+
 test -s ~/.alias && . ~/.alias || true
 
 . "$HOME/.atuin/bin/env"
