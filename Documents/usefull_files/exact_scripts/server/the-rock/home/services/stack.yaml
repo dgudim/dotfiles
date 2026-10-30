@@ -29,12 +29,12 @@ services:
       COLLECTOR_HOST_ID: 'the-rock'
       COLLECTOR_RUN_STARTUP: 'true'
     devices:
-      - "/dev/sda"
-      - "/dev/sdb"
-      - "/dev/sdc"
-      - "/dev/sdd"
-      - "/dev/mmcblk1"
-      - "/dev/mmcblk2"
+      - /dev/disk/by-id/ata-Samsung_SSD_870_EVO_1TB_S75CNX0WA17614D:/dev/sda
+      - /dev/disk/by-id/ata-ST20000NM007D-3DJ103_ZVT7JYBY:/dev/sdb
+      - /dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S3R3NF0J906689N:/dev/sdc
+      - /dev/disk/by-id/ata-ST20000NM007D-3DJ103_ZVT7LMGX:/dev/sdd
+      - /dev/disk/by-id/mmc-USD00_0x54151f60:/dev/mmcblk1
+      - /dev/disk/by-id/mmc-DA4064_0x48f2dd23:/dev/mmcblk2
 
   hawser:
     image: ghcr.io/finsys/hawser:latest
