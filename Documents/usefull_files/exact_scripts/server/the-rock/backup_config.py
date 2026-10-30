@@ -52,6 +52,7 @@ SYSTEM_FILES = [
     "/etc/systemd/resolved.conf",
     "/etc/nsswitch.conf",
     "/etc/avahi/avahi-daemon.conf",
+    "/etc/systemd/network/10-netplan-eth0.network",
 
     # Hass UPS
     secret("/opt/hass-power-monitor/hass-power-monitor-config.json")

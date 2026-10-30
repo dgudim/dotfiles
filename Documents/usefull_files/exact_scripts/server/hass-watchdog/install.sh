@@ -13,8 +13,8 @@ need_root() {
 }
 
 install_deps() {
-    echo "Installing python3 and python3-requests with zypper..."
-    zypper --non-interactive install --no-recommends python3 python3-requests
+    echo "Installing python3 and python3-requests..."
+    zypper --non-interactive install --no-recommends python3 python3-requests || apt install python3 python3-requests
 }
 
 install_files() {

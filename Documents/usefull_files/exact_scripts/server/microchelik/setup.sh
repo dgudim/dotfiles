@@ -38,7 +38,8 @@ waypipe ripgrep fd duf rsync fatrace \
 bindfs age \
 python313-uv python313-pip tmux ouch strace \
 libva-utils libvulkan_intel \
-libhidapi-hidraw0 pkgconf hunspell cronie cronie-anacron
+libhidapi-hidraw0 pkgconf hunspell cronie cronie-anacron \
+hdparm sdparm
 
 # Audio deps
 sudo zypper install \
@@ -53,11 +54,11 @@ sudo zypper remove snapper firewalld cups cups-client dnsmasq samba quota plocat
 sudo systemctl mask firewalld apparmor auditd rsyslog.service
 
 # Handled by scrutiny
-sudo zypper remove smartmontools hdparm sdparm hddtemp
+sudo zypper remove smartmontools hddtemp
 sudo systemctl mask smartd.service hddtemp.service
 sudo systemctl mask btrfs-balance.timer btrfsmaintenance-refresh.path btrfs-scrub.timer
 
-zypper packages --unneeded | awk -F'|' 'NR==0 || NR==1 || NR==2 || NR==3 || NR==4 {next} {print $3}' > list
+sudo zypper packages --unneeded | awk -F'|' 'NR==0 || NR==1 || NR==2 || NR==3 || NR==4 {next} {print $3}' > list
 while read p; do sudo zypper info $p && sudo zypper se --requires $p && sudo zypper rm $p; done  < list
 rm -rf list
 
