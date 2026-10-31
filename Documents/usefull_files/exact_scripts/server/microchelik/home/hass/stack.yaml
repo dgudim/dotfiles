@@ -72,7 +72,7 @@ services:
             - 127.0.0.1:10200:10200
         volumes:
             - /mnt/sata_500/piper:/data
-    
+
     whisper:
       container_name: whisper
       image: rhasspy/wyoming-whisper

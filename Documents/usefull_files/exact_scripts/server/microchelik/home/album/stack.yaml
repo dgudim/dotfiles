@@ -26,7 +26,7 @@ services:
             - ATLAS_DB_URL=postgresql+psycopg://atlas:${ATLAS_DB_PASSWORD}@postgres:5432/atlas
             - ATLAS_VAAPI_DEVICE=/dev/dri/renderD128
         volumes:
-            - /mnt/sata_500/trip_atlas_media/data:/data
+            - chonker-photos-atlas:/data
             - /mnt/sata_500/trip_atlas_media/import:/import:ro
             - /mnt/sata_500/trip_atlas_media/backups:/backups
         devices:
@@ -47,3 +47,12 @@ networks:
   backend:
     external: true
     name: backend
+
+volumes:
+  chonker-photos-atlas:
+    driver: local
+    name: chonker-photos-atlas
+    driver_opts:
+      type: nfs
+      o: addr=${THE_ROCK_IP},rw,hard,async,noatime,nconnect=2,vers=4.1,fsc
+      device: ":/mnt/chonker/photos_atlas/data"

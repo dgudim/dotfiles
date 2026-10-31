@@ -255,7 +255,7 @@ services:
         - proxy
 
     atuin:
-        image: ghcr.io/atuinsh/atuin:18.23.0
+        image: ghcr.io/atuinsh/atuin:18.24.4
         container_name: atuin
         labels:
           caddy: "${ATUIN_URL}"
@@ -349,16 +349,15 @@ services:
         NEXTAUTH_SECRET: ${LINKWARDEN_NEXTAUTH_SECRET}
         DATABASE_URL: ${LINKWARDEN_DATABASE_URL}
         MEILI_MASTER_KEY: ${LINKWARDEN_MEILI_MASTER_KEY}
-        NEXT_PUBLIC_OLLAMA_ENDPOINT_URL: "http://host.docker.internal:11434"
-        OLLAMA_MODEL: "phi3:mini-4k"
       volumes:
         - /mnt/sata_500/linkwarden/data:/data/data
       depends_on:
-        - meilisearch
+        - linkwarden-meilisearch
 
-    meilisearch:
+    linkwarden-meilisearch:
       image: getmeili/meilisearch:v1.12.8
       restart: unless-stopped
+      container_name: linkwarden-meilisearch
       user: ${PUID}:${PGID}
       environment:
         MEILI_MASTER_KEY: ${LINKWARDEN_MEILI_MASTER_KEY}

@@ -14,6 +14,8 @@ services:
       caddy.log: access
       caddy.reverse_proxy: "{{upstreams 6060}}"
       caddy_ingress_network: "proxy"
+      backup.stop: ""
+      backup.stop-order: "-1"
     environment:
       - USER_ID=${PUID}
       - GROUP_ID=${PGID}
@@ -36,8 +38,11 @@ services:
       - proxy
 
   mariadb:
-    image: lscr.io/linuxserver/mariadb:11.4.5
+    image: lscr.io/linuxserver/mariadb:11.8.9
     container_name: mariadb
+    labels:
+      backup.stop: ""
+      backup.stop-order: "1"
     environment:
       - PUID=${PUID}
       - PGID=${PGID}

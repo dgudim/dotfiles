@@ -126,7 +126,6 @@ services:
       - default
       - backend
 
-
   valkey:
     image: valkey/valkey:9
     container_name: valkey
@@ -223,8 +222,9 @@ services:
       - /mnt/sata_500/backrest/ssh:/root/.ssh # keys for SFTP repos
       - /mnt/sata_500/backrest/restore:/restore
       # Same path as on the host, so snapshots show the real paths
-      - /mnt/sata_500:/mnt/sata_500:ro
+      - /mnt/sata_500:/mnt/sata_500
       - the-rock-ssd:/the-rock-ssd
+      - chonker-photos:/chonker-photos
       - /mnt/usb_2t:/mnt/usb_2t
     tmpfs:
       - /tmp:size=1g
@@ -243,6 +243,8 @@ services:
         caddy.import: protect
         caddy.reverse_proxy: "{{upstreams 9091}}"
         caddy_ingress_network: "proxy"
+        backup.stop: ""
+        backup.stop-order: "0"
     restart: unless-stopped
     healthcheck:
       interval: 60s
@@ -298,3 +300,7 @@ volumes:
       type: nfs
       o: addr=${THE_ROCK_IP},rw,hard,async,noatime,nconnect=2,vers=4.1
       device: ":/mnt/ssd1"
+
+  chonker-photos:
+    external: true
+    name: chonker-photos

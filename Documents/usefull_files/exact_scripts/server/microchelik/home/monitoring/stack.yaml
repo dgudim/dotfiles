@@ -120,6 +120,9 @@ services:
         image: influxdb:2.9
         container_name: scrutiny-influxdb
         restart: unless-stopped
+        labels:
+          backup.stop: ""
+          backup.stop-order: "1"
         environment:
             - TZ=${TZ}
             - INFLUXD_METRICS_DISABLED=true
@@ -147,6 +150,8 @@ services:
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 8080}}"
           caddy_ingress_network: "proxy"
+          backup.stop: ""
+          backup.stop-order: "-1"
         restart: unless-stopped
         ports:
             - 4040:8080 # For external collectors (the-rock)
@@ -233,7 +238,7 @@ services:
         environment:
             - TZ=${TZ}
         volumes:
-            - ./config/vector:/etc/vector:ro
+            - ./config/vector/vector.yaml:/etc/vector/vector.yaml:ro
             - /mnt/sata_500/vector/geoip:/etc/vector/geoip:ro
             - /mnt/sata_500/vector/data:/var/lib/vector
             - /run/log/journal:/run/log/journal:ro

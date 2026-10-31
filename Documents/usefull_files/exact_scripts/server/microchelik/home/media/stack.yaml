@@ -52,6 +52,8 @@ services:
           caddy.log: access
           caddy.reverse_proxy: "{{upstreams 4533}}"
           caddy_ingress_network: "proxy"
+          backup.stop: ""
+          backup.stop-order: "0"
         user: ${PUID}:${PGID}
         restart: unless-stopped
         ports:
