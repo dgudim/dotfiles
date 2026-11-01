@@ -219,7 +219,6 @@ services:
       - /mnt/sata_500/backrest/data:/data
       - /mnt/sata_500/backrest/config:/config
       - /mnt/sata_500/backrest/cache:/cache
-      - /mnt/sata_500/backrest/ssh:/root/.ssh # keys for SFTP repos
       - /mnt/sata_500/backrest/restore:/restore
       # Same path as on the host, so snapshots show the real paths
       - /mnt/sata_500:/mnt/sata_500

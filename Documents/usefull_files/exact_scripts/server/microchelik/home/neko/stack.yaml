@@ -20,8 +20,7 @@ services:
       - "59001:59001/udp"
       - "59001:59001/tcp"
     devices:
-      - /dev/dri/renderD128:/dev/dri/renderD128
-      - /dev/dri/card0:/dev/dri/card0
+      - /dev/dri:/dev/dri
     environment:
       # https://github.com/m1k1o/neko/issues/573
       NNEKO_CAPTURE_VIDEO_PIPELINE: |

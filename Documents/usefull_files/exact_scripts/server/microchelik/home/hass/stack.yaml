@@ -12,6 +12,8 @@ services:
           caddy: "${HASS_SITES}"
           caddy.log: access
           caddy.reverse_proxy: "127.0.0.1:8123"
+          backup.stop: ""
+          backup.stop-priority: "0"
         restart: unless-stopped
         # the recorder needs time to flush to the database on shutdown
         stop_grace_period: 2m

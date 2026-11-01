@@ -11,8 +11,7 @@ HOME_FILES = [
     ".gitconfig",
     ".bashrc",
     ".config/atuin/config.toml",
-    "base_env_definitions",
-    "relabel-containers.py"
+    "base_env_definitions"
 ]
 
 SYSTEM_FILES = [
