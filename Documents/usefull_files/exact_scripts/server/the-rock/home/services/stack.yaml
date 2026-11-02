@@ -74,6 +74,7 @@ services:
       - TS_EXTRA_ARGS=--accept-dns=true --operator=root
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_USERSPACE=false
+      - TS_TAILSCALED_EXTRA_ARGS=--no-logs-no-support
       - TZ=${TZ}
     cap_add:
       - NET_ADMIN
@@ -96,8 +97,6 @@ services:
       - DAC_READ_SEARCH
       - SYS_PTRACE
       - SYS_ADMIN
-    security_opt:
-      - apparmor:unconfined
     volumes:
       - ./config/netdata:/etc/netdata
       - /mnt/emmc/netdata/lib:/var/lib/netdata

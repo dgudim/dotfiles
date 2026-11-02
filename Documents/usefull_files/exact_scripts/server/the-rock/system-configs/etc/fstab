@@ -8,7 +8,7 @@ tmpfs /tmp     tmpfs defaults,nosuid 0 0
 /mnt/emmc/var_cache              /var/cache                                none           defaults,bind,nofail 0 0
 /mnt/emmc/var_log                /var/log                                  none           defaults,bind,nofail 0 0
 /mnt/emmc/var_tmp                /var/tmp                                  none           defaults,bind,nofail 0 0
-/mnt/emmc/systemd-journal-upload /var/lib/private/systemd/journal-upload   none           defaults,bind,nofail 0 0
+tmpfs                            /var/lib/private/systemd/journal-upload   tmpfs          defaults,mode=0700   0 0
 
 /mnt/emmc/atuin                  /home/kloud/.local/share/atuin            none           defaults,bind,nofail 0 0
 /mnt/emmc/atuin                  /home/kloud/.atuin                        none           defaults,bind,nofail 0 0
