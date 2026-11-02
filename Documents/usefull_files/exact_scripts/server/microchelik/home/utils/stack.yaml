@@ -352,12 +352,12 @@ services:
       volumes:
         - /mnt/sata_500/linkwarden/data:/data/data
       depends_on:
-        - linkwarden-meilisearch
+        - meilisearch
 
-    linkwarden-meilisearch:
+    meilisearch:
       image: getmeili/meilisearch:v1.12.8
       restart: unless-stopped
-      container_name: linkwarden-meilisearch
+      container_name: meilisearch
       user: ${PUID}:${PGID}
       environment:
         MEILI_MASTER_KEY: ${LINKWARDEN_MEILI_MASTER_KEY}

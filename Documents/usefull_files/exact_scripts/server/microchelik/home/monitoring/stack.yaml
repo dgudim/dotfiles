@@ -93,6 +93,7 @@ services:
             # For go.d collectors
             - NETDATA_PIHOLE_PASSWORD=${NETDATA_PIHOLE_PASSWORD}
             - NETDATA_PG_DSN=${NETDATA_PG_DSN}
+            - NETDATA_VALKEY_DSN=${NETDATA_VALKEY_DSN}
             # For health_alarm_notify.conf
             - NTFY_URL=${NTFY_URL}
         cap_add:
