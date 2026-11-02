@@ -35,6 +35,7 @@ services:
             - GF_DATABASE_USER=grafana
             - GF_DATABASE_PASSWORD=${GRAFANA_DB_PASS}
             - GF_DATABASE_SSL_MODE=disable
+            - GF_PLUGINS_PREINSTALL=victoriametrics-metrics-datasource,victoriametrics-logs-datasource,netsage-sankey-panel
         volumes:
             - /mnt/sata_500/grafana:/var/lib/grafana
 
