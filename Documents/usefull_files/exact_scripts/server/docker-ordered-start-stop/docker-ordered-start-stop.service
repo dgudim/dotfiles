@@ -1,0 +1,17 @@
+[Unit]
+Description=Stop/start containers in order before Docker shuts down
+After=docker.service
+Requires=docker.service
+# Also stop before / start after a `systemctl restart docker`
+PartOf=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/docker-ordered-start-stop start
+ExecStop=/usr/local/bin/docker-ordered-start-stop stop
+TimeoutStartSec=10min
+TimeoutStopSec=10min
+
+[Install]
+WantedBy=docker.service

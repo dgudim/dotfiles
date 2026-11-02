@@ -1,0 +1,27 @@
+#!/bin/sh
+set -eu
+
+STATE=/var/lib/docker-ordered/running
+STOP_LAST="postgres valkey mariadb nextcloud-aio-database pihole tailscale"
+
+stop_last()  { grep -xF  "$(printf '%s\n' $STOP_LAST)" "$STATE" || true; }
+stop_first() { grep -vxF "$(printf '%s\n' $STOP_LAST)" "$STATE" || true; }
+
+case ${1:-} in
+  stop)
+    mkdir -p "$(dirname "$STATE")"
+    docker ps --format '{{.Names}}' > "$STATE"
+    [ -z "$(stop_first)" ] || docker stop $(stop_first)
+    [ -z "$(stop_last)" ]  || docker stop $(stop_last)
+    ;;
+  start)
+    [ -f "$STATE" ] || exit 0
+    [ -z "$(stop_last)" ]  || docker start $(stop_last)
+    [ -z "$(stop_first)" ] || docker start $(stop_first)
+    rm "$STATE"
+    ;;
+  *)
+    echo "usage: $0 stop|start" >&2
+    exit 1
+    ;;
+esac
