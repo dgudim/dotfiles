@@ -111,6 +111,7 @@ services:
     container_name: postgres
     restart: unless-stopped
     shm_size: '4gb'
+    stop_grace_period: 1m
     ports:
       - 5432:5432
     environment:

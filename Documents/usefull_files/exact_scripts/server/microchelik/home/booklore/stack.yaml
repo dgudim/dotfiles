@@ -54,6 +54,7 @@ services:
     volumes:
       - /mnt/sata_500/booklore/mariadb:/config
     restart: unless-stopped
+    stop_grace_period: 1m
     healthcheck:
       test: [ "CMD", "mariadb-admin", "ping", "-h", "localhost" ]
       interval: 60s
