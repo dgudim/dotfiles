@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """RockPro64 fan control via the pwm-fan hwmon interface.
 
-Fan speed = max(CPU/GPU curve, disk curve). Drives with no reads/writes for
-DISK_IDLE_MIN are spun down and left out of the disk curve until they're used
-again. On exit the fan is handed back to the kernel's step_wise governor.
+Fan speed = max(CPU/GPU curve, disk curve). Hard drives (not SSDs) with no
+reads/writes for DISK_IDLE_MIN are spun down and left out of the disk curve
+until they're used again. On exit the fan is handed back to the kernel's step_wise governor.
 """
 
 import signal
@@ -57,6 +57,14 @@ def curve(temp, points, off_temp, running):
     return points[-1][1]
 
 
+def is_spinning(dev):
+    """True for hard drives; SSDs have nothing to spin down."""
+    try:
+        return read(Path("/sys/block") / dev / "queue" / "rotational") == "1"
+    except OSError:
+        return False  # drive went away
+
+
 def control_disks(disks):
     """Spin down drives idle for DISK_IDLE_MIN; return the hottest awake drive's temperature.
 
@@ -76,7 +84,7 @@ def control_disks(disks):
         last_io, last_change, asleep = disks.get(dev, (io, now, False))
         if io != last_io:
             last_change, asleep = now, False  # real I/O: drive is awake again
-        elif not asleep and now - last_change >= DISK_IDLE_MIN * 60:
+        elif not asleep and now - last_change >= DISK_IDLE_MIN * 60 and is_spinning(dev):
             subprocess.run(["hdparm", "-y", f"/dev/{dev}"], check=False, capture_output=True)
             print(f"{dev}: idle for {DISK_IDLE_MIN} min, spinning down", flush=True)
             asleep = True
