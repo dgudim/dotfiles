@@ -1,0 +1,7 @@
+verbosity=1
+bootlogo=false
+overlay_prefix=rockchip
+rootdev=UUID=5cc7f07d-9fdb-4dbf-a061-5c4664fb958f
+rootfstype=ext4
+overlays=rk3399-opp-2ghz rk3399-pcie-gen2
+usbstoragequirks=0x2537:0x1066:u,0x2537:0x1068:u
