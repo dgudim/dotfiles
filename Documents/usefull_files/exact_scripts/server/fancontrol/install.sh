@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# Installs fancontrol.py into /opt/fancontrol and runs it as a systemd service.
-# Usage: sudo ./install.sh   (run with fancontrol.py and fancontrol.service in the same directory)
 set -euo pipefail
 
 DEST=/opt/fancontrol
@@ -19,6 +17,5 @@ install -m 644 "$SRC_DIR/fancontrol.service" /etc/systemd/system/fancontrol.serv
 echo "Installed $DEST/fancontrol.py and /etc/systemd/system/fancontrol.service"
 
 systemctl daemon-reload
-systemctl enable fancontrol.service
-systemctl restart fancontrol.service
+systemctl enable --now fancontrol.service
 systemctl --no-pager status fancontrol.service

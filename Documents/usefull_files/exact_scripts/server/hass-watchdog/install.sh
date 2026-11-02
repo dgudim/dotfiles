@@ -39,27 +39,11 @@ install_unit() {
     systemctl enable --now "${SERVICE_NAME}.service"
 }
 
-warn_if_unconfigured() {
-    local dest_config="${INSTALL_DIR}/hass-power-monitor-config.json"
-    python3 - "${dest_config}" <<'PY'
-import json, sys
-path = sys.argv[1]
-with open(path) as f:
-    cfg = json.load(f)
-missing = [k for k in ("api_key", "sensor_id") if not str(cfg.get(k, "")).strip()]
-if missing:
-    print(f"Warning: {path} still has empty fields: {', '.join(missing)}")
-    print("Edit the config, then run: systemctl restart hass-power-monitor")
-    sys.exit(0)
-PY
-}
-
 main() {
     need_root
     install_deps
     install_files
     install_unit
-    warn_if_unconfigured
 
     echo
     echo "Installed ${SERVICE_NAME}."

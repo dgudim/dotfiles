@@ -75,6 +75,8 @@ NetworkManager systemd-resolved avahi-daemon sshd \
 bluetooth chronyd docker cron.service fstrim.timer
 
 sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../hass-watchdog/install.sh"
+sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../docker-ordered-start-stop/install.sh"
+sudo bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../disksleep/install.sh"
 
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
