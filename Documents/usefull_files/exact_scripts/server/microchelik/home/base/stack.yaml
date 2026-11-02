@@ -36,6 +36,7 @@ services:
     environment:
 #      - TS_AUTHKEY=
       - TS_EXTRA_ARGS=--accept-dns=true --operator=root
+      - TS_TAILSCALED_EXTRA_ARGS=--no-logs-no-support
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_USERSPACE=false
       - TZ=${TZ}
@@ -134,7 +135,7 @@ services:
     command: valkey-server --save 240 5 --loglevel warning
     shm_size: '4gb'
     ports:
-      - 6379:6379
+      - 127.0.0.1:6379:6379
     environment:
       - TZ=${TZ}
     volumes:

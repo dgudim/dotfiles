@@ -46,7 +46,7 @@ services:
         user: ${PUID}:${PGID}
         restart: unless-stopped
         ports:
-            - 9428:9428
+            - 127.0.0.1:9428:9428
         environment:
             - TZ=${TZ}
         volumes:
@@ -62,7 +62,7 @@ services:
             - TZ=${TZ}
         # For hass
         ports:
-            - 8428:8428
+            - 127.0.0.1:8428:8428
         # For scraping
         extra_hosts:
             - host.docker.internal:host-gateway
@@ -99,8 +99,6 @@ services:
             - DAC_READ_SEARCH
             - SYS_PTRACE
             - SYS_ADMIN
-        security_opt:
-            - apparmor=unconfined
         volumes:
             - ./config/netdata:/etc/netdata
             - /mnt/sata_500/netdata/lib:/var/lib/netdata
@@ -112,7 +110,6 @@ services:
             - /sys:/host/sys:ro
             - /etc/os-release:/host/etc/os-release:ro
             - /var/run/docker.sock:/var/run/docker.sock:ro
-            # - /home/kloud/netdata/web:/usr/share/netdata/web:ro
         tmpfs:
             - /var/cache/netdata:uid=201,gid=201,mode=0770,size=268435456
 
