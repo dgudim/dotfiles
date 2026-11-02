@@ -1,0 +1,10 @@
+[Unit]
+Description=Spin down idle hard drives
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/disksleep/disksleep.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
