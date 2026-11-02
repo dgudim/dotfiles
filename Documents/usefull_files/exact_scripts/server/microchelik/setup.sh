@@ -31,8 +31,8 @@ avahi
 
 # Different utils (Bindfs is for nextcloud)
 sudo zypper install \
-fwupd fastfetch btop htop eza \
-jq yq usbip tcpdump \
+purge-kernels-service fwupd fastfetch btop htop eza \
+git-core, jq yq usbip tcpdump \
 intel-media-driver intel-gpu-tools \
 waypipe ripgrep fd duf rsync fatrace \
 bindfs age \
@@ -40,6 +40,9 @@ python313-uv python313-pip tmux ouch strace \
 libva-utils libvulkan_intel \
 libhidapi-hidraw0 pkgconf hunspell cronie cronie-anacron \
 hdparm sdparm
+
+# Unused stuff
+sudo zypper remove git-gui gitk tk
 
 # Audio deps
 sudo zypper install \
@@ -50,7 +53,7 @@ alsa-firmware alsa-plugins bluez bluez-firmware bluez-auto-enable-devices
 sudo zypper install zram-generator
 
 # Unused services
-sudo zypper remove snapper firewalld cups cups-client dnsmasq samba quota plocate
+sudo zypper remove snapper firewalld cups cups-client dnsmasq samba quota plocate rsyslog syslog-service wicked wicked-service
 sudo systemctl mask firewalld apparmor auditd rsyslog.service
 
 # Handled by scrutiny
