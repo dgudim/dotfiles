@@ -8,8 +8,8 @@ PartOf=docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/local/bin/docker-ordered-start-stop start
-ExecStop=/usr/local/bin/docker-ordered-start-stop stop
+ExecStart=/opt/docker-ordered-start-stop/docker-ordered-start-stop start
+ExecStop=/opt/docker-ordered-start-stop/docker-ordered-start-stop stop
 TimeoutStartSec=10min
 TimeoutStopSec=10min
 
