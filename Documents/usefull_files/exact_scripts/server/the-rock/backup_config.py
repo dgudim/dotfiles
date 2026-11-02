@@ -10,6 +10,8 @@ HOME_FILES = [
     ".gitconfig",
     ".config/atuin/config.toml",
     "base_env_definitions",
+    secret(".ssh/authorized_keys"),
+    secret(".ssh/known_hosts")
 ]
 
 SYSTEM_FILES = [
@@ -50,6 +52,8 @@ SYSTEM_FILES = [
     "/etc/hosts",
     "/etc/hostname",
     "/etc/ssh/sshd_config",
+    secret("/root/.ssh/authorized_keys"),
+    secret("/root/.ssh/known_hosts"),
     "/etc/systemd/resolved.conf",
     "/etc/nsswitch.conf",
     "/etc/avahi/avahi-daemon.conf",
