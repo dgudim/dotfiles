@@ -220,6 +220,16 @@ gop() {
 }
 alias brl='br -sdp'
 
+cdl() {
+    cd "$@"
+    ls
+}
+
+mkdirc() {
+	mkdir "$1"
+	cd "$1"
+}
+
 ################################################ Neofetch logo ################################################
 
 alias fastfetch='fastfetch --logo-width 60 --logo-padding-top 2 --logo /home/kloud/.config/neofetch/logo'
