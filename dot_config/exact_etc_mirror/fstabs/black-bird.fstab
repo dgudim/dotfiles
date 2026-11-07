@@ -8,3 +8,8 @@
 UUID=7135-F28A                                        /boot          vfat             defaults,noatime,umask=0077                       0 2
 /dev/mapper/luks-1c5c824f-40e6-49f6-918c-8e09f46f731c /              btrfs   subvol=/,defaults,compress=zstd:3,noatime,X-fstrim.notrim  0 0
 /dev/mapper/luks-16b658ff-614b-4cfb-a576-f284e9368530 swap           swap             defaults                                          0 0
+
+
+# NFS
+192.168.50.137:/mnt/chonker/media   /mnt/chonker-media        nfs     defaults,nofail,noauto,x-systemd.automount,x-systemd.idle-timeout=10min,x-systemd.mount-timeout=10,_netdev,vers=4.2,nconnect=2,async,rw,hard,noatime 0 0
+192.168.50.137:/mnt/chonker/photos  /mnt/chonker-photos       nfs     defaults,nofail,noauto,x-systemd.automount,x-systemd.idle-timeout=10min,x-systemd.mount-timeout=10,_netdev,vers=4.2,nconnect=2,async,rw,hard,noatime 0 0
