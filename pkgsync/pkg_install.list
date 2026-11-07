@@ -251,7 +251,6 @@ breeze5
 kde-gtk-config
 kdialog
 kscreen
-colord-kde
 ksshaskpass
 accountsservice
 drkonqi
@@ -282,7 +281,7 @@ wayscriber-bin
 wayscriber-configurator
 drawy
 ntfydesktop
-alt-sendme-bin
+dashbeam-bin
 merkuro
 konsole
 cool-retro-term

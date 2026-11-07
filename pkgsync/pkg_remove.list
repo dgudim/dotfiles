@@ -145,6 +145,8 @@ libkolabxml
 libkcompactdisc
 nodejs-lts-jod
 qt5-location
+colord-kde
+python-lockfile
 
 # Replaced with a different version
 translate-shell
@@ -181,6 +183,9 @@ ast-grep-bin
 
 # Replaced with inputactions-kwin
 input-actions
+
+# Replaced with dashbeam
+alt-sendme-bin
 
 # Not in the aur
 bun-bin
