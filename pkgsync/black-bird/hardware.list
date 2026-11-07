@@ -21,6 +21,7 @@ snapper-gui-git
 btrfsmaintenance
 bees
 kio-snapshot
+inputactions-kwin-alpm-hook
 
 # Opencl
 intel-compute-runtime-legacy-bin

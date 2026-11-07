@@ -18,9 +18,9 @@ bees
 snap-pac
 snapper
 snapper-gui-git
-fprintd
 displaylink
 kio-snapshot
+inputactions-kwin-alpm-hook
 
 # Thinkpad + AMD
 thinkfan-ui
