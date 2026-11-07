@@ -253,8 +253,10 @@ services:
       X_AUTHELIA_CONFIG_FILTERS: template
       AUTH_DOMAIN: ${AUTH_DOMAIN}
       AUTH_URL: ${AUTHELIA_URL}
+      GALLERY_PUBLIC_URL: ${GALLERY_URL}
       ATLAS_PUBLIC_URL: ${ATLAS_URL}
-      AUTH_POLICY: ${AUTH_POLICY:-one_factor}
+      NEXTCLOUD_PUBLIC_URL: ${NEXTCLOUD_URL}
+      AUTH_POLICY: one_factor
     networks:
       - default
       - proxy

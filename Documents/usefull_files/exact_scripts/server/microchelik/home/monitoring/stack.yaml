@@ -254,7 +254,10 @@ services:
         image: python:3.13-slim
         container_name: conntrack-sources
         network_mode: host
+        pid: host
         restart: unless-stopped
+        cap_add:
+            - SYS_PTRACE
         environment:
             - TZ=${TZ}
         volumes:

@@ -65,14 +65,116 @@ services:
             - ND_IMAGECACHESIZE=2GB               # keep more resized covers locally
             - ND_PLUGINS_ENABLED=true
             - ND_PLUGINS_AUTORELOAD=true
-            - ND_AGENTS=audiomuseai,lastfm,deezer,listenbrainz
+            - ND_AGENTS=audiomuseai,apple-music,lastfm,deezer,listenbrainz
+            - ND_LYRICSPRIORITY=.lrc,.txt,embedded,nd-lyrics,navidrome-shazam-plugin  # plugin lyrics show in Feishin, not Navidrome's UI
+            - ND_SESSIONTIMEOUT=72h
+            - ND_LASTFM_APIKEY=${LASTFM_API_KEY}
+            - ND_LASTFM_SECRET=${LASTFM_API_SECRET}
             - TZ=${TZ}
         volumes:
             - /mnt/sata_500/navidrome:/data
-            - chonker-music:/music:ro
+            - chonker-music:/music   # writable so the lyrics plugin can save sidecar files
         networks:
           - default
           - proxy
+
+
+    feishin:
+        image: ghcr.io/jeffvli/feishin:latest
+        container_name: feishin
+        restart: unless-stopped
+        labels:
+          homepage.group: "Internal apps"
+          homepage.name: "Feishin"
+          homepage.icon: "feishin.png"
+          homepage.href: "${FEISHIN_URL}"
+          homepage.description: "Music player"
+          homepage.weight: "21"
+          caddy: "${FEISHIN_SITES}"
+          caddy.log: access
+          caddy.reverse_proxy: "{{upstreams 9180}}"
+          caddy_ingress_network: "proxy"
+        environment:
+            - SERVER_NAME=Navidrome
+            - SERVER_TYPE=navidrome
+            - SERVER_URL=${NAVIDROME_URL}
+            - SERVER_LOCK=false
+            - LEGACY_AUTHENTICATION=false
+            - ANALYTICS_DISABLED=true
+        networks:
+          - default
+          - proxy
+
+    navisync:
+        build:
+            context: .
+            dockerfile: NaviSync.Dockerfile
+        container_name: navisync
+        profiles: ["manual"]
+        user: ${PUID}:${PGID}
+        environment:
+            - TZ=${TZ}
+            - NAVIDROME_DB_PATH=/navidrome/navidrome.db
+            - NAVIDROME_URL=http://navidrome:4533
+            - NAVIDROME_USER_ID=49pOG1LxG2H1YZJ5llfFDH
+            - LASTFM_USER=${LASTFM_USER}
+            - LASTFM_API_KEY=${LASTFM_API_KEY}
+            - LASTFM_API_SECRET=${LASTFM_API_SECRET}
+            - LASTFM_SESSION_KEY=${LASTFM_SESSION_KEY}
+            - SYNC_LOVED_TO_LASTFM=True
+            - SYNC_PLAYCOUNT=True
+            - PLAYCOUNT_CONFLICT_RESOLUTION=higher
+            - ALBUM_MATCHING_MODE=album_aware
+            - DUPLICATE_RESOLUTION=all
+            - AUTO_CONFIRM=True
+            - ENABLE_FUZZY_MATCHING=True
+            - FUZZY_MATCHING_THRESHOLD=90
+            - FUZZY_MATCHING_AUTO_THRESHOLD=90
+            - SPINDLE_URL=http://spindle-backend:3590   # after each sync, send recent plays from Navidrome's history to Spindle
+            - SPINDLE_INGEST_SECRET=${SPINDLE_INGEST_SECRET}
+        volumes:
+            - /mnt/sata_500/navidrome:/navidrome
+            - /mnt/sata_500/navisync:/state      # match cache and reports
+            - ./config/navisync/navisync_unattended.py:/app/navisync_unattended.py:ro   # edits apply without a rebuild
+        networks:
+            - default
+
+    spindle-backend:
+        image: ghcr.io/xmorose/spindle:latest
+        container_name: spindle-backend
+        restart: unless-stopped
+        user: ${PUID}:${PGID}
+        labels:
+            homepage.group: "Internal apps"
+            homepage.name: "Spindle"
+            homepage.icon: "mdi-chart-timeline-variant"
+            homepage.href: "${SPINDLE_URL}"
+            homepage.description: "Listening stats"
+            homepage.weight: "22"
+            caddy: "${SPINDLE_SITES}"
+            caddy.log: access
+            caddy.reverse_proxy: "{{upstreams 3590}}"
+            caddy_ingress_network: "proxy"
+        environment:
+            - TZ=${TZ}
+            - WEB_DIR=/app/web
+            - STATS_DB_PATH=/app/data/stats.db
+            - COVER_CACHE_DIR=/app/data/covers
+            - NAVIDROME_DB_PATH=/nddata/navidrome.db
+            - DEFAULT_USER=kloud
+            - INGEST_SECRET=${SPINDLE_INGEST_SECRET}
+            - AUTH_ENABLED=false
+            - TRUST_PROXY=true
+            - NAVIDROME_URL=http://navidrome:4533
+            - NAVIDROME_USER=${SPINDLE_NAVIDROME_USER}
+            - NAVIDROME_PASSWORD=${SPINDLE_NAVIDROME_PASSWORD}
+            - EXCLUDE_BASELINE_WHEN_IMPORTED=true
+        volumes:
+            - /mnt/sata_500/spindle:/app/data
+            - /mnt/sata_500/navidrome:/nddata
+        networks:
+            - default
+            - proxy
 
     audiomuse-ai-flask:
         image: ghcr.io/neptunehub/audiomuse-ai:latest

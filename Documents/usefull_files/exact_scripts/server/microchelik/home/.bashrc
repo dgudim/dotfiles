@@ -13,21 +13,40 @@
 # Some applications read the EDITOR variable to determine your favourite text
 # editor. So uncomment the line below and enter the editor of your choice :-)
 #export EDITOR=/usr/bin/vim
-#export EDITOR=/usr/bin/mcedit
 
-# For some news readers it makes sense to specify the NEWSSERVER variable here
-#export NEWSSERVER=your.news.server
 
-# If you want to use a Palm device with Linux, uncomment the two lines below.
-# For some (older) Palm Pilots, you might need to set a lower baud rate
-# e.g. 57600 or 38400; lowest is 9600 (very slow!)
-#
-#export PILOTPORT=/dev/pilot
-#export PILOTRATE=115200
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
+fi
+
+export EDITOR=/usr/bin/nano
 
 export HISTCONTROL=ignorespace:erasedups
 
-test -s ~/.alias && . ~/.alias || true
+cdl() {
+    cd "$@"
+    ls
+}
+
+mkdirc() {
+	mkdir "$1"
+	cd "$1"
+}
+
+dcompupd() {
+    sudo docker compose up -d "$@"
+}
+
+dcompup() {
+    sudo docker compose up "$@"
+}
 
 . "$HOME/.atuin/bin/env"
 eval "$(atuin init bash --disable-up-arrow)"
