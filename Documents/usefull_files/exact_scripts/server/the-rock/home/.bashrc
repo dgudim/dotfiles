@@ -87,6 +87,26 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export EDITOR=/usr/bin/nano
+
+cdl() {
+    cd "$@"
+    ls
+}
+
+mkdirc() {
+    mkdir "$1"
+    cd "$1"
+}
+
+dcompupd() {
+    sudo docker compose up -d "$@"
+}
+
+dcompup() {
+    sudo docker compose up "$@"
+}
+
 # cargo
 . "$HOME/.cargo/env"
 
