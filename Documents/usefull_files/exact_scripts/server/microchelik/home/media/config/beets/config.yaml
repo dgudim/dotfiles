@@ -1,0 +1,29 @@
+# beets: fills in tags from MusicBrainz in place. Files are never moved, renamed or copied.
+# Runs as the `beets` service in the media stack (docker compose run --rm beets <command>).
+directory: /music
+library: /data/library.db
+statefile: /data/state.pickle
+pluginpath: [/config/beetsplug]
+plugins: [musicbrainz, lyrics, artistclean]
+create_backup_before_migrations: no   # /mnt/sata_500 is backed up anyway
+ignore: [".*", "*~", "*.sync-conflict-*", "lost+found"]   # .stfolder, .stversions, Syncthing temp files, conflict copies
+
+import:
+    copy: no
+    move: no                 # with copy also off, modify/mbsync/update never move files either
+    write: yes
+    singletons: yes          # folders are artists and playlists, not albums: match each song on its own
+    quiet_fallback: skip     # with -q, anything short of a strong match is skipped and logged
+    incremental: yes         # a file is looked at once
+    incremental_skip_later: yes   # skipped files aren't retried; go through them with --from-logfile -I
+    duplicate_action: keep   # the same song in an artist folder and a playlist folder: tag both
+    languages: [en]          # prefer MusicBrainz's English (Latin) aliases for artist and title
+
+lyrics:
+    synced: yes              # LRC when LRCLib has it; never replaces lyrics a file already has
+    sources: [lrclib, lrcmux, genius]
+
+artistclean:
+    # Regex -> replacement, applied to artist fields before diacritics are stripped
+    replace:
+        'A\.L\.I\.S\.O\.N': ALISON

@@ -139,6 +139,22 @@ services:
         networks:
             - default
 
+    beets:
+        build:
+            context: .
+            dockerfile: Beets.Dockerfile
+        container_name: beets
+        profiles: ["manual"]
+        user: ${PUID}:${PGID}
+        environment:
+            - TZ=${TZ}
+        volumes:
+            - chonker-music:/music
+            - ./config/beets:/config:ro
+            - /mnt/sata_500/beets:/data
+        networks:
+            - default
+
     spindle-backend:
         image: ghcr.io/xmorose/spindle:latest
         container_name: spindle-backend
@@ -270,7 +286,7 @@ services:
             - backend
 
     immich-server:
-        image: ghcr.io/gudim/gallery-server:${IMMICH_VERSION}
+        image: ghcr.io/gudim/gallery-server:${IMMICH_VERSION}.${GALLERY_SUBVERSION}
         container_name: immich-server
         user: "${PUID}:${PGID}"
         restart: unless-stopped
@@ -309,7 +325,7 @@ services:
            - proxy
 
     immich-machine-learning:
-        image: ghcr.io/open-noodle/gallery-ml:${IMMICH_ML_VERSION}
+        image: ghcr.io/open-noodle/gallery-ml:${IMMICH_VERSION}
         container_name: immich-machine-learning
         user: "${PUID}:${PGID}"
         restart: unless-stopped
