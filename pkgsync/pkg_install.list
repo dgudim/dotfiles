@@ -130,6 +130,7 @@ tpm2-tools
 dos2unix
 tree
 kmscon
+bootvine
 gtk3
 chrony
 

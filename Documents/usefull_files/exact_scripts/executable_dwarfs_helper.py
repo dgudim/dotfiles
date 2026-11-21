@@ -68,19 +68,20 @@ class MountDirHierarchy:
         self.overlay_mount_path.mkdir(exist_ok=True, parents=True)
 
 
-def err_exit(message: str) -> NoReturn:
+def err_exit(message: str, exit: bool = True) -> NoReturn:
     print(f"{L_RED}{message}{NC}")
     _ = input(f"{LIGHT_GRAY}Press any key to continue{NC}")
-    sys.exit(1)
+    if exit:
+        sys.exit(1)
 
 
-def checked_exec(command: list[str], on_fail: Callable[[], int] | None = None):
+def checked_exec(command: list[str], on_fail: Callable[[], int] | None = None, exit: bool = True):
     print(f"{L_CYAN}| {GRAY}exec _> {LIGHTER_GRAY}{command}{NC}")
     exit_code = subprocess.call(command)
     if exit_code != 0:
         if on_fail is not None:
             on_fail()
-        err_exit(f"Error executing command: '{RED}{command}{NC}'")
+        err_exit(f"Error executing command: '{RED}{command}{NC}'", exit)
 
 
 def display_gui_question(message: str):
@@ -153,10 +154,10 @@ def unmount_image(image_path: Path, keep_changes: Callable[..., bool]):
     if mount_info.overlay_mount_path.is_mount():
         print(f"{BLUE}Killing processes using the folder{NC}")
         checked_exec(
-            [SUDO_APP, "bash", "-c", f"kill $(lsof -t +f -- '{mount_info.overlay_mount_path.as_posix()}' 2> /dev/null || true) || true"]
+            [SUDO_APP, "bash", "-c", f"kill $(lsof -t +f -- '{mount_info.overlay_mount_path.as_posix()}' 2> /dev/null || true) || true"], exit=False
         )
         checked_exec(
-            [SUDO_APP, "bash", "-c", f"fuser -vmMk '{mount_info.overlay_mount_path.as_posix()}'"]
+            [SUDO_APP, "bash", "-c", f"fuser -vmMk '{mount_info.overlay_mount_path.as_posix()}'"], exit=False
         )
         checked_exec(
             [SUDO_APP, "umount", mount_info.overlay_mount_path.as_posix()],
