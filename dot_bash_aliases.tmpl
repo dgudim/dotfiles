@@ -84,6 +84,33 @@ git-merge-project-into-subfolder() {
 	echo "DONE!"
 }
 
+dropcommit() {
+  local hash subject
+  if [[ $# -ne 1 ]]; then
+    echo "usage: dropcommit <commit>" >&2
+    return 2
+  fi
+  hash=$(git rev-parse --verify --quiet "$1^{commit}") || {
+    echo "not a commit: $1" >&2
+    return 1
+  }
+  if ! git merge-base --is-ancestor "$hash" HEAD; then
+    echo "commit is not on the current branch: $hash" >&2
+    return 1
+  fi
+  if git rev-parse --verify --quiet "$hash^2" >/dev/null; then
+    echo "refusing to drop a merge commit: $hash" >&2
+    return 1
+  fi
+  if ! git rev-parse --verify --quiet "$hash^" >/dev/null; then
+    echo "refusing to drop a root commit: $hash" >&2
+    return 1
+  fi
+  subject=$(git log -1 --format='%h %s' "$hash")
+  echo "dropping $subject"
+  git rebase --onto "$hash^" "$hash"
+}
+
 
 ensure-worktree() {
 	[ -z ${1+x} ] && echo "Please give me a branch" && return 1
