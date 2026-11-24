@@ -133,6 +133,7 @@ kmscon
 bootvine
 gtk3
 chrony
+openssl-3
 
 ## PACMAN HOOKS AND SCRIPTS
 pacmanlogviewer
