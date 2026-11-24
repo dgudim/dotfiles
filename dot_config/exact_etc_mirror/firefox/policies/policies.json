@@ -1,0 +1,15 @@
+{
+  "policies": {
+    "SearchEngines": {
+      "Add": [
+        {
+          "Name": "Nogon",
+          "URLTemplate": "http://localhost:4433/?q={searchTerms}",
+          "SuggestURLTemplate": "http://localhost:4433/suggest?q={searchTerms}",
+          "Method": "GET",
+          "Alias": "@ng"
+        }
+      ]
+    }
+  }
+}
